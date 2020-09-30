@@ -1,0 +1,9 @@
+.idea
+*.log
+.vscode/*
+!.vscode/launch.json
+node_modules
+test.ts
+.python-version
+/coverage
+.settings
