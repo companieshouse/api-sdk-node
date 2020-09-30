@@ -1,4 +1,4 @@
-artifact_name       := ch-sdk-node
+artifact_name       := api-sdk-node
 version             := "unversioned"
 
 .PHONY: clean
