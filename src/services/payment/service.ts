@@ -34,7 +34,7 @@ export default class PaymentService {
    */
     public async getPayment (paymentResourceUri: string):
     Promise<ApiResult<ApiResponse<Payment>>> {
-        const resp = await this.client.httpGet(paymentResourceUri)
+        const resp: HttpResponse = await this.client.httpGet(paymentResourceUri)
 
         return this.handlePaymentHttpResponse(resp)
     }
@@ -44,7 +44,7 @@ export default class PaymentService {
         const createPaymentRequestResource: CreatePaymentRequestResource =
       Mapping.snakeCaseKeys<CreatePaymentRequestResource>(createPaymentRequest);
 
-        const resp = await this.client.httpPost(path, createPaymentRequestResource);
+        const resp: HttpResponse = await this.client.httpPost(path, createPaymentRequestResource);
 
         return this.handlePaymentHttpResponse(resp);
     }
@@ -62,7 +62,7 @@ export default class PaymentService {
             });
         }
 
-        const body = resp.body as PaymentResource;
+        const body: PaymentResource = resp.body;
 
         response.resource = Mapping.camelCaseKeys<Payment>(body);
         return success(response);
