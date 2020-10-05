@@ -38,25 +38,39 @@ class PaymentService {
             return this.createPaymentHandler(createPaymentRequest, "");
         });
     }
+    /**
+   * Retrieves a payment session.
+   *
+   * @param paymentResourceUri the desired payment session's URI
+   */
+    getPayment(paymentResourceUri) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = yield this.client.httpGet(paymentResourceUri);
+            return this.handlePaymentHttpResponse(resp);
+        });
+    }
     createPaymentHandler(createPaymentRequest, path) {
-        var _a;
         return __awaiter(this, void 0, void 0, function* () {
             const createPaymentRequestResource = mapping_1.default.snakeCaseKeys(createPaymentRequest);
             const resp = yield this.client.httpPost(path, createPaymentRequestResource);
-            const response = {
-                httpStatusCode: resp.status,
-                headers: resp.headers
-            };
-            if (resp.error) {
-                return result_1.failure({
-                    httpStatusCode: resp.status,
-                    errors: ((_a = resp === null || resp === void 0 ? void 0 : resp.error) === null || _a === void 0 ? void 0 : _a.errors) || resp.error
-                });
-            }
-            const body = resp.body;
-            response.resource = mapping_1.default.camelCaseKeys(body);
-            return result_1.success(response);
+            return this.handlePaymentHttpResponse(resp);
         });
+    }
+    handlePaymentHttpResponse(resp) {
+        var _a;
+        const response = {
+            httpStatusCode: resp.status,
+            headers: resp.headers
+        };
+        if (resp.error) {
+            return result_1.failure({
+                httpStatusCode: resp.status,
+                errors: ((_a = resp === null || resp === void 0 ? void 0 : resp.error) === null || _a === void 0 ? void 0 : _a.errors) || resp.error
+            });
+        }
+        const body = resp.body;
+        response.resource = mapping_1.default.camelCaseKeys(body);
+        return result_1.success(response);
     }
 }
 exports.default = PaymentService;

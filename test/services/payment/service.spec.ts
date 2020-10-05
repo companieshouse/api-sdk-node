@@ -118,4 +118,64 @@ describe("payment service", () => {
             expect(paymentRequest.state).to.equal(mockRequestBody.state);
         });
     });
+
+    describe("get payment", () => {
+      beforeEach(() => {
+          sinon.reset();
+          sinon.restore();
+      });
+
+      afterEach(done => {
+          sinon.reset();
+          sinon.restore();
+          done();
+      });
+
+      it("returns an error response on failure", async () => {
+          const mockGetResponse = {
+              status: 401,
+              error: "An error occurred"
+          };
+
+          sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+          const paymentService: PaymentService = new PaymentService(requestClient);
+          const response = await paymentService.getPayment("payments/TEST_ID");
+          const data = response.value as ApiResponse<Payment>;
+
+          expect(data.resource).to.be.undefined;
+      });
+
+      it("maps the payment fields", async () => {
+          const mockGetResponse = {
+              status: 200,
+              body: mockResponseBody
+          };
+
+          sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+          const paymentService: PaymentService = new PaymentService(requestClient);
+          const response = await paymentService.getPayment("payments/TEST_ID");
+
+          const data = response.value as ApiResponse<Payment>;
+          const payment = data.resource;
+          expect(payment.amount).to.equal(mockResponseBody.amount);
+          expect(payment.availablePaymentMethods[0]).to.equal(mockResponseBody.available_payment_methods[0]);
+          expect(payment.availablePaymentMethods[1]).to.equal(mockResponseBody.available_payment_methods[1]);
+          expect(payment.companyNumber).to.equal(mockResponseBody.company_number);
+          expect(payment.completedAt).to.equal(mockResponseBody.completed_at);
+          expect(payment.createdAt).to.equal(mockResponseBody.created_at);
+          expect(payment.createdBy.email).to.equal(mockResponseBody.created_by.email);
+          expect(payment.createdBy.forename).to.equal(mockResponseBody.created_by.forename);
+          expect(payment.createdBy.id).to.equal(mockResponseBody.created_by.id);
+          expect(payment.createdBy.surname).to.equal(mockResponseBody.created_by.surname);
+          expect(payment.description).to.equal(mockResponseBody.description);
+          expect(payment.etag).to.equal(mockResponseBody.etag);
+          expect(payment.kind).to.equal(mockResponseBody.kind);
+          expect(payment.links.journey).to.equal(mockResponseBody.links.journey);
+          expect(payment.links.resource).to.equal(mockResponseBody.links.resource);
+          expect(payment.links.self).to.equal(mockResponseBody.links.self);
+          expect(payment.paymentMethod).to.equal(mockResponseBody.payment_method);
+          expect(payment.reference).to.equal(mockResponseBody.reference);
+          expect(payment.status).to.equal(mockResponseBody.status);
+      });
+  });
 });

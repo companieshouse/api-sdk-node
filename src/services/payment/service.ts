@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { HttpResponse, IHttpClient } from "../../http";
 import { ApiResult, ApiResponse } from "../resource";
 import { CreatePaymentRequest, Payment, CreatePaymentRequestResource, PaymentResource } from "./types";
 import Mapping from "../../mapping/mapping";
@@ -27,13 +27,29 @@ export default class PaymentService {
         return this.createPaymentHandler(createPaymentRequest, "");
     }
 
+    /**
+   * Retrieves a payment session.
+   *
+   * @param paymentResourceUri the desired payment session's URI
+   */
+    public async getPayment (paymentResourceUri: string):
+    Promise<ApiResult<ApiResponse<Payment>>> {
+        const resp: HttpResponse = await this.client.httpGet(paymentResourceUri)
+
+        return this.handlePaymentHttpResponse(resp)
+    }
+
     private async createPaymentHandler (createPaymentRequest: CreatePaymentRequest, path: string):
     Promise<ApiResult<ApiResponse<Payment>>> {
         const createPaymentRequestResource: CreatePaymentRequestResource =
       Mapping.snakeCaseKeys<CreatePaymentRequestResource>(createPaymentRequest);
 
-        const resp = await this.client.httpPost(path, createPaymentRequestResource);
+        const resp: HttpResponse = await this.client.httpPost(path, createPaymentRequestResource);
 
+        return this.handlePaymentHttpResponse(resp);
+    }
+
+    private handlePaymentHttpResponse(resp: HttpResponse): ApiResult<ApiResponse<Payment>> {
         const response: ApiResponse<Payment> = {
             httpStatusCode: resp.status,
             headers: resp.headers
@@ -46,7 +62,7 @@ export default class PaymentService {
             });
         }
 
-        const body = resp.body as PaymentResource;
+        const body: PaymentResource = resp.body;
 
         response.resource = Mapping.camelCaseKeys<Payment>(body);
         return success(response);
