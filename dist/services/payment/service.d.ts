@@ -16,5 +16,12 @@ export default class PaymentService {
    * @param createPaymentRequest a create payment request
    */
     createPaymentWithFullUrl(createPaymentRequest: CreatePaymentRequest): Promise<ApiResult<ApiResponse<Payment>>>;
+    /**
+   * Retrieves a payment session.
+   *
+   * @param paymentResourceUri the desired payment session's URI
+   */
+    getPayment(paymentResourceUri: string): Promise<ApiResult<ApiResponse<Payment>>>;
     private createPaymentHandler;
+    private handlePaymentHttpResponse;
 }
