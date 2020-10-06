@@ -14,7 +14,7 @@ The following snippet shows how to get up and running quickly using TypeScript.
 
 ```typescript
 
-import {createApiClient} from "ch-sdk-node";
+import {createApiClient} from "api-sdk-node";
 
 (async () => {
     const api = createApiClient("your-api-key");
@@ -28,7 +28,7 @@ import {createApiClient} from "ch-sdk-node";
 There is an alternative way of calling some of the services, which forces you to check for errors. It borrows concepts from the Either class found in functional programming.
 ```typescript
 
-import {createApiClient} from "ch-sdk-node";
+import {createApiClient} from "api-sdk-node";
 
 (async () => {
     const api = createApiClient("your-api-key");
@@ -56,7 +56,7 @@ From within this directory, run the following command to make symbolic links to 
 
 Then from within your local project, simply link it with the following command
 
-    npm link ch-sdk-node
+    npm link api-sdk-node
 
 Note that if your local project is running within a Vagrant Virtual Machine, this command will need to be run on the VM.
 

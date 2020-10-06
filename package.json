@@ -1,9 +1,9 @@
 {
-  "name": "ch-sdk-node",
+  "name": "api-sdk-node",
   "version": "1.0.0",
-  "description": "",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "license": "ISC",
   "scripts": {
     "build": "tsc",
     "prebuild": "rm -rf dist/*",
@@ -11,9 +11,6 @@
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "camelcase-keys": "~6.2.2",
     "request": "~2.88.0",
