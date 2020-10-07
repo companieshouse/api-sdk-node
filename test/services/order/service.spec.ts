@@ -1,14 +1,12 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
 
 import OrderService from "../../../src/services/order/order/service";
-import { RequestClient, HttpResponse } from "../../../src/http";
-import Resource, { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
+import { RequestClient } from "../../../src/http";
+import { ApiErrorResponse } from "../../../src/services/resource";
 import {
     Order, OrderResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
-    CertificateItemOptions, CertifiedCopyItemOptions
+    CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
 } from "../../../src/services/order/order/types";
 const expect = chai.expect;
 
@@ -16,6 +14,7 @@ const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "
 
 const CERTIFICATE_ORDER_ID = "ORD-123456-123456";
 const CERTIFIED_COPY_ORDER_ID = "ORD-1111111-1111111";
+const MISSING_IMAGE_DELIVERY_ORDER_ID = "ORD-222222-222222";
 
 const mockCertificateOrderResponseBody: OrderResource = {
     ordered_at: "2020-05-15T08:41:05.798Z",
@@ -196,6 +195,63 @@ const mockCertifiedCopyOrderResponseBody: OrderResource = {
     }
 }
 
+const mockMissingImageDeliveryOrderResponseBody: OrderResource = {
+    payment_reference: "q4nn5UxZiZxVG2e",
+    etag: "80bd2953c79729aa0885f6987208690341376db0",
+    items: [
+        {
+            id: "MID-123456-123456",
+            company_name: "THE Company",
+            company_number: "00000000",
+            description: "missing image delivery for company 00000000",
+            description_identifier: "missing-image-delivery",
+            description_values: {
+                company_number: "00000000",
+                "missing-image-delivery": "missing image delivery for company 00000000"
+            },
+            item_costs: [
+                {
+                    discount_applied: "0",
+                    item_cost: "3",
+                    calculated_cost: "3",
+                    product_type: "missing-image-delivery"
+                }
+            ],
+            item_options: {
+                filing_history_date: "2015-05-26",
+                filing_history_description: "appoint-person-director-company-with-name",
+                filing_history_description_values: {
+                    officer_name: "Mr Richard John Harris"
+                },
+                filing_history_id: "MzEyMzcyNDc2OWFkaXF6a2N4",
+                filing_history_type: "AP01"
+            },
+            etag: "7ae7d006fab4a6bab9fafcfea1eef1b78ffa4e52",
+            kind: "item#missing-image-delivery",
+            links: {
+                self: "/orderable/missing-image-deliveries/MID-123456-123456"
+            },
+            quantity: 1,
+            item_uri: "/orderable/missing-image-deliveries/MID-123456-123456",
+            status: "unknown",
+            postage_cost: "0",
+            total_item_cost: "3",
+            postal_delivery: false
+        }
+    ],
+    kind: "order",
+    total_order_cost: "3",
+    reference: MISSING_IMAGE_DELIVERY_ORDER_ID,
+    ordered_at: "2020-10-07T11:09:46.196",
+    ordered_by: {
+        email: "demo@ch.gov.uk",
+        id: "67ZeMsvAEgkBWs7tNKacdrPvOmQ"
+    },
+    links: {
+        self: "/orders/" + MISSING_IMAGE_DELIVERY_ORDER_ID
+    }
+};
+
 describe("order", () => {
     describe("get an order", () => {
         beforeEach(() => {
@@ -334,6 +390,30 @@ describe("order", () => {
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryType).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_type);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryCost).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_cost);
+        });
+
+        it("should map missing image delivery item option fields correctly", async () => {
+            const mockGetResponse = {
+                status: 200,
+                body: mockMissingImageDeliveryOrderResponseBody
+            };
+
+            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const order: OrderService = new OrderService(requestClient);
+            const response = await order.getOrder(MISSING_IMAGE_DELIVERY_ORDER_ID);
+            const data = response.value as Order;
+
+            const item = data.items[0];
+            const itemResource = mockMissingImageDeliveryOrderResponseBody.items[0];
+
+            const itemOptionsResource = itemResource.item_options as MissingImageDeliveryItemOptionsResource;
+            const itemOptions = item.itemOptions as MissingImageDeliveryItemOptions;
+
+            expect(itemOptions.filingHistoryDate).to.equal(itemOptionsResource.filing_history_date);
+            expect(itemOptions.filingHistoryDescription).to.equal(itemOptionsResource.filing_history_description);
+            expect(itemOptions.filingHistoryDescriptionValues).to.equal(itemOptionsResource.filing_history_description_values);
+            expect(itemOptions.filingHistoryId).to.equal(itemOptionsResource.filing_history_id);
+            expect(itemOptions.filingHistoryType).to.equal(itemOptionsResource.filing_history_type);
         });
     });
 });
