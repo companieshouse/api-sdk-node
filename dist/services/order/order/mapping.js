@@ -2,17 +2,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 class OrderMapping {
     static mapOrderResourceToOrder(orderResource) {
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j;
         const order = {
             deliveryDetails: {
-                addressLine1: orderResource.delivery_details.address_line_1,
-                addressLine2: orderResource.delivery_details.address_line_2,
-                country: orderResource.delivery_details.country,
-                forename: orderResource.delivery_details.forename,
-                locality: orderResource.delivery_details.locality,
-                poBox: orderResource.delivery_details.po_box,
-                postalCode: orderResource.delivery_details.postal_code,
-                region: orderResource.delivery_details.region,
-                surname: orderResource.delivery_details.surname
+                addressLine1: (_a = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _a === void 0 ? void 0 : _a.address_line_1,
+                addressLine2: (_b = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _b === void 0 ? void 0 : _b.address_line_2,
+                country: (_c = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _c === void 0 ? void 0 : _c.country,
+                forename: (_d = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _d === void 0 ? void 0 : _d.forename,
+                locality: (_e = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _e === void 0 ? void 0 : _e.locality,
+                poBox: (_f = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _f === void 0 ? void 0 : _f.po_box,
+                postalCode: (_g = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _g === void 0 ? void 0 : _g.postal_code,
+                region: (_h = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _h === void 0 ? void 0 : _h.region,
+                surname: (_j = orderResource === null || orderResource === void 0 ? void 0 : orderResource.delivery_details) === null || _j === void 0 ? void 0 : _j.surname
             },
             items: orderResource.items.map((item) => {
                 return this.mapItemResourceToItem(item);
@@ -49,7 +50,7 @@ class OrderMapping {
                 itemCost: i === null || i === void 0 ? void 0 : i.item_cost,
                 productType: i === null || i === void 0 ? void 0 : i.product_type
             })),
-            itemOptions: this.mapItemOptionsResourceToItemOptions(itemResource.item_options),
+            itemOptions: this.mapItemOptionsResourceToItemOptions(itemResource.item_options, itemResource.kind),
             itemUri: itemResource.item_uri,
             kind: itemResource.kind,
             links: {
@@ -66,9 +67,10 @@ class OrderMapping {
     static removeEmptyObjects(input) {
         return Object.values(input).some((value) => value !== undefined) ? input : undefined;
     }
-    static mapItemOptionsResourceToItemOptions(itemResource) {
+    static mapItemOptionsResourceToItemOptions(itemResource, kind) {
         var _a, _b, _c;
-        if ("certificate_type" in itemResource) {
+        if (kind === "item#certificate") {
+            itemResource = itemResource;
             const directorDetails = this.removeEmptyObjects({
                 includeBasicInformation: (_a = itemResource === null || itemResource === void 0 ? void 0 : itemResource.director_details) === null || _a === void 0 ? void 0 : _a.include_basic_information
             });
@@ -91,7 +93,8 @@ class OrderMapping {
                 surname: itemResource.surname
             };
         }
-        else {
+        else if (kind === "item#certified-copy") {
+            itemResource = itemResource;
             return {
                 deliveryTimescale: itemResource.delivery_timescale,
                 deliveryMethod: itemResource.delivery_method,
@@ -103,6 +106,16 @@ class OrderMapping {
                     filingHistoryDescriptionValues: f.filing_history_description_values,
                     filingHistoryCost: f.filing_history_cost
                 }))
+            };
+        }
+        else {
+            itemResource = itemResource;
+            return {
+                filingHistoryDate: itemResource.filing_history_date,
+                filingHistoryDescription: itemResource.filing_history_description,
+                filingHistoryId: itemResource.filing_history_id,
+                filingHistoryType: itemResource.filing_history_type,
+                filingHistoryDescriptionValues: itemResource.filing_history_description_values
             };
         }
     }

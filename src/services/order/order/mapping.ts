@@ -1,18 +1,22 @@
-import { Order, OrderResource, Item, ItemResource, ItemOptions, ItemOptionsResource, CertificateItemOptionsResource } from "./types";
+import {
+    Order, OrderResource, Item, ItemResource, ItemOptions, ItemOptionsResource,
+    CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
+    MissingImageDeliveryItemOptionsResource
+} from "./types";
 
 export default class OrderMapping {
     public static mapOrderResourceToOrder (orderResource: OrderResource): Order {
         const order: Order = {
             deliveryDetails: {
-                addressLine1: orderResource.delivery_details.address_line_1,
-                addressLine2: orderResource.delivery_details.address_line_2,
-                country: orderResource.delivery_details.country,
-                forename: orderResource.delivery_details.forename,
-                locality: orderResource.delivery_details.locality,
-                poBox: orderResource.delivery_details.po_box,
-                postalCode: orderResource.delivery_details.postal_code,
-                region: orderResource.delivery_details.region,
-                surname: orderResource.delivery_details.surname
+                addressLine1: orderResource?.delivery_details?.address_line_1,
+                addressLine2: orderResource?.delivery_details?.address_line_2,
+                country: orderResource?.delivery_details?.country,
+                forename: orderResource?.delivery_details?.forename,
+                locality: orderResource?.delivery_details?.locality,
+                poBox: orderResource?.delivery_details?.po_box,
+                postalCode: orderResource?.delivery_details?.postal_code,
+                region: orderResource?.delivery_details?.region,
+                surname: orderResource?.delivery_details?.surname
             },
             items: orderResource.items.map((item) => {
                 return this.mapItemResourceToItem(item)
@@ -50,7 +54,7 @@ export default class OrderMapping {
                 itemCost: i?.item_cost,
                 productType: i?.product_type
             })),
-            itemOptions: this.mapItemOptionsResourceToItemOptions(itemResource.item_options),
+            itemOptions: this.mapItemOptionsResourceToItemOptions(itemResource.item_options, itemResource.kind),
             itemUri: itemResource.item_uri,
             kind: itemResource.kind,
             links: {
@@ -69,8 +73,9 @@ export default class OrderMapping {
         return Object.values(input).some((value) => value !== undefined) ? input : undefined;
     }
 
-    private static mapItemOptionsResourceToItemOptions (itemResource: ItemOptionsResource): ItemOptions {
-        if ("certificate_type" in itemResource) {
+    private static mapItemOptionsResourceToItemOptions (itemResource: ItemOptionsResource, kind: string): ItemOptions {
+        if (kind === "item#certificate") {
+            itemResource = itemResource as CertificateItemOptionsResource;
             const directorDetails = this.removeEmptyObjects({
                 includeBasicInformation: itemResource?.director_details?.include_basic_information
             });
@@ -95,7 +100,8 @@ export default class OrderMapping {
                 forename: itemResource.forename,
                 surname: itemResource.surname
             }
-        } else {
+        } else if (kind === "item#certified-copy") {
+            itemResource = itemResource as CertifiedCopyItemOptionsResource;
             return {
                 deliveryTimescale: itemResource.delivery_timescale,
                 deliveryMethod: itemResource.delivery_method,
@@ -107,6 +113,15 @@ export default class OrderMapping {
                     filingHistoryDescriptionValues: f.filing_history_description_values,
                     filingHistoryCost: f.filing_history_cost
                 }))
+            }
+        } else {
+            itemResource = itemResource as MissingImageDeliveryItemOptionsResource;
+            return {
+                filingHistoryDate: itemResource.filing_history_date,
+                filingHistoryDescription: itemResource.filing_history_description,
+                filingHistoryId: itemResource.filing_history_id,
+                filingHistoryType: itemResource.filing_history_type,
+                filingHistoryDescriptionValues: itemResource.filing_history_description_values
             }
         }
     }

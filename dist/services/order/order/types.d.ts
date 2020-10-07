@@ -2,7 +2,7 @@
  * Order is the interface used within this SDK.
  */
 export interface Order {
-    deliveryDetails: {
+    deliveryDetails?: {
         addressLine1: string;
         addressLine2: string;
         country: string;
@@ -88,12 +88,19 @@ export interface FilingHistoryItemOptions {
     filingHistoryDescriptionValues: Record<string, any>;
     filingHistoryCost: string;
 }
-export declare type ItemOptions = CertificateItemOptions | CertifiedCopyItemOptions;
+export interface MissingImageDeliveryItemOptions {
+    filingHistoryDate: string;
+    filingHistoryDescription: string;
+    filingHistoryId: string;
+    filingHistoryType: string;
+    filingHistoryDescriptionValues: Record<string, any>;
+}
+export declare type ItemOptions = CertificateItemOptions | CertifiedCopyItemOptions | MissingImageDeliveryItemOptions;
 /**
  * OrderResource is what is returned from the api.
  */
 export interface OrderResource {
-    delivery_details: {
+    delivery_details?: {
         address_line_1: string;
         address_line_2: string;
         country: string;
@@ -179,4 +186,11 @@ export interface FilingHistoryItemOptionsResource {
     filing_history_description_values: Record<string, any>;
     filing_history_cost: string;
 }
-export declare type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource;
+export interface MissingImageDeliveryItemOptionsResource {
+    filing_history_date: string;
+    filing_history_description: string;
+    filing_history_id: string;
+    filing_history_type: string;
+    filing_history_description_values: Record<string, any>;
+}
+export declare type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource | MissingImageDeliveryItemOptionsResource;
