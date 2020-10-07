@@ -1,11 +1,12 @@
-import { 
-    MidItemResource, 
-    MidItemPostRequest, 
-    MidItemRequestResource, 
-    ItemOptionsRequest, 
-    MidItem, 
-    ItemOptionsResource, 
-    ItemCostsResource } from "./types";
+import {
+    MidItemResource,
+    MidItemPostRequest,
+    MidItemRequestResource,
+    ItemOptionsRequest,
+    MidItem,
+    ItemOptionsResource,
+    ItemCostsResource
+} from "./types";
 
 export default class MidMapping {
     public static mapMidItemRequestToMidItemRequestResource (midItemRequest: MidItemPostRequest): MidItemRequestResource {

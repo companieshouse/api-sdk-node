@@ -13,7 +13,7 @@ export default class ApiClient {
   public readonly lateFilingPenalties: LateFilingPenaltyService;
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyProfile: CompanyProfileService;
-   public  readonly  companyPsc : CompanyPscService ;
+   public readonly companyPsc : CompanyPscService ;
   public readonly certificate: CertificateService;
   public readonly certifiedCopies: CertifiedCopiesService;
   public readonly basket: BasketService;
