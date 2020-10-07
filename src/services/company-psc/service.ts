@@ -14,7 +14,7 @@ export default class CompanyPscService {
    *
    * @param number the company number to look up
    */
-    public async getCompanyPsc(number: string): Promise<Resource<CompanyPersonsWithSignificantControl>> {
+    public async getCompanyPsc (number: string): Promise<Resource<CompanyPersonsWithSignificantControl>> {
         const resp = await this.client.httpGet(`/company/${number}/persons-with-significant-control`);
 
         const resource: Resource<CompanyPersonsWithSignificantControl> = {

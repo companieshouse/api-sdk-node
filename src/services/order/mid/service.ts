@@ -24,7 +24,6 @@ export default class {
     };
 
     public async postMid (midItemRequest: MidItemPostRequest): Promise<Resource<MidItem>> {
-
         const midItemRequestResource: MidItemRequestResource = MidMapping.mapMidItemRequestToMidItemRequestResource(midItemRequest);
         const resp = await this.client.httpPost("/orderable/missing-image-deliveries", midItemRequestResource);
 

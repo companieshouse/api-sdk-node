@@ -101,7 +101,7 @@ describe("create a MID POST", () => {
 });
 
 describe("GET missing image delivery", () => {
-    before(() => {
+    beforeEach(() => {
         sinon.reset();
         sinon.restore();
     });
@@ -118,7 +118,7 @@ describe("GET missing image delivery", () => {
             error: "An error occured"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet"). resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const missingImageDelivery: MidService = new MidService(requestClient);
         const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
 

@@ -49,7 +49,7 @@ export default class PaymentService {
         return this.handlePaymentHttpResponse(resp);
     }
 
-    private handlePaymentHttpResponse(resp: HttpResponse): ApiResult<ApiResponse<Payment>> {
+    private handlePaymentHttpResponse (resp: HttpResponse): ApiResult<ApiResponse<Payment>> {
         const response: ApiResponse<Payment> = {
             httpStatusCode: resp.status,
             headers: resp.headers
