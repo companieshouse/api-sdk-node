@@ -47,6 +47,7 @@ export default interface IHttpClient {
     httpGet(url: string): Promise<HttpResponse>;
     httpPost(url: string, body?: any): Promise<HttpResponse>;
     httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
+    httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpDelete(url: string): Promise<HttpResponse>;
 }
 export declare abstract class AbstractClient implements IHttpClient {
@@ -81,6 +82,7 @@ export declare abstract class AbstractClient implements IHttpClient {
     abstract httpGet(url: string): Promise<HttpResponse>;
     abstract httpPost(url: string, body?: any): Promise<HttpResponse>;
     abstract httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
+    abstract httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     abstract httpDelete(url: string): Promise<HttpResponse>;
     private init;
 }

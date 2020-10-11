@@ -34,6 +34,11 @@ class RequestClient extends http_client_1.AbstractClient {
             return this.request({ method: "PATCH", url, body, headers });
         });
     }
+    httpPut(url, body, headers) {
+        return __awaiter(this, void 0, void 0, function* () {
+            return this.request({ method: "PUT", url, body, headers });
+        });
+    }
     httpDelete(url) {
         return __awaiter(this, void 0, void 0, function* () {
             return this.request({ method: "DELETE", url });
