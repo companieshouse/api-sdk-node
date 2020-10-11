@@ -18,6 +18,10 @@ export default class RequestClient extends AbstractClient {
         return this.request({ method: "PATCH", url, body, headers });
     }
 
+    public async httpPut (url: string, body?: any, headers?: Headers): Promise<HttpResponse> {
+        return this.request({ method: "PUT", url, body, headers });
+    }
+
     public async httpDelete (url: string): Promise<HttpResponse> {
         return this.request({ method: "DELETE", url });
     }

@@ -11,6 +11,10 @@ class TestClient extends AbstractClient {
         throw new Error("Method not implemented.");
     }
 
+    public httpPut (url: string, body: any, headers: any): Promise<HttpResponse> {
+        throw new Error("Method not implemented.");
+    }
+
     public httpDelete (url: string): Promise<HttpResponse> {
         throw new Error("Method not implemented.");
     }

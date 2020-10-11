@@ -124,6 +124,42 @@ describe("request-client", () => {
         expect(resp.status).to.equal(statusCode);
     });
 
+    it("returns an error response when HTTP PUT request fails", async () => {
+        const returnedBody = { error: "company not found" };
+        const statusCode = 404;
+
+        const rejectedValue = {
+            status: statusCode,
+            response: {
+                body: returnedBody
+            }
+        };
+
+        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const resp = await client.httpPut("/foo", { data: "bar" }, { content: "bob" });
+
+        expect(mockRequest).to.have.been.calledOnce;
+        expect(resp.status).to.equal(statusCode);
+    });
+
+    it("returns the correct body for successful PUT calls", async () => {
+        const body = { ok: true };
+        const statusCode = 200;
+
+        const resolvedValue = {
+            status: statusCode,
+            body: body
+        };
+
+        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const resp = await client.httpPut("/foo", { data: "bar" }, { content: "bob" });
+
+        expect(mockRequest).to.have.been.calledOnce;
+        expect(resp.error).to.be.undefined;
+        expect(resp.body).to.deep.equal(body);
+        expect(resp.status).to.equal(statusCode);
+    });
+
     it("returns an error response when HTTP DELETE request fails", async () => {
         const returnedBody = { error: "not found" };
         const statusCode = 404;
