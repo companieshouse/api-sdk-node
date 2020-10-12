@@ -12,7 +12,7 @@
     "test": "mocha",
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
     "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
-    "prepublishOnly": "tsc",
+    "prepublishOnly": "[ ! -d node_modules ] && npm install; tsc",
     "postpublish": "rm -rf dist"
   },
   "dependencies": {
