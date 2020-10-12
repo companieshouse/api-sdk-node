@@ -6,7 +6,7 @@ This SDK abstract the calls to our public APIs.
 
 Use NPM to install the SDK in your project;
 
-    npm i git+ssh://git@github.com:companieshouse/api-sdk-node.git
+    npm i @companieshouse/api-sdk-node
 
 Note that this install may need to be run with the 'sudo' command to avoid an error related to file permissions (and Sophos virus scanning).
 
@@ -14,7 +14,7 @@ The following snippet shows how to get up and running quickly using TypeScript.
 
 ```typescript
 
-import {createApiClient} from "api-sdk-node";
+import {createApiClient} from "@companieshouse/api-sdk-node";
 
 (async () => {
     const api = createApiClient("your-api-key");
@@ -28,7 +28,7 @@ import {createApiClient} from "api-sdk-node";
 There is an alternative way of calling some of the services, which forces you to check for errors. It borrows concepts from the Either class found in functional programming.
 ```typescript
 
-import {createApiClient} from "api-sdk-node";
+import {createApiClient} from "@companieshouse/api-sdk-node";
 
 (async () => {
     const api = createApiClient("your-api-key");
@@ -69,11 +69,3 @@ Note that if your local project is running within a Vagrant Virtual Machine, thi
 To tun the tests with coverage, pass the `--coverage` flag on the command line.
 
     npm t -- --coverage
-
-## Building a new version
-
-When you want to release a new version, you first need to compile the TypeScript code.
-
-    npm run build
-
-This will output the generated JavaScript, Declaration files and Source Maps to the [dist](./dist) directory. The generated source code needs to be committed under version control as there is no internal npm registry yet.
