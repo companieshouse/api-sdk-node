@@ -1,6 +1,6 @@
 {
   "name": "@companieshouse/api-sdk-node",
-  "version": "1.0.0",
+  "version": "unversioned",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
    "files": [
