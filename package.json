@@ -6,7 +6,7 @@
    "files": [
     "dist"
   ],
-  "license": "ISC",
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
     "test": "mocha",
