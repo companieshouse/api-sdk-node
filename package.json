@@ -6,10 +6,11 @@
   "license": "ISC",
   "scripts": {
     "build": "tsc",
-    "prebuild": "rm -rf dist/*",
     "test": "mocha",
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
-    "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix"
+    "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
+    "prepublishOnly": "tsc",
+    "postpublish": "rm -rf dist"
   },
   "dependencies": {
     "camelcase-keys": "~6.2.2",
