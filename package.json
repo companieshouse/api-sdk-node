@@ -1,15 +1,19 @@
 {
-  "name": "api-sdk-node",
-  "version": "1.0.0",
+  "name": "@companieshouse/api-sdk-node",
+  "version": "unversioned",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-  "license": "ISC",
+   "files": [
+    "dist"
+  ],
+  "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "prebuild": "rm -rf dist/*",
     "test": "mocha",
     "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
-    "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix"
+    "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
+    "prepublishOnly": "[ ! -d node_modules ] && npm install; tsc",
+    "postpublish": "rm -rf dist"
   },
   "dependencies": {
     "camelcase-keys": "~6.2.2",
