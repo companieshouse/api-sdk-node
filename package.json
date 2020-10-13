@@ -1,9 +1,9 @@
 {
   "name": "@companieshouse/api-sdk-node",
-  "version": "unversioned",
+  "version": "0.0.0",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
-   "files": [
+  "files": [
     "dist"
   ],
   "license": "MIT",
