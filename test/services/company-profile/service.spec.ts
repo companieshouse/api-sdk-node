@@ -118,7 +118,7 @@ describe("company-profile", () => {
         expect(data.resource.links.filingHistory).to.equal(mockResponseBody.links.filing_history);
     });
 
-    it("maps the company field data items correctly when registered office, accounts, confirmation statement,links and super_secure_pscs are missing", async () => {
+    it("maps the company field data items correctly when registered office, accounts, confirmation statement, links, and super_secure_pscs are missing", async () => {
         const mockResponseBody : CompanyProfileResource = ({
             company_name: "HELLO LTD",
             company_number: "88",
