@@ -10,6 +10,7 @@ export interface CompanyProfileResource {
   jurisdiction: string;
   sic_codes: string[];
   has_been_liquidated: boolean;
+  has_super_secure_pscs?: boolean;
   type: string;
   has_charges: boolean;
   has_insolvency_history: boolean;
@@ -95,6 +96,7 @@ export interface CompanyProfile {
   jurisdiction: string;
   sicCodes: string[];
   hasBeenLiquidated: boolean;
+  hasSuperSecurePscs?: boolean;
   type: string;
   hasCharges: boolean;
   hasInsolvencyHistory: boolean;
