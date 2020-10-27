@@ -49,6 +49,7 @@ export default class CompanyProfileService {
             jurisdiction: body.jurisdiction,
             sicCodes: body.sic_codes,
             hasBeenLiquidated: body.has_been_liquidated,
+            hasSuperSecurePscs: body?.has_super_secure_pscs,
             type: body.type,
             hasCharges: body.has_charges,
             hasInsolvencyHistory: body.has_insolvency_history,

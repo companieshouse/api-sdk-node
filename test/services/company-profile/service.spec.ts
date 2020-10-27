@@ -46,6 +46,7 @@ describe("company-profile", () => {
             company_status_detail: "not sure",
             sic_codes: ["85100"],
             has_been_liquidated: false,
+            has_super_secure_pscs: false,
             type: "private-limited-shares-section-30-exemption",
             has_charges: false,
             has_insolvency_history: true,
@@ -95,6 +96,7 @@ describe("company-profile", () => {
         expect(data.resource.jurisdiction).to.equal(mockResponseBody.jurisdiction);
         expect(data.resource.sicCodes).to.eql(mockResponseBody.sic_codes);
         expect(data.resource.hasBeenLiquidated).to.equal(mockResponseBody.has_been_liquidated);
+        expect(data.resource.hasSuperSecurePscs).to.equal(mockResponseBody.has_super_secure_pscs);
         expect(data.resource.type).to.equal(mockResponseBody.type);
         expect(data.resource.hasCharges).to.equal(mockResponseBody.has_charges);
         expect(data.resource.hasInsolvencyHistory).to.equal(mockResponseBody.has_insolvency_history);
@@ -116,7 +118,7 @@ describe("company-profile", () => {
         expect(data.resource.links.filingHistory).to.equal(mockResponseBody.links.filing_history);
     });
 
-    it("maps the company field data items correctly when registered office, accounts, confirmation statement and links are missing", async () => {
+    it("maps the company field data items correctly when registered office, accounts, confirmation statement, links, and super_secure_pscs are missing", async () => {
         const mockResponseBody : CompanyProfileResource = ({
             company_name: "HELLO LTD",
             company_number: "88",
@@ -172,5 +174,6 @@ describe("company-profile", () => {
         expect(data.resource.confirmationStatement.nextDue).to.be.undefined;
         expect(data.resource.confirmationStatement.overdue).to.be.undefined;
         expect(data.resource.links.filingHistory).to.be.undefined;
+        expect(data.resource.hasSuperSecurePscs).to.be.undefined;
     });
 });
