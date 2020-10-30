@@ -5,6 +5,7 @@ import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
+import CompanyFilingHistoryService from "./services/company-filing-history/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -12,8 +13,9 @@ import { PaymentService } from "./services/payment/";
 export default class ApiClient {
   public readonly lateFilingPenalties: LateFilingPenaltyService;
   public readonly companyOfficers: CompanyOfficersService;
+  public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;
-   public readonly companyPsc : CompanyPscService ;
+  public readonly companyPsc : CompanyPscService ;
   public readonly certificate: CertificateService;
   public readonly certifiedCopies: CertifiedCopiesService;
   public readonly basket: BasketService;
@@ -25,6 +27,7 @@ export default class ApiClient {
       // services on the api domain using the apiClient
       this.lateFilingPenalties = new LateFilingPenaltyService(apiClient);
       this.companyOfficers = new CompanyOfficersService(apiClient);
+      this.companyFilingHistory = new CompanyFilingHistoryService(apiClient);
       this.companyProfile = new CompanyProfileService(apiClient);
       this.companyPsc = new CompanyPscService(apiClient);
       this.certificate = new CertificateService(apiClient);
