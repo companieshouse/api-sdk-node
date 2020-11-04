@@ -3,8 +3,7 @@ import { RefreshTokenData } from "./types";
 import Resource from "../resource";
 
 export default class {
-    constructor (private readonly client: IHttpClient) {
-    }
+    constructor (private readonly client: IHttpClient) {}
 
     public async refresh (refreshToken: string, grantType: string, clientId: string,
         clientSecret: string): Promise<Resource<RefreshTokenData>> {
