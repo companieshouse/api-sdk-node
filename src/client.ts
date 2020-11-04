@@ -6,6 +6,7 @@ import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
+import { RefreshTokenService } from "./services/refresh-token";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -22,6 +23,7 @@ export default class ApiClient {
   public readonly payment: PaymentService;
   public readonly order: OrderService;
   public readonly mid : MidService;
+  public readonly refreshToken: RefreshTokenService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -38,5 +40,6 @@ export default class ApiClient {
       this.mid = new MidService(apiClient);
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
+      this.refreshToken = new RefreshTokenService(accountClient);
   }
 }
