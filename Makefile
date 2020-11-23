@@ -17,6 +17,10 @@ build:
 lint:
 	npm run lint
 
+.PHONY: test
+test:
+	npm run test
+
 .PHONY: test-unit
 test-unit:
 	npm run test
@@ -38,3 +42,7 @@ endif
 
 .PHONY: dist
 dist: lint test-unit clean package
+
+.PHONY: sonar
+sonar:
+	npm run analyse-code
