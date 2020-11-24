@@ -9,7 +9,7 @@ clean:
 	rm -f ./build.log
 
 .PHONY: build
-build:
+build: lint
 	npm i
 	npm run build
 
