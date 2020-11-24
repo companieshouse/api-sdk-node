@@ -9,9 +9,10 @@ clean:
 	rm -f ./build.log
 
 .PHONY: build
-build: lint
+build:
 	npm i
 	npm run build
+	npm run lint
 
 .PHONY: lint
 lint:
