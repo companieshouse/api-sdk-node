@@ -12,6 +12,7 @@ clean:
 build:
 	npm i
 	npm run build
+	npm run lint
 
 .PHONY: lint
 lint:
