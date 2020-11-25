@@ -18,7 +18,6 @@ describe("refresh token", () => {
     });
 
     it("returns an error response on failure", async () => {
-
         sinon.stub(requestClient, "httpPost").resolves({
             status: 400,
             error: "Invalid parameter"
