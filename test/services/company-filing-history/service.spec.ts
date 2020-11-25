@@ -63,7 +63,7 @@ describe("company-filing-history", () => {
         const companyFilingHistoryService : CompanyFilingHistoryService = new CompanyFilingHistoryService(requestClient);
         const data = await companyFilingHistoryService.getCompanyFilingHistory("123");
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).to.equal(201);
 
         expect(data.resource.etag).to.equal(mockResponseBody.etag)
         expect(data.resource.filingHistoryStatus).to.equal(mockResponseBody.filing_history_status)
