@@ -18,6 +18,10 @@ build:
 lint:
 	npm run lint
 
+.PHONY: security-check
+security-check:
+	npm audit
+
 .PHONY: test
 test:
 	npm run test
