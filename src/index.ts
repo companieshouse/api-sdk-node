@@ -15,8 +15,6 @@ export const createApiClient = (apiKey?: string, oauthToken?: string, baseUrl: s
         throw new Error("You cannot set both api key and oauth token to create a client. Please use one or the other");
     }
 
-    compilation error
-
     // the http client adapter for the api domain
     const apiOptions: HttpClientOptions = {
         apiKey,
