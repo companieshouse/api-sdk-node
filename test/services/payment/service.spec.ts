@@ -82,7 +82,7 @@ describe("payment service", () => {
 
             const data = response.value as ApiResponse<Payment>;
             const payment = data.resource;
-            expect(payment.amount).to.equal(mockResponseBody.etag);
+            expect(payment.amount).to.equal(mockResponseBody.amount);
             expect(payment.availablePaymentMethods[0]).to.equal(mockResponseBody.available_payment_methods[0]);
             expect(payment.availablePaymentMethods[1]).to.equal(mockResponseBody.available_payment_methods[1]);
             expect(payment.companyNumber).to.equal(mockResponseBody.company_number);
