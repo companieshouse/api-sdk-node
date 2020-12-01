@@ -23,7 +23,7 @@
     "snakecase-keys": "~3.2.0"
   },
   "devDependencies": {
-    "@types/chai": "~4.2.11",
+    "@types/chai": "~4.2.14",
     "@types/chai-as-promised": "~7.1.2",
     "@types/chai-http": "~4.2.0",
     "@types/mocha": "~7.0.2",
