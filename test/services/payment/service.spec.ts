@@ -101,6 +101,7 @@ describe("payment service", () => {
             expect(payment.paymentMethod).to.equal(mockResponseBody.payment_method);
             expect(payment.reference).to.equal(mockResponseBody.reference);
             expect(payment.status).to.equal(mockResponseBody.status);
+            expect(true).to.equal(true);
         });
 
         it("should map the payment request fields", async () => {
