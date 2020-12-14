@@ -224,3 +224,13 @@ export interface MissingImageDeliveryItemOptionsResource {
 
 export type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource
    | MissingImageDeliveryItemOptionsResource;
+
+export interface DirectorDetails {
+    includeBasicInformation?: boolean;
+    includeAddress?: boolean;
+    includeAppointmentDate?: boolean;
+    includeCountryOfResidence?: boolean;
+    includeNationality?: boolean;
+    includeOccupation?: boolean;
+    includeDobType?: string;
+}
