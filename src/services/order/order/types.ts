@@ -75,6 +75,12 @@ export interface CertificateItemOptions {
     };
     directorDetails: {
         includeBasicInformation?: boolean;
+        includeAddress?: boolean;
+        includeAppointmentDate?: boolean;
+        includeCountryOfResidence?: boolean;
+        includeNationality?: boolean;
+        includeOccupation?: boolean;
+        includeDobType?: string;
     };
     forename: string;
     surname: string;
@@ -182,6 +188,12 @@ export interface CertificateItemOptionsResource {
     };
     director_details: {
         include_basic_information?: boolean;
+        include_address?: boolean;
+        include_appointment_date?: boolean;
+        include_country_of_residence?: boolean;
+        include_nationality?: boolean;
+        include_occupation?: boolean;
+        include_dob_type?: string;
     };
     forename: string;
     surname: string;
