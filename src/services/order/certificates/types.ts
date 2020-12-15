@@ -161,13 +161,13 @@ export interface ItemOptionsRequest {
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
-    includeAddress?: boolean;
-    includeAppointmentDate?: boolean;
+    includeAddress?: boolean | null;
+    includeAppointmentDate?: boolean | null;
     includeBasicInformation: boolean | null;
-    includeCountryOfResidence?: boolean;
+    includeCountryOfResidence?: boolean | null;
     includeDobType?: string | null;
-    includeNationality?: boolean;
-    includeOccupation?: boolean;
+    includeNationality?: boolean | null;
+    includeOccupation?: boolean | null;
 }
 
 export interface RegisteredOfficeAddressDetailsRequest {
