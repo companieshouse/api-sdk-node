@@ -165,7 +165,7 @@ export interface DirectorOrSecretaryDetailsRequest {
     includeAppointmentDate?: boolean;
     includeBasicInformation: boolean | null;
     includeCountryOfResidence?: boolean;
-    includeDobType?: string;
+    includeDobType?: string | null;
     includeNationality?: boolean;
     includeOccupation?: boolean;
 }
