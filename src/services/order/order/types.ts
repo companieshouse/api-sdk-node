@@ -72,6 +72,12 @@ export interface CertificateItemOptions {
     };
     secretaryDetails: {
         includeBasicInformation?: boolean;
+        includeAddress?: boolean;
+        includeAppointmentDate?: boolean;
+        includeCountryOfResidence?: boolean;
+        includeNationality?: boolean;
+        includeOccupation?: boolean;
+        includeDobType?: string;
     };
     directorDetails: {
         includeBasicInformation?: boolean;
@@ -185,6 +191,12 @@ export interface CertificateItemOptionsResource {
     };
     secretary_details: {
         include_basic_information?: boolean;
+        include_address?: boolean;
+        include_appointment_date?: boolean;
+        include_country_of_residence?: boolean;
+        include_nationality?: boolean;
+        include_occupation?: boolean;
+        include_dob_type?: string;
     };
     director_details: {
         include_basic_information?: boolean;
@@ -225,7 +237,7 @@ export interface MissingImageDeliveryItemOptionsResource {
 export type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource
    | MissingImageDeliveryItemOptionsResource;
 
-export interface DirectorDetails {
+export interface DirectorOrSecretaryDetails {
     includeBasicInformation?: boolean;
     includeAddress?: boolean;
     includeAppointmentDate?: boolean;

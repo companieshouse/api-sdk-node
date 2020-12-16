@@ -87,7 +87,13 @@ export default class OrderMapping {
             });
 
             const secretaryDetails = this.removeEmptyObjects({
-                includeBasicInformation: itemResource?.secretary_details?.include_basic_information
+                includeBasicInformation: itemResource?.secretary_details?.include_basic_information,
+                includeAddress: itemResource?.secretary_details?.include_address,
+                includeAppointmentDate: itemResource?.secretary_details?.include_appointment_date,
+                includeCountryOfResidence: itemResource?.secretary_details?.include_country_of_residence,
+                includeNationality: itemResource?.secretary_details?.include_nationality,
+                includeOccupation: itemResource?.secretary_details?.include_occupation,
+                includeDobType: itemResource?.secretary_details?.include_dob_type
             });
 
             const registeredOfficeAddressDetails = this.removeEmptyObjects({
