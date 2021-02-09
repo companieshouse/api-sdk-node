@@ -21,8 +21,3 @@ export interface Items {
 export interface Links {
     self: string;
 }
-
-// AlphabeticalSearchPostRequest
-export interface AlphabeticalSearchPostRequest {
-    company_name: string
-}
