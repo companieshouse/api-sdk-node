@@ -19,7 +19,7 @@ class TestClient extends AbstractClient {
         throw new Error("Method not implemented.");
     }
 
-    public async httpGet (url: string): Promise<HttpResponse> {
+    public async httpGet (url: string, headers: any): Promise<HttpResponse> {
         return { status: 200 };
     }
 }
