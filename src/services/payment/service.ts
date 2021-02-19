@@ -41,8 +41,8 @@ export default class PaymentService {
 
     private async createPaymentHandler (createPaymentRequest: CreatePaymentRequest, path: string):
     Promise<ApiResult<ApiResponse<Payment>>> {
-        const createPaymentRequestResource: CreatePaymentRequestResource =
-      Mapping.snakeCaseKeys<CreatePaymentRequestResource>(createPaymentRequest);
+        const createPaymentRequestResource =
+      Mapping.snakeCaseKeys(createPaymentRequest);
 
         const resp: HttpResponse = await this.client.httpPost(path, createPaymentRequestResource);
 
