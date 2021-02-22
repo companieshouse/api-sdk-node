@@ -8,6 +8,7 @@ import { PaymentService } from "./services/payment/";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
 import AlphabeticalSearchService from "./services/search/alphabetical-search/service";
+import DissolvedSearchService from "./services/search/dissolved-search/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -26,6 +27,7 @@ export default class ApiClient {
   public readonly mid : MidService;
   public readonly refreshToken: RefreshTokenService;
   public readonly alphabeticalSearch: AlphabeticalSearchService;
+  public readonly dissolvedSearch: DissolvedSearchService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -41,6 +43,7 @@ export default class ApiClient {
       this.order = new OrderService(apiClient);
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
+      this.dissolvedSearch = new DissolvedSearchService(apiClient);
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);
