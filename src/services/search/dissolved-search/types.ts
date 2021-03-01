@@ -10,8 +10,8 @@ export interface Items {
     company_name: string;
     company_number: string;
     company_status: string;
-    date_of_cessation: string;
-    date_of_creation: string;
+    date_of_cessation: Date;
+    date_of_creation: Date;
     kind: string;
     previous_company_names: PreviousCompanyNames[];
 }
@@ -22,8 +22,8 @@ export interface Address {
 }
 
 export interface PreviousCompanyNames {
-    ceased_on: string;
-    effective_from: string;
+    ceased_on: Date;
+    effective_from: Date;
     name: string;
 }
 
@@ -32,8 +32,8 @@ export interface TopHit {
     company_name: string;
     company_number: string;
     company_status: string;
-    date_of_cessation: string;
-    date_of_creation: string;
+    date_of_cessation: Date;
+    date_of_creation: Date;
     kind: string;
     previous_company_names: PreviousCompanyNames[];
 }

@@ -20,13 +20,13 @@ const mockResponseBody : CompaniesResource = ({
             company_name: "test company",
             company_number: "0000789",
             company_status: "active",
-            date_of_cessation: "19910212",
-            date_of_creation: "19910212",
+            date_of_cessation: (new Date("19910212")),
+            date_of_creation: (new Date("19910212")),
             kind: "kind",
             previous_company_names: [
                 {
-                    ceased_on: "19910212",
-                    effective_from: "19910212",
+                    ceased_on: (new Date("19910212")),
+                    effective_from: (new Date("19910212")),
                     name: "old name"
                 }
             ]
@@ -41,13 +41,13 @@ const mockResponseBody : CompaniesResource = ({
         company_name: "test company",
         company_number: "0000789",
         company_status: "active",
-        date_of_cessation: "19910212",
-        date_of_creation: "19910212",
+        date_of_cessation: (new Date("19910212")),
+        date_of_creation: (new Date("19910212")),
         kind: "kind",
         previous_company_names: [
             {
-                ceased_on: "19910212",
-                effective_from: "19910212",
+                ceased_on: (new Date("19910212")),
+                effective_from: (new Date("19910212")),
                 name: "old name"
             }
         ]
