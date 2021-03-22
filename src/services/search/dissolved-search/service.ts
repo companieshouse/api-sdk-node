@@ -4,12 +4,21 @@ import Resource from "../../resource";
 
 export default class DissolvedSearchService {
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (companyName: string, requestId: string): Promise<Resource<CompaniesResource>> {
+    public async getCompanies (companyName: string, requestId: string, searchType: string): Promise<Resource<CompaniesResource>> {
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
         }
-        const dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
+        const ALPHABETICAL_QUERY = "&search_type=alphabetical";
+        const BEST_MATCH_QUERY = "&search_type=best-match";
+
+        let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
+
+        if (searchType === "alphabetical") {
+            dissolvedSearchURL += ALPHABETICAL_QUERY;
+        } else {
+            dissolvedSearchURL += BEST_MATCH_QUERY;
+        };
 
         const resp = await this.client.httpGet(dissolvedSearchURL, additionalHeaders);
 
