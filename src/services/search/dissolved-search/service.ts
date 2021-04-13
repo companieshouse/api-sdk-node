@@ -11,7 +11,7 @@ export default class DissolvedSearchService {
         }
         const ALPHABETICAL_QUERY = "&search_type=alphabetical";
         const BEST_MATCH_QUERY = "&search_type=best-match";
-        const PREVIOUSNAME_QUERY = "&search_type=previousName";
+        const PREVIOUSNAME_QUERY = "&search_type=previous-name-dissolved";
 
         let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
 
