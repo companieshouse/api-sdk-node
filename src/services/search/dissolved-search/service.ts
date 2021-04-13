@@ -11,14 +11,19 @@ export default class DissolvedSearchService {
         }
         const ALPHABETICAL_QUERY = "&search_type=alphabetical";
         const BEST_MATCH_QUERY = "&search_type=best-match";
+        const PREVIOUSNAME_QUERY = "&search_type=previousName";
 
         let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
 
         if (searchType === "alphabetical") {
             dissolvedSearchURL += ALPHABETICAL_QUERY;
-        } else {
+        }
+        if (searchType === "previousName"){
+            dissolvedSearchURL += PREVIOUSNAME_QUERY;
+        }
+        if (searchType === "best-match") {
             dissolvedSearchURL += BEST_MATCH_QUERY;
-        };
+        }
 
         const resp = await this.client.httpGet(dissolvedSearchURL, additionalHeaders);
 
