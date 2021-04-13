@@ -18,7 +18,7 @@ export default class DissolvedSearchService {
         if (searchType === "alphabetical") {
             dissolvedSearchURL += ALPHABETICAL_QUERY;
         }
-        if (searchType === "previousName"){
+        if (searchType === "previousName") {
             dissolvedSearchURL += PREVIOUSNAME_QUERY;
         }
         if (searchType === "best-match") {
