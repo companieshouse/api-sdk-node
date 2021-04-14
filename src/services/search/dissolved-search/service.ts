@@ -11,17 +11,17 @@ export default class DissolvedSearchService {
         }
         const ALPHABETICAL_QUERY = "&search_type=alphabetical";
         const BEST_MATCH_QUERY = "&search_type=best-match";
-        const PREVIOUSNAME_QUERY = "&search_type=previous-name-dissolved";
+        const PREVIOUS_NAME_QUERY = "&search_type=previous-name-dissolved";
 
         let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
 
         if (searchType === "alphabetical") {
             dissolvedSearchURL += ALPHABETICAL_QUERY;
         }
-        if (searchType === "previousName") {
-            dissolvedSearchURL += PREVIOUSNAME_QUERY;
+        if (searchType === "previousNameDissolved") {
+            dissolvedSearchURL += PREVIOUS_NAME_QUERY;
         }
-        if (searchType === "best-match") {
+        if (searchType === "bestMatch") {
             dissolvedSearchURL += BEST_MATCH_QUERY;
         }
 
