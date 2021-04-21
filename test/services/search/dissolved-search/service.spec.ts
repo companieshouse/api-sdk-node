@@ -57,6 +57,7 @@ const mockResponseBody : CompaniesResource = ({
 const mockRequestId = "fdskfhsdoifhsffsif";
 const testCompanyName = "TEST COMPANY NAME";
 const searchType = "alphabetical";
+const changedName = "best-match";
 
 describe("create a dissolved search GET", () => {
     beforeEach(() => {
@@ -78,7 +79,7 @@ describe("create a dissolved search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, changedName);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
@@ -92,7 +93,7 @@ describe("create a dissolved search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, changedName);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];
 
