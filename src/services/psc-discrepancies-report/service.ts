@@ -8,7 +8,11 @@ export default class {
     constructor (private readonly client: IHttpClient) { }
 
     public async getReport (reportId: string): Promise<Resource<PSCDiscrepancyReport>> {
-        const resp = await this.client.httpGet(`${PSC_DISCREPANCY_API_URL}/${reportId}`);
+        return this.getReportBySelfLink(`${PSC_DISCREPANCY_API_URL}/${reportId}`);
+    }
+
+    public async getReportBySelfLink (selfLink: string): Promise<Resource<PSCDiscrepancyReport>> {
+        const resp = await this.client.httpGet(`${selfLink}`);
 
         const resource: Resource<PSCDiscrepancyReport> = {
             httpStatusCode: resp.status
@@ -45,7 +49,11 @@ export default class {
     }
 
     public async updateReport (reportId: string, report: PSCDiscrepancyReport) {
-        const resp = await this.client.httpPut(`${PSC_DISCREPANCY_API_URL}/${reportId}`, report);
+        return this.updateReportBySelfLink(`${PSC_DISCREPANCY_API_URL}/${reportId}`, report);
+    }
+
+    public async updateReportBySelfLink (selfLink: string, report: PSCDiscrepancyReport) {
+        const resp = await this.client.httpPut(selfLink, report);
 
         const resource: Resource<PSCDiscrepancyReport> = {
             httpStatusCode: resp.status

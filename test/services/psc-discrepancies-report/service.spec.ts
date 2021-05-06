@@ -8,7 +8,7 @@ const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
-const mockResponseBodyComplete: any = ({
+const mockResponseBodyComplete: PSCDiscrepancyReport = ({
     links: {
         self: "/psc-discrepancy-reports/573a4369-c29d-44d7-9580-e52f85c4a19b"
     },
@@ -186,11 +186,11 @@ describe("Update Psc Discrepancy Report", () => {
         expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyComplete.obliged_entity_type);
         expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyComplete.obliged_entity_email);
         expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
-        expect(data.resource.obliged_entity_organisation_name).to.be.undefined;
-        expect(data.resource.obliged_entity_name).to.be.undefined;
-        expect(data.resource.obliged_entity_contact_name).to.be.undefined;
-        expect(data.resource.obliged_entity_telephone_number).to.be.undefined;
-        expect(data.resource.company_number).to.be.undefined;
-        expect(data.resource.submission_reference).to.be.undefined;
+        expect(data.resource.obliged_entity_organisation_name).to.equal(mockResponseBodyComplete.obliged_entity_organisation_name);
+        expect(data.resource.obliged_entity_name).to.equal(mockResponseBodyComplete.obliged_entity_name);
+        expect(data.resource.obliged_entity_contact_name).to.equal(mockResponseBodyComplete.obliged_entity_contact_name);
+        expect(data.resource.obliged_entity_telephone_number).to.equal(mockResponseBodyComplete.obliged_entity_telephone_number);
+        expect(data.resource.company_number).to.equal(mockResponseBodyComplete.company_number);
+        expect(data.resource.submission_reference).to.equal(mockResponseBodyComplete.submission_reference);
     });
 })
