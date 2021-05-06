@@ -4,6 +4,7 @@ import sinon from "sinon";
 import PscDiscrepancyService from "../../../src/services/psc-discrepancies/service";
 import { RequestClient } from "../../../src/http";
 import { PscDiscrepancy } from "../../../src/services/psc-discrepancies/types";
+import { prototype } from "module";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -63,7 +64,7 @@ describe("Get All Psc Discrepancies", () => {
     it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
         const mockGetResponse = {
             status: 200,
-            body: mockResponseBodyComplete
+            body: mockResponseBodyArray
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
@@ -84,7 +85,7 @@ describe("Get All Psc Discrepancies", () => {
     });
 })
 
-describe("Get All Psc Discrepancies", () => {
+describe("Get Psc Discrepancies", () => {
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -118,19 +119,16 @@ describe("Get All Psc Discrepancies", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(DISCREPANCY_SELF_LINK);
+        const data = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.length).to.equal(2);
-        data.resource.forEach(res => {
-            expect(res.etag).to.equal(mockResponseBodyComplete.etag);
-            expect(res.kind).to.equal(mockResponseBodyComplete.kind);
-            expect(res.details).to.equal(mockResponseBodyComplete.details);
-            expect(res.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
-            expect(res.psc_name).to.equal(mockResponseBodyComplete.psc_name);
-            expect(res.links.self).to.equal(mockResponseBodyComplete.links.self);
-            expect(res.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
-        })
+        expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);
+        expect(data.resource.kind).to.equal(mockResponseBodyComplete.kind);
+        expect(data.resource.details).to.equal(mockResponseBodyComplete.details);
+        expect(data.resource.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
+        expect(data.resource.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+        expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
+        expect(data.resource.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
     });
 })
 

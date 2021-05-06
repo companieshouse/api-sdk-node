@@ -16,7 +16,7 @@ export default class {
             return resource;
         }
 
-        resource.resource = { ...resp.body }
+        resource.resource = [...resp.body]
 
         return resource;
     }
