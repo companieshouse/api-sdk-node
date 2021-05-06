@@ -20,6 +20,11 @@ const mockResponseBodyComplete: PscDiscrepancy = ({
     psc_date_of_birth: "Æ"
 });
 
+const mockResponseBodyArray: PscDiscrepancy[] = [
+    mockResponseBodyComplete,
+    mockResponseBodyComplete
+]
+
 const mockResponseBodyCreate: any = ({
     details: "Æ",
     psc_name: "Æ",
@@ -27,6 +32,107 @@ const mockResponseBodyCreate: any = ({
 });
 
 const REPORT_SELF_LINK = "REPORT_SELF_LINK";
+const DISCREPANCY_SELF_LINK = "DISCREPANCY_SELF_LINK"
+
+describe("Get All Psc Discrepancies", () => {
+    beforeEach(() => {
+        sinon.reset();
+        sinon.restore();
+    });
+
+    afterEach(done => {
+        sinon.reset();
+        sinon.restore();
+        done();
+    });
+
+    it("returns an error response on failure", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+
+        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+
+        expect(data.httpStatusCode).to.equal(401);
+        expect(data.resource).to.be.undefined;
+    });
+
+    it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBodyComplete
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.length).to.equal(2);
+        data.resource.forEach(res => {
+            expect(res.etag).to.equal(mockResponseBodyComplete.etag);
+            expect(res.kind).to.equal(mockResponseBodyComplete.kind);
+            expect(res.details).to.equal(mockResponseBodyComplete.details);
+            expect(res.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
+            expect(res.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+            expect(res.links.self).to.equal(mockResponseBodyComplete.links.self);
+            expect(res.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
+        })
+    });
+})
+
+describe("Get All Psc Discrepancies", () => {
+    beforeEach(() => {
+        sinon.reset();
+        sinon.restore();
+    });
+
+    afterEach(done => {
+        sinon.reset();
+        sinon.restore();
+        done();
+    });
+
+    it("returns an error response on failure", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+
+        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const data = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+
+        expect(data.httpStatusCode).to.equal(401);
+        expect(data.resource).to.be.undefined;
+    });
+
+    it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBodyComplete
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(DISCREPANCY_SELF_LINK);
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.length).to.equal(2);
+        data.resource.forEach(res => {
+            expect(res.etag).to.equal(mockResponseBodyComplete.etag);
+            expect(res.kind).to.equal(mockResponseBodyComplete.kind);
+            expect(res.details).to.equal(mockResponseBodyComplete.details);
+            expect(res.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
+            expect(res.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+            expect(res.links.self).to.equal(mockResponseBodyComplete.links.self);
+            expect(res.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
+        })
+    });
+})
 
 describe("Create Psc Discrepancy", () => {
     beforeEach(() => {
