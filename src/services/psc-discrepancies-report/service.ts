@@ -8,7 +8,7 @@ export default class {
     constructor (private readonly client: IHttpClient) { }
 
     public async getReport (reportId: string): Promise<Resource<PSCDiscrepancyReport>> {
-        return this.getReportBySelfLink(`${PSC_DISCREPANCY_API_URL}/${reportId}`);
+        return this.getReportBySelfLink(this.buildSelfLink(reportId));
     }
 
     public async getReportBySelfLink (selfLink: string): Promise<Resource<PSCDiscrepancyReport>> {
@@ -49,7 +49,7 @@ export default class {
     }
 
     public async updateReport (reportId: string, report: PSCDiscrepancyReport) {
-        return this.updateReportBySelfLink(`${PSC_DISCREPANCY_API_URL}/${reportId}`, report);
+        return this.updateReportBySelfLink(this.buildSelfLink(reportId), report);
     }
 
     public async updateReportBySelfLink (selfLink: string, report: PSCDiscrepancyReport) {
@@ -66,5 +66,9 @@ export default class {
         resource.resource = { ...resp.body }
 
         return resource;
+    }
+
+    private buildSelfLink (reportId: string): string {
+        return `${PSC_DISCREPANCY_API_URL}/${reportId}`;
     }
 }
