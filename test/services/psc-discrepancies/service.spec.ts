@@ -12,7 +12,7 @@ const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "
 const mockResponseBodyComplete: PscDiscrepancy = ({
     links: {
         self: "/psc-discrepancy-reports/fac191b2-fb28-43f4-a963-00deed13ff50/discrepancies/294fc59f-3d64-4b49-a1fd-64c6d5becd99",
-        "psc-discrepancy-report": "/psc-discrepancy-reports/fac191b2-fb28-43f4-a963-00deed13ff50"
+        psc_discrepancy_report: "/psc-discrepancy-reports/fac191b2-fb28-43f4-a963-00deed13ff50"
     },
     etag: "0d4cce4b87c518cf2464bec3362604bb65267958",
     kind: "psc_discrepancy#psc_discrepancy_report",
@@ -80,7 +80,7 @@ describe("Get All Psc Discrepancies", () => {
             expect(res.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
             expect(res.psc_name).to.equal(mockResponseBodyComplete.psc_name);
             expect(res.links.self).to.equal(mockResponseBodyComplete.links.self);
-            expect(res.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
+            expect(res.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
         })
     });
 })
@@ -128,7 +128,7 @@ describe("Get Psc Discrepancies", () => {
         expect(data.resource.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
         expect(data.resource.psc_name).to.equal(mockResponseBodyComplete.psc_name);
         expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
-        expect(data.resource.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
+        expect(data.resource.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
     });
 })
 
@@ -175,6 +175,6 @@ describe("Create Psc Discrepancy", () => {
         expect(data.resource.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
         expect(data.resource.psc_name).to.equal(mockResponseBodyComplete.psc_name);
         expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
-        expect(data.resource.links["psc-discrepancy-report"]).to.equal(mockResponseBodyComplete.links["psc-discrepancy-report"]);
+        expect(data.resource.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
     });
 })

@@ -8,5 +8,5 @@ export interface PscDiscrepancy {
 }
 export interface LinksResource {
     self: string;
-    "psc-discrepancy-report": string;
+    psc_discrepancy_report: string;
 }
