@@ -5,6 +5,7 @@ import PscDiscrepancyReportService from "../../../src/services/psc-discrepancies
 import { RequestClient } from "../../../src/http";
 import { PSCDiscrepancyReport } from "../../../src/services/psc-discrepancies-report/types";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
+import { Result, failure } from "../../../src/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -43,6 +44,7 @@ const genericApiError: ApiError = {
 };
 
 const REPORT_ID = "REPORT_ID";
+const OBLIGED_ENTITY_TYPE = "5";
 
 describe("Get Psc Discrepancy Report", () => {
     beforeEach(() => {
@@ -56,6 +58,26 @@ describe("Get Psc Discrepancy Report", () => {
         done();
     });
 
+    it("Fully mocked Test", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
+
+        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+
+        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
+
+        expect(result).to.be.equal(mockResult)
+
+        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports/" + REPORT_ID)
+        expect(mockProcess).to.have.been.calledWith(mockGetResponse)
+    })
+
     it("returns an error response on failure", async () => {
         const mockGetResponse = {
             status: 401,
@@ -64,6 +86,7 @@ describe("Get Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+
         const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
         expect(result.isFailure()).to.be.true;
@@ -117,15 +140,35 @@ describe("Create Psc Discrepancy Report", () => {
         done();
     });
 
-    it("returns an error response on failure", async () => {
-        const mockGetResponse = {
+    it("Fully mocked Test", async () => {
+        const mockPostResponse = {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+
+        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
+
+        expect(result).to.be.equal(mockResult)
+
+        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports")
+        expect(mockProcess).to.have.been.calledWith(mockPostResponse)
+    })
+
+    it("returns an error response on failure", async () => {
+        const mockPostResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+
+        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
 
         expect(result.isFailure()).to.be.true;
 
@@ -158,7 +201,7 @@ describe("Create Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
 
         expect(result.isFailure()).to.be.true;
 
@@ -169,14 +212,14 @@ describe("Create Psc Discrepancy Report", () => {
     });
 
     it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
-        const mockGetResponse = {
+        const mockPostResponse = {
             status: 200,
             body: mockResponseBodyCreate
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
 
         expect(result.isFailure()).to.be.false;
         expect(result.isSuccess()).to.be.true;
@@ -211,12 +254,32 @@ describe("Update Psc Discrepancy Report", () => {
         done();
     });
 
-    it("returns an error response on failure", async () => {
-        const mockGetResponse = {
+    it("Fully mocked Test", async () => {
+        const mockPutResponse = {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
+
+        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+
+        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+
+        expect(result).to.be.equal(mockResult)
+
+        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports/" + REPORT_ID, mockResponseBodyComplete)
+        expect(mockProcess).to.have.been.calledWith(mockPutResponse)
+    })
+
+    it("returns an error response on failure", async () => {
+        const mockPutResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
@@ -230,12 +293,12 @@ describe("Update Psc Discrepancy Report", () => {
     });
 
     it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
-        const mockGetResponse = {
+        const mockPutResponse = {
             status: 200,
             body: mockResponseBodyComplete
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 

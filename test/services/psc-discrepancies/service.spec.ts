@@ -4,9 +4,8 @@ import sinon from "sinon";
 import PscDiscrepancyService from "../../../src/services/psc-discrepancies/service";
 import { RequestClient } from "../../../src/http";
 import { PscDiscrepancy } from "../../../src/services/psc-discrepancies/types";
-// import { Result } from "../../../src/services/result"
-import { prototype } from "module";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
+import { failure, Result } from "../../../src/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -53,6 +52,26 @@ describe("Get All Psc Discrepancies", () => {
         done();
     });
 
+    it("Fully mocked Test", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
+
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+
+        const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+
+        expect(result).to.be.equal(mockResult);
+
+        expect(mockRequest).to.have.been.calledWith(REPORT_SELF_LINK + "/discrepancies");
+        expect(mockProcess).to.have.been.calledWith(mockGetResponse);
+    })
+
     it("returns an error response on failure", async () => {
         const mockGetResponse = {
             status: 401,
@@ -61,8 +80,8 @@ describe("Get All Psc Discrepancies", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
 
         expect(result.isFailure()).to.be.true;
         expect(result.isSuccess()).to.be.false;
@@ -81,8 +100,8 @@ describe("Get All Psc Discrepancies", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
 
         expect(result.isFailure()).to.be.false;
         expect(result.isSuccess()).to.be.true;
@@ -115,6 +134,26 @@ describe("Get Psc Discrepancies", () => {
         done();
     });
 
+    it("Fully mocked Test", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
+
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+
+        const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+
+        expect(result).to.be.equal(mockResult);
+
+        expect(mockRequest).to.have.been.calledWith(DISCREPANCY_SELF_LINK);
+        expect(mockProcess).to.have.been.calledWith(mockGetResponse);
+    })
+
     it("returns an error response on failure", async () => {
         const mockGetResponse = {
             status: 401,
@@ -122,8 +161,8 @@ describe("Get Psc Discrepancies", () => {
         };
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
         expect(result.isFailure()).to.be.true;
         expect(result.isSuccess()).to.be.false;
@@ -141,8 +180,8 @@ describe("Get Psc Discrepancies", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
         const data = result.value as ApiResponse<PscDiscrepancy>;
 
@@ -169,15 +208,35 @@ describe("Create Psc Discrepancy", () => {
         done();
     });
 
-    it("returns an error response on failure", async () => {
-        const mockGetResponse = {
+    it("Fully mocked Test", async () => {
+        const mockPostResponse = {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
 
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+
+        const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
+
+        const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+
+        expect(result).to.be.equal(mockResult);
+
+        expect(mockRequest).to.have.been.calledWith(`${REPORT_SELF_LINK}/discrepancies`, mockResponseBodyCreate);
+        expect(mockProcess).to.have.been.calledWith(mockPostResponse);
+    })
+
+    it("returns an error response on failure", async () => {
+        const mockPostResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
 
         expect(result.isFailure()).to.be.true;
         expect(result.isSuccess()).to.be.false;
@@ -189,14 +248,14 @@ describe("Create Psc Discrepancy", () => {
     });
 
     it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
-        const mockGetResponse = {
+        const mockPostResponse = {
             status: 200,
             body: mockResponseBodyComplete
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const result = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
 
         const data = result.value as ApiResponse<PscDiscrepancy>;
 
