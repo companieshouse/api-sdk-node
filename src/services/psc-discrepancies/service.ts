@@ -16,12 +16,12 @@ export default class {
     }
 
     public async getPscDiscrepancy (selfLink: string) {
-        const resp = await this.client.httpGet(this.buildBaseURL(selfLink));
+        const resp = await this.client.httpGet(selfLink);
         return this.utility.processResponse(resp);
     }
 
     public async createPscDiscrepancy (reportSelfLink: string, discrepancy:PscDiscrepancy) {
-        const resp = await this.client.httpPost(this.buildBaseURL(reportSelfLink));
+        const resp = await this.client.httpPost(this.buildBaseURL(reportSelfLink), discrepancy);
         return this.utility.processResponse(resp);
     }
 
