@@ -1,56 +1,28 @@
-import { IHttpClient } from "../../http";
-import Resource from "../../services/resource";
+import { IHttpClient, HttpResponse } from "../../http";
+import Resource, { ApiErrorResponse, ApiError } from "../../services/resource";
 import { PscDiscrepancy } from "./types"
+import { failure, success } from "../result";
+import Mapping from "../../mapping/mapping";
+import Util from "../psc-discrepancies-report/util"
 
 export default class {
-    constructor (private readonly client: IHttpClient) { }
+    utility: Util;
+    constructor (private readonly client: IHttpClient) { this.utility = new Util() }
 
     public async getPscDiscrepanciesForReport (reportSelfLink: string) {
         const resp = await this.client.httpGet(this.buildBaseURL(reportSelfLink));
 
-        const resource: Resource<PscDiscrepancy[]> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = [...resp.body]
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
     public async getPscDiscrepancy (selfLink: string) {
         const resp = await this.client.httpGet(this.buildBaseURL(selfLink));
-
-        const resource: Resource<PscDiscrepancy> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = { ...resp.body }
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
     public async createPscDiscrepancy (reportSelfLink: string, discrepancy:PscDiscrepancy) {
         const resp = await this.client.httpPost(this.buildBaseURL(reportSelfLink));
-
-        const resource: Resource<PscDiscrepancy> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = { ...resp.body }
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
     private buildBaseURL (reportSelfLink: string): string {

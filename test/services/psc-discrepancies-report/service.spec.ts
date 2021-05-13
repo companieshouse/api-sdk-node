@@ -4,11 +4,12 @@ import sinon from "sinon";
 import PscDiscrepancyReportService from "../../../src/services/psc-discrepancies-report/service";
 import { RequestClient } from "../../../src/http";
 import { PSCDiscrepancyReport } from "../../../src/services/psc-discrepancies-report/types";
+import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
-const mockResponseBodyComplete: PSCDiscrepancyReport = ({
+const mockResponseBodyComplete: PSCDiscrepancyReport = {
     links: {
         self: "/psc-discrepancy-reports/573a4369-c29d-44d7-9580-e52f85c4a19b"
     },
@@ -23,7 +24,7 @@ const mockResponseBodyComplete: PSCDiscrepancyReport = ({
     company_number: "00006400",
     submission_reference: "1755-1223-1316-1244",
     status: "COMPLETE"
-});
+};
 
 const mockResponseBodyCreate: any = (
     {
@@ -36,6 +37,10 @@ const mockResponseBodyCreate: any = (
         obliged_entity_type: "2"
     }
 )
+
+const genericApiError: ApiError = {
+    error: "An error occurred"
+};
 
 const REPORT_ID = "REPORT_ID";
 
@@ -59,10 +64,14 @@ describe("Get Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.getReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
+
+        expect(result.isFailure()).to.be.true;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
     });
 
     it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
@@ -73,7 +82,12 @@ describe("Get Psc Discrepancy Report", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.getReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
+
+        expect(result.isFailure()).to.be.false;
+        expect(result.isSuccess()).to.be.true;
+
+        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
@@ -111,10 +125,47 @@ describe("Create Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+
+        expect(result.isFailure()).to.be.true;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
+    });
+    it("returns a correctly mapped error response on validation failure", async () => {
+        const validationError = {
+            status: 400,
+            error: {
+                errors: [
+                    {
+                        error: "obliged_entity_type must be a valid integer.",
+                        location: "obliged_entity_type",
+                        location_type: "request-body",
+                        type: "ch:validation"
+                    }
+                ]
+            }
+        }
+        const expectedError: ApiError = {
+            error: "obliged_entity_type must be a valid integer.",
+            location: "obliged_entity_type",
+            locationType: "request-body",
+            type: "ch:validation"
+        }
+
+        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
+
+        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+
+        expect(result.isFailure()).to.be.true;
+
+        const data = result.value as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([expectedError]));
     });
 
     it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
@@ -125,7 +176,12 @@ describe("Create Psc Discrepancy Report", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+        const result = await pscDiscrepancyReportService.createNewReport(REPORT_ID);
+
+        expect(result.isFailure()).to.be.false;
+        expect(result.isSuccess()).to.be.true;
+
+        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
@@ -163,10 +219,14 @@ describe("Update Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+        const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+
+        expect(result.isFailure()).to.be.true;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
     });
 
     it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
@@ -177,7 +237,12 @@ describe("Update Psc Discrepancy Report", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const data = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+        const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+
+        expect(result.isFailure()).to.be.false;
+        expect(result.isSuccess()).to.be.true;
+
+        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);

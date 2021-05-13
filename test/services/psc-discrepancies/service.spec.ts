@@ -4,7 +4,9 @@ import sinon from "sinon";
 import PscDiscrepancyService from "../../../src/services/psc-discrepancies/service";
 import { RequestClient } from "../../../src/http";
 import { PscDiscrepancy } from "../../../src/services/psc-discrepancies/types";
+// import { Result } from "../../../src/services/result"
 import { prototype } from "module";
+import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -32,6 +34,10 @@ const mockResponseBodyCreate: any = ({
     psc_date_of_birth: "Æ"
 });
 
+const genericApiError: ApiError = {
+    error: "An error occurred"
+};
+
 const REPORT_SELF_LINK = "REPORT_SELF_LINK";
 const DISCREPANCY_SELF_LINK = "DISCREPANCY_SELF_LINK"
 
@@ -52,13 +58,20 @@ describe("Get All Psc Discrepancies", () => {
             status: 401,
             error: "An error occurred"
         };
+
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+        const result = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+
+        expect(result.isFailure()).to.be.true;
+        expect(result.isSuccess()).to.be.false;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
     });
 
     it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
@@ -69,7 +82,12 @@ describe("Get All Psc Discrepancies", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+        const result = await pscDiscrepancyReportService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
+
+        expect(result.isFailure()).to.be.false;
+        expect(result.isSuccess()).to.be.true;
+
+        const data = result.value as ApiResponse<PscDiscrepancy[]>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.length).to.equal(2);
@@ -105,10 +123,15 @@ describe("Get Psc Discrepancies", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+        const result = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+
+        expect(result.isFailure()).to.be.true;
+        expect(result.isSuccess()).to.be.false;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
     });
 
     it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
@@ -119,7 +142,9 @@ describe("Get Psc Discrepancies", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+        const result = await pscDiscrepancyReportService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
+
+        const data = result.value as ApiResponse<PscDiscrepancy>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);
@@ -152,10 +177,15 @@ describe("Create Psc Discrepancy", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+        const result = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+
+        expect(result.isFailure()).to.be.true;
+        expect(result.isSuccess()).to.be.false;
+
+        const data = result.value as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
     });
 
     it("maps the psc discrepancy field data items correctly when optional fields are missing", async () => {
@@ -166,7 +196,9 @@ describe("Create Psc Discrepancy", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse);
         const pscDiscrepancyReportService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
-        const data = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+        const result = await pscDiscrepancyReportService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
+
+        const data = result.value as ApiResponse<PscDiscrepancy>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);

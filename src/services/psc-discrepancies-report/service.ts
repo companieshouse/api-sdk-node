@@ -1,51 +1,30 @@
 import { IHttpClient } from "../../http";
-import Resource from "../../services/resource";
 import { PSCDiscrepancyReport } from "./types"
+import Util from "./util"
 
 const PSC_DISCREPANCY_API_URL = "/psc-discrepancy-reports";
 
 export default class {
-    constructor (private readonly client: IHttpClient) { }
+    utility: Util;
+    constructor (private readonly client: IHttpClient) { this.utility = new Util() }
 
-    public async getReport (reportId: string): Promise<Resource<PSCDiscrepancyReport>> {
+    public async getReport (reportId: string) {
         return this.getReportBySelfLink(this.buildSelfLink(reportId));
     }
 
-    public async getReportBySelfLink (selfLink: string): Promise<Resource<PSCDiscrepancyReport>> {
+    public async getReportBySelfLink (selfLink: string) {
         const resp = await this.client.httpGet(`${selfLink}`);
-
-        const resource: Resource<PSCDiscrepancyReport> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = { ...resp.body }
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
-    public async createNewReport (obligedEntityType: String): Promise<Resource<PSCDiscrepancyReport>> {
+    public async createNewReport (obligedEntityType: String) {
         const resp = await this.client.httpPost(
             PSC_DISCREPANCY_API_URL,
             {
                 obligedEntityType: obligedEntityType,
                 status: "INCOMPLETE"
             });
-
-        const resource: Resource<PSCDiscrepancyReport> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = { ...resp.body }
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
     public async updateReport (reportId: string, report: PSCDiscrepancyReport) {
@@ -54,18 +33,7 @@ export default class {
 
     public async updateReportBySelfLink (selfLink: string, report: PSCDiscrepancyReport) {
         const resp = await this.client.httpPut(selfLink, report);
-
-        const resource: Resource<PSCDiscrepancyReport> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        resource.resource = { ...resp.body }
-
-        return resource;
+        return this.utility.processResponse(resp);
     }
 
     private buildSelfLink (reportId: string): string {
