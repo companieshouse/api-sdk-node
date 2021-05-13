@@ -29,7 +29,7 @@ export default class {
             } else if ((errors as ApiError).type) {
                 return Mapping.camelCaseKeys(errors);
             } else if (Object.getOwnPropertyNames(errors).includes("errors") || Object.getOwnPropertyNames(errors).includes("error")) {
-                return this.buildErrors(errors.errors);
+                return this.buildErrors(errors.errors ? errors.errors : errors.error);
             } else {
                 const ret: ApiError = {
                     error: errors
