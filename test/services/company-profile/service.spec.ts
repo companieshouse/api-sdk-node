@@ -70,7 +70,9 @@ describe("company-profile", () => {
                 overdue: true
             },
             confirmation_statement: {
+                last_made_up_to: "2018-08-24",
                 next_due: "2019-08-24",
+                next_made_up_to: "2019-07-20",
                 overdue: true
             },
             links: {
@@ -113,7 +115,9 @@ describe("company-profile", () => {
         expect(data.resource.accounts.nextAccounts.periodStartOn).to.equal(mockResponseBody.accounts.next_accounts.period_start_on);
         expect(data.resource.accounts.nextDue).to.equal(mockResponseBody.accounts.next_due);
         expect(data.resource.accounts.overdue).to.equal(mockResponseBody.accounts.overdue);
+        expect(data.resource.confirmationStatement.lastMadeUpTo).to.equal(mockResponseBody.confirmation_statement.last_made_up_to);
         expect(data.resource.confirmationStatement.nextDue).to.equal(mockResponseBody.confirmation_statement.next_due);
+        expect(data.resource.confirmationStatement.nextMadeUpTo).to.equal(mockResponseBody.confirmation_statement.next_made_up_to);
         expect(data.resource.confirmationStatement.overdue).to.equal(mockResponseBody.confirmation_statement.overdue);
         expect(data.resource.links.filingHistory).to.equal(mockResponseBody.links.filing_history);
     });
@@ -171,7 +175,9 @@ describe("company-profile", () => {
         expect(data.resource.accounts.nextAccounts.periodStartOn).to.be.undefined;
         expect(data.resource.accounts.nextDue).to.be.undefined;
         expect(data.resource.accounts.overdue).to.be.undefined;
+        expect(data.resource.confirmationStatement.lastMadeUpTo).to.be.undefined;
         expect(data.resource.confirmationStatement.nextDue).to.be.undefined;
+        expect(data.resource.confirmationStatement.nextMadeUpTo).to.be.undefined;
         expect(data.resource.confirmationStatement.overdue).to.be.undefined;
         expect(data.resource.links.filingHistory).to.be.undefined;
         expect(data.resource.hasSuperSecurePscs).to.be.undefined;

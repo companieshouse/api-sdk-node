@@ -77,11 +77,23 @@ export default class OrderMapping {
         if (kind === "item#certificate") {
             itemResource = itemResource as CertificateItemOptionsResource;
             const directorDetails = this.removeEmptyObjects({
-                includeBasicInformation: itemResource?.director_details?.include_basic_information
+                includeBasicInformation: itemResource?.director_details?.include_basic_information,
+                includeAddress: itemResource?.director_details?.include_address,
+                includeAppointmentDate: itemResource?.director_details?.include_appointment_date,
+                includeCountryOfResidence: itemResource?.director_details?.include_country_of_residence,
+                includeNationality: itemResource?.director_details?.include_nationality,
+                includeOccupation: itemResource?.director_details?.include_occupation,
+                includeDobType: itemResource?.director_details?.include_dob_type
             });
 
             const secretaryDetails = this.removeEmptyObjects({
-                includeBasicInformation: itemResource?.secretary_details?.include_basic_information
+                includeBasicInformation: itemResource?.secretary_details?.include_basic_information,
+                includeAddress: itemResource?.secretary_details?.include_address,
+                includeAppointmentDate: itemResource?.secretary_details?.include_appointment_date,
+                includeCountryOfResidence: itemResource?.secretary_details?.include_country_of_residence,
+                includeNationality: itemResource?.secretary_details?.include_nationality,
+                includeOccupation: itemResource?.secretary_details?.include_occupation,
+                includeDobType: itemResource?.secretary_details?.include_dob_type
             });
 
             const registeredOfficeAddressDetails = this.removeEmptyObjects({

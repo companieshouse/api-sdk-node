@@ -3,7 +3,7 @@ import { AbstractClient, HttpResponse } from "../../src/http";
 const expect = chai.expect;
 
 class TestClient extends AbstractClient {
-    public httpPost (url: string, body: any): Promise<HttpResponse> {
+    public httpPost (url: string, body: any, headers: any): Promise<HttpResponse> {
         throw new Error("Method not implemented.");
     }
 
@@ -19,7 +19,7 @@ class TestClient extends AbstractClient {
         throw new Error("Method not implemented.");
     }
 
-    public async httpGet (url: string): Promise<HttpResponse> {
+    public async httpGet (url: string, headers: any): Promise<HttpResponse> {
         return { status: 200 };
     }
 }
