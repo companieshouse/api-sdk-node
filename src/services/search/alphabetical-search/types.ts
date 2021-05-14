@@ -16,6 +16,7 @@ export interface Items {
     company_status: string;
     corporate_name: string;
     record_type: string;
+    ordered_alpha_key: string;
 }
 
 export interface Links {
