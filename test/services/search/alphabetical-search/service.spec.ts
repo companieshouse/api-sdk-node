@@ -20,7 +20,8 @@ const mockResponseBody : CompaniesResource = ({
                 company_number: "FC022000",
                 company_status: "active",
                 corporate_name: "corporate name",
-                record_type: "record type"
+                record_type: "record type",
+                ordered_alpha_key: "ordered alpha key"
             },
             links: {
                 self: "/company/FC022000"
@@ -76,6 +77,7 @@ describe("create a alphabetical search GET", () => {
         expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
         expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
         expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
+        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
         expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
     });
 });
