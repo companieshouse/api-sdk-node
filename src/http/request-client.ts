@@ -6,12 +6,12 @@ import rq from "request-promise-native";
  * library.
  */
 export default class RequestClient extends AbstractClient {
-    public async httpGet (url: string): Promise<HttpResponse> {
-        return this.request({ method: "GET", url });
+    public async httpGet (url: string, headers?: Headers): Promise<HttpResponse> {
+        return this.request({ method: "GET", url, headers });
     }
 
-    public async httpPost (url: string, body?: any): Promise<HttpResponse> {
-        return this.request({ method: "POST", url, body });
+    public async httpPost (url: string, body?: any, headers?: Headers): Promise<HttpResponse> {
+        return this.request({ method: "POST", url, body, headers });
     }
 
     public async httpPatch (url: string, body?: any, headers?: Headers): Promise<HttpResponse> {
