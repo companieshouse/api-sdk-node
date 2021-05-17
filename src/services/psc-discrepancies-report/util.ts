@@ -3,10 +3,12 @@ import Resource, { ApiErrorResponse, ApiError, ApiResponse } from "../../service
 import { failure, success, Result, Success, Failure } from "../result";
 import Mapping from "../../mapping/mapping";
 
+type NestedErrors = { errors: ApiError[] }
+
 export default class {
     constructor () { }
 
-    processResponse (resp: HttpResponse) {
+    processResponse (resp: HttpResponse): Result<ApiResponse<any>, ApiErrorResponse> {
         if (resp.error) {
             const error: ApiErrorResponse = {
                 httpStatusCode: resp.status,
@@ -22,22 +24,18 @@ export default class {
         }
     }
 
-    private buildErrors (errors: any) {
-        if (errors) {
-            if (Array.isArray(errors)) {
-                return errors.map(error => this.buildErrors(error));
-            } else if ((errors as ApiError).type) {
-                return Mapping.camelCaseKeys(errors);
-            } else if (Object.getOwnPropertyNames(errors).includes("errors") || Object.getOwnPropertyNames(errors).includes("error")) {
-                return this.buildErrors(errors.errors ? errors.errors : errors.error);
-            } else {
-                const ret: ApiError = {
-                    error: errors
-                };
-                return [ret];
-            }
+    private buildErrors (errors: string | NestedErrors): ApiError[] {
+        if (typeof errors === "string") {
+            const ret: ApiError = {
+                error: errors
+            };
+            return [ret];
+        } else if ((errors as NestedErrors).errors) {
+            return (errors as NestedErrors).errors.reduce<ApiError[]>((previousValue, currentValue) => {
+                return [...previousValue, Mapping.camelCaseKeys(currentValue)]
+            }, []);
         } else {
-            return null;
+            return [];
         }
     }
 }
