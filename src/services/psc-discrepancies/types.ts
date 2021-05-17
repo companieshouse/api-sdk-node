@@ -1,4 +1,4 @@
-export interface PscDiscrepancy {
+export interface PSCDiscrepancy {
     links: LinksResource,
     etag: string,
     kind: string,

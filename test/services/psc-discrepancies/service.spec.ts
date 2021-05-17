@@ -3,14 +3,14 @@ import sinon from "sinon";
 
 import PscDiscrepancyService from "../../../src/services/psc-discrepancies/service";
 import { RequestClient } from "../../../src/http";
-import { PscDiscrepancy } from "../../../src/services/psc-discrepancies/types";
+import { PSCDiscrepancy } from "../../../src/services/psc-discrepancies/types";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
 import { failure, Result } from "../../../src/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
-const mockResponseBodyComplete: PscDiscrepancy = ({
+const mockResponseBodyComplete: PSCDiscrepancy = ({
     links: {
         self: "/psc-discrepancy-reports/fac191b2-fb28-43f4-a963-00deed13ff50/discrepancies/294fc59f-3d64-4b49-a1fd-64c6d5becd99",
         psc_discrepancy_report: "/psc-discrepancy-reports/fac191b2-fb28-43f4-a963-00deed13ff50"
@@ -22,7 +22,7 @@ const mockResponseBodyComplete: PscDiscrepancy = ({
     psc_date_of_birth: "Æ"
 });
 
-const mockResponseBodyArray: PscDiscrepancy[] = [
+const mockResponseBodyArray: PSCDiscrepancy[] = [
     mockResponseBodyComplete,
     mockResponseBodyComplete
 ]
@@ -58,7 +58,7 @@ describe("Get All Psc Discrepancies", () => {
             error: "An error occurred"
         };
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
+        const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
 
@@ -106,7 +106,7 @@ describe("Get All Psc Discrepancies", () => {
         expect(result.isFailure()).to.be.false;
         expect(result.isSuccess()).to.be.true;
 
-        const data = result.value as ApiResponse<PscDiscrepancy[]>;
+        const data = result.value as ApiResponse<PSCDiscrepancy[]>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.length).to.equal(2);
@@ -140,7 +140,7 @@ describe("Get Psc Discrepancies", () => {
             error: "An error occurred"
         };
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
+        const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
 
@@ -183,7 +183,7 @@ describe("Get Psc Discrepancies", () => {
         const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
-        const data = result.value as ApiResponse<PscDiscrepancy>;
+        const data = result.value as ApiResponse<PSCDiscrepancy>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);
@@ -214,7 +214,7 @@ describe("Create Psc Discrepancy", () => {
             error: "An error occurred"
         };
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
-        const mockResult: Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse> = failure(null);
+        const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
 
@@ -257,7 +257,7 @@ describe("Create Psc Discrepancy", () => {
         const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
 
-        const data = result.value as ApiResponse<PscDiscrepancy>;
+        const data = result.value as ApiResponse<PSCDiscrepancy>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);

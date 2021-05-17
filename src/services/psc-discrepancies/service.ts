@@ -1,11 +1,11 @@
 import { IHttpClient } from "../../http";
 import { ApiErrorResponse, ApiResponse } from "../../services/resource";
-import { PscDiscrepancy } from "./types"
+import { PSCDiscrepancy } from "./types"
 import { Result } from "../result";
 import Util from "../psc-discrepancies-report/util"
 
-type PromisedDiscrepancyResult = Promise<Result<ApiResponse<PscDiscrepancy>, ApiErrorResponse>>;
-type PromisedDiscrepanciesResult = Promise<Result<ApiResponse<PscDiscrepancy[]>, ApiErrorResponse>>;
+type PromisedDiscrepancyResult = Promise<Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse>>;
+type PromisedDiscrepanciesResult = Promise<Result<ApiResponse<PSCDiscrepancy[]>, ApiErrorResponse>>;
 
 export default class {
     utility: Util;
@@ -22,7 +22,7 @@ export default class {
         return this.utility.processResponse(resp);
     }
 
-    public async createPscDiscrepancy (reportSelfLink: string, discrepancy:PscDiscrepancy): PromisedDiscrepancyResult {
+    public async createPscDiscrepancy (reportSelfLink: string, discrepancy:PSCDiscrepancy): PromisedDiscrepancyResult {
         const resp = await this.client.httpPost(this.buildBaseURL(reportSelfLink), discrepancy);
         return this.utility.processResponse(resp);
     }
