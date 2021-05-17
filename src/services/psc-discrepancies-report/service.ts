@@ -6,20 +6,22 @@ import { ApiResponse, ApiErrorResponse } from "services/resource";
 
 const PSC_DISCREPANCY_API_URL = "/psc-discrepancy-reports";
 
+type PromisedReportResult= Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>>;
+
 export default class {
     utility: Util;
     constructor (private readonly client: IHttpClient) { this.utility = new Util() }
 
-    public async getReport (reportId: string): Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>> {
+    public async getReport (reportId: string): PromisedReportResult {
         return this.getReportBySelfLink(this.buildSelfLink(reportId));
     }
 
-    public async getReportBySelfLink (selfLink: string): Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>> {
+    public async getReportBySelfLink (selfLink: string): PromisedReportResult {
         const resp = await this.client.httpGet(`${selfLink}`);
         return this.utility.processResponse(resp);
     }
 
-    public async createNewReport (obligedEntityType: String): Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>> {
+    public async createNewReport (obligedEntityType: String): PromisedReportResult {
         const resp = await this.client.httpPost(
             PSC_DISCREPANCY_API_URL,
             {
@@ -29,11 +31,11 @@ export default class {
         return this.utility.processResponse(resp);
     }
 
-    public async updateReport (reportId: string, report: PSCDiscrepancyReport): Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>> {
+    public async updateReport (reportId: string, report: PSCDiscrepancyReport): PromisedReportResult {
         return this.updateReportBySelfLink(this.buildSelfLink(reportId), report);
     }
 
-    public async updateReportBySelfLink (selfLink: string, report: PSCDiscrepancyReport): Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>> {
+    public async updateReportBySelfLink (selfLink: string, report: PSCDiscrepancyReport): PromisedReportResult {
         const resp = await this.client.httpPut(selfLink, report);
         return this.utility.processResponse(resp);
     }
