@@ -73,7 +73,9 @@ export default class CompanyProfileService {
                 overdue: acc?.overdue
             },
             confirmationStatement: {
+                lastMadeUpTo: confirmationStatement?.last_made_up_to,
                 nextDue: confirmationStatement?.next_due,
+                nextMadeUpTo: confirmationStatement?.next_made_up_to,
                 overdue: confirmationStatement?.overdue
             },
             links: {
