@@ -1,7 +1,7 @@
 import chai from "chai";
 import sinon from "sinon";
 
-import PscDiscrepancyService from "../../../src/services/psc-discrepancies/service";
+import PSCDiscrepancyService from "../../../src/services/psc-discrepancies/service";
 import { RequestClient } from "../../../src/http";
 import { PSCDiscrepancy } from "../../../src/services/psc-discrepancies/types";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
@@ -60,7 +60,7 @@ describe("Get All Psc Discrepancies", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
 
         const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
 
@@ -80,7 +80,7 @@ describe("Get All Psc Discrepancies", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
 
         expect(result.isFailure()).to.be.true;
@@ -100,7 +100,7 @@ describe("Get All Psc Discrepancies", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.getPscDiscrepanciesForReport(REPORT_SELF_LINK);
 
         expect(result.isFailure()).to.be.false;
@@ -142,7 +142,7 @@ describe("Get Psc Discrepancies", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
 
         const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
 
@@ -161,7 +161,7 @@ describe("Get Psc Discrepancies", () => {
         };
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
         expect(result.isFailure()).to.be.true;
@@ -180,7 +180,7 @@ describe("Get Psc Discrepancies", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.getPscDiscrepancy(DISCREPANCY_SELF_LINK);
 
         const data = result.value as ApiResponse<PSCDiscrepancy>;
@@ -216,7 +216,7 @@ describe("Create Psc Discrepancy", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancy>, ApiErrorResponse> = failure(null);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
 
         const mockProcess = sinon.stub(pscDiscrepancyService.utility, "processResponse").resolves(mockResult)
 
@@ -235,7 +235,7 @@ describe("Create Psc Discrepancy", () => {
         };
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
 
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
 
         expect(result.isFailure()).to.be.true;
@@ -254,7 +254,7 @@ describe("Create Psc Discrepancy", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
-        const pscDiscrepancyService: PscDiscrepancyService = new PscDiscrepancyService(requestClient);
+        const pscDiscrepancyService: PSCDiscrepancyService = new PSCDiscrepancyService(requestClient);
         const result = await pscDiscrepancyService.createPscDiscrepancy(REPORT_SELF_LINK, mockResponseBodyCreate);
 
         const data = result.value as ApiResponse<PSCDiscrepancy>;
