@@ -9,6 +9,9 @@ import CompanyFilingHistoryService from "./services/company-filing-history/servi
 import { RefreshTokenService } from "./services/refresh-token";
 import AlphabeticalSearchService from "./services/search/alphabetical-search/service";
 import DissolvedSearchService from "./services/search/dissolved-search/service";
+import PSCDiscrepancyService from "./services/psc-discrepancies/service";
+import PSCDiscrepancyReportService from "./services/psc-discrepancies-report/service";
+import { PSCDiscrepanciesReportService } from "services/psc-discrepancies-report";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -28,6 +31,8 @@ export default class ApiClient {
   public readonly refreshToken: RefreshTokenService;
   public readonly alphabeticalSearch: AlphabeticalSearchService;
   public readonly dissolvedSearch: DissolvedSearchService;
+  public readonly pscDiscrepancies: PSCDiscrepancyService;
+  public readonly pscDiscrepancyReport:PSCDiscrepanciesReportService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -47,5 +52,7 @@ export default class ApiClient {
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);
+      this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
+      this.pscDiscrepancyReport = new PSCDiscrepancyReportService(apiClient);
   }
 }
