@@ -52,7 +52,7 @@ export default class ApiClient {
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);
-      this.pscDiscrepancies = new PSCDiscrepancyService();
-      this.pscDiscrepancyReport = new PSCDiscrepancyReportService();
+      this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
+      this.pscDiscrepancyReport = new PSCDiscrepancyReportService(apiClient);
   }
 }
