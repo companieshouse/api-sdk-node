@@ -11,7 +11,7 @@ import AlphabeticalSearchService from "./services/search/alphabetical-search/ser
 import DissolvedSearchService from "./services/search/dissolved-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
 import PSCDiscrepancyReportService from "./services/psc-discrepancies-report/service";
-import { PSCDiscrepanciesReportService } from "services/psc-discrepancies-report";
+import { PSCDiscrepanciesReportService } from "./services/psc-discrepancies-report";
 
 /**
  * ApiClient is the class that all service objects hang off.
