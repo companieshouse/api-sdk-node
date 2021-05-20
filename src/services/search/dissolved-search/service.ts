@@ -5,7 +5,7 @@ import { start } from "repl";
 
 export default class DissolvedSearchService {
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (companyName: string, requestId: string, searchType: string, startIndex: string): Promise<Resource<CompaniesResource>> {
+    public async getCompanies (companyName: string, requestId: string, searchType: string, startIndex: number): Promise<Resource<CompaniesResource>> {
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
