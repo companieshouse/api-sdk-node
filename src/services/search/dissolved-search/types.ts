@@ -3,6 +3,7 @@ export interface CompaniesResource {
     items: Items[];
     kind: string;
     top_hit: TopHit;
+    hits: number;
 }
 
 export interface Items {

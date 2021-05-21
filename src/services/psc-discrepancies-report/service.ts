@@ -1,8 +1,8 @@
 import { IHttpClient } from "../../http";
 import { PSCDiscrepancyReport } from "./types"
 import Util from "./util"
-import { Result } from "services/result";
-import { ApiResponse, ApiErrorResponse } from "services/resource";
+import { Result } from "../../services/result";
+import { ApiResponse, ApiErrorResponse } from "../../services/resource";
 
 const PSC_DISCREPANCY_API_URL = "/psc-discrepancy-reports";
 
