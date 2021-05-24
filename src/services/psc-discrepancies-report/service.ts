@@ -25,7 +25,7 @@ export default class {
         const resp = await this.client.httpPost(
             PSC_DISCREPANCY_API_URL,
             {
-                obligedEntityType: obligedEntityType,
+                obliged_entity_type: obligedEntityType,
                 status: "INCOMPLETE"
             });
         return this.utility.processResponse(resp);
