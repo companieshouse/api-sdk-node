@@ -4,12 +4,28 @@ import Resource from "../../resource";
 
 export default class AlphabeticalSearchService {
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (companyName: string, requestId: string): Promise<Resource<CompaniesResource>> {
+    public async getCompanies (companyName: string, requestId: string,
+        searchBefore: string | null, searchAfter: string | null, size: number | null): Promise<Resource<CompaniesResource>> {
+        const SEARCH_BEFORE_QUERY = "&search_before=";
+        const SEARCH_AFTER_QUERY = "&search_after=";
+        const SIZE_QUERY = "&size=";
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
         }
-        const alphabeticalSearchURL = "/alphabetical-search/companies?q=" + companyName;
+        let alphabeticalSearchURL = "/alphabetical-search/companies?q=" + companyName;
+
+        if (searchBefore != null) {
+            alphabeticalSearchURL += SEARCH_BEFORE_QUERY + searchBefore;
+        }
+
+        if (searchAfter != null) {
+            alphabeticalSearchURL += SEARCH_AFTER_QUERY + searchAfter;
+        }
+
+        if (size != null) {
+            alphabeticalSearchURL += SIZE_QUERY + size;
+        }
 
         const resp = await this.client.httpGet(alphabeticalSearchURL, additionalHeaders);
 

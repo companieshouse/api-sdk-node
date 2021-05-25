@@ -21,7 +21,8 @@ const mockResponseBody : CompaniesResource = ({
                 company_status: "active",
                 corporate_name: "corporate name",
                 record_type: "record type",
-                ordered_alpha_key: "ordered alpha key"
+                ordered_alpha_key: "ordered alpha key",
+                ordered_alpha_key_with_id: "COMPANY:00000000"
             },
             links: {
                 self: "/company/FC022000"
@@ -32,6 +33,9 @@ const mockResponseBody : CompaniesResource = ({
 
 const mockRequestId = "fdskfhsdoifhsffsif";
 const testCompanyName = "TEST COMPANY NAME";
+const searchBefore = "TESTCOMPANYTOP:00000000";
+const searchAfter = "TESTCOMPANYBOTTOM:00000000";
+const size = 20;
 
 describe("create a alphabetical search GET", () => {
     beforeEach(() => {
@@ -53,7 +57,7 @@ describe("create a alphabetical search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
@@ -67,7 +71,51 @@ describe("create a alphabetical search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
+        expect(data.resource.results[0].ID).to.equal(mockResponseBody.results[0].ID);
+        expect(data.resource.results[0].company_type).to.equal(mockResponseBody.results[0].company_type)
+        expect(data.resource.results[0].items.company_number).to.equal(mockResponseBody.results[0].items.company_number);
+        expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
+        expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
+        expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
+        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
+        expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
+    });
+
+    it("returns alphabetical search results correctly when searching previous results", async () => {
+        const mockGetRequest = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchBefore, null, size);
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
+        expect(data.resource.results[0].ID).to.equal(mockResponseBody.results[0].ID);
+        expect(data.resource.results[0].company_type).to.equal(mockResponseBody.results[0].company_type)
+        expect(data.resource.results[0].items.company_number).to.equal(mockResponseBody.results[0].items.company_number);
+        expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
+        expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
+        expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
+        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
+        expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
+    });
+
+    it("returns alphabetical search results correctly when searching next results", async () => {
+        const mockGetRequest = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, searchAfter, size);
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
