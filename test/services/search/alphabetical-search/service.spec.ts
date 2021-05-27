@@ -10,23 +10,28 @@ const expect = chai.expect;
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 const mockResponseBody : CompaniesResource = ({
+    etag: "etag",
     searchType: "",
-    topHit: "TEST COMPANY",
-    results: [
+    topHit: {
+        company_name: "test company",
+        company_number: "0000789",
+        company_status: "active",
+        kind: "kind",
+        ordered_alpha_key_with_id: "testcompany:0000789"
+    },
+    items: [
         {
-            ID: "FC022000",
             company_type: "oversea-company",
-            items: {
-                company_number: "FC022000",
-                company_status: "active",
-                corporate_name: "corporate name",
-                record_type: "record type",
-                ordered_alpha_key: "ordered alpha key",
-                ordered_alpha_key_with_id: "COMPANY:00000000"
-            },
+            company_number: "FC022000",
+            company_status: "active",
+            corporate_name: "corporate name",
+            record_type: "record type",
+            ordered_alpha_key: "ordered alpha key",
+            ordered_alpha_key_with_id: "COMPANY:00000000",
             links: {
                 self: "/company/FC022000"
-            }
+            },
+            kind: "kind"
         }
     ]
 });
@@ -75,14 +80,13 @@ describe("create a alphabetical search GET", () => {
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
-        expect(data.resource.results[0].ID).to.equal(mockResponseBody.results[0].ID);
-        expect(data.resource.results[0].company_type).to.equal(mockResponseBody.results[0].company_type)
-        expect(data.resource.results[0].items.company_number).to.equal(mockResponseBody.results[0].items.company_number);
-        expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
-        expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
-        expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
-        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
-        expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
+        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
+        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
+        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
+        expect(data.resource.items[0].corporate_name).to.equal(mockResponseBody.items[0].corporate_name);
+        expect(data.resource.items[0].record_type).to.equal(mockResponseBody.items[0].record_type);
+        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
+        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
     });
 
     it("returns alphabetical search results correctly when searching previous results", async () => {
@@ -97,14 +101,13 @@ describe("create a alphabetical search GET", () => {
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
-        expect(data.resource.results[0].ID).to.equal(mockResponseBody.results[0].ID);
-        expect(data.resource.results[0].company_type).to.equal(mockResponseBody.results[0].company_type)
-        expect(data.resource.results[0].items.company_number).to.equal(mockResponseBody.results[0].items.company_number);
-        expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
-        expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
-        expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
-        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
-        expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
+        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
+        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
+        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
+        expect(data.resource.items[0].corporate_name).to.equal(mockResponseBody.items[0].corporate_name);
+        expect(data.resource.items[0].record_type).to.equal(mockResponseBody.items[0].record_type);
+        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
+        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
     });
 
     it("returns alphabetical search results correctly when searching next results", async () => {
@@ -119,13 +122,12 @@ describe("create a alphabetical search GET", () => {
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.topHit).to.equal(mockResponseBody.topHit);
-        expect(data.resource.results[0].ID).to.equal(mockResponseBody.results[0].ID);
-        expect(data.resource.results[0].company_type).to.equal(mockResponseBody.results[0].company_type)
-        expect(data.resource.results[0].items.company_number).to.equal(mockResponseBody.results[0].items.company_number);
-        expect(data.resource.results[0].items.company_status).to.equal(mockResponseBody.results[0].items.company_status);
-        expect(data.resource.results[0].items.corporate_name).to.equal(mockResponseBody.results[0].items.corporate_name);
-        expect(data.resource.results[0].items.record_type).to.equal(mockResponseBody.results[0].items.record_type);
-        expect(data.resource.results[0].items.ordered_alpha_key).to.equal(mockResponseBody.results[0].items.ordered_alpha_key);
-        expect(data.resource.results[0].links).to.equal(mockResponseBody.results[0].links);
+        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
+        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
+        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
+        expect(data.resource.items[0].corporate_name).to.equal(mockResponseBody.items[0].corporate_name);
+        expect(data.resource.items[0].record_type).to.equal(mockResponseBody.items[0].record_type);
+        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
+        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
     });
 });
