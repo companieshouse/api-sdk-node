@@ -23,6 +23,7 @@ const mockResponseBody : CompaniesResource = ({
             date_of_cessation: (new Date("19910212")),
             date_of_creation: (new Date("19910212")),
             kind: "kind",
+            ordered_alpha_key_with_id: "testcompany:0000789",
             previous_company_names: [
                 {
                     ceased_on: (new Date("19910212")),
@@ -44,6 +45,7 @@ const mockResponseBody : CompaniesResource = ({
         date_of_cessation: (new Date("19910212")),
         date_of_creation: (new Date("19910212")),
         kind: "kind",
+        ordered_alpha_key_with_id: "testcompany:0000789",
         previous_company_names: [
             {
                 ceased_on: (new Date("19910212")),
@@ -59,6 +61,9 @@ const mockRequestId = "fdskfhsdoifhsffsif";
 const testCompanyName = "TEST COMPANY NAME";
 const searchType = "alphabetical";
 const startIndex = 0;
+const searchBefore = "testcompany:0000784"
+const searchafter = "testcompany:0000794"
+const page = 0
 
 describe("create a dissolved search GET", () => {
     beforeEach(() => {
@@ -80,7 +85,7 @@ describe("create a dissolved search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex, searchBefore, searchafter, page);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
@@ -94,7 +99,7 @@ describe("create a dissolved search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex, searchBefore, searchafter, page);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];
 
