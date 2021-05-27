@@ -1,11 +1,9 @@
 import { IHttpClient } from "../../../http";
 import { CompaniesResource } from "./types";
 import Resource from "../../resource";
-import { start } from "repl";
-
 export default class DissolvedSearchService {
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (companyName: string, requestId: string, searchType: string, startIndex: number): Promise<Resource<CompaniesResource>> {
+    public async getCompanies (companyName: string, requestId: string, searchType: string, startIndex: number | null, searchBefore: string | null, searchAfter: string | null, size: number | null): Promise<Resource<CompaniesResource>> {
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
@@ -13,12 +11,24 @@ export default class DissolvedSearchService {
         const ALPHABETICAL_QUERY = "&search_type=alphabetical";
         const BEST_MATCH_QUERY = "&search_type=best-match";
         const PREVIOUS_NAME_QUERY = "&search_type=previous-name-dissolved";
-        const START_INDEX_QUERY = "&start_index=" + startIndex;
+        const START_INDEX_QUERY = "&start_index=";
+        const SEARCH_BEFORE_QUERY = "&search_before=";
+        const SEARCH_AFTER_QUERY = "&search_after=";
+        const SIZE_QUERY = "&size=";
 
         let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
 
         if (searchType === "alphabetical") {
-            dissolvedSearchURL += ALPHABETICAL_QUERY;
+            dissolvedSearchURL += ALPHABETICAL_QUERY
+            if (searchAfter !== null) {
+                dissolvedSearchURL += SEARCH_AFTER_QUERY + searchAfter;
+            }
+            if (searchBefore !== null) {
+                dissolvedSearchURL += SEARCH_BEFORE_QUERY + searchBefore;
+            }
+            if (size !== null) {
+                dissolvedSearchURL += SIZE_QUERY + size;
+            }
         }
 
         if (!startIndex && searchType === "previousNameDissolved") {

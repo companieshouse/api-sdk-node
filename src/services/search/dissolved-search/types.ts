@@ -14,6 +14,7 @@ export interface Items {
     date_of_cessation: Date;
     date_of_creation: Date;
     kind: string;
+    ordered_alpha_key_with_id: string;
     previous_company_names: PreviousCompanyNames[];
 }
 
@@ -36,5 +37,6 @@ export interface TopHit {
     date_of_cessation: Date;
     date_of_creation: Date;
     kind: string;
+    ordered_alpha_key_with_id: string;
     previous_company_names: PreviousCompanyNames[];
 }
