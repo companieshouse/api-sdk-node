@@ -36,7 +36,7 @@ export default class DissolvedSearchService {
         }
 
         if (startIndex && searchType === "previousNameDissolved") {
-            dissolvedSearchURL += PREVIOUS_NAME_QUERY + START_INDEX_QUERY;
+            dissolvedSearchURL += PREVIOUS_NAME_QUERY + START_INDEX_QUERY + startIndex;
         }
 
         if (!startIndex && searchType === "bestMatch") {
@@ -44,7 +44,7 @@ export default class DissolvedSearchService {
         }
 
         if (startIndex && searchType === "bestMatch") {
-            dissolvedSearchURL += BEST_MATCH_QUERY + START_INDEX_QUERY;
+            dissolvedSearchURL += BEST_MATCH_QUERY + START_INDEX_QUERY + startIndex;
         }
 
         const resp = await this.client.httpGet(dissolvedSearchURL, additionalHeaders);
