@@ -1,25 +1,28 @@
 export interface CompaniesResource {
-    searchType: string;
-    topHit: string;
-    results: Result[];
+    etag: string;
+    top_hit: TopHit;
+    items: Items[];
+    kind: string;
 }
-
-export interface Result {
-    ID: string;
-    company_type: string;
-    items: Items;
-    links: Links;
-}
-
 export interface Items {
+    company_type: string;
     company_number: string;
     company_status: string;
-    corporate_name: string;
-    record_type: string;
+    company_name: string;
     ordered_alpha_key: string;
     ordered_alpha_key_with_id: string;
+    kind: string;
+    links: Links;
 }
 
 export interface Links {
     self: string;
+}
+
+export interface TopHit {
+    company_number: string;
+    company_status: string;
+    company_name: string;
+    ordered_alpha_key_with_id: string;
+    kind: string;
 }
