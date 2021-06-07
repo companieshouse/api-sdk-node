@@ -10,7 +10,7 @@ import { RefreshTokenService } from "./services/refresh-token";
 import AlphabeticalSearchService from "./services/search/alphabetical-search/service";
 import DissolvedSearchService from "./services/search/dissolved-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
-import PSCDiscrepancyReportService from "./services/psc-discrepancies-report/service";
+import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/service";
 import { PSCDiscrepanciesReportService } from "./services/psc-discrepancies-report";
 
 /**
