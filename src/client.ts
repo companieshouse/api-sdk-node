@@ -10,8 +10,7 @@ import { RefreshTokenService } from "./services/refresh-token";
 import AlphabeticalSearchService from "./services/search/alphabetical-search/service";
 import DissolvedSearchService from "./services/search/dissolved-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
-import PSCDiscrepancyReportService from "./services/psc-discrepancies-report/service";
-import { PSCDiscrepanciesReportService } from "./services/psc-discrepancies-report";
+import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -53,6 +52,6 @@ export default class ApiClient {
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);
       this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
-      this.pscDiscrepancyReport = new PSCDiscrepancyReportService(apiClient);
+      this.pscDiscrepancyReport = new PSCDiscrepanciesReportService(apiClient);
   }
 }
