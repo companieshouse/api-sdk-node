@@ -17,7 +17,7 @@ const mockResponseBody : CompaniesResource = ({
                 address_line_1: "test house",
                 address_line_2: "test street",
                 locality: "cardiff",
-                post_code: "cf5 6rb"
+                postal_code: "cf5 6rb"
             },
             company_name: "test company",
             company_number: "0000789",
@@ -41,7 +41,7 @@ const mockResponseBody : CompaniesResource = ({
             address_line_1: "test house",
             address_line_2: "test street",
             locality: "cardiff",
-            post_code: "cf5 6rb"
+            postal_code: "cf5 6rb"
         },
         company_name: "test company",
         company_number: "0000789",
@@ -110,7 +110,7 @@ describe("create a dissolved search GET", () => {
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBody.etag);
         expect(item.registered_office_address.locality).to.equal(mockItem.registered_office_address.locality);
-        expect(item.registered_office_address.post_code).to.equal(mockItem.registered_office_address.post_code);
+        expect(item.registered_office_address.postal_code).to.equal(mockItem.registered_office_address.postal_code);
         expect(item.company_name).to.equal(mockItem.company_name);
         expect(item.company_number).to.equal(mockItem.company_number);
         expect(item.company_status).to.equal(mockItem.company_status);
@@ -121,8 +121,10 @@ describe("create a dissolved search GET", () => {
         expect(item.previous_company_names[0].effective_from).to.equal(mockItem.previous_company_names[0].effective_from);
         expect(item.previous_company_names[0].name).to.equal(mockItem.previous_company_names[0].name);
         expect(data.resource.kind).to.equal(mockResponseBody.kind);
+        expect(data.resource.top_hit.registered_office_address.address_line_1).to.equal(mockResponseBody.top_hit.registered_office_address.address_line_1);
+        expect(data.resource.top_hit.registered_office_address.address_line_2).to.equal(mockResponseBody.top_hit.registered_office_address.address_line_2);
         expect(data.resource.top_hit.registered_office_address.locality).to.equal(mockResponseBody.top_hit.registered_office_address.locality);
-        expect(data.resource.top_hit.registered_office_address.post_code).to.equal(mockResponseBody.top_hit.registered_office_address.post_code);
+        expect(data.resource.top_hit.registered_office_address.postal_code).to.equal(mockResponseBody.top_hit.registered_office_address.postal_code);
         expect(data.resource.top_hit.company_name).to.equal(mockResponseBody.top_hit.company_name);
         expect(data.resource.top_hit.company_number).to.equal(mockResponseBody.top_hit.company_number);
         expect(data.resource.top_hit.company_status).to.equal(mockResponseBody.top_hit.company_status);
