@@ -7,7 +7,7 @@ export interface CompaniesResource {
 }
 
 export interface Items {
-    address: Address;
+    registered_office_address: Address;
     company_name: string;
     company_number: string;
     company_status: string;
@@ -19,8 +19,10 @@ export interface Items {
 }
 
 export interface Address {
+    address_line_1: string;
+    address_line_2: string;
     locality: string;
-    postal_code: string;
+    post_code: string;
 }
 
 export interface PreviousCompanyNames {
@@ -30,7 +32,7 @@ export interface PreviousCompanyNames {
 }
 
 export interface TopHit {
-    address: Address;
+    registered_office_address: Address;
     company_name: string;
     company_number: string;
     company_status: string;
