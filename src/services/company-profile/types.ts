@@ -46,7 +46,7 @@ export interface NextAccountsResource {
 export interface ConfirmationStatementResource {
   last_made_up_to?: string;
   next_due: string;
-  next_made_up_to?: string;
+  next_made_up_to: string;
   overdue: boolean;
 }
 
@@ -80,7 +80,7 @@ export interface NextAccounts {
 export interface ConfirmationStatement {
   lastMadeUpTo?: string;
   nextDue: string;
-  nextMadeUpTo?: string;
+  nextMadeUpTo: string;
   overdue: boolean;
 }
 
