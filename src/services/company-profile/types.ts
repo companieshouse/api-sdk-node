@@ -16,7 +16,7 @@ export interface CompanyProfileResource {
   has_insolvency_history: boolean;
   registered_office_address: RegisteredOfficeAddressResource;
   accounts: AccountsResource;
-  confirmation_statement: ConfirmationStatementResource;
+  confirmation_statement?: ConfirmationStatementResource;
   links: LinksResource;
 }
 
@@ -46,7 +46,7 @@ export interface NextAccountsResource {
 export interface ConfirmationStatementResource {
   last_made_up_to?: string;
   next_due: string;
-  next_made_up_to?: string;
+  next_made_up_to: string;
   overdue: boolean;
 }
 
@@ -80,7 +80,7 @@ export interface NextAccounts {
 export interface ConfirmationStatement {
   lastMadeUpTo?: string;
   nextDue: string;
-  nextMadeUpTo?: string;
+  nextMadeUpTo: string;
   overdue: boolean;
 }
 
@@ -106,6 +106,6 @@ export interface CompanyProfile {
   hasInsolvencyHistory: boolean;
   registeredOfficeAddress: RegisteredOfficeAddress;
   accounts: Accounts;
-  confirmationStatement: ConfirmationStatement;
+  confirmationStatement?: ConfirmationStatement;
   links: Links;
 }
