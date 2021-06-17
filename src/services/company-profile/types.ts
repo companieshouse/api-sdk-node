@@ -16,7 +16,7 @@ export interface CompanyProfileResource {
   has_insolvency_history: boolean;
   registered_office_address: RegisteredOfficeAddressResource;
   accounts: AccountsResource;
-  confirmation_statement: ConfirmationStatementResource;
+  confirmation_statement?: ConfirmationStatementResource;
   links: LinksResource;
 }
 
@@ -106,6 +106,6 @@ export interface CompanyProfile {
   hasInsolvencyHistory: boolean;
   registeredOfficeAddress: RegisteredOfficeAddress;
   accounts: Accounts;
-  confirmationStatement: ConfirmationStatement;
+  confirmationStatement?: ConfirmationStatement;
   links: Links;
 }
