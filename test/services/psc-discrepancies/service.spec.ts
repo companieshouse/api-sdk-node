@@ -19,7 +19,8 @@ const mockResponseBodyComplete: PSCDiscrepancy = ({
     kind: "psc_discrepancy#psc_discrepancy_report",
     details: "Æ",
     psc_name: "Æ",
-    psc_date_of_birth: "Æ"
+    psc_date_of_birth: "Æ",
+    psc_type: "Æ"
 });
 
 const mockResponseBodyArray: PSCDiscrepancy[] = [
@@ -116,6 +117,7 @@ describe("Get All Psc Discrepancies", () => {
             expect(res.details).to.equal(mockResponseBodyComplete.details);
             expect(res.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
             expect(res.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+            expect(res.psc_type).to.equal(mockResponseBodyComplete.psc_type);
             expect(res.links.self).to.equal(mockResponseBodyComplete.links.self);
             expect(res.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
         })
@@ -191,6 +193,7 @@ describe("Get Psc Discrepancies", () => {
         expect(data.resource.details).to.equal(mockResponseBodyComplete.details);
         expect(data.resource.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
         expect(data.resource.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+        expect(data.resource.psc_type).to.equal(mockResponseBodyComplete.psc_type);
         expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
         expect(data.resource.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
     });
@@ -265,6 +268,7 @@ describe("Create Psc Discrepancy", () => {
         expect(data.resource.details).to.equal(mockResponseBodyComplete.details);
         expect(data.resource.psc_date_of_birth).to.equal(mockResponseBodyComplete.psc_date_of_birth);
         expect(data.resource.psc_name).to.equal(mockResponseBodyComplete.psc_name);
+        expect(data.resource.psc_type).to.equal(mockResponseBodyComplete.psc_type);
         expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
         expect(data.resource.links.psc_discrepancy_report).to.equal(mockResponseBodyComplete.links.psc_discrepancy_report);
     });
