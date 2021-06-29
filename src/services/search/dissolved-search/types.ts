@@ -16,7 +16,7 @@ export interface Items {
     kind: string;
     ordered_alpha_key_with_id: string;
     previous_company_names: PreviousCompanyNames[];
-    matched_previous_company_names: MatchedPreviousCompanyNames;
+    matched_previous_company_name: MatchedPreviousCompanyName;
 }
 
 export interface Address {
@@ -31,7 +31,7 @@ export interface PreviousCompanyNames {
     effective_from: Date;
     name: string;
 }
-export interface MatchedPreviousCompanyNames {
+export interface MatchedPreviousCompanyName {
     ceased_on: Date;
     effective_from: Date;
     name: string;
@@ -47,5 +47,5 @@ export interface TopHit {
     kind: string;
     ordered_alpha_key_with_id: string;
     previous_company_names: PreviousCompanyNames[];
-    matched_previous_company_names: MatchedPreviousCompanyNames;
+    matched_previous_company_name: MatchedPreviousCompanyName;
 }
