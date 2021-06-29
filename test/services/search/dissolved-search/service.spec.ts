@@ -31,6 +31,13 @@ const mockResponseBody : CompaniesResource = ({
                     ceased_on: (new Date("19910212")),
                     effective_from: (new Date("19910212")),
                     name: "old name"
+                },
+            ],
+            matched_previous_company_names: [
+                {
+                    ceased_on: (new Date("19910212")),
+                    effective_from: (new Date("19910212")),
+                    name: "old name"
                 }
             ]
         }
@@ -51,6 +58,13 @@ const mockResponseBody : CompaniesResource = ({
         kind: "kind",
         ordered_alpha_key_with_id: "testcompany:0000789",
         previous_company_names: [
+            {
+                ceased_on: (new Date("19910212")),
+                effective_from: (new Date("19910212")),
+                name: "old name"
+            }
+        ],
+        matched_previous_company_names: [
             {
                 ceased_on: (new Date("19910212")),
                 effective_from: (new Date("19910212")),
@@ -120,6 +134,9 @@ describe("create a dissolved search GET", () => {
         expect(item.previous_company_names[0].ceased_on).to.equal(mockItem.previous_company_names[0].ceased_on);
         expect(item.previous_company_names[0].effective_from).to.equal(mockItem.previous_company_names[0].effective_from);
         expect(item.previous_company_names[0].name).to.equal(mockItem.previous_company_names[0].name);
+        expect(item.matched_previous_company_names[0].ceased_on).to.equal(mockItem.matched_previous_company_names[0].ceased_on);
+        expect(item.matched_previous_company_names[0].effective_from).to.equal(mockItem.matched_previous_company_names[0].effective_from);
+        expect(item.matched_previous_company_names[0].name).to.equal(mockItem.matched_previous_company_names[0].name);
         expect(data.resource.kind).to.equal(mockResponseBody.kind);
         expect(data.resource.top_hit.registered_office_address.address_line_1).to.equal(mockResponseBody.top_hit.registered_office_address.address_line_1);
         expect(data.resource.top_hit.registered_office_address.address_line_2).to.equal(mockResponseBody.top_hit.registered_office_address.address_line_2);
@@ -134,6 +151,9 @@ describe("create a dissolved search GET", () => {
         expect(data.resource.top_hit.previous_company_names[0].ceased_on).to.equal(mockResponseBody.top_hit.previous_company_names[0].ceased_on);
         expect(data.resource.top_hit.previous_company_names[0].effective_from).to.equal(mockResponseBody.top_hit.previous_company_names[0].effective_from);
         expect(data.resource.top_hit.previous_company_names[0].name).to.equal(mockResponseBody.top_hit.previous_company_names[0].name);
+        expect(data.resource.top_hit.matched_previous_company_names[0].ceased_on).to.equal(mockResponseBody.top_hit.matched_previous_company_names[0].ceased_on);
+        expect(data.resource.top_hit.matched_previous_company_names[0].effective_from).to.equal(mockResponseBody.top_hit.matched_previous_company_names[0].effective_from);
+        expect(data.resource.top_hit.matched_previous_company_names[0].name).to.equal(mockResponseBody.top_hit.matched_previous_company_names[0].name);
         expect(data.resource.hits).to.equal(mockResponseBody.hits);
     });
 });
