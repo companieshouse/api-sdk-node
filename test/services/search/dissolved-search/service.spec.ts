@@ -31,7 +31,7 @@ const mockResponseBody : CompaniesResource = ({
                     ceased_on: (new Date("19910212")),
                     effective_from: (new Date("19910212")),
                     name: "old name"
-                },
+                }
             ],
             matched_previous_company_name:
                 {
