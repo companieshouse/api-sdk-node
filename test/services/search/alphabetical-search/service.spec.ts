@@ -27,7 +27,7 @@ const mockResponseBody : CompaniesResource = ({
             ordered_alpha_key: "ordered alpha key",
             ordered_alpha_key_with_id: "COMPANY:00000000",
             links: {
-                self: "/company/FC022000"
+                company_profile: "/company/FC022000"
             },
             kind: "kind"
         }

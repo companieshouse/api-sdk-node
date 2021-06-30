@@ -16,7 +16,7 @@ export interface Items {
 }
 
 export interface Links {
-    self: string;
+    company_profile: string;
 }
 
 export interface TopHit {
