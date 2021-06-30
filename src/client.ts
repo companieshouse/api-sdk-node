@@ -11,6 +11,7 @@ import AlphabeticalSearchService from "./services/search/alphabetical-search/ser
 import DissolvedSearchService from "./services/search/dissolved-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
 import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/service";
+import TransactionService from "./services/transaction/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -31,7 +32,8 @@ export default class ApiClient {
   public readonly alphabeticalSearch: AlphabeticalSearchService;
   public readonly dissolvedSearch: DissolvedSearchService;
   public readonly pscDiscrepancies: PSCDiscrepancyService;
-  public readonly pscDiscrepancyReport:PSCDiscrepanciesReportService;
+  public readonly pscDiscrepancyReport: PSCDiscrepanciesReportService;
+  public readonly transaction: TransactionService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -53,5 +55,6 @@ export default class ApiClient {
       this.refreshToken = new RefreshTokenService(accountClient);
       this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
       this.pscDiscrepancyReport = new PSCDiscrepanciesReportService(apiClient);
+      this.transaction = new TransactionService(apiClient);
   }
 }
