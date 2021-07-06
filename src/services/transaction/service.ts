@@ -1,9 +1,6 @@
 import { IHttpClient } from "../../http";
-import {
-    Transaction, TransactionResource
-
-} from "./types";
-import Resource from "../resource";
+import { Transaction, TransactionResource } from "./types";
+import Resource, { ApiErrorResponse } from "../resource";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -13,7 +10,7 @@ export default class TransactionService {
    *
    * @param transaction the transaction to create
    */
-    public async postTransaction (transaction: Transaction): Promise<Resource<Transaction>> {
+    public async postTransaction (transaction: Transaction): Promise<Resource<Transaction>|ApiErrorResponse> {
         let url = "/transactions"
         if (transaction.id) {
             url += "/" + transaction.id
@@ -21,13 +18,16 @@ export default class TransactionService {
 
         const resp = await this.client.httpPost(url);
 
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
         const resource: Resource<Transaction> = {
             httpStatusCode: resp.status
         };
-
-        if (resp.error) {
-            return resource;
-        }
 
         // cast the response body to the expected type
         const body = resp.body as TransactionResource;
