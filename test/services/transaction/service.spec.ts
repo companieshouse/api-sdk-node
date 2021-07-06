@@ -4,6 +4,8 @@ import sinon from "sinon";
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
 import { Transaction, TransactionResource } from "../../../src/services/transaction";
+import { ApiErrorResponse } from "../../../src/services/resource";
+import { Resource } from "../../../src";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -31,7 +33,8 @@ describe("transaction", () => {
         const data = await transaction.postTransaction({} as Transaction);
 
         expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        const castedData: ApiErrorResponse = data;
+        expect(castedData.errors[0]).to.equal("An error occurred");
     });
 
     it("maps the company field data items correctly", async () => {
@@ -56,10 +59,11 @@ describe("transaction", () => {
         const data = await transaction.postTransaction({} as Transaction);
 
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(data.resource.reference).to.equal(mockResponseBody.reference);
-        expect(data.resource.description).to.equal(mockResponseBody.description);
+        const castedData: Resource<Transaction> = data as Resource<Transaction>;
+        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
+        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
+        expect(castedData.resource.description).to.equal(mockResponseBody.description);
     });
 });
