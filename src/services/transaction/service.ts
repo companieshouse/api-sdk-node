@@ -16,7 +16,7 @@ export default class TransactionService {
             url += "/" + transaction.id
         }
 
-        const resp = await this.client.httpPost(url);
+        const resp = await this.client.httpPost(url, transaction);
 
         if (resp.error) {
             return {
