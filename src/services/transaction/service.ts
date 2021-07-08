@@ -16,7 +16,9 @@ export default class TransactionService {
             url += "/" + transaction.id
         }
 
-        const resp = await this.client.httpPost(url, transaction);
+        const transactionResource: TransactionResource = this.mapToResource(transaction);
+
+        const resp = await this.client.httpPost(url, transactionResource);
 
         if (resp.error) {
             return {
@@ -47,5 +49,22 @@ export default class TransactionService {
             description: body.description
         }
         return resource;
+    }
+
+    private mapToResource (transaction:Transaction):TransactionResource {
+        return {
+            company_name: transaction.companyName,
+            company_number: transaction.companyNumber,
+            created_at: transaction.createdAt,
+            created_by: transaction.createdBy,
+            description: transaction.description,
+            etag: transaction.etag,
+            id: transaction.id,
+            kind: transaction.kind,
+            links: transaction.links,
+            reference: transaction.reference,
+            status: transaction.status,
+            updated_at: transaction.updatedAt
+        }
     }
 }
