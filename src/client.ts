@@ -9,6 +9,7 @@ import CompanyFilingHistoryService from "./services/company-filing-history/servi
 import { RefreshTokenService } from "./services/refresh-token";
 import AlphabeticalSearchService from "./services/search/alphabetical-search/service";
 import DissolvedSearchService from "./services/search/dissolved-search/service";
+import EnhancedSearchService from "./services/search/enhanced-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
 import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/service";
 import TransactionService from "./services/transaction/service";
@@ -31,6 +32,7 @@ export default class ApiClient {
   public readonly refreshToken: RefreshTokenService;
   public readonly alphabeticalSearch: AlphabeticalSearchService;
   public readonly dissolvedSearch: DissolvedSearchService;
+  public readonly enhancedSearch: EnhancedSearchService;
   public readonly pscDiscrepancies: PSCDiscrepancyService;
   public readonly pscDiscrepancyReport: PSCDiscrepanciesReportService;
   public readonly transaction: TransactionService;
@@ -50,6 +52,7 @@ export default class ApiClient {
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
       this.dissolvedSearch = new DissolvedSearchService(apiClient);
+      this.enhancedSearch = new EnhancedSearchService(apiClient);
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);
