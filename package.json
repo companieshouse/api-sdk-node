@@ -24,7 +24,7 @@
     "url-search-params-polyfill": "~8.1.1"
   },
   "devDependencies": {
-    "@types/chai": "~4.2.14",
+    "@types/chai": "~4.2.21",
     "@types/chai-as-promised": "~7.1.2",
     "@types/chai-http": "~4.2.0",
     "@types/mocha": "~8.0.4",
