@@ -4,7 +4,7 @@ import sinon from "sinon";
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
 import { Transaction, TransactionResource } from "../../../src/services/transaction";
-import {ApiErrorResponse, ApiResponse} from "../../../src/services/resource";
+import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
 const expect = chai.expect;
 

@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource } from "./types";
-import Resource, {ApiErrorResponse, ApiResponse} from "../resource";
+import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
