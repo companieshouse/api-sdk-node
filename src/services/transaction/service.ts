@@ -51,6 +51,11 @@ export default class TransactionService {
         return resource;
     }
 
+    /**
+     * Get a transaction.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
     public async getTransaction (transactionId: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         const url = "/transactions/" + transactionId
         const resp = await this.client.httpGet(url);
