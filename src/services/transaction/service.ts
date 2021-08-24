@@ -72,7 +72,7 @@ export default class TransactionService {
         }
 
         return {
-            httpStatusCode: 500,
+            httpStatusCode: 400,
             errors: [{ error: "Cannot update transaction - id not found" }]
         };
     }

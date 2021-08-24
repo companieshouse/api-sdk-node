@@ -119,7 +119,7 @@ describe("transaction", () => {
     it("put returns an error response if id is not present", async () => {
         const transaction: TransactionService = new TransactionService(requestClient);
         const data = await transaction.putTransaction({} as Transaction);
-        expect(data.httpStatusCode).to.equal(500);
+        expect(data.httpStatusCode).to.equal(400);
         const castedData: ApiErrorResponse = data;
         expect(castedData.errors[0].error).to.equal("Cannot update transaction - id not found");
     });
