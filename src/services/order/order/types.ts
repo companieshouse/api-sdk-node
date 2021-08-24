@@ -63,10 +63,34 @@ export interface ItemCosts {
 
 export interface CertificateItemOptions {
     certificateType: string;
+    companyType: string;
     deliveryTimescale: string;
+    designatedMemberDetails: {
+        includeAddress?: boolean;
+        includeAppointmentDate?: boolean;
+        includeBasicInformation?: boolean;
+        includeCountryOfResidence?: boolean;
+        includeDobType?: string;
+    };
     deliveryMethod: string;
+    generalPartnerDetails: {
+        includeBasicInformation?: boolean;
+    };
     includeGoodStandingInformation?: boolean;
     includeCompanyObjectsInformation?: boolean;
+    limitedPartnerDetails: {
+        includeBasicInformation?: boolean;
+    };
+    memberDetails: {
+        includeAddress?: boolean;
+        includeAppointmentDate?: boolean;
+        includeBasicInformation?: boolean;
+        includeCountryOfResidence?: boolean;
+        includeDobType?: string;
+    };
+    principlePlaceOfBusinessDetails: {
+        includeAddressRecordsType?: string;
+    };
     registeredOfficeAddressDetails: {
         includeAddressRecordsType?: string;
     };
@@ -182,10 +206,34 @@ export interface ItemCostsResource {
 
 export interface CertificateItemOptionsResource {
     certificate_type: string;
+    company_type: string;
     delivery_timescale: string;
     delivery_method: string;
+    designated_member_details: {
+        include_address?: boolean;
+        include_appointment_date?: boolean;
+        include_basic_information?: boolean;
+        include_country_of_residence?: boolean;
+        include_dob_type?: string;
+    };
     include_good_standing_information?: boolean;
     include_company_objects_information?: boolean;
+    general_partner_details: {
+        include_basic_information?: boolean;
+    };
+    limited_partner_details: {
+        include_basic_information?: boolean;
+    };
+    member_details: {
+        include_address?: boolean;
+        include_appointment_date?: boolean;
+        include_basic_information?: boolean;
+        include_country_of_residence?: boolean;
+        include_dob_type?: string;
+    };
+    principle_place_of_business_details: {
+        include_address_records_type?: string;
+    };
     registered_office_address_details: {
         include_address_records_type?: string;
     };

@@ -30,9 +30,17 @@ const mockResponseBody : CertificateItemResource = ({
     item_options: {
         certificate_type: "cert type",
         collection_location: "location",
+        company_type: 'llp',
         contact_number: "010100",
         delivery_method: "delivery",
         delivery_timescale: "timescale",
+        designated_member_details: {
+            include_address: true,
+            include_appointment_date: true,
+            include_basic_information: true,
+            include_country_of_residence: true,
+            include_dob_type: 'dob'
+        },
         director_details: {
             include_address: true,
             include_appointment_date: true,
@@ -43,9 +51,26 @@ const mockResponseBody : CertificateItemResource = ({
             include_occupation: true
         },
         forename: "forename",
+        general_partner_details: {
+            include_basic_information: true
+        },
         include_company_objects_information: true,
         include_email_copy: true,
         include_good_standing_information: true,
+        limited_partner_details: {
+            include_basic_information: true
+        },
+        principle_place_of_business_details: {
+            include_address_records_type: "include address",
+            include_dates: true
+        },
+        member_details: {
+            include_address: true,
+            include_appointment_date: true,
+            include_basic_information: true,
+            include_country_of_residence: true,
+            include_dob_type: 'dob'
+        },
         registered_office_address_details: {
             include_address_records_type: "include address",
             include_dates: true
@@ -91,14 +116,20 @@ const mockResponseBodyMissingFields : CertificateItemResource = ({
     item_options: {
         certificate_type: "cert type",
         collection_location: "location",
+        company_type: undefined,
+        designated_member_details: undefined,
         contact_number: "010100",
         delivery_method: "delivery",
         delivery_timescale: "timescale",
         director_details: undefined,
         forename: "name",
+        general_partner_details: undefined,
         include_company_objects_information: true,
         include_email_copy: true,
         include_good_standing_information: true,
+        limited_partner_details: undefined,
+        member_details: undefined,
+        principle_place_of_business_details: undefined,
         registered_office_address_details: undefined,
         secretary_details: undefined,
         surname: undefined
@@ -150,6 +181,11 @@ describe("order a certificate GET", () => {
         const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT");
         const resourceItemOptions = data.resource.itemOptions;
         const resourceDirectorDetails = resourceItemOptions.directorDetails;
+        const resourceDesignatedMemberDetails = resourceItemOptions.designatedMemberDetails;
+        const resourcePrinciplePlaceOfBusinessDetails = resourceItemOptions.principlePlaceOfBusinessDetails;
+        const resourceMemberDetails = resourceItemOptions.memberDetails;
+        const resourceLimitedPartnerDetails = resourceItemOptions.limitedPartnerDetails;
+        const resourceGeneralPartnerDetails = resourceItemOptions.generalPartnerDetails;
         const resourceRegisteredOfficeAddressDetails = resourceItemOptions.registeredOfficeAddressDetails;
         const resourceSecretaryDetails = resourceItemOptions.secretaryDetails;
         const resourceItemCosts = data.resource.itemCosts;
@@ -158,6 +194,11 @@ describe("order a certificate GET", () => {
         const mockRegisteredOfficeAddressDetails = mockItemOptions.registered_office_address_details;
         const mockSecretaryDetails = mockItemOptions.secretary_details;
         const mockItemCosts = mockResponseBody.item_costs;
+        const mockDesignatedMemberDetails = mockItemOptions.designated_member_details;
+        const mockPrinciplePlaceOfBusinessDetails = mockItemOptions.principle_place_of_business_details;
+        const mockMemberDetails = mockItemOptions.member_details;
+        const mockLimitedPartnerDetails = mockItemOptions.limited_partner_details;
+        const mockGeneralPartnerDetails = mockItemOptions.general_partner_details;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
@@ -176,8 +217,14 @@ describe("order a certificate GET", () => {
         expect(resourceItemOptions.certificateType).to.equal(mockItemOptions.certificate_type);
         expect(resourceItemOptions.collectionLocation).to.equal(mockItemOptions.collection_location);
         expect(resourceItemOptions.contactNumber).to.equal(mockItemOptions.contact_number);
+        expect(resourceItemOptions.companyType).to.equal(mockItemOptions.company_type);
         expect(resourceItemOptions.deliveryMethod).to.equal(mockItemOptions.delivery_method);
         expect(resourceItemOptions.deliveryTimescale).to.equal(mockItemOptions.delivery_timescale);
+        expect(resourceDesignatedMemberDetails.includeAddress).to.equal(mockDesignatedMemberDetails.include_address);
+        expect(resourceDesignatedMemberDetails.includeAppointmentDate).to.equal(mockDesignatedMemberDetails.include_appointment_date);
+        expect(resourceDesignatedMemberDetails.includeBasicInformation).to.equal(mockDesignatedMemberDetails.include_basic_information);
+        expect(resourceDesignatedMemberDetails.includeCountryOfResidence).to.equal(mockDesignatedMemberDetails.include_country_of_residence);
+        expect(resourceDesignatedMemberDetails.includeDobType).to.equal(mockDesignatedMemberDetails.include_dob_type);
         expect(resourceDirectorDetails.includeAddress).to.equal(mockDirectorDetails.include_address);
         expect(resourceDirectorDetails.includeAppointmentDate).to.equal(mockDirectorDetails.include_appointment_date);
         expect(resourceDirectorDetails.includeBasicInformation).to.equal(mockDirectorDetails.include_basic_information);
@@ -185,10 +232,19 @@ describe("order a certificate GET", () => {
         expect(resourceDirectorDetails.includeDobType).to.equal(mockDirectorDetails.include_dob_type);
         expect(resourceDirectorDetails.includeNationality).to.equal(mockDirectorDetails.include_nationality);
         expect(resourceDirectorDetails.includeOccupation).to.equal(mockDirectorDetails.include_occupation);
+        expect(resourceGeneralPartnerDetails.includeBasicInformation).to.equal(mockGeneralPartnerDetails.include_basic_information);
         expect(resourceItemOptions.forename).to.equal(mockItemOptions.forename);
         expect(resourceItemOptions.includeCompanyObjectsInformation).to.equal(mockItemOptions.include_company_objects_information);
         expect(resourceItemOptions.includeEmailCopy).to.equal(mockItemOptions.include_email_copy);
         expect(resourceItemOptions.includeGoodStandingInformation).to.equal(mockItemOptions.include_good_standing_information);
+        expect(resourceLimitedPartnerDetails.includeBasicInformation).to.equal(mockLimitedPartnerDetails.include_basic_information);
+        expect(resourceMemberDetails.includeAddress).to.equal(mockMemberDetails.include_address);
+        expect(resourceMemberDetails.includeAppointmentDate).to.equal(mockMemberDetails.include_appointment_date);
+        expect(resourceMemberDetails.includeBasicInformation).to.equal(mockMemberDetails.include_basic_information);
+        expect(resourceMemberDetails.includeCountryOfResidence).to.equal(mockMemberDetails.include_country_of_residence);
+        expect(resourceMemberDetails.includeDobType).to.equal(mockMemberDetails.include_dob_type);
+        expect(resourcePrinciplePlaceOfBusinessDetails.includeAddressRecordsType).to.equal(mockPrinciplePlaceOfBusinessDetails.include_address_records_type);
+        expect(resourcePrinciplePlaceOfBusinessDetails.includeDates).to.equal(mockPrinciplePlaceOfBusinessDetails.include_dates);
         expect(resourceRegisteredOfficeAddressDetails.includeAddressRecordsType).to.equal(mockRegisteredOfficeAddressDetails.include_address_records_type);
         expect(resourceRegisteredOfficeAddressDetails.includeDates).to.equal(mockRegisteredOfficeAddressDetails.include_dates);
         expect(resourceSecretaryDetails.includeAddress).to.equal(mockSecretaryDetails.include_address);
@@ -220,6 +276,11 @@ describe("order a certificate GET", () => {
         const resourceDirectorDetails = resourceItemOptions.directorDetails;
         const resourceRegisteredOfficeAddressDetails = resourceItemOptions.registeredOfficeAddressDetails;
         const resourceSecretaryDetails = resourceItemOptions.secretaryDetails;
+        const resourceDesignatedMemberDetails = resourceItemOptions.designatedMemberDetails;
+        const resourcePrinciplePlaceOfBusinessDetails = resourceItemOptions.principlePlaceOfBusinessDetails;
+        const resourceMemberDetails = resourceItemOptions.memberDetails;
+        const resourceLimitedPartnerDetails = resourceItemOptions.limitedPartnerDetails;
+        const resourceGeneralPartnerDetails = resourceItemOptions.generalPartnerDetails;
         const resourceItemCosts = data.resource.itemCosts;
         const mockItemOptions = mockResponseBodyMissingFields.item_options;
         const mockItemCosts = mockResponseBodyMissingFields.item_costs;
@@ -240,9 +301,15 @@ describe("order a certificate GET", () => {
         expect(resourceItemCosts[0].productType).to.equal(mockItemCosts[0].product_type);
         expect(resourceItemOptions.certificateType).to.equal(mockItemOptions.certificate_type);
         expect(resourceItemOptions.collectionLocation).to.equal(mockItemOptions.collection_location);
+        expect(resourceItemOptions.companyType).to.be.undefined;
         expect(resourceItemOptions.contactNumber).to.equal(mockItemOptions.contact_number);
         expect(resourceItemOptions.deliveryMethod).to.equal(mockItemOptions.delivery_method);
         expect(resourceItemOptions.deliveryTimescale).to.equal(mockItemOptions.delivery_timescale);
+        expect(resourceDesignatedMemberDetails.includeAddress).to.be.undefined;
+        expect(resourceDesignatedMemberDetails.includeAppointmentDate).to.be.undefined;
+        expect(resourceDesignatedMemberDetails.includeBasicInformation).to.be.undefined;
+        expect(resourceDesignatedMemberDetails.includeCountryOfResidence).to.be.undefined;
+        expect(resourceDesignatedMemberDetails.includeDobType).to.be.undefined;
         expect(resourceDirectorDetails?.includeAddress).to.be.undefined;
         expect(resourceDirectorDetails?.includeAppointmentDate).to.be.undefined;
         expect(resourceDirectorDetails?.includeBasicInformation).to.be.undefined;
@@ -250,10 +317,19 @@ describe("order a certificate GET", () => {
         expect(resourceDirectorDetails?.includeDobType).to.be.undefined;
         expect(resourceDirectorDetails?.includeNationality).to.be.undefined;
         expect(resourceDirectorDetails?.includeOccupation).to.be.undefined;
+        expect(resourceGeneralPartnerDetails.includeBasicInformation).to.be.undefined;
         expect(resourceItemOptions.forename).to.equal(mockItemOptions.forename);
         expect(resourceItemOptions.includeCompanyObjectsInformation).to.equal(mockItemOptions.include_company_objects_information);
         expect(resourceItemOptions.includeEmailCopy).to.equal(mockItemOptions.include_email_copy);
         expect(resourceItemOptions.includeGoodStandingInformation).to.equal(mockItemOptions.include_good_standing_information);
+        expect(resourceLimitedPartnerDetails.includeBasicInformation).to.be.undefined;
+        expect(resourceMemberDetails.includeAddress).to.be.undefined;
+        expect(resourceMemberDetails.includeAppointmentDate).to.be.undefined;
+        expect(resourceMemberDetails.includeBasicInformation).to.be.undefined;
+        expect(resourceMemberDetails.includeCountryOfResidence).to.be.undefined;
+        expect(resourceMemberDetails.includeDobType).to.be.undefined;
+        expect(resourcePrinciplePlaceOfBusinessDetails.includeAddressRecordsType).to.be.undefined;
+        expect(resourcePrinciplePlaceOfBusinessDetails.includeDates).to.be.undefined;
         expect(resourceRegisteredOfficeAddressDetails?.includeAddressRecordsType).to.be.undefined;
         expect(resourceRegisteredOfficeAddressDetails?.includeDates).to.be.undefined;
         expect(resourceSecretaryDetails?.includeAddress).to.be.undefined;
@@ -280,6 +356,7 @@ describe("create a certificate POST", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
+            companyType: 'llp',
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
@@ -292,10 +369,34 @@ describe("create a certificate POST", () => {
                 includeNationality: true,
                 includeOccupation: true
             },
+            designatedMemberDetails: {
+                includeAddress: true,
+                includeAppointmentDate: true,
+                includeBasicInformation: true,
+                includeCountryOfResidence: true,
+                includeDobType: "dob"
+            },
             forename: "forename",
+            generalPartnerDetails: {
+                includeBasicInformation: true
+            },
             includeCompanyObjectsInformation: true,
             includeEmailCopy: true,
             includeGoodStandingInformation: true,
+            limitedPartnerDetails: {
+                includeBasicInformation: true
+            },
+            memberDetails: {
+                includeAddress: true,
+                includeAppointmentDate: true,
+                includeBasicInformation: true,
+                includeCountryOfResidence: true,
+                includeDobType: "dob"
+            },
+            principlePlaceOfBusinessDetails: {
+                includeAddressRecordsType: "include address",
+                includeDates: true
+            },
             registeredOfficeAddressDetails: {
                 includeAddressRecordsType: "include address",
                 includeDates: true
@@ -356,6 +457,7 @@ describe("create a certificate POST", () => {
         expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
+        expect(io.companyType).to.equal(mockIo.company_type);
         expect(io.contactNumber).to.equal(mockIo.contact_number);
         expect(io.deliveryMethod).to.equal(mockIo.delivery_method);
         expect(io.deliveryTimescale).to.equal(mockIo.delivery_timescale);
@@ -366,10 +468,24 @@ describe("create a certificate POST", () => {
         expect(io.directorDetails.includeDobType).to.equal(mockIo.director_details.include_dob_type);
         expect(io.directorDetails.includeNationality).to.equal(mockIo.director_details.include_nationality);
         expect(io.directorDetails.includeOccupation).to.equal(mockIo.director_details.include_occupation);
+        expect(io.designatedMemberDetails.includeAddress).to.equal(mockIo.designated_member_details.include_address);
+        expect(io.designatedMemberDetails.includeAppointmentDate).to.equal(mockIo.designated_member_details.include_appointment_date);
+        expect(io.designatedMemberDetails.includeBasicInformation).to.equal(mockIo.designated_member_details.include_basic_information);
+        expect(io.designatedMemberDetails.includeCountryOfResidence).to.equal(mockIo.designated_member_details.include_country_of_residence);
+        expect(io.designatedMemberDetails.includeDobType).to.equal(mockIo.designated_member_details.include_dob_type);
         expect(io.forename).to.equal(mockIo.forename);
+        expect(io.generalPartnerDetails.includeBasicInformation).to.equal(mockIo.general_partner_details.include_basic_information);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
+        expect(io.limitedPartnerDetails.includeBasicInformation).to.equal(mockIo.limited_partner_details.include_basic_information);
+        expect(io.memberDetails.includeAddress).to.equal(mockIo.member_details.include_address);
+        expect(io.memberDetails.includeAppointmentDate).to.equal(mockIo.member_details.include_appointment_date);
+        expect(io.memberDetails.includeBasicInformation).to.equal(mockIo.member_details.include_basic_information);
+        expect(io.memberDetails.includeCountryOfResidence).to.equal(mockIo.member_details.include_country_of_residence);
+        expect(io.memberDetails.includeDobType).to.equal(mockIo.member_details.include_dob_type);
+        expect(io.principlePlaceOfBusinessDetails.includeAddressRecordsType).to.equal(mockIo.registered_office_address_details.include_address_records_type);
+        expect(io.principlePlaceOfBusinessDetails.includeDates).to.equal(mockIo.registered_office_address_details.include_dates);
         expect(io.registeredOfficeAddressDetails.includeAddressRecordsType).to.equal(mockIo.registered_office_address_details.include_address_records_type);
         expect(io.registeredOfficeAddressDetails.includeDates).to.equal(mockIo.registered_office_address_details.include_dates);
         expect(io.secretaryDetails.includeAddress).to.equal(mockIo.secretary_details.include_address);
@@ -423,6 +539,7 @@ describe("update a certificate PATCH", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
+            companyType: 'llp',
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
@@ -435,10 +552,34 @@ describe("update a certificate PATCH", () => {
                 includeNationality: true,
                 includeOccupation: true
             },
+            designatedMemberDetails: {
+                includeAddress: true,
+                includeAppointmentDate: true,
+                includeBasicInformation: true,
+                includeCountryOfResidence: true,
+                includeDobType: 'dob'
+            },
             forename: "forename",
+            generalPartnerDetails: {
+                includeBasicInformation: true
+            },
             includeCompanyObjectsInformation: true,
             includeEmailCopy: true,
             includeGoodStandingInformation: true,
+            limitedPartnerDetails: {
+                includeBasicInformation: true
+            },
+            memberDetails: {
+                includeAddress: true,
+                includeAppointmentDate: true,
+                includeBasicInformation: true,
+                includeCountryOfResidence: true,
+                includeDobType: 'dob'
+            },
+            principlePlaceOfBusinessDetails: {
+                includeAddressRecordsType: "include address",
+                includeDates: true
+            },
             registeredOfficeAddressDetails: {
                 includeAddressRecordsType: "include address",
                 includeDates: true
@@ -499,9 +640,15 @@ describe("update a certificate PATCH", () => {
         expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
+        expect(io.companyType).to.equal(mockIo.company_type);
         expect(io.contactNumber).to.equal(mockIo.contact_number);
         expect(io.deliveryMethod).to.equal(mockIo.delivery_method);
         expect(io.deliveryTimescale).to.equal(mockIo.delivery_timescale);
+        expect(io.designatedMemberDetails.includeAddress).to.equal(mockIo.designated_member_details.include_address);
+        expect(io.designatedMemberDetails.includeAppointmentDate).to.equal(mockIo.designated_member_details.include_appointment_date);
+        expect(io.designatedMemberDetails.includeBasicInformation).to.equal(mockIo.designated_member_details.include_basic_information);
+        expect(io.designatedMemberDetails.includeCountryOfResidence).to.equal(mockIo.designated_member_details.include_country_of_residence);
+        expect(io.designatedMemberDetails.includeDobType).to.equal(mockIo.designated_member_details.include_dob_type);
         expect(io.directorDetails.includeAddress).to.equal(mockIo.director_details.include_address);
         expect(io.directorDetails.includeAppointmentDate).to.equal(mockIo.director_details.include_appointment_date);
         expect(io.directorDetails.includeBasicInformation).to.equal(mockIo.director_details.include_basic_information);
@@ -510,9 +657,18 @@ describe("update a certificate PATCH", () => {
         expect(io.directorDetails.includeNationality).to.equal(mockIo.director_details.include_nationality);
         expect(io.directorDetails.includeOccupation).to.equal(mockIo.director_details.include_occupation);
         expect(io.forename).to.equal(mockIo.forename);
+        expect(io.generalPartnerDetails.includeBasicInformation).to.equal(mockIo.general_partner_details.include_basic_information);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
+        expect(io.limitedPartnerDetails.includeBasicInformation).to.equal(mockIo.limited_partner_details.include_basic_information);
+        expect(io.memberDetails.includeAddress).to.equal(mockIo.member_details.include_address);
+        expect(io.memberDetails.includeAppointmentDate).to.equal(mockIo.member_details.include_appointment_date);
+        expect(io.memberDetails.includeBasicInformation).to.equal(mockIo.member_details.include_basic_information);
+        expect(io.memberDetails.includeCountryOfResidence).to.equal(mockIo.member_details.include_country_of_residence);
+        expect(io.memberDetails.includeDobType).to.equal(mockIo.member_details.include_dob_type);
+        expect(io.principlePlaceOfBusinessDetails.includeAddressRecordsType).to.equal(mockIo.registered_office_address_details.include_address_records_type);
+        expect(io.principlePlaceOfBusinessDetails.includeDates).to.equal(mockIo.registered_office_address_details.include_dates);
         expect(io.registeredOfficeAddressDetails.includeAddressRecordsType).to.equal(mockIo.registered_office_address_details.include_address_records_type);
         expect(io.registeredOfficeAddressDetails.includeDates).to.equal(mockIo.registered_office_address_details.include_dates);
         expect(io.secretaryDetails.includeAddress).to.equal(mockIo.secretary_details.include_address);
