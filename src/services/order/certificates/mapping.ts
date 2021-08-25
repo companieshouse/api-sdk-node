@@ -214,7 +214,7 @@ export default class CertificateMapping {
             : undefined;
     }
 
-    private static mapMemberDetailsRequestToMemberDetailsResource(request: MemberDetailsRequest): MemberDetailsResource {
+    private static mapMemberDetailsRequestToMemberDetailsResource (request: MemberDetailsRequest): MemberDetailsResource {
         const memberDetailsResource: MemberDetailsResource = {
             include_address: request?.includeAddress,
             include_appointment_date: request?.includeAppointmentDate,
@@ -223,11 +223,11 @@ export default class CertificateMapping {
             include_dob_type: request?.includeDobType
         };
         return Object.values(memberDetailsResource).some((value) => value !== undefined)
-        ? memberDetailsResource
-        : undefined;
+            ? memberDetailsResource
+            : undefined;
     }
 
-    private static mapMemberDetailsResourceToMemberDetails(resource: MemberDetailsResource): MemberDetails {
+    private static mapMemberDetailsResourceToMemberDetails (resource: MemberDetailsResource): MemberDetails {
         const memberDetails: MemberDetails = {
             includeAddress: resource?.include_address,
             includeAppointmentDate: resource?.include_appointment_date,
@@ -236,11 +236,11 @@ export default class CertificateMapping {
             includeDobType: resource?.include_dob_type
         };
         return Object.values(memberDetails).some((value) => value !== undefined)
-        ? memberDetails
-        : undefined;
+            ? memberDetails
+            : undefined;
     }
 
-    private static mapPartnerDetailsRequestToPartnerDetailsResource(request: PartnerDetailsRequest): PartnerDetailsResource {
+    private static mapPartnerDetailsRequestToPartnerDetailsResource (request: PartnerDetailsRequest): PartnerDetailsResource {
         const partnerDetailsResource: PartnerDetailsResource = {
             include_basic_information: request?.includeBasicInformation
         };

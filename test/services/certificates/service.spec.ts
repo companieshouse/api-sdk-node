@@ -30,7 +30,7 @@ const mockResponseBody : CertificateItemResource = ({
     item_options: {
         certificate_type: "cert type",
         collection_location: "location",
-        company_type: 'llp',
+        company_type: "llp",
         contact_number: "010100",
         delivery_method: "delivery",
         delivery_timescale: "timescale",
@@ -39,7 +39,7 @@ const mockResponseBody : CertificateItemResource = ({
             include_appointment_date: true,
             include_basic_information: true,
             include_country_of_residence: true,
-            include_dob_type: 'dob'
+            include_dob_type: "dob"
         },
         director_details: {
             include_address: true,
@@ -69,7 +69,7 @@ const mockResponseBody : CertificateItemResource = ({
             include_appointment_date: true,
             include_basic_information: true,
             include_country_of_residence: true,
-            include_dob_type: 'dob'
+            include_dob_type: "dob"
         },
         registered_office_address_details: {
             include_address_records_type: "include address",
@@ -347,7 +347,7 @@ describe("create a certificate POST", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
-            companyType: 'llp',
+            companyType: "llp",
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
@@ -530,7 +530,7 @@ describe("update a certificate PATCH", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
-            companyType: 'llp',
+            companyType: "llp",
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
@@ -548,7 +548,7 @@ describe("update a certificate PATCH", () => {
                 includeAppointmentDate: true,
                 includeBasicInformation: true,
                 includeCountryOfResidence: true,
-                includeDobType: 'dob'
+                includeDobType: "dob"
             },
             forename: "forename",
             generalPartnerDetails: {
@@ -565,7 +565,7 @@ describe("update a certificate PATCH", () => {
                 includeAppointmentDate: true,
                 includeBasicInformation: true,
                 includeCountryOfResidence: true,
-                includeDobType: 'dob'
+                includeDobType: "dob"
             },
             principlePlaceOfBusinessDetails: {
                 includeAddressRecordsType: "include address",
