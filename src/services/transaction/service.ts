@@ -94,6 +94,46 @@ export default class TransactionService {
         };
     }
 
+    /**
+     * Get a transaction.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
+    public async getTransaction (transactionId: string): Promise<Resource<Transaction>|ApiErrorResponse> {
+        const url = "/transactions/" + transactionId
+        const resp = await this.client.httpGet(url);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<Transaction> = {
+            httpStatusCode: resp.status
+        };
+
+        // cast the response body to the expected type
+        const body = resp.body as TransactionResource;
+
+        resource.resource = {
+            id: body.id,
+            etag: body.etag,
+            links: body.links,
+            reference: body.reference,
+            status: body.status,
+            kind: body.kind,
+            companyName: body.company_name,
+            companyNumber: body.company_number,
+            createdAt: body.created_at,
+            createdBy: body.created_by,
+            updatedAt: body.updated_at,
+            description: body.description
+        }
+        return resource;
+    }
+
     private mapToResource (transaction:Transaction):TransactionResource {
         return {
             company_name: transaction.companyName,

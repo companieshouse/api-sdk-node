@@ -67,6 +67,51 @@ describe("transaction", () => {
         expect(castedData.resource.description).to.equal(mockResponseBody.description);
     });
 
+    it("get returns an error response on failure", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransaction({} as string);
+
+        expect(data.httpStatusCode).to.equal(401);
+        const castedData: ApiErrorResponse = data;
+        expect(castedData.errors[0]).to.equal("An error occurred");
+    });
+
+    it("get maps the company field data items correctly", async () => {
+        const mockResponseBody : TransactionResource = ({
+            id: "12345678",
+            company_name: "HELLO LTD",
+            company_number: "88",
+            links: {
+                self: "/self"
+            },
+            reference: "ref",
+            description: "desc"
+        });
+
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransaction({} as string);
+
+        expect(data.httpStatusCode).to.equal(200);
+        const castedData: Resource<Transaction> = data as Resource<Transaction>;
+        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
+        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
+        expect(castedData.resource.description).to.equal(mockResponseBody.description);
+    });
+
     it("put returns successful response", async () => {
         const mockResponseBody : TransactionResource = ({
             id: "12345678",
