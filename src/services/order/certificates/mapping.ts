@@ -247,7 +247,7 @@ export default class CertificateMapping {
         return Object.values(partnerDetailsResource).some((value) => value !== undefined) ? partnerDetailsResource : undefined;
     }
 
-    private static mapPartnerDetailsResourceToPartnerDetails(resource: PartnerDetailsResource): PartnerDetails {
+    private static mapPartnerDetailsResourceToPartnerDetails (resource: PartnerDetailsResource): PartnerDetails {
         const partnerDetails: PartnerDetails = {
             includeBasicInformation: resource?.include_basic_information
         };
