@@ -229,11 +229,11 @@ export default class CertificateMapping {
 
     private static mapMemberDetailsResourceToMemberDetails(resource: MemberDetailsResource): MemberDetails {
         const memberDetails: MemberDetails = {
-            includeAddress: resource.include_address,
-            includeAppointmentDate: resource.include_appointment_date,
-            includeBasicInformation: resource.include_basic_information,
-            includeCountryOfResidence: resource.include_country_of_residence,
-            includeDobType: resource.include_dob_type
+            includeAddress: resource?.include_address,
+            includeAppointmentDate: resource?.include_appointment_date,
+            includeBasicInformation: resource?.include_basic_information,
+            includeCountryOfResidence: resource?.include_country_of_residence,
+            includeDobType: resource?.include_dob_type
         };
         return Object.values(memberDetails).some((value) => value !== undefined)
         ? memberDetails
@@ -242,14 +242,14 @@ export default class CertificateMapping {
 
     private static mapPartnerDetailsRequestToPartnerDetailsResource(request: PartnerDetailsRequest): PartnerDetailsResource {
         const partnerDetailsResource: PartnerDetailsResource = {
-            include_basic_information: request.includeBasicInformation
+            include_basic_information: request?.includeBasicInformation
         };
         return Object.values(partnerDetailsResource).some((value) => value !== undefined) ? partnerDetailsResource : undefined;
     }
 
     private static mapPartnerDetailsResourceToPartnerDetails(resource: PartnerDetailsResource): PartnerDetails {
         const partnerDetails: PartnerDetails = {
-            includeBasicInformation: resource.include_basic_information
+            includeBasicInformation: resource?.include_basic_information
         };
         return Object.values(partnerDetails).some((value) => value !== undefined) ? partnerDetails : undefined;
     }

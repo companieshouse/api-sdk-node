@@ -55,7 +55,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
             product_type: "certificate"
         }],
         item_options: {
-            company_type: "",
+            company_type: "llp",
             certificate_type: "incorporation-with-all-name-changes",
             delivery_method: "postal",
             delivery_timescale: "standard",
