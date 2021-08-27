@@ -61,8 +61,8 @@ export interface DirectorOrSecretaryDetailsResource {
 }
 
 export interface AddressDetailsResource {
-    include_address_records_type: string;
-    include_dates: boolean;
+    include_address_records_type?: string;
+    include_dates?: boolean;
 }
 
 export interface RegisteredOfficeAddressDetailsResource extends AddressDetailsResource {
@@ -136,18 +136,18 @@ export interface ItemOptions {
     contactNumber: string;
     deliveryMethod: string;
     deliveryTimescale: string;
-    designatedMemberDetails: DesignatedMemberDetails;
-    directorDetails: DirectorOrSecretaryDetails;
+    designatedMemberDetails?: DesignatedMemberDetails;
+    directorDetails?: DirectorOrSecretaryDetails;
     forename: string;
-    generalPartnerDetails: GeneralPartnerDetails;
+    generalPartnerDetails?: GeneralPartnerDetails;
     includeCompanyObjectsInformation: boolean;
     includeEmailCopy: boolean;
     includeGoodStandingInformation: boolean;
-    limitedPartnerDetails: LimitedPartnerDetails;
-    memberDetails: OrdinaryMemberDetails;
-    principlePlaceOfBusinessDetails: PrinciplePlaceOfBusinessDetails;
-    registeredOfficeAddressDetails: RegisteredOfficeAddressDetails;
-    secretaryDetails: DirectorOrSecretaryDetails;
+    limitedPartnerDetails?: LimitedPartnerDetails;
+    memberDetails?: OrdinaryMemberDetails;
+    principlePlaceOfBusinessDetails?: PrinciplePlaceOfBusinessDetails;
+    registeredOfficeAddressDetails?: RegisteredOfficeAddressDetails;
+    secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
 }
 
@@ -162,8 +162,8 @@ export interface DirectorOrSecretaryDetails {
 }
 
 export interface AddressDetails {
-    includeAddressRecordsType: string;
-    includeDates: boolean;
+    includeAddressRecordsType?: string;
+    includeDates?: boolean;
 }
 
 export interface RegisteredOfficeAddressDetails extends AddressDetails {
