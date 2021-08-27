@@ -31,14 +31,20 @@ export interface ItemCostsResource {
 export interface ItemOptionsResource {
     certificate_type: string;
     collection_location: string;
+    company_type: string;
     contact_number: string;
     delivery_method: string;
     delivery_timescale: string;
+    designated_member_details: DesignatedMemberDetailsResource;
     director_details: DirectorOrSecretaryDetailsResource;
     forename: string;
+    general_partner_details: GeneralPartnerDetailsResource;
     include_company_objects_information: boolean;
     include_email_copy: boolean;
     include_good_standing_information: boolean;
+    limited_partner_details: LimitedPartnerDetailsResource;
+    member_details: OrdinaryMemberDetailsResource;
+    principle_place_of_business_details: PrinciplePlaceOfBusinessDetailsResource;
     registered_office_address_details: RegisteredOfficeAddressDetailsResource;
     secretary_details: DirectorOrSecretaryDetailsResource;
     surname: string;
@@ -54,9 +60,39 @@ export interface DirectorOrSecretaryDetailsResource {
     include_occupation?: boolean;
 }
 
-export interface RegisteredOfficeAddressDetailsResource {
-    include_address_records_type: string;
-    include_dates: boolean;
+export interface AddressDetailsResource {
+    include_address_records_type?: string;
+    include_dates?: boolean;
+}
+
+export interface RegisteredOfficeAddressDetailsResource extends AddressDetailsResource {
+}
+
+export interface PrinciplePlaceOfBusinessDetailsResource extends AddressDetailsResource {
+}
+
+export interface MemberDetailsResource {
+    include_address?: boolean;
+    include_appointment_date?: boolean;
+    include_basic_information?: boolean;
+    include_country_of_residence?: boolean;
+    include_dob_type?: string;
+}
+
+export interface OrdinaryMemberDetailsResource extends MemberDetailsResource {
+}
+
+export interface DesignatedMemberDetailsResource extends MemberDetailsResource {
+}
+
+export interface PartnerDetailsResource {
+    include_basic_information?: boolean;
+}
+
+export interface GeneralPartnerDetailsResource extends PartnerDetailsResource {
+}
+
+export interface LimitedPartnerDetailsResource extends PartnerDetailsResource {
 }
 
 export interface LinksResource {
@@ -96,16 +132,22 @@ export interface ItemCosts {
 export interface ItemOptions {
     certificateType: string;
     collectionLocation: string;
+    companyType: string;
     contactNumber: string;
     deliveryMethod: string;
     deliveryTimescale: string;
-    directorDetails: DirectorOrSecretaryDetails;
+    designatedMemberDetails?: DesignatedMemberDetails;
+    directorDetails?: DirectorOrSecretaryDetails;
     forename: string;
+    generalPartnerDetails?: GeneralPartnerDetails;
     includeCompanyObjectsInformation: boolean;
     includeEmailCopy: boolean;
     includeGoodStandingInformation: boolean;
-    registeredOfficeAddressDetails: RegisteredOfficeAddressDetails;
-    secretaryDetails: DirectorOrSecretaryDetails;
+    limitedPartnerDetails?: LimitedPartnerDetails;
+    memberDetails?: OrdinaryMemberDetails;
+    principlePlaceOfBusinessDetails?: PrinciplePlaceOfBusinessDetails;
+    registeredOfficeAddressDetails?: RegisteredOfficeAddressDetails;
+    secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
 }
 
@@ -119,9 +161,39 @@ export interface DirectorOrSecretaryDetails {
     includeOccupation?: boolean;
 }
 
-export interface RegisteredOfficeAddressDetails {
-    includeAddressRecordsType: string;
-    includeDates: boolean;
+export interface AddressDetails {
+    includeAddressRecordsType?: string;
+    includeDates?: boolean;
+}
+
+export interface RegisteredOfficeAddressDetails extends AddressDetails {
+}
+
+export interface PrinciplePlaceOfBusinessDetails extends AddressDetails {
+}
+
+export interface MemberDetails {
+    includeAddress?: boolean;
+    includeAppointmentDate?: boolean;
+    includeBasicInformation?: boolean;
+    includeCountryOfResidence?: boolean;
+    includeDobType?: string;
+}
+
+export interface OrdinaryMemberDetails extends MemberDetails {
+}
+
+export interface DesignatedMemberDetails extends MemberDetails {
+}
+
+export interface PartnerDetails {
+    includeBasicInformation?: boolean;
+}
+
+export interface GeneralPartnerDetails extends PartnerDetails {
+}
+
+export interface LimitedPartnerDetails extends PartnerDetails {
 }
 
 export interface Links {
@@ -147,14 +219,20 @@ export interface CertificateItemPatchRequest {
 export interface ItemOptionsRequest {
     certificateType?: string;
     collectionLocation?: string;
+    companyType?: string;
     contactNumber?: string;
     deliveryMethod?: string;
     deliveryTimescale?: string;
+    designatedMemberDetails?: DesignatedMemberDetailsRequest;
     directorDetails?: DirectorOrSecretaryDetailsRequest;
     forename?: string;
+    generalPartnerDetails?: GeneralPartnerDetailsRequest;
     includeCompanyObjectsInformation?: boolean | null;
     includeEmailCopy?: boolean;
     includeGoodStandingInformation?: boolean | null;
+    limitedPartnerDetails?: LimitedPartnerDetailsRequest;
+    memberDetails?: OrdinaryMemberDetailsRequest;
+    principlePlaceOfBusinessDetails?: PrinciplePlaceOfBusinessDetailsRequest;
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetailsRequest;
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
@@ -170,9 +248,39 @@ export interface DirectorOrSecretaryDetailsRequest {
     includeOccupation?: boolean | null;
 }
 
-export interface RegisteredOfficeAddressDetailsRequest {
+export interface AddressDetailsRequest {
     includeAddressRecordsType?: string | null;
     includeDates?: boolean;
+}
+
+export interface RegisteredOfficeAddressDetailsRequest extends AddressDetailsRequest {
+}
+
+export interface PrinciplePlaceOfBusinessDetailsRequest extends AddressDetailsRequest {
+}
+
+export interface MemberDetailsRequest {
+    includeAddress?: boolean | null;
+    includeAppointmentDate?: boolean | null;
+    includeBasicInformation?: boolean | null;
+    includeCountryOfResidence?: boolean | null;
+    includeDobType?: string | null;
+}
+
+export interface OrdinaryMemberDetailsRequest extends MemberDetailsRequest {
+}
+
+export interface DesignatedMemberDetailsRequest extends MemberDetailsRequest {
+}
+
+export interface PartnerDetailsRequest {
+    includeBasicInformation?: boolean | null;
+}
+
+export interface GeneralPartnerDetailsRequest extends PartnerDetailsRequest {
+}
+
+export interface LimitedPartnerDetailsRequest extends PartnerDetailsRequest {
 }
 
 // CertificateItemRequestResource

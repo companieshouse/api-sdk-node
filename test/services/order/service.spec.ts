@@ -55,14 +55,20 @@ const mockCertificateOrderResponseBody: OrderResource = {
             product_type: "certificate"
         }],
         item_options: {
+            company_type: "llp",
             certificate_type: "incorporation-with-all-name-changes",
             delivery_method: "postal",
             delivery_timescale: "standard",
             director_details: {
                 include_basic_information: true
             },
+            designated_member_details: {},
             forename: "forename",
+            general_partner_details: {},
+            limited_partner_details: {},
+            member_details: {},
             include_good_standing_information: true,
+            principle_place_of_business_details: {},
             registered_office_address_details: {},
             secretary_details: {},
             surname: "surname"
