@@ -347,7 +347,6 @@ describe("create a certificate POST", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
-            companyType: "llp",
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
@@ -530,7 +529,6 @@ describe("update a certificate PATCH", () => {
         itemOptions: {
             certificateType: "cert type",
             collectionLocation: "location",
-            companyType: "llp",
             contactNumber: "010100",
             deliveryMethod: "delivery",
             deliveryTimescale: "timescale",
