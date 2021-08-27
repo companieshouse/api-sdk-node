@@ -260,11 +260,11 @@ export interface PrinciplePlaceOfBusinessDetailsRequest extends AddressDetailsRe
 }
 
 export interface MemberDetailsRequest {
-    includeAddress?: boolean;
-    includeAppointmentDate?: boolean;
-    includeBasicInformation?: boolean;
-    includeCountryOfResidence?: boolean;
-    includeDobType?: string;
+    includeAddress?: boolean | null;
+    includeAppointmentDate?: boolean | null;
+    includeBasicInformation?: boolean | null;
+    includeCountryOfResidence?: boolean | null;
+    includeDobType?: string | null;
 }
 
 export interface OrdinaryMemberDetailsRequest extends MemberDetailsRequest {
@@ -274,7 +274,7 @@ export interface DesignatedMemberDetailsRequest extends MemberDetailsRequest {
 }
 
 export interface PartnerDetailsRequest {
-    includeBasicInformation?: boolean;
+    includeBasicInformation?: boolean | null;
 }
 
 export interface GeneralPartnerDetailsRequest extends PartnerDetailsRequest {
