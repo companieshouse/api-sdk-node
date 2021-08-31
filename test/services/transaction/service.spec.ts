@@ -46,7 +46,16 @@ describe("transaction", () => {
                 self: "/self"
             },
             reference: "ref",
-            description: "desc"
+            description: "desc",
+            resources: {
+                resource: {
+                    kind: "kind",
+                    links: {
+                        resource: "self",
+                        costs: "costs"
+                    }
+                }
+            }
         });
 
         const mockPostResponse = {
