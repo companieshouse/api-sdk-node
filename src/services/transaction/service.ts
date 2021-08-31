@@ -44,37 +44,25 @@ export default class TransactionService {
      *
      * @param replacment transaction
      */
-    public async putTransaction (transaction: Transaction): Promise<ApiResponse<Transaction>|ApiErrorResponse> {
-        if (transaction.id) {
-            const url = "/transactions/" + transaction.id
+    public async putTransaction (transaction: Transaction): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
+        const url = "/transactions/" + transaction.id
 
-            const transactionResource: TransactionResource = this.mapToResource(transaction);
-            const resp = await this.client.httpPut(url, transactionResource);
+        const transactionResource: TransactionResource = this.mapToResource(transaction);
+        const resp = await this.client.httpPut(url, transactionResource);
 
-            if (resp.error) {
-                return {
-                    httpStatusCode: resp.status,
-                    errors: [resp.error]
-                };
-            }
-
-            const resource: ApiResponse<Transaction> = {
-                headers: resp.headers,
-                httpStatusCode: resp.status
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
             };
-
-            // cast the response body to the expected type
-            const body: TransactionResource = resp.body as TransactionResource;
-
-            this.populateResource(resource, body);
-
-            return resource;
         }
 
-        return {
-            httpStatusCode: 400,
-            errors: [{ error: "Cannot update transaction - id not found" }]
+        const resource: ApiResponse<Transaction> = {
+            headers: resp.headers,
+            httpStatusCode: resp.status
         };
+
+        return resource;
     }
 
     private populateResource (resource:Resource<Transaction>, body:TransactionResource) {
