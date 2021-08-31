@@ -90,7 +90,8 @@ export default class TransactionService {
             createdAt: body.created_at,
             createdBy: body.created_by,
             updatedAt: body.updated_at,
-            description: body.description
+            description: body.description,
+            resources: body.resources
         };
     }
 
@@ -129,7 +130,8 @@ export default class TransactionService {
             createdAt: body.created_at,
             createdBy: body.created_by,
             updatedAt: body.updated_at,
-            description: body.description
+            description: body.description,
+            resources: body.resources
         }
         return resource;
     }
@@ -146,6 +148,7 @@ export default class TransactionService {
             kind: transaction.kind,
             links: transaction.links,
             reference: transaction.reference,
+            resources: transaction.resources,
             status: transaction.status,
             updated_at: transaction.updatedAt
         }

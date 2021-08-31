@@ -17,7 +17,16 @@ export interface TransactionResource {
         email: string
     },
     updated_at?: string,
-    description: string
+    description: string,
+    resources?: {
+        [key: string]: {
+            kind: string,
+            links: {
+                resource: string,
+                costs?: string
+            }
+        }
+    }
 }
 
 export interface Transaction {
@@ -36,5 +45,14 @@ export interface Transaction {
         email: string
     },
     updatedAt?: string,
-    description: string
+    description: string,
+    resources?: {
+        [key: string]: {
+            kind: string,
+            links: {
+                resource: string,
+                costs?: string
+            }
+        }
+    }
 }
