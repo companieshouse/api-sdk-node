@@ -56,7 +56,6 @@ export default class CertificateMapping {
             customer_reference: certificateItemRequest.customerReference,
             company_number: certificateItemRequest.companyNumber,
             item_options: {
-                company_type: itemOptions.companyType,
                 certificate_type: itemOptions.certificateType,
                 collection_location: itemOptions.collectionLocation,
                 contact_number: itemOptions.contactNumber,

@@ -31,7 +31,7 @@ export interface ItemCostsResource {
 export interface ItemOptionsResource {
     certificate_type: string;
     collection_location: string;
-    company_type: string;
+    company_type?: string;
     contact_number: string;
     delivery_method: string;
     delivery_timescale: string;
@@ -219,7 +219,6 @@ export interface CertificateItemPatchRequest {
 export interface ItemOptionsRequest {
     certificateType?: string;
     collectionLocation?: string;
-    companyType?: string;
     contactNumber?: string;
     deliveryMethod?: string;
     deliveryTimescale?: string;
