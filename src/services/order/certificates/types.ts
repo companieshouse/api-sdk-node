@@ -41,6 +41,7 @@ export interface ItemOptionsResource {
     general_partner_details: GeneralPartnerDetailsResource;
     include_company_objects_information: boolean;
     include_email_copy: boolean;
+    include_general_nature_of_business_information: boolean;
     include_good_standing_information: boolean;
     limited_partner_details: LimitedPartnerDetailsResource;
     member_details: OrdinaryMemberDetailsResource;
@@ -142,6 +143,7 @@ export interface ItemOptions {
     generalPartnerDetails?: GeneralPartnerDetails;
     includeCompanyObjectsInformation: boolean;
     includeEmailCopy: boolean;
+    includeGeneralNatureOfBusinessInformation: boolean;
     includeGoodStandingInformation: boolean;
     limitedPartnerDetails?: LimitedPartnerDetails;
     memberDetails?: OrdinaryMemberDetails;
@@ -228,6 +230,7 @@ export interface ItemOptionsRequest {
     generalPartnerDetails?: GeneralPartnerDetailsRequest;
     includeCompanyObjectsInformation?: boolean | null;
     includeEmailCopy?: boolean;
+    includeGeneralNatureOfBusinessInformation?: boolean | null;
     includeGoodStandingInformation?: boolean | null;
     limitedPartnerDetails?: LimitedPartnerDetailsRequest;
     memberDetails?: OrdinaryMemberDetailsRequest;
