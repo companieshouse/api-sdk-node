@@ -56,6 +56,7 @@ const mockResponseBody : CertificateItemResource = ({
         },
         include_company_objects_information: true,
         include_email_copy: true,
+        include_general_nature_of_business_information: true,
         include_good_standing_information: true,
         limited_partner_details: {
             include_basic_information: true
@@ -126,6 +127,7 @@ const mockResponseBodyMissingFields : CertificateItemResource = ({
         general_partner_details: undefined,
         include_company_objects_information: true,
         include_email_copy: true,
+        include_general_nature_of_business_information: true,
         include_good_standing_information: true,
         limited_partner_details: undefined,
         member_details: undefined,
@@ -236,6 +238,7 @@ describe("order a certificate GET", () => {
         expect(resourceItemOptions.forename).to.equal(mockItemOptions.forename);
         expect(resourceItemOptions.includeCompanyObjectsInformation).to.equal(mockItemOptions.include_company_objects_information);
         expect(resourceItemOptions.includeEmailCopy).to.equal(mockItemOptions.include_email_copy);
+        expect(resourceItemOptions.includeGeneralNatureOfBusinessInformation).to.equal(mockItemOptions.include_general_nature_of_business_information);
         expect(resourceItemOptions.includeGoodStandingInformation).to.equal(mockItemOptions.include_good_standing_information);
         expect(resourceLimitedPartnerDetails.includeBasicInformation).to.equal(mockLimitedPartnerDetails.include_basic_information);
         expect(resourceMemberDetails.includeAddress).to.equal(mockMemberDetails.include_address);
@@ -317,6 +320,7 @@ describe("order a certificate GET", () => {
         expect(resourceItemOptions.forename).to.equal(mockItemOptions.forename);
         expect(resourceItemOptions.includeCompanyObjectsInformation).to.equal(mockItemOptions.include_company_objects_information);
         expect(resourceItemOptions.includeEmailCopy).to.equal(mockItemOptions.include_email_copy);
+        expect(resourceItemOptions.includeGeneralNatureOfBusinessInformation).to.equal(mockItemOptions.include_general_nature_of_business_information);
         expect(resourceItemOptions.includeGoodStandingInformation).to.equal(mockItemOptions.include_good_standing_information);
         expect(resourceLimitedPartnerDetails).to.be.undefined;
         expect(resourceMemberDetails).to.be.undefined;
@@ -372,6 +376,7 @@ describe("create a certificate POST", () => {
             },
             includeCompanyObjectsInformation: true,
             includeEmailCopy: true,
+            includeGeneralNatureOfBusinessInformation: true,
             includeGoodStandingInformation: true,
             limitedPartnerDetails: {
                 includeBasicInformation: true
@@ -467,6 +472,7 @@ describe("create a certificate POST", () => {
         expect(io.generalPartnerDetails.includeBasicInformation).to.equal(mockIo.general_partner_details.include_basic_information);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
+        expect(io.includeGeneralNatureOfBusinessInformation).to.equal(mockIo.include_general_nature_of_business_information);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
         expect(io.limitedPartnerDetails.includeBasicInformation).to.equal(mockIo.limited_partner_details.include_basic_information);
         expect(io.memberDetails.includeAddress).to.equal(mockIo.member_details.include_address);
@@ -513,6 +519,7 @@ describe("create a certificate POST", () => {
         expect(io.forename).to.equal(mockIo.forename);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
+        expect(io.includeGeneralNatureOfBusinessInformation).to.equal(mockIo.include_general_nature_of_business_information);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
         expect(io.registeredOfficeAddressDetails).to.be.undefined;
         expect(io.secretaryDetails).to.be.undefined;
@@ -554,6 +561,7 @@ describe("update a certificate PATCH", () => {
             },
             includeCompanyObjectsInformation: true,
             includeEmailCopy: true,
+            includeGeneralNatureOfBusinessInformation: true,
             includeGoodStandingInformation: true,
             limitedPartnerDetails: {
                 includeBasicInformation: true
@@ -649,6 +657,7 @@ describe("update a certificate PATCH", () => {
         expect(io.generalPartnerDetails.includeBasicInformation).to.equal(mockIo.general_partner_details.include_basic_information);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
+        expect(io.includeGeneralNatureOfBusinessInformation).to.equal(mockIo.include_general_nature_of_business_information);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
         expect(io.limitedPartnerDetails.includeBasicInformation).to.equal(mockIo.limited_partner_details.include_basic_information);
         expect(io.memberDetails.includeAddress).to.equal(mockIo.member_details.include_address);
@@ -695,6 +704,7 @@ describe("update a certificate PATCH", () => {
         expect(io.forename).to.equal(mockIo.forename);
         expect(io.includeCompanyObjectsInformation).to.equal(mockIo.include_company_objects_information);
         expect(io.includeEmailCopy).to.equal(mockIo.include_email_copy);
+        expect(io.includeGeneralNatureOfBusinessInformation).to.equal(mockIo.include_general_nature_of_business_information);
         expect(io.includeGoodStandingInformation).to.equal(mockIo.include_good_standing_information);
         expect(io.registeredOfficeAddressDetails).to.be.undefined;
         expect(io.secretaryDetails).to.be.undefined;

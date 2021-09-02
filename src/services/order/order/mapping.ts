@@ -134,6 +134,7 @@ export default class OrderMapping {
                 deliveryTimescale: itemResource.delivery_timescale,
                 deliveryMethod: itemResource.delivery_method,
                 designatedMemberDetails: designatedMemberDetails,
+                includeGeneralNatureOfBusinessInformation: itemResource.include_general_nature_of_business_information,
                 includeGoodStandingInformation: itemResource.include_good_standing_information,
                 includeCompanyObjectsInformation: itemResource.include_company_objects_information,
                 generalPartnerDetails: generalPartnerDetails,
