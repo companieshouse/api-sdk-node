@@ -1,9 +1,9 @@
 import chai from "chai";
 import sinon from "sinon";
 
-import { EnhancedSearchService } from "../../../../src/services/search/enhanced-search";
+import { AdvancedSearchService } from "../../../../src/services/search/advanced-search";
 import { RequestClient } from "../../../../src/http";
-import { CompaniesResource } from "../../../../src/services/search/enhanced-search/types";
+import { CompaniesResource } from "../../../../src/services/search/advanced-search/types";
 import Resource from "../../../../src/services/resource";
 
 const expect = chai.expect;
@@ -29,8 +29,12 @@ const mockResponseBody : CompaniesResource = ({
             locality: "cardiff",
             postal_code: "cf5 6rb",
             premises: "premises",
+            region: "region",
             country: "country"
-        }
+        },
+        sic_codes: [
+            "999999"
+        ]
     },
     items: [
         {
@@ -50,8 +54,12 @@ const mockResponseBody : CompaniesResource = ({
                 locality: "cardiff",
                 postal_code: "cf5 6rb",
                 premises: "premises",
+                region: "region",
                 country: "country"
-            }
+            },
+            sic_codes: [
+                "999999"
+            ]
         }
     ],
     kind: "kind",
@@ -59,13 +67,19 @@ const mockResponseBody : CompaniesResource = ({
 })
 
 const mockRequestId = "fdskfhsdoifhsffsif";
-const testCompanyName = "TEST COMPANY NAME";
+const testCompanyNameIncludes = "INCLUDES";
+const testCompanyNameExcludes = "EXCLUDES"
 const testLocation = "TEST LOCATION";
-const testIncorporatedFrom = " TEST INCORPORATED FROM";
-const testIncorporatedTo = " TEST INCORPORATED TO";
-const searchType = "enhanced";
+const testIncorporatedFrom = "TEST INCORPORATED FROM";
+const testIncorporatedTo = "TEST INCORPORATED TO";
+const testSicCodes = "999999";
+const testCompanyStatus = "TEST COMPANY STATUS";
+const testCompanyType = "TEST COMPANY TYPE";
+const testDissolvedFrom = "TEST DISSOLVED FROM";
+const testDissolvedTo = "TEST DISSOLVED TO";
+const searchType = "advanced";
 
-describe("create an enhanced search GET", () => {
+describe("create an advanced search GET", () => {
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -84,22 +98,24 @@ describe("create an enhanced search GET", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
-        const search: EnhancedSearchService = new EnhancedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, testLocation, testIncorporatedFrom, testIncorporatedTo, mockRequestId);
+        const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testDissolvedFrom, testDissolvedTo, mockRequestId);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
     });
 
-    it("returns enhanced search results correctly", async () => {
+    it("returns advanced search results correctly", async () => {
         const mockGetRequest = {
             status: 200,
             body: mockResponseBody
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
-        const search: EnhancedSearchService = new EnhancedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, testLocation, testIncorporatedFrom, testIncorporatedTo, mockRequestId);
+        const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
+        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyNameIncludes, testDissolvedFrom, testDissolvedTo, mockRequestId);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];
 
@@ -119,9 +135,11 @@ describe("create an enhanced search GET", () => {
         expect(data.resource.top_hit.registered_office_address.postal_code).to.equal(mockResponseBody.top_hit.registered_office_address.postal_code);
         expect(data.resource.top_hit.registered_office_address.premises).to.equal(mockResponseBody.top_hit.registered_office_address.premises);
         expect(data.resource.top_hit.registered_office_address.country).to.equal(mockResponseBody.top_hit.registered_office_address.country);
+        expect(data.resource.top_hit.sic_codes).to.equal(mockResponseBody.top_hit.sic_codes);
         expect(item.company_name).to.equal(mockItem.company_name);
         expect(item.company_number).to.equal(mockItem.company_number);
         expect(item.company_status).to.equal(mockItem.company_status);
+        expect(item.company_type).to.equal(mockItem.company_type);
         expect(item.kind).to.equal(mockItem.kind);
         expect(item.links.company_profile).to.equal(mockItem.links.company_profile);
         expect(item.date_of_cessation).to.equal(mockItem.date_of_cessation);
@@ -131,6 +149,7 @@ describe("create an enhanced search GET", () => {
         expect(item.registered_office_address.locality).to.equal(mockItem.registered_office_address.locality);
         expect(item.registered_office_address.postal_code).to.equal(mockItem.registered_office_address.postal_code);
         expect(item.registered_office_address.premises).to.equal(mockItem.registered_office_address.premises);
+        expect(item.sic_codes).to.equal(mockItem.sic_codes);
         expect(data.resource.kind).to.equal(mockResponseBody.kind);
         expect(data.resource.hits).to.equal(mockResponseBody.hits);
     });
