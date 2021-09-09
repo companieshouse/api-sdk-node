@@ -21,7 +21,8 @@ export interface ConfirmationStatementSubmissionDataResource {
     registered_office_address_data?: RegisteredOfficeAddressDataResource,
     active_director_details_data?: ActiveDirectorDetailsDataResource,
     shareholder_data?: ShareholderDataResource,
-    register_locations_data?: RegisterLocationsDataResource
+    register_locations_data?: RegisterLocationsDataResource,
+    trading_status_data?: TradingStatusDataResource
 }
 
 export interface ConfirmationStatementSubmissionData {
@@ -31,7 +32,8 @@ export interface ConfirmationStatementSubmissionData {
     registeredOfficeAddressData?: RegisteredOfficeAddressData,
     activeDirectorDetailsData?: ActiveDirectorDetailsData,
     shareholderData?: ShareholderData,
-    registerLocationsData?: RegisterLocationsData
+    registerLocationsData?: RegisterLocationsData,
+    tradingStatusData?: TradingStatusData
 }
 
 export interface ConfirmationStatementSubmissionSectionResource {
@@ -88,6 +90,12 @@ export interface RegisterLocationsDataResource extends ConfirmationStatementSubm
 }
 
 export interface RegisterLocationsData extends ConfirmationStatementSubmissionSection {
+}
+
+export interface TradingStatusDataResource extends ConfirmationStatementSubmissionSectionResource {
+}
+
+export interface TradingStatusData extends ConfirmationStatementSubmissionSection {
 }
 
 export enum SectionStatus {
