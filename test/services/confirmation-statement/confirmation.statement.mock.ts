@@ -80,7 +80,7 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
             }
         },
         shareholderData: { sectionStatus: SectionStatus.CONFIRMED },
-        tradingStatusData: {sectionStatus: SectionStatus.CONFIRMED}
+        tradingStatusData: { sectionStatus: SectionStatus.CONFIRMED }
     },
     links: {
         self: "self/link"
@@ -232,7 +232,7 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
             }
         },
         shareholder_data: { section_status: SectionStatus.CONFIRMED },
-        trading_status_data: {section_status: SectionStatus.CONFIRMED}
+        trading_status_data: { section_status: SectionStatus.CONFIRMED }
     },
     links: {
         self: "self/link"
