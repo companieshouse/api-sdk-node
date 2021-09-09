@@ -38,7 +38,9 @@ import {
     RegisterLocationsData,
     RegisterLocationsDataResource,
     NextMadeUpToDate,
-    NextMadeUpToDateResource
+    NextMadeUpToDateResource,
+    TradingStatusData,
+    TradingStatusDataResource
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -283,7 +285,8 @@ export default class {
             ...(dataResource.registered_office_address_data && { registeredOfficeAddressData: this.mapToRegisteredOfficeAddressData(dataResource.registered_office_address_data) }),
             ...(dataResource.active_director_details_data && { activeDirectorDetailsData: this.mapToActiveDirectorDetailsData(dataResource.active_director_details_data) }),
             ...(dataResource.shareholder_data && { shareholderData: this.mapToShareholderData(dataResource.shareholder_data) }),
-            ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) })
+            ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) }),
+            ...(dataResource.trading_status_data && { tradingStatusData: this.mapToTradingStatusData(dataResource.trading_status_data) })
         }
     }
 
@@ -295,7 +298,8 @@ export default class {
             ...(data.registeredOfficeAddressData && { registered_office_address_data: this.mapToRegisteredOfficeAddressDataResource(data.registeredOfficeAddressData) }),
             ...(data.activeDirectorDetailsData && { active_director_details_data: this.mapToActiveDirectorDetailsDataResource(data.activeDirectorDetailsData) }),
             ...(data.shareholderData && { shareholder_data: this.mapToShareholderDataResource(data.shareholderData) }),
-            ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) })
+            ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) }),
+            ...(data.tradingStatusData && { trading_status_data: this.mapToTradingStatusDataResource(data.tradingStatusData) })
         }
     }
 
@@ -598,6 +602,18 @@ export default class {
             ...(typeof nextMadeUpToDateResource.is_due !== "undefined" && { isDue: nextMadeUpToDateResource.is_due }),
             ...(nextMadeUpToDateResource.new_next_made_up_to_date && { newNextMadeUpToDate: nextMadeUpToDateResource.new_next_made_up_to_date })
         } as NextMadeUpToDate;
+    }
+
+    private mapToTradingStatusDataResource (tradingStatusData: TradingStatusData): TradingStatusDataResource {
+        return {
+            section_status: tradingStatusData.sectionStatus
+        }
+    }
+
+    private mapToTradingStatusData (tradingStatusDataResource: TradingStatusDataResource): TradingStatusData {
+        return {
+            sectionStatus: tradingStatusDataResource.section_status
+        }
     }
 
     private getConfirmationStatementUrlIncTransactionId (transactionId: string) {

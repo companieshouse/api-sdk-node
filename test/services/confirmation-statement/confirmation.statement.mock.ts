@@ -79,7 +79,8 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
                 description: "TEST SIC CODE DETAILS"
             }
         },
-        shareholderData: { sectionStatus: SectionStatus.CONFIRMED }
+        shareholderData: { sectionStatus: SectionStatus.CONFIRMED },
+        tradingStatusData: {sectionStatus: SectionStatus.CONFIRMED}
     },
     links: {
         self: "self/link"
@@ -230,7 +231,8 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
                 description: "TEST SIC CODE DETAILS"
             }
         },
-        shareholder_data: { section_status: SectionStatus.CONFIRMED }
+        shareholder_data: { section_status: SectionStatus.CONFIRMED },
+        trading_status_data: {section_status: SectionStatus.CONFIRMED}
     },
     links: {
         self: "self/link"
