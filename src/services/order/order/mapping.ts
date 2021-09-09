@@ -96,17 +96,52 @@ export default class OrderMapping {
                 includeDobType: itemResource?.secretary_details?.include_dob_type
             });
 
+            const memberDetails = this.removeEmptyObjects({
+                includeAddress: itemResource?.member_details?.include_address,
+                includeAppointmentDate: itemResource?.member_details?.include_appointment_date,
+                includeBasicInformation: itemResource?.member_details?.include_basic_information,
+                includeCountryOfResidence: itemResource?.member_details?.include_country_of_residence,
+                includeDobType: itemResource?.member_details?.include_dob_type
+            });
+
+            const designatedMemberDetails = this.removeEmptyObjects({
+                includeAddress: itemResource?.member_details?.include_address,
+                includeAppointmentDate: itemResource?.member_details?.include_appointment_date,
+                includeBasicInformation: itemResource?.member_details?.include_basic_information,
+                includeCountryOfResidence: itemResource?.member_details?.include_country_of_residence,
+                includeDobType: itemResource?.member_details?.include_dob_type
+            });
+
             const registeredOfficeAddressDetails = this.removeEmptyObjects({
                 includeAddressRecordsType: itemResource?.registered_office_address_details?.include_address_records_type
             });
 
+            const principlePlaceOfBusinessDetails = this.removeEmptyObjects({
+                includeAddressRecordsType: itemResource?.principle_place_of_business_details?.include_address_records_type
+            });
+
+            const generalPartnerDetails = this.removeEmptyObjects({
+                includeBasicInformation: itemResource?.general_partner_details?.include_basic_information
+            });
+
+            const limitedPartnerDetails = this.removeEmptyObjects({
+                includeBasicInformation: itemResource?.limited_partner_details?.include_basic_information
+            });
+
             return {
                 certificateType: itemResource.certificate_type,
+                companyType: itemResource.company_type,
                 deliveryTimescale: itemResource.delivery_timescale,
                 deliveryMethod: itemResource.delivery_method,
+                designatedMemberDetails: designatedMemberDetails,
+                includeGeneralNatureOfBusinessInformation: itemResource.include_general_nature_of_business_information,
                 includeGoodStandingInformation: itemResource.include_good_standing_information,
                 includeCompanyObjectsInformation: itemResource.include_company_objects_information,
+                generalPartnerDetails: generalPartnerDetails,
+                limitedPartnerDetails: limitedPartnerDetails,
+                memberDetails: memberDetails,
                 registeredOfficeAddressDetails: registeredOfficeAddressDetails,
+                principlePlaceOfBusinessDetails: principlePlaceOfBusinessDetails,
                 secretaryDetails: secretaryDetails,
                 directorDetails: directorDetails,
                 forename: itemResource.forename,

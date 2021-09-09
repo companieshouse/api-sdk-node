@@ -55,14 +55,21 @@ const mockCertificateOrderResponseBody: OrderResource = {
             product_type: "certificate"
         }],
         item_options: {
+            company_type: "llp",
             certificate_type: "incorporation-with-all-name-changes",
             delivery_method: "postal",
             delivery_timescale: "standard",
             director_details: {
                 include_basic_information: true
             },
+            designated_member_details: {},
             forename: "forename",
+            general_partner_details: {},
+            limited_partner_details: {},
+            member_details: {},
+            include_general_nature_of_business_information: true,
             include_good_standing_information: true,
+            principle_place_of_business_details: {},
             registered_office_address_details: {},
             secretary_details: {},
             surname: "surname"
@@ -360,6 +367,7 @@ describe("order", () => {
             expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
             expect(itemOptions.directorDetails.includeBasicInformation).to.equal(itemOptionsResource.director_details.include_basic_information);
             expect(itemOptions.forename).to.equal(itemOptionsResource.forename);
+            expect(itemOptions.includeGeneralNatureOfBusinessInformation).to.equal(itemOptionsResource.include_general_nature_of_business_information);
             expect(itemOptions.includeGoodStandingInformation).to.equal(itemOptionsResource.include_good_standing_information);
             expect(itemOptions.registeredOfficeAddressDetails).to.be.undefined;
             expect(itemOptions.secretaryDetails).to.be.undefined;

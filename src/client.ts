@@ -13,6 +13,8 @@ import DissolvedSearchService from "./services/search/dissolved-search/service";
 import PSCDiscrepancyService from "./services/psc-discrepancies/service";
 import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/service";
 import TransactionService from "./services/transaction/service";
+import CompanyPscStatementsService from "./services/company-psc-statements/service";
+import { ConfirmationStatementService } from "./services/confirmation-statement";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -22,7 +24,9 @@ export default class ApiClient {
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;
-  public readonly companyPsc : CompanyPscService ;
+  public readonly companyPsc: CompanyPscService;
+  public readonly companyPscStatements: CompanyPscStatementsService;
+  public readonly confirmationStatementService: ConfirmationStatementService;
   public readonly certificate: CertificateService;
   public readonly certifiedCopies: CertifiedCopiesService;
   public readonly basket: BasketService;
@@ -44,6 +48,8 @@ export default class ApiClient {
       this.companyFilingHistory = new CompanyFilingHistoryService(apiClient);
       this.companyProfile = new CompanyProfileService(apiClient);
       this.companyPsc = new CompanyPscService(apiClient);
+      this.companyPscStatements = new CompanyPscStatementsService(apiClient);
+      this.confirmationStatementService = new ConfirmationStatementService(apiClient);
       this.certificate = new CertificateService(apiClient);
       this.certifiedCopies = new CertifiedCopiesService(apiClient);
       this.basket = new BasketService(apiClient);
