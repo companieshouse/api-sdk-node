@@ -279,6 +279,7 @@ export default class {
 
     private mapToConfirmationStatementSubmissionData (dataResource: ConfirmationStatementSubmissionDataResource): ConfirmationStatementSubmissionData {
         return {
+            confirmationStatementMadeUpToDate: dataResource.confirmation_statement_made_up_to_date,
             ...(dataResource.persons_significant_control_data && { personsSignificantControlData: this.mapToPersonsOfSignificantControlData(dataResource.persons_significant_control_data) }),
             ...(dataResource.statement_of_capital_data && { statementOfCapitalData: this.mapToStatementOfCapitalData(dataResource.statement_of_capital_data) }),
             ...(dataResource.sic_code_data && { sicCodeData: this.mapToSicCodeData(dataResource.sic_code_data) }),
@@ -292,6 +293,7 @@ export default class {
 
     private mapToConfirmationStatementSubmissionDataResource (data: ConfirmationStatementSubmissionData): ConfirmationStatementSubmissionDataResource {
         return {
+            confirmation_statement_made_up_to_date: data.confirmationStatementMadeUpToDate,
             ...(data.personsSignificantControlData && { persons_significant_control_data: this.mapToPersonsOfSignificantControlDataResource(data.personsSignificantControlData) }),
             ...(data.statementOfCapitalData && { statement_of_capital_data: this.mapToStatementOfCapitalDataResource(data.statementOfCapitalData) }),
             ...(data.sicCodeData && { sic_code_data: this.mapToSicCodeDataResource(data.sicCodeData) }),

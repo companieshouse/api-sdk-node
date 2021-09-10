@@ -54,6 +54,7 @@ export const mockStatementOfCapital: StatementOfCapitalResource = {
 export const mockConfirmationStatementSubmission: ConfirmationStatementSubmission = {
     id: "abc",
     data: {
+        confirmationStatementMadeUpToDate: "2021-09-10",
         personsSignificantControlData: {
             sectionStatus: SectionStatus.CONFIRMED,
             personsOfSignificantControl: []
@@ -204,6 +205,7 @@ export const mockRegisterLocationsList: RegisterLocationResource[] = [
 export const mockConfirmationStatementSubmissionResource: ConfirmationStatementSubmissionResource = {
     id: "abc",
     data: {
+        confirmation_statement_made_up_to_date: "2021-09-10",
         persons_significant_control_data: {
             section_status: SectionStatus.CONFIRMED,
             persons_of_significant_control: []
@@ -248,7 +250,9 @@ export const mockConfirmationStatementSubmissionResourceNoData: ConfirmationStat
 
 export const mockConfirmationStatementSubmissionResourceEmptyData: ConfirmationStatementSubmissionResource = {
     id: "abc",
-    data: { },
+    data: {
+        confirmation_statement_made_up_to_date: "2021-09-10"
+    },
     links: {
         self: "self/link"
     }
@@ -257,6 +261,7 @@ export const mockConfirmationStatementSubmissionResourceEmptyData: ConfirmationS
 export const mockConfirmationStatementSubmissionResourceNoSOC: ConfirmationStatementSubmissionResource = {
     id: "abc",
     data: {
+        confirmation_statement_made_up_to_date: "2021-09-10",
         statement_of_capital_data: {
             section_status: SectionStatus.CONFIRMED
         }
