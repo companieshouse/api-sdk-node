@@ -15,24 +15,26 @@ export interface ConfirmationStatementSubmissionResource {
 }
 
 export interface ConfirmationStatementSubmissionDataResource {
-    persons_significant_control_data?: PersonsOfSignificantControlDataResource,
-    statement_of_capital_data?: StatementOfCapitalDataResource,
-    sic_code_data?: SicCodeDataResource,
-    registered_office_address_data?: RegisteredOfficeAddressDataResource,
     active_director_details_data?: ActiveDirectorDetailsDataResource,
-    shareholder_data?: ShareholderDataResource,
+    confirmation_statement_made_up_to_date: string,
+    persons_significant_control_data?: PersonsOfSignificantControlDataResource,
     register_locations_data?: RegisterLocationsDataResource,
+    registered_office_address_data?: RegisteredOfficeAddressDataResource,
+    shareholder_data?: ShareholderDataResource,
+    sic_code_data?: SicCodeDataResource,
+    statement_of_capital_data?: StatementOfCapitalDataResource,
     trading_status_data?: TradingStatusDataResource
 }
 
 export interface ConfirmationStatementSubmissionData {
-    personsSignificantControlData?: PersonsOfSignificantControlData
-    statementOfCapitalData?: StatementOfCapitalData,
-    sicCodeData?: SicCodeData,
-    registeredOfficeAddressData?: RegisteredOfficeAddressData,
     activeDirectorDetailsData?: ActiveDirectorDetailsData,
-    shareholderData?: ShareholderData,
+    confirmationStatementMadeUpToDate: string,
+    personsSignificantControlData?: PersonsOfSignificantControlData,
+    registeredOfficeAddressData?: RegisteredOfficeAddressData,
     registerLocationsData?: RegisterLocationsData,
+    shareholderData?: ShareholderData,
+    sicCodeData?: SicCodeData,
+    statementOfCapitalData?: StatementOfCapitalData,
     tradingStatusData?: TradingStatusData
 }
 

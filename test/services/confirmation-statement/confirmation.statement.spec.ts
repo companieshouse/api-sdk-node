@@ -151,6 +151,7 @@ describe("Update confirmation statement POST", () => {
         const updatedConfirmationStatement = data.resource;
         const mockSubmission = mockValues.mockConfirmationStatementSubmissionResource;
         expect(updatedConfirmationStatement.id).to.equal(mockSubmission.id);
+        expect(updatedConfirmationStatement.data.confirmationStatementMadeUpToDate).to.equal(mockSubmission.data.confirmation_statement_made_up_to_date);
         expect(updatedConfirmationStatement.data.statementOfCapitalData.sectionStatus).to.equal(mockSubmission.data.statement_of_capital_data.section_status);
         expect(updatedConfirmationStatement.data.statementOfCapitalData.statementOfCapital.classOfShares).to.equal(mockSubmission.data.statement_of_capital_data.statement_of_capital.class_of_shares);
         expect(updatedConfirmationStatement.data.sicCodeData.sectionStatus).to.equal(mockSubmission.data.sic_code_data.section_status);
@@ -342,12 +343,14 @@ describe("confirmation statement submission GET", () => {
         const data: Resource<ConfirmationStatementSubmission> =
             await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
 
+        const mockResource = mockValues.mockConfirmationStatementSubmissionResource;
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.id).to.equal(mockValues.mockConfirmationStatementSubmissionResource.id);
-        expect(data.resource.links).to.equal(mockValues.mockConfirmationStatementSubmissionResource.links)
-        expect(data.resource.data.statementOfCapitalData.sectionStatus).to.equal(mockValues.mockConfirmationStatementSubmissionResource.data.statement_of_capital_data.section_status);
+        expect(data.resource.id).to.equal(mockResource.id);
+        expect(data.resource.links).to.equal(mockResource.links);
+        expect(data.resource.data.confirmationStatementMadeUpToDate).to.equal(mockResource.data.confirmation_statement_made_up_to_date);
+        expect(data.resource.data.statementOfCapitalData.sectionStatus).to.equal(mockResource.data.statement_of_capital_data.section_status);
         const statementOfCapital: StatementOfCapital = data.resource.data.statementOfCapitalData.statementOfCapital;
-        const mockStatementOfCapital: StatementOfCapitalResource = mockValues.mockConfirmationStatementSubmissionResource.data.statement_of_capital_data.statement_of_capital
+        const mockStatementOfCapital: StatementOfCapitalResource = mockResource.data.statement_of_capital_data.statement_of_capital
         expect(statementOfCapital.aggregateNominalValue).to.equal(mockStatementOfCapital.aggregate_nominal_value);
         expect(statementOfCapital.classOfShares).to.equal(mockStatementOfCapital.class_of_shares);
         expect(statementOfCapital.currency).to.equal(mockStatementOfCapital.currency);
@@ -368,18 +371,6 @@ describe("confirmation statement submission GET", () => {
         expect(data.resource.id).to.equal(mockValues.mockConfirmationStatementSubmissionResourceNoData.id);
         expect(data.resource.links).to.equal(mockValues.mockConfirmationStatementSubmissionResourceNoData.links)
         expect(data.resource.data).to.equal(undefined);
-    });
-
-    it("should return confirmation statement submission object with empty data", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockConfirmationStatementSubmissionResourceEmptyData });
-        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<ConfirmationStatementSubmission> =
-            await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
-
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.id).to.equal(mockValues.mockConfirmationStatementSubmissionResourceEmptyData.id);
-        expect(data.resource.links).to.equal(mockValues.mockConfirmationStatementSubmissionResourceEmptyData.links)
-        expect(data.resource.data).to.deep.equal(mockValues.mockConfirmationStatementSubmissionResourceEmptyData.data);
     });
 
     it("should return confirmation statement submission object with no statement of capital", async () => {
@@ -404,52 +395,52 @@ describe("confirmation statement submission GET", () => {
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors[0]).to.equal("No confirmation statement submission found");
     });
+});
 
-    describe("getNextMadeUpToDate tests", () => {
-        it("Should not map optional fields when filing is due", async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsDue });
-            const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-            const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
-            const nextMadeUpToDate: NextMadeUpToDate = response.resource;
+describe("getNextMadeUpToDate tests", () => {
+    it("Should not map optional fields when filing is due", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsDue });
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
+        const nextMadeUpToDate: NextMadeUpToDate = response.resource;
 
-            expect(response.httpStatusCode).to.equal(200);
-            expect(nextMadeUpToDate.currentNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.current_next_made_up_to_date);
-            expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.is_due);
-            expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
-        })
+        expect(response.httpStatusCode).to.equal(200);
+        expect(nextMadeUpToDate.currentNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.current_next_made_up_to_date);
+        expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.is_due);
+        expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
+    })
 
-        it("Should map optional fields when filing is not due", async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsNotDue });
-            const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-            const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
-            const nextMadeUpToDate: NextMadeUpToDate = response.resource;
+    it("Should map optional fields when filing is not due", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsNotDue });
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
+        const nextMadeUpToDate: NextMadeUpToDate = response.resource;
 
-            expect(response.httpStatusCode).to.equal(200);
-            expect(nextMadeUpToDate.currentNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.current_next_made_up_to_date);
-            expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.is_due);
-            expect(nextMadeUpToDate.newNextMadeUpToDate).not.to.be.undefined;
-            expect(nextMadeUpToDate.newNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.new_next_made_up_to_date);
-        })
+        expect(response.httpStatusCode).to.equal(200);
+        expect(nextMadeUpToDate.currentNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.current_next_made_up_to_date);
+        expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.is_due);
+        expect(nextMadeUpToDate.newNextMadeUpToDate).not.to.be.undefined;
+        expect(nextMadeUpToDate.newNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.new_next_made_up_to_date);
+    })
 
-        it("Should not map optional fields when no cs found in company profile", async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceNoCs });
-            const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-            const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
-            const nextMadeUpToDate: NextMadeUpToDate = response.resource;
+    it("Should not map optional fields when no cs found in company profile", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceNoCs });
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
+        const nextMadeUpToDate: NextMadeUpToDate = response.resource;
 
-            expect(response.httpStatusCode).to.equal(200);
-            expect(nextMadeUpToDate.currentNextMadeUpToDate).to.be.null;
-            expect(nextMadeUpToDate.isDue).to.be.undefined
-            expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
-        })
+        expect(response.httpStatusCode).to.equal(200);
+        expect(nextMadeUpToDate.currentNextMadeUpToDate).to.be.null;
+        expect(nextMadeUpToDate.isDue).to.be.undefined
+        expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
+    })
 
-        it("Should return an error when api response status >= 400", async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 404, error: "Not Found" });
-            const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-            const response: ApiErrorResponse = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as ApiErrorResponse;
+    it("Should return an error when api response status >= 400", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 404, error: "Not Found" });
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const response: ApiErrorResponse = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as ApiErrorResponse;
 
-            expect(response.httpStatusCode).to.equal(404);
-            expect(response.errors[0]).to.equal("Not Found");
-        })
+        expect(response.httpStatusCode).to.equal(404);
+        expect(response.errors[0]).to.equal("Not Found");
     })
 });
