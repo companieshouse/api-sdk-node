@@ -361,18 +361,6 @@ describe("confirmation statement submission GET", () => {
         expect(statementOfCapital.totalNumberOfShares).to.equal(mockStatementOfCapital.total_number_of_shares);
     });
 
-    it("should return confirmation statement submission object without data", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockConfirmationStatementSubmissionResourceNoData });
-        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<ConfirmationStatementSubmission> =
-            await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
-
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.id).to.equal(mockValues.mockConfirmationStatementSubmissionResourceNoData.id);
-        expect(data.resource.links).to.equal(mockValues.mockConfirmationStatementSubmissionResourceNoData.links)
-        expect(data.resource.data).to.equal(undefined);
-    });
-
     it("should return confirmation statement submission object with no statement of capital", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockConfirmationStatementSubmissionResourceNoSOC });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
@@ -408,7 +396,7 @@ describe("getNextMadeUpToDate tests", () => {
         expect(nextMadeUpToDate.currentNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.current_next_made_up_to_date);
         expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsDue.is_due);
         expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
-    })
+    });
 
     it("Should map optional fields when filing is not due", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsNotDue });
@@ -421,7 +409,7 @@ describe("getNextMadeUpToDate tests", () => {
         expect(nextMadeUpToDate.isDue).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.is_due);
         expect(nextMadeUpToDate.newNextMadeUpToDate).not.to.be.undefined;
         expect(nextMadeUpToDate.newNextMadeUpToDate).to.equal(mockValues.mockNextMadeUpToDateResourceIsNotDue.new_next_made_up_to_date);
-    })
+    });
 
     it("Should not map optional fields when no cs found in company profile", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceNoCs });
@@ -433,7 +421,7 @@ describe("getNextMadeUpToDate tests", () => {
         expect(nextMadeUpToDate.currentNextMadeUpToDate).to.be.null;
         expect(nextMadeUpToDate.isDue).to.be.undefined
         expect(nextMadeUpToDate.newNextMadeUpToDate).to.be.undefined;
-    })
+    });
 
     it("Should return an error when api response status >= 400", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 404, error: "Not Found" });
@@ -442,5 +430,5 @@ describe("getNextMadeUpToDate tests", () => {
 
         expect(response.httpStatusCode).to.equal(404);
         expect(response.errors[0]).to.equal("Not Found");
-    })
+    });
 });

@@ -241,23 +241,6 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
     }
 };
 
-export const mockConfirmationStatementSubmissionResourceNoData: ConfirmationStatementSubmissionResource = {
-    id: "abc",
-    links: {
-        self: "self/link"
-    }
-};
-
-export const mockConfirmationStatementSubmissionResourceEmptyData: ConfirmationStatementSubmissionResource = {
-    id: "abc",
-    data: {
-        confirmation_statement_made_up_to_date: "2021-09-10"
-    },
-    links: {
-        self: "self/link"
-    }
-};
-
 export const mockConfirmationStatementSubmissionResourceNoSOC: ConfirmationStatementSubmissionResource = {
     id: "abc",
     data: {
