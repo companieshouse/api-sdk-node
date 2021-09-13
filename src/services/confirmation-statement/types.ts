@@ -287,8 +287,8 @@ export interface Shareholder {
     foreName2?: string;
     surname: string;
     shares: string;
-    shareClassTypeId: string;
-    currencyTypeId: string;
+    classOfShares: string;
+    currency: string;
 }
 
 export interface ShareholderResource {
@@ -296,8 +296,8 @@ export interface ShareholderResource {
     fore_name_2?: string;
     surname: string;
     shares: string;
-    share_class_type_id: string;
-    currency_type_id: string;
+    class_of_shares: string;
+    currency: string;
 }
 
 export interface NextMadeUpToDateResource {
