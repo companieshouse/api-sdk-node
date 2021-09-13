@@ -258,7 +258,7 @@ export default class {
     private mapToConfirmationStatementSubmission (apiResource: ConfirmationStatementSubmissionResource): ConfirmationStatementSubmission {
         return {
             id: apiResource.id,
-            ...(apiResource.data && { data: this.mapToConfirmationStatementSubmissionData(apiResource.data) }),
+            data: this.mapToConfirmationStatementSubmissionData(apiResource.data),
             links: apiResource.links
         }
     }
@@ -266,7 +266,7 @@ export default class {
     private mapToConfirmationStatementSubmissionResource (submission: ConfirmationStatementSubmission): ConfirmationStatementSubmissionResource {
         return {
             id: submission.id,
-            ...(submission.data && { data: this.mapToConfirmationStatementSubmissionDataResource(submission.data) }),
+            data: this.mapToConfirmationStatementSubmissionDataResource(submission.data),
             links: submission.links
         }
     }

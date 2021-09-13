@@ -1,6 +1,6 @@
 export interface ConfirmationStatementSubmission {
     id: string,
-    data?: ConfirmationStatementSubmissionData,
+    data: ConfirmationStatementSubmissionData,
     links: {
         self: string,
     },
@@ -8,7 +8,7 @@ export interface ConfirmationStatementSubmission {
 
 export interface ConfirmationStatementSubmissionResource {
     id: string,
-    data?: ConfirmationStatementSubmissionDataResource,
+    data: ConfirmationStatementSubmissionDataResource,
     links: {
         self: string,
     },
