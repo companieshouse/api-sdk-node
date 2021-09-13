@@ -551,8 +551,8 @@ export default class {
                 foreName2: shareholderResource.fore_name_2,
                 surname: shareholderResource.surname,
                 shares: shareholderResource.shares,
-                shareClassTypeId: shareholderResource.share_class_type_id,
-                currencyTypeId: shareholderResource.currency_type_id
+                classOfShares: shareholderResource.class_of_shares,
+                currency: shareholderResource.currency
             }
         }
         return shareholderList;
@@ -567,8 +567,8 @@ export default class {
                 fore_name_2: shareholder.foreName2,
                 surname: shareholder.surname,
                 shares: shareholder.shares,
-                share_class_type_id: shareholder.shareClassTypeId,
-                currency_type_id: shareholder.currencyTypeId
+                class_of_shares: shareholder.classOfShares,
+                currency: shareholder.currency
             }
         }
         return shareholderResourceList;

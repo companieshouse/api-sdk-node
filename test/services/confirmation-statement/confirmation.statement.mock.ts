@@ -178,16 +178,16 @@ export const mockShareholderList: ShareholderResource[] = [
         fore_name_1: "John",
         surname: "Lewis",
         shares: "123",
-        share_class_type_id: "123",
-        currency_type_id: "123"
+        class_of_shares: "ORDINARY",
+        currency: "GBP"
     },
     {
         fore_name_1: "James",
         fore_name_2: "R",
         surname: "Bond",
         shares: "456",
-        share_class_type_id: "456",
-        currency_type_id: "456"
+        class_of_shares: "ORDINARY A",
+        currency: "USD"
     }
 ]
 
