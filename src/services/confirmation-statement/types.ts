@@ -94,12 +94,6 @@ export interface RegisterLocationsDataResource extends ConfirmationStatementSubm
 export interface RegisterLocationsData extends ConfirmationStatementSubmissionSection {
 }
 
-export interface TradingStatusDataResource extends ConfirmationStatementSubmissionSectionResource {
-}
-
-export interface TradingStatusData extends ConfirmationStatementSubmissionSection {
-}
-
 export enum SectionStatus {
     CONFIRMED = "CONFIRMED",
     NOT_CONFIRMED = "NOT_CONFIRMED",
@@ -310,4 +304,12 @@ export interface NextMadeUpToDate {
     currentNextMadeUpToDate: string,
     isDue?: boolean,
     newNextMadeUpToDate?: string
+}
+
+export interface TradingStatusDataResource {
+    trading_status_answer: boolean
+}
+
+export interface TradingStatusData {
+    tradingStatusAnswer: boolean
 }

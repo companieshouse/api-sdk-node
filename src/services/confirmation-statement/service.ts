@@ -608,13 +608,13 @@ export default class {
 
     private mapToTradingStatusDataResource (tradingStatusData: TradingStatusData): TradingStatusDataResource {
         return {
-            section_status: tradingStatusData.sectionStatus
+            trading_status_answer: tradingStatusData.tradingStatusAnswer
         }
     }
 
     private mapToTradingStatusData (tradingStatusDataResource: TradingStatusDataResource): TradingStatusData {
         return {
-            sectionStatus: tradingStatusDataResource.section_status
+            tradingStatusAnswer: tradingStatusDataResource.trading_status_answer
         }
     }
 
