@@ -160,7 +160,7 @@ describe("Update confirmation statement POST", () => {
         expect(updatedConfirmationStatement.data.activeDirectorDetailsData.sectionStatus).to.equal(mockSubmission.data.active_director_details_data.section_status);
         expect(updatedConfirmationStatement.data.shareholderData.sectionStatus).to.equal(mockSubmission.data.shareholder_data.section_status);
         expect(updatedConfirmationStatement.data.registerLocationsData.sectionStatus).to.equal(mockSubmission.data.register_locations_data.section_status);
-        expect(updatedConfirmationStatement.data.tradingStatusData.sectionStatus).to.equal(mockSubmission.data.trading_status_data.section_status);
+        expect(updatedConfirmationStatement.data.tradingStatusData.tradingStatusAnswer).to.equal(mockSubmission.data.trading_status_data.trading_status_answer);
     });
 
     it("should return error 404 - not found", async () => {
