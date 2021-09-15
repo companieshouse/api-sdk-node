@@ -81,7 +81,7 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
             }
         },
         shareholderData: { sectionStatus: SectionStatus.CONFIRMED },
-        tradingStatusData: { sectionStatus: SectionStatus.CONFIRMED }
+        tradingStatusData: { tradingStatusAnswer: true }
     },
     links: {
         self: "self/link"
@@ -234,7 +234,7 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
             }
         },
         shareholder_data: { section_status: SectionStatus.CONFIRMED },
-        trading_status_data: { section_status: SectionStatus.CONFIRMED }
+        trading_status_data: { trading_status_answer: true }
     },
     links: {
         self: "self/link"
