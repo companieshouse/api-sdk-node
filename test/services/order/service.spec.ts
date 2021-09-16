@@ -69,7 +69,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
             member_details: {},
             include_general_nature_of_business_information: true,
             include_good_standing_information: true,
-            principle_place_of_business_details: {},
+            principal_place_of_business_details: {},
             registered_office_address_details: {},
             secretary_details: {},
             surname: "surname"
