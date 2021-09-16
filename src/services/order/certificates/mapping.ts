@@ -9,7 +9,7 @@ import {
     GeneralPartnerDetails,
     LimitedPartnerDetailsResource,
     OrdinaryMemberDetailsResource,
-    PrinciplePlaceOfBusinessDetailsResource,
+    PrincipalPlaceOfBusinessDetailsResource,
     AddressDetailsRequest,
     AddressDetailsResource,
     GeneralPartnerDetailsResource,
@@ -19,7 +19,7 @@ import {
     PartnerDetailsRequest,
     PartnerDetailsResource,
     PartnerDetails,
-    PrinciplePlaceOfBusinessDetails,
+    PrincipalPlaceOfBusinessDetails,
     OrdinaryMemberDetails,
     LimitedPartnerDetails
 } from "./types";
@@ -38,8 +38,8 @@ export default class CertificateMapping {
         const registeredOfficeAddressDetails: RegisteredOfficeAddressDetailsResource =
                 this.mapAddressDetailsRequestToAddressDetailsResource(itemOptions.registeredOfficeAddressDetails);
 
-        const principlePlaceOfBusinessDetails: PrinciplePlaceOfBusinessDetailsResource =
-                this.mapAddressDetailsRequestToAddressDetailsResource(itemOptions.principlePlaceOfBusinessDetails);
+        const principalPlaceOfBusinessDetails: PrincipalPlaceOfBusinessDetailsResource =
+                this.mapAddressDetailsRequestToAddressDetailsResource(itemOptions.principalPlaceOfBusinessDetails);
 
         const designatedMemberDetails: DesignatedMemberDetailsResource =
                 this.mapMemberDetailsRequestToMemberDetailsResource(itemOptions.designatedMemberDetails);
@@ -71,7 +71,7 @@ export default class CertificateMapping {
                 include_good_standing_information: itemOptions.includeGoodStandingInformation,
                 limited_partner_details: limitedPartnerDetails,
                 member_details: ordinaryMemberDetails,
-                principle_place_of_business_details: principlePlaceOfBusinessDetails,
+                principal_place_of_business_details: principalPlaceOfBusinessDetails,
                 registered_office_address_details: registeredOfficeAddressDetails,
                 secretary_details: secretaryDetails,
                 surname: itemOptions.surname
@@ -92,8 +92,8 @@ export default class CertificateMapping {
         const registeredOfficeAddressDetails: RegisteredOfficeAddressDetails =
                 this.mapAddressDetailsResourceToAddressDetails(io.registered_office_address_details);
 
-        const principlePlaceOfBusinessDetails: PrinciplePlaceOfBusinessDetails =
-                this.mapAddressDetailsResourceToAddressDetails(io.principle_place_of_business_details);
+        const principalPlaceOfBusinessDetails: PrincipalPlaceOfBusinessDetails =
+                this.mapAddressDetailsResourceToAddressDetails(io.principal_place_of_business_details);
 
         const designatedMemberDetails: DesignatedMemberDetails =
                 this.mapMemberDetailsResourceToMemberDetails(io.designated_member_details);
@@ -139,7 +139,7 @@ export default class CertificateMapping {
                 includeGoodStandingInformation: io.include_good_standing_information,
                 limitedPartnerDetails,
                 memberDetails: ordinaryMemberDetails,
-                principlePlaceOfBusinessDetails,
+                principalPlaceOfBusinessDetails,
                 registeredOfficeAddressDetails,
                 secretaryDetails,
                 surname: io.surname

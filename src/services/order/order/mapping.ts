@@ -116,8 +116,8 @@ export default class OrderMapping {
                 includeAddressRecordsType: itemResource?.registered_office_address_details?.include_address_records_type
             });
 
-            const principlePlaceOfBusinessDetails = this.removeEmptyObjects({
-                includeAddressRecordsType: itemResource?.principle_place_of_business_details?.include_address_records_type
+            const principalPlaceOfBusinessDetails = this.removeEmptyObjects({
+                includeAddressRecordsType: itemResource?.principal_place_of_business_details?.include_address_records_type
             });
 
             const generalPartnerDetails = this.removeEmptyObjects({
@@ -141,7 +141,7 @@ export default class OrderMapping {
                 limitedPartnerDetails: limitedPartnerDetails,
                 memberDetails: memberDetails,
                 registeredOfficeAddressDetails: registeredOfficeAddressDetails,
-                principlePlaceOfBusinessDetails: principlePlaceOfBusinessDetails,
+                principalPlaceOfBusinessDetails: principalPlaceOfBusinessDetails,
                 secretaryDetails: secretaryDetails,
                 directorDetails: directorDetails,
                 forename: itemResource.forename,
