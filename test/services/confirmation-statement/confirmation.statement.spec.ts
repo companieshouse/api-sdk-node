@@ -275,6 +275,11 @@ describe("persons with significant control GET", () => {
         expect(data.resource[1].naturesOfControl).to.be.undefined;
         expect(data.resource[0].dateOfBirthIso).to.equal("1984-01-23");
         expect(data.resource[1].dateOfBirthIso).to.be.undefined;
+        expect(data.resource[0].serviceAddressArea).to.equal("area");
+        expect(data.resource[0].serviceAddressCareOf).to.equal("care of");
+        expect(data.resource[0].serviceAddressCountryName).to.equal("country name");
+        expect(data.resource[0].serviceAddressPoBox).to.equal("po box");
+        expect(data.resource[0].serviceAddressRegion).to.equal("region");
     });
 
     it("should not map missing address or names", async () => {
