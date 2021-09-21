@@ -196,6 +196,11 @@ export interface PersonOfSignificantControl {
     serviceAddressLine1?: string;
     serviceAddressPostCode?: string;
     serviceAddressPostTown?: string;
+    serviceAddressPoBox?: string;
+    serviceAddressCountryName?: string;
+    serviceAddressCareOf?: string;
+    serviceAddressRegion?: string;
+    serviceAddressArea?: string;
     companyName?: string;
     registrationNumber?: string;
     lawGoverned?: string;
@@ -239,6 +244,11 @@ export interface PersonOfSignificantControlResource {
     service_address_line_1?: string;
     service_address_post_code?: string;
     service_address_post_town?: string;
+    service_address_po_box?: string;
+    service_address_country_name?: string;
+    service_address_care_of?: string;
+    service_address_region?: string;
+    service_address_area?: string;
     company_name?: string;
     registration_number?: string;
     law_governed?: string;
