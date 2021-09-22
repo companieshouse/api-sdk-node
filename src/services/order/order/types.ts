@@ -76,6 +76,7 @@ export interface CertificateItemOptions {
     generalPartnerDetails: {
         includeBasicInformation?: boolean;
     };
+    includeGeneralNatureOfBusinessInformation?: boolean;
     includeGoodStandingInformation?: boolean;
     includeCompanyObjectsInformation?: boolean;
     limitedPartnerDetails: {
@@ -88,7 +89,7 @@ export interface CertificateItemOptions {
         includeCountryOfResidence?: boolean;
         includeDobType?: string;
     };
-    principlePlaceOfBusinessDetails: {
+    principalPlaceOfBusinessDetails: {
         includeAddressRecordsType?: string;
     };
     registeredOfficeAddressDetails: {
@@ -216,6 +217,7 @@ export interface CertificateItemOptionsResource {
         include_country_of_residence?: boolean;
         include_dob_type?: string;
     };
+    include_general_nature_of_business_information?: boolean;
     include_good_standing_information?: boolean;
     include_company_objects_information?: boolean;
     general_partner_details: {
@@ -231,7 +233,7 @@ export interface CertificateItemOptionsResource {
         include_country_of_residence?: boolean;
         include_dob_type?: string;
     };
-    principle_place_of_business_details: {
+    principal_place_of_business_details: {
         include_address_records_type?: string;
     };
     registered_office_address_details: {

@@ -41,10 +41,11 @@ export interface ItemOptionsResource {
     general_partner_details: GeneralPartnerDetailsResource;
     include_company_objects_information: boolean;
     include_email_copy: boolean;
+    include_general_nature_of_business_information: boolean;
     include_good_standing_information: boolean;
     limited_partner_details: LimitedPartnerDetailsResource;
     member_details: OrdinaryMemberDetailsResource;
-    principle_place_of_business_details: PrinciplePlaceOfBusinessDetailsResource;
+    principal_place_of_business_details: PrincipalPlaceOfBusinessDetailsResource;
     registered_office_address_details: RegisteredOfficeAddressDetailsResource;
     secretary_details: DirectorOrSecretaryDetailsResource;
     surname: string;
@@ -68,7 +69,7 @@ export interface AddressDetailsResource {
 export interface RegisteredOfficeAddressDetailsResource extends AddressDetailsResource {
 }
 
-export interface PrinciplePlaceOfBusinessDetailsResource extends AddressDetailsResource {
+export interface PrincipalPlaceOfBusinessDetailsResource extends AddressDetailsResource {
 }
 
 export interface MemberDetailsResource {
@@ -142,10 +143,11 @@ export interface ItemOptions {
     generalPartnerDetails?: GeneralPartnerDetails;
     includeCompanyObjectsInformation: boolean;
     includeEmailCopy: boolean;
+    includeGeneralNatureOfBusinessInformation: boolean;
     includeGoodStandingInformation: boolean;
     limitedPartnerDetails?: LimitedPartnerDetails;
     memberDetails?: OrdinaryMemberDetails;
-    principlePlaceOfBusinessDetails?: PrinciplePlaceOfBusinessDetails;
+    principalPlaceOfBusinessDetails?: PrincipalPlaceOfBusinessDetails;
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetails;
     secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
@@ -169,7 +171,7 @@ export interface AddressDetails {
 export interface RegisteredOfficeAddressDetails extends AddressDetails {
 }
 
-export interface PrinciplePlaceOfBusinessDetails extends AddressDetails {
+export interface PrincipalPlaceOfBusinessDetails extends AddressDetails {
 }
 
 export interface MemberDetails {
@@ -228,10 +230,11 @@ export interface ItemOptionsRequest {
     generalPartnerDetails?: GeneralPartnerDetailsRequest;
     includeCompanyObjectsInformation?: boolean | null;
     includeEmailCopy?: boolean;
+    includeGeneralNatureOfBusinessInformation?: boolean | null;
     includeGoodStandingInformation?: boolean | null;
     limitedPartnerDetails?: LimitedPartnerDetailsRequest;
     memberDetails?: OrdinaryMemberDetailsRequest;
-    principlePlaceOfBusinessDetails?: PrinciplePlaceOfBusinessDetailsRequest;
+    principalPlaceOfBusinessDetails?: PrincipalPlaceOfBusinessDetailsRequest;
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetailsRequest;
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
@@ -255,7 +258,7 @@ export interface AddressDetailsRequest {
 export interface RegisteredOfficeAddressDetailsRequest extends AddressDetailsRequest {
 }
 
-export interface PrinciplePlaceOfBusinessDetailsRequest extends AddressDetailsRequest {
+export interface PrincipalPlaceOfBusinessDetailsRequest extends AddressDetailsRequest {
 }
 
 export interface MemberDetailsRequest {

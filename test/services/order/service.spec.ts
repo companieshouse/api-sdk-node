@@ -79,8 +79,9 @@ const mockCertificateOrderResponseBody: OrderResource = {
                 include_country_of_residence: false,
                 include_dob_type: "partial"
             },
+            include_general_nature_of_business_information: true,
             include_good_standing_information: true,
-            principle_place_of_business_details: {},
+            principal_place_of_business_details: {},
             registered_office_address_details: {},
             secretary_details: {},
             surname: "surname"
@@ -378,6 +379,7 @@ describe("order", () => {
             expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
             expect(itemOptions.directorDetails.includeBasicInformation).to.equal(itemOptionsResource.director_details.include_basic_information);
             expect(itemOptions.forename).to.equal(itemOptionsResource.forename);
+            expect(itemOptions.includeGeneralNatureOfBusinessInformation).to.equal(itemOptionsResource.include_general_nature_of_business_information);
             expect(itemOptions.includeGoodStandingInformation).to.equal(itemOptionsResource.include_good_standing_information);
             expect(itemOptions.registeredOfficeAddressDetails).to.be.undefined;
             expect(itemOptions.secretaryDetails).to.be.undefined;
