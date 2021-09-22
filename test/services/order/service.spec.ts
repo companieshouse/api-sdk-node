@@ -384,8 +384,8 @@ describe("order", () => {
             expect(itemOptions.registeredOfficeAddressDetails).to.be.undefined;
             expect(itemOptions.secretaryDetails).to.be.undefined;
             expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
-            expect(itemOptions.designatedMemberDetails).to.deep.equal({includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial"})
-            expect(itemOptions.memberDetails).to.deep.equal({includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial"})
+            expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
+            expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
         });
 
         it("should map certified copy item option fields correctly", async () => {

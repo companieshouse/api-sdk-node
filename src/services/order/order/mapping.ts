@@ -3,7 +3,7 @@ import {
     CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
     MissingImageDeliveryItemOptionsResource
 } from "./types";
-import {MemberDetails} from "../certificates";
+import { MemberDetails } from "../certificates";
 
 export default class OrderMapping {
     public static mapOrderResourceToOrder (orderResource: OrderResource): Order {
