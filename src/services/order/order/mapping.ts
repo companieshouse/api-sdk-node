@@ -3,6 +3,7 @@ import {
     CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
     MissingImageDeliveryItemOptionsResource
 } from "./types";
+import {MemberDetails} from "../certificates";
 
 export default class OrderMapping {
     public static mapOrderResourceToOrder (orderResource: OrderResource): Order {
@@ -96,21 +97,9 @@ export default class OrderMapping {
                 includeDobType: itemResource?.secretary_details?.include_dob_type
             });
 
-            const memberDetails = this.removeEmptyObjects({
-                includeAddress: itemResource?.member_details?.include_address,
-                includeAppointmentDate: itemResource?.member_details?.include_appointment_date,
-                includeBasicInformation: itemResource?.member_details?.include_basic_information,
-                includeCountryOfResidence: itemResource?.member_details?.include_country_of_residence,
-                includeDobType: itemResource?.member_details?.include_dob_type
-            });
+            const memberDetails = OrderMapping.mapMemberDetails(itemResource?.member_details);
 
-            const designatedMemberDetails = this.removeEmptyObjects({
-                includeAddress: itemResource?.member_details?.include_address,
-                includeAppointmentDate: itemResource?.member_details?.include_appointment_date,
-                includeBasicInformation: itemResource?.member_details?.include_basic_information,
-                includeCountryOfResidence: itemResource?.member_details?.include_country_of_residence,
-                includeDobType: itemResource?.member_details?.include_dob_type
-            });
+            const designatedMemberDetails = OrderMapping.mapMemberDetails(itemResource?.designated_member_details);
 
             const registeredOfficeAddressDetails = this.removeEmptyObjects({
                 includeAddressRecordsType: itemResource?.registered_office_address_details?.include_address_records_type
@@ -170,5 +159,21 @@ export default class OrderMapping {
                 filingHistoryDescriptionValues: itemResource.filing_history_description_values
             }
         }
+    }
+
+    static mapMemberDetails = (member_details: {
+        include_address?: boolean,
+        include_appointment_date?: boolean,
+        include_basic_information?: boolean,
+        include_country_of_residence?: boolean,
+        include_dob_type?: string
+    }): MemberDetails => {
+        return OrderMapping.removeEmptyObjects({
+            includeAddress: member_details?.include_address,
+            includeAppointmentDate: member_details?.include_appointment_date,
+            includeBasicInformation: member_details?.include_basic_information,
+            includeCountryOfResidence: member_details?.include_country_of_residence,
+            includeDobType: member_details?.include_dob_type
+        });
     }
 }
