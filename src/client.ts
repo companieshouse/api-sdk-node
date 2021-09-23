@@ -3,7 +3,7 @@ import CompanyOfficersService from "./services/company-officers/service";
 import CompanyProfileService from "./services/company-profile/service";
 import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
-import { BasketService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
+import { BasketService, CheckoutService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
@@ -31,6 +31,7 @@ export default class ApiClient {
   public readonly certifiedCopies: CertifiedCopiesService;
   public readonly basket: BasketService;
   public readonly payment: PaymentService;
+  public readonly checkout: CheckoutService;
   public readonly order: OrderService;
   public readonly mid : MidService;
   public readonly refreshToken: RefreshTokenService;
@@ -54,6 +55,7 @@ export default class ApiClient {
       this.certifiedCopies = new CertifiedCopiesService(apiClient);
       this.basket = new BasketService(apiClient);
       this.payment = new PaymentService(apiClient); // TODO split payments url/domain into a separate config item and http client
+      this.checkout = new CheckoutService(apiClient);
       this.order = new OrderService(apiClient);
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
