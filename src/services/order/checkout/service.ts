@@ -4,7 +4,7 @@ import { ApiResult } from "../../../services/resource";
 import { failure, success } from "../../../services/result";
 import CheckoutMapping from "./mapping";
 
-export default class OrderService {
+export default class CheckoutService {
     constructor (private readonly client: IHttpClient) { }
 
     public async getCheckout (checkoutId: string): Promise<ApiResult<Checkout>> {
