@@ -299,10 +299,9 @@ describe("checkout", () => {
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID); ;
-            const data = response.value as ApiErrorResponse;
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.errors).to.equal("An error occurred");
+            expect(response.httpStatusCode).to.equal(401);
+            expect(response.resource).to.be.undefined;
         });
 
         it("should map generic fields correctly", async () => {
@@ -314,7 +313,7 @@ describe("checkout", () => {
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID);
-            const data = response.value as Checkout;
+            const data = response.resource as Checkout;
 
             expect(data.paidAt).to.equal(mockCertificateCheckoutResponseBody.paid_at);
             expect(data.checkedOutBy.id).to.equal(mockCertificateCheckoutResponseBody.checked_out_by.id);
@@ -374,7 +373,7 @@ describe("checkout", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID);
-            const data = response.value as Checkout;
+            const data = response.resource as Checkout;
 
             const item = data.items[0];
             const itemResource = mockCertificateCheckoutResponseBody.items[0];
@@ -405,7 +404,7 @@ describe("checkout", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(CERTIFIED_COPY_CHECKOUT_ID);
-            const data = response.value as Checkout;
+            const data = response.resource as Checkout;
             const item = data.items[0];
             const itemResource = mockCertifiedCopyCheckoutResponseBody.items[0];
 
@@ -431,7 +430,7 @@ describe("checkout", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID);
-            const data = response.value as Checkout;
+            const data = response.resource as Checkout;
 
             const item = data.items[0];
             const itemResource = mockMissingImageDeliveryCheckoutResponseBody.items[0];
