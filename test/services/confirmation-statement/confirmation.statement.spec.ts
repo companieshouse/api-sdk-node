@@ -281,6 +281,7 @@ describe("persons with significant control GET", () => {
         expect(data.resource[0].serviceAddressPoBox).to.equal("po box");
         expect(data.resource[0].serviceAddressRegion).to.equal("region");
         expect(data.resource[0].serviceAddressHouseNameNumber).to.equal("house name number");
+        expect(data.resource[0].registerLocation).to.equal("ENGLAND");
     });
 
     it("should not map missing address or names", async () => {

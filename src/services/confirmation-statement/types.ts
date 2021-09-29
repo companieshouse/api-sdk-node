@@ -203,6 +203,7 @@ export interface PersonOfSignificantControl {
     serviceAddressArea?: string;
     serviceAddressHouseNameNumber?: string;
     companyName?: string;
+    registerLocation?: string;
     registrationNumber?: string;
     lawGoverned?: string;
     legalForm?: string;
@@ -252,6 +253,7 @@ export interface PersonOfSignificantControlResource {
     service_address_area?: string;
     service_address_house_name_number?: string;
     company_name?: string;
+    register_location?: string;
     registration_number?: string;
     law_governed?: string;
     legal_form?: string;
