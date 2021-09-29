@@ -125,7 +125,6 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
         service_address_care_of: "care of",
         service_address_region: "region",
         service_address_area: "area",
-        service_address_house_name_number: "house name number",
         company_name: "Company1",
         registration_number: "67890",
         law_governed: "ENGLISH",
