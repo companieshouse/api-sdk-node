@@ -201,6 +201,7 @@ export interface PersonOfSignificantControl {
     serviceAddressCareOf?: string;
     serviceAddressRegion?: string;
     serviceAddressArea?: string;
+    serviceAddressHouseNameNumber?: string;
     companyName?: string;
     registrationNumber?: string;
     lawGoverned?: string;
@@ -249,6 +250,7 @@ export interface PersonOfSignificantControlResource {
     service_address_care_of?: string;
     service_address_region?: string;
     service_address_area?: string;
+    service_address_house_name_number?: string;
     company_name?: string;
     registration_number?: string;
     law_governed?: string;
