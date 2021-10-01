@@ -275,13 +275,8 @@ describe("persons with significant control GET", () => {
         expect(data.resource[1].naturesOfControl).to.be.undefined;
         expect(data.resource[0].dateOfBirthIso).to.equal("1984-01-23");
         expect(data.resource[1].dateOfBirthIso).to.be.undefined;
-        expect(data.resource[0].serviceAddressArea).to.equal("area");
-        expect(data.resource[0].serviceAddressCareOf).to.equal("care of");
-        expect(data.resource[0].serviceAddressCountryName).to.equal("country name");
-        expect(data.resource[0].serviceAddressPoBox).to.equal("po box");
-        expect(data.resource[0].serviceAddressRegion).to.equal("region");
-        expect(data.resource[0].serviceAddressHouseNameNumber).to.equal("house name number");
-        expect(data.resource[0].registerLocation).to.equal("ENGLAND");
+        expect(data.resource[0].serviceAddress?.addressLine1).to.equal("10 This road");
+        expect(data.resource[0].address?.addressLine1).to.equal("20 Any road");
     });
 
     it("should not map missing address or names", async () => {
@@ -291,6 +286,7 @@ describe("persons with significant control GET", () => {
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource[0].nameElements).to.be.undefined;
         expect(data.resource[0].address).to.be.undefined;
+        expect(data.resource[0].serviceAddress).to.be.undefined;
         expect(data.resource[0].appointmentType).to.equal("1");
     });
 

@@ -109,6 +109,7 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
             title: "Mr"
         },
         address: mockAddress1,
+        service_address: mockAddress2,
         appointment_type: "1",
         natures_of_control: [],
         date_of_birth: {
@@ -117,15 +118,6 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
         },
         date_of_birth_iso: "1984-01-23",
         nationality: "British",
-        service_address_line_1: "1 Nowhere road",
-        service_address_post_code: "NO1 0AA",
-        service_address_post_town: "Nowhere",
-        service_address_po_box: "po box",
-        service_address_country_name: "country name",
-        service_address_care_of: "care of",
-        service_address_region: "region",
-        service_address_area: "area",
-        service_address_house_name_number: "house name number",
         company_name: "Company1",
         register_location: "ENGLAND",
         registration_number: "67890",
@@ -142,6 +134,7 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
             title: "Mr"
         },
         address: mockAddress2,
+        service_address: mockAddress1,
         appointment_type: "1",
         natures_of_control: undefined,
         date_of_birth: {
@@ -149,9 +142,6 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
             year: 1967
         },
         nationality: "British",
-        service_address_line_1: "1 Somewhere street",
-        service_address_post_code: "SW1 3ZZ",
-        service_address_post_town: "Somewhere",
         company_name: "Company2",
         register_location: "ENGLAND",
         registration_number: "123456",
@@ -170,9 +160,6 @@ export const mockPscNoNameNoAddress: PersonOfSignificantControlResource[] = [
             year: 1984
         },
         nationality: "British",
-        service_address_line_1: "1 Nowhere road",
-        service_address_post_code: "NO1 0AA",
-        service_address_post_town: "Nowhere",
         company_name: "Company1",
         register_location: "ENGLAND",
         registration_number: "67890",

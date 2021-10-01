@@ -188,20 +188,12 @@ export interface RegisterLocationResource {
 export interface PersonOfSignificantControl {
     nameElements?: NameElements;
     address?: Address;
+    serviceAddress?: Address;
     appointmentType: string
     naturesOfControl?: string[];
     dateOfBirth?: DateOfBirth;
     dateOfBirthIso?: string,
     nationality?: string;
-    serviceAddressLine1?: string;
-    serviceAddressPostCode?: string;
-    serviceAddressPostTown?: string;
-    serviceAddressPoBox?: string;
-    serviceAddressCountryName?: string;
-    serviceAddressCareOf?: string;
-    serviceAddressRegion?: string;
-    serviceAddressArea?: string;
-    serviceAddressHouseNameNumber?: string;
     companyName?: string;
     registerLocation?: string;
     registrationNumber?: string;
@@ -238,20 +230,12 @@ export interface DateOfBirth {
 export interface PersonOfSignificantControlResource {
     name_elements?: NameElementsResource;
     address?: AddressResource;
+    service_address?: AddressResource;
     appointment_type: string
     natures_of_control?: string[];
     date_of_birth?: DateOfBirth;
     date_of_birth_iso?: string,
     nationality?: string;
-    service_address_line_1?: string;
-    service_address_post_code?: string;
-    service_address_post_town?: string;
-    service_address_po_box?: string;
-    service_address_country_name?: string;
-    service_address_care_of?: string;
-    service_address_region?: string;
-    service_address_area?: string;
-    service_address_house_name_number?: string;
     company_name?: string;
     register_location?: string;
     registration_number?: string;
