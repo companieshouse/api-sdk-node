@@ -238,6 +238,7 @@ export interface ItemOptionsRequest {
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetailsRequest;
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
+    companyType?: string;
 }
 
 export interface DirectorOrSecretaryDetailsRequest {

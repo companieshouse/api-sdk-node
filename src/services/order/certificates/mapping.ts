@@ -74,7 +74,8 @@ export default class CertificateMapping {
                 principal_place_of_business_details: principalPlaceOfBusinessDetails,
                 registered_office_address_details: registeredOfficeAddressDetails,
                 secretary_details: secretaryDetails,
-                surname: itemOptions.surname
+                surname: itemOptions.surname,
+                company_type: itemOptions.companyType
             },
             quantity: certificateItemRequest.quantity
         };
