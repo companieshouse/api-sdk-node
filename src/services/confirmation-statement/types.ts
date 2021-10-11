@@ -160,6 +160,7 @@ export interface ActiveDirectorDetails {
     occupation: string;
     nationality: string;
     dateOfBirth: string;
+    dateOfAppointment: string;
     serviceAddress: Address;
     residentialAddress: Address;
 }
@@ -171,6 +172,7 @@ export interface ActiveDirectorDetailsResource {
     occupation: string;
     nationality: string;
     date_of_birth: string;
+    date_of_appointment: string;
     service_address: AddressResource;
     residential_address: AddressResource;
 }

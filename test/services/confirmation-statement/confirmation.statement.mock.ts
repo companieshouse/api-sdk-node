@@ -95,6 +95,7 @@ export const mockActiveDirectorDetails: ActiveDirectorDetailsResource = {
     occupation: "singer",
     nationality: "British",
     date_of_birth: "1 January 1960",
+    date_of_appointment: "1 January 2009",
     service_address: mockAddress1,
     residential_address: mockAddress2
 }
