@@ -484,6 +484,7 @@ export default class {
             nationality: apiResource.nationality,
             dateOfBirth: apiResource.date_of_birth,
             dateOfAppointment: apiResource.date_of_appointment,
+            countryOfResidence: apiResource.country_of_residence,
             ...(apiResource.service_address && { serviceAddress: this.mapToAddress(apiResource.service_address) }),
             ...(apiResource.residential_address && { residentialAddress: this.mapToAddress(apiResource.residential_address) })
         }
