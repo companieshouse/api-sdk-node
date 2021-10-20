@@ -303,7 +303,7 @@ describe("Shareholder GET", () => {
     it("should return a list of shareholder", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetShareholder[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<Shareholder[]> = await csService.getShareholders(COMPANY_NUMBER) as Resource<Shareholder[]>;
+        const data: Resource<Shareholder[]> = await csService.getShareholders(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<Shareholder[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource[0].surname).to.equal("Lewis");
         expect(data.resource[0].foreName2).to.undefined;
@@ -313,7 +313,7 @@ describe("Shareholder GET", () => {
     it("should return a 500 error - Internal server error", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetShareholder[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getShareholders(COMPANY_NUMBER) as ApiErrorResponse;
+        const data: ApiErrorResponse = await csService.getShareholders(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");
     });

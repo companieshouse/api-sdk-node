@@ -200,8 +200,8 @@ export default class {
         return resource;
     }
 
-    public async getShareholders (companyNumber: string): Promise<Resource<Shareholder[]> | ApiErrorResponse> {
-        const url = `${this.getConfirmationStatementUrl(companyNumber)}/shareholders`;
+    public async getShareholders (transactionId: string, confirmationStatementId: string): Promise<Resource<Shareholder[]> | ApiErrorResponse> {
+        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/shareholders`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
