@@ -193,7 +193,8 @@ export interface PersonOfSignificantControl {
     nameElements?: NameElements;
     address?: Address;
     serviceAddress?: Address;
-    appointmentType: string
+    appointmentType: string;
+    appointmentDate: string;
     naturesOfControl?: string[];
     dateOfBirth?: DateOfBirth;
     dateOfBirthIso?: string,
@@ -235,7 +236,8 @@ export interface PersonOfSignificantControlResource {
     name_elements?: NameElementsResource;
     address?: AddressResource;
     service_address?: AddressResource;
-    appointment_type: string
+    appointment_type: string;
+    appointment_date: string;
     natures_of_control?: string[];
     date_of_birth?: DateOfBirth;
     date_of_birth_iso?: string,
