@@ -50,7 +50,7 @@ export default class AdvancedSearchService {
         }
 
         if (companyStatus !== null) {
-            buildEnhancedSearchURL.append(COMPANY_STATUS_QUERY, companyNameIncludes)
+            buildEnhancedSearchURL.append(COMPANY_STATUS_QUERY, companyStatus);
         }
 
         if (companyType !== null) {
