@@ -113,6 +113,7 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
         address: mockAddress1,
         service_address: mockAddress2,
         appointment_type: "1",
+        appointment_date: "2006-04-25",
         natures_of_control: [],
         date_of_birth: {
             month: 1,
@@ -138,6 +139,7 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
         address: mockAddress2,
         service_address: mockAddress1,
         appointment_type: "1",
+        appointment_date: "2006-04-25",
         natures_of_control: undefined,
         date_of_birth: {
             month: 1,
@@ -156,6 +158,7 @@ export const mockPersonsWithSignificantControlList: PersonOfSignificantControlRe
 export const mockPscNoNameNoAddress: PersonOfSignificantControlResource[] = [
     {
         appointment_type: "1",
+        appointment_date: "2006-04-25",
         natures_of_control: [],
         date_of_birth: {
             month: 1,
