@@ -218,7 +218,7 @@ describe("statement of capital data GET", () => {
     it("should return statement of capital object", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetStatementOfCapital[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<StatementOfCapital> = await csService.getStatementOfCapital(COMPANY_NUMBER) as Resource<StatementOfCapital>;
+        const data: Resource<StatementOfCapital> = await csService.getStatementOfCapital(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<StatementOfCapital>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.classOfShares).to.equal(mockValues.mockStatementOfCapital.class_of_shares);
@@ -227,7 +227,7 @@ describe("statement of capital data GET", () => {
     it("should not return statement of capital object", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetStatementOfCapital[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getStatementOfCapital(COMPANY_NUMBER);
+        const data: ApiErrorResponse = await csService.getStatementOfCapital(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors[0]).to.equal("No statement of capital data found");
@@ -267,7 +267,7 @@ describe("persons with significant control GET", () => {
     it("should return a list of persons with significant control", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetPersonsOfSignificantControl[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(COMPANY_NUMBER) as Resource<PersonOfSignificantControl[]>;
+        const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<PersonOfSignificantControl[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource[0].nameElements.surname).to.equal("Smith");
         expect(data.resource[0].nameElements.middleName).to.be.undefined;
@@ -282,7 +282,7 @@ describe("persons with significant control GET", () => {
     it("should not map missing address or names", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockPscNoNameNoAddress });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(COMPANY_NUMBER) as Resource<PersonOfSignificantControl[]>;
+        const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<PersonOfSignificantControl[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource[0].nameElements).to.be.undefined;
         expect(data.resource[0].address).to.be.undefined;
@@ -293,7 +293,7 @@ describe("persons with significant control GET", () => {
     it("should return error 500 - Internal server error", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetPersonsOfSignificantControl[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getPersonsOfSignificantControl(COMPANY_NUMBER) as ApiErrorResponse;
+        const data: ApiErrorResponse = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");
     });
@@ -323,7 +323,7 @@ describe("Register Location GET", () => {
     it("should return a list of registers and their locations", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetRegisterLocations[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<RegisterLocation[]> = await csService.getRegisterLocations(COMPANY_NUMBER) as Resource<RegisterLocation[]>;
+        const data: Resource<RegisterLocation[]> = await csService.getRegisterLocations(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<RegisterLocation[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource[0].registerTypeDesc).to.equal("Reg Type Desc 1");
         expect(data.resource[0].sailAddress.addressLine1).to.equal("20 Any road");
@@ -333,7 +333,7 @@ describe("Register Location GET", () => {
     it("should return a 500 error - Internal server error", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetRegisterLocations[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getRegisterLocations(COMPANY_NUMBER) as ApiErrorResponse;
+        const data: ApiErrorResponse = await csService.getRegisterLocations(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");
     });
