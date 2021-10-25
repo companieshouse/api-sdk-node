@@ -155,8 +155,8 @@ export default class {
         return resource;
     }
 
-    public async getActiveDirectorDetails (companyNumber: string): Promise<Resource<ActiveDirectorDetails> | ApiErrorResponse> {
-        const url = `${this.getConfirmationStatementUrl(companyNumber)}/active-director-details`;
+    public async getActiveDirectorDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveDirectorDetails> | ApiErrorResponse> {
+        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/active-director-details`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {

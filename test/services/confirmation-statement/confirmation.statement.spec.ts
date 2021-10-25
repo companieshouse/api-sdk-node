@@ -238,7 +238,7 @@ describe("Active officer details GET", () => {
     it("should return active officer details object", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<ActiveDirectorDetails> = await csService.getActiveDirectorDetails(COMPANY_NUMBER) as Resource<ActiveDirectorDetails>;
+        const data: Resource<ActiveDirectorDetails> = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveDirectorDetails>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.dateOfBirth).to.equal(mockValues.mockActiveDirectorDetails.date_of_birth);
@@ -247,7 +247,7 @@ describe("Active officer details GET", () => {
     it("should return error 404 - No active director details were found", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(COMPANY_NUMBER);
+        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors[0]).to.equal("No active director details were found");
@@ -256,7 +256,7 @@ describe("Active officer details GET", () => {
     it("should return error 500 - Internal server error", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(COMPANY_NUMBER);
+        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");
