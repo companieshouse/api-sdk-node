@@ -135,8 +135,8 @@ export default class {
         return resource;
     }
 
-    public async getStatementOfCapital (companyNumber: string): Promise<Resource<StatementOfCapital> | ApiErrorResponse> {
-        const url: string = `${this.getConfirmationStatementUrl(companyNumber)}/statement-of-capital`;
+    public async getStatementOfCapital (transactionId: string, confirmationStatementId: string): Promise<Resource<StatementOfCapital> | ApiErrorResponse> {
+        const url: string = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/statement-of-capital`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
@@ -170,8 +170,8 @@ export default class {
         return resource;
     }
 
-    public async getRegisterLocations (companyNumber: string): Promise<Resource<RegisterLocation[]> | ApiErrorResponse> {
-        const url = `${this.getConfirmationStatementUrl(companyNumber)}/register-locations`;
+    public async getRegisterLocations (transactionId: string, confirmationStatementId: string): Promise<Resource<RegisterLocation[]> | ApiErrorResponse> {
+        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/register-locations`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
@@ -185,8 +185,8 @@ export default class {
         return resource;
     }
 
-    public async getPersonsOfSignificantControl (companyNumber: string): Promise<Resource<PersonOfSignificantControl[]> | ApiErrorResponse> {
-        const url = `${this.getConfirmationStatementUrl(companyNumber)}/persons-of-significant-control`;
+    public async getPersonsOfSignificantControl (transactionId: string, confirmationStatementId: string): Promise<Resource<PersonOfSignificantControl[]> | ApiErrorResponse> {
+        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/persons-of-significant-control`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
