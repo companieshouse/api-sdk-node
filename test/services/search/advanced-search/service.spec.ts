@@ -67,6 +67,7 @@ const mockResponseBody : CompaniesResource = ({
 })
 
 const mockRequestId = "fdskfhsdoifhsffsif";
+const testStartIndex = 0;
 const testCompanyNameIncludes = "INCLUDES";
 const testCompanyNameExcludes = "EXCLUDES"
 const testLocation = "TEST LOCATION";
@@ -99,7 +100,7 @@ describe("create an advanced search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
+        const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testDissolvedFrom, testDissolvedTo, mockRequestId);
 
         expect(data.httpStatusCode).to.equal(401);
@@ -114,7 +115,7 @@ describe("create an advanced search GET", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
+        const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyNameIncludes, testDissolvedFrom, testDissolvedTo, mockRequestId);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];

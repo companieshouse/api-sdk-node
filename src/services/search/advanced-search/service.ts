@@ -5,9 +5,10 @@ import "url-search-params-polyfill";
 
 export default class AdvancedSearchService {
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
+    public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
         incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, dissolvedFrom: string | null,
         dissolvedTo: string | null, requestId: string): Promise<Resource<CompaniesResource>> {
+        const START_INDEX_QUERY = "start_index";
         const COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
         const COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
         const LOCATION_QUERY = "location";
@@ -24,6 +25,10 @@ export default class AdvancedSearchService {
         }
 
         const buildEnhancedSearchURL = new URLSearchParams("/enhanced-search/companies?");
+
+        if (startIndex !== null) {
+            buildEnhancedSearchURL.append(START_INDEX_QUERY, String(startIndex));
+        }
 
         if (companyNameIncludes !== null) {
             buildEnhancedSearchURL.append(COMPANY_NAME_INCLUDES_QUERY, companyNameIncludes)
