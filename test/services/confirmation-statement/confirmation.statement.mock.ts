@@ -1,5 +1,5 @@
 import {
-    ActiveDirectorDetailsResource,
+    ActiveOfficerDetailsResource,
     CompanyValidationResponseResource,
     ConfirmationStatementCreatedResource,
     ConfirmationStatementSubmission,
@@ -88,7 +88,7 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
     }
 };
 
-export const mockActiveDirectorDetails: ActiveDirectorDetailsResource = {
+export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     fore_name_1: "John",
     fore_name_2: "middle name",
     surname: "Doe",
@@ -211,7 +211,7 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
             section_status: SectionStatus.CONFIRMED,
             persons_of_significant_control: []
         },
-        active_director_details_data: { section_status: SectionStatus.CONFIRMED },
+        active_officer_details_data: { section_status: SectionStatus.CONFIRMED },
         registered_office_address_data: { section_status: SectionStatus.CONFIRMED },
         register_locations_data: { section_status: SectionStatus.CONFIRMED },
         statement_of_capital_data: {
@@ -312,8 +312,8 @@ export const mockGetStatementOfCapital = {
     404: { status: 404, error: "No statement of capital data found" }
 };
 
-export const mockGetActiveDirectorDetails = {
-    200: { status: 200, body: mockActiveDirectorDetails },
+export const mockGetActiveOfficerDetails = {
+    200: { status: 200, body: mockActiveOfficerDetails },
     404: { status: 404, error: "No active director details were found" },
     500: { status: 500, error: "Internal server error" }
 };

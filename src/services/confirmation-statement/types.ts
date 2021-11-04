@@ -15,7 +15,7 @@ export interface ConfirmationStatementSubmissionResource {
 }
 
 export interface ConfirmationStatementSubmissionDataResource {
-    active_director_details_data?: ActiveDirectorDetailsDataResource,
+    active_officer_details_data?: ActiveOfficerDetailsDataResource,
     confirmation_statement_made_up_to_date: string,
     persons_significant_control_data?: PersonsOfSignificantControlDataResource,
     register_locations_data?: RegisterLocationsDataResource,
@@ -27,7 +27,7 @@ export interface ConfirmationStatementSubmissionDataResource {
 }
 
 export interface ConfirmationStatementSubmissionData {
-    activeDirectorDetailsData?: ActiveDirectorDetailsData,
+    activeOfficerDetailsData?: ActiveOfficerDetailsData,
     confirmationStatementMadeUpToDate: string,
     personsSignificantControlData?: PersonsOfSignificantControlData,
     registeredOfficeAddressData?: RegisteredOfficeAddressData,
@@ -76,10 +76,10 @@ export interface RegisteredOfficeAddressDataResource extends ConfirmationStateme
 export interface RegisteredOfficeAddressData extends ConfirmationStatementSubmissionSection {
 }
 
-export interface ActiveDirectorDetailsDataResource extends ConfirmationStatementSubmissionSectionResource {
+export interface ActiveOfficerDetailsDataResource extends ConfirmationStatementSubmissionSectionResource {
 }
 
-export interface ActiveDirectorDetailsData extends ConfirmationStatementSubmissionSection {
+export interface ActiveOfficerDetailsData extends ConfirmationStatementSubmissionSection {
 }
 
 export interface ShareholderDataResource extends ConfirmationStatementSubmissionSectionResource {
@@ -155,7 +155,7 @@ export interface StatementOfCapitalResource {
     total_amount_unpaid_for_currency: string;
 }
 
-export interface ActiveDirectorDetails {
+export interface ActiveOfficerDetails {
     foreName1: string;
     foreName2?: string;
     surname: string;
@@ -168,7 +168,7 @@ export interface ActiveDirectorDetails {
     residentialAddress: Address;
 }
 
-export interface ActiveDirectorDetailsResource {
+export interface ActiveOfficerDetailsResource {
     fore_name_1: string;
     fore_name_2?: string;
     surname: string;
