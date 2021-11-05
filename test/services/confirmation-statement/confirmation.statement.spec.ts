@@ -1,5 +1,5 @@
 import {
-    ActiveDirectorDetails,
+    ActiveOfficerDetails,
     CompanyValidationResponse,
     ConfirmationStatementCreated,
     ConfirmationStatementService,
@@ -157,7 +157,7 @@ describe("Update confirmation statement POST", () => {
         expect(updatedConfirmationStatement.data.sicCodeData.sectionStatus).to.equal(mockSubmission.data.sic_code_data.section_status);
         expect(updatedConfirmationStatement.data.sicCodeData.sicCode.code).to.equal(mockSubmission.data.sic_code_data.sic_code.code);
         expect(updatedConfirmationStatement.data.registeredOfficeAddressData.sectionStatus).to.equal(mockSubmission.data.registered_office_address_data.section_status);
-        expect(updatedConfirmationStatement.data.activeDirectorDetailsData.sectionStatus).to.equal(mockSubmission.data.active_director_details_data.section_status);
+        expect(updatedConfirmationStatement.data.activeOfficerDetailsData.sectionStatus).to.equal(mockSubmission.data.active_officer_details_data.section_status);
         expect(updatedConfirmationStatement.data.shareholderData.sectionStatus).to.equal(mockSubmission.data.shareholder_data.section_status);
         expect(updatedConfirmationStatement.data.registerLocationsData.sectionStatus).to.equal(mockSubmission.data.register_locations_data.section_status);
         expect(updatedConfirmationStatement.data.tradingStatusData.tradingStatusAnswer).to.equal(mockSubmission.data.trading_status_data.trading_status_answer);
@@ -236,27 +236,27 @@ describe("statement of capital data GET", () => {
 
 describe("Active officer details GET", () => {
     it("should return active officer details object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[200]);
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: Resource<ActiveDirectorDetails> = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveDirectorDetails>;
+        const data: Resource<ActiveOfficerDetails> = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveOfficerDetails>;
 
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.dateOfBirth).to.equal(mockValues.mockActiveDirectorDetails.date_of_birth);
+        expect(data.resource.dateOfBirth).to.equal(mockValues.mockActiveOfficerDetails.date_of_birth);
     });
 
     it("should return error 404 - No active director details were found", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[404]);
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
+        const data: ApiErrorResponse = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors[0]).to.equal("No active director details were found");
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveDirectorDetails[500]);
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
-        const data: ApiErrorResponse = await csService.getActiveDirectorDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
+        const data: ApiErrorResponse = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");

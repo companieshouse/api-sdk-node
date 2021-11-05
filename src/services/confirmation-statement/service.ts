@@ -1,8 +1,8 @@
 import {
-    ActiveDirectorDetails,
-    ActiveDirectorDetailsResource,
-    ActiveDirectorDetailsData,
-    ActiveDirectorDetailsDataResource,
+    ActiveOfficerDetails,
+    ActiveOfficerDetailsResource,
+    ActiveOfficerDetailsData,
+    ActiveOfficerDetailsDataResource,
     Address,
     AddressResource,
     CompanyValidationResponse,
@@ -155,7 +155,7 @@ export default class {
         return resource;
     }
 
-    public async getActiveDirectorDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveDirectorDetails> | ApiErrorResponse> {
+    public async getActiveOfficerDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveOfficerDetails> | ApiErrorResponse> {
         const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/active-director-details`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
@@ -163,9 +163,9 @@ export default class {
             return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
-        const resource: Resource<ActiveDirectorDetails> = { httpStatusCode: resp.status };
+        const resource: Resource<ActiveOfficerDetails> = { httpStatusCode: resp.status };
 
-        resource.resource = this.mapToActiveDirectorDetails(resp.body);
+        resource.resource = this.mapToActiveOfficerDetails(resp.body);
 
         return resource;
     }
@@ -284,7 +284,7 @@ export default class {
             ...(dataResource.statement_of_capital_data && { statementOfCapitalData: this.mapToStatementOfCapitalData(dataResource.statement_of_capital_data) }),
             ...(dataResource.sic_code_data && { sicCodeData: this.mapToSicCodeData(dataResource.sic_code_data) }),
             ...(dataResource.registered_office_address_data && { registeredOfficeAddressData: this.mapToRegisteredOfficeAddressData(dataResource.registered_office_address_data) }),
-            ...(dataResource.active_director_details_data && { activeDirectorDetailsData: this.mapToActiveDirectorDetailsData(dataResource.active_director_details_data) }),
+            ...(dataResource.active_officer_details_data && { activeOfficerDetailsData: this.mapToActiveOfficerDetailsData(dataResource.active_officer_details_data) }),
             ...(dataResource.shareholder_data && { shareholderData: this.mapToShareholderData(dataResource.shareholder_data) }),
             ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) }),
             ...(dataResource.trading_status_data && { tradingStatusData: this.mapToTradingStatusData(dataResource.trading_status_data) })
@@ -298,7 +298,7 @@ export default class {
             ...(data.statementOfCapitalData && { statement_of_capital_data: this.mapToStatementOfCapitalDataResource(data.statementOfCapitalData) }),
             ...(data.sicCodeData && { sic_code_data: this.mapToSicCodeDataResource(data.sicCodeData) }),
             ...(data.registeredOfficeAddressData && { registered_office_address_data: this.mapToRegisteredOfficeAddressDataResource(data.registeredOfficeAddressData) }),
-            ...(data.activeDirectorDetailsData && { active_director_details_data: this.mapToActiveDirectorDetailsDataResource(data.activeDirectorDetailsData) }),
+            ...(data.activeOfficerDetailsData && { active_officer_details_data: this.mapToActiveOfficerDetailsDataResource(data.activeOfficerDetailsData) }),
             ...(data.shareholderData && { shareholder_data: this.mapToShareholderDataResource(data.shareholderData) }),
             ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) }),
             ...(data.tradingStatusData && { trading_status_data: this.mapToTradingStatusDataResource(data.tradingStatusData) })
@@ -477,7 +477,7 @@ export default class {
         }
     }
 
-    private mapToActiveDirectorDetails (apiResource: ActiveDirectorDetailsResource): ActiveDirectorDetails {
+    private mapToActiveOfficerDetails (apiResource: ActiveOfficerDetailsResource): ActiveOfficerDetails {
         return {
             foreName1: apiResource.fore_name_1,
             foreName2: apiResource.fore_name_2,
@@ -518,15 +518,15 @@ export default class {
         }
     }
 
-    private mapToActiveDirectorDetailsDataResource (activeDirectorDetailsData: ActiveDirectorDetailsData): ActiveDirectorDetailsDataResource {
+    private mapToActiveOfficerDetailsDataResource (activeOfficerDetailsData: ActiveOfficerDetailsData): ActiveOfficerDetailsDataResource {
         return {
-            section_status: activeDirectorDetailsData.sectionStatus
+            section_status: activeOfficerDetailsData.sectionStatus
         }
     }
 
-    private mapToActiveDirectorDetailsData (activeDirectorDetailsDataResource: ActiveDirectorDetailsDataResource): ActiveDirectorDetailsData {
+    private mapToActiveOfficerDetailsData (activeOfficerDetailsDataResource: ActiveOfficerDetailsDataResource): ActiveOfficerDetailsData {
         return {
-            sectionStatus: activeDirectorDetailsDataResource.section_status
+            sectionStatus: activeOfficerDetailsDataResource.section_status
         }
     }
 
