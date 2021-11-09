@@ -98,7 +98,8 @@ export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     date_of_appointment: "1 January 2009",
     country_of_residence: "Country",
     service_address: mockAddress1,
-    residential_address: mockAddress2
+    residential_address: mockAddress2,
+    officer_type: "NATURAL DIRECTOR"
 }
 
 export const mockPersonsWithSignificantControlList: PersonOfSignificantControlResource[] = [

@@ -166,6 +166,7 @@ export interface ActiveOfficerDetails {
     countryOfResidence: string;
     serviceAddress: Address;
     residentialAddress: Address;
+    officerType: string;
 }
 
 export interface ActiveOfficerDetailsResource {
@@ -179,6 +180,7 @@ export interface ActiveOfficerDetailsResource {
     country_of_residence: string;
     service_address: AddressResource;
     residential_address: AddressResource;
+    officer_type: string;
 }
 
 export interface RegisterLocation {
