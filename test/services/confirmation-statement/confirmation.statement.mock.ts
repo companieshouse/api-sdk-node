@@ -99,7 +99,7 @@ export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     country_of_residence: "Country",
     service_address: mockAddress1,
     residential_address: mockAddress2,
-    corporate: false,
+    is_corporate: false,
     role: "SECRETARY",
     place_registered: "UNITED KINGDOM",
     registration_number: "012345678",

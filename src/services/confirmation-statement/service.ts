@@ -489,7 +489,7 @@ export default class {
             countryOfResidence: apiResource.country_of_residence,
             ...(apiResource.service_address && { serviceAddress: this.mapToAddress(apiResource.service_address) }),
             ...(apiResource.residential_address && { residentialAddress: this.mapToAddress(apiResource.residential_address) }),
-            corporate: apiResource.corporate,
+            isCorporate: apiResource.is_corporate,
             role: apiResource.role,
             placeRegistered: apiResource.place_registered,
             registrationNumber: apiResource.registration_number,

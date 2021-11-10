@@ -166,7 +166,7 @@ export interface ActiveOfficerDetails {
     countryOfResidence: string;
     serviceAddress: Address;
     residentialAddress: Address;
-    corporate: boolean;
+    isCorporate: boolean;
     role: string;
     placeRegistered: string;
     registrationNumber: string;
@@ -186,7 +186,7 @@ export interface ActiveOfficerDetailsResource {
     country_of_residence: string;
     service_address: AddressResource;
     residential_address: AddressResource;
-    corporate: boolean;
+    is_corporate: boolean;
     role: string;
     place_registered: string;
     registration_number: string;
