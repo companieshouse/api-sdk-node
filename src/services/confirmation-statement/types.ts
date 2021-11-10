@@ -168,11 +168,11 @@ export interface ActiveOfficerDetails {
     residentialAddress: Address;
     isCorporate: boolean;
     role: string;
-    placeRegistered: string;
-    registrationNumber: string;
-    lawGoverned: string;
-    legalForm: string;
-    identificationType: string;
+    placeRegistered?: string;
+    registrationNumber?: string;
+    lawGoverned?: string;
+    legalForm?: string;
+    identificationType?: string;
 }
 
 export interface ActiveOfficerDetailsResource {
