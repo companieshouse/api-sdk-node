@@ -414,7 +414,7 @@ describe("create a certificate POST", () => {
                 includeOccupation: true
             },
             surname: "surname",
-            includeLiquidatorsDetails: {
+            liquidatorsDetails: {
                 includeBasicInformation: true
             }
         },
@@ -604,7 +604,7 @@ describe("update a certificate PATCH", () => {
                 includeOccupation: true
             },
             surname: "surname",
-            includeLiquidatorsDetails: {
+            liquidatorsDetails: {
                 includeBasicInformation: true
             }
         },

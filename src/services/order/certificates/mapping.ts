@@ -57,7 +57,7 @@ export default class CertificateMapping {
                 this.mapPartnerDetailsRequestToPartnerDetailsResource(itemOptions.limitedPartnerDetails);
 
         const liquidatorsDetails =
-            this.mapLiquidatorDetailsRequestToLiquidatorsDetailsResource(itemOptions.includeLiquidatorsDetails);
+            this.mapLiquidatorDetailsRequestToLiquidatorsDetailsResource(itemOptions.liquidatorsDetails);
 
         return {
             customer_reference: certificateItemRequest.customerReference,

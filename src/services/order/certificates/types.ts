@@ -253,7 +253,7 @@ export interface ItemOptionsRequest {
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
     companyType?: string;
-    includeLiquidatorsDetails?: LiquidatorsDetailsRequest
+    liquidatorsDetails?: LiquidatorsDetailsRequest
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
