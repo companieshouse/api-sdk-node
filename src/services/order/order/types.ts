@@ -115,6 +115,9 @@ export interface CertificateItemOptions {
     };
     forename: string;
     surname: string;
+    liquidatorsDetails: {
+        includeBasicInformation?: boolean;
+    }
 }
 
 export interface CertifiedCopyItemOptions {
@@ -259,6 +262,9 @@ export interface CertificateItemOptionsResource {
     };
     forename: string;
     surname: string;
+    liquidators_details: {
+        include_basic_information?: boolean;
+    }
 }
 
 export interface CertifiedCopyItemOptionsResource {
@@ -287,12 +293,3 @@ export interface MissingImageDeliveryItemOptionsResource {
 export type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource
    | MissingImageDeliveryItemOptionsResource;
 
-export interface DirectorOrSecretaryDetails {
-    includeBasicInformation?: boolean;
-    includeAddress?: boolean;
-    includeAppointmentDate?: boolean;
-    includeCountryOfResidence?: boolean;
-    includeNationality?: boolean;
-    includeOccupation?: boolean;
-    includeDobType?: string;
-}
