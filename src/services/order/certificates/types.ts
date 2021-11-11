@@ -49,6 +49,7 @@ export interface ItemOptionsResource {
     registered_office_address_details: RegisteredOfficeAddressDetailsResource;
     secretary_details: DirectorOrSecretaryDetailsResource;
     surname: string;
+    liquidators_details: LiquidatorsDetailsResource;
 }
 
 export interface DirectorOrSecretaryDetailsResource {
@@ -86,14 +87,20 @@ export interface OrdinaryMemberDetailsResource extends MemberDetailsResource {
 export interface DesignatedMemberDetailsResource extends MemberDetailsResource {
 }
 
-export interface PartnerDetailsResource {
+export interface BasicInformationResource {
     include_basic_information?: boolean;
+}
+
+export interface PartnerDetailsResource extends BasicInformationResource {
 }
 
 export interface GeneralPartnerDetailsResource extends PartnerDetailsResource {
 }
 
 export interface LimitedPartnerDetailsResource extends PartnerDetailsResource {
+}
+
+export interface LiquidatorsDetailsResource extends BasicInformationResource {
 }
 
 export interface LinksResource {
@@ -151,6 +158,7 @@ export interface ItemOptions {
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetails;
     secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
+    liquidatorsDetails: LiquidatorsDetails;
 }
 
 export interface DirectorOrSecretaryDetails {
@@ -188,14 +196,20 @@ export interface OrdinaryMemberDetails extends MemberDetails {
 export interface DesignatedMemberDetails extends MemberDetails {
 }
 
-export interface PartnerDetails {
+export interface BasicInformation {
     includeBasicInformation?: boolean;
+}
+
+export interface PartnerDetails extends BasicInformation {
 }
 
 export interface GeneralPartnerDetails extends PartnerDetails {
 }
 
 export interface LimitedPartnerDetails extends PartnerDetails {
+}
+
+export interface LiquidatorsDetails extends BasicInformation {
 }
 
 export interface Links {
@@ -239,6 +253,7 @@ export interface ItemOptionsRequest {
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
     companyType?: string;
+    includeLiquidatorsDetails?: LiquidatorsDetailsRequest
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
@@ -276,14 +291,20 @@ export interface OrdinaryMemberDetailsRequest extends MemberDetailsRequest {
 export interface DesignatedMemberDetailsRequest extends MemberDetailsRequest {
 }
 
-export interface PartnerDetailsRequest {
+export interface BasicInformationRequest {
     includeBasicInformation?: boolean | null;
+}
+
+export interface PartnerDetailsRequest extends BasicInformationRequest {
 }
 
 export interface GeneralPartnerDetailsRequest extends PartnerDetailsRequest {
 }
 
 export interface LimitedPartnerDetailsRequest extends PartnerDetailsRequest {
+}
+
+export interface LiquidatorsDetailsRequest extends BasicInformationRequest {
 }
 
 // CertificateItemRequestResource
