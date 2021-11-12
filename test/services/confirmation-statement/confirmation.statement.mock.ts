@@ -98,14 +98,7 @@ export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     date_of_appointment: "1 January 2009",
     country_of_residence: "Country",
     service_address: mockAddress1,
-    residential_address: mockAddress2,
-    is_corporate: false,
-    role: "SECRETARY",
-    place_registered: "UNITED KINGDOM",
-    registration_number: "012345678",
-    law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
-    legal_form: "INTERNATIONAL BUSINESS COMPANY",
-    identification_type: "Y"
+    residential_address: mockAddress2
 }
 
 export const mockPersonsWithSignificantControlList: PersonOfSignificantControlResource[] = [
