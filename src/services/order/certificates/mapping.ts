@@ -272,7 +272,7 @@ export default class CertificateMapping {
         return Object.values(liquidatorsDetails).some((value) => value !== undefined) ? liquidatorsDetails : undefined;
     }
 
-    private static mapLiquidatorDetailsRequestToLiquidatorsDetailsResource(request: LiquidatorsDetailsRequest) : LiquidatorsDetailsResource {
+    private static mapLiquidatorDetailsRequestToLiquidatorsDetailsResource (request: LiquidatorsDetailsRequest) : LiquidatorsDetailsResource {
         const resource: LiquidatorsDetailsResource = {
             include_basic_information: request?.includeBasicInformation
         };

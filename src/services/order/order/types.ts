@@ -292,4 +292,3 @@ export interface MissingImageDeliveryItemOptionsResource {
 
 export type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource
    | MissingImageDeliveryItemOptionsResource;
-

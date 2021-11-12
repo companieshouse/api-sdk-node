@@ -389,7 +389,7 @@ describe("order", () => {
             expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
             expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
-            expect(itemOptions.liquidatorsDetails).to.deep.equal({ includeBasicInformation: false } );
+            expect(itemOptions.liquidatorsDetails).to.deep.equal({ includeBasicInformation: false });
         });
 
         it("should map certified copy item option fields correctly", async () => {
