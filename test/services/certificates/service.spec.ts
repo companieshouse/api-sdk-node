@@ -6,7 +6,6 @@ import chaiHttp from "chai-http";
 import CertificateService from "../../../src/services/order/certificates/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { CertificateItemResource, CertificateItemPostRequest, CertificateItemPatchRequest } from "../../../src/services/order/certificates/types";
-import exp = require("constants");
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
