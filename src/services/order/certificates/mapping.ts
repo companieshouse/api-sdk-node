@@ -1,6 +1,6 @@
 
 import {
-    CertificateItem, CertificateItemResource, ItemOptionsResource,
+    CertificateItem, CertificateItemResource,
     ItemCostsResource, CertificateItemPostRequest, CertificateItemRequestResource,
     ItemOptionsRequest, CertificateItemPatchRequest, DirectorOrSecretaryDetails, DirectorOrSecretaryDetailsResource,
     RegisteredOfficeAddressDetailsResource, RegisteredOfficeAddressDetails, DirectorOrSecretaryDetailsRequest,
@@ -21,7 +21,10 @@ import {
     PartnerDetails,
     PrincipalPlaceOfBusinessDetails,
     OrdinaryMemberDetails,
-    LimitedPartnerDetails
+    LimitedPartnerDetails,
+    LiquidatorsDetails,
+    LiquidatorsDetailsRequest,
+    LiquidatorsDetailsResource
 } from "./types";
 
 export default class CertificateMapping {
@@ -52,6 +55,10 @@ export default class CertificateMapping {
 
         const limitedPartnerDetails: LimitedPartnerDetailsResource =
                 this.mapPartnerDetailsRequestToPartnerDetailsResource(itemOptions.limitedPartnerDetails);
+
+        const liquidatorsDetails =
+            this.mapLiquidatorDetailsRequestToLiquidatorsDetailsResource(itemOptions.liquidatorsDetails);
+
         return {
             customer_reference: certificateItemRequest.customerReference,
             company_number: certificateItemRequest.companyNumber,
@@ -75,14 +82,15 @@ export default class CertificateMapping {
                 registered_office_address_details: registeredOfficeAddressDetails,
                 secretary_details: secretaryDetails,
                 surname: itemOptions.surname,
-                company_type: itemOptions.companyType
+                company_type: itemOptions.companyType,
+                liquidators_details: liquidatorsDetails
             },
             quantity: certificateItemRequest.quantity
         };
     }
 
     public static mapCertificateItemResourceToCertificateItem (body: CertificateItemResource): CertificateItem {
-        const io = body.item_options as ItemOptionsResource;
+        const io = body.item_options;
 
         const directorDetails: DirectorOrSecretaryDetails =
                 this.mapDirectorOrSecretaryDetailsResourceToDirectorOrSecretaryDetails(io.director_details);
@@ -108,7 +116,9 @@ export default class CertificateMapping {
         const limitedPartnerDetails: LimitedPartnerDetails =
                 this.mapPartnerDetailsResourceToPartnerDetails(io.limited_partner_details);
 
-        const certificateItem: CertificateItem = {
+        const liquidatorsDetails = this.mapLiquidatorDetailsResourceToLiquidatorsDetails(io.liquidators_details);
+
+        return {
             companyName: body.company_name,
             companyNumber: body.company_number,
             customerReference: body.customer_reference,
@@ -143,7 +153,8 @@ export default class CertificateMapping {
                 principalPlaceOfBusinessDetails,
                 registeredOfficeAddressDetails,
                 secretaryDetails,
-                surname: io.surname
+                surname: io.surname,
+                liquidatorsDetails
             },
             kind: body.kind,
             links: {
@@ -153,9 +164,7 @@ export default class CertificateMapping {
             postalDelivery: body.postal_delivery,
             quantity: body.quantity,
             totalItemCost: body.total_item_cost
-        };
-        const cleanCertificateItem: CertificateItem = certificateItem;
-        return cleanCertificateItem;
+        }
     }
 
     private static mapDirectorOrSecretaryDetailsRequestDirectorOrSecretaryDetailsResource (
@@ -254,5 +263,19 @@ export default class CertificateMapping {
             includeBasicInformation: resource?.include_basic_information
         };
         return Object.values(partnerDetails).some((value) => value !== undefined) ? partnerDetails : undefined;
+    }
+
+    private static mapLiquidatorDetailsResourceToLiquidatorsDetails (resource: LiquidatorsDetailsResource): LiquidatorsDetails {
+        const liquidatorsDetails: LiquidatorsDetails = {
+            includeBasicInformation: resource?.include_basic_information
+        };
+        return Object.values(liquidatorsDetails).some((value) => value !== undefined) ? liquidatorsDetails : undefined;
+    }
+
+    private static mapLiquidatorDetailsRequestToLiquidatorsDetailsResource (request: LiquidatorsDetailsRequest) : LiquidatorsDetailsResource {
+        const resource: LiquidatorsDetailsResource = {
+            include_basic_information: request?.includeBasicInformation
+        };
+        return Object.values(resource).some((value) => value !== undefined) ? resource : undefined;
     }
 }

@@ -7,7 +7,7 @@ import { MemberDetails } from "../certificates";
 
 export default class OrderMapping {
     public static mapOrderResourceToOrder (orderResource: OrderResource): Order {
-        const order: Order = {
+        return {
             deliveryDetails: {
                 addressLine1: orderResource?.delivery_details?.address_line_1,
                 addressLine2: orderResource?.delivery_details?.address_line_2,
@@ -36,7 +36,6 @@ export default class OrderMapping {
             reference: orderResource.reference,
             totalOrderCost: orderResource.total_order_cost
         }
-        return order;
     }
 
     private static mapItemResourceToItem (itemResource: ItemResource): Item {
@@ -117,6 +116,10 @@ export default class OrderMapping {
                 includeBasicInformation: itemResource?.limited_partner_details?.include_basic_information
             });
 
+            const liquidatorsDetails = this.removeEmptyObjects({
+                includeBasicInformation: itemResource?.liquidators_details?.include_basic_information
+            });
+
             return {
                 certificateType: itemResource.certificate_type,
                 companyType: itemResource.company_type,
@@ -134,7 +137,8 @@ export default class OrderMapping {
                 secretaryDetails: secretaryDetails,
                 directorDetails: directorDetails,
                 forename: itemResource.forename,
-                surname: itemResource.surname
+                surname: itemResource.surname,
+                liquidatorsDetails
             }
         } else if (kind === "item#certified-copy") {
             itemResource = itemResource as CertifiedCopyItemOptionsResource;
