@@ -24,55 +24,55 @@ export default class AdvancedSearchService {
             "Content-Type": "application/json"
         }
 
-        const buildEnhancedSearchURL = new URLSearchParams("/enhanced-search/companies?");
+        const buildAdvancedSearchURL = new URLSearchParams("/advanced-search/companies?");
 
         if (startIndex !== null) {
-            buildEnhancedSearchURL.append(START_INDEX_QUERY, String(startIndex));
+            buildAdvancedSearchURL.append(START_INDEX_QUERY, String(startIndex));
         }
 
         if (companyNameIncludes !== null) {
-            buildEnhancedSearchURL.append(COMPANY_NAME_INCLUDES_QUERY, companyNameIncludes)
+            buildAdvancedSearchURL.append(COMPANY_NAME_INCLUDES_QUERY, companyNameIncludes)
         }
 
         if (companyNameExcludes !== null) {
-            buildEnhancedSearchURL.append(COMPANY_NAME_EXCLUDES_QUERY, companyNameExcludes)
+            buildAdvancedSearchURL.append(COMPANY_NAME_EXCLUDES_QUERY, companyNameExcludes)
         }
 
         if (location !== null) {
-            buildEnhancedSearchURL.append(LOCATION_QUERY, location)
+            buildAdvancedSearchURL.append(LOCATION_QUERY, location)
         }
 
         if (incorporatedFrom !== null) {
-            buildEnhancedSearchURL.append(INCORPORATED_FROM_QUERY, incorporatedFrom)
+            buildAdvancedSearchURL.append(INCORPORATED_FROM_QUERY, incorporatedFrom)
         }
 
         if (incorporatedTo !== null) {
-            buildEnhancedSearchURL.append(INCORPORATED_TO_QUERY, incorporatedTo)
+            buildAdvancedSearchURL.append(INCORPORATED_TO_QUERY, incorporatedTo)
         }
 
         if (sicCodes !== null) {
-            buildEnhancedSearchURL.append(SIC_CODES_QUERY, sicCodes)
+            buildAdvancedSearchURL.append(SIC_CODES_QUERY, sicCodes)
         }
 
         if (companyStatus !== null) {
-            buildEnhancedSearchURL.append(COMPANY_STATUS_QUERY, companyStatus);
+            buildAdvancedSearchURL.append(COMPANY_STATUS_QUERY, companyStatus);
         }
 
         if (companyType !== null) {
-            buildEnhancedSearchURL.append(COMPANY_TYPE_QUERY, companyType)
+            buildAdvancedSearchURL.append(COMPANY_TYPE_QUERY, companyType)
         }
 
         if (dissolvedFrom !== null) {
-            buildEnhancedSearchURL.append(DISSOLVED_FROM_QUERY_PARAMETER, dissolvedFrom)
+            buildAdvancedSearchURL.append(DISSOLVED_FROM_QUERY_PARAMETER, dissolvedFrom)
         }
 
         if (dissolvedTo !== null) {
-            buildEnhancedSearchURL.append(DISSOLVED_TO_QUERY_PARAMETER, dissolvedTo)
+            buildAdvancedSearchURL.append(DISSOLVED_TO_QUERY_PARAMETER, dissolvedTo)
         }
 
-        const enhancedSearchUrl = buildEnhancedSearchURL.toString();
+        const advancedSearchUrl = buildAdvancedSearchURL.toString();
 
-        const resp = await this.client.httpGet(enhancedSearchUrl, additionalHeaders);
+        const resp = await this.client.httpGet(advancedSearchUrl, additionalHeaders);
 
         const resource: Resource<CompaniesResource> = {
             httpStatusCode: resp.status
