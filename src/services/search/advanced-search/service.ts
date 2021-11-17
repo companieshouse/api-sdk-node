@@ -7,7 +7,7 @@ export default class AdvancedSearchService {
     constructor (private readonly client: IHttpClient) { }
     public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
         incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, dissolvedFrom: string | null,
-        dissolvedTo: string | null, requestId: string): Promise<Resource<CompaniesResource>> {
+        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
         const START_INDEX_QUERY = "start_index";
         const COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
         const COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
@@ -18,7 +18,8 @@ export default class AdvancedSearchService {
         const COMPANY_STATUS_QUERY = "company_status";
         const COMPANY_TYPE_QUERY = "company_type";
         const DISSOLVED_FROM_QUERY_PARAMETER = "dissolved_from";
-        const DISSOLVED_TO_QUERY_PARAMETER = "dissolved_to"
+        const DISSOLVED_TO_QUERY_PARAMETER = "dissolved_to";
+        const SIZE_QUERY_PARAMETER = "size";
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
@@ -68,6 +69,10 @@ export default class AdvancedSearchService {
 
         if (dissolvedTo !== null) {
             buildAdvancedSearchURL.append(DISSOLVED_TO_QUERY_PARAMETER, dissolvedTo)
+        }
+
+        if (size !== null) {
+            buildAdvancedSearchURL.append(SIZE_QUERY_PARAMETER, String(size))
         }
 
         const advancedSearchUrl = buildAdvancedSearchURL.toString();

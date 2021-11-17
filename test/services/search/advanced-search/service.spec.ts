@@ -79,6 +79,7 @@ const testCompanyType = "TEST COMPANY TYPE";
 const testDissolvedFrom = "TEST DISSOLVED FROM";
 const testDissolvedTo = "TEST DISSOLVED TO";
 const searchType = "advanced";
+const size = 20;
 
 describe("create an advanced search GET", () => {
     beforeEach(() => {
@@ -101,7 +102,7 @@ describe("create an advanced search GET", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
-            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testDissolvedFrom, testDissolvedTo, mockRequestId);
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
@@ -116,7 +117,7 @@ describe("create an advanced search GET", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
-            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyNameIncludes, testDissolvedFrom, testDissolvedTo, mockRequestId);
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyNameIncludes, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];
 
