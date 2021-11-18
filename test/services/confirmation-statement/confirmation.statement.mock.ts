@@ -108,6 +108,47 @@ export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     identification_type: "Y"
 }
 
+export const mockListActiveOfficerDetails: ActiveOfficerDetailsResource[] = [
+    {
+        fore_name_1: "John",
+        fore_name_2: "middle name",
+        surname: "Doe",
+        occupation: "singer",
+        nationality: "British",
+        date_of_birth: "1 January 1960",
+        date_of_appointment: "1 January 2009",
+        country_of_residence: "Country",
+        service_address: mockAddress1,
+        residential_address: mockAddress2,
+        is_corporate: false,
+        role: "SECRETARY",
+        place_registered: "UNITED KINGDOM",
+        registration_number: "012345678",
+        law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
+        legal_form: "INTERNATIONAL BUSINESS COMPANY",
+        identification_type: "Y"
+    },
+    {
+        fore_name_1: "John",
+        fore_name_2: "middle name",
+        surname: "Doe",
+        occupation: "singer",
+        nationality: "British",
+        date_of_birth: "1 January 1960",
+        date_of_appointment: "1 January 2009",
+        country_of_residence: "Country",
+        service_address: mockAddress1,
+        residential_address: mockAddress2,
+        is_corporate: false,
+        role: "SECRETARY",
+        place_registered: "UNITED KINGDOM",
+        registration_number: "012345678",
+        law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
+        legal_form: "INTERNATIONAL BUSINESS COMPANY",
+        identification_type: "Y"
+    }
+]
+
 export const mockPersonsWithSignificantControlList: PersonOfSignificantControlResource[] = [
     {
         name_elements: {
@@ -322,6 +363,12 @@ export const mockGetStatementOfCapital = {
 export const mockGetActiveOfficerDetails = {
     200: { status: 200, body: mockActiveOfficerDetails },
     404: { status: 404, error: "No active director details were found" },
+    500: { status: 500, error: "Internal server error" }
+};
+
+export const mockGetListActiveOfficersDetails = {
+    200: { status: 200, body: mockListActiveOfficerDetails },
+    404: { status: 404, error: "No active officers details were found" },
     500: { status: 500, error: "Internal server error" }
 };
 

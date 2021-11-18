@@ -263,6 +263,35 @@ describe("Active officer details GET", () => {
     });
 });
 
+describe("List active officers details GET", () => {
+    it("should return active officer details object", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[200]);
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const data: Resource<ActiveOfficerDetails[]> = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveOfficerDetails[]>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource[1].dateOfBirth).to.equal(mockValues.mockActiveOfficerDetails.date_of_birth);
+    });
+
+    it("should return error 404 - No active director details were found", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[404]);
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const data: ApiErrorResponse = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
+
+        expect(data.httpStatusCode).to.equal(404);
+        expect(data.errors[0]).to.equal("No active officers details were found");
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[500]);
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const data: ApiErrorResponse = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors[0]).to.equal("Internal server error");
+    });
+});
+
 describe("persons with significant control GET", () => {
     it("should return a list of persons with significant control", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetPersonsOfSignificantControl[200]);
