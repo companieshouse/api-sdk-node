@@ -498,22 +498,22 @@ export default class {
             const officerResource: ActiveOfficerDetailsResource = officerResourceList[index];
             officerList[index] = {
                 foreName1: officerResource.fore_name_1,
-            foreName2: officerResource.fore_name_2,
-            surname: officerResource.surname,
-            occupation: officerResource.occupation,
-            nationality: officerResource.nationality,
-            dateOfBirth: officerResource.date_of_birth,
-            dateOfAppointment: officerResource.date_of_appointment,
-            countryOfResidence: officerResource.country_of_residence,
-            ...(officerResource.service_address && { serviceAddress: this.mapToAddress(officerResource.service_address) }),
-            ...(officerResource.residential_address && { residentialAddress: this.mapToAddress(officerResource.residential_address) }),
-            isCorporate: officerResource.is_corporate,
-            role: officerResource.role,
-            placeRegistered: officerResource.place_registered,
-            registrationNumber: officerResource.registration_number,
-            lawGoverned: officerResource.law_governed,
-            legalForm: officerResource.legal_form,
-            identificationType: officerResource.identification_type
+                foreName2: officerResource.fore_name_2,
+                surname: officerResource.surname,
+                occupation: officerResource.occupation,
+                nationality: officerResource.nationality,
+                dateOfBirth: officerResource.date_of_birth,
+                dateOfAppointment: officerResource.date_of_appointment,
+                countryOfResidence: officerResource.country_of_residence,
+                ...(officerResource.service_address && { serviceAddress: this.mapToAddress(officerResource.service_address) }),
+                ...(officerResource.residential_address && { residentialAddress: this.mapToAddress(officerResource.residential_address) }),
+                isCorporate: officerResource.is_corporate,
+                role: officerResource.role,
+                placeRegistered: officerResource.place_registered,
+                registrationNumber: officerResource.registration_number,
+                lawGoverned: officerResource.law_governed,
+                legalForm: officerResource.legal_form,
+                identificationType: officerResource.identification_type
             }
         }
         return officerList;
