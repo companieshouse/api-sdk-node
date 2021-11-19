@@ -171,7 +171,7 @@ export default class {
     }
 
     public async getListActiveOfficerDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveOfficerDetails[]> | ApiErrorResponse> {
-        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/active-officer-details`;
+        const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/active-officers-details`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
