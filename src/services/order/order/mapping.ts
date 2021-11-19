@@ -138,7 +138,7 @@ export default class OrderMapping {
                 directorDetails: directorDetails,
                 forename: itemResource.forename,
                 surname: itemResource.surname,
-                liquidatorsDetails
+                liquidatorsDetails: liquidatorsDetails
             }
         } else if (kind === "item#certified-copy") {
             itemResource = itemResource as CertifiedCopyItemOptionsResource;
