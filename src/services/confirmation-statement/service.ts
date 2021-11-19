@@ -170,7 +170,7 @@ export default class {
         return resource;
     }
 
-    public async getListActiveOfficerDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveOfficerDetails> | ApiErrorResponse> {
+    public async getListActiveOfficerDetails (transactionId: string, confirmationStatementId: string): Promise<Resource<ActiveOfficerDetails[]> | ApiErrorResponse> {
         const url = `${this.getConfirmationStatementUrlIncTransactionId(transactionId)}/${confirmationStatementId}/active-officer-details`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
