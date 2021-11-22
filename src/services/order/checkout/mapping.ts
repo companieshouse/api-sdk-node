@@ -119,6 +119,10 @@ export default class CheckoutMapping {
                 includeBasicInformation: itemResource?.limited_partner_details?.include_basic_information
             });
 
+            const liquidatorsDetails = this.removeEmptyObjects({
+                includeBasicInformation: itemResource?.liquidators_details?.include_basic_information
+            });
+
             return {
                 certificateType: itemResource.certificate_type,
                 companyType: itemResource.company_type,
@@ -136,7 +140,8 @@ export default class CheckoutMapping {
                 secretaryDetails: secretaryDetails,
                 directorDetails: directorDetails,
                 forename: itemResource.forename,
-                surname: itemResource.surname
+                surname: itemResource.surname,
+                liquidatorsDetails: liquidatorsDetails
             }
         } else if (kind === "item#certified-copy") {
             itemResource = itemResource as CertifiedCopyItemOptionsResource;

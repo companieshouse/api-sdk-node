@@ -117,6 +117,9 @@ export interface CertificateItemOptions {
     };
     forename: string;
     surname: string;
+    liquidatorsDetails: {
+        includeBasicInformation?: boolean;
+    }
 }
 
 export interface CertifiedCopyItemOptions {
@@ -263,6 +266,9 @@ export interface CertificateItemOptionsResource {
     };
     forename: string;
     surname: string;
+    liquidators_details: {
+        include_basic_information?: boolean;
+    }
 }
 
 export interface CertifiedCopyItemOptionsResource {
