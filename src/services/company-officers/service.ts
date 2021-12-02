@@ -14,8 +14,16 @@ export default class CompanyOfficersService {
    *
    * @param number the company number to look up
    */
-    public async getCompanyOfficers (number: string): Promise<Resource<CompanyOfficers>> {
-        const resp = await this.client.httpGet(`/company/${number}/officers`);
+    public async getCompanyOfficers (number: string, pageSize: number = 35, pageIndex: number = 0, registerView: boolean = false): Promise<Resource<CompanyOfficers>> {
+        let url = `/company/${number}/officers`;
+        url = url.concat("?",
+            `page_size=${pageSize}`,
+            "&",
+            `page_index=${pageIndex}`,
+            "&",
+            `register_view=${registerView}`);
+
+        const resp = await this.client.httpGet(url);
 
         const resource: Resource<CompanyOfficers> = {
             httpStatusCode: resp.status
