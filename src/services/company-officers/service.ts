@@ -13,8 +13,14 @@ export default class CompanyOfficersService {
    * Get the officers for a company.
    *
    * @param number the company number to look up
+   * @param pageSize the number of officers to show on the page
+   * @param pageIndex the start position of the page
+   * @param registerView Display register specific information. If given register is held at Companies House,
+   * registers_view set to true and correct register_type specified, only active officers will be returned.
+   * Those will also have full date of birth.Defaults to false
+   * @param orderBy the field by which to order the result set
    */
-    public async getCompanyOfficers (number: string, pageSize: number = 35, pageIndex: number = 0, registerView: boolean = false): Promise<Resource<CompanyOfficers>> {
+    public async getCompanyOfficers (number: string, pageSize: number = 35, pageIndex: number = 0, registerView: boolean = false, orderBy?: string): Promise<Resource<CompanyOfficers>> {
         let url = `/company/${number}/officers`;
         url = url.concat("?",
             `page_size=${pageSize}`,
@@ -22,6 +28,9 @@ export default class CompanyOfficersService {
             `page_index=${pageIndex}`,
             "&",
             `register_view=${registerView}`);
+        if (orderBy) {
+            url = url.concat(`&order_by=${orderBy}`);
+        }
 
         const resp = await this.client.httpGet(url);
 

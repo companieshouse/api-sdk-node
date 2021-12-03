@@ -155,24 +155,23 @@ describe("company-officers", () => {
     });
 
     it("should pass url with default parameters when undefined", async () => {
-        const mockGetResponse = {
-            status: 200,
-            body: {}
-        };
         const spy = sinon.spy(requestClient, "httpGet");
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
-        const data = await companyOfficers.getCompanyOfficers("123");
+        await companyOfficers.getCompanyOfficers("123");
         expect(spy.calledWith("/company/123/officers?page_size=35&page_index=0&register_view=false")).to.equal(true);
     });
 
     it("should pass url with specified parameters", async () => {
-        const mockGetResponse = {
-            status: 200,
-            body: {}
-        };
         const spy = sinon.spy(requestClient, "httpGet");
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
-        const data = await companyOfficers.getCompanyOfficers("123", 10, 2, true);
+        await companyOfficers.getCompanyOfficers("123", 10, 2, true);
         expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true")).to.equal(true);
+    });
+
+    it("should pass url with orderBy parameter", async () => {
+        const spy = sinon.spy(requestClient, "httpGet");
+        const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
+        await companyOfficers.getCompanyOfficers("123", 10, 2, true, "resigned_on");
+        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on")).to.equal(true);
     });
 });
