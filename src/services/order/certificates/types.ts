@@ -220,22 +220,25 @@ export interface Links {
 
 // CertificateItemPostRequest
 export interface CertificateItemPostRequest {
-    companyNumber?: string;
+    companyNumber: string;
     customerReference?: string;
     itemOptions: ItemOptionsRequest;
     quantity: number;
 }
 
+// CertificateItemInitialRequest
+export interface CertificateItemInitialRequest {
+    companyNumber: string;
+}
+
 // CertificateItemPatchRequest
 export interface CertificateItemPatchRequest {
-  companyNumber?: string;
   customerReference?: string;
-  itemOptions: ItemOptionsRequest;
+  itemOptions?: ItemOptionsRequest;
   quantity?: number;
 }
 
 export interface ItemOptionsRequest {
-    certificateType?: string;
     collectionLocation?: string;
     contactNumber?: string;
     deliveryMethod?: string;
@@ -254,9 +257,7 @@ export interface ItemOptionsRequest {
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetailsRequest;
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
-    companyType?: string;
     liquidatorsDetails?: LiquidatorsDetailsRequest;
-    companyStatus?: string;
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
