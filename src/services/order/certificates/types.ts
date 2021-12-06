@@ -50,6 +50,7 @@ export interface ItemOptionsResource {
     secretary_details: DirectorOrSecretaryDetailsResource;
     surname: string;
     liquidators_details: LiquidatorsDetailsResource;
+    company_status: string;
 }
 
 export interface DirectorOrSecretaryDetailsResource {
@@ -159,6 +160,7 @@ export interface ItemOptions {
     secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
     liquidatorsDetails: LiquidatorsDetails;
+    companyStatus: string;
 }
 
 export interface DirectorOrSecretaryDetails {
@@ -253,7 +255,8 @@ export interface ItemOptionsRequest {
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
     companyType?: string;
-    liquidatorsDetails?: LiquidatorsDetailsRequest
+    liquidatorsDetails?: LiquidatorsDetailsRequest;
+    companyStatus?: string;
 }
 
 export interface DirectorOrSecretaryDetailsRequest {

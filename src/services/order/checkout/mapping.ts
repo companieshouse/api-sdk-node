@@ -141,7 +141,8 @@ export default class CheckoutMapping {
                 directorDetails: directorDetails,
                 forename: itemResource.forename,
                 surname: itemResource.surname,
-                liquidatorsDetails: liquidatorsDetails
+                liquidatorsDetails: liquidatorsDetails,
+                companyStatus: itemResource.company_status
             }
         } else if (kind === "item#certified-copy") {
             itemResource = itemResource as CertifiedCopyItemOptionsResource;

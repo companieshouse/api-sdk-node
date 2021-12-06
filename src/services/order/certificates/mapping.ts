@@ -83,7 +83,8 @@ export default class CertificateMapping {
                 secretary_details: secretaryDetails,
                 surname: itemOptions.surname,
                 company_type: itemOptions.companyType,
-                liquidators_details: liquidatorsDetails
+                liquidators_details: liquidatorsDetails,
+                company_status: itemOptions.companyStatus
             },
             quantity: certificateItemRequest.quantity
         };
@@ -154,7 +155,8 @@ export default class CertificateMapping {
                 registeredOfficeAddressDetails,
                 secretaryDetails,
                 surname: io.surname,
-                liquidatorsDetails
+                liquidatorsDetails,
+                companyStatus: io.company_status
             },
             kind: body.kind,
             links: {
