@@ -61,9 +61,8 @@ export default class CertificateMapping {
 
         return {
             customer_reference: certificateItemRequest.customerReference,
-            company_number: certificateItemRequest.companyNumber,
             item_options: {
-                certificate_type: itemOptions.certificateType,
+                certificate_type: undefined,
                 collection_location: itemOptions.collectionLocation,
                 contact_number: itemOptions.contactNumber,
                 delivery_method: itemOptions.deliveryMethod,
@@ -82,9 +81,8 @@ export default class CertificateMapping {
                 registered_office_address_details: registeredOfficeAddressDetails,
                 secretary_details: secretaryDetails,
                 surname: itemOptions.surname,
-                company_type: itemOptions.companyType,
                 liquidators_details: liquidatorsDetails,
-                company_status: itemOptions.companyStatus
+                company_status: undefined
             },
             quantity: certificateItemRequest.quantity
         };

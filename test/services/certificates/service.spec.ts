@@ -1,17 +1,19 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
 
 import CertificateService from "../../../src/services/order/certificates/service";
-import { RequestClient, HttpResponse } from "../../../src/http";
-import { CertificateItemResource, CertificateItemPostRequest, CertificateItemPatchRequest } from "../../../src/services/order/certificates/types";
-import exp = require("constants");
+import {RequestClient} from "../../../src/http";
+import {
+    CertificateItemPatchRequest,
+    CertificateItemPostRequest,
+    CertificateItemResource
+} from "../../../src/services/order/certificates/types";
+
 const expect = chai.expect;
 
-const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
+const requestClient = new RequestClient({baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED"});
 
-const mockResponseBody : CertificateItemResource = ({
+const mockResponseBody: CertificateItemResource = ({
     company_name: "company name",
     company_number: "1471",
     customer_reference: "reference",
@@ -102,7 +104,7 @@ const mockResponseBody : CertificateItemResource = ({
     total_item_cost: "total cost"
 });
 
-const mockResponseBodyMissingFields : CertificateItemResource = ({
+const mockResponseBodyMissingFields: CertificateItemResource = ({
     company_name: "company name",
     company_number: "1471",
     customer_reference: "reference",
@@ -362,7 +364,6 @@ describe("create a certificate POST", () => {
         companyNumber: "company number",
         customerReference: "reference",
         itemOptions: {
-            certificateType: "cert type",
             collectionLocation: "location",
             contactNumber: "010100",
             deliveryMethod: "delivery",
@@ -549,10 +550,8 @@ describe("create a certificate POST", () => {
 describe("update a certificate PATCH", () => {
     const certificateId = "CHS001";
     const mockRequestBody: CertificateItemPatchRequest = ({
-        companyNumber: "company number",
         customerReference: "reference",
         itemOptions: {
-            certificateType: "cert type",
             collectionLocation: "location",
             contactNumber: "010100",
             deliveryMethod: "delivery",

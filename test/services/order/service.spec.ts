@@ -87,7 +87,8 @@ const mockCertificateOrderResponseBody: OrderResource = {
             surname: "surname",
             liquidators_details: {
                 include_basic_information: false
-            }
+            },
+            company_status: undefined
         },
         etag: "abcdefg123456",
         kind: "item#certificate",

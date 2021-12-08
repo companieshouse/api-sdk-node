@@ -1,73 +1,73 @@
-import { IHttpClient } from "../../../http";
+import {IHttpClient} from "../../../http";
 import {
-    CertificateItem, CertificateItemResource, CertificateItemPostRequest, CertificateItemRequestResource,
-    CertificateItemPatchRequest
+    CertificateItem,
+    CertificateItemInitialRequest,
+    CertificateItemPatchRequest,
+    CertificateItemPostRequest
 } from "./types";
 import Resource from "../../resource";
-import CertificateMapping from "./mapping";
+import Mapping from "../../../mapping/mapping";
 
 export default class {
-    constructor (private readonly client: IHttpClient) { }
+    constructor(private readonly client: IHttpClient) {
+    }
 
-    public async getCertificate (certificateId: string): Promise<Resource<CertificateItem>> {
+    public async getCertificate(certificateId: string): Promise<Resource<CertificateItem>> {
         const resp = await this.client.httpGet(`/orderable/certificates/${certificateId}`);
 
         const resource: Resource<CertificateItem> = {
             httpStatusCode: resp.status
         };
 
-        if (resp.error) {
-            return resource;
+        if (!resp.error) {
+            resource.resource = Mapping.camelCaseKeys(resp.body);
         }
 
-        const body = resp.body as CertificateItemResource;
-
-        resource.resource = CertificateMapping.mapCertificateItemResourceToCertificateItem(body);
         return resource;
     }
 
-    public async postCertificate (certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> {
-        const certificateItemRequestResource: CertificateItemRequestResource =
-    CertificateMapping.mapCertificateItemRequestToCertificateItemRequestResource(certificateItemRequest);
+    public async postCertificateInitialRequest(certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> {
+        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
+    }
 
-        const resp = await this.client.httpPost("/orderable/certificates", certificateItemRequestResource);
+    public async postCertificate(certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> {
+        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates");
+    }
+
+    private async postCertificateRequest(certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> {
+        const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
+
+        const resp = await this.client.httpPost(url, postRequest);
 
         const resource: Resource<CertificateItem> = {
             httpStatusCode: resp.status
         };
 
-        if (resp.error) {
-            return resource;
+        if (!resp.error) {
+            resource.resource = Mapping.camelCaseKeys(resp.body);
         }
 
-        const body = resp.body as CertificateItemResource;
-
-        resource.resource = CertificateMapping.mapCertificateItemResourceToCertificateItem(body);
         return resource;
     }
 
-    public async patchCertificate (certificateItemRequest: CertificateItemPatchRequest, certificateId: string):
-    Promise<Resource<CertificateItem>> {
-        const certificateItemRequestResource: CertificateItemRequestResource =
-    CertificateMapping.mapCertificateItemRequestToCertificateItemRequestResource(certificateItemRequest);
+    public async patchCertificate(certificateItemRequest: CertificateItemPatchRequest, certificateId: string):
+        Promise<Resource<CertificateItem>> {
+        const patchRequest = Mapping.snakeCaseKeys(certificateItemRequest);
 
         const additionalHeaders = {
             "Content-Type": "application/merge-patch+json"
         };
         const resp = await this.client.httpPatch(`/orderable/certificates/${certificateId}`,
-            certificateItemRequestResource, additionalHeaders);
+            patchRequest, additionalHeaders);
 
         const resource: Resource<CertificateItem> = {
             httpStatusCode: resp.status
         };
 
-        if (resp.error) {
-            return resource;
+        if (!resp.error) {
+            resource.resource = Mapping.camelCaseKeys(resp.body);
         }
 
-        const body = resp.body as CertificateItemResource;
-
-        resource.resource = CertificateMapping.mapCertificateItemResourceToCertificateItem(body);
         return resource;
     }
 }
