@@ -26,18 +26,34 @@ export default class {
         return resource;
     }
 
-    public async postCertificateInitialRequest(certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> {
-        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
-    }
-
+    // Create a whole certificate item in one invocation
     public async postCertificate(certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> {
         return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates");
     }
 
-    private async postCertificateRequest(certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> {
-        const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
+    /*
+     * Create a partial certificate item with an initial request.
+     *
+     * Note: use patchCertificate to add or amend certificate item properties.
+     */
+    public async postInitialCertificate(certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> {
+        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
+    }
 
-        const resp = await this.client.httpPost(url, postRequest);
+    /*
+     * Add or amend certificate item properties; there can be one or more patch requests.
+     *
+     * Note: use this method after a call to postInitialCertificate.
+     */
+    public async patchCertificate(certificateItemRequest: CertificateItemPatchRequest, certificateId: string):
+        Promise<Resource<CertificateItem>> {
+        const patchRequest = Mapping.snakeCaseKeys(certificateItemRequest);
+
+        const additionalHeaders = {
+            "Content-Type": "application/merge-patch+json"
+        };
+        const resp = await this.client.httpPatch(`/orderable/certificates/${certificateId}`,
+            patchRequest, additionalHeaders);
 
         const resource: Resource<CertificateItem> = {
             httpStatusCode: resp.status
@@ -50,15 +66,10 @@ export default class {
         return resource;
     }
 
-    public async patchCertificate(certificateItemRequest: CertificateItemPatchRequest, certificateId: string):
-        Promise<Resource<CertificateItem>> {
-        const patchRequest = Mapping.snakeCaseKeys(certificateItemRequest);
+    private async postCertificateRequest(certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> {
+        const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
 
-        const additionalHeaders = {
-            "Content-Type": "application/merge-patch+json"
-        };
-        const resp = await this.client.httpPatch(`/orderable/certificates/${certificateId}`,
-            patchRequest, additionalHeaders);
+        const resp = await this.client.httpPost(url, postRequest);
 
         const resource: Resource<CertificateItem> = {
             httpStatusCode: resp.status

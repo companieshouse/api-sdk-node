@@ -2,8 +2,10 @@ import chai from "chai";
 import sinon from "sinon";
 
 import CertificateService from "../../../src/services/order/certificates/service";
-import {RequestClient} from "../../../src/http";
+import {HttpResponse, RequestClient} from "../../../src/http";
 import {
+    CertificateItem,
+    CertificateItemInitialRequest,
     CertificateItemPatchRequest,
     CertificateItemPostRequest,
     CertificateItemResource
@@ -511,6 +513,7 @@ describe("create a certificate POST", () => {
         expect(io.surname).to.equal(mockIo.surname);
         expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
+        expect(io.companyStatus).to.equal(mockIo.company_status);
     });
 
     it("maps create a certificate correctly when director, secretary, registered office address details and surname are missing", async () => {
@@ -544,6 +547,7 @@ describe("create a certificate POST", () => {
         expect(io.surname).to.be.undefined;
         expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
+        expect(io.companyStatus).to.be.undefined;
     });
 });
 
@@ -699,6 +703,7 @@ describe("update a certificate PATCH", () => {
         expect(io.surname).to.equal(mockIo.surname);
         expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
+        expect(io.companyStatus).to.equal(mockIo.company_status);
     });
 
     it("maps patch a certificate correctly when director, secretary, registered office address details and surname are missing", async () => {
@@ -732,5 +737,69 @@ describe("update a certificate PATCH", () => {
         expect(io.surname).to.be.undefined;
         expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
+        expect(io.companyStatus).to.be.undefined;
     });
 });
+
+describe("Create an initial certificate item", () => {
+    beforeEach(() => {
+        sinon.reset();
+        sinon.restore();
+    });
+
+    afterEach(done => {
+        sinon.reset();
+        sinon.restore();
+        done();
+    });
+
+    const certificateService = new CertificateService(requestClient)
+
+    it('should return error on API failure', async () => {
+        //given
+        sinon.stub(requestClient, "httpPost").resolves({
+            status: 401,
+            error: "An error occurred"
+        } as HttpResponse)
+
+        //when
+        const data = await certificateService.postInitialCertificate({
+            companyNumber: '00006400'
+        } as CertificateItemInitialRequest);
+
+        //then
+        expect(data.httpStatusCode).to.equal(401)
+        expect(data.resource).to.be.undefined
+    })
+
+    it('should create a certificate item', async () => {
+        //given
+        sinon.stub(requestClient, "httpPost").resolves({
+            status: 201,
+            body: {
+                id: 'CRT-123123-123123',
+                company_number: '00006400',
+                item_options: {
+                    company_status: 'active',
+                    company_type: 'ltd'
+                }
+            }
+        } as HttpResponse)
+
+        //when
+        const data = await certificateService.postInitialCertificate({
+            companyNumber: '00006400'
+        } as CertificateItemInitialRequest)
+
+        //then
+        expect(data.httpStatusCode).to.equal(201)
+        expect(data.resource).to.be.deep.equal({
+            id: 'CRT-123123-123123',
+            companyNumber: '00006400',
+            itemOptions: {
+                companyStatus: 'active',
+                companyType: 'ltd'
+            }
+        } as CertificateItem)
+    })
+})

@@ -3,11 +3,11 @@ import sinon from "sinon";
 
 import CheckoutService from "../../../src/services/order/checkout/service";
 import { RequestClient } from "../../../src/http";
-import { ApiErrorResponse } from "../../../src/services/resource";
+
 import {
     Checkout, CheckoutResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
     CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
-} from "../../../src/services/order/checkout/types";
+} from "../../../src/services/order/checkout";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -88,7 +88,7 @@ const mockCertificateCheckoutResponseBody: CheckoutResource = {
             secretary_details: {},
             surname: "surname",
             liquidators_details: {},
-            company_status: undefined
+            company_status: 'active'
         },
         etag: "abcdefg123456",
         kind: "item#certificate",
@@ -395,6 +395,7 @@ describe("checkout", () => {
             expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
             expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
+            expect(itemOptions.companyStatus).to.equal(itemOptionsResource.company_status);
         });
 
         it("should map certified copy item option fields correctly", async () => {

@@ -7,7 +7,7 @@ import { ApiErrorResponse } from "../../../src/services/resource";
 import {
     Order, OrderResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
     CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
-} from "../../../src/services/order/order/types";
+} from "../../../src/services/order/order";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -88,7 +88,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
             liquidators_details: {
                 include_basic_information: false
             },
-            company_status: undefined
+            company_status: "active"
         },
         etag: "abcdefg123456",
         kind: "item#certificate",
@@ -296,7 +296,7 @@ describe("order", () => {
 
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const order: OrderService = new OrderService(requestClient);
-            const response = await order.getOrder(CERTIFICATE_ORDER_ID); ;
+            const response = await order.getOrder(CERTIFICATE_ORDER_ID);
             const data = response.value as ApiErrorResponse;
 
             expect(data.httpStatusCode).to.equal(401);
@@ -391,6 +391,7 @@ describe("order", () => {
             expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.liquidatorsDetails).to.deep.equal({ includeBasicInformation: false });
+            expect(itemOptions.companyStatus).to.equal(itemOptionsResource.company_status);
         });
 
         it("should map certified copy item option fields correctly", async () => {
