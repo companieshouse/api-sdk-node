@@ -2,7 +2,7 @@ import chai from "chai";
 import sinon from "sinon";
 
 import CertificateService from "../../../src/services/order/certificates/service";
-import {HttpResponse, RequestClient} from "../../../src/http";
+import { HttpResponse, RequestClient } from "../../../src/http";
 import {
     CertificateItem,
     CertificateItemInitialRequest,
@@ -13,7 +13,7 @@ import {
 
 const expect = chai.expect;
 
-const requestClient = new RequestClient({baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED"});
+const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 const mockResponseBody: CertificateItemResource = ({
     company_name: "company name",
@@ -755,50 +755,50 @@ describe("Create an initial certificate item", () => {
 
     const certificateService = new CertificateService(requestClient)
 
-    it('should return error on API failure', async () => {
-        //given
+    it("should return error on API failure", async () => {
+        // given
         sinon.stub(requestClient, "httpPost").resolves({
             status: 401,
             error: "An error occurred"
         } as HttpResponse)
 
-        //when
+        // when
         const data = await certificateService.postInitialCertificate({
-            companyNumber: '00006400'
+            companyNumber: "00006400"
         } as CertificateItemInitialRequest);
 
-        //then
+        // then
         expect(data.httpStatusCode).to.equal(401)
         expect(data.resource).to.be.undefined
     })
 
-    it('should create a certificate item', async () => {
-        //given
+    it("should create a certificate item", async () => {
+        // given
         sinon.stub(requestClient, "httpPost").resolves({
             status: 201,
             body: {
-                id: 'CRT-123123-123123',
-                company_number: '00006400',
+                id: "CRT-123123-123123",
+                company_number: "00006400",
                 item_options: {
-                    company_status: 'active',
-                    company_type: 'ltd'
+                    company_status: "active",
+                    company_type: "ltd"
                 }
             }
         } as HttpResponse)
 
-        //when
+        // when
         const data = await certificateService.postInitialCertificate({
-            companyNumber: '00006400'
+            companyNumber: "00006400"
         } as CertificateItemInitialRequest)
 
-        //then
+        // then
         expect(data.httpStatusCode).to.equal(201)
         expect(data.resource).to.be.deep.equal({
-            id: 'CRT-123123-123123',
-            companyNumber: '00006400',
+            id: "CRT-123123-123123",
+            companyNumber: "00006400",
             itemOptions: {
-                companyStatus: 'active',
-                companyType: 'ltd'
+                companyStatus: "active",
+                companyType: "ltd"
             }
         } as CertificateItem)
     })

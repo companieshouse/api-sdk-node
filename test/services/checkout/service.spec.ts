@@ -88,7 +88,7 @@ const mockCertificateCheckoutResponseBody: CheckoutResource = {
             secretary_details: {},
             surname: "surname",
             liquidators_details: {},
-            company_status: 'active'
+            company_status: "active"
         },
         etag: "abcdefg123456",
         kind: "item#certificate",
