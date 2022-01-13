@@ -50,6 +50,7 @@ export interface ItemOptionsResource {
     secretary_details: DirectorOrSecretaryDetailsResource;
     surname: string;
     liquidators_details: LiquidatorsDetailsResource;
+    company_status: string;
 }
 
 export interface DirectorOrSecretaryDetailsResource {
@@ -159,6 +160,7 @@ export interface ItemOptions {
     secretaryDetails?: DirectorOrSecretaryDetails;
     surname: string;
     liquidatorsDetails: LiquidatorsDetails;
+    companyStatus: string;
 }
 
 export interface DirectorOrSecretaryDetails {
@@ -218,22 +220,25 @@ export interface Links {
 
 // CertificateItemPostRequest
 export interface CertificateItemPostRequest {
-    companyNumber?: string;
+    companyNumber: string;
     customerReference?: string;
     itemOptions: ItemOptionsRequest;
     quantity: number;
 }
 
+// CertificateItemInitialRequest
+export interface CertificateItemInitialRequest {
+    companyNumber: string;
+}
+
 // CertificateItemPatchRequest
 export interface CertificateItemPatchRequest {
-  companyNumber?: string;
   customerReference?: string;
-  itemOptions: ItemOptionsRequest;
+  itemOptions?: ItemOptionsRequest;
   quantity?: number;
 }
 
 export interface ItemOptionsRequest {
-    certificateType?: string;
     collectionLocation?: string;
     contactNumber?: string;
     deliveryMethod?: string;
@@ -252,8 +257,7 @@ export interface ItemOptionsRequest {
     registeredOfficeAddressDetails?: RegisteredOfficeAddressDetailsRequest;
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
-    companyType?: string;
-    liquidatorsDetails?: LiquidatorsDetailsRequest
+    liquidatorsDetails?: LiquidatorsDetailsRequest;
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
