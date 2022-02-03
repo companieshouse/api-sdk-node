@@ -12,7 +12,7 @@ export default class {
     constructor (private readonly client: IHttpClient) {
     }
 
-    public getCertificate = async (certificateId: string): Promise<Resource<CertificateItem>> => {
+    public async getCertificate (certificateId: string): Promise<Resource<CertificateItem>> {
         const resp = await this.client.httpGet(`/orderable/certificates/${certificateId}`);
 
         const resource: Resource<CertificateItem> = {
@@ -27,7 +27,7 @@ export default class {
     }
 
     // Create a whole certificate item in one invocation
-    public postCertificate = async (certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> => {
+    public async postCertificate (certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> {
         return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates");
     }
 
@@ -36,7 +36,7 @@ export default class {
      *
      * Note: use patchCertificate to add or amend certificate item properties.
      */
-    public postInitialCertificate = async (certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> => {
+    public async postInitialCertificate (certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> {
         return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
     }
 
@@ -45,7 +45,7 @@ export default class {
      *
      * Note: use this method after a call to postInitialCertificate.
      */
-    public patchCertificate = async (certificateItemRequest: CertificateItemPatchRequest, certificateId: string): Promise<Resource<CertificateItem>> => {
+    public async patchCertificate (certificateItemRequest: CertificateItemPatchRequest, certificateId: string): Promise<Resource<CertificateItem>> {
         const patchRequest = Mapping.snakeCaseKeys(certificateItemRequest);
 
         const additionalHeaders = {
@@ -65,7 +65,7 @@ export default class {
         return resource;
     }
 
-    private postCertificateRequest = async (certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> => {
+    private async postCertificateRequest (certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> {
         const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
 
         const resp = await this.client.httpPost(url, postRequest);
