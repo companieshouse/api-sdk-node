@@ -10,10 +10,14 @@ import {
     CertificateItemPostRequest,
     CertificateItemResource
 } from "../../../src/services/order/certificates/types";
+import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 
 const expect = chai.expect;
 
-const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
+const requestClient = new RequestClient({
+    baseUrl: "URL-NOT-USED",
+    oauthToken: "TOKEN-NOT-USED"
+});
 
 const mockResponseBody: CertificateItemResource = ({
     company_name: "company name",
@@ -759,17 +763,26 @@ describe("Create an initial certificate item", () => {
         // given
         sinon.stub(requestClient, "httpPost").resolves({
             status: 401,
-            error: "An error occurred"
+            error: {
+                errors: [{
+                    error: "company-status-invalid"
+                }]
+            }
         } as HttpResponse)
 
         // when
         const data = await certificateService.postInitialCertificate({
             companyNumber: "00006400"
         } as CertificateItemInitialRequest);
+        const result = data.value as ApiErrorResponse
 
         // then
-        expect(data.httpStatusCode).to.equal(401)
-        expect(data.resource).to.be.undefined
+        expect(data.isFailure()).to.equal(true);
+        expect(data.isSuccess()).to.equal(false);
+        expect(result.httpStatusCode).to.equal(401);
+        expect(result.errors).to.deep.equal([{
+            error: "company-status-invalid"
+        }]);
     })
 
     it("should create a certificate item", async () => {
@@ -790,10 +803,11 @@ describe("Create an initial certificate item", () => {
         const data = await certificateService.postInitialCertificate({
             companyNumber: "00006400"
         } as CertificateItemInitialRequest)
+        const result = data.value as ApiResponse<CertificateItem>;
 
         // then
-        expect(data.httpStatusCode).to.equal(201)
-        expect(data.resource).to.be.deep.equal({
+        expect(result.httpStatusCode).to.equal(201)
+        expect(result.resource).to.be.deep.equal({
             id: "CRT-123123-123123",
             companyNumber: "00006400",
             itemOptions: {

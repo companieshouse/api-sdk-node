@@ -5,8 +5,9 @@ import {
     CertificateItemPatchRequest,
     CertificateItemPostRequest
 } from "./types";
-import Resource from "../../resource";
+import Resource, { ApiResponse, ApiResult } from "../../resource";
 import Mapping from "../../../mapping/mapping";
+import { failure, success } from "../../result";
 
 export default class {
     constructor (private readonly client: IHttpClient) {
@@ -36,8 +37,23 @@ export default class {
      *
      * Note: use patchCertificate to add or amend certificate item properties.
      */
-    public async postInitialCertificate (certificateItemRequest: CertificateItemInitialRequest): Promise<Resource<CertificateItem>> {
-        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
+    public async postInitialCertificate (certificateItemRequest: CertificateItemInitialRequest): Promise<ApiResult<ApiResponse<CertificateItem>>> {
+        const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
+
+        const serverResponse = await this.client.httpPost("/orderable/certificates/initial", postRequest);
+        const response: ApiResponse<CertificateItem> = {
+            httpStatusCode: serverResponse.status
+        };
+
+        if (serverResponse.error) {
+            return failure({
+                httpStatusCode: serverResponse.status,
+                errors: serverResponse.error.errors
+            });
+        } else {
+            response.resource = Mapping.camelCaseKeys<CertificateItem>(serverResponse.body);
+            return success(response);
+        }
     }
 
     /*
