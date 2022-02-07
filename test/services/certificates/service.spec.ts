@@ -765,7 +765,7 @@ describe("Create an initial certificate item", () => {
             status: 401,
             error: {
                 errors: [{
-                    E101: "Unauthenticated"
+                    error: "company-status-invalid"
                 }]
             }
         } as HttpResponse)
@@ -781,7 +781,7 @@ describe("Create an initial certificate item", () => {
         expect(data.isSuccess()).to.equal(false);
         expect(result.httpStatusCode).to.equal(401);
         expect(result.errors).to.deep.equal([{
-            E101: "Unauthenticated"
+            error: "company-status-invalid"
         }]);
     })
 
