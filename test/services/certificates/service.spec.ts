@@ -10,7 +10,8 @@ import {
     CertificateItemPostRequest,
     CertificateItemResource
 } from "../../../src/services/order/certificates/types";
-import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
+import Resource, {ApiErrorResponse, ApiResponse, ApiResult} from "../../../src/services/resource";
+import {Failure, Success} from "../../../src/services/result";
 
 const expect = chai.expect;
 
@@ -447,15 +448,18 @@ describe("create a certificate POST", () => {
     it("returns an error response on failure", async () => {
         const mockPostRequest = {
             status: 401,
-            error: "An error occurred"
+            error: {
+                errors: [{error: "An error occurred"}]
+            }
         };
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.postCertificate(mockRequestBody);
+        const data = await certificate.postCertificate(mockRequestBody) as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>
+        const errResponse = data.value
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(errResponse.httpStatusCode).to.equal(401);
+        expect(errResponse.errors[0].error).to.equal("An error occurred");
     });
 
     it("maps create a certificate correctly", async () => {
@@ -466,13 +470,14 @@ describe("create a certificate POST", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.postCertificate(mockRequestBody);
-        const io = data.resource.itemOptions;
+        const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
+        const certificateItem = data.value.resource
+        const io = certificateItem.itemOptions;
         const mockIo = mockResponseBody.item_options;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(certificateItem.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(certificateItem.customerReference).to.equal(mockResponseBody.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
         expect(io.companyType).to.equal(mockIo.company_type);
@@ -515,7 +520,7 @@ describe("create a certificate POST", () => {
         expect(io.secretaryDetails.includeNationality).to.equal(mockIo.secretary_details.include_nationality);
         expect(io.secretaryDetails.includeOccupation).to.equal(mockIo.secretary_details.include_occupation);
         expect(io.surname).to.equal(mockIo.surname);
-        expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
+        expect(certificateItem.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
         expect(io.companyStatus).to.equal(mockIo.company_status);
     });
@@ -528,13 +533,14 @@ describe("create a certificate POST", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.postCertificate(mockRequestBody);
-        const io = data.resource.itemOptions;
+        const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
+        const certificateItem = data.value.resource
+        const io = certificateItem.itemOptions;
         const mockIo = mockResponseBodyMissingFields.item_options;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(certificateItem.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
+        expect(certificateItem.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
         expect(io.contactNumber).to.equal(mockIo.contact_number);
@@ -549,7 +555,7 @@ describe("create a certificate POST", () => {
         expect(io.registeredOfficeAddressDetails).to.be.undefined;
         expect(io.secretaryDetails).to.be.undefined;
         expect(io.surname).to.be.undefined;
-        expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
+        expect(certificateItem.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
         expect(io.companyStatus).to.be.undefined;
     });
