@@ -28,7 +28,7 @@ export default class {
     }
 
     // Create a whole certificate item in one invocation
-    public async postCertificate (certificateItemRequest: CertificateItemPostRequest): Promise<Resource<CertificateItem>> {
+    public async postCertificate (certificateItemRequest: CertificateItemPostRequest): Promise<ApiResult<ApiResponse<CertificateItem>>> {
         return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates");
     }
 
@@ -38,22 +38,7 @@ export default class {
      * Note: use patchCertificate to add or amend certificate item properties.
      */
     public async postInitialCertificate (certificateItemRequest: CertificateItemInitialRequest): Promise<ApiResult<ApiResponse<CertificateItem>>> {
-        const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
-
-        const serverResponse = await this.client.httpPost("/orderable/certificates/initial", postRequest);
-        const response: ApiResponse<CertificateItem> = {
-            httpStatusCode: serverResponse.status
-        };
-
-        if (serverResponse.error) {
-            return failure({
-                httpStatusCode: serverResponse.status,
-                errors: serverResponse.error.errors
-            });
-        } else {
-            response.resource = Mapping.camelCaseKeys<CertificateItem>(serverResponse.body);
-            return success(response);
-        }
+        return this.postCertificateRequest(certificateItemRequest, "/orderable/certificates/initial");
     }
 
     /*
@@ -81,19 +66,22 @@ export default class {
         return resource;
     }
 
-    private async postCertificateRequest (certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<Resource<CertificateItem>> {
+    private async postCertificateRequest (certificateItemRequest: CertificateItemInitialRequest | CertificateItemPostRequest, url: string): Promise<ApiResult<ApiResponse<CertificateItem>>> {
         const postRequest = Mapping.snakeCaseKeys(certificateItemRequest);
 
-        const resp = await this.client.httpPost(url, postRequest);
-
-        const resource: Resource<CertificateItem> = {
-            httpStatusCode: resp.status
+        const serverResponse = await this.client.httpPost(url, postRequest);
+        const response: ApiResponse<CertificateItem> = {
+            httpStatusCode: serverResponse.status
         };
 
-        if (!resp.error) {
-            resource.resource = Mapping.camelCaseKeys(resp.body);
+        if (serverResponse.error) {
+            return failure({
+                httpStatusCode: serverResponse.status,
+                errors: serverResponse.error.errors
+            });
+        } else {
+            response.resource = Mapping.camelCaseKeys<CertificateItem>(serverResponse.body);
+            return success(response);
         }
-
-        return resource;
     }
 }
