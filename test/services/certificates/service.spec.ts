@@ -10,8 +10,8 @@ import {
     CertificateItemPostRequest,
     CertificateItemResource
 } from "../../../src/services/order/certificates/types";
-import Resource, {ApiErrorResponse, ApiResponse, ApiResult} from "../../../src/services/resource";
-import {Failure, Success} from "../../../src/services/result";
+import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
+import { Failure, Success } from "../../../src/services/result";
 
 const expect = chai.expect;
 
@@ -449,7 +449,7 @@ describe("create a certificate POST", () => {
         const mockPostRequest = {
             status: 401,
             error: {
-                errors: [{error: "An error occurred"}]
+                errors: [{ error: "An error occurred" }]
             }
         };
 
