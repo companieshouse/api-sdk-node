@@ -91,7 +91,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
             company_status: "active",
             administrators_details: {
                 include_basic_information: false
-            },
+            }
         },
         etag: "abcdefg123456",
         kind: "item#certificate",

@@ -102,8 +102,8 @@ const mockResponseBody: CertificateItemResource = ({
         company_status: "active",
         administrators_details: {
             include_basic_information: true
-        },
-   },
+        }
+    },
     kind: "kind",
     links: {
         self: "self"
@@ -154,7 +154,7 @@ const mockResponseBodyMissingFields: CertificateItemResource = ({
         surname: undefined,
         liquidators_details: undefined,
         company_status: undefined,
-        administrators_details: undefined,
+        administrators_details: undefined
     },
     kind: "kind",
     links: {
