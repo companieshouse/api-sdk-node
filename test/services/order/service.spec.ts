@@ -88,7 +88,10 @@ const mockCertificateOrderResponseBody: OrderResource = {
             liquidators_details: {
                 include_basic_information: false
             },
-            company_status: "active"
+            company_status: "active",
+            administrators_details: {
+                include_basic_information: false
+            },
         },
         etag: "abcdefg123456",
         kind: "item#certificate",
@@ -392,6 +395,7 @@ describe("order", () => {
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.liquidatorsDetails).to.deep.equal({ includeBasicInformation: false });
             expect(itemOptions.companyStatus).to.equal(itemOptionsResource.company_status);
+            expect(itemOptions.administratorsDetails).to.deep.equal({ includeBasicInformation: false });
         });
 
         it("should map certified copy item option fields correctly", async () => {

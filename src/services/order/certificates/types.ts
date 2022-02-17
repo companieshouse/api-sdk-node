@@ -51,6 +51,7 @@ export interface ItemOptionsResource {
     surname: string;
     liquidators_details: LiquidatorsDetailsResource;
     company_status: string;
+    administrators_details: AdministratorsDetailsResource;
 }
 
 export interface DirectorOrSecretaryDetailsResource {
@@ -102,6 +103,9 @@ export interface LimitedPartnerDetailsResource extends PartnerDetailsResource {
 }
 
 export interface LiquidatorsDetailsResource extends BasicInformationResource {
+}
+
+export interface AdministratorsDetailsResource extends BasicInformationResource {
 }
 
 export interface LinksResource {
@@ -161,6 +165,7 @@ export interface ItemOptions {
     surname: string;
     liquidatorsDetails: LiquidatorsDetails;
     companyStatus: string;
+    administratorsDetails: AdministratorsDetails;
 }
 
 export interface DirectorOrSecretaryDetails {
@@ -214,6 +219,9 @@ export interface LimitedPartnerDetails extends PartnerDetails {
 export interface LiquidatorsDetails extends BasicInformation {
 }
 
+export interface AdministratorsDetails extends BasicInformation {
+}
+
 export interface Links {
     self: string;
 }
@@ -258,6 +266,7 @@ export interface ItemOptionsRequest {
     secretaryDetails?: DirectorOrSecretaryDetailsRequest;
     surname?: string;
     liquidatorsDetails?: LiquidatorsDetailsRequest;
+    administratorsDetails?: AdministratorsDetailsRequest;
 }
 
 export interface DirectorOrSecretaryDetailsRequest {
@@ -309,6 +318,9 @@ export interface LimitedPartnerDetailsRequest extends PartnerDetailsRequest {
 }
 
 export interface LiquidatorsDetailsRequest extends BasicInformationRequest {
+}
+
+export interface AdministratorsDetailsRequest extends BasicInformationRequest {
 }
 
 // CertificateItemRequestResource
