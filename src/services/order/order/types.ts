@@ -119,6 +119,9 @@ export interface CertificateItemOptions {
         includeBasicInformation?: boolean;
     };
     companyStatus: string;
+    administratorsDetails: {
+        includeBasicInformation?: boolean;
+    };
 }
 
 export interface CertifiedCopyItemOptions {
@@ -267,6 +270,9 @@ export interface CertificateItemOptionsResource {
         include_basic_information?: boolean;
     };
     company_status: string;
+    administrators_details: {
+        include_basic_information?: boolean;
+    };
 }
 
 export interface CertifiedCopyItemOptionsResource {

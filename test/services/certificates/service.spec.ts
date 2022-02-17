@@ -99,7 +99,10 @@ const mockResponseBody: CertificateItemResource = ({
         liquidators_details: {
             include_basic_information: true
         },
-        company_status: "active"
+        company_status: "active",
+        administrators_details: {
+            include_basic_information: true
+        }
     },
     kind: "kind",
     links: {
@@ -150,7 +153,8 @@ const mockResponseBodyMissingFields: CertificateItemResource = ({
         secretary_details: undefined,
         surname: undefined,
         liquidators_details: undefined,
-        company_status: undefined
+        company_status: undefined,
+        administrators_details: undefined
     },
     kind: "kind",
     links: {
@@ -219,6 +223,7 @@ describe("order a certificate GET", () => {
         const mockGeneralPartnerDetails = mockItemOptions.general_partner_details;
         const mockLiquidatorsDetails = mockItemOptions.liquidators_details;
         const mockCompanyStatus = mockItemOptions.company_status;
+        const mockAdministratorsDetails = mockItemOptions.administrators_details;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
@@ -284,6 +289,7 @@ describe("order a certificate GET", () => {
         expect(data.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
         expect(resourceItemOptions.liquidatorsDetails.includeBasicInformation).to.equal(mockLiquidatorsDetails.include_basic_information);
         expect(resourceItemOptions.companyStatus).to.equal(mockCompanyStatus);
+        expect(resourceItemOptions.administratorsDetails.includeBasicInformation).to.equal(mockAdministratorsDetails.include_basic_information);
     });
 
     it("maps the certificate field data items correctly when director, secretary and office address details and surname are missing", async () => {
@@ -363,6 +369,7 @@ describe("order a certificate GET", () => {
         expect(data.resource.totalItemCost).to.equal(mockResponseBodyMissingFields.total_item_cost);
         expect(resourceItemOptions.liquidatorsDetails?.includeBasicInformation).to.be.undefined;
         expect(resourceItemOptions.companyStatus).to.be.undefined;
+        expect(resourceItemOptions.administratorsDetails?.includeBasicInformation).to.be.undefined;
     });
 });
 
@@ -428,6 +435,9 @@ describe("create a certificate POST", () => {
             },
             surname: "surname",
             liquidatorsDetails: {
+                includeBasicInformation: true
+            },
+            administratorsDetails: {
                 includeBasicInformation: true
             }
         },
@@ -523,6 +533,7 @@ describe("create a certificate POST", () => {
         expect(certificateItem.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
         expect(io.companyStatus).to.equal(mockIo.company_status);
+        expect(io.administratorsDetails.includeBasicInformation).to.equal(mockIo.administrators_details.include_basic_information);
     });
 
     it("maps create a certificate correctly when director, secretary, registered office address details and surname are missing", async () => {
@@ -558,6 +569,7 @@ describe("create a certificate POST", () => {
         expect(certificateItem.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
         expect(io.companyStatus).to.be.undefined;
+        expect(io.administratorsDetails).to.be.undefined;
     });
 });
 
@@ -623,6 +635,9 @@ describe("update a certificate PATCH", () => {
             },
             surname: "surname",
             liquidatorsDetails: {
+                includeBasicInformation: true
+            },
+            administratorsDetails: {
                 includeBasicInformation: true
             }
         },
@@ -714,6 +729,7 @@ describe("update a certificate PATCH", () => {
         expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
         expect(io.companyStatus).to.equal(mockIo.company_status);
+        expect(io.administratorsDetails.includeBasicInformation).to.equal(mockIo.administrators_details.include_basic_information);
     });
 
     it("maps patch a certificate correctly when director, secretary, registered office address details and surname are missing", async () => {
@@ -748,6 +764,7 @@ describe("update a certificate PATCH", () => {
         expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
         expect(io.companyStatus).to.be.undefined;
+        expect(io.administratorsDetails).to.be.undefined;
     });
 });
 
