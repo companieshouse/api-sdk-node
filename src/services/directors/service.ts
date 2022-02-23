@@ -1,15 +1,15 @@
 import { HealthCheck } from "./types";
-import { HttpResponse, IHttpClient } from "../../http";
-import Resource, { ApiErrorResponse, ApiResult } from "../resource";
-import { failure, success } from "services/result";
+import { IHttpClient } from "../../http";
+import Resource, { ApiResult } from "../resource";
+import { failure, success } from "../result";
 
 export default class {
     private directorsApiEndpoint = "/directors-poc";
     private healthCheckEndpoint = "/healthCheck";
 
-    constructor (private readonly client: IHttpClient) {}
+    constructor(private readonly client: IHttpClient) {}
 
-    public async getHealthCheck (): Promise<ApiResult<Resource<HealthCheck>>> {
+    public async getHealthCheck(): Promise<ApiResult<Resource<HealthCheck>>> {
         const { client, directorsApiEndpoint, healthCheckEndpoint } = this;
         const healthCheckUrl = directorsApiEndpoint + healthCheckEndpoint;
 
@@ -21,15 +21,15 @@ export default class {
                 errors: [
                     {
                         error: resp.error,
-                        location: healthCheckUrl
-                    }
-                ]
+                        location: healthCheckUrl,
+                    },
+                ],
             });
         }
 
         return success({
             httpStatusCode: 200,
-            resource: resp.body as HealthCheck
+            resource: resp.body as HealthCheck,
         });
     }
 }
