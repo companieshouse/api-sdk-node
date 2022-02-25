@@ -181,15 +181,19 @@ describe("order a certificate GET", () => {
     it("returns an error response on failure", async () => {
         const mockGetResponse = {
             status: 401,
-            error: "An error occurred"
+            error: {
+                errors: [{ error: "An error occurred" }]
+            }
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT");
+        const result = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(result.isFailure()).to.be.true;
+        expect(result.isSuccess()).to.be.false;
+        expect(result.value.httpStatusCode).to.equal(401);
+        expect(result.value.errors[0].error).to.equal("An error occurred");
     });
 
     it("maps the certificate field data items correctly", async () => {
@@ -198,10 +202,10 @@ describe("order a certificate GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT");
-        const resourceItemOptions = data.resource.itemOptions;
+        const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
+        const resourceItemOptions = data.value.resource.itemOptions;
         const resourceDirectorDetails = resourceItemOptions.directorDetails;
         const resourceDesignatedMemberDetails = resourceItemOptions.designatedMemberDetails;
         const resourcePrincipalPlaceOfBusinessDetails = resourceItemOptions.principalPlaceOfBusinessDetails;
@@ -210,7 +214,7 @@ describe("order a certificate GET", () => {
         const resourceGeneralPartnerDetails = resourceItemOptions.generalPartnerDetails;
         const resourceRegisteredOfficeAddressDetails = resourceItemOptions.registeredOfficeAddressDetails;
         const resourceSecretaryDetails = resourceItemOptions.secretaryDetails;
-        const resourceItemCosts = data.resource.itemCosts;
+        const resourceItemCosts = data.value.resource.itemCosts;
         const mockItemOptions = mockResponseBody.item_options;
         const mockDirectorDetails = mockItemOptions.director_details;
         const mockRegisteredOfficeAddressDetails = mockItemOptions.registered_office_address_details;
@@ -225,15 +229,15 @@ describe("order a certificate GET", () => {
         const mockCompanyStatus = mockItemOptions.company_status;
         const mockAdministratorsDetails = mockItemOptions.administrators_details;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
-        expect(data.resource.description).to.equal(mockResponseBody.description);
-        expect(data.resource.descriptionIdentifier).to.equal(mockResponseBody.description_identifier);
-        expect(data.resource.descriptionValues.key).to.equal(mockResponseBody.description_values.key);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.id).to.equal(mockResponseBody.id);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(data.value.resource.companyName).to.equal(mockResponseBody.company_name);
+        expect(data.value.resource.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(data.value.resource.customerReference).to.equal(mockResponseBody.customer_reference);
+        expect(data.value.resource.description).to.equal(mockResponseBody.description);
+        expect(data.value.resource.descriptionIdentifier).to.equal(mockResponseBody.description_identifier);
+        expect(data.value.resource.descriptionValues.key).to.equal(mockResponseBody.description_values.key);
+        expect(data.value.resource.etag).to.equal(mockResponseBody.etag);
+        expect(data.value.resource.id).to.equal(mockResponseBody.id);
         expect(resourceItemCosts.length).to.equal(1);
         expect(resourceItemCosts[0].calculatedCost).to.equal(mockItemCosts[0].calculated_cost);
         expect(resourceItemCosts[0].discountApplied).to.equal(mockItemCosts[0].discount_applied);
@@ -281,12 +285,12 @@ describe("order a certificate GET", () => {
         expect(resourceSecretaryDetails.includeNationality).to.equal(mockSecretaryDetails.include_nationality);
         expect(resourceSecretaryDetails.includeOccupation).to.equal(mockSecretaryDetails.include_occupation);
         expect(resourceItemOptions.surname).to.equal(mockItemOptions.surname);
-        expect(data.resource.kind).to.equal(mockResponseBody.kind);
-        expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(data.resource.postageCost).to.equal(mockResponseBody.postage_cost);
-        expect(data.resource.postalDelivery).to.equal(mockResponseBody.postal_delivery);
-        expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
-        expect(data.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
+        expect(data.value.resource.kind).to.equal(mockResponseBody.kind);
+        expect(data.value.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(data.value.resource.postageCost).to.equal(mockResponseBody.postage_cost);
+        expect(data.value.resource.postalDelivery).to.equal(mockResponseBody.postal_delivery);
+        expect(data.value.resource.quantity).to.equal(mockResponseBody.quantity);
+        expect(data.value.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
         expect(resourceItemOptions.liquidatorsDetails.includeBasicInformation).to.equal(mockLiquidatorsDetails.include_basic_information);
         expect(resourceItemOptions.companyStatus).to.equal(mockCompanyStatus);
         expect(resourceItemOptions.administratorsDetails.includeBasicInformation).to.equal(mockAdministratorsDetails.include_basic_information);
@@ -298,10 +302,10 @@ describe("order a certificate GET", () => {
             body: mockResponseBodyMissingFields
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT");
-        const resourceItemOptions = data.resource.itemOptions;
+        const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
+        const resourceItemOptions = data.value.resource.itemOptions;
         const resourceDirectorDetails = resourceItemOptions.directorDetails;
         const resourceRegisteredOfficeAddressDetails = resourceItemOptions.registeredOfficeAddressDetails;
         const resourceSecretaryDetails = resourceItemOptions.secretaryDetails;
@@ -310,19 +314,19 @@ describe("order a certificate GET", () => {
         const resourceMemberDetails = resourceItemOptions.memberDetails;
         const resourceLimitedPartnerDetails = resourceItemOptions.limitedPartnerDetails;
         const resourceGeneralPartnerDetails = resourceItemOptions.generalPartnerDetails;
-        const resourceItemCosts = data.resource.itemCosts;
+        const resourceItemCosts = data.value.resource.itemCosts;
         const mockItemOptions = mockResponseBodyMissingFields.item_options;
         const mockItemCosts = mockResponseBodyMissingFields.item_costs;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyName).to.equal(mockResponseBodyMissingFields.company_name);
-        expect(data.resource.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
-        expect(data.resource.description).to.equal(mockResponseBodyMissingFields.description);
-        expect(data.resource.descriptionIdentifier).to.equal(mockResponseBodyMissingFields.description_identifier);
-        expect(data.resource.descriptionValues.key).to.equal(mockResponseBodyMissingFields.description_values.key);
-        expect(data.resource.etag).to.equal(mockResponseBodyMissingFields.etag);
-        expect(data.resource.id).to.equal(mockResponseBodyMissingFields.id);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(data.value.resource.companyName).to.equal(mockResponseBodyMissingFields.company_name);
+        expect(data.value.resource.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
+        expect(data.value.resource.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
+        expect(data.value.resource.description).to.equal(mockResponseBodyMissingFields.description);
+        expect(data.value.resource.descriptionIdentifier).to.equal(mockResponseBodyMissingFields.description_identifier);
+        expect(data.value.resource.descriptionValues.key).to.equal(mockResponseBodyMissingFields.description_values.key);
+        expect(data.value.resource.etag).to.equal(mockResponseBodyMissingFields.etag);
+        expect(data.value.resource.id).to.equal(mockResponseBodyMissingFields.id);
         expect(resourceItemCosts.length).to.equal(1);
         expect(resourceItemCosts[0].calculatedCost).to.equal(mockItemCosts[0].calculated_cost);
         expect(resourceItemCosts[0].discountApplied).to.equal(mockItemCosts[0].discount_applied);
@@ -361,12 +365,12 @@ describe("order a certificate GET", () => {
         expect(resourceSecretaryDetails?.includeNationality).to.be.undefined;
         expect(resourceSecretaryDetails?.includeOccupation).to.be.undefined;
         expect(resourceItemOptions.surname).to.equal(mockItemOptions.surname);
-        expect(data.resource.kind).to.equal(mockResponseBodyMissingFields.kind);
-        expect(data.resource.links.self).to.equal(mockResponseBodyMissingFields.links.self);
-        expect(data.resource.postageCost).to.equal(mockResponseBodyMissingFields.postage_cost);
-        expect(data.resource.postalDelivery).to.equal(mockResponseBodyMissingFields.postal_delivery);
-        expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
-        expect(data.resource.totalItemCost).to.equal(mockResponseBodyMissingFields.total_item_cost);
+        expect(data.value.resource.kind).to.equal(mockResponseBodyMissingFields.kind);
+        expect(data.value.resource.links.self).to.equal(mockResponseBodyMissingFields.links.self);
+        expect(data.value.resource.postageCost).to.equal(mockResponseBodyMissingFields.postage_cost);
+        expect(data.value.resource.postalDelivery).to.equal(mockResponseBodyMissingFields.postal_delivery);
+        expect(data.value.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
+        expect(data.value.resource.totalItemCost).to.equal(mockResponseBodyMissingFields.total_item_cost);
         expect(resourceItemOptions.liquidatorsDetails?.includeBasicInformation).to.be.undefined;
         expect(resourceItemOptions.companyStatus).to.be.undefined;
         expect(resourceItemOptions.administratorsDetails?.includeBasicInformation).to.be.undefined;
@@ -463,7 +467,7 @@ describe("create a certificate POST", () => {
             }
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.postCertificate(mockRequestBody) as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>
         const errResponse = data.value
@@ -478,7 +482,7 @@ describe("create a certificate POST", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
         const certificateItem = data.value.resource
@@ -542,7 +546,7 @@ describe("create a certificate POST", () => {
             body: mockResponseBodyMissingFields
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
         const certificateItem = data.value.resource
@@ -658,15 +662,21 @@ describe("update a certificate PATCH", () => {
     it("returns an error response on failure", async () => {
         const mockPatchRequest = {
             status: 401,
-            error: "An error occurred"
+            error: {
+                errors: [{
+                    error: "An error occurred"
+                }]
+            }
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+        sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.patchCertificate(mockRequestBody, certificateId);
+        const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.isFailure()).to.be.true;
+        expect(data.isSuccess()).to.be.false;
+        expect(data.value.httpStatusCode).to.equal(401);
+        expect(data.value.errors[0].error).to.equal("An error occurred");
     });
 
     it("maps patch a certificate correctly", async () => {
@@ -675,15 +685,15 @@ describe("update a certificate PATCH", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+        sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.patchCertificate(mockRequestBody, certificateId);
-        const io = data.resource.itemOptions;
+        const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
+        const io = data.value.resource.itemOptions;
         const mockIo = mockResponseBody.item_options;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(data.value.resource.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(data.value.resource.customerReference).to.equal(mockResponseBody.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
         expect(io.companyType).to.equal(mockIo.company_type);
@@ -726,7 +736,7 @@ describe("update a certificate PATCH", () => {
         expect(io.secretaryDetails.includeNationality).to.equal(mockIo.secretary_details.include_nationality);
         expect(io.secretaryDetails.includeOccupation).to.equal(mockIo.secretary_details.include_occupation);
         expect(io.surname).to.equal(mockIo.surname);
-        expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
+        expect(data.value.resource.quantity).to.equal(mockResponseBody.quantity);
         expect(io.liquidatorsDetails.includeBasicInformation).to.equal(mockIo.liquidators_details.include_basic_information);
         expect(io.companyStatus).to.equal(mockIo.company_status);
         expect(io.administratorsDetails.includeBasicInformation).to.equal(mockIo.administrators_details.include_basic_information);
@@ -738,15 +748,15 @@ describe("update a certificate PATCH", () => {
             body: mockResponseBodyMissingFields
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+        sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
-        const data = await certificate.patchCertificate(mockRequestBody, certificateId);
-        const io = data.resource.itemOptions;
+        const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
+        const io = data.value.resource.itemOptions;
         const mockIo = mockResponseBodyMissingFields.item_options;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
+        expect(data.value.httpStatusCode).to.equal(200);
+        expect(data.value.resource.companyNumber).to.equal(mockResponseBodyMissingFields.company_number);
+        expect(data.value.resource.customerReference).to.equal(mockResponseBodyMissingFields.customer_reference);
         expect(io.certificateType).to.equal(mockIo.certificate_type);
         expect(io.collectionLocation).to.equal(mockIo.collection_location);
         expect(io.contactNumber).to.equal(mockIo.contact_number);
@@ -761,7 +771,7 @@ describe("update a certificate PATCH", () => {
         expect(io.registeredOfficeAddressDetails).to.be.undefined;
         expect(io.secretaryDetails).to.be.undefined;
         expect(io.surname).to.be.undefined;
-        expect(data.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
+        expect(data.value.resource.quantity).to.equal(mockResponseBodyMissingFields.quantity);
         expect(io.liquidatorsDetails).to.be.undefined;
         expect(io.companyStatus).to.be.undefined;
         expect(io.administratorsDetails).to.be.undefined;
