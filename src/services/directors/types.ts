@@ -41,3 +41,22 @@ export interface Details {
 export interface Ping {
     status: string;
 }
+
+export interface Personal {
+    date_of_birth: string;
+    forename: string;
+    surname: string;
+}
+
+export interface Links {
+    selflink: string;
+}
+
+export interface Directorship {
+    id: string;
+    personal: Personal;
+    appointment_id?: string;
+    company_number?: string;
+    appointed_on: string;
+    links: Links;
+}
