@@ -8,9 +8,9 @@ export default class {
     private directorsApiEndpoint = "/directors-poc";
     private healthCheckEndpoint = "/healthCheck";
     private directorsTransactionEndpoint =
-        "/transactions/:transactionId/directors-poc/directors";
+        "/transactions/:transactionId/directors";
 
-    constructor(private readonly client: IHttpClient) {}
+    constructor(private readonly client: IHttpClient) { }
 
     private getUpdateTransactionEndpoint(transactionId: string): string {
         return this.directorsTransactionEndpoint.replace(
