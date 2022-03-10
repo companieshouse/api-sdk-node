@@ -6,7 +6,7 @@ import "url-search-params-polyfill";
 export default class AdvancedSearchService {
     constructor (private readonly client: IHttpClient) { }
     public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, dissolvedFrom: string | null,
+        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
         dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
         const START_INDEX_QUERY = "start_index";
         const COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
@@ -17,6 +17,7 @@ export default class AdvancedSearchService {
         const SIC_CODES_QUERY = "sic_codes";
         const COMPANY_STATUS_QUERY = "company_status";
         const COMPANY_TYPE_QUERY = "company_type";
+        const COMPANY_SUBTYPE_QUERY = "company_subtype";
         const DISSOLVED_FROM_QUERY_PARAMETER = "dissolved_from";
         const DISSOLVED_TO_QUERY_PARAMETER = "dissolved_to";
         const SIZE_QUERY_PARAMETER = "size";
@@ -61,6 +62,10 @@ export default class AdvancedSearchService {
 
         if (companyType !== null) {
             buildAdvancedSearchURL.append(COMPANY_TYPE_QUERY, companyType)
+        }
+
+        if (companySubtype !== null) {
+            buildAdvancedSearchURL.append(COMPANY_SUBTYPE_QUERY, companySubtype)
         }
 
         if (dissolvedFrom !== null) {

@@ -17,6 +17,7 @@ const mockResponseBody : CompaniesResource = ({
         company_number: "0000789",
         company_status: "active",
         company_type: "company type",
+        company_subtype: "company subtype",
         kind: "kind",
         links: {
             company_profile: "/company/FC022000"
@@ -42,6 +43,7 @@ const mockResponseBody : CompaniesResource = ({
             company_number: "0000789",
             company_status: "active",
             company_type: "company type",
+            company_subtype: "company subtype",
             kind: "kind",
             links: {
                 company_profile: "/company/FC022000"
@@ -76,6 +78,7 @@ const testIncorporatedTo = "TEST INCORPORATED TO";
 const testSicCodes = "999999";
 const testCompanyStatus = "TEST COMPANY STATUS";
 const testCompanyType = "TEST COMPANY TYPE";
+const testCompanySubtype = "TEST COMPANY SUBTYPE"
 const testDissolvedFrom = "TEST DISSOLVED FROM";
 const testDissolvedTo = "TEST DISSOLVED TO";
 const searchType = "advanced";
@@ -102,7 +105,7 @@ describe("create an advanced search GET", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
-            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.resource).to.be.undefined;
@@ -117,7 +120,7 @@ describe("create an advanced search GET", () => {
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
-            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyNameIncludes, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
+            testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
         const item = data.resource.items[0];
         const mockItem = mockResponseBody.items[0];
 
@@ -127,6 +130,7 @@ describe("create an advanced search GET", () => {
         expect(data.resource.top_hit.company_number).to.equal(mockResponseBody.top_hit.company_number);
         expect(data.resource.top_hit.company_status).to.equal(mockResponseBody.top_hit.company_status);
         expect(data.resource.top_hit.company_type).to.equal(mockResponseBody.top_hit.company_type);
+        expect(data.resource.top_hit.company_subtype).to.equal(mockResponseBody.top_hit.company_subtype);
         expect(data.resource.top_hit.kind).to.equal(mockResponseBody.top_hit.kind);
         expect(data.resource.top_hit.links.company_profile).to.equal(mockResponseBody.top_hit.links.company_profile);
         expect(data.resource.top_hit.date_of_cessation).to.equal(mockResponseBody.top_hit.date_of_cessation);
@@ -142,6 +146,7 @@ describe("create an advanced search GET", () => {
         expect(item.company_number).to.equal(mockItem.company_number);
         expect(item.company_status).to.equal(mockItem.company_status);
         expect(item.company_type).to.equal(mockItem.company_type);
+        expect(item.company_subtype).to.equal(mockItem.company_subtype);
         expect(item.kind).to.equal(mockItem.kind);
         expect(item.links.company_profile).to.equal(mockItem.links.company_profile);
         expect(item.date_of_cessation).to.equal(mockItem.date_of_cessation);

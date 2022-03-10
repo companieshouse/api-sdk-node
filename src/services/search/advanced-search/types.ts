@@ -11,6 +11,7 @@ export interface Items {
     company_number: string;
     company_status: string;
     company_type: string;
+    company_subtype: string;
     kind: string;
     links: Links;
     date_of_cessation: Date;
@@ -34,6 +35,7 @@ export interface TopHit {
     company_number: string;
     company_status: string;
     company_type: string;
+    company_subtype: string;
     kind: string;
     links: Links;
     date_of_cessation: Date;
