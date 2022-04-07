@@ -15,6 +15,7 @@ import PSCDiscrepanciesReportService from "./services/psc-discrepancies-report/s
 import TransactionService from "./services/transaction/service";
 import CompanyPscStatementsService from "./services/company-psc-statements/service";
 import { ConfirmationStatementService } from "./services/confirmation-statement";
+import { OverseasEntityService } from "./services/overseas-entities";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -41,6 +42,7 @@ export default class ApiClient {
   public readonly pscDiscrepancies: PSCDiscrepancyService;
   public readonly pscDiscrepancyReport: PSCDiscrepanciesReportService;
   public readonly transaction: TransactionService;
+  public readonly overseasEntity: OverseasEntityService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -61,6 +63,7 @@ export default class ApiClient {
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
       this.dissolvedSearch = new DissolvedSearchService(apiClient);
       this.advancedSearch = new AdvancedSearchService(apiClient);
+      this.overseasEntity = new OverseasEntityService(apiClient);
       // service on the account/identity domain using the accountClient
       // e.g. user profile service can be added here when required
       this.refreshToken = new RefreshTokenService(accountClient);

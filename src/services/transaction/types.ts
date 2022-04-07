@@ -37,7 +37,7 @@ export interface Transaction {
     status?: string,
     kind?: string,
     companyName?: string,
-    companyNumber: string,
+    companyNumber?: string,
     createdAt?: string,
     createdBy?: {
         language: string,
