@@ -6,12 +6,6 @@ export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
 }
-
-export interface OverseasEntityResource {
-    presenter?: PresenterResource;
-    entity?: EntityResource;
-}
-
 export interface OverseasEntityCreated {
     id: string
 }
@@ -19,42 +13,20 @@ export interface OverseasEntityCreated {
 /**
  * Overseas Entities interface used on OverseasEntity object
  */
-
 export interface Presenter {
-    fullName?: string
-    phoneNumber?: string
-    role?: presenterRole
-    roleTitle?: string
-    registrationNumber?: number
-}
-
-export interface PresenterResource {
     full_name?: string
     phone_number?: string
     role?: presenterRole
     role_title?: string
-    anti_money_laundering_registration_number?: number
+    anti_money_laundering_registration_number?: string
 }
 
 export interface Entity {
-    overseasEntityName?: string
-    incorporationCountry?: string
-    principalAddress?: Address
-    isAddressSameAsPrincipalAddress?: yesNoResponse
-    serviceAddress?: Address
-    email?: string
-    legalForm?: string
-    governedLaw?: string
-    publicRegister?: string
-    registrationNumber?: string
-}
-
-export interface EntityResource {
     name?: string
     incorporation_country?: string
-    principal_address?: AddressResource
+    principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
-    service_address?: AddressResource
+    service_address?: Address
     email?: string
     legal_form?: string
     law_governed?: string
@@ -65,18 +37,7 @@ export interface EntityResource {
 /**
  * Shared Data Type
  */
-
- interface Address {
-    propertyNameNumber?: string
-    addressLine1?: string
-    addressLine2?: string
-    town?: string
-    county?: string
-    country?: string
-    postcode?: string
-}
-
-interface AddressResource {
+export interface Address {
     property_name_number?: string
     line_1?: string
     line_2?: string
@@ -95,7 +56,6 @@ enum presenterRole {
     administrator = "administrator",
     agent = "agent",
     solicitor = "solicitor",
-    beneficialOwner = "beneficialOwner",
     beneficial_owner = "beneficial_owner",
     other = "other"
 }
