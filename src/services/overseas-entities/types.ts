@@ -5,11 +5,6 @@
 export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
-    beneficialOwnerIndividual?: BeneficialOwnerIndividual[];
-    beneficialOwnerOther?: BeneficialOwnerOther[];
-    beneficialOwnerGov?: BeneficialOwnerGov[];
-    managingOfficerIndividual?: ManagingOfficerIndividual[];
-    managingOfficerCorporate?: ManagingOfficerCorporate[];
 }
 
 export interface OverseasEntityResource {
@@ -51,79 +46,20 @@ export interface Entity {
     legalForm?: string
     governedLaw?: string
     publicRegister?: string
-    registrationNumber?: number
+    registrationNumber?: string
 }
 
 export interface EntityResource {
     name?: string
     incorporation_country?: string
-    principal_address?: Address
+    principal_address?: AddressResource
     is_service_address_same_as_principal_address?: yesNoResponse
-    service_address?: Address
+    service_address?: AddressResource
     email?: string
     legal_form?: string
     law_governed?: string
-    public_register_entity_registered_on?: string
+    public_register_name?: string
     registration_number?: string
-}
-
-export interface BeneficialOwnerIndividual {
-    fullName?: string
-    dateOfBirth?: InputDate
-    ownerNationality?: string
-    usualResidentialAddress?: Address
-    isAddressSameAsUsusalResidentialAddress?: yesNoResponse
-    serviceAddress?: Address
-    startDate?: InputDate
-    natureOfControl?: natureOfControl
-    trustee?: yesNoResponse
-    onSanctionsList?: yesNoResponse
-}
-
-export interface BeneficialOwnerOther {
-    corporationName?: string
-    principalAddress?: Address
-    isSameAddress?: yesNoResponse
-    serviceAddress?: Address
-    lawGoverned?: string
-    startDate?: InputDate
-    natureOfControl?: natureOfControl
-    statementCondition?: statementCondition
-    isSanctioned?: yesNoResponse
-}
-
-export interface BeneficialOwnerGov {
-    corporationName?: string
-    principalAddress?: Address
-    serviceAddress?: Address
-    isServiceAddressSameAsPrincipalAddress?: yesNoResponse
-    corporationLawGoverned?: string
-    corporationStartDate?: InputDate
-    corporationNatureOfControl?: corpNatureOfControl
-    isOnSanctionsList?: yesNoResponse
-}
-
-export interface ManagingOfficerIndividual {
-    fullName?: string
-    hasAFormerName?: yesNoResponse
-    formerName?: string
-    dateOfBirth?: InputDate
-    nationality?: string
-    usualResidentialAddress?: Address
-    businessOccupation?: string
-    roleAndResponsibilities?: string
-}
-
-export interface ManagingOfficerCorporate {
-    officerName?: string,
-    usualResidentialAddress?: Address,
-    serviceAddress?: Address,
-    isSameAddress?: yesNoResponse,
-    whereOfficerRegistered?: string,
-    legalForm?: string,
-    legalAuthority?: string,
-    registrationNumber?: string,
-    startDate?: InputDate
 }
 
 /**
@@ -153,30 +89,6 @@ interface AddressResource {
 enum yesNoResponse {
     No = 0,
     Yes = 1
-}
-
-interface InputDate {
-    day: number
-    month: number
-    year: number
-}
-
-enum natureOfControl {
-    over25upTo50Percent = "25",
-    over50under75Percent = "50",
-    atLeast75Percent = "75"
-}
-
-enum corpNatureOfControl {
-    shares = "shares",
-    voting = "voting",
-    appoint = "appoint",
-    influence = "influence"
-}
-
-enum statementCondition {
-    statement1 = "statement1",
-    statement2 = "statement2"
 }
 
 enum presenterRole {

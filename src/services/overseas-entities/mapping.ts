@@ -34,7 +34,7 @@ const mapEntity = (body: Entity): EntityResource => {
         email: body.email,
         legal_form: body.legalForm,
         law_governed: body.governedLaw,
-        public_register_entity_registered_on: body.publicRegister,
-        registration_number: "" + body.registrationNumber
+        public_register_name: body.publicRegister,
+        registration_number: body.registrationNumber
     }
 };
