@@ -5,6 +5,7 @@ import sinon from "sinon";
 import * as mockValues from "./overseas.entities.mock";
 import { OverseasEntityCreated, OverseasEntityService } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
+import { mapOverseasEntity } from "../../../src/services/overseas-entities/mapping";
 
 describe("OverseasEntityService Tests suite", () => {
     beforeEach(() => {
@@ -38,5 +39,16 @@ describe("OverseasEntityService Tests suite", () => {
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.errors[0]).to.equal(mockValues.UNAUTHORISED);
+    });
+});
+
+describe("Mapping OverseasEntity Tests suite", () => {
+    it("should return OverseasEntity object from mapOverseasEntity method", async () => {
+        const data = mapOverseasEntity({
+            presenter: mockValues.PRESENTER_OBJECT_MOCK,
+            entity: mockValues.ENTITY_OBJECT_MOCK
+        });
+
+        expect(data).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK);
     });
 });
