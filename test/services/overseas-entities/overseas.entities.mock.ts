@@ -44,6 +44,6 @@ export const UNAUTHORISED = "Unauthorised";
 
 export const mockOverseasEntityCreatedResource: OverseasEntityCreated = { id: "00112233" };
 export const mockPostOverseasEntityResponse = {
-    200: { status: 200, body: mockOverseasEntityCreatedResource },
+    201: { status: 201, body: mockOverseasEntityCreatedResource },
     401: { status: 401, error: UNAUTHORISED }
 };
