@@ -20,14 +20,14 @@ describe("OverseasEntityService Tests suite", () => {
     });
 
     it("should return object Id for postOverseasEntity method", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[200]);
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[201]);
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = (await oeService.postOverseasEntity(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_OBJECT_MOCK
         )) as Resource<OverseasEntityCreated>;
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).to.equal(201);
         expect(data.resource.id).to.equal(mockValues.mockOverseasEntityCreatedResource.id);
     });
 
