@@ -16,6 +16,7 @@ import TransactionService from "./services/transaction/service";
 import CompanyPscStatementsService from "./services/company-psc-statements/service";
 import { ConfirmationStatementService } from "./services/confirmation-statement";
 import { OverseasEntityService } from "./services/overseas-entities";
+import { OrderSearchService } from "./services/order/search/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -34,6 +35,7 @@ export default class ApiClient {
   public readonly payment: PaymentService;
   public readonly checkout: CheckoutService;
   public readonly order: OrderService;
+  public readonly orderSearchService: OrderSearchService;
   public readonly mid : MidService;
   public readonly refreshToken: RefreshTokenService;
   public readonly alphabeticalSearch: AlphabeticalSearchService;
@@ -59,6 +61,7 @@ export default class ApiClient {
       this.payment = new PaymentService(apiClient); // TODO split payments url/domain into a separate config item and http client
       this.checkout = new CheckoutService(apiClient);
       this.order = new OrderService(apiClient);
+      this.orderSearchService = new OrderSearchService(apiClient);
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
       this.dissolvedSearch = new DissolvedSearchService(apiClient);
