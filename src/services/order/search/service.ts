@@ -11,7 +11,7 @@ export class OrderSearchService {
     public async search (request: SearchRequest): Promise<ApiResult<ApiResponse<SearchResponse>>> {
         const serverRequest = Mapping.snakeCaseKeys(request);
         const queryParams = Object.keys(serverRequest).map(key => key + "=" + serverRequest[key]).join("&");
-        const serverResponse = await this.client.httpGet("/orders/search" + queryParams ? "?" + queryParams : "");
+        const serverResponse = await this.client.httpGet("/orders/search" + (queryParams ? ("?" + queryParams) : ""));
         const response: ApiResponse<SearchResponse> = {
             httpStatusCode: serverResponse.status
         };
