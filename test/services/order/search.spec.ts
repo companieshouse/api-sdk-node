@@ -1,6 +1,6 @@
 import sinon from "sinon";
 import { RequestClient } from "../../../src";
-import { OrderSearchService, SearchResponse } from "../../../src/services/order/search";
+import { OrderSearchService, OrderSummary, SearchResponse } from "../../../src/services/order/search";
 import { expect } from "chai";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
@@ -10,13 +10,22 @@ const requestClient = new RequestClient({
     oauthToken: "TOKEN-NOT-USED"
 });
 
-const expectedOrderSummary = {
+const expectedOrderSummary: OrderSummary = {
     id: "ORD-123123-123123",
     email: "demo@ch.gov.uk",
     companyNumber: "12345678",
     productLine: "Certificate",
     orderDate: "01/01/1980",
-    paymentStatus: "paid"
+    paymentStatus: "paid",
+    links: {
+        self: {
+            link: "/path/to/orders"
+        },
+        order: {
+            link: "/path/to/orders"
+        }
+    }
+
 };
 
 describe("OrderSearchService", () => {
