@@ -1,5 +1,5 @@
 export interface SearchRequest {
-    orderNumber?: string;
+    id?: string;
     email?: string;
     companyNumber?: string;
 }

@@ -113,12 +113,12 @@ describe("OrderSearchService", () => {
         const mock = sinon.mock(requestClient);
         mock.expects("httpGet")
             .returns(serverResponse)
-            .calledWithExactly("/orders/search?order_number=ORD-123123-123123&email=demo@ch.gov.uk&company_number=12345678");
+            .calledWithExactly("/orders/search?id=ORD-123123-123123&email=demo@ch.gov.uk&company_number=12345678");
         const searchService: OrderSearchService = new OrderSearchService(requestClient);
 
         // when {results are fetched from the search endpoint with multiple criteria specified}
         const clientResult = await searchService.search({
-            orderNumber: "ORD-123123-123123",
+            id: "ORD-123123-123123",
             email: "demo@ch.gov.uk",
             companyNumber: "12345678"
         }) as Success<ApiResponse<SearchResponse>, ApiErrorResponse>;
