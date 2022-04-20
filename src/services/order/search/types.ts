@@ -1,5 +1,5 @@
 export interface SearchRequest {
-    orderNumber?: string;
+    id?: string;
     email?: string;
     companyNumber?: string;
 }
@@ -16,5 +16,14 @@ export interface OrderSummary {
     productLine: string;
     orderDate: string;
     paymentStatus: string;
-    resourceLink: string;
+    links: Links;
+}
+
+export interface Links {
+    self: Link;
+    order?: Link;
+}
+
+export interface Link {
+    link: string;
 }
