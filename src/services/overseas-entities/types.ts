@@ -5,6 +5,7 @@
 export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
+    beneficial_owners_statement?: BeneficialOwnersStatement;
 }
 export interface OverseasEntityCreated {
     id: string
@@ -34,6 +35,10 @@ export interface Entity {
     registration_number?: string
 }
 
+export interface BeneficialOwnersStatement {
+    beneficial_owners_statement?: BeneficialOwnersStatementType
+}
+
 /**
  * Shared Data Type
  */
@@ -58,4 +63,12 @@ enum presenterRole {
     solicitor = "solicitor",
     beneficial_owner = "beneficial_owner",
     other = "other"
+}
+
+enum BeneficialOwnersStatementType {
+    all_identified_all_details = "all_identified_all_details",
+    all_identified_some_details = "all_identified_some_details",
+    some_identified_all_details = "some_identified_all_details",
+    some_identified_some_details = "some_identified_some_details",
+    none_identified = "none_identified"
 }
