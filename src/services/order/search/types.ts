@@ -2,6 +2,7 @@ export interface SearchRequest {
     id?: string;
     email?: string;
     companyNumber?: string;
+    pageSize: number;
 }
 
 export interface SearchResponse {
