@@ -5,7 +5,7 @@
 export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
-    beneficial_owners_statement?: BeneficialOwnersStatement;
+    beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividual[];
     beneficial_owners_corporate?: BeneficialOwnerCorporate[];
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
@@ -36,10 +36,6 @@ export interface Entity {
     law_governed?: string
     public_register_name?: string
     registration_number?: string
-}
-
-export interface BeneficialOwnersStatement {
-    beneficial_owners_statement?: BeneficialOwnersStatementType
 }
 
 export interface BeneficialOwnerIndividual {

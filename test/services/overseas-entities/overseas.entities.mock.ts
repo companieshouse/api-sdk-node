@@ -4,7 +4,7 @@ import {
     BeneficialOwnerCorporate,
     BeneficialOwnerGovernmentOrPublicAuthority,
     BeneficialOwnerIndividual,
-    BeneficialOwnersStatement, BeneficialOwnersStatementType,
+    BeneficialOwnersStatementType,
     Entity, NatureOfControlType,
     OverseasEntity,
     OverseasEntityCreated,
@@ -40,10 +40,6 @@ export const ENTITY_OBJECT_MOCK: Entity = {
     law_governed: "governedLaw",
     public_register_name: "publicRegister",
     registration_number: "123"
-};
-
-export const BENEFICIAL_OWNER_STATEMENT_MOCK: BeneficialOwnersStatement = {
-    beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details
 };
 
 export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] = [
@@ -102,7 +98,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
-    beneficial_owners_statement: BENEFICIAL_OWNER_STATEMENT_MOCK,
+    beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST
