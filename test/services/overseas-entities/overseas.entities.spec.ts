@@ -3,7 +3,11 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
-import { OverseasEntityCreated, OverseasEntityService } from "../../../src/services/overseas-entities";
+import {
+    BeneficialOwnersStatementType,
+    OverseasEntityCreated,
+    OverseasEntityService
+} from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity } from "../../../src/services/overseas-entities/mapping";
 
@@ -46,9 +50,19 @@ describe("Mapping OverseasEntity Tests suite", () => {
     it("should return OverseasEntity object from mapOverseasEntity method", async () => {
         const data = mapOverseasEntity({
             presenter: mockValues.PRESENTER_OBJECT_MOCK,
-            entity: mockValues.ENTITY_OBJECT_MOCK
+            entity: mockValues.ENTITY_OBJECT_MOCK,
+            beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details,
+            beneficial_owners_individual: mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
+            beneficial_owners_corporate: mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
+            beneficial_owners_government_or_public_authority: mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST
         });
 
-        expect(data).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK);
+        expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.presenter);
+        expect(data.entity).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.entity);
+        expect(data.beneficial_owners_statement).to.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_statement);
+        expect(data.beneficial_owners_individual[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_individual[0]);
+        expect(data.beneficial_owners_corporate[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_corporate[0]);
+        expect(data.beneficial_owners_government_or_public_authority[0]).to.deep.equal(
+            mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_government_or_public_authority[0]);
     });
 });
