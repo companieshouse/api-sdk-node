@@ -41,15 +41,15 @@ export interface Entity {
 export interface BeneficialOwnerIndividual {
     first_name?: string
     last_name?: string
-    date_of_birth?: string
+    date_of_birth?: InputDate
     nationality?: string
     usual_residential_address?: Address
     service_address?: Address
     is_service_address_same_as_usual_residential_address?: yesNoResponse
-    start_date?: string
-    beneficial_owner_nature_of_control_types?: NatureOfControlType
-    trustees_nature_of_control_types?: NatureOfControlType
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType
+    start_date?: InputDate
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    trustees_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
     is_on_sanctions_list?: yesNoResponse
 }
 
@@ -101,6 +101,12 @@ export enum yesNoResponse {
     No = 0,
     Yes = 1
 }
+
+export interface InputDate {
+    day: string;
+    month: string;
+    year: string;
+  }
 
 enum presenterRole {
     administrator = "administrator",

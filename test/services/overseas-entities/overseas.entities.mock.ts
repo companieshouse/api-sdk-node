@@ -46,15 +46,15 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] 
     {
         first_name: "Joe",
         last_name: "Bloggs",
-        date_of_birth: "",
+        date_of_birth: { day: "1", month: "1", year: "1950" },
         nationality: "Utopian",
         usual_residential_address: ADDRESS,
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
-        start_date: "",
-        beneficial_owner_nature_of_control_types: NatureOfControlType.over_25_percent_of_shares,
-        trustees_nature_of_control_types: NatureOfControlType.appoint_or_remove_majority_board_directors,
-        non_legal_firm_members_nature_of_control_types: NatureOfControlType.significant_influence_or_control,
+        start_date: { day: "1", month: "1", year: "2012" },
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
+        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
