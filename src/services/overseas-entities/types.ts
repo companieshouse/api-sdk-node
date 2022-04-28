@@ -10,6 +10,15 @@ export interface OverseasEntity {
     beneficial_owners_corporate?: BeneficialOwnerCorporate[];
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
 }
+
+export interface OverseasEntityResource {
+    presenter?: Presenter;
+    entity?: Entity;
+    beneficial_owners_statement?: BeneficialOwnersStatementType;
+    beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
+    beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
+    beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
+}
 export interface OverseasEntityCreated {
     id: string
 }
@@ -53,7 +62,39 @@ export interface BeneficialOwnerIndividual {
     is_on_sanctions_list?: yesNoResponse
 }
 
+export interface BeneficialOwnerIndividualResource {
+    first_name?: string
+    last_name?: string
+    date_of_birth?: string
+    nationality?: string
+    usual_residential_address?: Address
+    service_address?: Address
+    is_service_address_same_as_usual_residential_address?: yesNoResponse
+    start_date?: string
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    trustees_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    is_on_sanctions_list?: yesNoResponse
+}
+
 export interface BeneficialOwnerCorporate {
+    name?: string
+    principal_address?: Address
+    service_address?: Address
+    is_service_address_same_as_principal_address?: yesNoResponse
+    legal_form?: string
+    law_governed?: string
+    is_on_register_in_country_formed_in?: yesNoResponse
+    register_name?: string
+    registration_number?: string
+    start_date?: InputDate
+    beneficial_owner_nature_of_control_types?: NatureOfControlType
+    trustees_nature_of_control_types?: NatureOfControlType
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType
+    is_on_sanctions_list?: yesNoResponse
+}
+
+export interface BeneficialOwnerCorporateResource {
     name?: string
     principal_address?: Address
     service_address?: Address
