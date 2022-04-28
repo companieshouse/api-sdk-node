@@ -25,8 +25,8 @@ const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual
     const boIndividualResources: BeneficialOwnerIndividualResource[] = [];
     boIndividuals.forEach(boIndividual => {
         const { date_of_birth, start_date, ...rest } = boIndividual;
-        const dobAsString = `${date_of_birth.year}-${date_of_birth.month}-${date_of_birth.day}`;
-        const startDateAsString = `${start_date.year}-${start_date.month}-${start_date.day}`;
+        const dobAsString = `${date_of_birth.year}-${zeroPadNumber(date_of_birth.month)}-${zeroPadNumber(date_of_birth.day)}`;
+        const startDateAsString = `${start_date.year}-${zeroPadNumber(start_date.month)}-${zeroPadNumber(start_date.day)}`;
         boIndividualResources.push({
             date_of_birth: dobAsString,
             start_date: startDateAsString,
@@ -50,11 +50,18 @@ const mapBeneficialOwnersCorporate = (boCorporates?: BeneficialOwnerCorporate[])
     const boCorporateResources: BeneficialOwnerCorporateResource[] = [];
     boCorporates.forEach(boCorporate => {
         const { start_date, ...rest } = boCorporate;
-        const startDateAsString = `${start_date.year}-${start_date.month}-${start_date.day}`;
+        const startDateAsString = `${start_date.year}-${zeroPadNumber(start_date.month)}-${zeroPadNumber(start_date.day)}`;
         boCorporateResources.push({
             start_date: startDateAsString,
             ...rest
         })
     });
     return boCorporateResources;
+}
+
+const zeroPadNumber = (input: string): string => {
+    if (input?.length === 1) {
+        return "0" + input;
+    }
+    return input;
 }
