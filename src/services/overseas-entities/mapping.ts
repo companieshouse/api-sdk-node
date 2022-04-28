@@ -14,8 +14,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
 /**
  * Convert the BeneficialOwnerIndividual array data into the Resource format that the API expects
  * (just converting dates currently)
- * @param boCorporates 
- * @returns 
+ * @param boIndividuals Array of BeneficialOwnerIndividual objects
+ * @returns Array of BeneficialOwnerIndividualResource
  */
 const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual[]): BeneficialOwnerIndividualResource[] => {
     if (!boIndividuals) {
@@ -39,8 +39,8 @@ const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual
 /**
  * Convert the BeneficialOwnerCorporate array data into the Resource format that the API expects
  * (just converting dates currently)
- * @param boCorporates 
- * @returns 
+ * @param boCorporates Array of BeneficialOwnerCorporate objects
+ * @returns Array of BeneficialOwnerCorporateResource
  */
 const mapBeneficialOwnersCorporate = (boCorporates?: BeneficialOwnerCorporate[]): BeneficialOwnerCorporateResource[] => {
     if (!boCorporates) {
