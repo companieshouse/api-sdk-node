@@ -11,6 +11,12 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
     };
 };
 
+/**
+ * Convert the BeneficialOwnerIndividual array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param boCorporates 
+ * @returns 
+ */
 const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual[]): BeneficialOwnerIndividualResource[] => {
     if (!boIndividuals) {
         return {} as BeneficialOwnerIndividualResource[];
@@ -30,14 +36,20 @@ const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual
     return boIndividualResources;
 }
 
+/**
+ * Convert the BeneficialOwnerCorporate array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param boCorporates 
+ * @returns 
+ */
 const mapBeneficialOwnersCorporate = (boCorporates?: BeneficialOwnerCorporate[]): BeneficialOwnerCorporateResource[] => {
     if (!boCorporates) {
         return {} as BeneficialOwnerCorporateResource[];
     }
 
     const boCorporateResources: BeneficialOwnerCorporateResource[] = [];
-    boCorporates.forEach(boIndividual => {
-        const { start_date, ...rest } = boIndividual;
+    boCorporates.forEach(boCorporate => {
+        const { start_date, ...rest } = boCorporate;
         const startDateAsString = `${start_date.year}-${start_date.month}-${start_date.day}`;
         boCorporateResources.push({
             start_date: startDateAsString,
