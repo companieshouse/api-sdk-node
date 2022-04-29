@@ -121,8 +121,8 @@ export interface BeneficialOwnerGovernmentOrPublicAuthority {
     is_on_register_in_country_formed_in?: yesNoResponse
     register_name?: string
     registration_number?: string
-    beneficial_owner_nature_of_control_types?: NatureOfControlType
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
 }
 
 /**

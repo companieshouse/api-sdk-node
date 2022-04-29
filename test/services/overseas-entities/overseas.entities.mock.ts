@@ -95,7 +95,6 @@ export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = 
         trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
         is_on_sanctions_list: yesNoResponse.No
-
     }
 ];
 
@@ -130,8 +129,8 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         register_name: "registerName",
         registration_number: "xyz789",
-        beneficial_owner_nature_of_control_types: NatureOfControlType.over_25_percent_of_shares,
-        non_legal_firm_members_nature_of_control_types: NatureOfControlType.significant_influence_or_control
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control]
     }
 ];
 
