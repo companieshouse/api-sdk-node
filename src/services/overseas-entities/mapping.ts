@@ -17,18 +17,14 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
  * @param boIndividuals Array of BeneficialOwnerIndividual objects
  * @returns Array of BeneficialOwnerIndividualResource
  */
-const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual[]): BeneficialOwnerIndividualResource[] => {
-    if (!boIndividuals) {
-        return {} as BeneficialOwnerIndividualResource[];
-    }
-
+const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[] = []): BeneficialOwnerIndividualResource[] => {
     const boIndividualResources: BeneficialOwnerIndividualResource[] = [];
     boIndividuals.forEach(boIndividual => {
         const { date_of_birth, start_date, ...rest } = boIndividual;
         boIndividualResources.push({
+            ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year),
-            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year),
-            ...rest
+            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
         })
     });
     return boIndividualResources;
@@ -40,17 +36,13 @@ const mapBeneficialOwnersIndividual = (boIndividuals?: BeneficialOwnerIndividual
  * @param boCorporates Array of BeneficialOwnerCorporate objects
  * @returns Array of BeneficialOwnerCorporateResource
  */
-const mapBeneficialOwnersCorporate = (boCorporates?: BeneficialOwnerCorporate[]): BeneficialOwnerCorporateResource[] => {
-    if (!boCorporates) {
-        return {} as BeneficialOwnerCorporateResource[];
-    }
-
+const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] = []): BeneficialOwnerCorporateResource[] => {
     const boCorporateResources: BeneficialOwnerCorporateResource[] = [];
     boCorporates.forEach(boCorporate => {
         const { start_date, ...rest } = boCorporate;
         boCorporateResources.push({
-            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year),
-            ...rest
+            ...rest,
+            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
         })
     });
     return boCorporateResources;
@@ -60,8 +52,8 @@ const convertDateToIsoDateString = (day: string, month: string, year: string): s
     return `${year}-${zeroPadNumber(month)}-${zeroPadNumber(day)}`;
 }
 
-const zeroPadNumber = (input: string): string => {
-    if (input?.length === 1) {
+const zeroPadNumber = (input: string = ""): string => {
+    if (input.length === 1) {
         return "0" + input;
     }
     return input;
