@@ -91,9 +91,9 @@ export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = 
         register_name: "register",
         registration_number: "abc123",
         start_date: { day: "1", month: "12", year: "1950" },
-        beneficial_owner_nature_of_control_types: NatureOfControlType.over_25_percent_of_shares,
-        trustees_nature_of_control_types: NatureOfControlType.appoint_or_remove_majority_board_directors,
-        non_legal_firm_members_nature_of_control_types: NatureOfControlType.significant_influence_or_control,
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
+        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
         is_on_sanctions_list: yesNoResponse.No
 
     }
@@ -111,9 +111,9 @@ export const BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST: BeneficialOwnerCorpo
         register_name: "register",
         registration_number: "abc123",
         start_date: "1950-12-01",
-        beneficial_owner_nature_of_control_types: NatureOfControlType.over_25_percent_of_shares,
-        trustees_nature_of_control_types: NatureOfControlType.appoint_or_remove_majority_board_directors,
-        non_legal_firm_members_nature_of_control_types: NatureOfControlType.significant_influence_or_control,
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
+        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
         is_on_sanctions_list: yesNoResponse.No
 
     }

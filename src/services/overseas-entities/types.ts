@@ -88,9 +88,9 @@ export interface BeneficialOwnerCorporate {
     register_name?: string
     registration_number?: string
     start_date?: InputDate
-    beneficial_owner_nature_of_control_types?: NatureOfControlType
-    trustees_nature_of_control_types?: NatureOfControlType
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    trustees_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
     is_on_sanctions_list?: yesNoResponse
 }
 
@@ -105,9 +105,9 @@ export interface BeneficialOwnerCorporateResource {
     register_name?: string
     registration_number?: string
     start_date?: string
-    beneficial_owner_nature_of_control_types?: NatureOfControlType
-    trustees_nature_of_control_types?: NatureOfControlType
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    trustees_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
     is_on_sanctions_list?: yesNoResponse
 }
 
