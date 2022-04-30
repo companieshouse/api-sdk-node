@@ -158,11 +158,11 @@ enum presenterRole {
 }
 
 export enum BeneficialOwnersStatementType {
-    all_identified_all_details = "all_identified_all_details",
-    all_identified_some_details = "all_identified_some_details",
-    some_identified_all_details = "some_identified_all_details",
-    some_identified_some_details = "some_identified_some_details",
-    none_identified = "none_identified"
+    ALL_IDENTIFIED_ALL_DETAILS = "ALL_IDENTIFIED_ALL_DETAILS",
+    ALL_IDENTIFIED_SOME_DETAILS = "ALL_IDENTIFIED_SOME_DETAILS",
+    SOME_IDENTIFIED_ALL_DETAILS = "SOME_IDENTIFIED_ALL_DETAILS",
+    SOME_IDENTIFIED_SOME_DETAILS = "SOME_IDENTIFIED_SOME_DETAILS",
+    NONE_IDENTIFIED = "NONE_IDENTIFIED"
 }
 
 export enum NatureOfControlType {

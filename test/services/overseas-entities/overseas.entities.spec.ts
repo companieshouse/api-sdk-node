@@ -51,7 +51,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const data = mapOverseasEntity({
             presenter: mockValues.PRESENTER_OBJECT_MOCK,
             entity: mockValues.ENTITY_OBJECT_MOCK,
-            beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details,
+            beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
             beneficial_owners_individual: mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
             beneficial_owners_corporate: mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
             beneficial_owners_government_or_public_authority: mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST
