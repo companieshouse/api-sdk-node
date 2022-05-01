@@ -55,9 +55,9 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] 
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         start_date: { day: "1", month: "1", year: "2012" },
-        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
-        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
@@ -72,9 +72,9 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST: BeneficialOwnerIndi
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         start_date: "2012-01-01",
-        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
-        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
@@ -91,9 +91,9 @@ export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = 
         register_name: "register",
         registration_number: "abc123",
         start_date: { day: "1", month: "12", year: "1950" },
-        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
-        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
@@ -110,9 +110,9 @@ export const BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST: BeneficialOwnerCorpo
         register_name: "register",
         registration_number: "abc123",
         start_date: "1950-12-01",
-        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
-        trustees_nature_of_control_types: [NatureOfControlType.appoint_or_remove_majority_board_directors],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control],
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
         is_on_sanctions_list: yesNoResponse.No
 
     }
@@ -129,15 +129,15 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         register_name: "registerName",
         registration_number: "xyz789",
-        beneficial_owner_nature_of_control_types: [NatureOfControlType.over_25_percent_of_shares],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.significant_influence_or_control]
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
 ];
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
-    beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details,
+    beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST
@@ -146,7 +146,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
-    beneficial_owners_statement: BeneficialOwnersStatementType.all_identified_all_details,
+    beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST

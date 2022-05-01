@@ -158,16 +158,16 @@ enum presenterRole {
 }
 
 export enum BeneficialOwnersStatementType {
-    all_identified_all_details = "all_identified_all_details",
-    all_identified_some_details = "all_identified_some_details",
-    some_identified_all_details = "some_identified_all_details",
-    some_identified_some_details = "some_identified_some_details",
-    none_identified = "none_identified"
+    ALL_IDENTIFIED_ALL_DETAILS = "ALL_IDENTIFIED_ALL_DETAILS",
+    ALL_IDENTIFIED_SOME_DETAILS = "ALL_IDENTIFIED_SOME_DETAILS",
+    SOME_IDENTIFIED_ALL_DETAILS = "SOME_IDENTIFIED_ALL_DETAILS",
+    SOME_IDENTIFIED_SOME_DETAILS = "SOME_IDENTIFIED_SOME_DETAILS",
+    NONE_IDENTIFIED = "NONE_IDENTIFIED"
 }
 
 export enum NatureOfControlType {
-    over_25_percent_of_shares = "over_25_percent_of_shares",
-    over_25_percent_of_voting_rights = "over_25_percent_of_voting_rights",
-    appoint_or_remove_majority_board_directors = "appoint_or_remove_majority_board_directors",
-    significant_influence_or_control = "significant_influence_or_control"
+    OVER_25_PERCENT_OF_SHARES = "OVER_25_PERCENT_OF_SHARES",
+    OVER_25_PERCENT_OF_VOTING_RIGHTS = "OVER_25_PERCENT_OF_VOTING_RIGHTS",
+    APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS = "APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS",
+    SIGNIFICANT_INFLUENCE_OR_CONTROL = "SIGNIFICANT_INFLUENCE_OR_CONTROL"
 }
