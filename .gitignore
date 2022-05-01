@@ -7,4 +7,3 @@ test.ts
 .python-version
 /coverage
 .settings
-dist/
