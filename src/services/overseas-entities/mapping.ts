@@ -1,4 +1,4 @@
-import { BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource, OverseasEntity, OverseasEntityResource } from "./types";
+import { BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority, BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource, OverseasEntity, OverseasEntityResource } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
@@ -7,7 +7,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
-        beneficial_owners_government_or_public_authority: { ...body.beneficial_owners_government_or_public_authority }
+        beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority)
     };
 };
 
@@ -46,6 +46,24 @@ const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] =
         })
     });
     return boCorporateResources;
+}
+
+/**
+ * Convert the BeneficialOwnerGovernmentOrPublicAuthority array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param boGovernments Array of BeneficialOwnerGovernmentOrPublicAuthority objects
+ * @returns Array of BeneficialOwnerGovernmentOrPublicAuthorityResource
+ */
+const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentOrPublicAuthority[] = []): BeneficialOwnerGovernmentOrPublicAuthorityResource[] => {
+    const boGovernmentResources: BeneficialOwnerGovernmentOrPublicAuthorityResource[] = [];
+    boGovernments.forEach(boGovernment => {
+        const { start_date, ...rest } = boGovernment;
+        boGovernmentResources.push({
+            ...rest,
+            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
+        })
+    });
+    return boGovernmentResources;
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {

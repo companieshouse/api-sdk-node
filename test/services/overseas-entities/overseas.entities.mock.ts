@@ -4,6 +4,7 @@ import {
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
     BeneficialOwnerGovernmentOrPublicAuthority,
+    BeneficialOwnerGovernmentOrPublicAuthorityResource,
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     BeneficialOwnersStatementType,
@@ -126,9 +127,20 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         is_service_address_same_as_principal_address: yesNoResponse.Yes,
         legal_form: "gov",
         law_governed: "government",
-        is_on_register_in_country_formed_in: yesNoResponse.Yes,
-        register_name: "registerName",
-        registration_number: "xyz789",
+        start_date: { day: "1", month: "12", year: "1950" },
+        beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
+    }
+];
+export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGovernmentOrPublicAuthorityResource[] = [
+    {
+        name: "Joe Gov Ltd",
+        principal_address: ADDRESS,
+        service_address: ADDRESS,
+        is_service_address_same_as_principal_address: yesNoResponse.Yes,
+        legal_form: "gov",
+        law_governed: "government",
+        start_date: "1950-12-01",
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
@@ -149,7 +161,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
-    beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST
+    beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });

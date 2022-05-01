@@ -17,7 +17,7 @@ export interface OverseasEntityResource {
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
-    beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
+    beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
 }
 export interface OverseasEntityCreated {
     id: string
@@ -114,15 +114,24 @@ export interface BeneficialOwnerCorporateResource {
 export interface BeneficialOwnerGovernmentOrPublicAuthority {
     name?: string
     principal_address?: Address
-    service_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
+    service_address?: Address
     legal_form?: string
     law_governed?: string
-    is_on_register_in_country_formed_in?: yesNoResponse
-    register_name?: string
-    registration_number?: string
-    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    start_date?: InputDate
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[];
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
+}
+export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
+    name?: string
+    principal_address?: Address
+    is_service_address_same_as_principal_address?: yesNoResponse
+    service_address?: Address
+    legal_form?: string
+    law_governed?: string
+    start_date?: string
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[];
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
 /**
