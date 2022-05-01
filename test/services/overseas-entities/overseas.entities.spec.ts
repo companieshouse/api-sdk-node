@@ -63,6 +63,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.beneficial_owners_individual[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_individual[0]);
         expect(data.beneficial_owners_corporate[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_corporate[0]);
         expect(data.beneficial_owners_government_or_public_authority[0]).to.deep.equal(
-            mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_government_or_public_authority[0]);
+            mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_government_or_public_authority[0]);
     });
 });
