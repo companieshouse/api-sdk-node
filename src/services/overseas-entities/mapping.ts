@@ -1,4 +1,8 @@
-import { BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority, BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource, OverseasEntity, OverseasEntityResource } from "./types";
+import {
+    BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority,
+    BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource,
+    ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource
+} from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
@@ -7,7 +11,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
-        beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority)
+        beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
+        managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual)
     };
 };
 
@@ -64,6 +69,24 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
         })
     });
     return boGovernmentResources;
+}
+
+/**
+ * Convert the ManagingOfficerIndividual array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param moIndividuals Array of ManagingOfficerIndividual objects
+ * @returns Array of ManagingOfficerIndividualResource
+ */
+const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
+    const moIndividualResources: ManagingOfficerIndividualResource[] = [];
+    moIndividuals.forEach(moIndividual => {
+        const { date_of_birth, ...rest } = moIndividual;
+        moIndividualResources.push({
+            ...rest,
+            date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year)
+        })
+    });
+    return moIndividualResources;
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {

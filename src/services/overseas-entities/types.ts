@@ -9,6 +9,7 @@ export interface OverseasEntity {
     beneficial_owners_individual?: BeneficialOwnerIndividual[];
     beneficial_owners_corporate?: BeneficialOwnerCorporate[];
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
+    managing_officers_individual?: ManagingOfficerIndividual[];
 }
 
 export interface OverseasEntityResource {
@@ -18,6 +19,7 @@ export interface OverseasEntityResource {
     beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
+    managing_officers_individual?: ManagingOfficerIndividualResource[];
 }
 export interface OverseasEntityCreated {
     id: string
@@ -132,6 +134,34 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     start_date?: string
     beneficial_owner_nature_of_control_types?: NatureOfControlType[];
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
+}
+
+export interface ManagingOfficerIndividual {
+    first_name?: string
+    last_name?: string
+    has_former_names?: yesNoResponse
+    former_names?: string
+    date_of_birth?: InputDate
+    nationality?: string
+    usual_residential_address?: Address
+    service_address?: Address
+    is_service_address_same_as_usual_residential_address?: yesNoResponse
+    occupation?: string
+    role_and_responsibilities?: string
+}
+
+export interface ManagingOfficerIndividualResource {
+    first_name?: string
+    last_name?: string
+    has_former_names?: yesNoResponse
+    former_names?: string
+    date_of_birth?: string
+    nationality?: string
+    usual_residential_address?: Address
+    service_address?: Address
+    is_service_address_same_as_usual_residential_address?: yesNoResponse
+    occupation?: string
+    role_and_responsibilities?: string
 }
 
 /**
