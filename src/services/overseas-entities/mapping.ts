@@ -1,4 +1,8 @@
-import { BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority, BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource, ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource } from "./types";
+import {
+    BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority,
+    BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource,
+    ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource
+} from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
