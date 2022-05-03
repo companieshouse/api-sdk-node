@@ -12,7 +12,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
-        managing_officers_individual: mapManagingOfficerIndividual(body.managing_officers_individual)
+        managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual)
     };
 };
 
@@ -77,7 +77,7 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
  * @param moIndividuals Array of ManagingOfficerIndividual objects
  * @returns Array of ManagingOfficerIndividualResource
  */
-const mapManagingOfficerIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
+const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
     const moIndividualResources: ManagingOfficerIndividualResource[] = [];
     moIndividuals.forEach(moIndividual => {
         const { date_of_birth, ...rest } = moIndividual;
