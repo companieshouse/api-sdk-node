@@ -8,6 +8,8 @@ import {
     Checkout, CheckoutResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
     CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
 } from "../../../src/services/order/checkout";
+import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
+import { Failure, Success } from "../../../src/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -301,10 +303,10 @@ describe("checkout", () => {
 
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
-            const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID); ;
+            const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Failure<ApiResponse<Checkout>, ApiErrorResponse>;
 
-            expect(response.httpStatusCode).to.equal(401);
-            expect(response.resource).to.be.undefined;
+            expect(result.value.httpStatusCode).to.equal(401);
+            expect(result.value.errors[0].error).to.equal("An error occurred");
         });
 
         it("should map generic fields correctly", async () => {
@@ -315,9 +317,10 @@ describe("checkout", () => {
 
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
-            const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID);
-            const data = response.resource as Checkout;
+            const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
+            const data = result.value.resource as Checkout;
 
+            expect(result.value.httpStatusCode).to.equal(200);
             expect(data.paidAt).to.equal(mockCertificateCheckoutResponseBody.paid_at);
             expect(data.checkedOutBy.id).to.equal(mockCertificateCheckoutResponseBody.checked_out_by.id);
             expect(data.checkedOutBy.email).to.equal(mockCertificateCheckoutResponseBody.checked_out_by.email);
@@ -344,7 +347,7 @@ describe("checkout", () => {
             expect(item.description).to.equal(itemResource.description);
             expect(item.descriptionIdentifier).to.equal(itemResource.description_identifier);
             expect(item.descriptionValues.certificate).to.equal(itemResource.description_values.certificate);
-            expect(item.descriptionValues.company_number).to.equal(itemResource.description_values.company_number);
+            expect(item.descriptionValues.companyNumber).to.equal(itemResource.description_values.company_number);
 
             expect(item.itemCosts[0].discountApplied).to.equal(itemResource.item_costs[0].discount_applied);
             expect(item.itemCosts[0].itemCost).to.equal(itemResource.item_costs[0].item_cost);
@@ -375,8 +378,8 @@ describe("checkout", () => {
 
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
-            const response = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID);
-            const data = response.resource as Checkout;
+            const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
+            const data = result.value.resource as Checkout;
 
             const item = data.items[0];
             const itemResource = mockCertificateCheckoutResponseBody.items[0];
@@ -384,6 +387,7 @@ describe("checkout", () => {
             const itemOptionsResource = itemResource.item_options as CertificateItemOptionsResource;
             const itemOptions = item.itemOptions as CertificateItemOptions;
 
+            expect(result.value.httpStatusCode).to.equal(200);
             expect(itemOptions.certificateType).to.equal(itemOptionsResource.certificate_type);
             expect(itemOptions.deliveryMethod).to.equal(itemOptionsResource.delivery_method);
             expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
@@ -391,8 +395,8 @@ describe("checkout", () => {
             expect(itemOptions.forename).to.equal(itemOptionsResource.forename);
             expect(itemOptions.includeGeneralNatureOfBusinessInformation).to.equal(itemOptionsResource.include_general_nature_of_business_information);
             expect(itemOptions.includeGoodStandingInformation).to.equal(itemOptionsResource.include_good_standing_information);
-            expect(itemOptions.registeredOfficeAddressDetails).to.be.undefined;
-            expect(itemOptions.secretaryDetails).to.be.undefined;
+            expect(itemOptions.registeredOfficeAddressDetails).to.deep.equal(itemOptionsResource.registered_office_address_details);
+            expect(itemOptions.secretaryDetails).to.deep.equal(itemOptionsResource.secretary_details);
             expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
             expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
@@ -407,21 +411,23 @@ describe("checkout", () => {
 
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
-            const response = await checkout.getCheckout(CERTIFIED_COPY_CHECKOUT_ID);
-            const data = response.resource as Checkout;
+            const response = await checkout.getCheckout(CERTIFIED_COPY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
+            const data = response.value.resource as Checkout;
             const item = data.items[0];
             const itemResource = mockCertifiedCopyCheckoutResponseBody.items[0];
 
             const itemOptionsResource = itemResource.item_options as CertifiedCopyItemOptionsResource;
             const itemOptions = item.itemOptions as CertifiedCopyItemOptions
 
+            expect(response.value.httpStatusCode).to.equal(200);
             expect(itemOptions.deliveryMethod).to.equal(itemOptionsResource.delivery_method);
             expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescription).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryDate).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_date);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryId).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_id);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryType).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_type);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.changeDate).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.change_date);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.officerName).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.officer_name);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryCost).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_cost);
         });
 
@@ -433,8 +439,8 @@ describe("checkout", () => {
 
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
-            const response = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID);
-            const data = response.resource as Checkout;
+            const result = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
+            const data = result.value.resource as Checkout;
 
             const item = data.items[0];
             const itemResource = mockMissingImageDeliveryCheckoutResponseBody.items[0];
@@ -442,9 +448,10 @@ describe("checkout", () => {
             const itemOptionsResource = itemResource.item_options as MissingImageDeliveryItemOptionsResource;
             const itemOptions = item.itemOptions as MissingImageDeliveryItemOptions;
 
+            expect(result.value.httpStatusCode).to.equal(200);
             expect(itemOptions.filingHistoryDate).to.equal(itemOptionsResource.filing_history_date);
             expect(itemOptions.filingHistoryDescription).to.equal(itemOptionsResource.filing_history_description);
-            expect(itemOptions.filingHistoryDescriptionValues).to.equal(itemOptionsResource.filing_history_description_values);
+            expect(itemOptions.filingHistoryDescriptionValues.officerName).to.equal(itemOptionsResource.filing_history_description_values.officer_name);
             expect(itemOptions.filingHistoryId).to.equal(itemOptionsResource.filing_history_id);
             expect(itemOptions.filingHistoryType).to.equal(itemOptionsResource.filing_history_type);
         });
