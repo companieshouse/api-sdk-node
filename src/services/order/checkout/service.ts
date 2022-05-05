@@ -1,25 +1,27 @@
 import { IHttpClient } from "../../../http";
-import { Checkout, CheckoutResource } from "./types";
-import Resource from "../../resource";
-import CheckoutMapping from "./mapping";
+import { Checkout } from "./types";
+import { ApiResponse, ApiResult } from "../../resource";
+import { failure, success } from "../../result";
+import Mapping from "../../../mapping/mapping";
 
 export default class CheckoutService {
     constructor (private readonly client: IHttpClient) { }
 
-    public async getCheckout (checkoutId: string): Promise<Resource<Checkout>> {
-        const resp = await this.client.httpGet("/checkouts/" + checkoutId);
+    public async getCheckout (checkoutId: string): Promise<ApiResult<ApiResponse<Checkout>>> {
+        const serverResponse = await this.client.httpGet("/checkouts/" + checkoutId);
 
-        const resource: Resource<Checkout> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
+        if (serverResponse.error) {
+            return failure({
+                httpStatusCode: serverResponse.status,
+                errors: [{
+                    error: serverResponse.error
+                }]
+            });
+        } else {
+            return success({
+                httpStatusCode: serverResponse.status,
+                resource: Mapping.camelCaseKeys<Checkout>(serverResponse.body)
+            });
         }
-
-        const body = resp.body as CheckoutResource;
-
-        resource.resource = CheckoutMapping.mapCheckoutResourceToCheckout(body);
-        return resource;
     }
 }
