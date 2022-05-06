@@ -43,7 +43,8 @@ export const ENTITY_OBJECT_MOCK: Entity = {
     legal_form: "legalForm",
     law_governed: "governedLaw",
     public_register_name: "publicRegister",
-    registration_number: "123"
+    registration_number: "123",
+    is_on_register_in_country_formed_in: 1
 };
 
 export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] = [

@@ -47,6 +47,7 @@ export interface Entity {
     law_governed?: string
     public_register_name?: string
     registration_number?: string
+    is_on_register_in_country_formed_in?: yesNoResponse;
 }
 
 export interface BeneficialOwnerIndividual {
