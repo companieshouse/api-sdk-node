@@ -25,13 +25,10 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const PRESENTER_OBJECT_MOCK = {
-    full_name: "string",
-    phone_number: "string",
-    role: "solicitor",
-    role_title: "string",
-    anti_money_laundering_registration_number: "string"
-} as Presenter;
+export const PRESENTER_OBJECT_MOCK: Presenter = {
+    full_name: "Full Name",
+    email: "user@domain.roe"
+};
 
 export const ENTITY_OBJECT_MOCK: Entity = {
     name: "overseasEntityName",
