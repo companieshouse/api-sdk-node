@@ -30,10 +30,7 @@ export interface OverseasEntityCreated {
  */
 export interface Presenter {
     full_name?: string
-    phone_number?: string
-    role?: presenterRole
-    role_title?: string
-    anti_money_laundering_registration_number?: string
+    email?: string
 }
 
 export interface Entity {
@@ -187,14 +184,6 @@ export interface InputDate {
     day: string;
     month: string;
     year: string;
-  }
-
-enum presenterRole {
-    administrator = "administrator",
-    agent = "agent",
-    solicitor = "solicitor",
-    beneficial_owner = "beneficial_owner",
-    other = "other"
 }
 
 export enum BeneficialOwnersStatementType {
