@@ -88,7 +88,7 @@ export interface BeneficialOwnerCorporate {
     legal_form?: string
     law_governed?: string
     is_on_register_in_country_formed_in?: yesNoResponse
-    register_name?: string
+    public_register_name?: string
     registration_number?: string
     start_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
@@ -105,7 +105,7 @@ export interface BeneficialOwnerCorporateResource {
     legal_form?: string
     law_governed?: string
     is_on_register_in_country_formed_in?: yesNoResponse
-    register_name?: string
+    public_register_name?: string
     registration_number?: string
     start_date?: string
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
