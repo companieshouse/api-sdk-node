@@ -15,7 +15,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
-        managing_officers_corporate: mapManagingOfficerCorporate(body.managing_officers_corporate)
+        managing_officers_corporate: mapManagingOfficersCorporate(body.managing_officers_corporate)
     };
 };
 
@@ -98,7 +98,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
  * @param moCorporates Array of ManagingOfficerCorporate objects
  * @returns Array of ManagingOfficerCorporateResource
  */
-const mapManagingOfficerCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
+const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
     const boCorporateResources: ManagingOfficerCorporateResource[] = [];
     moCorporates.forEach(moCorporate => {
         const { start_date, ...rest } = moCorporate;

@@ -210,7 +210,6 @@ export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorp
         public_register_name: "register",
         registration_number: "abc123",
         start_date: "1950-12-01"
-
     }
 ];
 
