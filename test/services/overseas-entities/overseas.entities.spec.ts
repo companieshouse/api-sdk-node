@@ -55,7 +55,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             beneficial_owners_individual: mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
             beneficial_owners_corporate: mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
             beneficial_owners_government_or_public_authority: mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
-            managing_officers_individual: mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST
+            managing_officers_individual: mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
+            managing_officers_corporate: mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST
         });
 
         expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.presenter);
@@ -66,5 +67,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.beneficial_owners_government_or_public_authority[0]).to.deep.equal(
             mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_government_or_public_authority[0]);
         expect(data.managing_officers_individual[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_individual[0]);
+        expect(data.managing_officers_corporate[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_corporate[0]);
     });
 });
