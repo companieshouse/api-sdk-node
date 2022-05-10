@@ -8,11 +8,17 @@ import {
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     BeneficialOwnersStatementType,
-    Entity, ManagingOfficerIndividual, ManagingOfficerIndividualResource, NatureOfControlType,
+    Entity,
+    ManagingOfficerCorporate,
+    ManagingOfficerCorporateResource,
+    ManagingOfficerIndividual,
+    ManagingOfficerIndividualResource,
+    NatureOfControlType,
     OverseasEntity,
     OverseasEntityCreated,
     OverseasEntityResource,
-    Presenter, yesNoResponse
+    Presenter,
+    yesNoResponse
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -177,6 +183,36 @@ export const MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST: ManagingOfficerInd
     }
 ];
 
+export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] = [
+    {
+        name: "Joe Bloggs Ltd",
+        principal_address: ADDRESS,
+        service_address: ADDRESS,
+        is_service_address_same_as_principal_address: yesNoResponse.Yes,
+        legal_form: "corporate",
+        law_governed: "corporation",
+        is_on_register_in_country_formed_in: yesNoResponse.Yes,
+        public_register_name: "register",
+        registration_number: "abc123",
+        start_date: { day: "1", month: "12", year: "1950" }
+    }
+];
+
+export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = [
+    {
+        name: "Joe Bloggs Ltd",
+        principal_address: ADDRESS,
+        service_address: ADDRESS,
+        is_service_address_same_as_principal_address: yesNoResponse.Yes,
+        legal_form: "corporate",
+        law_governed: "corporation",
+        is_on_register_in_country_formed_in: yesNoResponse.Yes,
+        public_register_name: "register",
+        registration_number: "abc123",
+        start_date: "1950-12-01"
+    }
+];
+
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
@@ -184,7 +220,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
-    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST
+    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
+    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST
 };
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
@@ -194,7 +231,8 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
-    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST
+    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
+    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });

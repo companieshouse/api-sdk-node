@@ -1,6 +1,8 @@
 import {
     BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority,
     BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource,
+    ManagingOfficerCorporate,
+    ManagingOfficerCorporateResource,
     ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource
 } from "./types";
 
@@ -12,7 +14,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
-        managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual)
+        managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
+        managing_officers_corporate: mapManagingOfficersCorporate(body.managing_officers_corporate)
     };
 };
 
@@ -87,6 +90,24 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
         })
     });
     return moIndividualResources;
+}
+
+/**
+ * Convert the ManagingOfficerCorporate array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param moCorporates Array of ManagingOfficerCorporate objects
+ * @returns Array of ManagingOfficerCorporateResource
+ */
+const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
+    const boCorporateResources: ManagingOfficerCorporateResource[] = [];
+    moCorporates.forEach(moCorporate => {
+        const { start_date, ...rest } = moCorporate;
+        boCorporateResources.push({
+            ...rest,
+            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
+        })
+    });
+    return boCorporateResources;
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
