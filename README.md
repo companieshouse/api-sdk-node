@@ -2,6 +2,8 @@
 
 This SDK abstract the calls to our public APIs.
 
+Intended for use when making cross-web-service calls, supporting ERIC and the propagation of authentication details through to other services.
+
 ## Quick start
 
 Use NPM to install the SDK in your project;
