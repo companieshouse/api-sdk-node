@@ -50,6 +50,7 @@ export interface Entity {
 }
 
 export interface BeneficialOwnerIndividual {
+    id?: string
     first_name?: string
     last_name?: string
     date_of_birth?: InputDate
@@ -80,6 +81,7 @@ export interface BeneficialOwnerIndividualResource {
 }
 
 export interface BeneficialOwnerCorporate {
+    id?: string
     name?: string
     principal_address?: Address
     service_address?: Address
@@ -114,6 +116,7 @@ export interface BeneficialOwnerCorporateResource {
 }
 
 export interface BeneficialOwnerGovernmentOrPublicAuthority {
+    id?: string
     name?: string
     principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
@@ -137,6 +140,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 }
 
 export interface ManagingOfficerIndividual {
+    id?: string
     first_name?: string
     last_name?: string
     has_former_names?: yesNoResponse
@@ -165,6 +169,7 @@ export interface ManagingOfficerIndividualResource {
 }
 
 export interface ManagingOfficerCorporate {
+    id?: string
     name?: string
     principal_address?: Address
     service_address?: Address

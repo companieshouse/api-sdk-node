@@ -52,6 +52,7 @@ export const ENTITY_OBJECT_MOCK: Entity = {
 
 export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] = [
     {
+        id: "1ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
         first_name: "Joe",
         last_name: "Bloggs",
         date_of_birth: { day: "1", month: "1", year: "1950" },
@@ -86,6 +87,7 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST: BeneficialOwnerIndi
 
 export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = [
     {
+        id: "2ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
         name: "Joe Bloggs Ltd",
         principal_address: ADDRESS,
         service_address: ADDRESS,
@@ -125,6 +127,7 @@ export const BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST: BeneficialOwnerCorpo
 
 export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrPublicAuthority[] = [
     {
+        id: "3ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
         name: "Joe Gov Ltd",
         principal_address: ADDRESS,
         service_address: ADDRESS,
@@ -153,6 +156,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
 
 export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[] = [
     {
+        id: "4ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
         first_name: "Joe",
         last_name: "Bloggs",
         has_former_names: yesNoResponse.Yes,
@@ -185,6 +189,7 @@ export const MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST: ManagingOfficerInd
 
 export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] = [
     {
+        id: "5ec0bd7f-11c0-43da-975e-2a8ad9ebae0b",
         name: "Joe Bloggs Ltd",
         principal_address: ADDRESS,
         service_address: ADDRESS,

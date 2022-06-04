@@ -28,7 +28,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
 const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[] = []): BeneficialOwnerIndividualResource[] => {
     const boIndividualResources: BeneficialOwnerIndividualResource[] = [];
     boIndividuals.forEach(boIndividual => {
-        const { date_of_birth, start_date, ...rest } = boIndividual;
+        const { date_of_birth, start_date, id, ...rest } = boIndividual;
         boIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year),
@@ -47,7 +47,7 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
 const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] = []): BeneficialOwnerCorporateResource[] => {
     const boCorporateResources: BeneficialOwnerCorporateResource[] = [];
     boCorporates.forEach(boCorporate => {
-        const { start_date, ...rest } = boCorporate;
+        const { start_date, id, ...rest } = boCorporate;
         boCorporateResources.push({
             ...rest,
             start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
@@ -65,7 +65,7 @@ const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] =
 const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentOrPublicAuthority[] = []): BeneficialOwnerGovernmentOrPublicAuthorityResource[] => {
     const boGovernmentResources: BeneficialOwnerGovernmentOrPublicAuthorityResource[] = [];
     boGovernments.forEach(boGovernment => {
-        const { start_date, ...rest } = boGovernment;
+        const { start_date, id, ...rest } = boGovernment;
         boGovernmentResources.push({
             ...rest,
             start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
@@ -83,7 +83,7 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
 const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
     const moIndividualResources: ManagingOfficerIndividualResource[] = [];
     moIndividuals.forEach(moIndividual => {
-        const { date_of_birth, ...rest } = moIndividual;
+        const { date_of_birth, id, ...rest } = moIndividual;
         moIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year)
@@ -101,7 +101,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
 const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
     const boCorporateResources: ManagingOfficerCorporateResource[] = [];
     moCorporates.forEach(moCorporate => {
-        const { start_date, ...rest } = moCorporate;
+        const { start_date, id, ...rest } = moCorporate;
         boCorporateResources.push({
             ...rest,
             start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
