@@ -175,7 +175,7 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     start_date?: InputDate
-    roles_and_responsibilities: string
+    role_and_responsibilities: string
 }
 
 export interface ManagingOfficerCorporateResource {
@@ -189,7 +189,7 @@ export interface ManagingOfficerCorporateResource {
     public_register_name?: string
     registration_number?: string
     start_date?: string
-    roles_and_responsibilities: string
+    role_and_responsibilities: string
 }
 
 /**
