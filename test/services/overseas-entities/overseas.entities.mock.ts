@@ -194,7 +194,8 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         public_register_name: "register",
         registration_number: "abc123",
-        start_date: { day: "1", month: "12", year: "1950" }
+        start_date: { day: "1", month: "12", year: "1950" },
+        roles_and_responsibilities: "roles and responsibilities text"
     }
 ];
 
@@ -209,7 +210,8 @@ export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorp
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         public_register_name: "register",
         registration_number: "abc123",
-        start_date: "1950-12-01"
+        start_date: "1950-12-01",
+        roles_and_responsibilities: "roles and responsibilities text"
     }
 ];
 
