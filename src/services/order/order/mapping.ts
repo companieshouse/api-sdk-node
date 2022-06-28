@@ -128,6 +128,7 @@ export default class OrderMapping {
                 certificateType: itemResource.certificate_type,
                 companyType: itemResource.company_type,
                 deliveryTimescale: itemResource.delivery_timescale,
+                includeEmailCopy: itemResource.include_email_copy,
                 deliveryMethod: itemResource.delivery_method,
                 designatedMemberDetails: designatedMemberDetails,
                 includeGeneralNatureOfBusinessInformation: itemResource.include_general_nature_of_business_information,

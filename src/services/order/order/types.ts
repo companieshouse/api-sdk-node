@@ -65,7 +65,7 @@ export interface CertificateItemOptions {
     certificateType: string;
     companyType: string;
     deliveryTimescale: string;
-    includeEmailCopy: boolean;
+    includeEmailCopy?: boolean;
     designatedMemberDetails: {
         includeAddress?: boolean;
         includeAppointmentDate?: boolean;
@@ -217,7 +217,7 @@ export interface CertificateItemOptionsResource {
     certificate_type: string;
     company_type: string;
     delivery_timescale: string;
-    include_email_copy: boolean;
+    include_email_copy?: boolean;
     delivery_method: string;
     designated_member_details: {
         include_address?: boolean;
