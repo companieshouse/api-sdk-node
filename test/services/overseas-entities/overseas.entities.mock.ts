@@ -194,26 +194,11 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         public_register_name: "register",
         registration_number: "abc123",
-        start_date: { day: "1", month: "12", year: "1950" },
         role_and_responsibilities: "role and responsibilities text"
     }
 ];
 
-export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = [
-    {
-        name: "Joe Bloggs Ltd",
-        principal_address: ADDRESS,
-        service_address: ADDRESS,
-        is_service_address_same_as_principal_address: yesNoResponse.Yes,
-        legal_form: "corporate",
-        law_governed: "corporation",
-        is_on_register_in_country_formed_in: yesNoResponse.Yes,
-        public_register_name: "register",
-        registration_number: "abc123",
-        start_date: "1950-12-01",
-        role_and_responsibilities: "role and responsibilities text"
-    }
-];
+export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
