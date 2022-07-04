@@ -10,7 +10,7 @@ clean:
 
 .PHONY: build
 build:
-	npm i
+	npm ci
 	npm run lint
 	npm run build
 
