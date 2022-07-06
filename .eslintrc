@@ -21,6 +21,7 @@
         semi: [0, "always"],
         camelcase: [0, {properties: "never", ignoreDestructuring: true}],
         "no-unused-vars": "off",
+        "no-use-before-define": "off",
         "no-useless-constructor": "off",
         "no-prototype-builtins": "off"
     },

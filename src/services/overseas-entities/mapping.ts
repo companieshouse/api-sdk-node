@@ -29,8 +29,8 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
         const { date_of_birth, start_date, ...rest } = boIndividual;
         boIndividualResources.push({
             ...rest,
-            date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year),
-            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
+            date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
         })
     });
     return boIndividualResources;
@@ -48,7 +48,7 @@ const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] =
         const { start_date, ...rest } = boCorporate;
         boCorporateResources.push({
             ...rest,
-            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
         })
     });
     return boCorporateResources;
@@ -66,7 +66,7 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
         const { start_date, ...rest } = boGovernment;
         boGovernmentResources.push({
             ...rest,
-            start_date: convertDateToIsoDateString(start_date.day, start_date.month, start_date.year)
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
         })
     });
     return boGovernmentResources;
@@ -84,7 +84,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
         const { date_of_birth, ...rest } = moIndividual;
         moIndividualResources.push({
             ...rest,
-            date_of_birth: convertDateToIsoDateString(date_of_birth.day, date_of_birth.month, date_of_birth.year)
+            date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year)
         })
     });
     return moIndividualResources;
