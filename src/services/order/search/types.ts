@@ -7,10 +7,10 @@ export interface SearchRequest {
 
 export interface SearchResponse {
     totalOrders: number;
-    orderSummaries: OrderSummary[];
+    orderSummaries: CheckoutSummary[];
 }
 
-export interface OrderSummary {
+export interface CheckoutSummary {
     id: string;
     email: string;
     companyNumber: string;
