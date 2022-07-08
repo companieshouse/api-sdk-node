@@ -5,6 +5,7 @@
 export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
+    due_diligence?: DueDiligence;
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividual[];
     beneficial_owners_corporate?: BeneficialOwnerCorporate[];
@@ -16,6 +17,7 @@ export interface OverseasEntity {
 export interface OverseasEntityResource {
     presenter?: Presenter;
     entity?: Entity;
+    due_diligence?: DueDiligence;
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
@@ -47,6 +49,18 @@ export interface Entity {
     public_register_name?: string
     registration_number?: string
     is_on_register_in_country_formed_in?: yesNoResponse;
+}
+
+export interface DueDiligence {
+    identity_date?: InputDate;
+    name?: string
+    identity_address?: Address;
+    email?: string
+    supervisory_name?: string
+    aml_number?: string
+    agent_code?: string
+    partner_name?: string
+    diligence?: string
 }
 
 export interface BeneficialOwnerIndividual {

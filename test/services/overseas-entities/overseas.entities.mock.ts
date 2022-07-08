@@ -8,6 +8,7 @@ import {
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     BeneficialOwnersStatementType,
+    DueDiligence,
     Entity,
     ManagingOfficerCorporate,
     ManagingOfficerCorporateResource,
@@ -198,11 +199,21 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
     }
 ];
 
+export const DUE_DILIGENCE_MOCK: DueDiligence = {
+    name: "ABC Checking Ltd",
+    email: "lorem@ipsum.com",
+    supervisory_name: "Super supervisors",
+    aml_number: "antimon123",
+    agent_code: "assure123",
+    partner_name: "Joe Checker"
+};
+
 export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
+    due_diligence: DUE_DILIGENCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
@@ -214,6 +225,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
+    due_diligence: DUE_DILIGENCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
