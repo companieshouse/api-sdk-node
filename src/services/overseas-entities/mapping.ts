@@ -8,6 +8,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
     return {
         presenter: { ...body.presenter },
         entity: { ...body.entity },
+        due_diligence: { ...body.due_diligence },
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
