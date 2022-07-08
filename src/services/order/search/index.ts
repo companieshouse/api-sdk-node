@@ -1,2 +1,2 @@
 export * from "./types";
-export { OrderSearchService } from "./service";
+export { CheckoutSearchService } from "./service";

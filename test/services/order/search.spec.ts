@@ -1,6 +1,6 @@
 import sinon from "sinon";
 import { RequestClient } from "../../../src";
-import { OrderSearchService, OrderSummary, SearchResponse } from "../../../src/services/order/search";
+import { CheckoutSearchService, CheckoutSummary, SearchResponse } from "../../../src/services/order/search";
 import { expect } from "chai";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
@@ -10,7 +10,7 @@ const requestClient = new RequestClient({
     oauthToken: "TOKEN-NOT-USED"
 });
 
-const expectedOrderSummary: OrderSummary = {
+const expectedOrderSummary: CheckoutSummary = {
     id: "ORD-123123-123123",
     email: "demo@ch.gov.uk",
     companyNumber: "12345678",
@@ -27,7 +27,7 @@ const expectedOrderSummary: OrderSummary = {
     }
 };
 
-describe("OrderSearchService", () => {
+describe("CheckoutSearchService", () => {
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -52,7 +52,7 @@ describe("OrderSearchService", () => {
         mock.expects("httpGet")
             .returns(serverResponse)
             .calledWithExactly("/orders/search?page_size=1000");
-        const searchService: OrderSearchService = new OrderSearchService(requestClient);
+        const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 
         // when {results are fetched from the search endpoint using a single criteria}
         const clientResult = await searchService.search({
@@ -84,7 +84,7 @@ describe("OrderSearchService", () => {
         mock.expects("httpGet")
             .returns(serverResponse)
             .calledWithExactly("/orders/search?id=ORD-123123-123123&email=demo@ch.gov.uk&company_number=12345678&page_size=1000");
-        const searchService: OrderSearchService = new OrderSearchService(requestClient);
+        const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 
         // when {results are fetched from the search endpoint with multiple criteria specified}
         const clientResult = await searchService.search({
@@ -117,7 +117,7 @@ describe("OrderSearchService", () => {
         mock.expects("httpGet")
             .returns(serverResponse)
             .calledWithExactly("/orders/search");
-        const searchService: OrderSearchService = new OrderSearchService(requestClient);
+        const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 
         // when {results are fetched from the search endpoint}
         const clientResult = await searchService.search({} as any) as Failure<ApiResponse<SearchResponse>, ApiErrorResponse>;
