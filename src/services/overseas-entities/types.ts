@@ -11,6 +11,7 @@ export interface OverseasEntity {
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
     managing_officers_individual?: ManagingOfficerIndividual[];
     managing_officers_corporate?: ManagingOfficerCorporate[];
+    trust_data?: TrustData[];
 }
 
 export interface OverseasEntityResource {
@@ -22,6 +23,7 @@ export interface OverseasEntityResource {
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
     managing_officers_individual?: ManagingOfficerIndividualResource[];
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
+    trust_data?: TrustData[];
 }
 export interface OverseasEntityCreated {
     id: string
@@ -178,6 +180,10 @@ export interface ManagingOfficerCorporate {
 }
 
 export interface ManagingOfficerCorporateResource extends ManagingOfficerCorporate { }
+
+export interface TrustData {
+
+}
 
 /**
  * Shared Data Type

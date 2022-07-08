@@ -13,7 +13,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
-        managing_officers_corporate: body.managing_officers_corporate
+        managing_officers_corporate: body.managing_officers_corporate,
+        trust_data: body.trust_data
     };
 };
 
