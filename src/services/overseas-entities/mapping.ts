@@ -11,6 +11,8 @@ import {
     OverseasEntity,
     OverseasEntityDueDiligence,
     OverseasEntityDueDiligenceResource,
+    DueDiligence,
+    DueDiligenceResource,
     OverseasEntityResource
 } from "./types";
 
@@ -18,7 +20,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
     return {
         presenter: { ...body.presenter },
         entity: { ...body.entity },
-        due_diligence: { ...body.due_diligence },
+        due_diligence: mapDueDiligence(body.due_diligence),
         overseas_entity_due_diligence: mapOverseasEntityDueDiligence(body.overseas_entity_due_diligence),
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
@@ -103,6 +105,24 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
 }
 
 /**
+ * Convert the Due Diligence object data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param DueDiligence object
+ * @returns DueDiligenceResource Object
+ */
+const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
+    if (dueDiligence && Object.keys(dueDiligence).length) {
+        const identityDate = dueDiligence.identity_date || {} as InputDate;
+        const identity_date = convertDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
+        return {
+            ...dueDiligence,
+            identity_date
+        }
+    }
+    return {};
+}
+
+/**
  * Convert the Overseas Entity Due Diligence data into the Resource format that the API expects
  * (just converting dates currently)
  * @param oeDueDiligence OverseasEntityDueDiligence objects
@@ -111,7 +131,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
 const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligence): OverseasEntityDueDiligenceResource => {
     if (oeDueDiligence && Object.keys(oeDueDiligence).length) {
         const identityDate = oeDueDiligence.identity_date || {} as InputDate;
-        const identity_date = checkDate(identityDate.day, identityDate.month, identityDate.year);
+        const identity_date = convertOptionalDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
         return {
             ...oeDueDiligence,
             identity_date
@@ -120,10 +140,7 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
     return {};
 }
 
-/**
- * Checks if the Date fields are setted. Set empty string for optional date
- */
-const checkDate = (day: string = "", month: string = "", year: string = ""): string => {
+const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
     return (day && month && year) ? convertDateToIsoDateString(day, month, year) : "";
 }
 
