@@ -5,11 +5,14 @@ import {
     BeneficialOwnerGovernmentOrPublicAuthorityResource,
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
-    DueDiligence,
-    DueDiligenceResource, InputDate,
+    InputDate,
     ManagingOfficerIndividual,
     ManagingOfficerIndividualResource,
     OverseasEntity,
+    OverseasEntityDueDiligence,
+    OverseasEntityDueDiligenceResource,
+    DueDiligence,
+    DueDiligenceResource,
     OverseasEntityResource
 } from "./types";
 
@@ -18,6 +21,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         presenter: { ...body.presenter },
         entity: { ...body.entity },
         due_diligence: mapDueDiligence(body.due_diligence),
+        overseas_entity_due_diligence: mapOverseasEntityDueDiligence(body.overseas_entity_due_diligence),
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
@@ -116,6 +120,28 @@ const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
         }
     }
     return {};
+}
+
+/**
+ * Convert the Overseas Entity Due Diligence data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param oeDueDiligence OverseasEntityDueDiligence objects
+ * @returns OverseasEntityDueDiligenceResource
+ */
+const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligence): OverseasEntityDueDiligenceResource => {
+    if (oeDueDiligence && Object.keys(oeDueDiligence).length) {
+        const identityDate = oeDueDiligence.identity_date || {} as InputDate;
+        const identity_date = convertOptionalDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
+        return {
+            ...oeDueDiligence,
+            identity_date
+        }
+    }
+    return {};
+}
+
+const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
+    return (day && month && year) ? convertDateToIsoDateString(day, month, year) : "";
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
