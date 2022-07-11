@@ -107,7 +107,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
  * @returns DueDiligenceResource Object
  */
 const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
-    if (dueDiligence) {
+    if (dueDiligence && Object.keys(dueDiligence).length) {
         const identityDate = dueDiligence.identity_date || {} as InputDate;
         const identity_date = convertDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
         return {
