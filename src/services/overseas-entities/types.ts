@@ -17,7 +17,7 @@ export interface OverseasEntity {
 export interface OverseasEntityResource {
     presenter?: Presenter;
     entity?: Entity;
-    due_diligence?: DueDiligence;
+    due_diligence?: DueDiligenceResource;
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
@@ -53,14 +53,26 @@ export interface Entity {
 
 export interface DueDiligence {
     identity_date?: InputDate;
-    name?: string
+    name?: string;
     identity_address?: Address;
-    email?: string
-    supervisory_name?: string
-    aml_number?: string
-    agent_code?: string
-    partner_name?: string
-    diligence?: string
+    email?: string;
+    supervisory_name?: string;
+    aml_number?: string;
+    agent_code?: string;
+    partner_name?: string;
+    diligence?: string;
+}
+
+export interface DueDiligenceResource {
+    identity_date?: string;
+    name?: string;
+    identity_address?: Address;
+    email?: string;
+    supervisory_name?: string;
+    aml_number?: string;
+    agent_code?: string;
+    partner_name?: string;
+    diligence?: string;
 }
 
 export interface BeneficialOwnerIndividual {
