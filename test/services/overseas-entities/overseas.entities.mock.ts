@@ -17,6 +17,8 @@ import {
     NatureOfControlType,
     OverseasEntity,
     OverseasEntityCreated,
+    OverseasEntityDueDiligence,
+    OverseasEntityDueDiligenceResource,
     OverseasEntityResource,
     Presenter,
     yesNoResponse
@@ -208,12 +210,28 @@ export const DUE_DILIGENCE_MOCK: DueDiligence = {
     partner_name: "Joe Checker"
 };
 
+export const OE_DUE_DILIGENCE_MOCK: OverseasEntityDueDiligence = {
+    identity_date: { day: "1", month: "1", year: "2022" },
+    name: "ABC Checking Ltd",
+    identity_address: ADDRESS,
+    email: "lorem@ipsum.com",
+    supervisory_name: "Super supervisors",
+    aml_number: "antimon123",
+    partner_name: "Joe Checker"
+};
+
+export const OE_DUE_DILIGENCE_RESOURCE_MOCK: OverseasEntityDueDiligenceResource = {
+    ...OE_DUE_DILIGENCE_MOCK,
+    identity_date: "2022-01-01"
+};
+
 export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_MOCK,
+    overseas_entity_due_diligence: OE_DUE_DILIGENCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
@@ -226,6 +244,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_MOCK,
+    overseas_entity_due_diligence: OE_DUE_DILIGENCE_RESOURCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,

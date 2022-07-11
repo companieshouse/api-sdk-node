@@ -1,7 +1,17 @@
 import {
-    BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority,
-    BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource,
-    ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource
+    BeneficialOwnerCorporate,
+    BeneficialOwnerCorporateResource,
+    BeneficialOwnerGovernmentOrPublicAuthority,
+    BeneficialOwnerGovernmentOrPublicAuthorityResource,
+    BeneficialOwnerIndividual,
+    BeneficialOwnerIndividualResource,
+    InputDate,
+    ManagingOfficerIndividual,
+    ManagingOfficerIndividualResource,
+    OverseasEntity,
+    OverseasEntityDueDiligence,
+    OverseasEntityDueDiligenceResource,
+    OverseasEntityResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -9,6 +19,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         presenter: { ...body.presenter },
         entity: { ...body.entity },
         due_diligence: { ...body.due_diligence },
+        overseas_entity_due_diligence: mapOverseasEntityDueDiligence(body.overseas_entity_due_diligence),
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
@@ -89,6 +100,24 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
         })
     });
     return moIndividualResources;
+}
+
+/**
+ * Convert the Overseas Entity Due Diligence data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param oeDueDiligence OverseasEntityDueDiligence objects
+ * @returns OverseasEntityDueDiligenceResource
+ */
+const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligence): OverseasEntityDueDiligenceResource => {
+    if (oeDueDiligence) {
+        const identityDate = oeDueDiligence.identity_date || {} as InputDate;
+        const identity_date = convertDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
+        return {
+            ...oeDueDiligence,
+            identity_date
+        }
+    }
+    return {};
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
