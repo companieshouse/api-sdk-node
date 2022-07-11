@@ -79,7 +79,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             presenter: undefined,
             entity: undefined,
             due_diligence: undefined,
-            overseas_entity_due_diligence: undefined,
+            overseas_entity_due_diligence: {},
             beneficial_owners_statement: undefined,
             beneficial_owners_individual: [],
             beneficial_owners_corporate: [],
@@ -98,5 +98,27 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.beneficial_owners_government_or_public_authority).to.deep.equal([]);
         expect(data.managing_officers_individual).to.deep.equal([]);
         expect(data.managing_officers_corporate).to.deep.equal([]);
+    });
+
+    it("should return empty date string for OE Due Diligence object if identity date is undefined", () => {
+        const dataResource = mapOverseasEntity({
+            overseas_entity_due_diligence: {
+                ...mockValues.OE_DUE_DILIGENCE_MOCK,
+                identity_date: undefined
+            }
+        });
+
+        expect(dataResource.overseas_entity_due_diligence!.identity_date).to.deep.equal("");
+    });
+
+    it("should return empty date string for OE Due Diligence object if identity date subfields are empty", () => {
+        const dataResource = mapOverseasEntity({
+            overseas_entity_due_diligence: {
+                ...mockValues.OE_DUE_DILIGENCE_MOCK,
+                identity_date: { day: "", month: "", year: "" }
+            }
+        });
+
+        expect(dataResource.overseas_entity_due_diligence!.identity_date).to.deep.equal("");
     });
 });

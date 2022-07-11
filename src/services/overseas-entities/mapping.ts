@@ -109,15 +109,22 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
  * @returns OverseasEntityDueDiligenceResource
  */
 const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligence): OverseasEntityDueDiligenceResource => {
-    if (oeDueDiligence) {
+    if (oeDueDiligence && Object.keys(oeDueDiligence).length) {
         const identityDate = oeDueDiligence.identity_date || {} as InputDate;
-        const identity_date = convertDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
+        const identity_date = checkDate(identityDate.day, identityDate.month, identityDate.year);
         return {
             ...oeDueDiligence,
             identity_date
         }
     }
     return {};
+}
+
+/**
+ * Checks if the Date fields are setted. Set empty string for optional date
+ */
+const checkDate = (day: string = "", month: string = "", year: string = ""): string => {
+    return (day && month && year) ? convertDateToIsoDateString(day, month, year) : "";
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
