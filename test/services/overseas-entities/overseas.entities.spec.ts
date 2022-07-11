@@ -62,7 +62,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
         expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.presenter);
         expect(data.entity).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.entity);
-        expect(data.due_diligence).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.due_diligence);
+        expect(data.due_diligence).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.due_diligence);
         expect(data.beneficial_owners_statement).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK.beneficial_owners_statement);
         expect(data.beneficial_owners_individual?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_individual?.[0]);
         expect(data.beneficial_owners_corporate?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_corporate?.[0]);

@@ -1,14 +1,23 @@
 import {
-    BeneficialOwnerCorporate, BeneficialOwnerCorporateResource, BeneficialOwnerGovernmentOrPublicAuthority,
-    BeneficialOwnerGovernmentOrPublicAuthorityResource, BeneficialOwnerIndividual, BeneficialOwnerIndividualResource,
-    ManagingOfficerIndividual, ManagingOfficerIndividualResource, OverseasEntity, OverseasEntityResource
+    BeneficialOwnerCorporate,
+    BeneficialOwnerCorporateResource,
+    BeneficialOwnerGovernmentOrPublicAuthority,
+    BeneficialOwnerGovernmentOrPublicAuthorityResource,
+    BeneficialOwnerIndividual,
+    BeneficialOwnerIndividualResource,
+    DueDiligence,
+    DueDiligenceResource,
+    ManagingOfficerIndividual,
+    ManagingOfficerIndividualResource,
+    OverseasEntity,
+    OverseasEntityResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
         presenter: { ...body.presenter },
         entity: { ...body.entity },
-        due_diligence: { ...body.due_diligence },
+        due_diligence: mapDueDiligence(body.due_diligence),
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: mapBeneficialOwnersIndividual(body.beneficial_owners_individual),
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
@@ -89,6 +98,23 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
         })
     });
     return moIndividualResources;
+}
+
+/**
+ * Convert the Due Diligence object data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param  Due Diligence Object of  Due Diligence objects
+ * @returns DueDiligenceResource Object
+ */
+const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
+    if (dueDiligence) {
+        const { identity_date, ...rest } = dueDiligence;
+        const dueDiligenceResource: DueDiligenceResource = {
+            identity_date: convertDateToIsoDateString(identity_date?.day, identity_date?.month, identity_date?.year),
+            ...rest
+        };
+        return dueDiligenceResource;
+    }
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
