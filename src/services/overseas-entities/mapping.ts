@@ -6,7 +6,7 @@ import {
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     DueDiligence,
-    DueDiligenceResource,
+    DueDiligenceResource, InputDate,
     ManagingOfficerIndividual,
     ManagingOfficerIndividualResource,
     OverseasEntity,
@@ -108,13 +108,14 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
  */
 const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
     if (dueDiligence) {
-        const { identity_date, ...rest } = dueDiligence;
-        const dueDiligenceResource: DueDiligenceResource = {
-            identity_date: convertDateToIsoDateString(identity_date?.day, identity_date?.month, identity_date?.year),
-            ...rest
-        };
-        return dueDiligenceResource;
+        const identityDate = dueDiligence.identity_date || {} as InputDate;
+        const identity_date = convertDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
+        return {
+            ...dueDiligence,
+            identity_date
+        }
     }
+    return {};
 }
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {

@@ -210,13 +210,8 @@ export const DUE_DILIGENCE_MOCK: DueDiligence = {
 };
 
 export const DUE_DILIGENCE_RESOURCE_MOCK: DueDiligenceResource = {
-    identity_date: "2021-12-01",
-    name: "ABC Checking Ltd",
-    email: "lorem@ipsum.com",
-    supervisory_name: "Super supervisors",
-    aml_number: "antimon123",
-    agent_code: "assure123",
-    partner_name: "Joe Checker"
+    ...DUE_DILIGENCE_MOCK,
+    identity_date: "2021-12-01"
 }
 
 export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
