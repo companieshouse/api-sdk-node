@@ -103,7 +103,7 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
 /**
  * Convert the Due Diligence object data into the Resource format that the API expects
  * (just converting dates currently)
- * @param  @param dueDiligence object
+ * @param DueDiligence object
  * @returns DueDiligenceResource Object
  */
 const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
