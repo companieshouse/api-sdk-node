@@ -11,6 +11,7 @@ export interface BasketResource {
         self?: string;
     };
     total_basket_cost?: string;
+    enrolled: boolean;
 }
 
 export interface DeliveryDetailsResource {
@@ -37,6 +38,7 @@ export interface Basket {
         self?: string;
     };
     totalBasketCost?: string;
+    enrolled: boolean;
 }
 
 export interface DeliveryDetails {
