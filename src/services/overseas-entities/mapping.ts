@@ -130,12 +130,11 @@ const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
  */
 const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligence): OverseasEntityDueDiligenceResource => {
     if (oeDueDiligence && Object.keys(oeDueDiligence).length) {
-        const identityDate = oeDueDiligence.identity_date || {} as InputDate;
-        const identity_date = convertOptionalDateToIsoDateString(identityDate.day, identityDate.month, identityDate.year);
-        return {
-            ...oeDueDiligence,
-            identity_date
-        }
+        const { identity_date, ...rest } = oeDueDiligence;
+        const identityDateResource = convertOptionalDateToIsoDateString(identity_date?.day, identity_date?.month, identity_date?.year);
+        return (identityDateResource)
+            ? { ...rest, identity_date: identityDateResource }
+            : { ...rest };
     }
     return {};
 }

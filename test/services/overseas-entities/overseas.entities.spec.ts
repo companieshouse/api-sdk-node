@@ -6,6 +6,7 @@ import * as mockValues from "./overseas.entities.mock";
 import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
+    OverseasEntityDueDiligenceResource,
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
@@ -100,7 +101,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_corporate).to.deep.equal([]);
     });
 
-    it("should return empty date string for OE Due Diligence object if identity date is undefined", () => {
+    it("should return OE Due Diligence object without identity_date field if identity date is undefined", () => {
         const dataResource = mapOverseasEntity({
             overseas_entity_due_diligence: {
                 ...mockValues.OE_DUE_DILIGENCE_MOCK,
@@ -108,10 +109,10 @@ describe("Mapping OverseasEntity Tests suite", () => {
             }
         });
 
-        expect(dataResource.overseas_entity_due_diligence!.identity_date).to.deep.equal("");
+        expect(Object.keys(dataResource.overseas_entity_due_diligence!).indexOf("identity_date")).to.equal(-1);
     });
 
-    it("should return empty date string for OE Due Diligence object if identity date subfields are empty", () => {
+    it("should return OE Due Diligence object without identity_date field if identity date subfields are empty", () => {
         const dataResource = mapOverseasEntity({
             overseas_entity_due_diligence: {
                 ...mockValues.OE_DUE_DILIGENCE_MOCK,
@@ -119,6 +120,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
             }
         });
 
-        expect(dataResource.overseas_entity_due_diligence!.identity_date).to.deep.equal("");
+        expect(Object.keys(dataResource.overseas_entity_due_diligence!).indexOf("identity_date")).to.equal(-1);
     });
 });
