@@ -215,6 +215,7 @@ describe("basket", () => {
                     region: "Glamorgan",
                     surname: "Smith"
                 },
+                enrolled: true,
                 etag: "etag",
                 items: [{
                     company_name: "company name",
@@ -261,6 +262,7 @@ describe("basket", () => {
             const mockResourceItem = mockResponseBody.items[0];
 
             expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
@@ -305,7 +307,8 @@ describe("basket", () => {
                     postal_code: "CF5 3NB",
                     region: undefined,
                     surname: "Smith"
-                }
+                },
+                enrolled: false
             });
 
             const mockGetResponse = {
@@ -320,6 +323,7 @@ describe("basket", () => {
             const mockDeliveryDetails = mockResponseBodyMissingFields.delivery_details;
 
             expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.enrolled).to.be.false;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
@@ -359,6 +363,7 @@ describe("basket", () => {
                 region: "Glamorgan",
                 surname: "Smith"
             },
+            enrolled: true,
             etag: "etag",
             items: [{
                 company_name: "company name",
@@ -402,7 +407,8 @@ describe("basket", () => {
                 postal_code: "CF5 3NB",
                 region: undefined,
                 surname: "Smith"
-            }
+            },
+            enrolled: true
         });
 
         it("returns an error response on failure", async () => {
@@ -434,6 +440,7 @@ describe("basket", () => {
             const mockResourceItem = mockResponseBody.items[0];
 
             expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
@@ -478,6 +485,7 @@ describe("basket", () => {
             const mockDeliveryDetails = mockResponseBodyMissingFields.delivery_details;
 
             expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);

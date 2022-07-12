@@ -5,6 +5,8 @@
 export interface OverseasEntity {
     presenter?: Presenter;
     entity?: Entity;
+    due_diligence?: DueDiligence;
+    overseas_entity_due_diligence?: OverseasEntityDueDiligence;
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividual[];
     beneficial_owners_corporate?: BeneficialOwnerCorporate[];
@@ -17,6 +19,8 @@ export interface OverseasEntity {
 export interface OverseasEntityResource {
     presenter?: Presenter;
     entity?: Entity;
+    due_diligence?: DueDiligenceResource;
+    overseas_entity_due_diligence?: OverseasEntityDueDiligenceResource;
     beneficial_owners_statement?: BeneficialOwnersStatementType;
     beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
@@ -49,6 +53,50 @@ export interface Entity {
     public_register_name?: string
     registration_number?: string
     is_on_register_in_country_formed_in?: yesNoResponse;
+}
+
+export interface DueDiligence {
+    identity_date?: InputDate;
+    name?: string;
+    identity_address?: Address;
+    email?: string;
+    supervisory_name?: string;
+    aml_number?: string;
+    agent_code?: string;
+    partner_name?: string;
+    diligence?: string;
+}
+
+export interface DueDiligenceResource {
+    identity_date?: string;
+    name?: string;
+    identity_address?: Address;
+    email?: string;
+    supervisory_name?: string;
+    aml_number?: string;
+    agent_code?: string;
+    partner_name?: string;
+    diligence?: string;
+}
+
+export interface OverseasEntityDueDiligence {
+    identity_date?: InputDate;
+    name?: string
+    identity_address?: Address;
+    email?: string
+    supervisory_name?: string
+    aml_number?: string
+    partner_name?: string
+}
+
+export interface OverseasEntityDueDiligenceResource {
+    identity_date?: string;
+    name?: string
+    identity_address?: Address;
+    email?: string
+    supervisory_name?: string
+    aml_number?: string
+    partner_name?: string
 }
 
 export interface BeneficialOwnerIndividual {
