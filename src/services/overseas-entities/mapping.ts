@@ -221,7 +221,7 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[]): TrustCorporateRe
     trustCorporates.forEach(trustCorporate => {
         const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
         trustCorporateResources.push({
-            ...rest, 
+            ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
         })
     })

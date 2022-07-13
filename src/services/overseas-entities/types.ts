@@ -283,7 +283,7 @@ export interface TrustIndividual {
     date_became_interested_person_year?: string;
   }
 
-  export interface TrustIndividualResource {
+export interface TrustIndividualResource {
     type?: string;
     forename?: string;
     other_forenames?: string;
@@ -309,9 +309,9 @@ export interface TrustIndividual {
     ura_address_premises?: string;
     ura_address_region?: string;
     date_became_interested_person?: string;
-  }
+}
 
-  export interface TrustHistoricalBeneficialOwner {
+export interface TrustHistoricalBeneficialOwner {
     forename?: string;
     other_forenames?: string;
     surname?: string;
@@ -321,17 +321,17 @@ export interface TrustIndividual {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
-  }
+}
 
-  export interface TrustHistoricalBeneficialOwnerResource {
+export interface TrustHistoricalBeneficialOwnerResource {
     forename?: string;
     other_forenames?: string;
     surname?: string;
     notified_date?: string;
     ceased_date?: string;
-  }
-  
-  export interface TrustCorporate {
+}
+
+export interface TrustCorporate {
     type?: string;
     name?: string;
     date_became_interested_person_day?: string;
@@ -360,9 +360,9 @@ export interface TrustIndividual {
     identification_legal_form?: string;
     identification_place_registered?: string;
     identification_registration_number?: string;
-  }
+}
 
-  export interface TrustCorporateResource {
+export interface TrustCorporateResource {
     type?: string;
     name?: string;
     date_became_interested_person?: string;
@@ -389,7 +389,7 @@ export interface TrustIndividual {
     identification_legal_form?: string;
     identification_place_registered?: string;
     identification_registration_number?: string;
-  }
+}
 
 /**
  * Shared Data Type
