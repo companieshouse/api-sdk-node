@@ -5,11 +5,13 @@ import CheckoutService from "../../../src/services/order/checkout/service";
 import { RequestClient } from "../../../src/http";
 
 import {
-    Checkout, CheckoutResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
-    CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
+    Checkout, CheckoutResource
 } from "../../../src/services/order/checkout";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
+import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid/types";
+import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
+import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -92,7 +94,7 @@ const mockCertificateCheckoutResponseBody: CheckoutResource = {
             liquidators_details: {},
             company_status: "active",
             administrators_details: {}
-        },
+        } as CertificateItemOptionsResource,
         etag: "abcdefg123456",
         kind: "item#certificate",
         links: {
@@ -347,7 +349,7 @@ describe("checkout", () => {
             expect(item.description).to.equal(itemResource.description);
             expect(item.descriptionIdentifier).to.equal(itemResource.description_identifier);
             expect(item.descriptionValues.certificate).to.equal(itemResource.description_values.certificate);
-            expect(item.descriptionValues.companyNumber).to.equal(itemResource.description_values.company_number);
+            expect(item.descriptionValues.company_number).to.equal(itemResource.description_values.company_number);
 
             expect(item.itemCosts[0].discountApplied).to.equal(itemResource.item_costs[0].discount_applied);
             expect(item.itemCosts[0].itemCost).to.equal(itemResource.item_costs[0].item_cost);
@@ -426,8 +428,8 @@ describe("checkout", () => {
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryDate).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_date);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryId).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_id);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryType).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_type);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.changeDate).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.change_date);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.officerName).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.officer_name);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.change_date).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.change_date);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.officer_name).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.officer_name);
             expect(itemOptions.filingHistoryDocuments[0].filingHistoryCost).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_cost);
         });
 
@@ -451,7 +453,7 @@ describe("checkout", () => {
             expect(result.value.httpStatusCode).to.equal(200);
             expect(itemOptions.filingHistoryDate).to.equal(itemOptionsResource.filing_history_date);
             expect(itemOptions.filingHistoryDescription).to.equal(itemOptionsResource.filing_history_description);
-            expect(itemOptions.filingHistoryDescriptionValues.officerName).to.equal(itemOptionsResource.filing_history_description_values.officer_name);
+            expect(itemOptions.filingHistoryDescriptionValues.officer_name).to.equal(itemOptionsResource.filing_history_description_values.officer_name);
             expect(itemOptions.filingHistoryId).to.equal(itemOptionsResource.filing_history_id);
             expect(itemOptions.filingHistoryType).to.equal(itemOptionsResource.filing_history_type);
         });

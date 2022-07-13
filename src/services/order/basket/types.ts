@@ -1,11 +1,9 @@
-/**
- * Basket is what is returned from the api.
- */
+import { Item, ItemResource } from "../order";
 
 export interface BasketResource {
     delivery_details?: DeliveryDetailsResource;
     etag?: string;
-    items?: BasketItemResource[];
+    items?: ItemResource[];
     kind?: string;
     links?: {
         self?: string;
@@ -26,13 +24,10 @@ export interface DeliveryDetailsResource {
     surname: string;
 }
 
-/**
- * Basket is the interface used within the sdk.
- */
 export interface Basket {
     deliveryDetails?: DeliveryDetails;
     etag?: string;
-    items?: BasketItem[];
+    items?: Item[];
     kind?: string;
     links?: {
         self?: string;
@@ -85,92 +80,10 @@ export interface DeliveryDetailsRequest {
     surname: string;
 }
 
-/**
- * BasketItemResource is what is returned from the api.
- */
-export interface BasketItemResource {
-    company_name?: string;
-    company_number?: string;
-    customer_reference?: string;
-    description: string;
-    description_identifier?: string;
-    description_values?: Record<string, string>;
-    etag: string;
-    id: string;
-    item_costs: ItemCostsResource[];
-    item_options: Record<string, object>;
-    item_uri: string;
-    kind: string;
-    links: LinksResource;
-    postage_cost: string;
-    postal_delivery: boolean;
-    quantity: number;
-    total_item_cost: string;
-}
-
-export interface ItemCostsResource {
-    calculated_cost: string;
-    discount_applied?: string;
-    item_cost: string;
-    product_type: string;
-}
-
-export interface LinksResource {
-    self: string;
-}
-
-/**
- * BasketItem is the interface used within the sdk.
- */
-
-export interface BasketItem {
-    companyName?: string;
-    companyNumber?: string;
-    customerReference?: string;
-    description: string;
-    descriptionIdentifier?: string;
-    descriptionValues?: Record<string, string>;
-    etag: string;
-    id: string;
-    itemCosts: BasketItemCosts[];
-    itemOptions: Record<string, object>;
-    itemUri: string;
-    kind: string;
-    links: BasketItemLinks;
-    postageCost: string;
-    postalDelivery: boolean;
-    quantity: number;
-    totalItemCost: string;
-}
-
-export interface BasketItemCosts {
-    calculatedCost: string;
-    discountApplied?: string;
-    itemCost: string;
-    productType: string;
-}
-
-export interface BasketItemLinks {
-    self: string;
-}
-
-/**
- * ItemUriPostRequest
- */
-
 export interface ItemUriPostRequest {
     itemUri: string;
 }
 
-// ItemUriRequestResource
-
-export interface ItemUriRequestResource {
-    item_uri: string;
-}
-
-/**
- * CheckoutResource is what is returned from the api.
- */
 export interface CheckoutResource {
     checked_out_by: {
         email: string;
@@ -201,9 +114,6 @@ export interface CheckoutResource {
     total_order_cost: string;
 }
 
-/**
- * Checkout is the interface used within the sdk.
- */
 export interface Checkout {
   checkedOutBy: {
       email: string;

@@ -1,10 +1,17 @@
 import { IHttpClient } from "../../../http";
 import { CertifiedCopyItem, CertifiedCopyItemResource } from "./types";
 import Resource from "../../resource";
-import CertifiedCopyMapping from "./mapping";
 import Mapping from "../../../mapping/mapping";
 
-export default class {
+export default class CertifiedCopyService {
+    private static readonly EXCLUDED_FIELDS = {
+        deep: true,
+        stopPaths: [
+            "description_values", // all items
+            "item_options.filing_history_documents.filing_history_description_values" // certified copies
+        ]
+    };
+
     constructor (private readonly client: IHttpClient) { }
 
     public async getCertifiedCopy (certifiedCopyId: string): Promise<Resource<CertifiedCopyItem>> {
@@ -20,7 +27,7 @@ export default class {
 
         const body = resp.body as CertifiedCopyItemResource;
 
-        resource.resource = CertifiedCopyMapping.mapCertifiedItemResourceToCertifiedCopyItem(body);
+        resource.resource = Mapping.camelCaseKeys(body, CertifiedCopyService.EXCLUDED_FIELDS);
         return resource;
     };
 };

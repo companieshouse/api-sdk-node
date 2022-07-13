@@ -6,7 +6,10 @@ import chaiHttp from "chai-http";
 import BasketService from "../../../src/services/order/basket/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import Resource, { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
-import { ItemUriPostRequest, BasketItemResource, BasketPatchRequest, Checkout, CheckoutResource, BasketResource } from "../../../src/services/order/basket/types";
+import { ItemUriPostRequest, BasketPatchRequest, Checkout, CheckoutResource, BasketResource } from "../../../src/services/order/basket/types";
+import { ItemOptions, ItemOptionsResource, ItemResource } from "../../../src/services/order/order";
+import { ItemOptions as MissingImageDeliveryItemOptions } from "../../../src/services/order/mid";
+import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -28,7 +31,7 @@ describe("basket", () => {
             itemUri: "/orderable/certificates/CHS00000000000000007"
         });
 
-        const mockResponseBody: BasketItemResource = ({
+        const mockResponseBody: ItemResource = ({
             company_name: "company name",
             company_number: "00000000",
             customer_reference: "reference",
@@ -43,14 +46,24 @@ describe("basket", () => {
                 item_cost: "item cost",
                 product_type: "product type"
             }],
-            item_options: { key: {} },
+            item_options: {
+                filing_history_date: "filing history date",
+                filing_history_description: "filing history description",
+                filing_history_description_values: {
+                    key_one: "value_one",
+                    key_two: "value_two"
+                },
+                filing_history_id: "filing history id",
+                filing_history_type: "filing history type"
+            } as ItemOptionsResource,
             item_uri: "/orderable/certificates/CHS00000000000000007",
-            kind: "kind",
+            kind: "item#missing-image-delivery",
             links: { self: "links" },
             postage_cost: "postage cost",
             postal_delivery: true,
             quantity: 1,
-            total_item_cost: "total item cost"
+            total_item_cost: "total item cost",
+            status: "unknown"
         });
 
         it("returns an error response on failure", async () => {
@@ -83,14 +96,23 @@ describe("basket", () => {
             expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
             expect(data.resource.description).to.equal(mockResponseBody.description);
             expect(data.resource.descriptionIdentifier).to.equal(mockResponseBody.description_identifier);
-            expect(data.resource.descriptionValues).to.equal(mockResponseBody.description_values);
+            expect(data.resource.descriptionValues).to.deep.equal(mockResponseBody.description_values);
             expect(data.resource.etag).to.equal(mockResponseBody.etag);
             expect(data.resource.id).to.equal(mockResponseBody.id);
             expect(data.resource.itemCosts[0].calculatedCost).to.equal(mockResponseBody.item_costs[0].calculated_cost);
             expect(data.resource.itemCosts[0].discountApplied).to.equal(mockResponseBody.item_costs[0].discount_applied);
             expect(data.resource.itemCosts[0].itemCost).to.equal(mockResponseBody.item_costs[0].item_cost);
             expect(data.resource.itemCosts[0].productType).to.equal(mockResponseBody.item_costs[0].product_type);
-            expect(data.resource.itemOptions).to.equal(mockResponseBody.item_options);
+            expect(data.resource.itemOptions).to.deep.equal({
+                filingHistoryDate: "filing history date",
+                filingHistoryDescription: "filing history description",
+                filingHistoryDescriptionValues: {
+                    key_one: "value_one",
+                    key_two: "value_two"
+                },
+                filingHistoryId: "filing history id",
+                filingHistoryType: "filing history type"
+            });
             expect(data.resource.itemUri).to.equal(mockResponseBody.item_uri);
             expect(data.resource.kind).to.equal(mockResponseBody.kind);
             expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
@@ -175,7 +197,7 @@ describe("basket", () => {
             expect(data.resource.deliveryDetails.region).to.equal(mockResponseBody.delivery_details.region);
             expect(data.resource.deliveryDetails.surname).to.equal(mockResponseBody.delivery_details.surname);
             expect(data.resource.etag).to.equal(mockResponseBody.etag);
-            expect(data.resource.items).to.equal(mockResponseBody.items);
+            expect(data.resource.items).to.deep.equal(mockResponseBody.items);
             expect(data.resource.kind).to.equal(mockResponseBody.kind);
             expect(data.resource.links.payment).to.equal(mockResponseBody.links.payment);
             expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
@@ -223,7 +245,10 @@ describe("basket", () => {
                     customer_reference: "reference",
                     description: "description",
                     description_identifier: "description identifier",
-                    description_values: { key: "value" },
+                    description_values: {
+                        key_one: "value one",
+                        key_two: "value two"
+                    },
                     etag: "etag",
                     id: "id",
                     item_costs: [{
@@ -232,14 +257,29 @@ describe("basket", () => {
                         item_cost: "item cost",
                         product_type: "product type"
                     }],
-                    item_options: { key: {} },
+                    item_options: {
+                        filing_history_documents: [{
+                            filing_history_date: "filing history date",
+                            filing_history_description: "filing history description",
+                            filing_history_id: "filing history id",
+                            filing_history_type: "filing history type",
+                            filing_history_description_values: {
+                                key_one: "value one",
+                                key_two: "value two"
+                            },
+                            filing_history_cost: "filing history cost"
+                        }],
+                        delivery_method: "delivery method",
+                        delivery_timescale: "delivery timescale"
+                    } as CertifiedCopyItemOptionsResource,
                     item_uri: "/orderable/certificates/CHS00000000000000007",
-                    kind: "kind",
+                    kind: "item#certificate",
                     links: { self: "links" },
                     postage_cost: "postage cost",
                     postal_delivery: true,
                     quantity: 1,
-                    total_item_cost: "total item cost"
+                    total_item_cost: "total item cost",
+                    status: "unknown"
                 }],
                 kind: "kind",
                 links: {
@@ -285,7 +325,21 @@ describe("basket", () => {
             expect(resourceItem.itemCosts[0].discountApplied).to.equal(mockResourceItem.item_costs[0].discount_applied);
             expect(resourceItem.itemCosts[0].itemCost).to.equal(mockResourceItem.item_costs[0].item_cost);
             expect(resourceItem.itemCosts[0].productType).to.equal(mockResourceItem.item_costs[0].product_type);
-            expect(resourceItem.itemOptions).to.deep.equal(mockResourceItem.item_options);
+            expect(resourceItem.itemOptions).to.deep.equal({
+                filingHistoryDocuments: [{
+                    filingHistoryDate: "filing history date",
+                    filingHistoryDescription: "filing history description",
+                    filingHistoryId: "filing history id",
+                    filingHistoryType: "filing history type",
+                    filingHistoryDescriptionValues: {
+                        key_one: "value one",
+                        key_two: "value two"
+                    },
+                    filingHistoryCost: "filing history cost"
+                }],
+                deliveryMethod: "delivery method",
+                deliveryTimescale: "delivery timescale"
+            } as CertifiedCopyItemOptions);
             expect(resourceItem.itemUri).to.equal(mockResourceItem.item_uri);
             expect(resourceItem.kind).to.equal(mockResourceItem.kind);
             expect(resourceItem.links.self).to.equal(mockResourceItem.links.self);
@@ -380,14 +434,15 @@ describe("basket", () => {
                     item_cost: "item cost",
                     product_type: "product type"
                 }],
-                item_options: { key: {} },
+                item_options: { key: {} } as any,
                 item_uri: "/orderable/certificates/CHS00000000000000007",
                 kind: "kind",
                 links: { self: "links" },
                 postage_cost: "postage cost",
                 postal_delivery: true,
                 quantity: 1,
-                total_item_cost: "total item cost"
+                total_item_cost: "total item cost",
+                status: "unknown"
             }],
             kind: "kind",
             links: {

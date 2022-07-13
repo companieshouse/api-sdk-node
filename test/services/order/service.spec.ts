@@ -5,9 +5,11 @@ import OrderService from "../../../src/services/order/order/service";
 import { RequestClient } from "../../../src/http";
 import { ApiErrorResponse } from "../../../src/services/resource";
 import {
-    Order, OrderResource, CertificateItemOptionsResource, CertifiedCopyItemOptionsResource,
-    CertificateItemOptions, CertifiedCopyItemOptions, MissingImageDeliveryItemOptionsResource, MissingImageDeliveryItemOptions
+    Order, OrderResource
 } from "../../../src/services/order/order";
+import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid/types";
+import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
+import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -92,7 +94,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
             administrators_details: {
                 include_basic_information: false
             }
-        },
+        } as CertificateItemOptionsResource,
         etag: "abcdefg123456",
         kind: "item#certificate",
         links: {
@@ -388,8 +390,6 @@ describe("order", () => {
             expect(itemOptions.forename).to.equal(itemOptionsResource.forename);
             expect(itemOptions.includeGeneralNatureOfBusinessInformation).to.equal(itemOptionsResource.include_general_nature_of_business_information);
             expect(itemOptions.includeGoodStandingInformation).to.equal(itemOptionsResource.include_good_standing_information);
-            expect(itemOptions.registeredOfficeAddressDetails).to.be.undefined;
-            expect(itemOptions.secretaryDetails).to.be.undefined;
             expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
             expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
             expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })

@@ -9,7 +9,7 @@ import { ApiResponse, ApiResult } from "../../resource";
 import Mapping from "../../../mapping/mapping";
 import { failure, success } from "../../result";
 
-export default class {
+export default class CertificateService {
     constructor (private readonly client: IHttpClient) {
     }
 
