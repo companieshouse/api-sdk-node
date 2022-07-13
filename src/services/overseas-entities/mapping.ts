@@ -13,7 +13,15 @@ import {
     OverseasEntityDueDiligenceResource,
     DueDiligence,
     DueDiligenceResource,
-    OverseasEntityResource
+    OverseasEntityResource,
+    TrustData,
+    TrustDataResource,
+    TrustIndividual,
+    TrustIndividualResource,
+    TrustHistoricalBeneficialOwner,
+    TrustHistoricalBeneficialOwnerResource,
+    TrustCorporate,
+    TrustCorporateResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -28,7 +36,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
         managing_officers_corporate: body.managing_officers_corporate,
-        trust_data: body.trust_data
+        trust_data: mapTrustData(body.trust_data)
     };
 };
 
@@ -139,6 +147,85 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
         }
     }
     return {};
+}
+
+/**
+ * Convert the Trust Data into the Resource format which the API expects
+ * (just converting dates currently)
+ * @param  trustData Array of TrustData objects
+ * @returns Array of TrustDataResource
+ */
+const mapTrustData = (trustData: TrustData[]): TrustDataResource[] => {
+    const trustDataResources: TrustDataResource[] = [];
+    if (trustData && trustData.length) {
+        trustData.forEach(trust => {
+            const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, ...rest } = trust;
+            trustDataResources.push({
+                ...rest,
+                creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
+                INDIVIDUALS: mapTrustIndividuals(INDIVIDUALS),
+                HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
+                CORPORATES: mapTrustCorporates(CORPORATES)
+            })
+        });
+    }
+    return trustDataResources;
+}
+
+/**
+ * Convert the Trust Individuals Data into the Resource format which the API expects
+ * (just converting dates currently)
+ * @param  trustIndividuals Array of TrustIndividuals objects
+ * @returns Array of TrustIndividualResource
+ */
+const mapTrustIndividuals = (trustIndividuals: TrustIndividual[]): TrustIndividualResource[] => {
+    const trustIndividualResources: TrustIndividualResource[] = [];
+    trustIndividuals.forEach(trustIndividual => {
+        const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustIndividual;
+        trustIndividualResources.push({
+            ...rest,
+            date_of_birth: convertOptionalDateToIsoDateString(dob_day, dob_month, dob_year),
+            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
+        })
+    })
+    return trustIndividualResources;
+}
+
+/**
+ * Convert the Trust Historical BO Data into the Resource format which the API expects
+ * (just converting dates currently)
+ * @param  trustHistoricalBos Array of TrustHistoricalBeneficialOwner objects
+ * @returns Array of TrustHistoricalBeneficialOwnerResource
+ */
+const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalBeneficialOwner[]): TrustHistoricalBeneficialOwnerResource[] => {
+    const trustHistoricalBoResources: TrustHistoricalBeneficialOwnerResource[] = [];
+    trustHistoricalBos.forEach(trustHistoricalBo => {
+        const { notified_date_day, notified_date_month, notified_date_year, ceased_date_day, ceased_date_month, ceased_date_year, ...rest } = trustHistoricalBo;
+        trustHistoricalBoResources.push({
+            notified_date: convertOptionalDateToIsoDateString(notified_date_day, notified_date_month, notified_date_year),
+            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
+            ...rest
+        })
+    })
+    return trustHistoricalBoResources;
+}
+
+/**
+ * Convert the Trust Corporates Data into the Resource format which the API expects
+ * (just converting dates currently)
+ * @param  trustCorporates Array of TrustCorporate objects
+ * @returns Array of TrustCorporateResource
+ */
+const mapTrustCorporates = (trustCorporates: TrustCorporate[]): TrustCorporateResource[] => {
+    const trustCorporateResources: TrustCorporateResource[] = [];
+    trustCorporates.forEach(trustCorporate => {
+        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
+        trustCorporateResources.push({
+            ...rest, 
+            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
+        })
+    })
+    return trustCorporateResources;
 }
 
 const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
