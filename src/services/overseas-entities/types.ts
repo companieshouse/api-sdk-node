@@ -236,9 +236,9 @@ export interface Trust{
     creation_date_month: string;
     creation_date_year: string;
     unable_to_obtain_all_trust_info: boolean;
-    INDIVIDUALS?: TrustIndividual[];
+    INDIVIDUAL?: TrustIndividual[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwner[];
-    CORPORATES?: TrustCorporate[];
+    CORPORATE?: TrustCorporate[];
 }
 
 export interface TrustResource {
@@ -246,9 +246,9 @@ export interface TrustResource {
     trust_name: string;
     creation_date: string;
     unable_to_obtain_all_trust_info: boolean;
-    INDIVIDUALS?: TrustIndividualResource[];
+    INDIVIDUAL?: TrustIndividualResource[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwnerResource[];
-    CORPORATES?: TrustCorporateResource[];
+    CORPORATE?: TrustCorporateResource[];
 }
 
 export interface TrustIndividual {

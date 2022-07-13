@@ -158,13 +158,13 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
 const mapTrusts = (trusts: Trust[]): TrustResource[] => {
     if (trusts && trusts.length) {
         return trusts.map(trust => {
-            const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, ...rest } = trust;
+            const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUAL, HISTORICAL_BO, CORPORATE, ...rest } = trust;
             return {
                 ...rest,
                 creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
-                INDIVIDUALS: mapTrustIndividuals(INDIVIDUALS),
+                INDIVIDUAL: mapTrustIndividuals(INDIVIDUAL),
                 HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
-                CORPORATES: mapTrustCorporates(CORPORATES)
+                CORPORATE: mapTrustCorporates(CORPORATE)
             }
         })
     }

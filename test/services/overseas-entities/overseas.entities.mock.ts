@@ -323,8 +323,8 @@ export const TRUSTS_MOCK: Trust[] = [{
     creation_date_month: "02",
     creation_date_year: "2020",
     unable_to_obtain_all_trust_info: false,
-    INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
-    CORPORATES: TRUST_CORPORATES_MOCK,
+    INDIVIDUAL: TRUST_INDIVIDUALS_MOCK,
+    CORPORATE: TRUST_CORPORATES_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
 }]
 
@@ -412,8 +412,8 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     unable_to_obtain_all_trust_info: false,
-    INDIVIDUALS: TRUST_INDIVIDUALS_RESOURCE_MOCK,
-    CORPORATES: TRUST_CORPORATES_RESOURCE_MOCK,
+    INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
+    CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK
 }]
 
