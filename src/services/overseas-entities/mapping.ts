@@ -156,20 +156,19 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
  * @returns Array of TrustResource
  */
 const mapTrusts = (trusts: Trust[]): TrustResource[] => {
-    const trustResources: TrustResource[] = [];
     if (trusts && trusts.length) {
-        for (const trust of trusts) {
+        return trusts.map(trust => {
             const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, ...rest } = trust;
-            trustResources.push({
+            return {
                 ...rest,
                 creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
                 INDIVIDUALS: mapTrustIndividuals(INDIVIDUALS),
                 HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
                 CORPORATES: mapTrustCorporates(CORPORATES)
-            })
-        };
+            }
+        })
     }
-    return trustResources;
+    return [];
 }
 
 /**
@@ -179,16 +178,14 @@ const mapTrusts = (trusts: Trust[]): TrustResource[] => {
  * @returns Array of TrustIndividualResource
  */
 const mapTrustIndividuals = (trustIndividuals: TrustIndividual[]): TrustIndividualResource[] => {
-    const trustIndividualResources: TrustIndividualResource[] = [];
-    for (const trustIndividual of trustIndividuals) {
+    return trustIndividuals.map(trustIndividual => {
         const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustIndividual;
-        trustIndividualResources.push({
+        return {
             ...rest,
             date_of_birth: convertOptionalDateToIsoDateString(dob_day, dob_month, dob_year),
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
-        })
-    }
-    return trustIndividualResources;
+        }
+    })
 }
 
 /**
@@ -198,16 +195,14 @@ const mapTrustIndividuals = (trustIndividuals: TrustIndividual[]): TrustIndividu
  * @returns Array of TrustHistoricalBeneficialOwnerResource
  */
 const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalBeneficialOwner[]): TrustHistoricalBeneficialOwnerResource[] => {
-    const trustHistoricalBoResources: TrustHistoricalBeneficialOwnerResource[] = [];
-    for (const trustHistoricalBo of trustHistoricalBos) {
+    return trustHistoricalBos.map(trustHistoricalBo => {
         const { notified_date_day, notified_date_month, notified_date_year, ceased_date_day, ceased_date_month, ceased_date_year, ...rest } = trustHistoricalBo;
-        trustHistoricalBoResources.push({
+        return {
             notified_date: convertOptionalDateToIsoDateString(notified_date_day, notified_date_month, notified_date_year),
             ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
             ...rest
-        })
-    }
-    return trustHistoricalBoResources;
+        }
+    })
 }
 
 /**
@@ -216,16 +211,14 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  * @param  trustCorporates Array of TrustCorporate objects
  * @returns Array of TrustCorporateResource
  */
-const mapTrustCorporates = (trustCorporates: TrustCorporate[]): TrustCorporateResource[] => {
-    const trustCorporateResources: TrustCorporateResource[] = [];
-    for (const trustCorporate of trustCorporates) {
+const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {
+    return trustCorporates.map(trustCorporate => {
         const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
-        trustCorporateResources.push({
+        return {
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
-        })
-    }
-    return trustCorporateResources;
+        }
+    })
 }
 
 const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
