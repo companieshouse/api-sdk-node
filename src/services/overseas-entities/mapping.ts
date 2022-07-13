@@ -158,7 +158,7 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
 const mapTrusts = (trusts: Trust[]): TrustResource[] => {
     const trustResources: TrustResource[] = [];
     if (trusts && trusts.length) {
-        trusts.forEach(trust => {
+        for (const trust of trusts) {
             const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, ...rest } = trust;
             trustResources.push({
                 ...rest,
@@ -167,7 +167,7 @@ const mapTrusts = (trusts: Trust[]): TrustResource[] => {
                 HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
                 CORPORATES: mapTrustCorporates(CORPORATES)
             })
-        });
+        };
     }
     return trustResources;
 }
@@ -180,14 +180,14 @@ const mapTrusts = (trusts: Trust[]): TrustResource[] => {
  */
 const mapTrustIndividuals = (trustIndividuals: TrustIndividual[]): TrustIndividualResource[] => {
     const trustIndividualResources: TrustIndividualResource[] = [];
-    trustIndividuals.forEach(trustIndividual => {
+    for (const trustIndividual of trustIndividuals) {
         const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustIndividual;
         trustIndividualResources.push({
             ...rest,
             date_of_birth: convertOptionalDateToIsoDateString(dob_day, dob_month, dob_year),
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
         })
-    })
+    }
     return trustIndividualResources;
 }
 
@@ -199,14 +199,14 @@ const mapTrustIndividuals = (trustIndividuals: TrustIndividual[]): TrustIndividu
  */
 const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalBeneficialOwner[]): TrustHistoricalBeneficialOwnerResource[] => {
     const trustHistoricalBoResources: TrustHistoricalBeneficialOwnerResource[] = [];
-    trustHistoricalBos.forEach(trustHistoricalBo => {
+    for (const trustHistoricalBo of trustHistoricalBos) {
         const { notified_date_day, notified_date_month, notified_date_year, ceased_date_day, ceased_date_month, ceased_date_year, ...rest } = trustHistoricalBo;
         trustHistoricalBoResources.push({
             notified_date: convertOptionalDateToIsoDateString(notified_date_day, notified_date_month, notified_date_year),
             ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
             ...rest
         })
-    })
+    }
     return trustHistoricalBoResources;
 }
 
@@ -218,13 +218,13 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  */
 const mapTrustCorporates = (trustCorporates: TrustCorporate[]): TrustCorporateResource[] => {
     const trustCorporateResources: TrustCorporateResource[] = [];
-    trustCorporates.forEach(trustCorporate => {
+    for (const trustCorporate of trustCorporates) {
         const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
         trustCorporateResources.push({
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
         })
-    })
+    }
     return trustCorporateResources;
 }
 
