@@ -14,8 +14,8 @@ import {
     DueDiligence,
     DueDiligenceResource,
     OverseasEntityResource,
-    TrustData,
-    TrustDataResource,
+    Trust,
+    TrustResource,
     TrustIndividual,
     TrustIndividualResource,
     TrustHistoricalBeneficialOwner,
@@ -36,7 +36,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
         managing_officers_corporate: body.managing_officers_corporate,
-        trust_data: mapTrustData(body.trust_data)
+        trusts: mapTrusts(body.trusts)
     };
 };
 
@@ -152,15 +152,15 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
 /**
  * Convert the Trust Data into the Resource format which the API expects
  * (just converting dates currently)
- * @param  trustData Array of TrustData objects
- * @returns Array of TrustDataResource
+ * @param  trusts Array of Trust objects
+ * @returns Array of TrustResource
  */
-const mapTrustData = (trustData: TrustData[]): TrustDataResource[] => {
-    const trustDataResources: TrustDataResource[] = [];
-    if (trustData && trustData.length) {
-        trustData.forEach(trust => {
+const mapTrusts = (trusts: Trust[]): TrustResource[] => {
+    const trustResources: TrustResource[] = [];
+    if (trusts && trusts.length) {
+        trusts.forEach(trust => {
             const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, ...rest } = trust;
-            trustDataResources.push({
+            trustResources.push({
                 ...rest,
                 creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
                 INDIVIDUALS: mapTrustIndividuals(INDIVIDUALS),
@@ -169,7 +169,7 @@ const mapTrustData = (trustData: TrustData[]): TrustDataResource[] => {
             })
         });
     }
-    return trustDataResources;
+    return trustResources;
 }
 
 /**

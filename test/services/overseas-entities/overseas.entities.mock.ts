@@ -22,8 +22,8 @@ import {
     OverseasEntityResource,
     Presenter,
     yesNoResponse,
-    TrustData,
-    TrustDataResource,
+    Trust,
+    TrustResource,
     TrustIndividual,
     TrustIndividualResource,
     TrustCorporate,
@@ -316,7 +316,7 @@ export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
     ceased_date_year: "1986"
 }]
 
-export const TRUST_DATA_MOCK: TrustData[] = [{
+export const TRUSTS_MOCK: Trust[] = [{
     trust_id: "123",
     trust_name: "trust_name",
     creation_date_day: "20",
@@ -339,7 +339,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
-    trust_data: TRUST_DATA_MOCK
+    trusts: TRUSTS_MOCK
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
@@ -407,7 +407,7 @@ export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerR
     ceased_date: "1986-12-14"
 }]
 
-export const TRUST_DATA_RESOURCE_MOCK: TrustDataResource[] = [{
+export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     trust_id: "123",
     trust_name: "trust_name",
     creation_date: "2020-02-20",
@@ -428,7 +428,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
-    trust_data: TRUST_DATA_RESOURCE_MOCK
+    trusts: TRUSTS_RESOURCE_MOCK
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
