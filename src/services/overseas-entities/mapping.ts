@@ -128,7 +128,7 @@ const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
             identity_date
         }
     }
-    return {};
+    return null;
 }
 
 /**
@@ -145,7 +145,7 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
             ? { ...rest, identity_date: identityDateResource }
             : { ...rest };
     }
-    return {};
+    return null;
 }
 
 /**
