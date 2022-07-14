@@ -128,6 +128,8 @@ const mapDueDiligence = (dueDiligence: DueDiligence): DueDiligenceResource => {
             identity_date
         }
     }
+
+    // This object is optionally present - API will ignore it if sent as null but not as {}
     return null;
 }
 
@@ -145,6 +147,8 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
             ? { ...rest, identity_date: identityDateResource }
             : { ...rest };
     }
+
+    // This object is optionally present - API will ignore it if sent as null but not as {}
     return null;
 }
 
