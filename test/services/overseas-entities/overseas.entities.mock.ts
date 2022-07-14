@@ -8,6 +8,7 @@ import {
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     BeneficialOwnersStatementType,
+    DueDiligence, DueDiligenceResource,
     Entity,
     ManagingOfficerCorporate,
     ManagingOfficerCorporateResource,
@@ -16,9 +17,19 @@ import {
     NatureOfControlType,
     OverseasEntity,
     OverseasEntityCreated,
+    OverseasEntityDueDiligence,
+    OverseasEntityDueDiligenceResource,
     OverseasEntityResource,
     Presenter,
-    yesNoResponse
+    yesNoResponse,
+    Trust,
+    TrustResource,
+    TrustIndividual,
+    TrustIndividualResource,
+    TrustCorporate,
+    TrustCorporateResource,
+    TrustHistoricalBeneficialOwner,
+    TrustHistoricalBeneficialOwnerResource
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -198,28 +209,226 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
     }
 ];
 
+export const DUE_DILIGENCE_MOCK: DueDiligence = {
+    identity_date: { day: "1", month: "12", year: "2021" },
+    name: "ABC Checking Ltd",
+    email: "lorem@ipsum.com",
+    supervisory_name: "Super supervisors",
+    aml_number: "antimon123",
+    agent_code: "assure123",
+    partner_name: "Joe Checker"
+};
+
+export const DUE_DILIGENCE_RESOURCE_MOCK: DueDiligenceResource = {
+    ...DUE_DILIGENCE_MOCK,
+    identity_date: "2021-12-01"
+}
+
+export const OE_DUE_DILIGENCE_MOCK: OverseasEntityDueDiligence = {
+    identity_date: { day: "1", month: "1", year: "2022" },
+    name: "ABC Checking Ltd",
+    identity_address: ADDRESS,
+    email: "lorem@ipsum.com",
+    supervisory_name: "Super supervisors",
+    aml_number: "antimon123",
+    partner_name: "Joe Checker"
+};
+
+export const OE_DUE_DILIGENCE_RESOURCE_MOCK: OverseasEntityDueDiligenceResource = {
+    ...OE_DUE_DILIGENCE_MOCK,
+    identity_date: "2022-01-01"
+};
+
 export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
+
+export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
+    type: "type",
+    forename: "joe",
+    other_forenames: "jim",
+    surname: "bloggs",
+    dob_day: "31",
+    dob_month: "03",
+    dob_year: "2003",
+    nationality: "british",
+    sa_address_line1: "sa_addressline1",
+    sa_address_line2: "sa_addressline2",
+    sa_address_care_of: "sa_careof",
+    sa_address_country: "sa_country",
+    sa_address_locality: "sa_locality",
+    sa_address_po_box: "sa_pobox",
+    sa_address_postal_code: "sa_postcode",
+    sa_address_premises: "sa_premises",
+    sa_address_region: "sa_region",
+    ura_address_line1: "ura_line1",
+    ura_address_line2: "ura_line2",
+    ura_address_care_of: "ura_careof",
+    ura_address_country: "ura_country",
+    ura_address_locality: "ura_locality",
+    ura_address_po_box: "ura_pobox",
+    ura_address_postal_code: "ura_postcode",
+    ura_address_premises: "ura_premises",
+    ura_address_region: "ura_region",
+    date_became_interested_person_day: "30",
+    date_became_interested_person_month: "04",
+    date_became_interested_person_year: "2004"
+}]
+
+export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
+    type: "corp_type",
+    name: "corp_name",
+    date_became_interested_person_day: "31",
+    date_became_interested_person_month: "08",
+    date_became_interested_person_year: "2005",
+    ro_address_line1: "ro_line1",
+    ro_address_line2: "ro_line2",
+    ro_address_care_of: "ro_co",
+    ro_address_country: "ro_country",
+    ro_address_locality: "ro_locality",
+    ro_address_po_box: "ro_pobox",
+    ro_address_postal_code: "ro_postcode",
+    ro_address_premises: "ro_premises",
+    ro_address_region: "ro_region",
+    sa_address_line1: "sa_line1",
+    sa_address_line2: "sa_line2",
+    sa_address_care_of: "sa_co",
+    sa_address_country: "sa_country",
+    sa_address_locality: "sa_locality",
+    sa_address_po_box: "sa_pobox",
+    sa_address_postal_code: "sa_postcode",
+    sa_address_premises: "sa_premises",
+    sa_address_region: "sa_region",
+    identification_country_registration: "123",
+    identification_legal_authority: "auth",
+    identification_legal_form: "form",
+    identification_place_registered: "uk",
+    identification_registration_number: "456"
+}]
+
+export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
+    forename: "joe",
+    other_forenames: "jim",
+    surname: "bloggs",
+    notified_date_day: "13",
+    notified_date_month: "11",
+    notified_date_year: "1985",
+    ceased_date_day: "14",
+    ceased_date_month: "12",
+    ceased_date_year: "1986"
+}]
+
+export const TRUSTS_MOCK: Trust[] = [{
+    trust_id: "123",
+    trust_name: "trust_name",
+    creation_date_day: "20",
+    creation_date_month: "02",
+    creation_date_year: "2020",
+    unable_to_obtain_all_trust_info: false,
+    INDIVIDUAL: TRUST_INDIVIDUALS_MOCK,
+    CORPORATE: TRUST_CORPORATES_MOCK,
+    HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
+}]
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
+    due_diligence: DUE_DILIGENCE_MOCK,
+    overseas_entity_due_diligence: OE_DUE_DILIGENCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
-    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST
+    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
+    trusts: TRUSTS_MOCK
 };
+
+export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
+    type: "type",
+    forename: "joe",
+    other_forenames: "jim",
+    surname: "bloggs",
+    date_of_birth: "2003-03-31",
+    nationality: "british",
+    sa_address_line1: "sa_addressline1",
+    sa_address_line2: "sa_addressline2",
+    sa_address_care_of: "sa_careof",
+    sa_address_country: "sa_country",
+    sa_address_locality: "sa_locality",
+    sa_address_po_box: "sa_pobox",
+    sa_address_postal_code: "sa_postcode",
+    sa_address_premises: "sa_premises",
+    sa_address_region: "sa_region",
+    ura_address_line1: "ura_line1",
+    ura_address_line2: "ura_line2",
+    ura_address_care_of: "ura_careof",
+    ura_address_country: "ura_country",
+    ura_address_locality: "ura_locality",
+    ura_address_po_box: "ura_pobox",
+    ura_address_postal_code: "ura_postcode",
+    ura_address_premises: "ura_premises",
+    ura_address_region: "ura_region",
+    date_became_interested_person: "2004-04-30"
+}]
+
+export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
+    type: "corp_type",
+    name: "corp_name",
+    date_became_interested_person: "2005-08-31",
+    ro_address_line1: "ro_line1",
+    ro_address_line2: "ro_line2",
+    ro_address_care_of: "ro_co",
+    ro_address_country: "ro_country",
+    ro_address_locality: "ro_locality",
+    ro_address_po_box: "ro_pobox",
+    ro_address_postal_code: "ro_postcode",
+    ro_address_premises: "ro_premises",
+    ro_address_region: "ro_region",
+    sa_address_line1: "sa_line1",
+    sa_address_line2: "sa_line2",
+    sa_address_care_of: "sa_co",
+    sa_address_country: "sa_country",
+    sa_address_locality: "sa_locality",
+    sa_address_po_box: "sa_pobox",
+    sa_address_postal_code: "sa_postcode",
+    sa_address_premises: "sa_premises",
+    sa_address_region: "sa_region",
+    identification_country_registration: "123",
+    identification_legal_authority: "auth",
+    identification_legal_form: "form",
+    identification_place_registered: "uk",
+    identification_registration_number: "456"
+}]
+
+export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerResource[] = [{
+    forename: "joe",
+    other_forenames: "jim",
+    surname: "bloggs",
+    notified_date: "1985-11-13",
+    ceased_date: "1986-12-14"
+}]
+
+export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
+    trust_id: "123",
+    trust_name: "trust_name",
+    creation_date: "2020-02-20",
+    unable_to_obtain_all_trust_info: false,
+    INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
+    CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
+    HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK
+}]
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
+    due_diligence: DUE_DILIGENCE_RESOURCE_MOCK,
+    overseas_entity_due_diligence: OE_DUE_DILIGENCE_RESOURCE_MOCK,
     beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
-    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST
+    managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
+    trusts: TRUSTS_RESOURCE_MOCK
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
