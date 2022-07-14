@@ -156,13 +156,14 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
  */
 const mapTrusts = (trusts: Trust[] = []): TrustResource[] => {
     return trusts.map(trust => {
-        const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUAL, HISTORICAL_BO, CORPORATE, ...rest } = trust;
+        const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
         return {
             ...rest,
             creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
-            INDIVIDUAL: mapTrustIndividuals(INDIVIDUAL),
+            INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
             HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
-            CORPORATE: mapTrustCorporates(CORPORATE)
+            CORPORATE: mapTrustCorporates(CORPORATES),
+            unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info == "Yes") ? true : false
         }
     });
 }
