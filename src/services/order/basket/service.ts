@@ -7,6 +7,7 @@ import Resource, { ApiResponse, ApiResult } from "../../../services/resource";
 import { failure, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
 import { Item, ItemResource } from "../order";
+import BasketMapping from "./mapping";
 
 export default class BasketService {
     private static readonly EXCLUDED_FIELDS_FULL_BASKET = {
@@ -47,7 +48,7 @@ export default class BasketService {
     }
 
     public async patchBasket (basketRequest: BasketPatchRequest): Promise<Resource<Basket>> {
-        const basketRequestResource: BasketRequestResource = Mapping.snakeCaseKeys(basketRequest);
+        const basketRequestResource: BasketRequestResource = BasketMapping.mapBasketRequestToBasketRequestResource(basketRequest);
 
         const additionalHeaders = {
             "Content-Type": "application/merge-patch+json"
