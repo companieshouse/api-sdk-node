@@ -30,7 +30,7 @@ export default class RequestClient extends AbstractClient {
         try {
             const options: rq.Options = {
                 baseUrl: this.options.baseUrl,
-                uri: additionalOptions.url,
+                uri: additionalOptions.url as string,
                 method: additionalOptions.method,
                 headers: {
                     ...this.headers,

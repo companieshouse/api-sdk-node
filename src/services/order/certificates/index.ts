@@ -1,2 +1,2 @@
 export * from "./types";
-export { default as CertificateService } from "./service";
+export { default } from "./service";

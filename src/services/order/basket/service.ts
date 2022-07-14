@@ -1,14 +1,33 @@
 import { IHttpClient } from "../../../http";
 import {
-    Basket, BasketResource, BasketRequestResource, BasketPatchRequest, BasketItem,
-    ItemUriPostRequest, ItemUriRequestResource, BasketItemResource, CheckoutResource, Checkout
+    Basket, BasketResource, BasketRequestResource, BasketPatchRequest,
+    ItemUriPostRequest, CheckoutResource, Checkout
 } from "./types";
 import Resource, { ApiResponse, ApiResult } from "../../../services/resource";
-import BasketMapping from "./mapping";
 import { failure, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
+import { Item, ItemResource } from "../order";
+import BasketMapping from "./mapping";
 
 export default class BasketService {
+    private static readonly EXCLUDED_FIELDS_FULL_BASKET = {
+        deep: true,
+        stopPaths: [
+            "items.description_values", // all items
+            "items.item_options.filing_history_description_values", // missing image delivery
+            "items.item_options.filing_history_documents.filing_history_description_values" // certified copies
+        ]
+    };
+
+    private static readonly EXCLUDED_FIELDS_SINGLE_ITEM_BASKET = {
+        deep: true,
+        stopPaths: [
+            "description_values", // all items
+            "item_options.filing_history_description_values", // missing image delivery
+            "item_options.filing_history_documents.filing_history_description_values" // certified copies
+        ]
+    };
+
     constructor (private readonly client: IHttpClient) { }
 
     public async getBasket (): Promise<Resource<Basket>> {
@@ -24,13 +43,12 @@ export default class BasketService {
 
         const body = resp.body as BasketResource;
 
-        resource.resource = Mapping.camelCaseKeys<Basket>(body);
+        resource.resource = Mapping.camelCaseKeys<Basket>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
         return resource;
     }
 
     public async patchBasket (basketRequest: BasketPatchRequest): Promise<Resource<Basket>> {
-        const basketRequestResource: BasketRequestResource =
-        BasketMapping.mapBasketRequestToBasketRequestResource(basketRequest);
+        const basketRequestResource: BasketRequestResource = BasketMapping.mapBasketRequestToBasketRequestResource(basketRequest);
 
         const additionalHeaders = {
             "Content-Type": "application/merge-patch+json"
@@ -47,17 +65,16 @@ export default class BasketService {
 
         const body = resp.body as BasketResource;
 
-        resource.resource = Mapping.camelCaseKeys<Basket>(body);
+        resource.resource = Mapping.camelCaseKeys<Basket>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
         return resource;
     }
 
-    public async postItemToBasket (itemUriRequest: ItemUriPostRequest): Promise<Resource<BasketItem>> {
-        const itemUriRequestResource: ItemUriRequestResource =
-            BasketMapping.mapItemUriRequestToItemUriRequestResource(itemUriRequest);
+    public async postItemToBasket (itemUriRequest: ItemUriPostRequest): Promise<Resource<Item>> {
+        const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
 
         const resp = await this.client.httpPost("/basket/items", itemUriRequestResource);
 
-        const resource: Resource<BasketItem> = {
+        const resource: Resource<Item> = {
             httpStatusCode: resp.status
         };
 
@@ -65,9 +82,9 @@ export default class BasketService {
             return resource;
         }
 
-        const body = resp.body as BasketItemResource;
+        const body = resp.body as ItemResource;
 
-        resource.resource = BasketMapping.mapItemUriResourceToItemUri(body);
+        resource.resource = Mapping.camelCaseKeys<Item>(body, BasketService.EXCLUDED_FIELDS_SINGLE_ITEM_BASKET);
         return resource;
     }
 
@@ -88,35 +105,8 @@ export default class BasketService {
 
         const body = resp.body as CheckoutResource;
 
-        result.resource = {
-            checkedOutBy: {
-                email: body.checked_out_by.email,
-                id: body.checked_out_by.id
-            },
-            deliveryDetails: {
-                addressLine1: body.delivery_details?.address_line_1,
-                addressLine2: body.delivery_details?.address_line_2,
-                country: body.delivery_details?.country,
-                forename: body.delivery_details?.forename,
-                locality: body.delivery_details?.locality,
-                poBox: body.delivery_details?.po_box,
-                postalCode: body.delivery_details?.postal_code,
-                region: body.delivery_details?.region,
-                surname: body.delivery_details?.surname
-            },
-            etag: body.etag,
-            items: body.items,
-            kind: body.kind,
-            links: {
-                payment: body.links.payment,
-                self: body.links.self
-            },
-            paidAt: body.paid_at,
-            paymentReference: body.payment_reference,
-            reference: body.reference,
-            status: body.status,
-            totalOrderCost: body.total_order_cost
-        };
+        result.resource = Mapping.camelCaseKeys(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
+
         return success(result);
     }
 }

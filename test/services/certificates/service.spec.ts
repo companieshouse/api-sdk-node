@@ -111,7 +111,8 @@ const mockResponseBody: CertificateItemResource = ({
     postage_cost: "postage cost",
     postal_delivery: true,
     quantity: 1,
-    total_item_cost: "total cost"
+    total_item_cost: "total cost",
+    user_id: "user id"
 });
 
 const mockResponseBodyMissingFields: CertificateItemResource = ({
@@ -163,7 +164,8 @@ const mockResponseBodyMissingFields: CertificateItemResource = ({
     postage_cost: "postage cost",
     postal_delivery: true,
     quantity: 1,
-    total_item_cost: "total cost"
+    total_item_cost: "total cost",
+    user_id: "user id"
 });
 
 describe("order a certificate GET", () => {
@@ -238,6 +240,7 @@ describe("order a certificate GET", () => {
         expect(data.value.resource.descriptionValues.key).to.equal(mockResponseBody.description_values.key);
         expect(data.value.resource.etag).to.equal(mockResponseBody.etag);
         expect(data.value.resource.id).to.equal(mockResponseBody.id);
+        expect(data.value.resource.userId).to.equal(mockResponseBody.user_id);
         expect(resourceItemCosts.length).to.equal(1);
         expect(resourceItemCosts[0].calculatedCost).to.equal(mockItemCosts[0].calculated_cost);
         expect(resourceItemCosts[0].discountApplied).to.equal(mockItemCosts[0].discount_applied);

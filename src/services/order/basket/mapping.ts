@@ -1,46 +1,13 @@
-import {
-    Basket, BasketResource, BasketItem, BasketPatchRequest, BasketRequestResource,
-    ItemUriPostRequest, ItemUriRequestResource, BasketItemResource, ItemCostsResource
-} from "./types";
+import { BasketPatchRequest, BasketRequestResource } from "./types";
 
 export default class BasketMapping {
-    public static mapItemUriRequestToItemUriRequestResource (
-        itemUriRequest: ItemUriPostRequest): ItemUriRequestResource {
-        return {
-            item_uri: itemUriRequest.itemUri
-        };
-    }
-
-    public static mapItemUriResourceToItemUri (body: BasketItemResource): BasketItem {
-        return {
-            companyName: body.company_name,
-            companyNumber: body.company_number,
-            customerReference: body.customer_reference,
-            description: body.description,
-            descriptionIdentifier: body.description_identifier,
-            descriptionValues: body.description_values,
-            etag: body.etag,
-            id: body.id,
-            itemCosts: body.item_costs.map((i: ItemCostsResource) => ({
-                calculatedCost: i?.calculated_cost,
-                discountApplied: i?.discount_applied,
-                itemCost: i?.item_cost,
-                productType: i?.product_type
-            })),
-            //   item options not used
-            itemOptions: body.item_options,
-            itemUri: body.item_uri,
-            kind: body.kind,
-            links: {
-                self: body.links.self
-            },
-            postageCost: body.postage_cost,
-            postalDelivery: body.postal_delivery,
-            quantity: body.quantity,
-            totalItemCost: body.total_item_cost
-        };
-    }
-
+    /**
+     * Maps a request object to change delivery details to a corresponding resource request.
+     * Note: required as Mapping.snakeCaseKeys does not insert underscores between letters and numbers.
+     *
+     * @param basketRequest A {@link BasketPatchRequest patch basket details} request object
+     * @return BasketRequestResource An equivalent request entity with fields converted into snake case.
+     */
     public static mapBasketRequestToBasketRequestResource (basketRequest: BasketPatchRequest): BasketRequestResource {
         return {
             delivery_details: {

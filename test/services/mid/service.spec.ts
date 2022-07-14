@@ -28,6 +28,9 @@ const mockResponseBody : MidItemResource = ({
         product_type: "product type"
     }],
     item_options: {
+        filing_history_barcode: "barcode",
+        filing_history_category: "category",
+        filing_history_cost: "cost",
         filing_history_date: "2010-02-12",
         filing_history_description: "change-person-director-company-with-change-date",
         filing_history_description_values: {
