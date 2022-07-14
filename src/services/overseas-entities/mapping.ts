@@ -163,7 +163,7 @@ const mapTrusts = (trusts: Trust[] = []): TrustResource[] => {
             INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
             HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
             CORPORATE: mapTrustCorporates(CORPORATES),
-            unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info == "Yes") ? true : false
+            unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info === "Yes")
         }
     });
 }
