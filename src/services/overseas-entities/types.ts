@@ -235,10 +235,10 @@ export interface Trust{
     creation_date_day: string;
     creation_date_month: string;
     creation_date_year: string;
-    unable_to_obtain_all_trust_info: boolean;
-    INDIVIDUAL?: TrustIndividual[];
+    unable_to_obtain_all_trust_info: string;
+    INDIVIDUALS?: TrustIndividual[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwner[];
-    CORPORATE?: TrustCorporate[];
+    CORPORATES?: TrustCorporate[];
 }
 
 export interface TrustResource {

@@ -322,9 +322,9 @@ export const TRUSTS_MOCK: Trust[] = [{
     creation_date_day: "20",
     creation_date_month: "02",
     creation_date_year: "2020",
-    unable_to_obtain_all_trust_info: false,
-    INDIVIDUAL: TRUST_INDIVIDUALS_MOCK,
-    CORPORATE: TRUST_CORPORATES_MOCK,
+    unable_to_obtain_all_trust_info: "No",
+    INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
+    CORPORATES: TRUST_CORPORATES_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
 }]
 
