@@ -1,24 +1,20 @@
-/**
- * MidItemResource is what is returned from the api.
- */
-
 export interface MidItemResource {
-        company_name: string,
-        company_number: string,
-        customer_reference: string,
-        description: string,
-        description_identifier: string,
-        description_values: Record<string, string>;
-        etag: string,
-        id: string,
-        item_costs: ItemCostsResource[],
-        item_options: ItemOptionsResource,
-        kind: string,
-        links: LinksResource,
-        postage_cost: string,
-        postal_delivery: boolean,
-        quantity: number,
-        total_item_cost: string
+    company_name: string;
+    company_number: string;
+    customer_reference: string;
+    description: string;
+    description_identifier: string;
+    description_values: Record<string, string>;
+    etag: string;
+    id: string;
+    item_costs: ItemCostsResource[];
+    item_options: ItemOptionsResource;
+    kind: string;
+    links: LinksResource;
+    postage_cost: string;
+    postal_delivery: boolean;
+    quantity: number;
+    total_item_cost: string;
 }
 
 export interface ItemCostsResource {
@@ -29,20 +25,19 @@ export interface ItemCostsResource {
 }
 
 export interface ItemOptionsResource {
-    filing_history_date: string,
-    filing_history_description: string,
-    filing_history_description_values: Record<string, string>,
-    filing_history_id: string,
-    filing_history_type: string
+    filing_history_date: string;
+    filing_history_description: string;
+    filing_history_description_values: Record<string, string>;
+    filing_history_id: string;
+    filing_history_type: string;
+    filing_history_category: string;
+    filing_history_cost: string;
+    filing_history_barcode: string;
 }
 
 export interface LinksResource {
     self: string;
 }
-
-/**
- * MidItem is the interface used within this SDK.
- */
 
 export interface MidItem {
     companyName: string;
@@ -71,18 +66,20 @@ export interface ItemCosts {
 }
 
 export interface ItemOptions {
-    filingHistoryDate: string,
-    filingHistoryDescription: string,
-    filingHistoryDescriptionValues: Record<string, any>,
-    filingHistoryId: string,
-    filingHistoryType: string
+    filingHistoryDate: string;
+    filingHistoryDescription: string;
+    filingHistoryDescriptionValues: Record<string, any>;
+    filingHistoryId: string;
+    filingHistoryType: string;
+    filingHistoryCategory: string;
+    filingHistoryCost: string;
+    filingHistoryBarcode: string;
 }
 
 export interface Links {
     self: string;
 }
 
-// MidItemPostRequest
 export interface MidItemPostRequest {
     companyNumber?: string;
     customerReference?: string;
@@ -91,17 +88,16 @@ export interface MidItemPostRequest {
 }
 
 export interface ItemOptionsRequest {
-    filingHistoryId: string,
+    filingHistoryId: string;
 }
 
-// MidItemRequestResource
 export interface MidItemRequestResource {
     company_number?: string;
     customer_reference?: string;
     item_options: ItemOptionsRequestResource;
     quantity: number;
-  }
+}
 
 export interface ItemOptionsRequestResource {
-    filing_history_id: string,
+    filing_history_id: string;
 }

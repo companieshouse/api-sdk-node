@@ -8,7 +8,7 @@ import { RequestClient, HttpResponse } from "../../../src/http";
 import Resource, { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
 import { ItemUriPostRequest, BasketPatchRequest, Checkout, CheckoutResource, BasketResource } from "../../../src/services/order/basket/types";
 import { ItemOptions, ItemOptionsResource, ItemResource } from "../../../src/services/order/order";
-import { ItemOptions as MissingImageDeliveryItemOptions } from "../../../src/services/order/mid";
+import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 const expect = chai.expect;
 
@@ -54,8 +54,11 @@ describe("basket", () => {
                     key_two: "value_two"
                 },
                 filing_history_id: "filing history id",
-                filing_history_type: "filing history type"
-            } as ItemOptionsResource,
+                filing_history_type: "filing history type",
+                filing_history_barcode: "filing history barcode",
+                filing_history_cost: "filing history cost",
+                filing_history_category: "filing history category"
+            } as MissingImageDeliveryItemOptionsResource,
             item_uri: "/orderable/certificates/CHS00000000000000007",
             kind: "item#missing-image-delivery",
             links: { self: "links" },
@@ -111,8 +114,11 @@ describe("basket", () => {
                     key_two: "value_two"
                 },
                 filingHistoryId: "filing history id",
-                filingHistoryType: "filing history type"
-            });
+                filingHistoryType: "filing history type",
+                filingHistoryBarcode: "filing history barcode",
+                filingHistoryCategory: "filing history category",
+                filingHistoryCost: "filing history cost"
+            } as MissingImageDeliveryItemOptions);
             expect(data.resource.itemUri).to.equal(mockResponseBody.item_uri);
             expect(data.resource.kind).to.equal(mockResponseBody.kind);
             expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
@@ -258,6 +264,10 @@ describe("basket", () => {
                         product_type: "product type"
                     }],
                     item_options: {
+                        collection_location: "collection location",
+                        contact_number: "contact number",
+                        delivery_method: "delivery method",
+                        delivery_timescale: "delivery timescale",
                         filing_history_documents: [{
                             filing_history_date: "filing history date",
                             filing_history_description: "filing history description",
@@ -269,8 +279,8 @@ describe("basket", () => {
                             },
                             filing_history_cost: "filing history cost"
                         }],
-                        delivery_method: "delivery method",
-                        delivery_timescale: "delivery timescale"
+                        forename: "forename",
+                        surname: "surname"
                     } as CertifiedCopyItemOptionsResource,
                     item_uri: "/orderable/certificates/CHS00000000000000007",
                     kind: "item#certificate",
@@ -326,6 +336,10 @@ describe("basket", () => {
             expect(resourceItem.itemCosts[0].itemCost).to.equal(mockResourceItem.item_costs[0].item_cost);
             expect(resourceItem.itemCosts[0].productType).to.equal(mockResourceItem.item_costs[0].product_type);
             expect(resourceItem.itemOptions).to.deep.equal({
+                collectionLocation: "collection location",
+                contactNumber: "contact number",
+                deliveryMethod: "delivery method",
+                deliveryTimescale: "delivery timescale",
                 filingHistoryDocuments: [{
                     filingHistoryDate: "filing history date",
                     filingHistoryDescription: "filing history description",
@@ -337,8 +351,8 @@ describe("basket", () => {
                     },
                     filingHistoryCost: "filing history cost"
                 }],
-                deliveryMethod: "delivery method",
-                deliveryTimescale: "delivery timescale"
+                forename: "forename",
+                surname: "surname"
             } as CertifiedCopyItemOptions);
             expect(resourceItem.itemUri).to.equal(mockResourceItem.item_uri);
             expect(resourceItem.kind).to.equal(mockResourceItem.kind);

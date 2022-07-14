@@ -162,6 +162,8 @@ const mockCertifiedCopyCheckoutResponseBody: CheckoutResource = {
                 }
             ],
             item_options: {
+                collection_location: "london",
+                contact_number: "0123456789",
                 delivery_method: "postal",
                 delivery_timescale: "standard",
                 filing_history_documents: [
@@ -196,7 +198,9 @@ const mockCertifiedCopyCheckoutResponseBody: CheckoutResource = {
                         filing_history_type: "363a",
                         filing_history_cost: "15"
                     }
-                ]
+                ],
+                forename: "forename",
+                surname: "surname"
             },
             etag: "c7dace439d47fdb78c9c0803c60e6619d9400663",
             kind: "item#certified-copy",
@@ -249,6 +253,9 @@ const mockMissingImageDeliveryCheckoutResponseBody: CheckoutResource = {
                 }
             ],
             item_options: {
+                filing_history_barcode: "barcode",
+                filing_history_category: "category",
+                filing_history_cost: "10",
                 filing_history_date: "2015-05-26",
                 filing_history_description: "appoint-person-director-company-with-name",
                 filing_history_description_values: {

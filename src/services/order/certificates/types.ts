@@ -1,7 +1,3 @@
-/**
- * CertificateItemResource is what is returned from the api.
- */
-
 export interface CertificateItemResource {
     company_name: string;
     company_number: string;
@@ -19,6 +15,7 @@ export interface CertificateItemResource {
     postal_delivery: boolean;
     quantity: number;
     total_item_cost: string;
+    user_id: string;
   }
 
 export interface ItemCostsResource {
@@ -133,6 +130,7 @@ export interface CertificateItem {
     postalDelivery: boolean;
     quantity: number;
     totalItemCost: string;
+    userId: string;
 }
 
 export interface ItemCosts {
@@ -323,7 +321,6 @@ export interface LiquidatorsDetailsRequest extends BasicInformationRequest {
 export interface AdministratorsDetailsRequest extends BasicInformationRequest {
 }
 
-// CertificateItemRequestResource
 export interface CertificateItemRequestResource {
   company_number?: string;
   customer_reference?: string;
