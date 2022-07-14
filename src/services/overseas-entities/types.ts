@@ -13,6 +13,7 @@ export interface OverseasEntity {
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
     managing_officers_individual?: ManagingOfficerIndividual[];
     managing_officers_corporate?: ManagingOfficerCorporate[];
+    trusts?: Trust[];
 }
 
 export interface OverseasEntityResource {
@@ -26,6 +27,7 @@ export interface OverseasEntityResource {
     beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
     managing_officers_individual?: ManagingOfficerIndividualResource[];
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
+    trusts?: TrustResource[];
 }
 export interface OverseasEntityCreated {
     id: string
@@ -226,6 +228,168 @@ export interface ManagingOfficerCorporate {
 }
 
 export interface ManagingOfficerCorporateResource extends ManagingOfficerCorporate { }
+
+export interface Trust{
+    trust_id: string;
+    trust_name: string;
+    creation_date_day: string;
+    creation_date_month: string;
+    creation_date_year: string;
+    unable_to_obtain_all_trust_info: boolean;
+    INDIVIDUAL?: TrustIndividual[];
+    HISTORICAL_BO?: TrustHistoricalBeneficialOwner[];
+    CORPORATE?: TrustCorporate[];
+}
+
+export interface TrustResource {
+    trust_id: string;
+    trust_name: string;
+    creation_date: string;
+    unable_to_obtain_all_trust_info: boolean;
+    INDIVIDUAL?: TrustIndividualResource[];
+    HISTORICAL_BO?: TrustHistoricalBeneficialOwnerResource[];
+    CORPORATE?: TrustCorporateResource[];
+}
+
+export interface TrustIndividual {
+    type?: string;
+    forename?: string;
+    other_forenames?: string;
+    surname?: string;
+    dob_day?: string;
+    dob_month?: string;
+    dob_year?: string;
+    nationality?: string;
+    sa_address_line1?: string;
+    sa_address_line2?: string;
+    sa_address_care_of?: string;
+    sa_address_country?: string;
+    sa_address_locality?: string;
+    sa_address_po_box?: string;
+    sa_address_postal_code?: string;
+    sa_address_premises?: string;
+    sa_address_region?: string;
+    ura_address_line1?: string;
+    ura_address_line2?: string;
+    ura_address_care_of?: string;
+    ura_address_country?: string;
+    ura_address_locality?: string;
+    ura_address_po_box?: string;
+    ura_address_postal_code?: string;
+    ura_address_premises?: string;
+    ura_address_region?: string;
+    date_became_interested_person_day?: string;
+    date_became_interested_person_month?: string;
+    date_became_interested_person_year?: string;
+  }
+
+export interface TrustIndividualResource {
+    type?: string;
+    forename?: string;
+    other_forenames?: string;
+    surname?: string;
+    date_of_birth?: string;
+    nationality?: string;
+    sa_address_line1?: string;
+    sa_address_line2?: string;
+    sa_address_care_of?: string;
+    sa_address_country?: string;
+    sa_address_locality?: string;
+    sa_address_po_box?: string;
+    sa_address_postal_code?: string;
+    sa_address_premises?: string;
+    sa_address_region?: string;
+    ura_address_line1?: string;
+    ura_address_line2?: string;
+    ura_address_care_of?: string;
+    ura_address_country?: string;
+    ura_address_locality?: string;
+    ura_address_po_box?: string;
+    ura_address_postal_code?: string;
+    ura_address_premises?: string;
+    ura_address_region?: string;
+    date_became_interested_person?: string;
+}
+
+export interface TrustHistoricalBeneficialOwner {
+    forename?: string;
+    other_forenames?: string;
+    surname?: string;
+    notified_date_day?: string;
+    notified_date_month?: string;
+    notified_date_year?: string;
+    ceased_date_day?: string;
+    ceased_date_month?: string;
+    ceased_date_year?: string;
+}
+
+export interface TrustHistoricalBeneficialOwnerResource {
+    forename?: string;
+    other_forenames?: string;
+    surname?: string;
+    notified_date?: string;
+    ceased_date?: string;
+}
+
+export interface TrustCorporate {
+    type?: string;
+    name?: string;
+    date_became_interested_person_day?: string;
+    date_became_interested_person_month?: string;
+    date_became_interested_person_year?: string;
+    ro_address_line1?: string;
+    ro_address_line2?: string;
+    ro_address_care_of?: string;
+    ro_address_country?: string;
+    ro_address_locality?: string;
+    ro_address_po_box?: string;
+    ro_address_postal_code?: string;
+    ro_address_premises?: string;
+    ro_address_region?: string;
+    sa_address_line1?: string;
+    sa_address_line2?: string;
+    sa_address_care_of?: string;
+    sa_address_country?: string;
+    sa_address_locality?: string;
+    sa_address_po_box?: string;
+    sa_address_postal_code?: string;
+    sa_address_premises?: string;
+    sa_address_region?: string;
+    identification_country_registration?: string;
+    identification_legal_authority?: string;
+    identification_legal_form?: string;
+    identification_place_registered?: string;
+    identification_registration_number?: string;
+}
+
+export interface TrustCorporateResource {
+    type?: string;
+    name?: string;
+    date_became_interested_person?: string;
+    ro_address_line1?: string;
+    ro_address_line2?: string;
+    ro_address_care_of?: string;
+    ro_address_country?: string;
+    ro_address_locality?: string;
+    ro_address_po_box?: string;
+    ro_address_postal_code?: string;
+    ro_address_premises?: string;
+    ro_address_region?: string;
+    sa_address_line1?: string;
+    sa_address_line2?: string;
+    sa_address_care_of?: string;
+    sa_address_country?: string;
+    sa_address_locality?: string;
+    sa_address_po_box?: string;
+    sa_address_postal_code?: string;
+    sa_address_premises?: string;
+    sa_address_region?: string;
+    identification_country_registration?: string;
+    identification_legal_authority?: string;
+    identification_legal_form?: string;
+    identification_place_registered?: string;
+    identification_registration_number?: string;
+}
 
 /**
  * Shared Data Type

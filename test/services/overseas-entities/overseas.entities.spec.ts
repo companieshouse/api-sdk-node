@@ -59,7 +59,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             beneficial_owners_corporate: mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
             beneficial_owners_government_or_public_authority: mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
             managing_officers_individual: mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
-            managing_officers_corporate: mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST
+            managing_officers_corporate: mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
+            trusts: mockValues.TRUSTS_MOCK
         });
 
         expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.presenter);
@@ -73,6 +74,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_government_or_public_authority?.[0]);
         expect(data.managing_officers_individual?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_individual?.[0]);
         expect(data.managing_officers_corporate?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_corporate?.[0]);
+        expect(data.trusts?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.trusts?.[0]);
     });
 
     it("should return OverseasEntity object from mapOverseasEntity method with all empty sub fields", async () => {
@@ -86,7 +88,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             beneficial_owners_corporate: [],
             beneficial_owners_government_or_public_authority: [],
             managing_officers_individual: [],
-            managing_officers_corporate: []
+            managing_officers_corporate: [],
+            trusts: []
         });
 
         expect(data.presenter).to.deep.equal({});
@@ -99,6 +102,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.beneficial_owners_government_or_public_authority).to.deep.equal([]);
         expect(data.managing_officers_individual).to.deep.equal([]);
         expect(data.managing_officers_corporate).to.deep.equal([]);
+        expect(data.trusts).to.deep.equal([]);
     });
 
     it("should return OE Due Diligence object without identity_date field if identity date is undefined", () => {
