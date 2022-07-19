@@ -6,7 +6,14 @@ import chaiHttp from "chai-http";
 import BasketService from "../../../src/services/order/basket/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import Resource, { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
-import { ItemUriPostRequest, BasketPatchRequest, Checkout, CheckoutResource, BasketResource } from "../../../src/services/order/basket/types";
+import {
+    ItemUriRequest,
+    BasketPatchRequest,
+    Checkout,
+    CheckoutResource,
+    BasketResource,
+    BasketLinksResource
+} from "../../../src/services/order/basket/types";
 import { ItemOptions, ItemOptionsResource, ItemResource } from "../../../src/services/order/order";
 import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
@@ -27,7 +34,7 @@ describe("basket", () => {
     });
 
     describe("add item to basket using a POST request", () => {
-        const mockRequestBody: ItemUriPostRequest = ({
+        const mockRequestBody: ItemUriRequest = ({
             itemUri: "/orderable/certificates/CHS00000000000000007"
         });
 
@@ -571,7 +578,7 @@ describe("basket", () => {
         it("return status code 200 on successful call", async () => {
             const mockPutRequest = {
                 itemUri: "/orderable/certificates/12345678"
-            } as ItemUriPostRequest;
+            } as ItemUriRequest;
 
             const mockResponse = {
                 status: 200
@@ -596,11 +603,10 @@ describe("basket", () => {
             const data = await basket.getBasketLinks();
 
             expect(data.httpStatusCode).to.equal(401);
-            // expect(data.resource).to.be.undefined;
         });
 
         it("maps the basket data correctly", async () => {
-            const mockResponseBody = {
+            const mockResponseBody: BasketLinksResource = {
                 delivery_details: {
                     address_line_1: "117 kings road",
                     address_line_2: "canton",

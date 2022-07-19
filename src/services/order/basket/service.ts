@@ -1,12 +1,12 @@
 import {IHttpClient} from "../../../http";
 import {
-    Basket,
+    Basket, BasketLinks, BasketLinksResource,
     BasketPatchRequest,
     BasketRequestResource,
     BasketResource,
     Checkout,
     CheckoutResource,
-    ItemUriPostRequest
+    ItemUriRequest
 } from "./types";
 import Resource, {ApiResponse, ApiResult} from "../../../services/resource";
 import {failure, success} from "../../../services/result";
@@ -74,7 +74,7 @@ export default class BasketService {
         return resource;
     }
 
-    public async postItemToBasket (itemUriRequest: ItemUriPostRequest): Promise<Resource<Item>> {
+    public async postItemToBasket (itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
         const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
 
         const resp = await this.client.httpPost("/basket/items", itemUriRequestResource);
@@ -115,10 +115,10 @@ export default class BasketService {
         return success(result);
     }
 
-    public async getBasketLinks (): Promise<Resource<Basket>> {
+    public async getBasketLinks (): Promise<Resource<BasketLinks>> {
         const resp = await this.client.httpGet("/basket/links");
 
-        const resource: Resource<Basket> = {
+        const resource: Resource<BasketLinks> = {
             httpStatusCode: resp.status
         };
 
@@ -126,13 +126,13 @@ export default class BasketService {
             return resource;
         }
 
-        const body = resp.body as BasketResource;
+        const body = resp.body as BasketLinksResource;
 
-        resource.resource = Mapping.camelCaseKeys<Basket>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
+        resource.resource = Mapping.camelCaseKeys<BasketLinks>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
         return resource;
     }
 
-    public async removeBasketItem (itemUriRequest: ItemUriPostRequest): Promise<Resource<any>> {
+    public async removeBasketItem (itemUriRequest: ItemUriRequest): Promise<Resource<any>> {
         const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
         const response = await this.client.httpPut("/basket/items/remove", itemUriRequestResource);
 
