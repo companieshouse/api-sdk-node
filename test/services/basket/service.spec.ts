@@ -566,4 +566,87 @@ describe("basket", () => {
             expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
         });
     });
+
+    describe("PUT remove item uri", () => {
+        it("return status code 200 on successful call", async () => {
+            const mockPutRequest = {
+                itemUri: "/orderable/certificates/12345678"
+            } as ItemUriPostRequest;
+
+            const mockResponse = {
+                status: 200
+            };
+
+            sinon.stub(requestClient, "httpPut").resolves(mockResponse);
+            const basket: BasketService = new BasketService(requestClient);
+            const data = await basket.removeBasketItem(mockPutRequest);
+
+            expect(data.httpStatusCode).to.equal(200);
+        });
+    });
+
+    describe("GET Basket links", () => {
+        it("returns an error response on failure", async () => {
+            const mockGetResponse = {
+                status: 401
+            };
+
+            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const basket: BasketService = new BasketService(requestClient);
+            const data = await basket.getBasketLinks();
+
+            expect(data.httpStatusCode).to.equal(401);
+            // expect(data.resource).to.be.undefined;
+        });
+
+        it("maps the basket data correctly", async () => {
+            const mockResponseBody = {
+                delivery_details: {
+                    address_line_1: "117 kings road",
+                    address_line_2: "canton",
+                    country: "wales",
+                    forename: "John",
+                    locality: "Cardiff",
+                    po_box: "po box",
+                    postal_code: "CF5 3NB",
+                    region: "Glamorgan",
+                    surname: "Smith"
+                },
+                enrolled: true,
+                etag: "etag",
+                items: [{
+                    item_uri: "/orderable/certificates/CHS00000000000000007"
+                }],
+                kind: "kind",
+                links: {
+                    self: "self"
+                },
+                total_basket_cost: "5"
+            };
+
+            const mockGetResponse = {
+                status: 200,
+                body: mockResponseBody
+            };
+
+            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const basket: BasketService = new BasketService(requestClient);
+            const data = await basket.getBasketLinks();
+            const resourceDeliveryDetails = data.resource.deliveryDetails;
+            const mockDeliveryDetails = mockResponseBody.delivery_details;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.enrolled).to.be.true;
+            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
+            expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
+            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
+            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
+            expect(resourceDeliveryDetails.poBox).to.equal(mockDeliveryDetails.po_box);
+            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
+            expect(resourceDeliveryDetails.region).to.equal(mockDeliveryDetails.region);
+            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
+            expect(data.resource.items[0].itemUri).to.equal(mockResponseBody.items[0].item_uri);
+        });
+    });
 });

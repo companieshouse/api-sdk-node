@@ -1,12 +1,17 @@
-import { IHttpClient } from "../../../http";
+import {IHttpClient} from "../../../http";
 import {
-    Basket, BasketResource, BasketRequestResource, BasketPatchRequest,
-    ItemUriPostRequest, CheckoutResource, Checkout
+    Basket,
+    BasketPatchRequest,
+    BasketRequestResource,
+    BasketResource,
+    Checkout,
+    CheckoutResource,
+    ItemUriPostRequest
 } from "./types";
-import Resource, { ApiResponse, ApiResult } from "../../../services/resource";
-import { failure, success } from "../../../services/result";
+import Resource, {ApiResponse, ApiResult} from "../../../services/resource";
+import {failure, success} from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
-import { Item, ItemResource } from "../order";
+import {Item, ItemResource} from "../order";
 import BasketMapping from "./mapping";
 
 export default class BasketService {
@@ -108,5 +113,31 @@ export default class BasketService {
         result.resource = Mapping.camelCaseKeys(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
 
         return success(result);
+    }
+
+    public async getBasketLinks (): Promise<Resource<Basket>> {
+        const resp = await this.client.httpGet("/basket/links");
+
+        const resource: Resource<Basket> = {
+            httpStatusCode: resp.status
+        };
+
+        if (resp.error) {
+            return resource;
+        }
+
+        const body = resp.body as BasketResource;
+
+        resource.resource = Mapping.camelCaseKeys<Basket>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
+        return resource;
+    }
+
+    public async removeBasketItem (itemUriRequest: ItemUriPostRequest): Promise<Resource<any>> {
+        const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
+        const response = await this.client.httpPut("/basket/items/remove", itemUriRequestResource);
+
+        return {
+            httpStatusCode: response.status
+        };
     }
 }
