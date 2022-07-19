@@ -1,6 +1,8 @@
-import {IHttpClient} from "../../../http";
+import { IHttpClient } from "../../../http";
 import {
-    Basket, BasketLinks, BasketLinksResource,
+    Basket,
+    BasketLinks,
+    BasketLinksResource,
     BasketPatchRequest,
     BasketRequestResource,
     BasketResource,
@@ -8,10 +10,10 @@ import {
     CheckoutResource,
     ItemUriRequest
 } from "./types";
-import Resource, {ApiResponse, ApiResult} from "../../../services/resource";
-import {failure, success} from "../../../services/result";
+import Resource, { ApiResponse, ApiResult } from "../../../services/resource";
+import { failure, success } from "../../result";
 import Mapping from "../../../mapping/mapping";
-import {Item, ItemResource} from "../order";
+import { Item, ItemResource } from "../order";
 import BasketMapping from "./mapping";
 
 export default class BasketService {
