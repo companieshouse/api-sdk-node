@@ -130,7 +130,7 @@ export default class BasketService {
 
         const body = resp.body as BasketLinksResource;
 
-        resource.resource = Mapping.camelCaseKeys<BasketLinks>(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
+        resource.resource = Mapping.camelCaseKeys<BasketLinks>(body);
         return resource;
     }
 
