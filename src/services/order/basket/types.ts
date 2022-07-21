@@ -145,15 +145,20 @@ export interface Checkout {
 }
 
 export interface BasketLinksResource {
-    delivery_details?: DeliveryDetailsResource;
-    etag?: string;
-    items?: ItemUriResource[];
-    kind?: string;
-    links?: {
-        self?: string;
-    };
-    total_basket_cost?: string;
-    enrolled: boolean;
+    id: string;
+    created_at: string;
+    updated_at: string;
+    data: {
+        delivery_details?: DeliveryDetailsResource;
+        etag?: string;
+        items?: ItemUriResource[];
+        kind?: string;
+        links?: {
+            self?: string;
+        };
+        total_basket_cost?: string;
+        enrolled: boolean;
+    }
 }
 
 export interface ItemUriResource {
@@ -161,15 +166,20 @@ export interface ItemUriResource {
 }
 
 export interface BasketLinks {
-    deliveryDetails?: DeliveryDetails;
-    etag?: string;
-    items?: ItemUri[];
-    kind?: string;
-    links?: {
-        self?: string;
-    };
-    totalBasketCost?: string;
-    enrolled: boolean;
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    data: {
+        deliveryDetails?: DeliveryDetails;
+        etag?: string;
+        items?: ItemUri[];
+        kind?: string;
+        links?: {
+            self?: string;
+        };
+        totalBasketCost?: string;
+        enrolled: boolean;
+    }
 }
 
 export interface ItemUri {

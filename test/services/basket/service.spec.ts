@@ -607,27 +607,26 @@ describe("basket", () => {
 
         it("maps the basket data correctly", async () => {
             const mockResponseBody: BasketLinksResource = {
-                delivery_details: {
-                    address_line_1: "117 kings road",
-                    address_line_2: "canton",
-                    country: "wales",
-                    forename: "John",
-                    locality: "Cardiff",
-                    po_box: "po box",
-                    postal_code: "CF5 3NB",
-                    region: "Glamorgan",
-                    surname: "Smith"
-                },
-                enrolled: true,
-                etag: "etag",
-                items: [{
-                    item_uri: "/orderable/certificates/CHS00000000000000007"
-                }],
-                kind: "kind",
-                links: {
-                    self: "self"
-                },
-                total_basket_cost: "5"
+                id: "id",
+                created_at: "createdAt",
+                updated_at: "updatedAt",
+                data: {
+                    delivery_details: {
+                        address_line_1: "117 kings road",
+                        address_line_2: "canton",
+                        country: "wales",
+                        forename: "John",
+                        locality: "Cardiff",
+                        po_box: "po box",
+                        postal_code: "CF5 3NB",
+                        region: "Glamorgan",
+                        surname: "Smith"
+                    },
+                    items: [{
+                        item_uri: "/orderable/certificates/CHS00000000000000007"
+                    }],
+                    enrolled: true
+                }
             };
 
             const mockGetResponse = {
@@ -638,11 +637,11 @@ describe("basket", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasketLinks();
-            const resourceDeliveryDetails = data.resource.deliveryDetails;
-            const mockDeliveryDetails = mockResponseBody.delivery_details;
+            const resourceDeliveryDetails = data.resource.data.deliveryDetails;
+            const mockDeliveryDetails = mockResponseBody.data.delivery_details;
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.enrolled).to.be.true;
+            expect(data.resource.data.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
@@ -652,7 +651,7 @@ describe("basket", () => {
             expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
             expect(resourceDeliveryDetails.region).to.equal(mockDeliveryDetails.region);
             expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
-            expect(data.resource.items[0].itemUri).to.equal(mockResponseBody.items[0].item_uri);
+            expect(data.resource.data.items[0].itemUri).to.equal(mockResponseBody.data.items[0].item_uri);
         });
     });
 });
