@@ -80,7 +80,7 @@ export interface DeliveryDetailsRequest {
     surname: string;
 }
 
-export interface ItemUriPostRequest {
+export interface ItemUriRequest {
     itemUri: string;
 }
 
@@ -142,4 +142,46 @@ export interface Checkout {
   reference: string;
   status: string;
   totalOrderCost: string;
+}
+
+export interface BasketLinksResource {
+    id: string;
+    created_at: string;
+    updated_at: string;
+    data: {
+        delivery_details?: DeliveryDetailsResource;
+        etag?: string;
+        items?: ItemUriResource[];
+        kind?: string;
+        links?: {
+            self?: string;
+        };
+        total_basket_cost?: string;
+        enrolled: boolean;
+    }
+}
+
+export interface ItemUriResource {
+    item_uri: string;
+}
+
+export interface BasketLinks {
+    id: string;
+    createdAt: string;
+    updatedAt: string;
+    data: {
+        deliveryDetails?: DeliveryDetails;
+        etag?: string;
+        items?: ItemUri[];
+        kind?: string;
+        links?: {
+            self?: string;
+        };
+        totalBasketCost?: string;
+        enrolled: boolean;
+    }
+}
+
+export interface ItemUri {
+    itemUri: string;
 }
