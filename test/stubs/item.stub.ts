@@ -1,6 +1,6 @@
-import {ItemUriRequest} from "../../src/services/order/basket";
-import {ItemResource} from "../../src/services/order/order";
-import {ItemOptionsResource as MissingImageDeliveryItemOptionsResource} from "../../src/services/order/mid";
+import { ItemUriRequest } from "../../src/services/order/basket";
+import { ItemResource } from "../../src/services/order/order";
+import { ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../src/services/order/mid";
 
 export const itemUriRequestStub: ItemUriRequest = ({
     itemUri: "/orderable/certificates/CHS00000000000000007"

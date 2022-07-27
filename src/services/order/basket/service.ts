@@ -132,7 +132,7 @@ export default class BasketService {
         };
     }
 
-    private async addItemToBasket(path: string, itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
+    private async addItemToBasket (path: string, itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
         const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
 
         const resp = await this.client.httpPost(path, itemUriRequestResource);
