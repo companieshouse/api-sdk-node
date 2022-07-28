@@ -1,21 +1,18 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
+import { itemUriRequestStub, itemResourceStub } from "../../stubs/item.stub";
 
 import BasketService from "../../../src/services/order/basket/service";
-import { RequestClient, HttpResponse } from "../../../src/http";
-import Resource, { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
+import { RequestClient } from "../../../src/http";
+import { ApiResponse, ApiErrorResponse, ApiResult } from "../../../src/services/resource";
 import {
     ItemUriRequest,
     BasketPatchRequest,
     Checkout,
-    CheckoutResource,
     BasketResource,
     BasketLinksResource
 } from "../../../src/services/order/basket/types";
-import { ItemOptions, ItemOptionsResource, ItemResource } from "../../../src/services/order/order";
-import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid";
+import { ItemOptions as MissingImageDeliveryItemOptions } from "../../../src/services/order/mid";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 const expect = chai.expect;
 
@@ -34,48 +31,6 @@ describe("basket", () => {
     });
 
     describe("add item to basket using a POST request", () => {
-        const mockRequestBody: ItemUriRequest = ({
-            itemUri: "/orderable/certificates/CHS00000000000000007"
-        });
-
-        const mockResponseBody: ItemResource = ({
-            company_name: "company name",
-            company_number: "00000000",
-            customer_reference: "reference",
-            description: "description",
-            description_identifier: "description identifier",
-            description_values: { key: "value" },
-            etag: "etag",
-            id: "id",
-            item_costs: [{
-                calculated_cost: "calculated cost",
-                discount_applied: "discount applies",
-                item_cost: "item cost",
-                product_type: "product type"
-            }],
-            item_options: {
-                filing_history_date: "filing history date",
-                filing_history_description: "filing history description",
-                filing_history_description_values: {
-                    key_one: "value_one",
-                    key_two: "value_two"
-                },
-                filing_history_id: "filing history id",
-                filing_history_type: "filing history type",
-                filing_history_barcode: "filing history barcode",
-                filing_history_cost: "filing history cost",
-                filing_history_category: "filing history category"
-            } as MissingImageDeliveryItemOptionsResource,
-            item_uri: "/orderable/certificates/CHS00000000000000007",
-            kind: "item#missing-image-delivery",
-            links: { self: "links" },
-            postage_cost: "postage cost",
-            postal_delivery: true,
-            quantity: 1,
-            total_item_cost: "total item cost",
-            status: "unknown"
-        });
-
         it("returns an error response on failure", async () => {
             const mockPostResponse = {
                 status: 401,
@@ -84,7 +39,7 @@ describe("basket", () => {
 
             const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
-            const data = await basket.postItemToBasket(mockRequestBody);
+            const data = await basket.postItemToBasket(itemUriRequestStub);
 
             expect(data.httpStatusCode).to.equal(401);
             expect(data.resource).to.be.undefined;
@@ -93,26 +48,26 @@ describe("basket", () => {
         it("maps add item to basket correctly", async () => {
             const mockPostResponse = {
                 status: 200,
-                body: mockResponseBody
+                body: itemResourceStub
             };
 
             const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
-            const data = await basket.postItemToBasket(mockRequestBody);
+            const data = await basket.postItemToBasket(itemUriRequestStub);
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
-            expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-            expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
-            expect(data.resource.description).to.equal(mockResponseBody.description);
-            expect(data.resource.descriptionIdentifier).to.equal(mockResponseBody.description_identifier);
-            expect(data.resource.descriptionValues).to.deep.equal(mockResponseBody.description_values);
-            expect(data.resource.etag).to.equal(mockResponseBody.etag);
-            expect(data.resource.id).to.equal(mockResponseBody.id);
-            expect(data.resource.itemCosts[0].calculatedCost).to.equal(mockResponseBody.item_costs[0].calculated_cost);
-            expect(data.resource.itemCosts[0].discountApplied).to.equal(mockResponseBody.item_costs[0].discount_applied);
-            expect(data.resource.itemCosts[0].itemCost).to.equal(mockResponseBody.item_costs[0].item_cost);
-            expect(data.resource.itemCosts[0].productType).to.equal(mockResponseBody.item_costs[0].product_type);
+            expect(data.resource.companyName).to.equal(itemResourceStub.company_name);
+            expect(data.resource.companyNumber).to.equal(itemResourceStub.company_number);
+            expect(data.resource.customerReference).to.equal(itemResourceStub.customer_reference);
+            expect(data.resource.description).to.equal(itemResourceStub.description);
+            expect(data.resource.descriptionIdentifier).to.equal(itemResourceStub.description_identifier);
+            expect(data.resource.descriptionValues).to.deep.equal(itemResourceStub.description_values);
+            expect(data.resource.etag).to.equal(itemResourceStub.etag);
+            expect(data.resource.id).to.equal(itemResourceStub.id);
+            expect(data.resource.itemCosts[0].calculatedCost).to.equal(itemResourceStub.item_costs[0].calculated_cost);
+            expect(data.resource.itemCosts[0].discountApplied).to.equal(itemResourceStub.item_costs[0].discount_applied);
+            expect(data.resource.itemCosts[0].itemCost).to.equal(itemResourceStub.item_costs[0].item_cost);
+            expect(data.resource.itemCosts[0].productType).to.equal(itemResourceStub.item_costs[0].product_type);
             expect(data.resource.itemOptions).to.deep.equal({
                 filingHistoryDate: "filing history date",
                 filingHistoryDescription: "filing history description",
@@ -126,15 +81,76 @@ describe("basket", () => {
                 filingHistoryCategory: "filing history category",
                 filingHistoryCost: "filing history cost"
             } as MissingImageDeliveryItemOptions);
-            expect(data.resource.itemUri).to.equal(mockResponseBody.item_uri);
-            expect(data.resource.kind).to.equal(mockResponseBody.kind);
-            expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
-            expect(data.resource.postageCost).to.equal(mockResponseBody.postage_cost);
-            expect(data.resource.postalDelivery).to.equal(mockResponseBody.postal_delivery);
-            expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
-            expect(data.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
+            expect(data.resource.itemUri).to.equal(itemResourceStub.item_uri);
+            expect(data.resource.kind).to.equal(itemResourceStub.kind);
+            expect(data.resource.links.self).to.equal(itemResourceStub.links.self);
+            expect(data.resource.postageCost).to.equal(itemResourceStub.postage_cost);
+            expect(data.resource.postalDelivery).to.equal(itemResourceStub.postal_delivery);
+            expect(data.resource.quantity).to.equal(itemResourceStub.quantity);
+            expect(data.resource.totalItemCost).to.equal(itemResourceStub.total_item_cost);
         });
     });
+
+    describe("Append item to basket", () => {
+        it("returns an error response on failure", async () => {
+            const mockPostResponse = {
+                status: 401,
+                error: "An error occurred"
+            };
+
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const basket: BasketService = new BasketService(requestClient);
+            const data = await basket.appendItemToBasket(itemUriRequestStub);
+
+            expect(data.httpStatusCode).to.equal(401);
+            expect(data.resource).to.be.undefined;
+        });
+
+        it("appends item to basket correctly", async () => {
+            const mockPostResponse = {
+                status: 200,
+                body: itemResourceStub
+            };
+
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const basket: BasketService = new BasketService(requestClient);
+            const data = await basket.appendItemToBasket(itemUriRequestStub);
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.companyName).to.equal(itemResourceStub.company_name);
+            expect(data.resource.companyNumber).to.equal(itemResourceStub.company_number);
+            expect(data.resource.customerReference).to.equal(itemResourceStub.customer_reference);
+            expect(data.resource.description).to.equal(itemResourceStub.description);
+            expect(data.resource.descriptionIdentifier).to.equal(itemResourceStub.description_identifier);
+            expect(data.resource.descriptionValues).to.deep.equal(itemResourceStub.description_values);
+            expect(data.resource.etag).to.equal(itemResourceStub.etag);
+            expect(data.resource.id).to.equal(itemResourceStub.id);
+            expect(data.resource.itemCosts[0].calculatedCost).to.equal(itemResourceStub.item_costs[0].calculated_cost);
+            expect(data.resource.itemCosts[0].discountApplied).to.equal(itemResourceStub.item_costs[0].discount_applied);
+            expect(data.resource.itemCosts[0].itemCost).to.equal(itemResourceStub.item_costs[0].item_cost);
+            expect(data.resource.itemCosts[0].productType).to.equal(itemResourceStub.item_costs[0].product_type);
+            expect(data.resource.itemOptions).to.deep.equal({
+                filingHistoryDate: "filing history date",
+                filingHistoryDescription: "filing history description",
+                filingHistoryDescriptionValues: {
+                    key_one: "value_one",
+                    key_two: "value_two"
+                },
+                filingHistoryId: "filing history id",
+                filingHistoryType: "filing history type",
+                filingHistoryBarcode: "filing history barcode",
+                filingHistoryCategory: "filing history category",
+                filingHistoryCost: "filing history cost"
+            } as MissingImageDeliveryItemOptions);
+            expect(data.resource.itemUri).to.equal(itemResourceStub.item_uri);
+            expect(data.resource.kind).to.equal(itemResourceStub.kind);
+            expect(data.resource.links.self).to.equal(itemResourceStub.links.self);
+            expect(data.resource.postageCost).to.equal(itemResourceStub.postage_cost);
+            expect(data.resource.postalDelivery).to.equal(itemResourceStub.postal_delivery);
+            expect(data.resource.quantity).to.equal(itemResourceStub.quantity);
+            expect(data.resource.totalItemCost).to.equal(itemResourceStub.total_item_cost);
+        });
+    })
 
     describe("POST checkout basket", () => {
         it("returns an error response on failure", async () => {

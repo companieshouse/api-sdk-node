@@ -77,22 +77,11 @@ export default class BasketService {
     }
 
     public async postItemToBasket (itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
-        const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
+        return await this.addItemToBasket("/basket/items", itemUriRequest);
+    }
 
-        const resp = await this.client.httpPost("/basket/items", itemUriRequestResource);
-
-        const resource: Resource<Item> = {
-            httpStatusCode: resp.status
-        };
-
-        if (resp.error) {
-            return resource;
-        }
-
-        const body = resp.body as ItemResource;
-
-        resource.resource = Mapping.camelCaseKeys<Item>(body, BasketService.EXCLUDED_FIELDS_SINGLE_ITEM_BASKET);
-        return resource;
+    public async appendItemToBasket (itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
+        return await this.addItemToBasket("/basket/items/append", itemUriRequest);
     }
 
     public async checkoutBasket (): Promise<ApiResult<ApiResponse<Checkout>>> {
@@ -141,5 +130,24 @@ export default class BasketService {
         return {
             httpStatusCode: response.status
         };
+    }
+
+    private async addItemToBasket (path: string, itemUriRequest: ItemUriRequest): Promise<Resource<Item>> {
+        const itemUriRequestResource = Mapping.snakeCaseKeys(itemUriRequest);
+
+        const resp = await this.client.httpPost(path, itemUriRequestResource);
+
+        const resource: Resource<Item> = {
+            httpStatusCode: resp.status
+        };
+
+        if (resp.error) {
+            return resource;
+        }
+
+        const body = resp.body as ItemResource;
+
+        resource.resource = Mapping.camelCaseKeys<Item>(body, BasketService.EXCLUDED_FIELDS_SINGLE_ITEM_BASKET);
+        return resource;
     }
 }
