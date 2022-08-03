@@ -74,13 +74,13 @@ export interface ItemCosts {
 }
 
 export interface ItemOptions {
-    collectionLocation: string;
-    contactNumber: string;
-    deliveryMethod: string;
-    deliveryTimescale: string;
-    filingHistoryDocuments: FilingHistoryDocuments[];
-    forename: string;
-    surname: string;
+    collectionLocation?: string;
+    contactNumber?: string;
+    deliveryMethod?: string;
+    deliveryTimescale?: string;
+    filingHistoryDocuments?: FilingHistoryDocuments[];
+    forename?: string;
+    surname?: string;
 }
 
 export interface Links {
