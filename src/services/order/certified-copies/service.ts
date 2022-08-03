@@ -42,7 +42,7 @@ export default class CertifiedCopyService {
         const additionalHeaders = {
             "Content-Type": "application/merge-patch+json"
         };
-        const response = await this.client.httpPatch(`/orderable/certificates/${certifiedCopyId}`,
+        const response = await this.client.httpPatch(`/orderable/certified-copies/${certifiedCopyId}`,
             Mapping.snakeCaseKeys(certifiedCopyItemRequest), additionalHeaders);
         return this.handleResponse(response);
     }
