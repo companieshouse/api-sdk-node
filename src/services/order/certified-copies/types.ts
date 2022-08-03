@@ -95,3 +95,10 @@ export interface FilingHistoryDocuments {
     filingHistoryDescriptionValues?: Record<string, any>;
     filingHistoryCost: string;
 }
+
+// Patch Certified Document
+export interface CertifiedCopyItemPatchRequest {
+    customerReference?: string;
+    itemOptions?: CertifiedCopyItem;
+    quantity?: number;
+}
