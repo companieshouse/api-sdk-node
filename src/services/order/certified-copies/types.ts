@@ -99,6 +99,6 @@ export interface FilingHistoryDocuments {
 // Patch Certified Document
 export interface CertifiedCopyItemPatchRequest {
     customerReference?: string;
-    itemOptions?: CertifiedCopyItem;
+    itemOptions?: ItemOptions;
     quantity?: number;
 }
