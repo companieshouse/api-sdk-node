@@ -1,8 +1,7 @@
 import { HttpResponse, IHttpClient } from "../../../http";
 import { CertifiedCopyItem, CertifiedCopyItemResource, CertifiedCopyItemPatchRequest } from "./types";
-import Resource from "../../resource";
 import Mapping from "../../../mapping/mapping";
-import { ApiResponse, ApiResult } from "../../resource";
+import { default as Resource, ApiResponse, ApiResult } from "../../resource";
 import { failure, success } from "../../result";
 
 export default class CertifiedCopyService {
