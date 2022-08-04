@@ -74,13 +74,13 @@ export interface ItemCosts {
 }
 
 export interface ItemOptions {
-    collectionLocation?: string;
-    contactNumber?: string;
-    deliveryMethod?: string;
-    deliveryTimescale?: string;
-    filingHistoryDocuments?: FilingHistoryDocuments[];
-    forename?: string;
-    surname?: string;
+    collectionLocation: string;
+    contactNumber: string;
+    deliveryMethod: string;
+    deliveryTimescale: string;
+    filingHistoryDocuments: FilingHistoryDocuments[];
+    forename: string;
+    surname: string;
 }
 
 export interface Links {
@@ -99,6 +99,16 @@ export interface FilingHistoryDocuments {
 // Patch Certified Document
 export interface CertifiedCopyItemPatchRequest {
     customerReference?: string;
-    itemOptions?: ItemOptions;
+    itemOptions?: PatchItemOptions;
     quantity?: number;
+}
+
+export interface PatchItemOptions {
+    collectionLocation?: string;
+    contactNumber?: string;
+    deliveryMethod?: string;
+    deliveryTimescale?: string;
+    filingHistoryDocuments?: FilingHistoryDocuments[];
+    forename?: string;
+    surname?: string;
 }
