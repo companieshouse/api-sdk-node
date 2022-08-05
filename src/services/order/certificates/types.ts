@@ -1,3 +1,5 @@
+import { ItemOptionsDeliveryTimescaleConfigurable } from "../types";
+
 export interface CertificateItemResource {
     company_name: string;
     company_number: string;
@@ -140,13 +142,12 @@ export interface ItemCosts {
     productType: string;
 }
 
-export interface ItemOptions {
+export interface ItemOptions extends ItemOptionsDeliveryTimescaleConfigurable {
     certificateType: string;
     collectionLocation: string;
     companyType: string;
     contactNumber: string;
     deliveryMethod: string;
-    deliveryTimescale: string;
     designatedMemberDetails?: DesignatedMemberDetails;
     directorDetails?: DirectorOrSecretaryDetails;
     forename: string;

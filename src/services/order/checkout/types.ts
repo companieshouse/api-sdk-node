@@ -19,13 +19,13 @@ export interface Checkout {
         self: string;
         payment: string;
     };
-    paidAt: string;
+    paidAt?: string;
     checkedOutBy: {
         email: string;
         id: string
     };
     status: string;
-    paymentReference: string;
+    paymentReference?: string;
     reference: string;
     totalOrderCost: string;
 }
