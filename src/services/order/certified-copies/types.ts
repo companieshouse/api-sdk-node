@@ -1,3 +1,5 @@
+import { ItemOptionsDeliveryTimescaleConfigurable } from "../types";
+
 export interface CertifiedCopyItemResource {
     company_name: string;
     company_number: string;
@@ -73,7 +75,7 @@ export interface ItemCosts {
     productType: string;
 }
 
-export interface ItemOptions {
+export interface ItemOptions extends ItemOptionsDeliveryTimescaleConfigurable {
     collectionLocation: string;
     contactNumber: string;
     deliveryMethod: string;
