@@ -79,7 +79,6 @@ export interface ItemOptions extends ItemOptionsDeliveryTimescaleConfigurable {
     collectionLocation: string;
     contactNumber: string;
     deliveryMethod: string;
-    deliveryTimescale: string;
     filingHistoryDocuments: FilingHistoryDocuments[];
     forename: string;
     surname: string;
