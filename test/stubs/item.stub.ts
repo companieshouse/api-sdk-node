@@ -95,5 +95,3 @@ export const certifiedCopyItemStub: ItemResource = {
     total_item_cost: "15",
     postal_delivery: true
 }
-
-
