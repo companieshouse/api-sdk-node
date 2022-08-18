@@ -5,8 +5,8 @@ import { expect } from "chai";
 import { Success } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
 import { ApiErrorResponse } from "../../../src/services/resource";
-import {certifiedCopyItemStub, itemResourceStub} from "../../stubs/item.stub";
-import {Failure} from "../../../dist/services/result";
+import { certifiedCopyItemStub, itemResourceStub } from "../../stubs/item.stub";
+import { Failure } from "../../../dist/services/result";
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 const sandbox = sinon.createSandbox();
