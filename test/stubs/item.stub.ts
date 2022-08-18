@@ -43,3 +43,55 @@ export const itemResourceStub: ItemResource = ({
     total_item_cost: "total item cost",
     status: "unknown"
 });
+
+export const certifiedCopyItemStub: ItemResource = {
+    id: "CCD-123456-123456",
+    company_name: "Company Name",
+    company_number: "00006400",
+    description: "certified copy for company 00000000",
+    description_identifier: "certified-copy",
+    description_values: {
+        company_number: "00000000",
+        "certified-copy": "certified copy for company 00000000"
+    },
+    item_costs: [
+        {
+            discount_applied: "0",
+            item_cost: "15",
+            calculated_cost: "15",
+            product_type: "certified-copy"
+        }
+    ],
+    item_options: {
+        collection_location: "london",
+        contact_number: "0123456789",
+        delivery_method: "postal",
+        delivery_timescale: "standard",
+        filing_history_documents: [
+            {
+                filing_history_date: "2010-02-12",
+                filing_history_description: "change-person-director-company-with-change-date",
+                filing_history_description_values: {
+                    change_date: "2010-02-12",
+                    officer_name: "Thomas David Wheare"
+                },
+                filing_history_id: "MzAwOTM2MDg5OWFkaXF6a2N4",
+                filing_history_type: "CH01",
+                filing_history_cost: "15"
+            }
+        ],
+        forename: "forename",
+        surname: "surname"
+    },
+    etag: "c7dace439d47fdb78c9c0803c60e6619d9400663",
+    kind: "item#certified-copy",
+    links: {
+        self: "/orderable/certified-copies/CCD-123456-123456"
+    },
+    quantity: 1,
+    item_uri: "/orderable/certified-copies/CCD-123456-123456",
+    status: "unknown",
+    postage_cost: "0",
+    total_item_cost: "15",
+    postal_delivery: true
+}
