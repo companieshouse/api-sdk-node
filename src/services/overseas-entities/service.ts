@@ -10,7 +10,7 @@ export default class OverseasEntityService {
         const URL = `/transactions/${transactionId}/overseas-entity`;
         const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
 
-        if (response.error && response.status !== 400) {
+        if (response.error) {
             return {
                 httpStatusCode: response.status,
                 errors: [response.error]
