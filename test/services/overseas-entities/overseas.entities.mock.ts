@@ -435,9 +435,11 @@ export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthT
 
 export const TRANSACTION_ID = "12345";
 export const UNAUTHORISED = "Unauthorised";
+export const BAD_REQUEST = "Bad Request";
 
 export const mockOverseasEntityCreatedResource: OverseasEntityCreated = { id: "00112233" };
 export const mockPostOverseasEntityResponse = {
     201: { status: 201, body: mockOverseasEntityCreatedResource },
+    400: { status: 400, error: BAD_REQUEST },
     401: { status: 401, error: UNAUTHORISED }
 };
