@@ -6,7 +6,6 @@ import * as mockValues from "./overseas.entities.mock";
 import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
-    OverseasEntityDueDiligenceResource,
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
@@ -44,6 +43,16 @@ describe("OverseasEntityService Tests suite", () => {
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+    });
+
+    it("should return error 400 (Bad Request) for postOverseasEntity method", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.postOverseasEntity(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
     });
 });
 
