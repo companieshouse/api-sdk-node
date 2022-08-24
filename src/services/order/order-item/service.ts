@@ -26,7 +26,7 @@ export default class OrderItemService {
         if (resp.error) {
             return failure({
                 httpStatusCode: resp.status,
-                error: resp.error.error
+                error: resp.error?.error
             });
         }
 
