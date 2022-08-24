@@ -1,8 +1,12 @@
 import { IHttpClient } from "../../../http";
-import { ApiResult } from "../../../services/resource";
-import { failure, success } from "../../../services/result";
+import { failure, Result, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
 import { Item, ItemResource } from "../order";
+
+export type OrderItemErrorResponse = {
+    httpStatusCode?: number;
+    error?: string;
+};
 
 export default class OrderItemService {
     private static readonly EXCLUDED_FIELDS = {
@@ -16,13 +20,13 @@ export default class OrderItemService {
 
     constructor (private readonly client: IHttpClient) { }
 
-    public async getOrderItem (orderId: string, itemId: string): Promise<ApiResult<Item>> {
+    public async getOrderItem (orderId: string, itemId: string): Promise<Result<Item, OrderItemErrorResponse>> {
         const resp = await this.client.httpGet(`/orders/${orderId}/items/${itemId}`);
 
         if (resp.error) {
             return failure({
                 httpStatusCode: resp.status,
-                errors: resp?.error?.errors || resp.error
+                error: resp.error?.error
             });
         }
 

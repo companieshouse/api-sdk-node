@@ -1,6 +1,6 @@
 import sinon from "sinon";
 import { IHttpClient, RequestClient } from "../../../src";
-import OrderItemService from "../../../src/services/order/order-item/service";
+import OrderItemService, { OrderItemErrorResponse } from "../../../src/services/order/order-item/service";
 import { expect } from "chai";
 import { Success } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
@@ -154,7 +154,9 @@ describe("OrderItemService", () => {
             // given
             const serverResponse = {
                 status: 401,
-                error: "An error occurred"
+                error: {
+                    error: "An error occurred"
+                }
             };
             sandbox.mock(requestClient)
                 .expects("httpGet")
@@ -164,11 +166,11 @@ describe("OrderItemService", () => {
             const orderItemService = new OrderItemService(requestClient);
 
             // when
-            const actual = await orderItemService.getOrderItem("ORD-123123-123123", "CCD-123456-123456") as Failure<Item, ApiErrorResponse>;
+            const actual = await orderItemService.getOrderItem("ORD-123123-123123", "CCD-123456-123456") as Failure<Item, OrderItemErrorResponse>;
 
             expect(actual.isFailure()).to.be.true;
             expect(actual.value.httpStatusCode).to.equal(401);
-            expect(actual.value.errors).to.equal("An error occurred");
+            expect(actual.value.error).to.equal("An error occurred");
         });
     });
 });
