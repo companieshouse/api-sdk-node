@@ -15,6 +15,7 @@ export interface BasketResource {
 export interface DeliveryDetailsResource {
     address_line_1: string;
     address_line_2?: string;
+    company_name?: string;
     country: string;
     forename: string;
     locality: string;
@@ -39,6 +40,7 @@ export interface Basket {
 export interface DeliveryDetails {
     addressLine1: string;
     addressLine2?: string;
+    companyName?: string;
     country: string;
     forename: string;
     locality: string;
@@ -55,6 +57,7 @@ export interface BasketRequestResource {
 export interface DeliveryDetailsRequestResource {
     address_line_1: string;
     address_line_2?: string;
+    company_name?: string;
     country: string;
     forename: string;
     locality: string;
@@ -71,6 +74,7 @@ export interface BasketPatchRequest {
 export interface DeliveryDetailsRequest {
     addressLine1: string;
     addressLine2?: string | null;
+    companyName?: string | null;
     country: string;
     forename: string;
     locality: string;
@@ -92,6 +96,7 @@ export interface CheckoutResource {
     delivery_details: {
         address_line_1?: string;
         address_line_2?: string;
+        company_name: string;
         country?: string;
         forename?: string;
         locality?: string;
@@ -122,6 +127,7 @@ export interface Checkout {
   deliveryDetails: {
       addressLine1?: string;
       addressLine2?: string;
+      companyName?: string;
       country?: string;
       forename?: string;
       locality?: string;

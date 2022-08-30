@@ -9,6 +9,7 @@ export interface Order {
     deliveryDetails?: {
         addressLine1: string;
         addressLine2: string;
+        companyName: string;
         country: string;
         forename: string;
         locality: string;
@@ -74,6 +75,7 @@ export interface OrderResource {
     delivery_details?: {
         address_line_1: string;
         address_line_2: string;
+        company_name: string;
         country: string;
         forename: string;
         locality: string;
