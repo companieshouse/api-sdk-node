@@ -96,7 +96,7 @@ export interface CheckoutResource {
     delivery_details: {
         address_line_1?: string;
         address_line_2?: string;
-        company_name: string;
+        company_name?: string;
         country?: string;
         forename?: string;
         locality?: string;
