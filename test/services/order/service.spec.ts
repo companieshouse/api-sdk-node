@@ -32,6 +32,7 @@ const mockCertificateOrderResponseBody: OrderResource = {
     delivery_details: {
         address_line_1: "address line 1",
         address_line_2: "address line 2",
+        company_name: "company name",
         country: "country",
         forename: "forename",
         locality: "locality",
@@ -127,6 +128,7 @@ const mockCertifiedCopyOrderResponseBody: OrderResource = {
         surname: "bob",
         address_line_1: "address line 1",
         address_line_2: "address line 2",
+        company_name: "company name",
         po_box: "po box"
     },
     items: [
@@ -335,6 +337,7 @@ describe("order", () => {
 
             expect(data.deliveryDetails.addressLine1).to.equal(mockCertificateOrderResponseBody.delivery_details.address_line_1);
             expect(data.deliveryDetails.addressLine2).to.equal(mockCertificateOrderResponseBody.delivery_details.address_line_2);
+            expect(data.deliveryDetails.companyName).to.equal(mockCertificateOrderResponseBody.delivery_details.company_name);
             expect(data.deliveryDetails.country).to.equal(mockCertificateOrderResponseBody.delivery_details.country);
             expect(data.deliveryDetails.forename).to.equal(mockCertificateOrderResponseBody.delivery_details.forename);
             expect(data.deliveryDetails.locality).to.equal(mockCertificateOrderResponseBody.delivery_details.locality);

@@ -177,6 +177,7 @@ describe("basket", () => {
                 delivery_details: {
                     address_line_1: "address_line_1",
                     address_line_2: "address_line_2",
+                    company_name: "company_name",
                     country: "country",
                     forename: "forename",
                     locality: "locality",
@@ -218,6 +219,7 @@ describe("basket", () => {
             expect(data.resource.checkedOutBy.id).to.equal(mockResponseBody.checked_out_by.id);
             expect(data.resource.deliveryDetails.addressLine1).to.equal(mockResponseBody.delivery_details.address_line_1);
             expect(data.resource.deliveryDetails.addressLine2).to.equal(mockResponseBody.delivery_details.address_line_2);
+            expect(data.resource.deliveryDetails.companyName).to.equal(mockResponseBody.delivery_details.company_name);
             expect(data.resource.deliveryDetails.country).to.equal(mockResponseBody.delivery_details.country);
             expect(data.resource.deliveryDetails.forename).to.equal(mockResponseBody.delivery_details.forename);
             expect(data.resource.deliveryDetails.locality).to.equal(mockResponseBody.delivery_details.locality);
@@ -258,6 +260,7 @@ describe("basket", () => {
                 delivery_details: {
                     address_line_1: "117 kings road",
                     address_line_2: "canton",
+                    company_name: "Company Name",
                     country: "wales",
                     forename: "John",
                     locality: "Cardiff",
@@ -338,6 +341,7 @@ describe("basket", () => {
             expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
             expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
             expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
@@ -391,6 +395,7 @@ describe("basket", () => {
                 delivery_details: {
                     address_line_1: "117 kings road",
                     address_line_2: undefined,
+                    company_name: undefined,
                     country: "wales",
                     forename: "John",
                     locality: "Cardiff",
@@ -417,6 +422,7 @@ describe("basket", () => {
             expect(data.resource.enrolled).to.be.false;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
+            expect(resourceDeliveryDetails?.companyName).to.be.undefined;
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
             expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
             expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
@@ -432,6 +438,7 @@ describe("basket", () => {
             deliveryDetails: {
                 addressLine1: "117 kings road",
                 addressLine2: "canton",
+                companyName: "Company Name",
                 country: "wales",
                 forename: "John",
                 locality: "Cardiff",
@@ -446,6 +453,7 @@ describe("basket", () => {
             delivery_details: {
                 address_line_1: "117 kings road",
                 address_line_2: "canton",
+                company_name: "Company Name",
                 country: "wales",
                 forename: "John",
                 locality: "Cardiff",
@@ -492,6 +500,7 @@ describe("basket", () => {
             delivery_details: {
                 address_line_1: "117 kings road",
                 address_line_2: undefined,
+                company_name: undefined,
                 country: "wales",
                 forename: "John",
                 locality: "Cardiff",
@@ -535,6 +544,7 @@ describe("basket", () => {
             expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
             expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
             expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
@@ -580,6 +590,7 @@ describe("basket", () => {
             expect(data.resource.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
+            expect(resourceDeliveryDetails?.companyName).to.be.undefined;
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
             expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
             expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
@@ -630,6 +641,7 @@ describe("basket", () => {
                     delivery_details: {
                         address_line_1: "117 kings road",
                         address_line_2: "canton",
+                        company_name: "Company Name",
                         country: "wales",
                         forename: "John",
                         locality: "Cardiff",
@@ -660,6 +672,7 @@ describe("basket", () => {
             expect(data.resource.data.enrolled).to.be.true;
             expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
             expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
             expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
             expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
             expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);

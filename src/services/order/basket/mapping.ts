@@ -13,6 +13,7 @@ export default class BasketMapping {
             delivery_details: {
                 address_line_1: basketRequest.deliveryDetails.addressLine1,
                 address_line_2: basketRequest.deliveryDetails.addressLine2,
+                company_name: basketRequest.deliveryDetails.companyName,
                 country: basketRequest.deliveryDetails.country,
                 forename: basketRequest.deliveryDetails.forename,
                 locality: basketRequest.deliveryDetails.locality,
