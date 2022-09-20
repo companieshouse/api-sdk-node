@@ -25,7 +25,14 @@ export default class OverseasEntityService {
         return resource;
     }
 
-    public async putOverseasEntity (transactionId: string, body: OverseasEntity): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
+    /**
+     * Proof of concept for ROE-1271
+     * Not to be used for Live code
+     * @param transactionId
+     * @param body
+     * @returns
+     */
+    public async proofOfConceptPutOverseasEntity (transactionId: string, body: OverseasEntity): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
         const response: HttpResponse = await this.client.httpPut(URL, mapOverseasEntity(body));
 
@@ -44,8 +51,14 @@ export default class OverseasEntityService {
         return resource;
     }
 
+    /**
+     * Proof of concept for ROE-1271
+     * Not to be used for Live code
+     * @param transactionId
+     * @returns
+     */
     // no id returned, so this needs changing
-    public async patchOverseasEntity (transactionId: string): Promise<Resource<void> | ApiErrorResponse> {
+    public async proofOfConceptPatchOverseasEntity (transactionId: string): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
         const response: HttpResponse = await this.client.httpPatch(URL);
 
