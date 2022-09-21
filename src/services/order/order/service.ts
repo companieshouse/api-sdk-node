@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../../http";
 import { Order, OrderResource } from "./types";
-import {failure, Result, success} from "../../../services/result";
+import { failure, Result, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
 
 export type OrderErrorResponse = {

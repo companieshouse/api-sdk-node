@@ -1,7 +1,7 @@
 import chai from "chai";
 import sinon from "sinon";
 
-import OrderService, {OrderErrorResponse} from "../../../src/services/order/order/service";
+import OrderService, { OrderErrorResponse } from "../../../src/services/order/order/service";
 import { RequestClient } from "../../../src/http";
 import {
     Order, OrderResource
@@ -9,7 +9,7 @@ import {
 import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid/types";
 import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
-import {Failure} from "../../../dist/services/result";
+import { Failure } from "../../../dist/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
