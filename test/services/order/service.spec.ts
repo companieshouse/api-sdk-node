@@ -1,15 +1,15 @@
 import chai from "chai";
 import sinon from "sinon";
 
-import OrderService from "../../../src/services/order/order/service";
+import OrderService, {OrderErrorResponse} from "../../../src/services/order/order/service";
 import { RequestClient } from "../../../src/http";
-import { ApiErrorResponse } from "../../../src/services/resource";
 import {
     Order, OrderResource
 } from "../../../src/services/order/order";
 import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid/types";
 import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
+import {Failure} from "../../../dist/services/result";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -305,16 +305,22 @@ describe("order", () => {
         it("returns an error response on failure", async () => {
             const mockGetResponse = {
                 status: 401,
-                error: "An error occurred"
+                error: {
+                    error: "An error occurred"
+                }
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            sinon.mock(requestClient)
+                .expects("httpGet")
+                .once()
+                .withArgs("/orders/ORD-123456-123456")
+                .returns(mockGetResponse);
             const order: OrderService = new OrderService(requestClient);
-            const response = await order.getOrder(CERTIFICATE_ORDER_ID);
-            const data = response.value as ApiErrorResponse;
+            const actual = await order.getOrder(CERTIFICATE_ORDER_ID) as Failure<Order, OrderErrorResponse>;
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.errors).to.equal("An error occurred");
+            expect(actual.isFailure()).to.be.true;
+            expect(actual.value.httpStatusCode).to.equal(401);
+            expect(actual.value.error).to.equal("An error occurred");
         });
 
         it("should map generic fields correctly", async () => {
