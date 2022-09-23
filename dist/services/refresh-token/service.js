@@ -15,7 +15,7 @@ class default_1 {
     }
     refresh(refreshToken, grantType, clientId, clientSecret) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `/oauth2/token?grant_type=${grantType}&refresh_token=${refreshToken}&client_id=${clientId}&client_secret=${clientSecret}`;
+            const url = `/oauth2/token`;
             const params = {
                 refresh_token: refreshToken,
                 grant_type: grantType,
