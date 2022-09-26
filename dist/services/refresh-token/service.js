@@ -16,16 +16,7 @@ class default_1 {
     refresh(refreshToken, grantType, clientId, clientSecret) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `/oauth2/token?grant_type=${grantType}&refresh_token=${refreshToken}&client_id=${clientId}&client_secret=${clientSecret}`;
-            const params = {
-                refresh_token: refreshToken,
-                grant_type: grantType,
-                client_id: clientId,
-                client_secret: clientSecret
-            };
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            console.log(url);
-            console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-            const response = yield this.client.httpPost(url, {});
+            const response = yield this.client.httpPost(url);
             if (response.error) {
                 return {
                     httpStatusCode: response.status,
