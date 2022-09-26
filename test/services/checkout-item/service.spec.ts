@@ -5,7 +5,7 @@ import { Success, Failure } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
 import { certifiedCopyItemStub, itemResourceStub } from "../../stubs/item.stub";
 import CheckoutItemService, { CheckoutItemErrorResponse } from "../../../src/services/order/checkout-item/service";
-import {Checkout} from "../../../dist/services/order/checkout";
+import {Checkout} from "../../../src/services/order/checkout";
 import {
     CERTIFIED_COPY_CHECKOUT_ID,
     MISSING_IMAGE_DELIVERY_CHECKOUT_ID, mockCertifiedCopyCheckoutResponseBody,
@@ -221,6 +221,28 @@ describe("CheckoutItemService", () => {
             expect(actual.isFailure()).to.be.true;
             expect(actual.value.httpStatusCode).to.equal(401);
             expect(actual.value.error).to.equal("An error occurred");
+        });
+
+        // Returns failure with response code attached if items does not contain exactly one item
+        it("test me please", async () => {
+            // given
+            const serverResponse = {
+                status: 200,
+                body: {...mockMissingImageDeliveryCheckoutResponseBody, items: []}
+            };
+            sandbox.mock(requestClient)
+                .expects("httpGet")
+                .once()
+                .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
+                .returns(serverResponse);
+            const checkoutItemService = new CheckoutItemService(requestClient);
+
+            // when
+            const actual = await checkoutItemService.getCheckoutItem("ORD-123123-123123", "CCD-123456-123456") as Failure<Checkout, CheckoutItemErrorResponse>;
+
+            expect(actual.isFailure()).to.be.true;
+            expect(actual.value.httpStatusCode).to.equal(200);
+            expect(actual.value.error).to.equal("Expected checkout returned by api to have exactly one embedded item.");
         });
     });
 });
