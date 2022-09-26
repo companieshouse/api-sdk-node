@@ -227,7 +227,7 @@ describe("CheckoutItemService", () => {
             // given
             const serverResponse = {
                 status: 200,
-                body: {...mockMissingImageDeliveryCheckoutResponseBody, items: []}
+                body: { ...mockMissingImageDeliveryCheckoutResponseBody, items: [] }
             };
             sandbox.mock(requestClient)
                 .expects("httpGet")

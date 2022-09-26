@@ -1,5 +1,5 @@
-import {CheckoutResource} from "../../src/services/order/checkout";
-import {certifiedCopyItemStub, itemResourceStub} from "./item.stub";
+import { CheckoutResource } from "../../src/services/order/checkout";
+import { certifiedCopyItemStub, itemResourceStub } from "./item.stub";
 
 export const CERTIFIED_COPY_CHECKOUT_ID = "ORD-1111111-1111111";
 export const MISSING_IMAGE_DELIVERY_CHECKOUT_ID = "ORD-222222-222222";
