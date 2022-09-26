@@ -4,7 +4,7 @@ import { expect } from "chai";
 import { Success, Failure } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
 import CheckoutItemService, { CheckoutItemErrorResponse } from "../../../src/services/order/checkout-item/service";
-import {Checkout} from "../../../src/services/order/checkout";
+import { Checkout } from "../../../src/services/order/checkout";
 import {
     CERTIFIED_COPY_CHECKOUT_ID,
     MISSING_IMAGE_DELIVERY_CHECKOUT_ID, mockCertifiedCopyCheckoutResponseBody,
