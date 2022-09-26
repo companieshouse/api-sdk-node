@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../../http";
 import { failure, Result, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
-import { Item, ItemResource } from "../order";
+import { Checkout, CheckoutResource } from "../checkout";
 
 export type CheckoutItemErrorResponse = {
     httpStatusCode?: number;
@@ -12,15 +12,15 @@ export default class CheckoutItemService {
     private static readonly EXCLUDED_FIELDS = {
         deep: true,
         stopPaths: [
-            "description_values", // all items
-            "item_options.filing_history_description_values", // missing image delivery
-            "item_options.filing_history_documents.filing_history_description_values" // certified copies
+            "items.description_values", // all items
+            "items.item_options.filing_history_description_values", // missing image delivery
+            "items.item_options.filing_history_documents.filing_history_description_values" // certified copies
         ]
     };
 
     constructor (private readonly client: IHttpClient) { }
 
-    public async getCheckoutItem (orderId: string, itemId: string): Promise<Result<Item, CheckoutItemErrorResponse>> {
+    public async getCheckoutItem (orderId: string, itemId: string): Promise<Result<Checkout, CheckoutItemErrorResponse>> {
         const resp = await this.client.httpGet(`/checkouts/${orderId}/items/${itemId}`);
 
         if (resp.error) {
@@ -30,9 +30,17 @@ export default class CheckoutItemService {
             });
         }
 
-        const body = resp.body as ItemResource;
+        const body = resp.body as CheckoutResource;
 
-        const result: Item = Mapping.camelCaseKeys(body, CheckoutItemService.EXCLUDED_FIELDS);
+        if (body.items.length !== 1) {
+            return failure({
+                httpStatusCode: resp.status,
+                error: "Expected checkout returned by api to have exactly one embedded item."
+            })
+        }
+
+        const result: Checkout = Mapping.camelCaseKeys(body, CheckoutItemService.EXCLUDED_FIELDS);
+
         return success(result);
     }
 }
