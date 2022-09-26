@@ -3,7 +3,6 @@ import { RequestClient } from "../../../src";
 import { expect } from "chai";
 import { Success, Failure } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
-import { certifiedCopyItemStub, itemResourceStub } from "../../stubs/item.stub";
 import CheckoutItemService, { CheckoutItemErrorResponse } from "../../../src/services/order/checkout-item/service";
 import {Checkout} from "../../../src/services/order/checkout";
 import {

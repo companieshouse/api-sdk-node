@@ -1,9 +1,7 @@
 import { IHttpClient } from "../../../http";
 import { failure, Result, success } from "../../../services/result";
 import Mapping from "../../../mapping/mapping";
-import { Item, ItemResource } from "../order";
 import {Checkout, CheckoutResource} from "../checkout";
-import {NOTFOUND} from "dns";
 
 export type CheckoutItemErrorResponse = {
     httpStatusCode?: number;
