@@ -222,8 +222,28 @@ describe("CheckoutItemService", () => {
             expect(actual.value.error).to.equal("An error occurred");
         });
 
-        // Returns failure with response code attached if items does not contain exactly one item
-        it("test me please", async () => {
+        it("Returns failure with response code attached if items is undefined", async () => {
+            // given
+            const serverResponse = {
+                status: 200,
+                body: {}
+            };
+            sandbox.mock(requestClient)
+                .expects("httpGet")
+                .once()
+                .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
+                .returns(serverResponse);
+            const checkoutItemService = new CheckoutItemService(requestClient);
+
+            // when
+            const actual = await checkoutItemService.getCheckoutItem("ORD-123123-123123", "CCD-123456-123456") as Failure<Checkout, CheckoutItemErrorResponse>;
+
+            expect(actual.isFailure()).to.be.true;
+            expect(actual.value.httpStatusCode).to.equal(200);
+            expect(actual.value.error).to.equal("Expected checkout returned by api to have exactly one embedded item.");
+        });
+
+        it("Returns failure with response code attached if items does not contain exactly one item", async () => {
             // given
             const serverResponse = {
                 status: 200,
