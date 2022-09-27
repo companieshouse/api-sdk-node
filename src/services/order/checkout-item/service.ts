@@ -32,7 +32,7 @@ export default class CheckoutItemService {
 
         const body = resp.body as CheckoutResource;
 
-        if (body.items.length !== 1) {
+        if (!body.items || body.items.length !== 1) {
             return failure({
                 httpStatusCode: resp.status,
                 error: "Expected checkout returned by api to have exactly one embedded item."
