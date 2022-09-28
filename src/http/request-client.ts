@@ -32,13 +32,13 @@ export default class RequestClient extends AbstractClient {
                 baseUrl: this.options.baseUrl,
                 uri: additionalOptions.url as string,
                 method: additionalOptions.method,
-                // headers: {
-                //     ...this.headers,
-                //     ...additionalOptions.headers
-                // },
-                resolveWithFullResponse: true
-                // body: additionalOptions.body
-                // json: true
+                headers: {
+                    ...this.headers,
+                    ...additionalOptions.headers
+                },
+                resolveWithFullResponse: true,
+                body: additionalOptions.body,
+                json: true
             };
 
             // any errors (including status code errors) are thrown as exceptions and

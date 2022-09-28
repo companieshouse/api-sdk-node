@@ -52,13 +52,10 @@ class RequestClient extends http_client_1.AbstractClient {
                     baseUrl: this.options.baseUrl,
                     uri: additionalOptions.url,
                     method: additionalOptions.method,
-                    // headers: {
-                    //     ...this.headers,
-                    //     ...additionalOptions.headers
-                    // },
-                    resolveWithFullResponse: true
-                    // body: additionalOptions.body
-                    // json: true
+                    headers: Object.assign(Object.assign({}, this.headers), additionalOptions.headers),
+                    resolveWithFullResponse: true,
+                    body: additionalOptions.body,
+                    json: true
                 };
                 // any errors (including status code errors) are thrown as exceptions and
                 // will be caught in the catch block.
