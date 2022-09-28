@@ -52,10 +52,13 @@ class RequestClient extends http_client_1.AbstractClient {
                     baseUrl: this.options.baseUrl,
                     uri: additionalOptions.url,
                     method: additionalOptions.method,
-                    headers: Object.assign(Object.assign({}, this.headers), additionalOptions.headers),
-                    resolveWithFullResponse: true,
-                    body: additionalOptions.body,
-                    json: true
+                    // headers: {
+                    //     ...this.headers,
+                    //     ...additionalOptions.headers
+                    // },
+                    resolveWithFullResponse: true
+                    // body: additionalOptions.body
+                    // json: true
                 };
                 // any errors (including status code errors) are thrown as exceptions and
                 // will be caught in the catch block.
@@ -70,7 +73,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 // e is an instance of RequestError or StatusCodeError
                 // @see https://github.com/request/promise-core/blob/master/lib/errors.js
                 // however, there is currently no type declaration file for this.
-                const error = ((_a = e === null || e === void 0 ? void 0 : e.response) === null || _a === void 0 ? void 0 : _a.body) || { message: `failed to execute http request. this.options: ${JSON.stringify(this.options)} and additionalOptions: ${JSON.stringify(additionalOptions)} and error ${JSON.stringify(e)}` };
+                const error = ((_a = e === null || e === void 0 ? void 0 : e.response) === null || _a === void 0 ? void 0 : _a.body) || { message: `failed to execute http request. this.options: ${this.options} and additionalOptions: ${additionalOptions} and error ${e}` };
                 return {
                     status: (e === null || e === void 0 ? void 0 : e.statusCode) || 500,
                     error

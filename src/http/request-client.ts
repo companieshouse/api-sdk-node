@@ -32,13 +32,13 @@ export default class RequestClient extends AbstractClient {
                 baseUrl: this.options.baseUrl,
                 uri: additionalOptions.url as string,
                 method: additionalOptions.method,
-                headers: {
-                    ...this.headers,
-                    ...additionalOptions.headers
-                },
-                resolveWithFullResponse: true,
-                body: additionalOptions.body,
-                json: true
+                // headers: {
+                //     ...this.headers,
+                //     ...additionalOptions.headers
+                // },
+                resolveWithFullResponse: true
+                // body: additionalOptions.body
+                // json: true
             };
 
             // any errors (including status code errors) are thrown as exceptions and
@@ -53,7 +53,7 @@ export default class RequestClient extends AbstractClient {
             // e is an instance of RequestError or StatusCodeError
             // @see https://github.com/request/promise-core/blob/master/lib/errors.js
             // however, there is currently no type declaration file for this.
-            const error = e?.response?.body || { message: `failed to execute http request. this.options: ${JSON.stringify(this.options)} and additionalOptions: ${JSON.stringify(additionalOptions)} and error ${JSON.stringify(e)}` };
+            const error = e?.response?.body || { message: `failed to execute http request. this.options: ${this.options} and additionalOptions: ${additionalOptions} and error ${e}` };
             return {
                 status: e?.statusCode || 500,
                 error
