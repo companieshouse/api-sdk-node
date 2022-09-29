@@ -53,7 +53,7 @@ export default class RequestClient extends AbstractClient {
             // e is an instance of RequestError or StatusCodeError
             // @see https://github.com/request/promise-core/blob/master/lib/errors.js
             // however, there is currently no type declaration file for this.
-            const error = e?.response?.body || { message: `failed to execute http request. this.options: ${this.options} and additionalOptions: ${additionalOptions} and error ${e}` };
+            const error = e?.response?.body || { message: "failed to execute http request" };
             return {
                 status: e?.statusCode || 500,
                 error
