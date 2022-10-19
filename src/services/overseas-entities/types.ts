@@ -33,6 +33,10 @@ export interface OverseasEntityCreated {
     id: string
 }
 
+export interface HttpStatusCode {
+    httpStatusCode: number
+}
+
 /**
  * Overseas Entities interface used on OverseasEntity object
  */

@@ -443,3 +443,8 @@ export const mockPostOverseasEntityResponse = {
     400: { status: 400, error: BAD_REQUEST },
     401: { status: 401, error: UNAUTHORISED }
 };
+
+export const mockPutOverseasEntityResponse = {
+    200: { status: 200 },
+    400: { status: 400, error: BAD_REQUEST }
+};

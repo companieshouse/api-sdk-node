@@ -11,7 +11,7 @@ import {
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity } from "../../../src/services/overseas-entities/mapping";
 
-describe("OverseasEntityService Tests suite", () => {
+describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -53,6 +53,35 @@ describe("OverseasEntityService Tests suite", () => {
 
         expect(data.httpStatusCode).to.equal(400);
         expect(data.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+    });
+});
+
+describe("OverseasEntityService PUT Tests suite", () => {
+    beforeEach(() => {
+        sinon.reset();
+        sinon.restore();
+    });
+
+    it("should return httpStatusCode 200 for putOverseasEntity method", async () => {
+        sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutOverseasEntityResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.putOverseasEntity(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_OBJECT_MOCK
+        )) as Resource<OverseasEntityCreated>;
+
+        expect(data.httpStatusCode).to.equal(200);
+    });
+
+    it("should return error 400 (Bad Request) for putOverseasEntity method", async () => {
+        sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutOverseasEntityResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.putOverseasEntity(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.equal(mockValues.BAD_REQUEST);
     });
 });
 
