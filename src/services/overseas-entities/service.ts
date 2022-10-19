@@ -25,8 +25,8 @@ export default class OverseasEntityService {
         return resource;
     }
 
-    public async putOverseasEntity (transactionId: string, body: OverseasEntity): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
-        const URL = `transactions/${transactionId}/overseas-entity/start`
+    public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
+        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
 
         const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 

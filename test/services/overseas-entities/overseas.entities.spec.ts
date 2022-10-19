@@ -68,6 +68,7 @@ describe("OverseasEntityService PUT Tests suite", () => {
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = (await oeService.putOverseasEntity(
             mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID,
             mockValues.OVERSEAS_ENTITY_OBJECT_MOCK
         )) as Resource<OverseasEntityCreated>;
 
@@ -78,7 +79,10 @@ describe("OverseasEntityService PUT Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutOverseasEntityResponse[400]);
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
-        const data = await oeService.putOverseasEntity(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+        const data = await oeService.putOverseasEntity(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID,
+            {}) as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(400);
         expect(data.errors![0]).to.equal(mockValues.BAD_REQUEST);
