@@ -434,12 +434,18 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
 export const TRANSACTION_ID = "12345";
+export const OVERSEAS_ENTITY_ID = "00112233";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
 
-export const mockOverseasEntityCreatedResource: OverseasEntityCreated = { id: "00112233" };
+export const mockOverseasEntityCreatedResource: OverseasEntityCreated = { id: OVERSEAS_ENTITY_ID };
 export const mockPostOverseasEntityResponse = {
     201: { status: 201, body: mockOverseasEntityCreatedResource },
     400: { status: 400, error: BAD_REQUEST },
     401: { status: 401, error: UNAUTHORISED }
+};
+
+export const mockPutOverseasEntityResponse = {
+    200: { status: 200 },
+    400: { status: 400, error: BAD_REQUEST }
 };
