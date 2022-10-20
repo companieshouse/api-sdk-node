@@ -9,9 +9,9 @@ export default class OverseasEntityService {
     public async postOverseasEntity (
         transactionId: string,
         body: OverseasEntity,
-        isSaveAndResume: boolean = false
+        isSaveAndResumeFeatureActive: boolean = false
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
-        const URL = (isSaveAndResume)
+        const URL = (isSaveAndResumeFeatureActive)
             ? `/transactions/${transactionId}/overseas-entity/start`
             : `/transactions/${transactionId}/overseas-entity`;
         const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
