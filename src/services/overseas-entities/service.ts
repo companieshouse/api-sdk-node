@@ -1,10 +1,35 @@
 import { HttpResponse, IHttpClient } from "../../http";
-import { HttpStatusCode, OverseasEntity, OverseasEntityCreated } from "./types";
+import {
+    HttpStatusCode,
+    OverseasEntity,
+    OverseasEntityCreated,
+    OverseasEntityResource
+} from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
-import { mapOverseasEntity } from "./mapping";
+import { mapOverseasEntity, mapOverseasEntityResource } from "./mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
+
+    public async getBasketLinks (transactionId: string, overseasEntityId: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
+        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const body = response.body as OverseasEntityResource;
+        const resource: Resource<OverseasEntity> = {
+            httpStatusCode: response.status,
+            resource: mapOverseasEntityResource(response.body)
+        };
+
+        return resource;
+    }
 
     public async postOverseasEntity (
         transactionId: string,
