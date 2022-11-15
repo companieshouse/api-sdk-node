@@ -40,6 +40,52 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
     };
 };
 
+export const mapOverseasEntityResource = (body: OverseasEntityResource): OverseasEntity => {
+    return {
+        presenter: { ...body.presenter },
+        entity: { ...body.entity },
+        due_diligence: {
+            ...body.due_diligence,
+            identity_date: mapIsoDate(body.due_diligence.identity_date)
+        },
+        overseas_entity_due_diligence: {
+            ...body.overseas_entity_due_diligence,
+            identity_date: mapIsoDate(body.overseas_entity_due_diligence.identity_date)
+        },
+        beneficial_owners_statement: body.beneficial_owners_statement,
+        beneficial_owners_individual: (body.beneficial_owners_individual || []).map(boi => {
+            return {
+                ...boi,
+                start_date: mapIsoDate(boi.start_date),
+                date_of_birth: mapIsoDate(boi.date_of_birth)
+            }
+        }),
+        beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(boc => {
+            return {
+                ...boc,
+                start_date: mapIsoDate(boc.start_date)
+            }
+        }),
+        beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(bog => {
+            return {
+                ...bog,
+                start_date: mapIsoDate(bog.start_date)
+            }
+        }),
+        managing_officers_individual: (body.managing_officers_individual || []).map(moi => {
+            return {
+                ...moi,
+                date_of_birth: mapIsoDate(moi.date_of_birth)
+            }
+        }),
+        managing_officers_corporate: body.managing_officers_corporate
+        // trusts: {
+        //     ...body.trusts,
+        //     identity_date: mapIsoDate(body.due_diligence.identity_date)
+        // }
+    };
+};
+
 /**
  * Convert the BeneficialOwnerIndividual array data into the Resource format that the API expects
  * (just converting dates currently)
@@ -220,6 +266,11 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
         }
     })
+}
+
+const mapIsoDate = (date: string = ""): InputDate => {
+    const [day, month, year] = date.split("-");
+    return { day, month, year }
 }
 
 const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
