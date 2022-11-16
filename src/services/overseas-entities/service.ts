@@ -2,8 +2,7 @@ import { HttpResponse, IHttpClient } from "../../http";
 import {
     HttpStatusCode,
     OverseasEntity,
-    OverseasEntityCreated,
-    OverseasEntityResource
+    OverseasEntityCreated
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityResource } from "./mapping";
@@ -11,7 +10,7 @@ import { mapOverseasEntity, mapOverseasEntityResource } from "./mapping";
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
 
-    public async getBasketLinks (transactionId: string, overseasEntityId: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
+    public async getOverseasEntity (transactionId: string, overseasEntityId: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
         const response: HttpResponse = await this.client.httpGet(URL);
 
@@ -22,7 +21,6 @@ export default class OverseasEntityService {
             };
         }
 
-        const body = response.body as OverseasEntityResource;
         const resource: Resource<OverseasEntity> = {
             httpStatusCode: response.status,
             resource: mapOverseasEntityResource(response.body)

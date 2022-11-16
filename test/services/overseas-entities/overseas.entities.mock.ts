@@ -247,7 +247,7 @@ export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     other_forenames: "jim",
     surname: "bloggs",
     dob_day: "31",
-    dob_month: "03",
+    dob_month: "3",
     dob_year: "2003",
     nationality: "british",
     sa_address_line1: "sa_addressline1",
@@ -269,7 +269,7 @@ export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     ura_address_premises: "ura_premises",
     ura_address_region: "ura_region",
     date_became_interested_person_day: "30",
-    date_became_interested_person_month: "04",
+    date_became_interested_person_month: "4",
     date_became_interested_person_year: "2004"
 }]
 
@@ -277,7 +277,7 @@ export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
     type: "corp_type",
     name: "corp_name",
     date_became_interested_person_day: "31",
-    date_became_interested_person_month: "08",
+    date_became_interested_person_month: "8",
     date_became_interested_person_year: "2005",
     ro_address_line1: "ro_line1",
     ro_address_line2: "ro_line2",
@@ -320,7 +320,7 @@ export const TRUSTS_MOCK: Trust[] = [{
     trust_id: "123",
     trust_name: "trust_name",
     creation_date_day: "20",
-    creation_date_month: "02",
+    creation_date_month: "2",
     creation_date_year: "2020",
     unable_to_obtain_all_trust_info: "No",
     INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
@@ -447,5 +447,10 @@ export const mockPostOverseasEntityResponse = {
 
 export const mockPutOverseasEntityResponse = {
     200: { status: 200 },
+    400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockGetOverseasEntityResponse = {
+    200: { status: 200, body: OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK },
     400: { status: 400, error: BAD_REQUEST }
 };
