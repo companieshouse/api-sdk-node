@@ -46,45 +46,89 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         entity: { ...body.entity },
         due_diligence: {
             ...body.due_diligence,
-            identity_date: mapIsoDate(body.due_diligence.identity_date)
+            identity_date: mapIsoDate(body.due_diligence?.identity_date)
         },
         overseas_entity_due_diligence: {
             ...body.overseas_entity_due_diligence,
-            identity_date: mapIsoDate(body.overseas_entity_due_diligence.identity_date)
+            identity_date: mapIsoDate(body.overseas_entity_due_diligence?.identity_date)
         },
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: (body.beneficial_owners_individual || []).map(boi => {
-            return {
-                ...boi,
-                start_date: mapIsoDate(boi.start_date),
-                date_of_birth: mapIsoDate(boi.date_of_birth)
-            }
+            return { ...boi, start_date: mapIsoDate(boi.start_date), date_of_birth: mapIsoDate(boi.date_of_birth) }
         }),
         beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(boc => {
-            return {
-                ...boc,
-                start_date: mapIsoDate(boc.start_date)
-            }
+            return { ...boc, start_date: mapIsoDate(boc.start_date) }
         }),
         beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(bog => {
-            return {
-                ...bog,
-                start_date: mapIsoDate(bog.start_date)
-            }
+            return { ...bog, start_date: mapIsoDate(bog.start_date) }
         }),
         managing_officers_individual: (body.managing_officers_individual || []).map(moi => {
-            return {
-                ...moi,
-                date_of_birth: mapIsoDate(moi.date_of_birth)
-            }
+            return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth) }
         }),
-        managing_officers_corporate: body.managing_officers_corporate
-        // trusts: {
-        //     ...body.trusts,
-        //     identity_date: mapIsoDate(body.due_diligence.identity_date)
-        // }
+        managing_officers_corporate: body.managing_officers_corporate,
+        trusts: mapTrustsResource(body.trusts)
     };
 };
+
+/**
+* Convert the Trust Data Resource format coming from the API to WEB Trust
+* @param  trusts Array of TrustResource objects
+* @returns Array of Trust objects
+*/
+const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
+    return (trusts || []).map(trust => {
+        const creationDate = mapIsoDate(trust.creation_date);
+        return {
+            trust_id: trust.trust_id,
+            trust_name: trust.trust_name,
+            creation_date_day: creationDate.day,
+            creation_date_month: creationDate.month,
+            creation_date_year: creationDate.year,
+            unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
+            // Convert the Trust Individuals Resource Data into the format that the WEB expects
+            INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustI => {
+                const { date_of_birth, date_became_interested_person, ...rest } = trustI;
+                const dobDate = mapIsoDate(date_of_birth);
+                const dbipDate = mapIsoDate(date_became_interested_person);
+                return {
+                    ...rest,
+                    dob_day: dobDate.day,
+                    dob_month: dobDate.month,
+                    dob_year: dobDate.year,
+                    date_became_interested_person_day: dbipDate.day,
+                    date_became_interested_person_month: dbipDate.month,
+                    date_became_interested_person_year: dbipDate.year
+                }
+            }),
+            // Convert the Trust Historical BO Resource Data into the format that the WEB expects
+            HISTORICAL_BO: (trust.HISTORICAL_BO || []).map(trustH => {
+                const { notified_date, ceased_date, ...rest } = trustH;
+                const notifiedDate = mapIsoDate(notified_date);
+                const ceasedDate = mapIsoDate(ceased_date);
+                return {
+                    ...rest,
+                    notified_date_day: notifiedDate.day,
+                    notified_date_month: notifiedDate.month,
+                    notified_date_year: notifiedDate.year,
+                    ceased_date_day: ceasedDate.day,
+                    ceased_date_month: ceasedDate.month,
+                    ceased_date_year: ceasedDate.year
+                }
+            }),
+            // Convert the Trust Corporates Resource Data into the format that the WEB expects
+            CORPORATES: (trust.CORPORATE || []).map(trustC => {
+                const { date_became_interested_person, ...rest } = trustC;
+                const dbipDate = mapIsoDate(date_became_interested_person);
+                return {
+                    ...rest,
+                    date_became_interested_person_day: dbipDate.day,
+                    date_became_interested_person_month: dbipDate.month,
+                    date_became_interested_person_year: dbipDate.year
+                }
+            })
+        }
+    });
+}
 
 /**
  * Convert the BeneficialOwnerIndividual array data into the Resource format that the API expects
@@ -268,8 +312,9 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
     })
 }
 
-const mapIsoDate = (date: string = ""): InputDate => {
-    const [day, month, year] = date.split("-");
+const mapIsoDate = (date: string = "--"): InputDate => {
+    // Remove leading zeros, split and init variables
+    const [year, month, day] = date.replace(/\b0/g, "").split("-");
     return { day, month, year }
 }
 
