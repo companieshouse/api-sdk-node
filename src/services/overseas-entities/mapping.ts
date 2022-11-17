@@ -86,8 +86,8 @@ const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
             creation_date_year: creationDate.year,
             unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
             // Convert the Trust Individuals Resource Data into the format that the WEB expects
-            INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustI => {
-                const { date_of_birth, date_became_interested_person, ...rest } = trustI;
+            INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
+                const { date_of_birth, date_became_interested_person, ...rest } = trustInd;
                 const dobDate = mapIsoDate(date_of_birth);
                 const dbipDate = mapIsoDate(date_became_interested_person);
                 return {
@@ -101,8 +101,8 @@ const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
                 }
             }),
             // Convert the Trust Historical BO Resource Data into the format that the WEB expects
-            HISTORICAL_BO: (trust.HISTORICAL_BO || []).map(trustH => {
-                const { notified_date, ceased_date, ...rest } = trustH;
+            HISTORICAL_BO: (trust.HISTORICAL_BO || []).map(trustHist => {
+                const { notified_date, ceased_date, ...rest } = trustHist;
                 const notifiedDate = mapIsoDate(notified_date);
                 const ceasedDate = mapIsoDate(ceased_date);
                 return {
@@ -116,8 +116,8 @@ const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
                 }
             }),
             // Convert the Trust Corporates Resource Data into the format that the WEB expects
-            CORPORATES: (trust.CORPORATE || []).map(trustC => {
-                const { date_became_interested_person, ...rest } = trustC;
+            CORPORATES: (trust.CORPORATE || []).map(trustCorp => {
+                const { date_became_interested_person, ...rest } = trustCorp;
                 const dbipDate = mapIsoDate(date_became_interested_person);
                 return {
                     ...rest,
