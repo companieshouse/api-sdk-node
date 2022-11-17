@@ -44,14 +44,14 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
     return {
         presenter: { ...body.presenter },
         entity: { ...body.entity },
-        due_diligence: {
+        due_diligence: (body.due_diligence) ? {
             ...body.due_diligence,
             identity_date: mapIsoDate(body.due_diligence?.identity_date)
-        },
-        overseas_entity_due_diligence: {
+        } : {},
+        overseas_entity_due_diligence: (body.overseas_entity_due_diligence) ? {
             ...body.overseas_entity_due_diligence,
             identity_date: mapIsoDate(body.overseas_entity_due_diligence?.identity_date)
-        },
+        } : {},
         beneficial_owners_statement: body.beneficial_owners_statement,
         beneficial_owners_individual: (body.beneficial_owners_individual || []).map(boi => {
             return { ...boi, start_date: mapIsoDate(boi.start_date), date_of_birth: mapIsoDate(boi.date_of_birth) }
@@ -65,7 +65,7 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         managing_officers_individual: (body.managing_officers_individual || []).map(moi => {
             return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth) }
         }),
-        managing_officers_corporate: body.managing_officers_corporate,
+        managing_officers_corporate: body.managing_officers_corporate || [],
         trusts: mapTrustsResource(body.trusts)
     };
 };

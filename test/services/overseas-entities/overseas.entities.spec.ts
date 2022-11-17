@@ -209,6 +209,34 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
     });
 
+    it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
+        const data = mapOverseasEntityResource({
+            presenter: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.presenter,
+            entity: undefined,
+            due_diligence: undefined,
+            overseas_entity_due_diligence: undefined,
+            beneficial_owners_statement: undefined,
+            beneficial_owners_individual: undefined,
+            beneficial_owners_corporate: undefined,
+            beneficial_owners_government_or_public_authority: undefined,
+            managing_officers_individual: undefined,
+            managing_officers_corporate: undefined,
+            trusts: undefined
+        });
+
+        expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
+        expect(data.entity).to.deep.equal({});
+        expect(data.due_diligence).to.deep.equal({});
+        expect(data.overseas_entity_due_diligence).to.deep.equal({});
+        expect(data.beneficial_owners_statement).to.deep.equal(undefined);
+        expect(data.beneficial_owners_individual).to.deep.equal([]);
+        expect(data.beneficial_owners_corporate).to.deep.equal([]);
+        expect(data.beneficial_owners_government_or_public_authority).to.deep.equal([]);
+        expect(data.managing_officers_individual).to.deep.equal([]);
+        expect(data.managing_officers_corporate).to.deep.equal([]);
+        expect(data.trusts).to.deep.equal([]);
+    });
+
     it("should return OE Due Diligence object without identity_date field if identity date is undefined", () => {
         const dataResource = mapOverseasEntity({
             overseas_entity_due_diligence: {
