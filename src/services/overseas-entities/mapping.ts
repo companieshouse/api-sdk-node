@@ -26,8 +26,8 @@ import {
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
-        presenter: { ...body.presenter },
-        entity: { ...body.entity },
+        presenter: (body.presenter && Object.keys(body.presenter).length) ? { ...body.presenter } : null,
+        entity: (body.entity && Object.keys(body.entity).length) ? { ...body.entity } : null,
         due_diligence: mapDueDiligence(body.due_diligence),
         overseas_entity_due_diligence: mapOverseasEntityDueDiligence(body.overseas_entity_due_diligence),
         beneficial_owners_statement: body.beneficial_owners_statement,
