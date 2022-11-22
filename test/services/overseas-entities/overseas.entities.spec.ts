@@ -167,8 +167,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: []
         });
 
-        expect(data.presenter).to.deep.equal({});
-        expect(data.entity).to.deep.equal({});
+        expect(data.presenter).to.deep.equal(null);
+        expect(data.entity).to.deep.equal(null);
         expect(data.due_diligence).to.deep.equal(null);
         expect(data.overseas_entity_due_diligence).to.deep.equal(null);
         expect(data.beneficial_owners_statement).to.deep.equal(undefined);
