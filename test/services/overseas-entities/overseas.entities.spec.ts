@@ -9,7 +9,7 @@ import {
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity } from "../../../src/services/overseas-entities/mapping";
+import { mapOverseasEntity, mapOverseasEntityResource } from "../../../src/services/overseas-entities/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -89,8 +89,41 @@ describe("OverseasEntityService PUT Tests suite", () => {
     });
 });
 
+describe("OverseasEntityService GET Tests suite", () => {
+    beforeEach(() => {
+        sinon.reset();
+        sinon.restore();
+    });
+
+    it("should return httpStatusCode 200 for getOverseasEntity method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getOverseasEntity(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<OverseasEntityCreated>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(mockValues.OVERSEAS_ENTITY_OBJECT_MOCK);
+    });
+
+    it("should return error 400 (Bad Request) for getOverseasEntity method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.getOverseasEntity(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        ) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+    });
+});
+
 describe("Mapping OverseasEntity Tests suite", () => {
-    it("should return OverseasEntity object from mapOverseasEntity method", async () => {
+    it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
         const data = mapOverseasEntity({
             presenter: mockValues.PRESENTER_OBJECT_MOCK,
             entity: mockValues.ENTITY_OBJECT_MOCK,
@@ -119,7 +152,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.trusts?.[0]);
     });
 
-    it("should return OverseasEntity object from mapOverseasEntity method with all empty sub fields", async () => {
+    it("should return OverseasEntityResource object from mapOverseasEntity method with all empty sub fields", async () => {
         const data = mapOverseasEntity({
             presenter: undefined,
             entity: undefined,
@@ -138,6 +171,63 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.entity).to.deep.equal(null);
         expect(data.due_diligence).to.deep.equal(null);
         expect(data.overseas_entity_due_diligence).to.deep.equal(null);
+        expect(data.beneficial_owners_statement).to.deep.equal(undefined);
+        expect(data.beneficial_owners_individual).to.deep.equal([]);
+        expect(data.beneficial_owners_corporate).to.deep.equal([]);
+        expect(data.beneficial_owners_government_or_public_authority).to.deep.equal([]);
+        expect(data.managing_officers_individual).to.deep.equal([]);
+        expect(data.managing_officers_corporate).to.deep.equal([]);
+        expect(data.trusts).to.deep.equal([]);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
+        const OE_RESOURCE = mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK;
+        const data = mapOverseasEntityResource({
+            presenter: OE_RESOURCE.presenter,
+            entity: OE_RESOURCE.entity,
+            due_diligence: OE_RESOURCE.due_diligence,
+            overseas_entity_due_diligence: OE_RESOURCE.overseas_entity_due_diligence,
+            beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
+            beneficial_owners_individual: OE_RESOURCE.beneficial_owners_individual,
+            beneficial_owners_corporate: OE_RESOURCE.beneficial_owners_corporate,
+            beneficial_owners_government_or_public_authority: OE_RESOURCE.beneficial_owners_government_or_public_authority,
+            managing_officers_individual: OE_RESOURCE.managing_officers_individual,
+            managing_officers_corporate: OE_RESOURCE.managing_officers_corporate,
+            trusts: OE_RESOURCE.trusts
+        });
+
+        expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
+        expect(data.entity).to.deep.equal(mockValues.ENTITY_OBJECT_MOCK);
+        expect(data.due_diligence).to.deep.equal(mockValues.DUE_DILIGENCE_MOCK);
+        expect(data.overseas_entity_due_diligence).to.deep.equal(mockValues.OE_DUE_DILIGENCE_MOCK);
+        expect(data.beneficial_owners_statement).to.deep.equal(BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS);
+        expect(data.beneficial_owners_individual).to.deep.equal(mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST);
+        expect(data.beneficial_owners_corporate).to.deep.equal(mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST);
+        expect(data.beneficial_owners_government_or_public_authority).to.deep.equal(mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST);
+        expect(data.managing_officers_individual).to.deep.equal(mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST);
+        expect(data.managing_officers_corporate).to.deep.equal(mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST);
+        expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
+        const data = mapOverseasEntityResource({
+            presenter: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.presenter,
+            entity: undefined,
+            due_diligence: undefined,
+            overseas_entity_due_diligence: undefined,
+            beneficial_owners_statement: undefined,
+            beneficial_owners_individual: undefined,
+            beneficial_owners_corporate: undefined,
+            beneficial_owners_government_or_public_authority: undefined,
+            managing_officers_individual: undefined,
+            managing_officers_corporate: undefined,
+            trusts: undefined
+        });
+
+        expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
+        expect(data.entity).to.deep.equal({});
+        expect(data.due_diligence).to.deep.equal({});
+        expect(data.overseas_entity_due_diligence).to.deep.equal({});
         expect(data.beneficial_owners_statement).to.deep.equal(undefined);
         expect(data.beneficial_owners_individual).to.deep.equal([]);
         expect(data.beneficial_owners_corporate).to.deep.equal([]);
