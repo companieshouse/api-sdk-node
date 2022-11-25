@@ -44,11 +44,11 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
     return {
         presenter: { ...body.presenter },
         entity: { ...body.entity },
-        due_diligence: (body.due_diligence) ? {
+        due_diligence: (body.due_diligence && Object.keys(body.due_diligence).length) ? {
             ...body.due_diligence,
             identity_date: mapIsoDate(body.due_diligence?.identity_date)
         } : {},
-        overseas_entity_due_diligence: (body.overseas_entity_due_diligence) ? {
+        overseas_entity_due_diligence: (body.overseas_entity_due_diligence && Object.keys(body.overseas_entity_due_diligence).length) ? {
             ...body.overseas_entity_due_diligence,
             identity_date: mapIsoDate(body.overseas_entity_due_diligence?.identity_date)
         } : {},
@@ -312,9 +312,10 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
     })
 }
 
-const mapIsoDate = (date: string = "--"): InputDate => {
+const mapIsoDate = (date: string): InputDate => {
+    const mapDate = date || "--";
     // Remove leading zeros, split and init variables
-    const [year, month, day] = date.replace(/\b0/g, "").split("-");
+    const [year, month, day] = mapDate.replace(/\b0/g, "").split("-");
     return { day, month, year }
 }
 

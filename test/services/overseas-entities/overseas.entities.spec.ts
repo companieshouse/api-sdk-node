@@ -237,6 +237,17 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal([]);
     });
 
+    it("should return OE Due Diligence object with identity_date as InputDate object if identity date is null", () => {
+        const dataResource = mapOverseasEntityResource({
+            overseas_entity_due_diligence: {
+                ...mockValues.OE_DUE_DILIGENCE_RESOURCE_MOCK,
+                identity_date: null as any
+            }
+        });
+
+        expect(dataResource.overseas_entity_due_diligence?.identity_date).to.deep.equal({ day: "", month: "", year: "" });
+    });
+
     it("should return OE Due Diligence object without identity_date field if identity date is undefined", () => {
         const dataResource = mapOverseasEntity({
             overseas_entity_due_diligence: {
