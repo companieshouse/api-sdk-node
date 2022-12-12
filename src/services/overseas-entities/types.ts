@@ -3,6 +3,7 @@
  */
 
 export interface OverseasEntity {
+    entity_name?: EntityName;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligence;
@@ -17,6 +18,7 @@ export interface OverseasEntity {
 }
 
 export interface OverseasEntityResource {
+    entity_name?: EntityName;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligenceResource;
@@ -40,6 +42,10 @@ export interface HttpStatusCode {
 /**
  * Overseas Entities interface used on OverseasEntity object
  */
+export interface EntityName {
+    name?: string
+}
+
 export interface Presenter {
     full_name?: string
     email?: string
