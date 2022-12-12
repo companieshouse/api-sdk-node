@@ -52,7 +52,6 @@ export interface Presenter {
 }
 
 export interface Entity {
-    name?: string
     incorporation_country?: string
     principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
