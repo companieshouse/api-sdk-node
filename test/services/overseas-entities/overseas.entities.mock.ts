@@ -54,7 +54,6 @@ export const PRESENTER_OBJECT_MOCK: Presenter = {
 };
 
 export const ENTITY_OBJECT_MOCK: Entity = {
-    name: "overseasEntityName",
     incorporation_country: "incorporationCountry",
     principal_address: ADDRESS,
     is_service_address_same_as_principal_address: 0,
