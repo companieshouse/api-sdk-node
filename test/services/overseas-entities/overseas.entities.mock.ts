@@ -11,7 +11,6 @@ import {
     DueDiligence,
     DueDiligenceResource,
     Entity,
-    EntityName,
     ManagingOfficerCorporate,
     ManagingOfficerCorporateResource,
     ManagingOfficerIndividual,
@@ -44,9 +43,7 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const ENTITY_NAME_MOCK: EntityName = {
-    name: "Entity Name"
-};
+export const ENTITY_NAME_MOCK = "Entity Name";
 
 export const PRESENTER_OBJECT_MOCK: Presenter = {
     full_name: "Full Name",

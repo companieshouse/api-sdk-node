@@ -169,7 +169,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_corporate: [],
             trusts: []
         });
-
+        expect(data.entity_name).to.deep.equal(null);
         expect(data.presenter).to.deep.equal(null);
         expect(data.entity).to.deep.equal(null);
         expect(data.due_diligence).to.deep.equal(null);
@@ -260,7 +260,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined
         });
 
-        expect(data.entity_name).to.deep.equal({});
+        expect(data.entity_name).to.deep.equal(undefined);
         expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
         expect(data.entity).to.deep.equal({});
         expect(data.due_diligence).to.deep.equal({});
