@@ -244,7 +244,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal([]);
     });
 
-
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
         const data = mapOverseasEntityResource({
             entity_name: undefined,
