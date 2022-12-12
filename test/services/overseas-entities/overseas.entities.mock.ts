@@ -8,7 +8,8 @@ import {
     BeneficialOwnerIndividual,
     BeneficialOwnerIndividualResource,
     BeneficialOwnersStatementType,
-    DueDiligence, DueDiligenceResource,
+    DueDiligence,
+    DueDiligenceResource,
     Entity,
     ManagingOfficerCorporate,
     ManagingOfficerCorporateResource,
@@ -42,13 +43,14 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
+export const ENTITY_NAME_MOCK = "Entity Name";
+
 export const PRESENTER_OBJECT_MOCK: Presenter = {
     full_name: "Full Name",
     email: "user@domain.roe"
 };
 
 export const ENTITY_OBJECT_MOCK: Entity = {
-    name: "overseasEntityName",
     incorporation_country: "incorporationCountry",
     principal_address: ADDRESS,
     is_service_address_same_as_principal_address: 0,
@@ -329,6 +331,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 }]
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
+    entity_name: ENTITY_NAME_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_MOCK,
@@ -418,6 +421,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
 }]
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
+    entity_name: ENTITY_NAME_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_RESOURCE_MOCK,

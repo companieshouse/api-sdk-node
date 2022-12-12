@@ -3,6 +3,7 @@
  */
 
 export interface OverseasEntity {
+    entity_name?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligence;
@@ -17,6 +18,7 @@ export interface OverseasEntity {
 }
 
 export interface OverseasEntityResource {
+    entity_name?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligenceResource;
@@ -40,13 +42,13 @@ export interface HttpStatusCode {
 /**
  * Overseas Entities interface used on OverseasEntity object
  */
+
 export interface Presenter {
     full_name?: string
     email?: string
 }
 
 export interface Entity {
-    name?: string
     incorporation_country?: string
     principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
