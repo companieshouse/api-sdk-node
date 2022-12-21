@@ -15,12 +15,28 @@ export interface CompanyProfileResource {
   has_charges: boolean;
   has_insolvency_history: boolean;
   registered_office_address: RegisteredOfficeAddressResource;
+  service_address?: ServiceAddressResource;
   accounts: AccountsResource;
   confirmation_statement?: ConfirmationStatementResource;
+  foreign_company_details?: ForeignCompanyDetailsResource;
+  is_on_register_in_country_formed_in?: string;
   links: LinksResource;
 }
 
-export interface RegisteredOfficeAddressResource {
+export interface ForeignCompanyDetailsResource {
+  business_activity?: string;
+  governed_by: string;
+  originating_registry?: OriginatingRegistryResource;
+  is_a_credit_finacial_institution?: boolean;
+  legal_form: string
+}
+
+export interface OriginatingRegistryResource {
+  name: string;
+  country: string
+}
+
+export interface OfficeAddressResource {
   address_line_1: string;
   address_line_2: string;
   care_of: string;
@@ -31,6 +47,9 @@ export interface RegisteredOfficeAddressResource {
   premises: string;
   region: string;
 }
+
+export interface RegisteredOfficeAddressResource extends OfficeAddressResource {};
+export interface ServiceAddressResource extends OfficeAddressResource {};
 
 export interface AccountsResource {
   next_accounts: NextAccountsResource;
@@ -54,7 +73,7 @@ export interface LinksResource {
   filing_history?: string;
 }
 
-export interface RegisteredOfficeAddress {
+export interface OfficeAddress {
   addressLineOne: string;
   addressLineTwo: string;
   careOf: string;
@@ -65,6 +84,9 @@ export interface RegisteredOfficeAddress {
   premises: string;
   region: string;
 }
+
+export interface RegisteredOfficeAddress extends OfficeAddress {};
+export interface ServiceAddress extends OfficeAddress {};
 
 export interface Accounts {
   nextAccounts: NextAccounts;
@@ -88,6 +110,19 @@ export interface Links {
   filingHistory?: string;
 }
 
+export interface ForeignCompanyDetails {
+  businessActivity?: string;
+  governedBy: string;
+  originatingRegistry?: OriginatingRegistry;
+  isACreditFinacialInstitution?: boolean;
+  legalForm: string
+}
+
+export interface OriginatingRegistry {
+  name: string;
+  country: string
+}
+
 /**
  * CompanyProfile is the interface used within this SDK.
  */
@@ -105,7 +140,10 @@ export interface CompanyProfile {
   hasCharges: boolean;
   hasInsolvencyHistory: boolean;
   registeredOfficeAddress: RegisteredOfficeAddress;
+  serviceAddress?: ServiceAddress;
   accounts: Accounts;
   confirmationStatement?: ConfirmationStatement;
+  foreignCompanyDetails?: ForeignCompanyDetails;
+  isOnRegisterInCountryFormedIn: boolean;
   links: Links;
 }

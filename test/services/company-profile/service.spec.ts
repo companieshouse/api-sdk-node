@@ -58,8 +58,19 @@ describe("company-profile", () => {
                 country: "England",
                 locality: "Greater London",
                 po_box: "None",
-                premises: undefined,
-                region: undefined
+                premises: "",
+                region: ""
+            },
+            service_address: {
+                address_line_1: "101 Test Road",
+                address_line_2: "Cambridge",
+                postal_code: "CB1 ",
+                care_of: "Someone",
+                country: "England",
+                locality: "Cambridgeshire",
+                po_box: "None",
+                premises: "",
+                region: ""
             },
             accounts: {
                 next_accounts: {
@@ -75,6 +86,7 @@ describe("company-profile", () => {
                 next_made_up_to: "2019-07-20",
                 overdue: true
             },
+            is_on_register_in_country_formed_in: "false",
             links: {
                 filing_history: "/company/00000000/filing-history"
             }
@@ -111,6 +123,15 @@ describe("company-profile", () => {
         expect(data.resource.registeredOfficeAddress.poBox).to.equal(mockResponseBody.registered_office_address.po_box);
         expect(data.resource.registeredOfficeAddress.premises).to.equal(mockResponseBody.registered_office_address.premises);
         expect(data.resource.registeredOfficeAddress.region).to.equal(mockResponseBody.registered_office_address.region);
+        expect(data.resource.serviceAddress?.addressLineOne).to.equal(mockResponseBody.service_address?.address_line_1);
+        expect(data.resource.serviceAddress?.addressLineTwo).to.equal(mockResponseBody.service_address?.address_line_2);
+        expect(data.resource.serviceAddress?.postalCode).to.equal(mockResponseBody.service_address?.postal_code);
+        expect(data.resource.serviceAddress?.careOf).to.equal(mockResponseBody.service_address?.care_of);
+        expect(data.resource.serviceAddress?.country).to.equal(mockResponseBody.service_address?.country);
+        expect(data.resource.serviceAddress?.locality).to.equal(mockResponseBody.service_address?.locality);
+        expect(data.resource.serviceAddress?.poBox).to.equal(mockResponseBody.service_address?.po_box);
+        expect(data.resource.serviceAddress?.premises).to.equal(mockResponseBody.service_address?.premises);
+        expect(data.resource.registeredOfficeAddress.region).to.equal(mockResponseBody.registered_office_address.region);
         expect(data.resource.accounts.nextAccounts.periodEndOn).to.equal(mockResponseBody.accounts.next_accounts.period_end_on);
         expect(data.resource.accounts.nextAccounts.periodStartOn).to.equal(mockResponseBody.accounts.next_accounts.period_start_on);
         expect(data.resource.accounts.nextDue).to.equal(mockResponseBody.accounts.next_due);
@@ -120,6 +141,13 @@ describe("company-profile", () => {
         expect(data.resource.confirmationStatement.nextMadeUpTo).to.equal(mockResponseBody.confirmation_statement.next_made_up_to);
         expect(data.resource.confirmationStatement.overdue).to.equal(mockResponseBody.confirmation_statement.overdue);
         expect(data.resource.links.filingHistory).to.equal(mockResponseBody.links.filing_history);
+        expect(data.resource?.foreignCompanyDetails?.governedBy).to.equal(mockResponseBody.foreign_company_details?.governed_by);
+        expect(data.resource?.foreignCompanyDetails?.legalForm).to.equal(mockResponseBody.foreign_company_details?.legal_form);
+        expect(data.resource?.foreignCompanyDetails?.businessActivity).to.equal(mockResponseBody.foreign_company_details?.business_activity);
+        expect(data.resource?.foreignCompanyDetails?.isACreditFinacialInstitution).to.equal(mockResponseBody.foreign_company_details?.is_a_credit_finacial_institution);
+        expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.name).to.equal(mockResponseBody.foreign_company_details?.originating_registry?.name);
+        expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.country).to.equal(mockResponseBody.foreign_company_details?.originating_registry?.country);
+        expect(data.resource?.isOnRegisterInCountryFormedIn).to.equal(mockResponseBody.is_on_register_in_country_formed_in);
     });
 
     it("maps the company field data items correctly when registered office, accounts, confirmation statement, links, and super_secure_pscs are missing", async () => {
@@ -136,9 +164,12 @@ describe("company-profile", () => {
             has_charges: false,
             has_insolvency_history: true,
             registered_office_address: undefined,
+            service_address: undefined,
+            foreign_company_details: undefined,
             accounts: undefined,
             confirmation_statement: undefined,
-            links: undefined
+            links: undefined,
+            is_on_register_in_country_formed_in: undefined
         });
 
         const mockGetResponse = {
@@ -171,6 +202,15 @@ describe("company-profile", () => {
         expect(data.resource.registeredOfficeAddress.poBox).to.be.undefined;
         expect(data.resource.registeredOfficeAddress.premises).to.be.undefined;
         expect(data.resource.registeredOfficeAddress.region).to.be.undefined;
+        expect(data.resource.serviceAddress?.addressLineOne).to.be.undefined;
+        expect(data.resource.serviceAddress?.addressLineTwo).to.be.undefined;
+        expect(data.resource.serviceAddress?.postalCode).to.be.undefined;
+        expect(data.resource.serviceAddress?.careOf).to.be.undefined;
+        expect(data.resource.serviceAddress?.country).to.be.undefined;
+        expect(data.resource.serviceAddress?.locality).to.be.undefined;
+        expect(data.resource.serviceAddress?.poBox).to.be.undefined;
+        expect(data.resource.serviceAddress?.premises).to.be.undefined;
+        expect(data.resource.serviceAddress?.region).to.be.undefined;
         expect(data.resource.accounts.nextAccounts.periodEndOn).to.be.undefined;
         expect(data.resource.accounts.nextAccounts.periodStartOn).to.be.undefined;
         expect(data.resource.accounts.nextDue).to.be.undefined;
@@ -179,6 +219,13 @@ describe("company-profile", () => {
         expect(data.resource.confirmationStatement.nextDue).to.be.undefined;
         expect(data.resource.confirmationStatement.nextMadeUpTo).to.be.undefined;
         expect(data.resource.confirmationStatement.overdue).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.businessActivity).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.governedBy).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.businessActivity).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.isACreditFinacialInstitution).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.name).to.be.undefined;
+        expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.country).to.be.undefined;
+        expect(data.resource?.isOnRegisterInCountryFormedIn).to.be.undefined;
         expect(data.resource.links.filingHistory).to.be.undefined;
         expect(data.resource.hasSuperSecurePscs).to.be.undefined;
     });
