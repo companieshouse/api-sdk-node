@@ -1,4 +1,4 @@
-export const fullProfile = {
+export const fullCompanyProfileMock = {
     company_name: "HELLO LTD",
     company_number: "88",
     company_status: "liquidation",
@@ -63,7 +63,7 @@ export const fullProfile = {
     }
 };
 
-export const registeredAddressEtcMissing = {
+export const registeredAddressEtcMissingCompanyProfileMock = {
     company_name: "HELLO LTD",
     company_number: "88",
     company_status: "liquidation",
@@ -84,7 +84,7 @@ export const registeredAddressEtcMissing = {
     is_on_register_in_country_formed_in: undefined
 };
 
-export const foreignCompanyDetailsEtcMissing = {
+export const foreignCompanyDetailsEtcMissingCompanyProfileMock = {
     company_name: "HELLO LTD",
     company_number: "88",
     company_status: "liquidation",

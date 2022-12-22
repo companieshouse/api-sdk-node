@@ -6,7 +6,7 @@ import chaiHttp from "chai-http";
 import CompanyProfileService from "../../../src/services/company-profile/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { CompanyProfileResource, CompanyProfile } from "../../../src/services/company-profile/types";
-import { fullProfile, registeredAddressEtcMissing, foreignCompanyDetailsEtcMissing } from "./mocks";
+import { fullCompanyProfileMock, registeredAddressEtcMissingCompanyProfileMock, foreignCompanyDetailsEtcMissingCompanyProfileMock } from "./mocks";
 
 const expect = chai.expect;
 
@@ -39,7 +39,7 @@ describe("company-profile", () => {
     });
 
     it("maps the company field data items correctly", async () => {
-        const mockResponseBody : CompanyProfileResource = (fullProfile);
+        const mockResponseBody : CompanyProfileResource = fullCompanyProfileMock;
 
         const mockGetResponse = {
             status: 200,
@@ -102,7 +102,7 @@ describe("company-profile", () => {
     });
 
     it("maps the company field data items correctly when registered office, accounts, confirmation statement, links, and super_secure_pscs are missing", async () => {
-        const mockResponseBody = registeredAddressEtcMissing;
+        const mockResponseBody = registeredAddressEtcMissingCompanyProfileMock;
 
         const mockGetResponse = {
             status: 200,
@@ -165,7 +165,7 @@ describe("company-profile", () => {
     });
 
     it("maps the company field data items correctly when foreign company details, service address, is on register of country formed in are missing", async () => {
-        const mockResponseBody = foreignCompanyDetailsEtcMissing;
+        const mockResponseBody = foreignCompanyDetailsEtcMissingCompanyProfileMock;
 
         const mockGetResponse = {
             status: 200,
