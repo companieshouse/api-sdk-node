@@ -42,7 +42,7 @@ export default class CompanyProfileService {
         const foreignCompanyDetailsResource = body.foreign_company_details as ForeignCompanyDetailsResource;
 
         const originatingRegistryResource = foreignCompanyDetailsResource?.originating_registry;
-        let originatingRegistry = null;
+        let originatingRegistry;
         if (originatingRegistryResource !== undefined && originatingRegistryResource !== null) {
             originatingRegistry = {
                 name: originatingRegistryResource.name,
@@ -50,7 +50,7 @@ export default class CompanyProfileService {
             };
         }
 
-        let foreignCompanyDetails = null;
+        let foreignCompanyDetails;
         if (foreignCompanyDetailsResource !== undefined && foreignCompanyDetailsResource !== null) {
             foreignCompanyDetails = {
                 businessActivity: foreignCompanyDetailsResource?.business_activity,

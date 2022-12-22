@@ -80,6 +80,16 @@ describe("company-profile", () => {
                 next_due: "2019-07-01",
                 overdue: true
             },
+            foreign_company_details: {
+                business_activity: "Trading",
+                governed_by: "Corporation Law Of Australia",
+                legal_form: "Public Company Limited By Shares",
+                originating_registry: {
+                    name: "State Of Victoria - Australia",
+                    country: "Australia"
+                },
+                is_a_credit_finacial_institution: false
+            },
             confirmation_statement: {
                 last_made_up_to: "2018-08-24",
                 next_due: "2019-08-24",
