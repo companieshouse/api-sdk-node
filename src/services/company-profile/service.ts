@@ -42,31 +42,25 @@ export default class CompanyProfileService {
         const foreignCompanyDetailsResource = body.foreign_company_details as ForeignCompanyDetailsResource;
 
         const originatingRegistryResource = foreignCompanyDetailsResource?.originating_registry;
-        let originatingRegistry;
-        if (originatingRegistryResource !== undefined && originatingRegistryResource !== null) {
-            originatingRegistry = {
-                name: originatingRegistryResource.name,
-                country: originatingRegistryResource.country
-            };
-        }
+        const originatingRegistry = (Object.keys(originatingRegistryResource || {}).length)
+            ? { ...originatingRegistryResource }
+            : {};
 
-        let foreignCompanyDetails;
-        if (foreignCompanyDetailsResource !== undefined && foreignCompanyDetailsResource !== null) {
-            foreignCompanyDetails = {
+        const foreignCompanyDetails = (Object.keys(foreignCompanyDetailsResource || {}).length)
+            ? {
                 businessActivity: foreignCompanyDetailsResource?.business_activity,
                 governedBy: foreignCompanyDetailsResource?.governed_by,
                 originatingRegistry: originatingRegistry,
                 isACreditFinacialInstitution: foreignCompanyDetailsResource?.is_a_credit_finacial_institution,
                 legalForm: foreignCompanyDetailsResource?.legal_form
-            };
-        }
+            }
+            : {};
 
         const links = body.links as LinksResource;
 
-        let isOnRegisterInCountryFormedIn: boolean;
-        if (body.is_on_register_in_country_formed_in !== undefined && body.is_on_register_in_country_formed_in !== null) {
-            isOnRegisterInCountryFormedIn = body.is_on_register_in_country_formed_in === "true";
-        }
+        const isOnRegisterInCountryFormedIn = (body.is_on_register_in_country_formed_in)
+            ? body.is_on_register_in_country_formed_in === "true"
+            : false;
 
         resource.resource = {
             companyName: body.company_name,

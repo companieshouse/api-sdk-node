@@ -25,15 +25,15 @@ export interface CompanyProfileResource {
 
 export interface ForeignCompanyDetailsResource {
   business_activity?: string;
-  governed_by: string;
+  governed_by?: string;
   originating_registry?: OriginatingRegistryResource;
   is_a_credit_finacial_institution?: boolean;
-  legal_form: string
+  legal_form?: string
 }
 
 export interface OriginatingRegistryResource {
-  name: string;
-  country: string
+  name?: string;
+  country?: string
 }
 
 export interface OfficeAddressResource {
@@ -112,15 +112,15 @@ export interface Links {
 
 export interface ForeignCompanyDetails {
   businessActivity?: string;
-  governedBy: string;
+  governedBy?: string;
   originatingRegistry?: OriginatingRegistry;
   isACreditFinacialInstitution?: boolean;
-  legalForm: string
+  legalForm?: string
 }
 
 export interface OriginatingRegistry {
-  name: string;
-  country: string
+  name?: string;
+  country?: string
 }
 
 /**
