@@ -63,7 +63,7 @@ export default class CompanyProfileService {
 
         const links = body.links as LinksResource;
 
-        let isOnRegisterInCountryFormedIn: boolean = undefined;
+        let isOnRegisterInCountryFormedIn: boolean;
         if (body.is_on_register_in_country_formed_in !== undefined && body.is_on_register_in_country_formed_in !== null) {
             isOnRegisterInCountryFormedIn = body.is_on_register_in_country_formed_in === "true";
         }
