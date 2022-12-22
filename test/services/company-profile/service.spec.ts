@@ -147,7 +147,7 @@ describe("company-profile", () => {
         expect(data.resource?.foreignCompanyDetails?.isACreditFinacialInstitution).to.equal(mockResponseBody.foreign_company_details?.is_a_credit_finacial_institution);
         expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.name).to.equal(mockResponseBody.foreign_company_details?.originating_registry?.name);
         expect(data.resource?.foreignCompanyDetails?.originatingRegistry?.country).to.equal(mockResponseBody.foreign_company_details?.originating_registry?.country);
-        expect(data.resource?.isOnRegisterInCountryFormedIn).to.equal(mockResponseBody.is_on_register_in_country_formed_in);
+        expect(data.resource?.isOnRegisterInCountryFormedIn).to.equal(mockResponseBody.is_on_register_in_country_formed_in === "true");
     });
 
     it("maps the company field data items correctly when registered office, accounts, confirmation statement, links, and super_secure_pscs are missing", async () => {

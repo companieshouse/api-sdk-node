@@ -63,6 +63,11 @@ export default class CompanyProfileService {
 
         const links = body.links as LinksResource;
 
+        let isOnRegisterInCountryFormedIn: boolean = undefined;
+        if (body.is_on_register_in_country_formed_in !== undefined && body.is_on_register_in_country_formed_in !== null) {
+            isOnRegisterInCountryFormedIn = body.is_on_register_in_country_formed_in === "true";
+        }
+
         resource.resource = {
             companyName: body.company_name,
             companyNumber: body.company_number,
@@ -113,7 +118,7 @@ export default class CompanyProfileService {
                 overdue: confirmationStatement?.overdue
             },
             foreignCompanyDetails: foreignCompanyDetails,
-            isOnRegisterInCountryFormedIn: body.is_on_register_in_country_formed_in === "true",
+            isOnRegisterInCountryFormedIn: isOnRegisterInCountryFormedIn,
             links: {
                 filingHistory: links?.filing_history
             }

@@ -144,6 +144,6 @@ export interface CompanyProfile {
   accounts: Accounts;
   confirmationStatement?: ConfirmationStatement;
   foreignCompanyDetails?: ForeignCompanyDetails;
-  isOnRegisterInCountryFormedIn: boolean;
+  isOnRegisterInCountryFormedIn?: boolean;
   links: Links;
 }
