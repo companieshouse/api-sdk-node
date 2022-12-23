@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../http";
 import {
     CompanyProfile, CompanyProfileResource, RegisteredOfficeAddressResource, AccountsResource,
-    NextAccountsResource, ConfirmationStatementResource, LinksResource
+    NextAccountsResource, ConfirmationStatementResource, LinksResource, ForeignCompanyDetailsResource, ServiceAddressResource
 } from "./types";
 import Resource from "../resource";
 
@@ -31,6 +31,7 @@ export default class CompanyProfileService {
         const body = resp.body as CompanyProfileResource;
 
         const roa = body.registered_office_address as RegisteredOfficeAddressResource;
+        const serviceAddress = body.service_address as ServiceAddressResource;
 
         const acc = body.accounts as AccountsResource;
 
@@ -38,7 +39,28 @@ export default class CompanyProfileService {
 
         const confirmationStatement = body.confirmation_statement as ConfirmationStatementResource;
 
+        const foreignCompanyDetailsResource = body.foreign_company_details as ForeignCompanyDetailsResource;
+
+        const originatingRegistryResource = foreignCompanyDetailsResource?.originating_registry;
+        const originatingRegistry = (Object.keys(originatingRegistryResource || {}).length)
+            ? { ...originatingRegistryResource }
+            : {};
+
+        const foreignCompanyDetails = (Object.keys(foreignCompanyDetailsResource || {}).length)
+            ? {
+                businessActivity: foreignCompanyDetailsResource?.business_activity,
+                governedBy: foreignCompanyDetailsResource?.governed_by,
+                originatingRegistry: originatingRegistry,
+                isACreditFinacialInstitution: foreignCompanyDetailsResource?.is_a_credit_finacial_institution,
+                legalForm: foreignCompanyDetailsResource?.legal_form
+            }
+            : {};
+
         const links = body.links as LinksResource;
+
+        const isOnRegisterInCountryFormedIn = (body.is_on_register_in_country_formed_in)
+            ? body.is_on_register_in_country_formed_in === "true"
+            : false;
 
         resource.resource = {
             companyName: body.company_name,
@@ -64,6 +86,17 @@ export default class CompanyProfileService {
                 premises: roa?.premises,
                 region: roa?.region
             },
+            serviceAddress: {
+                addressLineOne: serviceAddress?.address_line_1,
+                addressLineTwo: serviceAddress?.address_line_2,
+                careOf: serviceAddress?.care_of,
+                country: serviceAddress?.country,
+                locality: serviceAddress?.locality,
+                poBox: serviceAddress?.po_box,
+                postalCode: serviceAddress?.postal_code,
+                premises: serviceAddress?.premises,
+                region: serviceAddress?.region
+            },
             accounts: {
                 nextAccounts: {
                     periodEndOn: nextAccs?.period_end_on,
@@ -78,6 +111,8 @@ export default class CompanyProfileService {
                 nextMadeUpTo: confirmationStatement?.next_made_up_to,
                 overdue: confirmationStatement?.overdue
             },
+            foreignCompanyDetails: foreignCompanyDetails,
+            isOnRegisterInCountryFormedIn: isOnRegisterInCountryFormedIn,
             links: {
                 filingHistory: links?.filing_history
             }
