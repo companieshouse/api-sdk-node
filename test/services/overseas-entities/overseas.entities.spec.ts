@@ -126,6 +126,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
     it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
         const data = mapOverseasEntity({
             entity_name: mockValues.ENTITY_NAME_MOCK,
+            oe_number: mockValues.ENTITY_NUMBER_MOCK,
             presenter: mockValues.PRESENTER_OBJECT_MOCK,
             entity: mockValues.ENTITY_OBJECT_MOCK,
             due_diligence: mockValues.DUE_DILIGENCE_MOCK,
@@ -140,6 +141,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
+        expect(data.oe_number).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.oe_number);
         expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.presenter);
         expect(data.entity).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity);
         expect(data.due_diligence).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.due_diligence);
@@ -157,6 +159,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
     it("should return OverseasEntityResource object from mapOverseasEntity method with all empty sub fields", async () => {
         const data = mapOverseasEntity({
             entity_name: undefined,
+            oe_number: undefined,
             presenter: undefined,
             entity: undefined,
             due_diligence: undefined,
@@ -170,6 +173,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: []
         });
         expect(data.entity_name).to.deep.equal(null);
+        expect(data.oe_number).to.deep.equal(null);
         expect(data.presenter).to.deep.equal(null);
         expect(data.entity).to.deep.equal(null);
         expect(data.due_diligence).to.deep.equal(null);
@@ -187,6 +191,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const OE_RESOURCE = mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK;
         const data = mapOverseasEntityResource({
             entity_name: OE_RESOURCE.entity_name,
+            oe_number: OE_RESOURCE.oe_number,
             presenter: OE_RESOURCE.presenter,
             entity: OE_RESOURCE.entity,
             due_diligence: OE_RESOURCE.due_diligence,
@@ -201,6 +206,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_MOCK);
+        expect(data.oe_number).to.deep.equal(mockValues.ENTITY_NUMBER_MOCK);
         expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
         expect(data.entity).to.deep.equal(mockValues.ENTITY_OBJECT_MOCK);
         expect(data.due_diligence).to.deep.equal(mockValues.DUE_DILIGENCE_MOCK);
@@ -217,6 +223,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
     it("should return OverseasEntity object from mapOverseasEntityResource method with just EntityName data", async () => {
         const data = mapOverseasEntityResource({
             entity_name: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name,
+            oe_number: undefined,
             presenter: undefined,
             entity: undefined,
             due_diligence: undefined,
@@ -231,6 +238,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_MOCK);
+        expect(data.oe_number).to.deep.equal(undefined);
         expect(data.presenter).to.deep.equal({});
         expect(data.entity).to.deep.equal({});
         expect(data.due_diligence).to.deep.equal({});
