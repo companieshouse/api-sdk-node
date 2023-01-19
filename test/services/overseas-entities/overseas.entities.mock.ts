@@ -334,7 +334,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     entity_name: ENTITY_NAME_MOCK,
-    oe_number: ENTITY_NUMBER_MOCK,
+    entity_number: ENTITY_NUMBER_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_MOCK,
@@ -425,7 +425,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     entity_name: ENTITY_NAME_MOCK,
-    oe_number: ENTITY_NUMBER_MOCK,
+    entity_number: ENTITY_NUMBER_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
     due_diligence: DUE_DILIGENCE_RESOURCE_MOCK,

@@ -3,7 +3,7 @@
  */
 export interface OverseasEntity {
     entity_name?: string;
-    oe_number?: string;
+    entity_number?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligence;
@@ -18,7 +18,7 @@ export interface OverseasEntity {
 }
 export interface OverseasEntityResource {
     entity_name?: string;
-    oe_number?: string;
+    entity_number?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligenceResource;

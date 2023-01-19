@@ -15,7 +15,7 @@ exports.mapOverseasEntityResource = exports.mapOverseasEntity = void 0;
 const mapOverseasEntity = (body) => {
     return {
         entity_name: (body.entity_name) ? body.entity_name : null,
-        oe_number: (body.oe_number) ? body.oe_number : null,
+        entity_number: (body.entity_number) ? body.entity_number : null,
         presenter: (body.presenter && Object.keys(body.presenter).length) ? Object.assign({}, body.presenter) : null,
         entity: (body.entity && Object.keys(body.entity).length) ? Object.assign({}, body.entity) : null,
         due_diligence: mapDueDiligence(body.due_diligence),
@@ -34,7 +34,7 @@ const mapOverseasEntityResource = (body) => {
     var _a, _b;
     return {
         entity_name: body.entity_name,
-        oe_number: body.oe_number,
+        entity_number: body.entity_number,
         presenter: Object.assign({}, body.presenter),
         entity: Object.assign({}, body.entity),
         due_diligence: (body.due_diligence && Object.keys(body.due_diligence).length) ? Object.assign(Object.assign({}, body.due_diligence), { identity_date: mapIsoDate((_a = body.due_diligence) === null || _a === void 0 ? void 0 : _a.identity_date) }) : {},
