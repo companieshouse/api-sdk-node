@@ -4,6 +4,7 @@
 
 export interface OverseasEntity {
     entity_name?: string;
+    entity_number?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligence;
@@ -19,6 +20,7 @@ export interface OverseasEntity {
 
 export interface OverseasEntityResource {
     entity_name?: string;
+    entity_number?: string;
     presenter?: Presenter;
     entity?: Entity;
     due_diligence?: DueDiligenceResource;
@@ -31,6 +33,7 @@ export interface OverseasEntityResource {
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trusts?: TrustResource[];
 }
+
 export interface OverseasEntityCreated {
     id: string
 }
