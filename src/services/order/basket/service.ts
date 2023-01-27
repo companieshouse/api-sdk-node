@@ -150,11 +150,4 @@ export default class BasketService {
         resource.resource = Mapping.camelCaseKeys<Item>(body, BasketService.EXCLUDED_FIELDS_SINGLE_ITEM_BASKET);
         return resource;
     }
-
-    public async processFreeOrder (checkoutId: string): Promise<Resource<any>> {
-        const response = await this.client.httpPost("/basket/checkouts/" + checkoutId + "/process-free-order");
-        return {
-            httpStatusCode: response.status
-        };
-    }
 }
