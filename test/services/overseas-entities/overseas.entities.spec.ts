@@ -125,7 +125,7 @@ describe("OverseasEntityService GET Tests suite", () => {
 describe("Mapping OverseasEntity Tests suite", () => {
     it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
         const data = mapOverseasEntity({
-            entity_name: mockValues.ENTITY_NAME_MOCK,
+            entity_name: mockValues.ENTITY_NAME_FIELD_MOCK,
             entity_number: mockValues.ENTITY_NUMBER_MOCK,
             presenter: mockValues.PRESENTER_OBJECT_MOCK,
             entity: mockValues.ENTITY_OBJECT_MOCK,
@@ -205,7 +205,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: OE_RESOURCE.trusts
         });
 
-        expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_MOCK);
+        expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
         expect(data.entity_number).to.deep.equal(mockValues.ENTITY_NUMBER_MOCK);
         expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
         expect(data.entity).to.deep.equal(mockValues.ENTITY_OBJECT_MOCK);
@@ -237,7 +237,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined
         });
 
-        expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_MOCK);
+        expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
         expect(data.entity_number).to.deep.equal(undefined);
         expect(data.presenter).to.deep.equal({});
         expect(data.entity).to.deep.equal({});
@@ -269,7 +269,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined
         });
 
-        expect(data.entity_name).to.deep.equal(undefined);
+        expect(data.entity_name).to.deep.equal(null);
         expect(data.entity_number).to.deep.equal(mockValues.ENTITY_NUMBER_MOCK);
         expect(data.presenter).to.deep.equal({});
         expect(data.entity).to.deep.equal({});
@@ -300,7 +300,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined
         });
 
-        expect(data.entity_name).to.deep.equal(undefined);
+        expect(data.entity_name).to.deep.equal(null);
         expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
         expect(data.entity).to.deep.equal({});
         expect(data.due_diligence).to.deep.equal({});
