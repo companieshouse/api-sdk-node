@@ -338,7 +338,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 }]
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
-    entity_name: "Entity Name",
+    entity_name: ENTITY_NAME_FIELD_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
