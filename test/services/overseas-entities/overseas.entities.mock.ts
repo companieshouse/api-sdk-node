@@ -32,6 +32,7 @@ import {
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource
 } from "../../../src/services/overseas-entities";
+import { EntityName } from "../../../dist/services/overseas-entities";
 
 export const ADDRESS: Address = {
     property_name_number: "property name 1",
@@ -43,7 +44,11 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const ENTITY_NAME_MOCK = "Entity Name";
+export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
+    name: "Entity Name"
+};
+
+export const ENTITY_NAME_FIELD_MOCK = "Entity Name";
 
 export const ENTITY_NUMBER_MOCK = "Entity Number";
 
@@ -333,7 +338,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 }]
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
-    entity_name: ENTITY_NAME_MOCK,
+    entity_name: ENTITY_NAME_FIELD_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,
@@ -424,7 +429,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
 }]
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
-    entity_name: ENTITY_NAME_MOCK,
+    entity_name: ENTITY_NAME_BLOCK_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
     presenter: PRESENTER_OBJECT_MOCK,
     entity: ENTITY_OBJECT_MOCK,

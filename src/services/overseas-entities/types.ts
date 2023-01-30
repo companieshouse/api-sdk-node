@@ -19,7 +19,7 @@ export interface OverseasEntity {
 }
 
 export interface OverseasEntityResource {
-    entity_name?: string;
+    entity_name?: EntityName;
     entity_number?: string;
     presenter?: Presenter;
     entity?: Entity;
@@ -45,6 +45,10 @@ export interface HttpStatusCode {
 /**
  * Overseas Entities interface used on OverseasEntity object
  */
+
+export interface EntityName {
+    name?: string
+}
 
 export interface Presenter {
     full_name?: string
