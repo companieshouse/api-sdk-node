@@ -8,3 +8,4 @@ test.ts
 /coverage
 .settings
 dist/
+src/services/.DS_Store
