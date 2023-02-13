@@ -4,7 +4,7 @@ import { RequestClient } from "../../../src/http";
 import IHttpClient from "../../../src/http/http-client";
 import {
     AccountValidator,
-    AccountValidatorRequest,
+    AccountValidatorRequest
 } from "../../../src/services/account-validator";
 
 describe("AccountValidator", () => {
@@ -14,7 +14,7 @@ describe("AccountValidator", () => {
     beforeEach(() => {
         httpClient = new RequestClient({
             baseUrl: "URL-NOT-USED",
-            oauthToken: "TOKEN-NOT-USED",
+            oauthToken: "TOKEN-NOT-USED"
         });
         accountValidator = new AccountValidator(httpClient);
     });
@@ -24,11 +24,11 @@ describe("AccountValidator", () => {
             const expectedResponse = { resource: { data: "file data" } };
             const request: AccountValidatorRequest = {
                 fileName: "file.xhtml",
-                id: "fileId",
+                id: "fileId"
             };
             const postStub = sinon.stub(httpClient, "httpPost").resolves({
                 status: 200,
-                body: expectedResponse,
+                body: expectedResponse
             });
 
             const result = await accountValidator.postFileForValidation(
@@ -38,7 +38,7 @@ describe("AccountValidator", () => {
             expect(postStub.calledOnceWith("/validate", request)).to.be.true;
             expect(result).to.deep.equal({
                 httpStatusCode: 200,
-                resource: expectedResponse,
+                resource: expectedResponse
             });
 
             postStub.restore();
@@ -48,11 +48,11 @@ describe("AccountValidator", () => {
             const expectedResponse = { errors: [] };
             const request: AccountValidatorRequest = {
                 fileName: "file.xhtml",
-                id: "fileId",
+                id: "fileId"
             };
             const postStub = sinon.stub(httpClient, "httpPost").resolves({
                 status: 400,
-                body: expectedResponse,
+                body: expectedResponse
             });
 
             const result = await accountValidator.postFileForValidation(
@@ -62,7 +62,7 @@ describe("AccountValidator", () => {
             expect(postStub.calledOnceWith("/validate", request)).to.be.true;
             expect(result).to.deep.equal({
                 httpStatusCode: 400,
-                errors: [],
+                errors: []
             });
 
             postStub.restore();
@@ -75,7 +75,7 @@ describe("AccountValidator", () => {
             const expectedResponse = { resource: { data: "file data" } };
             const getStub = sinon.stub(httpClient, "httpGet").resolves({
                 status: 200,
-                body: expectedResponse,
+                body: expectedResponse
             });
 
             const result = await accountValidator.getFileValidationStatus(
@@ -86,7 +86,7 @@ describe("AccountValidator", () => {
                 .true;
             expect(result).to.deep.equal({
                 httpStatusCode: 200,
-                resource: expectedResponse,
+                resource: expectedResponse
             });
 
             getStub.restore();
@@ -97,7 +97,7 @@ describe("AccountValidator", () => {
             const expectedResponse = { errors: [] };
             const getStub = sinon.stub(httpClient, "httpGet").resolves({
                 status: 400,
-                body: expectedResponse,
+                body: expectedResponse
             });
 
             const result = await accountValidator.getFileValidationStatus(
@@ -108,7 +108,7 @@ describe("AccountValidator", () => {
                 .true;
             expect(result).to.deep.equal({
                 httpStatusCode: 400,
-                errors: [],
+                errors: []
             });
 
             getStub.restore();
