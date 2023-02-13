@@ -2,20 +2,24 @@ export interface AccountValidatorRequest {
     fileName: string;
     id: string;
 }
-export interface AccountValidatorResponse {
-    requestStatus: RequestStatus 
+
+export interface Data {
+    balanceSheetDate: string;
+    accountsType: string;
+    companieshouseRegisteredNumber: string;
 }
 
-export interface RequestStatus {
-    fileId: string;
-    status: string;
-    result: ValidationResult; 
-}
-
-export interface ValidationResult {
+export interface Result {
     errorMessages: string[];
-    data: string;
-    validationStatus: ValidationStatus; 
+    data: Data;
+    validationStatus: ValidationStatus;
 }
 
-type ValidationStatus = "OK" | "FAILED";
+export interface AccountValidatorResponse {
+    status: RequestStatus;
+    result: Result;
+    fileId: string;
+}
+
+type RequestStatus = "complete" | "pending";
+type ValidationStatus = "OK" | "FAILED"
