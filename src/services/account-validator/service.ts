@@ -1,5 +1,5 @@
 import { AccountValidatorRequest, AccountValidatorResponse } from "./types";
-import { HttpResponse, IHttpClient } from "../../http";
+import { IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 export default class {
