@@ -3,13 +3,13 @@ import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 export default class {
-    constructor(private readonly client: IHttpClient) {}
+    constructor (private readonly client: IHttpClient) {}
     /**
      * POST method to submit a file for validation
      * @param accountValidatorRequest
      * @returns
      */
-    public async postFileForValidation(
+    public async postFileForValidation (
         accountValidatorRequest: AccountValidatorRequest
     ): Promise<Resource<AccountValidatorResponse> | ApiErrorResponse> {
         const resp = await this.client.httpPost(
@@ -20,13 +20,13 @@ export default class {
         if (resp.status !== 200) {
             return {
                 httpStatusCode: resp.status,
-                errors: [],
+                errors: []
             };
         }
 
         return {
             httpStatusCode: resp.status,
-            resource: Mapping.camelCaseKeys(resp.body),
+            resource: Mapping.camelCaseKeys(resp.body)
         };
     }
 
@@ -35,7 +35,7 @@ export default class {
      * @param fileId
      * @returns
      */
-    public async getFileValidationStatus(
+    public async getFileValidationStatus (
         fileId: string
     ): Promise<Resource<AccountValidatorResponse> | ApiErrorResponse> {
         const resp = await this.client.httpGet(`/validate/check/${fileId}`);
@@ -43,13 +43,13 @@ export default class {
         if (resp.status !== 200) {
             return {
                 httpStatusCode: resp.status,
-                errors: [],
+                errors: []
             };
         }
 
         return {
             httpStatusCode: resp.status,
-            resource: Mapping.camelCaseKeys(resp.body),
+            resource: Mapping.camelCaseKeys(resp.body)
         };
     }
 }

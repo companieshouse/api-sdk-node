@@ -5,7 +5,7 @@ import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, CheckoutService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
-import AccountValidatorService  from "./services/account-validator/service";
+import AccountValidatorService from "./services/account-validator/service";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
 import AdvancedSearchService from "./services/search/advanced-search/service";
