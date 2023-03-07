@@ -26,7 +26,8 @@ import {
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
     return {
-        entity_name: (body.entity_name) ? body.entity_name : null,
+        entity_name: (body.entity_name) ? { name: body.entity_name } : null,
+        entity_number: (body.entity_number) ? body.entity_number : null,
         presenter: (body.presenter && Object.keys(body.presenter).length) ? { ...body.presenter } : null,
         entity: (body.entity && Object.keys(body.entity).length) ? { ...body.entity } : null,
         due_diligence: mapDueDiligence(body.due_diligence),
@@ -43,7 +44,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
 
 export const mapOverseasEntityResource = (body: OverseasEntityResource): OverseasEntity => {
     return {
-        entity_name: body.entity_name,
+        entity_name: (body.entity_name) ? body.entity_name.name : null,
+        entity_number: body.entity_number,
         presenter: { ...body.presenter },
         entity: { ...body.entity },
         due_diligence: (body.due_diligence && Object.keys(body.due_diligence).length) ? {
