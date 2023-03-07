@@ -317,6 +317,17 @@ export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
     forename: "joe",
     other_forenames: "jim",
     surname: "bloggs",
+    corporate_indicator: false,
+    notified_date_day: "13",
+    notified_date_month: "11",
+    notified_date_year: "1985",
+    ceased_date_day: "14",
+    ceased_date_month: "12",
+    ceased_date_year: "1986"
+},
+{
+    corporate_indicator: true,
+    corporate_name: "corp_former_bo",
     notified_date_day: "13",
     notified_date_month: "11",
     notified_date_year: "1985",
@@ -415,7 +426,16 @@ export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerR
     other_forenames: "jim",
     surname: "bloggs",
     notified_date: "1985-11-13",
-    ceased_date: "1986-12-14"
+    ceased_date: "1986-12-14",
+    corporate_indicator: false
+
+},
+{
+    notified_date: "1985-11-13",
+    ceased_date: "1986-12-14",
+    corporate_indicator: true,
+    corporate_name: "corp_former_bo"
+
 }]
 
 export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
