@@ -28,7 +28,8 @@ export interface ForeignCompanyDetailsResource {
   governed_by?: string;
   originating_registry?: OriginatingRegistryResource;
   is_a_credit_finacial_institution?: boolean;
-  legal_form?: string
+  legal_form?: string;
+  registration_number?: string;
 }
 
 export interface OriginatingRegistryResource {
@@ -115,7 +116,8 @@ export interface ForeignCompanyDetails {
   governedBy?: string;
   originatingRegistry?: OriginatingRegistry;
   isACreditFinacialInstitution?: boolean;
-  legalForm?: string
+  legalForm?: string;
+  registrationNumber?: string;
 }
 
 export interface OriginatingRegistry {

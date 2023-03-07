@@ -20,8 +20,10 @@ export interface CompanyPersonWithSignificantControlResource {
   name: string,
   name_elements: NameElementsResource,
   nationality: string,
+  nationality_other?: string,
   natures_of_control: string[],
   notified_on: string,
+  is_sanctioned?: boolean,
   identification?: IdentificationResource
 };
 
@@ -85,8 +87,10 @@ export interface CompanyPersonWithSignificantControl {
   name: string,
   nameElements: NameElements,
   nationality: string,
+  nationalityOther?: string,
   naturesOfControl: string[],
   notifiedOn: string,
+  isSanctioned?: boolean,
   identification?: Identification
 };
 

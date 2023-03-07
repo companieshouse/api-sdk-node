@@ -94,6 +94,7 @@ describe("company-profile", () => {
         expect(resource.links.filingHistory).to.equal(mockResponseBody.links.filing_history);
         expect(resource.foreignCompanyDetails?.governedBy).to.equal(mockResponseBody.foreign_company_details?.governed_by);
         expect(resource.foreignCompanyDetails?.legalForm).to.equal(mockResponseBody.foreign_company_details?.legal_form);
+        expect(resource.foreignCompanyDetails?.registrationNumber).to.equal(mockResponseBody.foreign_company_details?.registration_number);
         expect(resource.foreignCompanyDetails?.businessActivity).to.equal(mockResponseBody.foreign_company_details?.business_activity);
         expect(resource.foreignCompanyDetails?.isACreditFinacialInstitution).to.equal(mockResponseBody.foreign_company_details?.is_a_credit_finacial_institution);
         expect(resource.foreignCompanyDetails?.originatingRegistry?.name).to.equal(mockResponseBody.foreign_company_details?.originating_registry?.name);
@@ -155,6 +156,8 @@ describe("company-profile", () => {
         expect(resource.confirmationStatement?.overdue).to.be.undefined;
         expect(resource.foreignCompanyDetails?.businessActivity).to.be.undefined;
         expect(resource.foreignCompanyDetails?.governedBy).to.be.undefined;
+        expect(resource.foreignCompanyDetails?.registrationNumber).to.be.undefined;
+        expect(resource.foreignCompanyDetails?.legalForm).to.be.undefined;
         expect(resource.foreignCompanyDetails?.businessActivity).to.be.undefined;
         expect(resource.foreignCompanyDetails?.isACreditFinacialInstitution).to.be.undefined;
         expect(resource.foreignCompanyDetails?.originatingRegistry?.name).to.be.undefined;
@@ -218,6 +221,8 @@ describe("company-profile", () => {
         expect(resource.confirmationStatement?.overdue).to.be.undefined;
         expect(resource.foreignCompanyDetails?.businessActivity).to.be.undefined;
         expect(resource.foreignCompanyDetails?.governedBy).to.be.undefined;
+        expect(resource.foreignCompanyDetails?.legalForm).to.be.undefined;
+        expect(resource.foreignCompanyDetails?.registrationNumber).to.be.undefined;
         expect(resource.foreignCompanyDetails?.businessActivity).to.be.undefined;
         expect(resource.foreignCompanyDetails?.isACreditFinacialInstitution).to.be.undefined;
         expect(resource.foreignCompanyDetails?.originatingRegistry?.name).to.be.undefined;

@@ -49,7 +49,8 @@ export const fullCompanyProfileMock = {
             name: "State Of Victoria - Australia",
             country: "Australia"
         },
-        is_a_credit_finacial_institution: false
+        is_a_credit_finacial_institution: false,
+        registration_number: "1234567890"
     },
     confirmation_statement: {
         last_made_up_to: "2018-08-24",
