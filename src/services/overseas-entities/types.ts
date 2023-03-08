@@ -338,6 +338,8 @@ export interface TrustHistoricalBeneficialOwner {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
+    corporate_indicator?: boolean;
+    corporate_name?: string;
 }
 
 export interface TrustHistoricalBeneficialOwnerResource {
@@ -346,6 +348,8 @@ export interface TrustHistoricalBeneficialOwnerResource {
     surname?: string;
     notified_date?: string;
     ceased_date?: string;
+    corporate_indicator?: boolean;
+    corporate_name?: string;
 }
 
 export interface TrustCorporate {
