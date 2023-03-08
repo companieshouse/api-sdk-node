@@ -104,7 +104,6 @@ export interface CompanyOfficer {
   links: CompanyOfficerLinks;
   name: string;
   nationality?: string;
-  nationalityOther?: string;
   occupation?: string;
   officerRole: string;
   resignedOn?: string;

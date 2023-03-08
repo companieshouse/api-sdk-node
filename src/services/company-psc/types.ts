@@ -86,7 +86,6 @@ export interface CompanyPersonWithSignificantControl {
   name: string,
   nameElements: NameElements,
   nationality: string,
-  nationalityOther?: string,
   naturesOfControl: string[],
   notifiedOn: string,
   isSanctioned?: boolean,
