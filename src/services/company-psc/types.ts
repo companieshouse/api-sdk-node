@@ -20,7 +20,6 @@ export interface CompanyPersonWithSignificantControlResource {
   name: string,
   name_elements: NameElementsResource,
   nationality: string,
-  nationality_other?: string,
   natures_of_control: string[],
   notified_on: string,
   is_sanctioned?: boolean,

@@ -28,7 +28,6 @@ export interface CompanyOfficerResource {
   links: CompanyOfficerResourceLinks;
   name: string;
   nationality?: string;
-  nationality_other?: string;
   occupation?: string;
   officer_role: string;
   resigned_on?: string;
