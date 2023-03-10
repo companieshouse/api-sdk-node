@@ -31,7 +31,6 @@ export interface CompanyOfficerResource {
   occupation?: string;
   officer_role: string;
   resigned_on?: string;
-  is_sanctioned?: boolean;
 }
 
 export interface AddressResource {
@@ -107,7 +106,6 @@ export interface CompanyOfficer {
   occupation?: string;
   officerRole: string;
   resignedOn?: string;
-  isSanctioned?: boolean;
 }
 
 export interface Address {
