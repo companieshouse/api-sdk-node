@@ -12,10 +12,10 @@ export default class CompanyProfileService {
     constructor (private readonly client: IHttpClient) { }
 
     /**
-   * Get the profile for a company.
-   *
-   * @param number the company number to look up
-   */
+    * Get the profile for a company.
+    *
+    * @param number the company number to look up
+    */
     public async getCompanyProfile (number: string): Promise<Resource<CompanyProfile>> {
         const resp = await this.client.httpGet(`/company/${number}`);
 
@@ -52,7 +52,8 @@ export default class CompanyProfileService {
                 governedBy: foreignCompanyDetailsResource?.governed_by,
                 originatingRegistry: originatingRegistry,
                 isACreditFinacialInstitution: foreignCompanyDetailsResource?.is_a_credit_finacial_institution,
-                legalForm: foreignCompanyDetailsResource?.legal_form
+                legalForm: foreignCompanyDetailsResource?.legal_form,
+                registrationNumber: foreignCompanyDetailsResource?.registration_number
             }
             : {};
 

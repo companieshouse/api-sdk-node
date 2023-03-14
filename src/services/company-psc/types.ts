@@ -22,6 +22,8 @@ export interface CompanyPersonWithSignificantControlResource {
   nationality: string,
   natures_of_control: string[],
   notified_on: string,
+  is_sanctioned?: boolean,
+  kind?: string,
   identification?: IdentificationResource
 };
 
@@ -87,6 +89,8 @@ export interface CompanyPersonWithSignificantControl {
   nationality: string,
   naturesOfControl: string[],
   notifiedOn: string,
+  isSanctioned?: boolean,
+  kind?: string,
   identification?: Identification
 };
 
