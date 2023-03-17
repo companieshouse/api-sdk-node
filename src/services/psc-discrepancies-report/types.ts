@@ -1,4 +1,5 @@
 export interface PSCDiscrepancyReport {
+    material_discrepancies: string[];
     obliged_entity_organisation_name: string;
     obliged_entity_name: string;
     obliged_entity_contact_name: string;
