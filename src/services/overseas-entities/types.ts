@@ -277,6 +277,7 @@ export interface TrustIndividual {
     dob_month?: string;
     dob_year?: string;
     nationality?: string;
+    second_nationality?: string;
     sa_address_line1?: string;
     sa_address_line2?: string;
     sa_address_care_of?: string;
@@ -307,6 +308,7 @@ export interface TrustIndividualResource {
     surname?: string;
     date_of_birth?: string;
     nationality?: string;
+    second_nationality?: string;
     sa_address_line1?: string;
     sa_address_line2?: string;
     sa_address_care_of?: string;
