@@ -21,11 +21,11 @@ export default class {
         return this.utility.processResponse(resp);
     }
 
-    public async createNewReport (materialDiscrepancyCategories: string[]): PromisedReportResult {
+    public async createNewReport (materialDiscrepancies: string[]): PromisedReportResult {
         const resp = await this.client.httpPost(
             PSC_DISCREPANCY_API_URL,
             {
-                material_discrepancies: materialDiscrepancyCategories,
+                material_discrepancies: materialDiscrepancies,
                 status: "INCOMPLETE"
             });
         return this.utility.processResponse(resp);
