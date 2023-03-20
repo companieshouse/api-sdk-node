@@ -15,6 +15,7 @@ const mockSuccessResponse: HttpResponse = {
         },
         etag: "fa1774742515a04204dc105520cee4a4b8d2fc37",
         kind: "psc_discrepancy_report#psc_discrepancy_report",
+        material_discrepancies: ["1", "2"],
         obliged_entity_organisation_name: "orgName",
         obliged_entity_telephone_number: "telephone",
         obliged_entity_contact_name: "contactName",
@@ -42,8 +43,8 @@ const mockApiErrorResponse: HttpResponse = {
     error: {
         errors: [
             {
-                error: "obliged_entity_type must be a valid integer.",
-                location: "obliged_entity_type",
+                error: "material_discrepancies contains an invalid subfield",
+                location: "material_discrepancies",
                 location_type: "request-body",
                 type: "ch:validation"
             }
@@ -103,8 +104,8 @@ describe("Process Response", () => {
 
     it("returns an ApiErrorResponse with ApiErrors matching response body if body does match APIError format", async () => {
         const expectedError: ApiError = {
-            error: "obliged_entity_type must be a valid integer.",
-            location: "obliged_entity_type",
+            error: "material_discrepancies contains an invalid subfield",
+            location: "material_discrepancies",
             locationType: "request-body",
             type: "ch:validation"
         }

@@ -16,6 +16,7 @@ const mockResponseBodyComplete: PSCDiscrepancyReport = {
     },
     etag: "fa1774742515a04204dc105520cee4a4b8d2fc37",
     kind: "psc_discrepancy_report#psc_discrepancy_report",
+    material_discrepancies: ["1", "2"],
     obliged_entity_organisation_name: "orgName",
     obliged_entity_telephone_number: "telephone",
     obliged_entity_contact_name: "contactName",
@@ -34,6 +35,7 @@ const mockResponseBodyCreate: any = (
         },
         etag: "0c4cd8b723080d2be59b451e5d258a2215db469f",
         kind: "psc_discrepancy_report#psc_discrepancy_report",
+        material_discrepancies: ["1", "2"],
         obliged_entity_email: "Æ",
         obliged_entity_type: "2"
     }
@@ -44,7 +46,7 @@ const genericApiError: ApiError = {
 };
 
 const REPORT_ID = "REPORT_ID";
-const OBLIGED_ENTITY_TYPE = "5";
+const MATERIAL_DISCREPANCIES = ["1", "2"];
 
 describe("Get Psc Discrepancy Report", () => {
     beforeEach(() => {
@@ -116,6 +118,7 @@ describe("Get Psc Discrepancy Report", () => {
         expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
         expect(data.resource.obliged_entity_organisation_name).to.equal(mockResponseBodyCreate.obliged_entity_organisation_name);
         expect(data.resource.kind).to.equal(mockResponseBodyCreate.kind);
+        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyCreate.material_discrepancies);
         expect(data.resource.obliged_entity_name).to.equal(mockResponseBodyCreate.obliged_entity_name);
         expect(data.resource.obliged_entity_contact_name).to.equal(mockResponseBodyCreate.obliged_entity_contact_name);
         expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyCreate.obliged_entity_email);
@@ -152,7 +155,7 @@ describe("Create Psc Discrepancy Report", () => {
 
         const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
 
-        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
+        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
         expect(result).to.be.equal(mockResult)
 
@@ -168,7 +171,7 @@ describe("Create Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
+        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
         expect(result.isFailure()).to.be.true;
 
@@ -183,8 +186,8 @@ describe("Create Psc Discrepancy Report", () => {
             error: {
                 errors: [
                     {
-                        error: "obliged_entity_type must be a valid integer.",
-                        location: "obliged_entity_type",
+                        error: "material_discrepancies contains an invalid subfield",
+                        location: "material_discrepancies",
                         location_type: "request-body",
                         type: "ch:validation"
                     }
@@ -192,8 +195,8 @@ describe("Create Psc Discrepancy Report", () => {
             }
         }
         const expectedError: ApiError = {
-            error: "obliged_entity_type must be a valid integer.",
-            location: "obliged_entity_type",
+            error: "material_discrepancies contains an invalid subfield",
+            location: "material_discrepancies",
             locationType: "request-body",
             type: "ch:validation"
         }
@@ -201,7 +204,7 @@ describe("Create Psc Discrepancy Report", () => {
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
+        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
         expect(result.isFailure()).to.be.true;
 
@@ -219,7 +222,7 @@ describe("Create Psc Discrepancy Report", () => {
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(OBLIGED_ENTITY_TYPE);
+        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
         expect(result.isFailure()).to.be.false;
         expect(result.isSuccess()).to.be.true;
@@ -229,6 +232,7 @@ describe("Create Psc Discrepancy Report", () => {
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
         expect(data.resource.kind).to.equal(mockResponseBodyCreate.kind);
+        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyCreate.material_discrepancies);
         expect(data.resource.status).to.equal(mockResponseBodyCreate.status);
         expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyCreate.obliged_entity_type);
         expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyCreate.obliged_entity_email);
@@ -310,6 +314,7 @@ describe("Update Psc Discrepancy Report", () => {
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);
         expect(data.resource.kind).to.equal(mockResponseBodyComplete.kind);
+        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyComplete.material_discrepancies);
         expect(data.resource.status).to.equal(mockResponseBodyComplete.status);
         expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyComplete.obliged_entity_type);
         expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyComplete.obliged_entity_email);
