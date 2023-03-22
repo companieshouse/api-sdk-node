@@ -287,6 +287,7 @@ export interface TrustIndividual {
     sa_address_postal_code?: string;
     sa_address_premises?: string;
     sa_address_region?: string;
+    is_service_address_same_as_usual_residential_address?: yesNoResponse;
     ura_address_line1?: string;
     ura_address_line2?: string;
     ura_address_care_of?: string;
@@ -318,6 +319,7 @@ export interface TrustIndividualResource {
     sa_address_postal_code?: string;
     sa_address_premises?: string;
     sa_address_region?: string;
+    is_service_address_same_as_usual_residential_address?: yesNoResponse;
     ura_address_line1?: string;
     ura_address_line2?: string;
     ura_address_care_of?: string;
@@ -378,6 +380,7 @@ export interface TrustCorporate {
     sa_address_postal_code?: string;
     sa_address_premises?: string;
     sa_address_region?: string;
+    is_service_address_same_as_principal_address?: yesNoResponse;
     identification_country_registration?: string;
     identification_legal_authority?: string;
     identification_legal_form?: string;
@@ -407,6 +410,7 @@ export interface TrustCorporateResource {
     sa_address_postal_code?: string;
     sa_address_premises?: string;
     sa_address_region?: string;
+    is_service_address_same_as_principal_address?: yesNoResponse;
     identification_country_registration?: string;
     identification_legal_authority?: string;
     identification_legal_form?: string;
