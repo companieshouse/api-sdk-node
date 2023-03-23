@@ -278,8 +278,8 @@ export interface TrustIndividual {
     dob_year?: string;
     nationality?: string;
     second_nationality?: string;
-    sa_address_line1?: string;
-    sa_address_line2?: string;
+    sa_address_line_1?: string;
+    sa_address_line_2?: string;
     sa_address_care_of?: string;
     sa_address_country?: string;
     sa_address_locality?: string;
@@ -288,8 +288,8 @@ export interface TrustIndividual {
     sa_address_premises?: string;
     sa_address_region?: string;
     is_service_address_same_as_usual_residential_address?: yesNoResponse;
-    ura_address_line1?: string;
-    ura_address_line2?: string;
+    ura_address_line_1?: string;
+    ura_address_line_2?: string;
     ura_address_care_of?: string;
     ura_address_country?: string;
     ura_address_locality?: string;
@@ -310,8 +310,8 @@ export interface TrustIndividualResource {
     date_of_birth?: string;
     nationality?: string;
     second_nationality?: string;
-    sa_address_line1?: string;
-    sa_address_line2?: string;
+    sa_address_line_1?: string;
+    sa_address_line_2?: string;
     sa_address_care_of?: string;
     sa_address_country?: string;
     sa_address_locality?: string;
@@ -320,8 +320,8 @@ export interface TrustIndividualResource {
     sa_address_premises?: string;
     sa_address_region?: string;
     is_service_address_same_as_usual_residential_address?: yesNoResponse;
-    ura_address_line1?: string;
-    ura_address_line2?: string;
+    ura_address_line_1?: string;
+    ura_address_line_2?: string;
     ura_address_care_of?: string;
     ura_address_country?: string;
     ura_address_locality?: string;
@@ -362,8 +362,8 @@ export interface TrustCorporate {
     date_became_interested_person_day?: string;
     date_became_interested_person_month?: string;
     date_became_interested_person_year?: string;
-    ro_address_line1?: string;
-    ro_address_line2?: string;
+    ro_address_line_1?: string;
+    ro_address_line_2?: string;
     ro_address_care_of?: string;
     ro_address_country?: string;
     ro_address_locality?: string;
@@ -371,8 +371,8 @@ export interface TrustCorporate {
     ro_address_postal_code?: string;
     ro_address_premises?: string;
     ro_address_region?: string;
-    sa_address_line1?: string;
-    sa_address_line2?: string;
+    sa_address_line_1?: string;
+    sa_address_line_2?: string;
     sa_address_care_of?: string;
     sa_address_country?: string;
     sa_address_locality?: string;
@@ -392,8 +392,8 @@ export interface TrustCorporateResource {
     type?: string;
     name?: string;
     date_became_interested_person?: string;
-    ro_address_line1?: string;
-    ro_address_line2?: string;
+    ro_address_line_1?: string;
+    ro_address_line_2?: string;
     ro_address_care_of?: string;
     ro_address_country?: string;
     ro_address_locality?: string;
@@ -401,8 +401,8 @@ export interface TrustCorporateResource {
     ro_address_postal_code?: string;
     ro_address_premises?: string;
     ro_address_region?: string;
-    sa_address_line1?: string;
-    sa_address_line2?: string;
+    sa_address_line_1?: string;
+    sa_address_line_2?: string;
     sa_address_care_of?: string;
     sa_address_country?: string;
     sa_address_locality?: string;
