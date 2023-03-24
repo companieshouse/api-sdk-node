@@ -20,6 +20,7 @@ import { OverseasEntityService } from "./services/overseas-entities";
 import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
+import OfficerFilingService from "./services/officer-filing/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -51,6 +52,7 @@ export default class ApiClient {
   public readonly pscDiscrepancyReport: PSCDiscrepanciesReportService;
   public readonly transaction: TransactionService;
   public readonly overseasEntity: OverseasEntityService;
+  public readonly officerFiling: OfficerFilingService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
