@@ -19,6 +19,7 @@ export interface AccountValidatorResponse {
     status: RequestStatus;
     result: Result;
     fileId: string;
+    fileName: string;
 }
 
 type RequestStatus = "complete" | "pending";
