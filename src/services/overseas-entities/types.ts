@@ -386,6 +386,7 @@ export interface TrustCorporate {
     identification_legal_form?: string;
     identification_place_registered?: string;
     identification_registration_number?: string;
+    is_on_register_in_country_formed_in: yesNoResponse;
 }
 
 export interface TrustCorporateResource {
@@ -416,6 +417,7 @@ export interface TrustCorporateResource {
     identification_legal_form?: string;
     identification_place_registered?: string;
     identification_registration_number?: string;
+    is_on_register_in_country_formed_in: yesNoResponse;
 }
 
 /**

@@ -313,7 +313,8 @@ export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
     identification_legal_authority: "auth",
     identification_legal_form: "form",
     identification_place_registered: "uk",
-    identification_registration_number: "456"
+    identification_registration_number: "456",
+    is_on_register_in_country_formed_in: yesNoResponse.Yes
 }]
 
 export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
@@ -424,7 +425,8 @@ export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
     identification_legal_authority: "auth",
     identification_legal_form: "form",
     identification_place_registered: "uk",
-    identification_registration_number: "456"
+    identification_registration_number: "456",
+    is_on_register_in_country_formed_in: yesNoResponse.Yes
 }]
 
 export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerResource[] = [{
