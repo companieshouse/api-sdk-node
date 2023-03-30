@@ -16,6 +16,7 @@ export interface OverseasEntity {
     managing_officers_individual?: ManagingOfficerIndividual[];
     managing_officers_corporate?: ManagingOfficerCorporate[];
     trusts?: Trust[];
+    update?: Update;
 }
 
 export interface OverseasEntityResource {
@@ -32,6 +33,7 @@ export interface OverseasEntityResource {
     managing_officers_individual?: ManagingOfficerIndividualResource[];
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trusts?: TrustResource[];
+    update?: UpdateResource;
 }
 
 export interface OverseasEntityCreated {
@@ -113,6 +115,7 @@ export interface OverseasEntityDueDiligenceResource {
 }
 
 export interface BeneficialOwnerIndividual {
+    ch_reference?: string
     first_name?: string
     last_name?: string
     date_of_birth?: InputDate
@@ -122,6 +125,7 @@ export interface BeneficialOwnerIndividual {
     service_address?: Address
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     start_date?: InputDate
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -129,6 +133,7 @@ export interface BeneficialOwnerIndividual {
 }
 
 export interface BeneficialOwnerIndividualResource {
+    ch_reference?: string
     first_name?: string
     last_name?: string
     date_of_birth?: string
@@ -138,6 +143,7 @@ export interface BeneficialOwnerIndividualResource {
     service_address?: Address
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     start_date?: string
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -145,6 +151,7 @@ export interface BeneficialOwnerIndividualResource {
 }
 
 export interface BeneficialOwnerCorporate {
+    ch_reference?: string
     name?: string
     principal_address?: Address
     service_address?: Address
@@ -155,6 +162,7 @@ export interface BeneficialOwnerCorporate {
     public_register_name?: string
     registration_number?: string
     start_date?: InputDate
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -162,6 +170,7 @@ export interface BeneficialOwnerCorporate {
 }
 
 export interface BeneficialOwnerCorporateResource {
+    ch_reference?: string
     name?: string
     principal_address?: Address
     service_address?: Address
@@ -172,6 +181,7 @@ export interface BeneficialOwnerCorporateResource {
     public_register_name?: string
     registration_number?: string
     start_date?: string
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -179,6 +189,7 @@ export interface BeneficialOwnerCorporateResource {
 }
 
 export interface BeneficialOwnerGovernmentOrPublicAuthority {
+    ch_reference?: string
     name?: string
     principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
@@ -186,10 +197,12 @@ export interface BeneficialOwnerGovernmentOrPublicAuthority {
     legal_form?: string
     law_governed?: string
     start_date?: InputDate
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[];
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
+    ch_reference?: string
     name?: string
     principal_address?: Address
     is_service_address_same_as_principal_address?: yesNoResponse
@@ -197,11 +210,13 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     legal_form?: string
     law_governed?: string
     start_date?: string
+    ceased_date?: InputDate
     beneficial_owner_nature_of_control_types?: NatureOfControlType[];
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
 export interface ManagingOfficerIndividual {
+    ch_reference?: string
     first_name?: string
     last_name?: string
     has_former_names?: yesNoResponse
@@ -214,9 +229,11 @@ export interface ManagingOfficerIndividual {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
+    ceased_date?: InputDate
 }
 
 export interface ManagingOfficerIndividualResource {
+    ch_reference?: string
     first_name?: string
     last_name?: string
     has_former_names?: yesNoResponse
@@ -229,9 +246,11 @@ export interface ManagingOfficerIndividualResource {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
+    ceased_date?: InputDate
 }
 
 export interface ManagingOfficerCorporate {
+    ch_reference?: string
     name?: string
     principal_address?: Address
     service_address?: Address
@@ -242,9 +261,40 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
+    ceased_date?: InputDate
 }
 
 export interface ManagingOfficerCorporateResource extends ManagingOfficerCorporate { }
+
+export interface Update {
+    date_of_creation?: InputDate;
+    date_of_ceasation?: InputDate;
+    date_of_filing?: InputDate;
+    next_filing_due?: InputDate;
+    registrable_beneficial_owner?: yesNoResponse;
+    any_beneficial_owners_ceased_or_added?: yesNoResponse;
+    bo_mo_data_fetched?: yesNoResponse;
+    review_beneficial_owners_individual?: BeneficialOwnerIndividual[];
+    review_beneficial_owners_corporate?: BeneficialOwnerCorporate[];
+    review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
+    review_managing_officers_individual?: ManagingOfficerIndividual[];
+    review_managing_officers_corporate?: ManagingOfficerCorporate[];
+}
+
+export interface UpdateResource {
+    date_of_creation?: InputDate;
+    date_of_ceasation?: InputDate;
+    date_of_filing?: InputDate;
+    next_filing_due?: InputDate;
+    registrable_beneficial_owner?: yesNoResponse;
+    any_beneficial_owners_ceased_or_added?: yesNoResponse;
+    bo_mo_data_fetched?: yesNoResponse;
+    review_beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
+    review_beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
+    review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
+    review_managing_officers_individual?: ManagingOfficerIndividualResource[];
+    review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
+}
 
 export interface Trust{
     trust_id: string;
