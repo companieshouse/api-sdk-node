@@ -72,6 +72,7 @@ export default class ApiClient {
       this.checkoutItem = new CheckoutItemService(apiClient);
       this.order = new OrderService(apiClient);
       this.orderItem = new OrderItemService(apiClient);
+      this.officerFiling = new OfficerFilingService(apiClient);
       this.checkoutSearchService = new CheckoutSearchService(apiClient);
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
