@@ -1,5 +1,5 @@
 import {
-    ActiveOfficerDetailsResource,
+    ActiveOfficerDetailsResource
 } from "../../../src/services/officer-filing";
 import { RequestClient } from "../../../src";
 
@@ -28,8 +28,6 @@ export const mockAddress2 = {
     premises: "10",
     region: "Thisshire"
 };
-
-
 
 export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
     fore_name_1: "John",
