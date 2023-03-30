@@ -1,5 +1,5 @@
 import {
-    ActiveOfficerDetails, OfficerFilingService,
+    ActiveOfficerDetails, OfficerFilingService
 } from "../../../src/services/officer-filing";
 import * as mockValues from "./officer.filing.mock";
 import { expect } from "chai";
@@ -20,7 +20,6 @@ afterEach(done => {
     sinon.restore();
     done();
 });
-
 
 describe("List active Directors details GET", () => {
     it("should return active officer details object", async () => {
@@ -49,5 +48,4 @@ describe("List active Directors details GET", () => {
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");
     });
-
 });

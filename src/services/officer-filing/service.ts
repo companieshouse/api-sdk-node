@@ -2,8 +2,7 @@ import {
     ActiveOfficerDetails,
     ActiveOfficerDetailsResource,
     Address,
-    AddressResource,
-    Tm01Submission,
+    AddressResource
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -25,8 +24,6 @@ export default class {
 
         return resource;
     }
-
-
 
     private mapToListActiveOfficerDetails (officerResourceList: ActiveOfficerDetailsResource[]): ActiveOfficerDetails[] {
         const officerList: ActiveOfficerDetails[] = [];
@@ -68,7 +65,6 @@ export default class {
             region: addressResource.region
         }
     }
-
 
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
         return `/transactions/${transactionId}/officers`;
