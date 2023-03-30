@@ -62,24 +62,34 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
             identity_date: mapIsoDate(body.overseas_entity_due_diligence?.identity_date)
         } : {},
         beneficial_owners_statement: body.beneficial_owners_statement,
-        beneficial_owners_individual: (body.beneficial_owners_individual || []).map(boi => {
-            return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) }
-        }),
-        beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(boc => {
-            return { ...boc, start_date: mapIsoDate(boc.start_date), ceased_date: mapIsoDate(boc.ceased_date) }
-        }),
-        beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(bog => {
-            return { ...bog, start_date: mapIsoDate(bog.start_date), ceased_date: mapIsoDate(bog.ceased_date) }
-        }),
-        managing_officers_individual: (body.managing_officers_individual || []).map(moi => {
-            return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapIsoDate(moi.resigned_on) }
-        }),
-        managing_officers_corporate: (body.managing_officers_corporate || []).map(moc => {
-            return { ...moc, resigned_on: mapIsoDate(moc.resigned_on) }
-        }),
+        beneficial_owners_individual: (body.beneficial_owners_individual || []).map(mapBoiResource),
+        beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(mapBocResource),
+        beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(mapBogResource),
+        managing_officers_individual: (body.managing_officers_individual || []).map(mapMoiResource),
+        managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
         update: mapUpdateResource(body.update ?? {})
     };
+};
+
+const mapBoiResource = boi => {
+    return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) };
+};
+
+const mapBocResource = boc => {
+    return { ...boc, start_date: mapIsoDate(boc.start_date), ceased_date: mapIsoDate(boc.ceased_date) };
+};
+
+const mapBogResource = bog => {
+    return { ...bog, start_date: mapIsoDate(bog.start_date), ceased_date: mapIsoDate(bog.ceased_date) };
+};
+
+const mapMoiResource = moi => {
+    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapIsoDate(moi.resigned_on) };
+};
+
+const mapMocResource = moc => {
+    return { ...moc, resigned_on: mapIsoDate(moc.resigned_on) };
 };
 
 /**
@@ -347,11 +357,41 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
 }
 
 export const mapUpdate = (body: Update): UpdateResource => {
-    return {};
+    return {
+        date_of_creation: convertOptionalDateToIsoDateString(body.date_of_creation?.day, body.date_of_creation?.month, body.date_of_creation?.year),
+        date_of_ceasation: convertOptionalDateToIsoDateString(body.date_of_ceasation?.day, body.date_of_ceasation?.month, body.date_of_ceasation?.year),
+        date_of_filing: convertOptionalDateToIsoDateString(body.date_of_filing?.day, body.date_of_filing?.month, body.date_of_filing?.year),
+        next_filing_due: convertOptionalDateToIsoDateString(body.next_filing_due?.day, body.next_filing_due?.month, body.next_filing_due?.year),
+        registrable_beneficial_owner: body.registrable_beneficial_owner,
+        any_beneficial_owners_ceased_or_added: body.any_beneficial_owners_ceased_or_added,
+        bo_mo_data_fetched: body.bo_mo_data_fetched,
+        review_beneficial_owners_individual: mapBeneficialOwnersIndividual(body.review_beneficial_owners_individual),
+        review_beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.review_beneficial_owners_corporate),
+        review_beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.review_beneficial_owners_government_or_public_authority),
+        review_managing_officers_individual: mapManagingOfficersIndividual(body.review_managing_officers_individual),
+        review_managing_officers_corporate: mapManagingOfficersCorporate(body.review_managing_officers_corporate)
+    };
 }
 
 export const mapUpdateResource = (body: UpdateResource): Update => {
-    return {};
+    return {
+        date_of_creation: mapOptionalIsoDate(body.date_of_creation),
+        date_of_ceasation: mapOptionalIsoDate(body.date_of_ceasation),
+        date_of_filing: mapOptionalIsoDate(body.date_of_filing),
+        next_filing_due: mapOptionalIsoDate(body.next_filing_due),
+        registrable_beneficial_owner: body.registrable_beneficial_owner,
+        any_beneficial_owners_ceased_or_added: body.any_beneficial_owners_ceased_or_added,
+        bo_mo_data_fetched: body.bo_mo_data_fetched,
+        review_beneficial_owners_individual: (body.review_beneficial_owners_individual || []).map(mapBoiResource),
+        review_beneficial_owners_corporate: (body.review_beneficial_owners_corporate || []).map(mapBocResource),
+        review_beneficial_owners_government_or_public_authority: (body.review_beneficial_owners_government_or_public_authority || []).map(mapBogResource),
+        review_managing_officers_individual: (body.review_managing_officers_individual || []).map(mapMoiResource),
+        review_managing_officers_corporate: (body.review_managing_officers_corporate || []).map(mapMocResource)
+    };
+}
+
+const mapOptionalIsoDate = (date: string | undefined): InputDate | undefined => {
+    return date ? mapIsoDate(date) : undefined;
 }
 
 const mapIsoDate = (date: string): InputDate => {

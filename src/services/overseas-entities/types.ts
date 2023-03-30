@@ -297,10 +297,10 @@ export interface Update {
 }
 
 export interface UpdateResource {
-    date_of_creation?: InputDate;
-    date_of_ceasation?: InputDate;
-    date_of_filing?: InputDate;
-    next_filing_due?: InputDate;
+    date_of_creation?: string;
+    date_of_ceasation?: string;
+    date_of_filing?: string;
+    next_filing_due?: string;
     registrable_beneficial_owner?: yesNoResponse;
     any_beneficial_owners_ceased_or_added?: yesNoResponse;
     bo_mo_data_fetched?: yesNoResponse;
