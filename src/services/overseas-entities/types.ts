@@ -2,6 +2,8 @@
  * Overseas Entity interface used within this SDK
  */
 
+import { __String } from "typescript";
+
 export interface OverseasEntity {
     entity_name?: string;
     entity_number?: string;
@@ -143,7 +145,7 @@ export interface BeneficialOwnerIndividualResource {
     service_address?: Address
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     start_date?: string
-    ceased_date?: InputDate
+    ceased_date?: string
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -181,7 +183,7 @@ export interface BeneficialOwnerCorporateResource {
     public_register_name?: string
     registration_number?: string
     start_date?: string
-    ceased_date?: InputDate
+    ceased_date?: string
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
@@ -210,7 +212,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     legal_form?: string
     law_governed?: string
     start_date?: string
-    ceased_date?: InputDate
+    ceased_date?: string
     beneficial_owner_nature_of_control_types?: NatureOfControlType[];
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
@@ -229,7 +231,7 @@ export interface ManagingOfficerIndividual {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
-    ceased_date?: InputDate
+    resigned_on?: InputDate
 }
 
 export interface ManagingOfficerIndividualResource {
@@ -246,7 +248,7 @@ export interface ManagingOfficerIndividualResource {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
-    ceased_date?: InputDate
+    resigned_on?: string
 }
 
 export interface ManagingOfficerCorporate {
@@ -261,10 +263,23 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
-    ceased_date?: InputDate
+    resigned_on?: InputDate
 }
 
-export interface ManagingOfficerCorporateResource extends ManagingOfficerCorporate { }
+export interface ManagingOfficerCorporateResource {
+    ch_reference?: string
+    name?: string
+    principal_address?: Address
+    service_address?: Address
+    is_service_address_same_as_principal_address?: yesNoResponse
+    legal_form?: string
+    law_governed?: string
+    is_on_register_in_country_formed_in?: yesNoResponse
+    public_register_name?: string
+    registration_number?: string
+    role_and_responsibilities?: string
+    resigned_on?: string
+}
 
 export interface Update {
     date_of_creation?: InputDate;
