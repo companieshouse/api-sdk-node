@@ -378,11 +378,33 @@ export const TRUSTS_MOCK: Trust[] = [{
 }]
 
 export const UPDATE_MOCK: Update = {
-
+    any_beneficial_owners_ceased_or_added: undefined,
+    date_of_creation: undefined,
+    date_of_ceasation: undefined,
+    date_of_filing: undefined,
+    next_filing_due: undefined,
+    bo_mo_data_fetched: undefined,
+    registrable_beneficial_owner: undefined,
+    review_beneficial_owners_individual: [],
+    review_beneficial_owners_corporate: [],
+    review_beneficial_owners_government_or_public_authority: [],
+    review_managing_officers_corporate: [],
+    review_managing_officers_individual: []
 };
 
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
-
+    any_beneficial_owners_ceased_or_added: undefined,
+    date_of_creation: undefined,
+    date_of_ceasation: undefined,
+    date_of_filing: undefined,
+    next_filing_due: undefined,
+    bo_mo_data_fetched: undefined,
+    registrable_beneficial_owner: undefined,
+    review_beneficial_owners_individual: [],
+    review_beneficial_owners_corporate: [],
+    review_beneficial_owners_government_or_public_authority: [],
+    review_managing_officers_corporate: [],
+    review_managing_officers_individual: []
 };
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
@@ -398,8 +420,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
-    update: UPDATE_MOCK,
-    trusts: TRUSTS_MOCK
+    trusts: TRUSTS_MOCK,
+    update: UPDATE_MOCK
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
@@ -501,7 +523,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
-    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
+    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST, 
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
     trusts: TRUSTS_RESOURCE_MOCK,
     update: UPDATE_RESOURCE_MOCK
