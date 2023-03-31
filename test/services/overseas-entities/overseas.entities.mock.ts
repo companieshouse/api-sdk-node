@@ -11,6 +11,7 @@ import {
     DueDiligence,
     DueDiligenceResource,
     Entity,
+    EntityName,
     ManagingOfficerCorporate,
     ManagingOfficerCorporateResource,
     ManagingOfficerIndividual,
@@ -30,9 +31,9 @@ import {
     TrustCorporate,
     TrustCorporateResource,
     TrustHistoricalBeneficialOwner,
-    TrustHistoricalBeneficialOwnerResource
+    TrustHistoricalBeneficialOwnerResource,
+    Update
 } from "../../../src/services/overseas-entities";
-import { EntityName } from "../../../dist/services/overseas-entities";
 
 export const ADDRESS: Address = {
     property_name_number: "property name 1",
@@ -352,6 +353,12 @@ export const TRUSTS_MOCK: Trust[] = [{
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
 }]
 
+export const UPDATE_OBJECT_MOCK: Update = {
+    date_of_creation: "2022-07-01",
+    bo_mo_data: false,
+    registrable_beneficial_owner: yesNoResponse.No
+};
+
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     entity_name: ENTITY_NAME_FIELD_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
@@ -365,7 +372,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
-    trusts: TRUSTS_MOCK
+    trusts: TRUSTS_MOCK,
+    update: UPDATE_OBJECT_MOCK
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
@@ -469,7 +477,8 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
-    trusts: TRUSTS_RESOURCE_MOCK
+    trusts: TRUSTS_RESOURCE_MOCK,
+    update: UPDATE_OBJECT_MOCK
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });

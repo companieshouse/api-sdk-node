@@ -21,7 +21,9 @@ import {
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource,
     TrustCorporate,
-    TrustCorporateResource
+    TrustCorporateResource,
+    Update,
+    UpdateResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -38,7 +40,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
         managing_officers_corporate: body.managing_officers_corporate,
-        trusts: mapTrusts(body.trusts)
+        trusts: mapTrusts(body.trusts),
+        update: (body.update && Object.keys(body.update).length) ? { ...body.update } : null
     };
 };
 
@@ -70,7 +73,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
             return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth) }
         }),
         managing_officers_corporate: body.managing_officers_corporate || [],
-        trusts: mapTrustsResource(body.trusts)
+        trusts: mapTrustsResource(body.trusts),
+        update: { ...body.update }
     };
 };
 
