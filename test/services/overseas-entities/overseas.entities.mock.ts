@@ -191,7 +191,7 @@ export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[]
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         occupation: "Some Occupation",
         role_and_responsibilities: "Some role and responsibilities",
-        resigned_on:  { day: "1", month: "2", year: "2023" }
+        resigned_on: { day: "1", month: "2", year: "2023" }
     }
 ];
 
@@ -224,10 +224,9 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
         public_register_name: "register",
         registration_number: "abc123",
         role_and_responsibilities: "role and responsibilities text",
-        resigned_on:  { day: "1", month: "2", year: "2023" }
+        resigned_on: { day: "1", month: "2", year: "2023" }
     }
 ];
-
 
 export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = [
     {
@@ -523,7 +522,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_individual: BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST,
     beneficial_owners_corporate: BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST,
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
-    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST, 
+    managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
     trusts: TRUSTS_RESOURCE_MOCK,
     update: UPDATE_RESOURCE_MOCK
