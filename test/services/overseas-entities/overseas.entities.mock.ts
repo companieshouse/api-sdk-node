@@ -24,6 +24,7 @@ import {
     Presenter,
     yesNoResponse,
     Update,
+    UpdateResource,
     Trust,
     TrustResource,
     TrustIndividual,
@@ -380,6 +381,10 @@ export const UPDATE_MOCK: Update = {
 
 };
 
+export const UPDATE_RESOURCE_MOCK: UpdateResource = {
+
+};
+
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     entity_name: ENTITY_NAME_FIELD_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
@@ -498,7 +503,8 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     beneficial_owners_government_or_public_authority: BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST,
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
-    trusts: TRUSTS_RESOURCE_MOCK
+    trusts: TRUSTS_RESOURCE_MOCK,
+    update: UPDATE_RESOURCE_MOCK
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
