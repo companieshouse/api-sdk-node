@@ -288,7 +288,7 @@ export interface Update {
     next_filing_due?: InputDate;
     registrable_beneficial_owner?: yesNoResponse;
     any_beneficial_owners_ceased_or_added?: yesNoResponse;
-    bo_mo_data_fetched?: yesNoResponse;
+    bo_mo_data_fetched?: boolean;
     review_beneficial_owners_individual?: BeneficialOwnerIndividual[];
     review_beneficial_owners_corporate?: BeneficialOwnerCorporate[];
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
@@ -303,7 +303,7 @@ export interface UpdateResource {
     next_filing_due?: string;
     registrable_beneficial_owner?: yesNoResponse;
     any_beneficial_owners_ceased_or_added?: yesNoResponse;
-    bo_mo_data_fetched?: yesNoResponse;
+    bo_mo_data_fetched?: boolean;
     review_beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     review_beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
