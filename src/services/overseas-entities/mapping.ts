@@ -73,23 +73,23 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
 };
 
 const mapBoiResource = boi => {
-    return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) };
+    return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapOptionalIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) };
 };
 
 const mapBocResource = boc => {
-    return { ...boc, start_date: mapIsoDate(boc.start_date), ceased_date: mapIsoDate(boc.ceased_date) };
+    return { ...boc, start_date: mapIsoDate(boc.start_date), ceased_date: mapOptionalIsoDate(boc.ceased_date) };
 };
 
 const mapBogResource = bog => {
-    return { ...bog, start_date: mapIsoDate(bog.start_date), ceased_date: mapIsoDate(bog.ceased_date) };
+    return { ...bog, start_date: mapIsoDate(bog.start_date), ceased_date: mapOptionalIsoDate(bog.ceased_date) };
 };
 
 const mapMoiResource = moi => {
-    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapIsoDate(moi.resigned_on) };
+    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
 };
 
 const mapMocResource = moc => {
-    return { ...moc, resigned_on: mapIsoDate(moc.resigned_on) };
+    return { ...moc, resigned_on: mapOptionalIsoDate(moc.resigned_on) };
 };
 
 /**
