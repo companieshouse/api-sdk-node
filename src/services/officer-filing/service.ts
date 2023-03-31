@@ -11,7 +11,7 @@ export default class {
     constructor (private readonly client: IHttpClient) { }
 
     public async getListActiveDirectorDetails (transactionId: string): Promise<Resource<ActiveOfficerDetails[]> | ApiErrorResponse> {
-        const url = `${this.getPrivateOfficerFilingUrlIncTransactionId(transactionId)}/active-directors-details`;
+        const url = `${this.getOfficerFilingUrlIncTransactionId(transactionId)}/active-directors-details`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
@@ -68,9 +68,5 @@ export default class {
 
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
         return `/transactions/${transactionId}/officers`;
-    }
-
-    private getPrivateOfficerFilingUrlIncTransactionId (transactionId: string) {
-        return `private/transactions/${transactionId}/officers`;
     }
 }
