@@ -188,7 +188,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_individual).to.deep.equal([]);
         expect(data.managing_officers_corporate).to.deep.equal([]);
         expect(data.trusts).to.deep.equal([]);
-        expect(data.update).to.deep.equal(null);
+        expect(data.update).to.deep.equal({});
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {

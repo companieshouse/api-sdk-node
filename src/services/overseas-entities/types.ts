@@ -247,14 +247,14 @@ export interface ManagingOfficerCorporate {
 }
 
 export interface Update {
-    date_of_creation?: string;
-    bo_mo_data?: boolean;
+    date_of_creation?: InputDate;
+    bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
 }
 
 export interface UpdateResource {
     date_of_creation?: string;
-    bo_mo_data?: boolean;
+    bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
 }
 

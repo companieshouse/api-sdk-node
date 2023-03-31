@@ -32,7 +32,8 @@ import {
     TrustCorporateResource,
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource,
-    Update
+    Update,
+    UpdateResource
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -354,10 +355,15 @@ export const TRUSTS_MOCK: Trust[] = [{
 }]
 
 export const UPDATE_OBJECT_MOCK: Update = {
-    date_of_creation: "2022-07-01",
-    bo_mo_data: false,
+    date_of_creation: { day: "1", month: "12", year: "2021" },
+    bo_mo_data_fetched: false,
     registrable_beneficial_owner: yesNoResponse.No
 };
+
+export const UPDATE_RESOURCE_MOCK: UpdateResource = {
+    ...UPDATE_OBJECT_MOCK,
+    date_of_creation: "2021-12-01"
+}
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     entity_name: ENTITY_NAME_FIELD_MOCK,
@@ -478,7 +484,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
     trusts: TRUSTS_RESOURCE_MOCK,
-    update: UPDATE_OBJECT_MOCK
+    update: UPDATE_RESOURCE_MOCK
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
