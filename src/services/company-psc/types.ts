@@ -1,3 +1,5 @@
+import { InputDate } from "services/overseas-entities";
+
 /**
  * CompanyPersonsWithSignificantControlResource is what is returned from the api.
  */
@@ -82,6 +84,7 @@ export interface CompanyPersonWithSignificantControl {
   address: any,
   countryOfResidence: string,
   dateOfBirth: DateOfBirth,
+  ceasedOn: InputDate,
   etag: string,
   links: ItemLinks,
   name: string,
