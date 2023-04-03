@@ -16,6 +16,7 @@ export interface OverseasEntity {
     managing_officers_individual?: ManagingOfficerIndividual[];
     managing_officers_corporate?: ManagingOfficerCorporate[];
     trusts?: Trust[];
+    update?: Update;
 }
 
 export interface OverseasEntityResource {
@@ -32,6 +33,7 @@ export interface OverseasEntityResource {
     managing_officers_individual?: ManagingOfficerIndividualResource[];
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trusts?: TrustResource[];
+    update?: UpdateResource;
 }
 
 export interface OverseasEntityCreated {
@@ -242,6 +244,18 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
+}
+
+export interface Update {
+    date_of_creation?: InputDate;
+    bo_mo_data_fetched?: boolean;
+    registrable_beneficial_owner?: yesNoResponse;
+}
+
+export interface UpdateResource {
+    date_of_creation?: string;
+    bo_mo_data_fetched?: boolean;
+    registrable_beneficial_owner?: yesNoResponse;
 }
 
 export interface ManagingOfficerCorporateResource extends ManagingOfficerCorporate { }

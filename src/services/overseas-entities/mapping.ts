@@ -21,7 +21,9 @@ import {
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource,
     TrustCorporate,
-    TrustCorporateResource
+    TrustCorporateResource,
+    Update,
+    UpdateResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -38,7 +40,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
         managing_officers_corporate: body.managing_officers_corporate,
-        trusts: mapTrusts(body.trusts)
+        trusts: mapTrusts(body.trusts),
+        update: mapUpdate(body.update)
     };
 };
 
@@ -70,7 +73,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
             return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth) }
         }),
         managing_officers_corporate: body.managing_officers_corporate || [],
-        trusts: mapTrustsResource(body.trusts)
+        trusts: mapTrustsResource(body.trusts),
+        update: mapUpdateResource(body.update ?? {})
     };
 };
 
@@ -314,6 +318,32 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
         }
     })
+}
+
+const mapUpdate = (update: Update): UpdateResource => {
+    if (update && Object.keys(update).length) {
+        return {
+            date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
+            bo_mo_data_fetched: update.bo_mo_data_fetched,
+            registrable_beneficial_owner: update.registrable_beneficial_owner
+        }
+    }
+    return {};
+}
+
+const mapUpdateResource = (updateResource: UpdateResource): Update => {
+    if (updateResource && Object.keys(updateResource).length) {
+        return {
+            date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
+            bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
+            registrable_beneficial_owner: updateResource.registrable_beneficial_owner
+        }
+    }
+    return {};
+}
+
+const mapOptionalIsoDate = (date: string | undefined): InputDate | undefined => {
+    return date ? mapIsoDate(date) : undefined;
 }
 
 const mapIsoDate = (date: string): InputDate => {
