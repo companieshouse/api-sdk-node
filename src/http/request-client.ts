@@ -1,5 +1,5 @@
 import { AbstractClient, HttpResponse, AdditionalOptions, Headers } from "./http-client";
-import rq from "request-promise-native";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
 
 /**
  * RequestClient is an implementation of our http client using the request
@@ -28,34 +28,32 @@ export default class RequestClient extends AbstractClient {
 
     private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
         try {
-            const options: rq.Options = {
-                baseUrl: this.options.baseUrl,
-                uri: additionalOptions.url as string,
+            const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
                     ...this.headers,
                     ...additionalOptions.headers
                 },
-                resolveWithFullResponse: true,
-                body: additionalOptions.body,
-                json: true
+                url: `${this.options.baseUrl}{additionalOptions.url}`,
+                data: additionalOptions.body,
+                responseType: "json",
+                validateStatus: () => true
             };
 
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
-            const resp = await rq(options) as rq.FullResponse;
+            const resp = await axios(options) as AxiosResponse;
             return {
-                status: resp.statusCode,
-                body: resp.body,
+                status: resp.status,
+                body: resp.data,
                 headers: resp.headers
             };
         } catch (e) {
-            // e is an instance of RequestError or StatusCodeError
-            // @see https://github.com/request/promise-core/blob/master/lib/errors.js
-            // however, there is currently no type declaration file for this.
-            const error = e?.response?.body || { message: "failed to execute http request" };
+            // e can be an instance of AxiosError or a generic error
+            // however, we cannot specify a type for e coz type annotations for catch block errors must be 'any' or 'unknown' if specified
+            const error = e?.response?.data || { message: "failed to execute http request" };
             return {
-                status: e?.statusCode || 500,
+                status: e?.status || 500,
                 error
             };
         }

@@ -17,13 +17,13 @@
     "analyse-code": "sonar-scanner"
   },
   "dependencies": {
+    "axios": "^0.21.4",
     "camelcase-keys": "~6.2.2",
-    "request": "~2.88.2",
-    "request-promise-native": "~1.0.9",
     "snakecase-keys": "~3.2.0",
     "url-search-params-polyfill": "~8.1.1"
   },
   "devDependencies": {
+    "@types/axios": "^0.14.0",
     "@types/chai": "^4.2.22",
     "@types/chai-as-promised": "^7.1.4",
     "@types/chai-http": "~4.2.0",
