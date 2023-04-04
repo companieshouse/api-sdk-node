@@ -1,69 +1,115 @@
-export interface Tm01Submission {
-    resigned_on: Date,
-    reference_etag: String,
-    reference_appointment_id: String
+/**
+ * CompanyOfficerResource is what is returned from the api.
+ */
+
+export interface CompanyOfficerResource {
+    address: AddressResource;
+    appointed_on: string;
+    country_of_residence?: string;
+    date_of_birth?: DateOfBirthResource;
+    former_names?: FormerNameResource[];
+    identification?: IdentificationResource;
+    links: CompanyOfficerResourceLinks;
+    name: string;
+    nationality?: string;
+    occupation?: string;
+    officer_role: string;
+    resigned_on?: string;
 }
 
-export interface ActiveOfficerDetails {
-    foreName1: string;
-    foreName2?: string;
-    surname: string;
-    occupation: string;
-    nationality: string;
-    dateOfBirth: string;
-    dateOfAppointment: string;
-    countryOfResidence: string;
-    serviceAddress: Address;
-    residentialAddress: Address;
-    isCorporate: boolean;
-    role: string;
-    placeRegistered?: string;
-    registrationNumber?: string;
-    lawGoverned?: string;
-    legalForm?: string;
-    identificationType?: string;
+export interface AddressResource {
+    address_line_1: string;
+    address_line_2?: string;
+    care_of?: string;
+    country: string;
+    locality: string;
+    po_box?: string;
+    postal_code?: string;
+    premises?: string;
+    region?: string;
 }
 
-export interface ActiveOfficerDetailsResource {
-    fore_name_1: string;
-    fore_name_2?: string;
-    surname: string;
-    occupation: string;
-    nationality: string;
-    date_of_birth: string;
-    date_of_appointment: string;
-    country_of_residence: string;
-    service_address: AddressResource;
-    residential_address: AddressResource;
-    is_corporate: boolean;
-    role: string;
+export interface DateOfBirthResource {
+    day?: string;
+    month: string;
+    year: string;
+}
+
+export interface FormerNameResource {
+    forenames?: string;
+    surname?: string;
+}
+
+export interface IdentificationResource {
+    identification_type?: string;
+    legal_authority?: string;
+    legal_form?: string;
     place_registered?: string;
     registration_number?: string;
-    law_governed?: string;
-    legal_form?: string;
-    identification_type?: string;
+}
+
+export interface CompanyOfficerResourceLinks {
+    officer: OfficerResourceLinks;
+}
+
+export interface OfficerResourceLinks {
+    appointments: string;
+}
+
+/**
+ * CompanyOfficers is the interface used within this SDK.
+ */
+
+export interface CompanyOfficer {
+    address: Address;
+    appointedOn: string;
+    countryOfResidence?: string;
+    dateOfBirth?: DateOfBirth;
+    formerNames?: FormerName[];
+    identification?: Identification;
+    links: CompanyOfficerLinks;
+    name: string;
+    nationality?: string;
+    occupation?: string;
+    officerRole: string;
+    resignedOn?: string;
 }
 
 export interface Address {
-    addressLine1?: string;
-    addressLine2?: string;
+    addressLine1: string;
+    addressLine2: string;
     careOf?: string;
-    country?: string;
-    locality?: string;
+    country: string;
+    locality: string;
     poBox?: string;
     postalCode?: string;
     premises?: string;
     region?: string;
 }
 
-export interface AddressResource {
-    address_line_1?: string;
-    address_line_2?: string;
-    care_of?: string;
-    country?: string;
-    locality?: string;
-    po_box?: string;
-    postal_code?: string;
-    premises?: string;
-    region?: string;
+export interface DateOfBirth {
+    day?: string;
+    month: string;
+    year: string;
+}
+
+export interface FormerName {
+    forenames?: string;
+    surname?: string;
+}
+
+export interface Identification {
+    identificationType?: string;
+    legalAuthority?: string;
+    legalForm?: string;
+    placeRegistered?: string;
+    registrationNumber?: string;
+}
+
+export interface CompanyOfficerLinks {
+    officer: OfficerLinks;
+}
+
+export interface OfficerLinks {
+    appointments: string;
 }
