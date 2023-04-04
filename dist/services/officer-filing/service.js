@@ -8,7 +8,11 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
+const mapping_1 = __importDefault(require("../../mapping/mapping"));
 class default_1 {
     constructor(client) {
         this.client = client;
@@ -21,30 +25,10 @@ class default_1 {
                 return { httpStatusCode: resp.status, errors: [resp.error] };
             }
             const resource = { httpStatusCode: resp.status };
-            resource.resource = this.mapToListActiveOfficerDetails(resp.body);
+            const body = resp.body;
+            resource.resource = mapping_1.default.camelCaseKeys(body);
             return resource;
         });
-    }
-    mapToListActiveOfficerDetails(officerResourceList) {
-        const officerList = [];
-        for (let index = 0; index < officerResourceList.length; index++) {
-            const officerResource = officerResourceList[index];
-            officerList[index] = Object.assign(Object.assign(Object.assign({ foreName1: officerResource.fore_name_1, foreName2: officerResource.fore_name_2, surname: officerResource.surname, occupation: officerResource.occupation, nationality: officerResource.nationality, dateOfBirth: officerResource.date_of_birth, dateOfAppointment: officerResource.date_of_appointment, countryOfResidence: officerResource.country_of_residence }, (officerResource.service_address && { serviceAddress: this.mapToAddress(officerResource.service_address) })), (officerResource.residential_address && { residentialAddress: this.mapToAddress(officerResource.residential_address) })), { isCorporate: officerResource.is_corporate, role: officerResource.role, placeRegistered: officerResource.place_registered, registrationNumber: officerResource.registration_number, lawGoverned: officerResource.law_governed, legalForm: officerResource.legal_form, identificationType: officerResource.identification_type });
-        }
-        return officerList;
-    }
-    mapToAddress(addressResource) {
-        return {
-            addressLine1: addressResource.address_line_1,
-            addressLine2: addressResource.address_line_2,
-            careOf: addressResource.care_of,
-            country: addressResource.country,
-            locality: addressResource.locality,
-            poBox: addressResource.po_box,
-            postalCode: addressResource.postal_code,
-            premises: addressResource.premises,
-            region: addressResource.region
-        };
     }
     getOfficerFilingUrlIncTransactionId(transactionId) {
         return `/transactions/${transactionId}/officers`;
