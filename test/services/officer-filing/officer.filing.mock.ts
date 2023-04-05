@@ -48,8 +48,6 @@ export const mockLinks = {
     }
 };
 
-
-
 export const mockActiveDirectorDetails: CompanyOfficerResource = {
     name: "Doe, James John",
     occupation: "singer",
@@ -60,7 +58,7 @@ export const mockActiveDirectorDetails: CompanyOfficerResource = {
     country_of_residence: "Country",
     address: mockAddress1,
     officer_role: "SECRETARY",
-    identification: mockIdentification,
+    identification: mockIdentification
 }
 
 export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
@@ -74,7 +72,7 @@ export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
         country_of_residence: "Country",
         address: mockAddress1,
         officer_role: "SECRETARY",
-        identification: mockIdentification,
+        identification: mockIdentification
     },
     {
         name: "JONES, Tim Bill",
@@ -86,7 +84,7 @@ export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
         country_of_residence: "Country",
         address: mockAddress1,
         officer_role: "SECRETARY",
-        identification: mockIdentification,
+        identification: mockIdentification
     }
 ]
 
