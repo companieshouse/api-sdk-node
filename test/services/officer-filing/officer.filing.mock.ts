@@ -1,20 +1,20 @@
 import {
-    ActiveOfficerDetailsResource
+    CompanyOfficerResource
 } from "../../../src/services/officer-filing";
 import { RequestClient } from "../../../src";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
 export const mockAddress1 = {
-    address_line_1: "20 Any road",
-    address_line_2: "Any",
-    care_of: "xyz",
-    country: "Anyland",
-    locality: "Anytown",
-    po_box: "1",
-    postal_code: "AN1 1XY",
-    premises: "20",
-    region: "Anyshire"
+    address_line_1: "123 Street",
+    address_line_2: "Some area",
+    care_of: "Some council",
+    country: "United Kingdom",
+    locality: "Wales",
+    po_box: "123",
+    postal_code: "SW1",
+    premises: "some premises",
+    region: "South"
 };
 
 export const mockAddress2 = {
@@ -29,69 +29,67 @@ export const mockAddress2 = {
     region: "Thisshire"
 };
 
-export const mockActiveOfficerDetails: ActiveOfficerDetailsResource = {
-    fore_name_1: "John",
-    fore_name_2: "middle name",
-    surname: "Doe",
+export const mockDateOfBirth = {
+    month: "1",
+    year: "1998"
+};
+
+export const mockIdentification = {
+    identification_type: "some identification type",
+    legal_authority: "some legal auth",
+    legal_form: "some legal form",
+    place_registered: "some place",
+    registration_number: "some reg"
+};
+
+export const mockLinks = {
+    officer: {
+        appointments: "officers/456/appointments"
+    }
+};
+
+export const mockActiveDirectorDetails: CompanyOfficerResource = {
+    name: "Doe, James John",
     occupation: "singer",
     nationality: "British",
-    date_of_birth: "1 January 1960",
-    date_of_appointment: "1 January 2009",
+    date_of_birth: mockDateOfBirth,
+    appointed_on: "1 January 2009",
+    links: mockLinks,
     country_of_residence: "Country",
-    service_address: mockAddress1,
-    residential_address: mockAddress2,
-    is_corporate: false,
-    role: "SECRETARY",
-    place_registered: "UNITED KINGDOM",
-    registration_number: "012345678",
-    law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
-    legal_form: "INTERNATIONAL BUSINESS COMPANY",
-    identification_type: "Y"
+    address: mockAddress1,
+    officer_role: "SECRETARY",
+    identification: mockIdentification
 }
 
-export const mockListActiveOfficerDetails: ActiveOfficerDetailsResource[] = [
+export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
     {
-        fore_name_1: "John",
-        fore_name_2: "middle name",
-        surname: "Doe",
+        name: "Doe, James John",
         occupation: "singer",
         nationality: "British",
-        date_of_birth: "1 January 1960",
-        date_of_appointment: "1 January 2009",
+        date_of_birth: mockDateOfBirth,
+        appointed_on: "1 January 2009",
+        links: mockLinks,
         country_of_residence: "Country",
-        service_address: mockAddress1,
-        residential_address: mockAddress2,
-        is_corporate: false,
-        role: "SECRETARY",
-        place_registered: "UNITED KINGDOM",
-        registration_number: "012345678",
-        law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
-        legal_form: "INTERNATIONAL BUSINESS COMPANY",
-        identification_type: "Y"
+        address: mockAddress1,
+        officer_role: "SECRETARY",
+        identification: mockIdentification
     },
     {
-        fore_name_1: "John",
-        fore_name_2: "middle name",
-        surname: "Doe",
+        name: "JONES, Tim Bill",
         occupation: "singer",
         nationality: "British",
-        date_of_birth: "1 January 1960",
-        date_of_appointment: "1 January 2009",
+        date_of_birth: mockDateOfBirth,
+        appointed_on: "1 January 2009",
+        links: mockLinks,
         country_of_residence: "Country",
-        service_address: mockAddress1,
-        residential_address: mockAddress2,
-        is_corporate: false,
-        role: "SECRETARY",
-        place_registered: "UNITED KINGDOM",
-        registration_number: "012345678",
-        law_governed: "INTERNATIONAL BUSINESS COMPANIES ACT 2000",
-        legal_form: "INTERNATIONAL BUSINESS COMPANY",
-        identification_type: "Y"
+        address: mockAddress1,
+        officer_role: "SECRETARY",
+        identification: mockIdentification
     }
 ]
 
-export const mockGetListActiveOfficersDetails = {
-    200: { status: 200, body: mockListActiveOfficerDetails },
-    404: { status: 404, error: "No active officers details were found" },
+export const mockGetListActiveDirectorsDetails = {
+    200: { status: 200, body: mockListActiveDirectorDetails },
+    404: { status: 404, error: "No active directors details were found" },
     500: { status: 500, error: "Internal server error" }
 };
