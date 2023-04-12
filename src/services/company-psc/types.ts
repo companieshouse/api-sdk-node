@@ -15,6 +15,7 @@ export interface CompanyPersonWithSignificantControlResource {
   address: AddressResource,
   country_of_residence: string,
   date_of_birth: DateOfBirthResource,
+  ceased_on: DateResource,
   etag: string,
   links: ItemLinksResource,
   name: string,
@@ -40,6 +41,12 @@ export interface AddressResource {
 
 export interface DateOfBirthResource {
   day?: string;
+  month: string;
+  year: string;
+};
+
+export interface DateResource {
+  day: string;
   month: string;
   year: string;
 };
@@ -82,6 +89,7 @@ export interface CompanyPersonWithSignificantControl {
   address: any,
   countryOfResidence: string,
   dateOfBirth: DateOfBirth,
+  ceasedOn: Date,
   etag: string,
   links: ItemLinks,
   name: string,
@@ -107,6 +115,12 @@ export interface Address {
 
 export interface DateOfBirth {
   day?: string;
+  month: string;
+  year: string;
+};
+
+export interface Date {
+  day: string;
   month: string;
   year: string;
 };

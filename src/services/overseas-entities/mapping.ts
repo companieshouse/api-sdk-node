@@ -8,6 +8,8 @@ import {
     InputDate,
     ManagingOfficerIndividual,
     ManagingOfficerIndividualResource,
+    ManagingOfficerCorporate,
+    ManagingOfficerCorporateResource,
     OverseasEntity,
     OverseasEntityDueDiligence,
     OverseasEntityDueDiligenceResource,
@@ -39,7 +41,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         beneficial_owners_corporate: mapBeneficialOwnersCorporate(body.beneficial_owners_corporate),
         beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(body.beneficial_owners_government_or_public_authority),
         managing_officers_individual: mapManagingOfficersIndividual(body.managing_officers_individual),
-        managing_officers_corporate: body.managing_officers_corporate,
+        managing_officers_corporate: mapManagingOfficersCorporate(body.managing_officers_corporate),
         trusts: mapTrusts(body.trusts),
         update: mapUpdate(body.update)
     };
@@ -60,22 +62,34 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
             identity_date: mapIsoDate(body.overseas_entity_due_diligence?.identity_date)
         } : {},
         beneficial_owners_statement: body.beneficial_owners_statement,
-        beneficial_owners_individual: (body.beneficial_owners_individual || []).map(boi => {
-            return { ...boi, start_date: mapIsoDate(boi.start_date), date_of_birth: mapIsoDate(boi.date_of_birth) }
-        }),
-        beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(boc => {
-            return { ...boc, start_date: mapIsoDate(boc.start_date) }
-        }),
-        beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(bog => {
-            return { ...bog, start_date: mapIsoDate(bog.start_date) }
-        }),
-        managing_officers_individual: (body.managing_officers_individual || []).map(moi => {
-            return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth) }
-        }),
-        managing_officers_corporate: body.managing_officers_corporate || [],
+        beneficial_owners_individual: (body.beneficial_owners_individual || []).map(mapBoiResource),
+        beneficial_owners_corporate: (body.beneficial_owners_corporate || []).map(mapBocResource),
+        beneficial_owners_government_or_public_authority: (body.beneficial_owners_government_or_public_authority || []).map(mapBogResource),
+        managing_officers_individual: (body.managing_officers_individual || []).map(mapMoiResource),
+        managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
-        update: mapUpdateResource(body.update ?? {})
+        update: mapUpdateResource(body.update)
     };
+};
+
+const mapBoiResource = boi => {
+    return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapOptionalIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) };
+};
+
+const mapBocResource = boc => {
+    return { ...boc, start_date: mapIsoDate(boc.start_date), ceased_date: mapOptionalIsoDate(boc.ceased_date) };
+};
+
+const mapBogResource = bog => {
+    return { ...bog, start_date: mapIsoDate(bog.start_date), ceased_date: mapOptionalIsoDate(bog.ceased_date) };
+};
+
+const mapMoiResource = moi => {
+    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
+};
+
+const mapMocResource = moc => {
+    return { ...moc, resigned_on: mapOptionalIsoDate(moc.resigned_on) };
 };
 
 /**
@@ -147,11 +161,12 @@ const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
 const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[] = []): BeneficialOwnerIndividualResource[] => {
     const boIndividualResources: BeneficialOwnerIndividualResource[] = [];
     boIndividuals.forEach(boIndividual => {
-        const { date_of_birth, start_date, ...rest } = boIndividual;
+        const { date_of_birth, start_date, ceased_date, ...rest } = boIndividual;
         boIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
-            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
+            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
         })
     });
     return boIndividualResources;
@@ -166,10 +181,11 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
 const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] = []): BeneficialOwnerCorporateResource[] => {
     const boCorporateResources: BeneficialOwnerCorporateResource[] = [];
     boCorporates.forEach(boCorporate => {
-        const { start_date, ...rest } = boCorporate;
+        const { start_date, ceased_date, ...rest } = boCorporate;
         boCorporateResources.push({
             ...rest,
-            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
+            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
         })
     });
     return boCorporateResources;
@@ -184,10 +200,11 @@ const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] =
 const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentOrPublicAuthority[] = []): BeneficialOwnerGovernmentOrPublicAuthorityResource[] => {
     const boGovernmentResources: BeneficialOwnerGovernmentOrPublicAuthorityResource[] = [];
     boGovernments.forEach(boGovernment => {
-        const { start_date, ...rest } = boGovernment;
+        const { start_date, ceased_date, ...rest } = boGovernment;
         boGovernmentResources.push({
             ...rest,
-            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year)
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
+            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
         })
     });
     return boGovernmentResources;
@@ -202,13 +219,32 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
 const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
     const moIndividualResources: ManagingOfficerIndividualResource[] = [];
     moIndividuals.forEach(moIndividual => {
-        const { date_of_birth, ...rest } = moIndividual;
+        const { date_of_birth, resigned_on, ...rest } = moIndividual;
         moIndividualResources.push({
             ...rest,
-            date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year)
+            date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
+            resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
         })
     });
     return moIndividualResources;
+}
+
+/**
+ * Convert the ManagingOfficerCorporate array data into the Resource format that the API expects
+ * (just converting dates currently)
+ * @param moCorporates Array of ManagingOfficerCorporate objects
+ * @returns Array of ManagingOfficerIndividualResource
+ */
+const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
+    const moCorporateResources: ManagingOfficerCorporateResource[] = [];
+    moCorporates.forEach(moIndividual => {
+        const { resigned_on, ...rest } = moIndividual;
+        moCorporateResources.push({
+            ...rest,
+            resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
+        })
+    });
+    return moCorporateResources;
 }
 
 /**
@@ -325,7 +361,12 @@ const mapUpdate = (update: Update): UpdateResource => {
         return {
             date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
-            registrable_beneficial_owner: update.registrable_beneficial_owner
+            registrable_beneficial_owner: update.registrable_beneficial_owner,
+            review_beneficial_owners_individual: mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual),
+            review_beneficial_owners_corporate: mapBeneficialOwnersCorporate(update.review_beneficial_owners_corporate),
+            review_beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(update.review_beneficial_owners_government_or_public_authority),
+            review_managing_officers_individual: mapManagingOfficersIndividual(update.review_managing_officers_individual),
+            review_managing_officers_corporate: mapManagingOfficersCorporate(update.review_managing_officers_corporate)
         }
     }
     return {};
@@ -336,7 +377,12 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
         return {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
-            registrable_beneficial_owner: updateResource.registrable_beneficial_owner
+            registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
+            review_beneficial_owners_individual: (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource),
+            review_beneficial_owners_corporate: (updateResource.review_beneficial_owners_corporate || []).map(mapBocResource),
+            review_beneficial_owners_government_or_public_authority: (updateResource.review_beneficial_owners_government_or_public_authority || []).map(mapBogResource),
+            review_managing_officers_individual: (updateResource.review_managing_officers_individual || []).map(mapMoiResource),
+            review_managing_officers_corporate: (updateResource.review_managing_officers_corporate || []).map(mapMocResource)
         }
     }
     return {};

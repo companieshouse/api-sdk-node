@@ -82,6 +82,7 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] 
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         start_date: { day: "1", month: "1", year: "2012" },
+        ceased_date: { day: "1", month: "2", year: "2023" },
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
@@ -99,6 +100,7 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST: BeneficialOwnerIndi
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         start_date: "2012-01-01",
+        ceased_date: "2023-02-01",
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
@@ -118,6 +120,7 @@ export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = 
         public_register_name: "register",
         registration_number: "abc123",
         start_date: { day: "1", month: "12", year: "1950" },
+        ceased_date: { day: "1", month: "2", year: "2023" },
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
@@ -137,6 +140,7 @@ export const BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST: BeneficialOwnerCorpo
         public_register_name: "register",
         registration_number: "abc123",
         start_date: "1950-12-01",
+        ceased_date: "2023-02-01",
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
@@ -154,6 +158,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         legal_form: "gov",
         law_governed: "government",
         start_date: { day: "1", month: "12", year: "1950" },
+        ceased_date: { day: "1", month: "2", year: "2023" },
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
@@ -168,6 +173,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
         legal_form: "gov",
         law_governed: "government",
         start_date: "1950-12-01",
+        ceased_date: "2023-02-01",
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
@@ -185,7 +191,8 @@ export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[]
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         occupation: "Some Occupation",
-        role_and_responsibilities: "Some role and responsibilities"
+        role_and_responsibilities: "Some role and responsibilities",
+        resigned_on: { day: "1", month: "2", year: "2023" }
     }
 ];
 
@@ -201,7 +208,8 @@ export const MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST: ManagingOfficerInd
         service_address: ADDRESS,
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         occupation: "Some Occupation",
-        role_and_responsibilities: "Some role and responsibilities"
+        role_and_responsibilities: "Some role and responsibilities",
+        resigned_on: "2023-02-01"
     }
 ];
 
@@ -216,7 +224,24 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
         is_on_register_in_country_formed_in: yesNoResponse.Yes,
         public_register_name: "register",
         registration_number: "abc123",
-        role_and_responsibilities: "role and responsibilities text"
+        role_and_responsibilities: "role and responsibilities text",
+        resigned_on: { day: "1", month: "2", year: "2023" }
+    }
+];
+
+export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = [
+    {
+        name: "Joe Bloggs Ltd",
+        principal_address: ADDRESS,
+        service_address: ADDRESS,
+        is_service_address_same_as_principal_address: yesNoResponse.Yes,
+        legal_form: "corporate",
+        law_governed: "corporation",
+        is_on_register_in_country_formed_in: yesNoResponse.Yes,
+        public_register_name: "register",
+        registration_number: "abc123",
+        role_and_responsibilities: "role and responsibilities text",
+        resigned_on: "2023-02-01"
     }
 ];
 
@@ -249,8 +274,6 @@ export const OE_DUE_DILIGENCE_RESOURCE_MOCK: OverseasEntityDueDiligenceResource 
     ...OE_DUE_DILIGENCE_MOCK,
     identity_date: "2022-01-01"
 };
-
-export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorporateResource[] = MANAGING_OFFICERS_CORPORATE_MOCK_LIST;
 
 export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     type: "type",
@@ -357,12 +380,22 @@ export const TRUSTS_MOCK: Trust[] = [{
 export const UPDATE_OBJECT_MOCK: Update = {
     date_of_creation: { day: "1", month: "12", year: "2021" },
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No
+    registrable_beneficial_owner: yesNoResponse.No,
+    review_beneficial_owners_individual: [],
+    review_beneficial_owners_corporate: [],
+    review_beneficial_owners_government_or_public_authority: [],
+    review_managing_officers_corporate: [],
+    review_managing_officers_individual: []
 };
 
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     ...UPDATE_OBJECT_MOCK,
-    date_of_creation: "2021-12-01"
+    date_of_creation: "2021-12-01",
+    review_beneficial_owners_individual: [],
+    review_beneficial_owners_corporate: [],
+    review_beneficial_owners_government_or_public_authority: [],
+    review_managing_officers_corporate: [],
+    review_managing_officers_individual: []
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
