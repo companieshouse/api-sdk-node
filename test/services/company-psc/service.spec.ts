@@ -79,11 +79,7 @@ describe("company-psc", () => {
                         place_registered: "Companies House",
                         registration_number: "INC08394823"
                     },
-                    ceased_on: {
-                        year: "2023",
-                        month: "2",
-                        day: "1"
-                    }
+                    ceased_on: "2023-2-1"
                 }
             ]
         });
