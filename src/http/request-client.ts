@@ -34,7 +34,7 @@ export default class RequestClient extends AbstractClient {
                     ...this.headers,
                     ...additionalOptions.headers
                 },
-                url: `${this.options.baseUrl}{additionalOptions.url}`,
+                url: `${this.options.baseUrl}${additionalOptions.url}`,
                 data: additionalOptions.body,
                 responseType: "json",
                 validateStatus: () => true
