@@ -31,13 +31,13 @@ export default class RequestClient extends AbstractClient {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
-                    ...this.headers,
-                    ...additionalOptions.headers
+                    authorization: this.headers.Authorization,
+                    accept: "application/json",
+                    "content-type": "application/json"
                 },
-                url: `${this.options.baseUrl}{additionalOptions.url}`,
+                url: `${this.options.baseUrl}${additionalOptions.url}`,
                 data: additionalOptions.body,
-                responseType: "json",
-                validateStatus: () => true
+                responseType: "json"
             };
 
             // any errors (including status code errors) are thrown as exceptions and
