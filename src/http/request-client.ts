@@ -34,8 +34,9 @@ export default class RequestClient extends AbstractClient {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
-                    ...this.headers,
-                    ...additionalOptions.headers
+                    authorization: this.headers.Authorization,
+                    accept: "application/json",
+                    "content-type": "application/json"
                 },
                 url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 data: additionalOptions.body,
