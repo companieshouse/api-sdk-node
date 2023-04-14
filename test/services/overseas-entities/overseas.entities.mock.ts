@@ -380,22 +380,13 @@ export const TRUSTS_MOCK: Trust[] = [{
 export const UPDATE_OBJECT_MOCK: Update = {
     date_of_creation: { day: "1", month: "12", year: "2021" },
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No,
-    review_beneficial_owners_individual: [],
-    review_beneficial_owners_corporate: [],
-    review_beneficial_owners_government_or_public_authority: [],
-    review_managing_officers_corporate: [],
-    review_managing_officers_individual: []
-};
+    registrable_beneficial_owner: yesNoResponse.No
+}
 
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
-    ...UPDATE_OBJECT_MOCK,
     date_of_creation: "2021-12-01",
-    review_beneficial_owners_individual: [],
-    review_beneficial_owners_corporate: [],
-    review_beneficial_owners_government_or_public_authority: [],
-    review_managing_officers_corporate: [],
-    review_managing_officers_individual: []
+    bo_mo_data_fetched: false,
+    registrable_beneficial_owner: yesNoResponse.No
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {

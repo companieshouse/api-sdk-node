@@ -358,32 +358,64 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
 
 const mapUpdate = (update: Update): UpdateResource => {
     if (update && Object.keys(update).length) {
-        return {
+        const resource : UpdateResource= {
             date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
             registrable_beneficial_owner: update.registrable_beneficial_owner,
-            review_beneficial_owners_individual: mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual),
-            review_beneficial_owners_corporate: mapBeneficialOwnersCorporate(update.review_beneficial_owners_corporate),
-            review_beneficial_owners_government_or_public_authority: mapBeneficialOwnersGovernment(update.review_beneficial_owners_government_or_public_authority),
-            review_managing_officers_individual: mapManagingOfficersIndividual(update.review_managing_officers_individual),
-            review_managing_officers_corporate: mapManagingOfficersCorporate(update.review_managing_officers_corporate)
+        };
+        const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
+        if (beneficial_owners_individual.length !== 0) {
+            resource.review_beneficial_owners_individual = beneficial_owners_individual;
         }
+        const beneficial_owners_corporate = mapBeneficialOwnersCorporate(update.review_beneficial_owners_corporate);
+        if (beneficial_owners_corporate.length !== 0) {
+            resource.review_beneficial_owners_corporate = beneficial_owners_corporate;
+        }
+        const beneficial_owners_government = mapBeneficialOwnersGovernment(update.review_beneficial_owners_government_or_public_authority);
+        if (beneficial_owners_government.length !== 0) {
+            resource.review_beneficial_owners_government_or_public_authority = beneficial_owners_government;
+        }
+        const managing_officers_individual = mapManagingOfficersIndividual(update.review_managing_officers_individual);
+        if (managing_officers_individual.length !== 0) {
+            resource.review_managing_officers_individual = managing_officers_individual;
+        }
+        const managing_officers_corporate = mapManagingOfficersCorporate(update.review_managing_officers_corporate);
+        if (managing_officers_corporate.length !== 0) {
+            resource.review_managing_officers_corporate = managing_officers_corporate;
+        }
+        return resource;
     }
     return {};
 }
 
 const mapUpdateResource = (updateResource: UpdateResource): Update => {
     if (updateResource && Object.keys(updateResource).length) {
-        return {
+        const update: Update = {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
-            registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
-            review_beneficial_owners_individual: (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource),
-            review_beneficial_owners_corporate: (updateResource.review_beneficial_owners_corporate || []).map(mapBocResource),
-            review_beneficial_owners_government_or_public_authority: (updateResource.review_beneficial_owners_government_or_public_authority || []).map(mapBogResource),
-            review_managing_officers_individual: (updateResource.review_managing_officers_individual || []).map(mapMoiResource),
-            review_managing_officers_corporate: (updateResource.review_managing_officers_corporate || []).map(mapMocResource)
+            registrable_beneficial_owner: updateResource.registrable_beneficial_owner
+        };
+        const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
+        if (beneficial_owners_individual.length !== 0) {
+            update.review_beneficial_owners_individual = beneficial_owners_individual;
         }
+        const beneficial_owners_corporate = (updateResource.review_beneficial_owners_corporate || []).map(mapBocResource);
+        if (beneficial_owners_corporate.length !== 0) {
+            update.review_beneficial_owners_corporate = beneficial_owners_corporate;
+        }
+        const beneficial_owners_government = (updateResource.review_beneficial_owners_government_or_public_authority || []).map(mapBogResource);
+        if (beneficial_owners_government.length !== 0) {
+            update.review_beneficial_owners_government_or_public_authority = beneficial_owners_government;
+        }
+        const managing_officers_individual = (updateResource.review_managing_officers_individual || []).map(mapMoiResource);
+        if (managing_officers_individual.length !== 0) {
+            update.review_managing_officers_individual  = managing_officers_individual;
+        }
+        const managing_officers_corporate = (updateResource.review_managing_officers_corporate || []).map(mapMocResource);
+        if (managing_officers_corporate.length !== 0) {
+            update.review_managing_officers_corporate = managing_officers_corporate;
+        }
+        return update
     }
     return {};
 }
