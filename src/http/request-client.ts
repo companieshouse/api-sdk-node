@@ -65,6 +65,10 @@ export default class RequestClient extends AbstractClient {
             // e can be an instance of AxiosError or a generic error
             // however, we cannot specify a type for e coz type annotations for catch block errors must be 'any' or 'unknown' if specified
             const error = e?.response?.data || { message: "failed to execute http request" };
+            
+            console.log("error output ====");
+            console.log(error);
+
             return {
                 status: e?.status || 500,
                 error
