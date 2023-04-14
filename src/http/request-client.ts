@@ -39,15 +39,28 @@ export default class RequestClient extends AbstractClient {
                 data: additionalOptions.body,
                 responseType: "json"
             };
-
+            console.log("headers output ====");
+            console.log(this.headers);
+            console.log("additionalOptions output ====");
+            console.log(additionalOptions);
+            console.log("options output ====");
+            console.log(options);
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
+
             const resp = await axios(options) as AxiosResponse;
-            return {
+
+            const response = {
                 status: resp.status,
                 body: resp.data,
                 headers: resp.headers
             };
+
+            console.log("response output ====");
+            console.log(response);
+
+            return response;
+
         } catch (e) {
             // e can be an instance of AxiosError or a generic error
             // however, we cannot specify a type for e coz type annotations for catch block errors must be 'any' or 'unknown' if specified
