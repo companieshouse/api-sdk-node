@@ -48,10 +48,13 @@ class RequestClient extends http_client_1.AbstractClient {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             try {
+                if (additionalOptions.url.charAt(0) !== "/") {
+                    additionalOptions.url = `/${additionalOptions.url}`;
+                }
                 const options = {
                     method: additionalOptions.method,
                     headers: Object.assign(Object.assign({}, this.headers), additionalOptions.headers),
-                    url: `${this.options.baseUrl}${additionalOptions.url}`,
+                    url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                     data: additionalOptions.body,
                     responseType: "json"
                 };
@@ -85,6 +88,12 @@ class RequestClient extends http_client_1.AbstractClient {
                 };
             }
         });
+    }
+    formatUrl(baseUrl, uri) {
+        if (uri.charAt(0) !== "/") {
+            uri = `/${uri}`;
+        }
+        return `${baseUrl}${uri}`;
     }
 }
 exports.default = RequestClient;
