@@ -358,10 +358,10 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
 
 const mapUpdate = (update: Update): UpdateResource => {
     if (update && Object.keys(update).length) {
-        const resource : UpdateResource= {
+        const resource: UpdateResource = {
             date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
-            registrable_beneficial_owner: update.registrable_beneficial_owner,
+            registrable_beneficial_owner: update.registrable_beneficial_owner
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
@@ -409,7 +409,7 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
         }
         const managing_officers_individual = (updateResource.review_managing_officers_individual || []).map(mapMoiResource);
         if (managing_officers_individual.length !== 0) {
-            update.review_managing_officers_individual  = managing_officers_individual;
+            update.review_managing_officers_individual = managing_officers_individual;
         }
         const managing_officers_corporate = (updateResource.review_managing_officers_corporate || []).map(mapMocResource);
         if (managing_officers_corporate.length !== 0) {
