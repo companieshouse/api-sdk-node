@@ -35,7 +35,7 @@ export default class RequestClient extends AbstractClient {
                     accept: "application/json",
                     "content-type": "application/json"
                 },
-                url: `${this.options.baseUrl}${additionalOptions.url}`,
+                url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 data: additionalOptions.body,
                 responseType: "json"
             };
@@ -57,5 +57,12 @@ export default class RequestClient extends AbstractClient {
                 error
             };
         }
+    }
+
+    private formatUrl (baseUrl, uri) {
+        if (uri.charAt(0) !== "/") {
+            uri = `/${uri}`;
+        }
+        return `${baseUrl}${uri}`;
     }
 }
