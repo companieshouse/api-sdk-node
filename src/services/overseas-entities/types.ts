@@ -229,6 +229,7 @@ export interface ManagingOfficerIndividual {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
+    start_date?: InputDate
     resigned_on?: InputDate
 }
 
@@ -246,6 +247,7 @@ export interface ManagingOfficerIndividualResource {
     is_service_address_same_as_usual_residential_address?: yesNoResponse
     occupation?: string
     role_and_responsibilities?: string
+    start_date?: string
     resigned_on?: string
 }
 
@@ -261,7 +263,8 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
-    resigned_on: InputDate
+    resigned_on?: InputDate
+    start_date?: InputDate
 }
 
 export interface Update {
@@ -299,6 +302,7 @@ export interface ManagingOfficerCorporateResource {
     registration_number?: string
     role_and_responsibilities?: string
     resigned_on?: string
+    start_date?: string
 }
 
 export interface Trust{

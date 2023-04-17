@@ -85,11 +85,11 @@ const mapBogResource = bog => {
 };
 
 const mapMoiResource = moi => {
-    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
+    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), start_date: mapOptionalIsoDate(moi.startOn), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
 };
 
 const mapMocResource = moc => {
-    return { ...moc, resigned_on: mapOptionalIsoDate(moc.resigned_on) };
+    return { ...moc, start_date: mapOptionalIsoDate(moc.startOn), resigned_on: mapOptionalIsoDate(moc.resigned_on) };
 };
 
 /**
@@ -219,10 +219,11 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
 const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[] = []): ManagingOfficerIndividualResource[] => {
     const moIndividualResources: ManagingOfficerIndividualResource[] = [];
     moIndividuals.forEach(moIndividual => {
-        const { date_of_birth, resigned_on, ...rest } = moIndividual;
+        const { date_of_birth, start_date, resigned_on, ...rest } = moIndividual;
         moIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
             resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
         })
     });
@@ -238,9 +239,10 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
 const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
     const moCorporateResources: ManagingOfficerCorporateResource[] = [];
     moCorporates.forEach(moIndividual => {
-        const { resigned_on, ...rest } = moIndividual;
+        const { start_date, resigned_on, ...rest } = moIndividual;
         moCorporateResources.push({
             ...rest,
+            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
             resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
         })
     });
