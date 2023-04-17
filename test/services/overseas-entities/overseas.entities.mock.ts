@@ -192,6 +192,7 @@ export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[]
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         occupation: "Some Occupation",
         role_and_responsibilities: "Some role and responsibilities",
+        start_date: { day: "1", month: "12", year: "2022" },
         resigned_on: { day: "1", month: "2", year: "2023" }
     }
 ];
@@ -209,6 +210,7 @@ export const MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST: ManagingOfficerInd
         is_service_address_same_as_usual_residential_address: yesNoResponse.Yes,
         occupation: "Some Occupation",
         role_and_responsibilities: "Some role and responsibilities",
+        start_date: "2022-12-01",
         resigned_on: "2023-02-01"
     }
 ];
@@ -225,6 +227,7 @@ export const MANAGING_OFFICERS_CORPORATE_MOCK_LIST: ManagingOfficerCorporate[] =
         public_register_name: "register",
         registration_number: "abc123",
         role_and_responsibilities: "role and responsibilities text",
+        start_date: { day: "1", month: "12", year: "2022" },
         resigned_on: { day: "1", month: "2", year: "2023" }
     }
 ];
@@ -241,6 +244,7 @@ export const MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST: ManagingOfficerCorp
         public_register_name: "register",
         registration_number: "abc123",
         role_and_responsibilities: "role and responsibilities text",
+        start_date: "2022-12-01",
         resigned_on: "2023-02-01"
     }
 ];

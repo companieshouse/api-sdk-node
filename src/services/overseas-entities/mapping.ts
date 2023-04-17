@@ -1,3 +1,4 @@
+import { start } from "repl";
 import {
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
@@ -85,11 +86,11 @@ const mapBogResource = bog => {
 };
 
 const mapMoiResource = moi => {
-    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), start_date: mapOptionalIsoDate(moi.startOn), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
+    return { ...moi, date_of_birth: mapIsoDate(moi.date_of_birth), start_date: mapOptionalIsoDate(moi.start_date), resigned_on: mapOptionalIsoDate(moi.resigned_on) };
 };
 
 const mapMocResource = moc => {
-    return { ...moc, start_date: mapOptionalIsoDate(moc.startOn), resigned_on: mapOptionalIsoDate(moc.resigned_on) };
+    return { ...moc, start_date: mapOptionalIsoDate(moc.start_date), resigned_on: mapOptionalIsoDate(moc.resigned_on) };
 };
 
 /**

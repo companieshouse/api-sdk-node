@@ -263,8 +263,8 @@ export interface ManagingOfficerCorporate {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
-    resigned_on?: InputDate
     start_date?: InputDate
+    resigned_on?: InputDate
 }
 
 export interface Update {
@@ -301,8 +301,8 @@ export interface ManagingOfficerCorporateResource {
     public_register_name?: string
     registration_number?: string
     role_and_responsibilities?: string
-    resigned_on?: string
     start_date?: string
+    resigned_on?: string
 }
 
 export interface Trust{
