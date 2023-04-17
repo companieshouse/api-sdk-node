@@ -205,4 +205,16 @@ describe("request-client", () => {
         const formattedUrl = clientPrototype.formatUrl(baseUrl, "/path/to/end-point");
         expect(formattedUrl).to.equal(`${baseUrl}/path/to/end-point`);
     });
+
+    it("returns a correctly formatted url if uri contains only a slash", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "/");
+        expect(formattedUrl).to.equal(`${baseUrl}`);
+    });
+
+    it("returns a correctly formatted url if uri is empty", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "");
+        expect(formattedUrl).to.equal(`${baseUrl}`);
+    });
 });
