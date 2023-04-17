@@ -34,8 +34,9 @@ export default class RequestClient extends AbstractClient {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
-                    ...this.headers,
-                    ...additionalOptions.headers
+                    authorization: this.headers.Authorization,
+                    accept: "application/json",
+                    "content-type": "application/json"
                 },
                 url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 data: additionalOptions.body,
@@ -45,7 +46,7 @@ export default class RequestClient extends AbstractClient {
             console.log(this.headers);
             console.log("additionalOptions output ====");
             console.log(additionalOptions);
-            console.log("options output ====");
+            console.log("options output/fix/v2 ====");
             console.log(options);
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.

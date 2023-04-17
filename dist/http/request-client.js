@@ -53,7 +53,11 @@ class RequestClient extends http_client_1.AbstractClient {
                 }
                 const options = {
                     method: additionalOptions.method,
-                    headers: Object.assign(Object.assign({}, this.headers), additionalOptions.headers),
+                    headers: {
+                        authorization: this.headers.Authorization,
+                        accept: "application/json",
+                        "content-type": "application/json"
+                    },
                     url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                     data: additionalOptions.body,
                     responseType: "json"
@@ -62,7 +66,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 console.log(this.headers);
                 console.log("additionalOptions output ====");
                 console.log(additionalOptions);
-                console.log("options output ====");
+                console.log("options output/fix/v2 ====");
                 console.log(options);
                 // any errors (including status code errors) are thrown as exceptions and
                 // will be caught in the catch block.
@@ -90,8 +94,11 @@ class RequestClient extends http_client_1.AbstractClient {
         });
     }
     formatUrl(baseUrl, uri) {
-        if (uri.charAt(0) !== "/") {
+        if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
+        }
+        if (uri === "/") {
+            return baseUrl;
         }
         return `${baseUrl}${uri}`;
     }
