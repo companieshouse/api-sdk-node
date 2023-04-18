@@ -66,7 +66,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 console.log(this.headers);
                 console.log("additionalOptions output ====");
                 console.log(additionalOptions);
-                console.log("options output/fix/v2 ====");
+                console.log("options output/fix/v3 ====");
                 console.log(options);
                 // any errors (including status code errors) are thrown as exceptions and
                 // will be caught in the catch block.
