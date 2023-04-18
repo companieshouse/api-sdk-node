@@ -53,11 +53,17 @@ class RequestClient extends http_client_1.AbstractClient {
                 }
                 const options = {
                     method: additionalOptions.method,
-                    headers: Object.assign(Object.assign({}, this.headers), additionalOptions.headers),
+                    headers: {
+                        authorization: this.headers.Authorization,
+                        accept: "application/json",
+                        "content-type": "application/json"
+                    },
                     url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
-                    data: additionalOptions.body,
                     responseType: "json"
                 };
+                if (additionalOptions.body) {
+                    options.data = additionalOptions.body;
+                }
                 console.log("headers output ====");
                 console.log(this.headers);
                 console.log("additionalOptions output ====");
