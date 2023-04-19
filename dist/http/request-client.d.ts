@@ -9,6 +9,6 @@ export default class RequestClient extends AbstractClient {
     httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpDelete(url: string): Promise<HttpResponse>;
-    private request;
     private formatUrl;
+    private request;
 }

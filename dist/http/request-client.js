@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_client_1 = require("./http-client");
 const axios_1 = __importDefault(require("axios"));
+// import fetch from "node-fetch";
 /**
  * RequestClient is an implementation of our http client using the request
  * library.
@@ -44,13 +45,73 @@ class RequestClient extends http_client_1.AbstractClient {
             return this.request({ method: "DELETE", url });
         });
     }
+    // private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
+    //     try {
+    //         const options = {
+    //             method: additionalOptions.method,
+    //             headers: {
+    //                 authorization: this.headers.Authorization,
+    //                 accept: "application/json",
+    //                 "content-type": "application/json"
+    //             },
+    //
+    //             responseType: "json"
+    //         };
+    //         if (additionalOptions.body) {
+    //             // @ts-ignore
+    //             options.body = JSON.stringify(additionalOptions.body);
+    //         }
+    //         console.log("headers output ====");
+    //         console.log(this.headers);
+    //         console.log("additionalOptions output ====");
+    //         console.log(additionalOptions);
+    //         console.log("options output/fix/v3 ====");
+    //         console.log(options);
+    //         // any errors (including status code errors) are thrown as exceptions and
+    //         // will be caught in the catch block.
+    //
+    //         const fetchUrl: string = this.formatUrl(this.options.baseUrl, additionalOptions.url);
+    //         console.log("url output ====");
+    //         console.log(fetchUrl);
+    //         const resp = await fetch(fetchUrl, options);
+    //
+    //         const response = {
+    //             status: resp.status,
+    //             body: resp.json(),
+    //             headers: resp.headers
+    //         };
+    //
+    //         console.log("response output ====");
+    //         console.log(response);
+    //
+    //         return response;
+    //     } catch (e) {
+    //         // e can be an instance of AxiosError or a generic error
+    //         // however, we cannot specify a type for e coz type annotations for catch block errors must be 'any' or 'unknown' if specified
+    //         const error = e?.response?.data || { message: "failed to execute http request" };
+    //
+    //         console.log("error output ====");
+    //         console.log(error);
+    //
+    //         return {
+    //             status: e?.status || 500,
+    //             error
+    //         };
+    //     }
+    // }
+    formatUrl(baseUrl, uri) {
+        if (uri.length > 0 && uri.charAt(0) !== "/") {
+            uri = `/${uri}`;
+        }
+        if (uri === "/") {
+            return baseUrl;
+        }
+        return `${baseUrl}${uri}`;
+    }
     request(additionalOptions) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                if (additionalOptions.url.charAt(0) !== "/") {
-                    additionalOptions.url = `/${additionalOptions.url}`;
-                }
                 const options = {
                     method: additionalOptions.method,
                     headers: {
@@ -59,7 +120,10 @@ class RequestClient extends http_client_1.AbstractClient {
                         "content-type": "application/json"
                     },
                     url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
-                    responseType: "json"
+                    responseType: "json",
+                    validateStatus: status => {
+                        return status < 500; // Resolve only if the status code is less than 500
+                    }
                 };
                 if (additionalOptions.body) {
                     options.data = additionalOptions.body;
@@ -94,15 +158,6 @@ class RequestClient extends http_client_1.AbstractClient {
                 };
             }
         });
-    }
-    formatUrl(baseUrl, uri) {
-        if (uri.length > 0 && uri.charAt(0) !== "/") {
-            uri = `/${uri}`;
-        }
-        if (uri === "/") {
-            return baseUrl;
-        }
-        return `${baseUrl}${uri}`;
     }
 }
 exports.default = RequestClient;
