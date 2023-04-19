@@ -1,13 +1,13 @@
 import { AbstractClient, HttpResponse, AdditionalOptions, Headers } from "./http-client";
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse, AxiosError, ResponseType } from "axios";
 
 /**
  * RequestClient is an implementation of our http client using the request
  * library.
  */
 export default class RequestClient extends AbstractClient {
-    public async httpGet (url: string, headers?: Headers): Promise<HttpResponse> {
-        return this.request({ method: "GET", url, headers });
+    public async httpGet (url: string, headers?: Headers, responseType?: ResponseType): Promise<HttpResponse> {
+        return this.request({ method: "GET", url, headers, responseType });
     }
 
     public async httpPost (url: string, body?: any, headers?: Headers): Promise<HttpResponse> {
@@ -28,6 +28,7 @@ export default class RequestClient extends AbstractClient {
 
     private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
         try {
+            const responseType = additionalOptions?.responseType;
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
@@ -37,7 +38,7 @@ export default class RequestClient extends AbstractClient {
                 },
                 url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 data: additionalOptions.body,
-                responseType: "json"
+                responseType: responseType ? responseType : "json",
             };
 
             // any errors (including status code errors) are thrown as exceptions and
