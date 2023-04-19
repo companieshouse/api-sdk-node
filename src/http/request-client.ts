@@ -36,9 +36,14 @@ export default class RequestClient extends AbstractClient {
                     "content-type": "application/json"
                 },
                 url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
-                data: additionalOptions.body,
-                responseType: "json"
+                responseType: "json",
+                validateStatus: status => {
+                    return status < 500; // Resolve only if the status code is less than 500
+                }
             };
+            if (additionalOptions.body) {
+                options.data = additionalOptions.body;
+            }
 
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
