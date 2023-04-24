@@ -1,4 +1,3 @@
-import { start } from "repl";
 import {
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
@@ -167,7 +166,7 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
             start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
-            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
+            ceased_date: convertOptionalInputDate(ceased_date)
         })
     });
     return boIndividualResources;
@@ -186,7 +185,7 @@ const mapBeneficialOwnersCorporate = (boCorporates: BeneficialOwnerCorporate[] =
         boCorporateResources.push({
             ...rest,
             start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
-            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
+            ceased_date: convertOptionalInputDate(ceased_date)
         })
     });
     return boCorporateResources;
@@ -205,7 +204,7 @@ const mapBeneficialOwnersGovernment = (boGovernments: BeneficialOwnerGovernmentO
         boGovernmentResources.push({
             ...rest,
             start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
-            ceased_date: convertDateToIsoDateString(ceased_date?.day, ceased_date?.month, ceased_date?.year)
+            ceased_date: convertOptionalInputDate(ceased_date)
         })
     });
     return boGovernmentResources;
@@ -224,8 +223,8 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
         moIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
-            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
-            resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
+            start_date: convertOptionalInputDate(start_date),
+            resigned_on: convertOptionalInputDate(resigned_on)
         })
     });
     return moIndividualResources;
@@ -235,16 +234,16 @@ const mapManagingOfficersIndividual = (moIndividuals: ManagingOfficerIndividual[
  * Convert the ManagingOfficerCorporate array data into the Resource format that the API expects
  * (just converting dates currently)
  * @param moCorporates Array of ManagingOfficerCorporate objects
- * @returns Array of ManagingOfficerIndividualResource
+ * @returns Array of ManagingOfficerCorporateResource
  */
 const mapManagingOfficersCorporate = (moCorporates: ManagingOfficerCorporate[] = []): ManagingOfficerCorporateResource[] => {
     const moCorporateResources: ManagingOfficerCorporateResource[] = [];
-    moCorporates.forEach(moIndividual => {
-        const { start_date, resigned_on, ...rest } = moIndividual;
+    moCorporates.forEach(moCorporate => {
+        const { start_date, resigned_on, ...rest } = moCorporate;
         moCorporateResources.push({
             ...rest,
-            start_date: convertDateToIsoDateString(start_date?.day, start_date?.month, start_date?.year),
-            resigned_on: convertDateToIsoDateString(resigned_on?.day, resigned_on?.month, resigned_on?.year)
+            start_date: convertOptionalInputDate(start_date),
+            resigned_on: convertOptionalInputDate(resigned_on)
         })
     });
     return moCorporateResources;
@@ -440,6 +439,10 @@ const convertOptionalDateToIsoDateString = (day: string = "", month: string = ""
 
 const convertDateToIsoDateString = (day: string, month: string, year: string): string => {
     return `${year}-${zeroPadNumber(month)}-${zeroPadNumber(day)}`;
+}
+
+const convertOptionalInputDate = (date: InputDate): string | undefined => {
+    return date ? convertOptionalDateToIsoDateString(date.day, date.month, date.year) : undefined;
 }
 
 const zeroPadNumber = (input: string = ""): string => {
