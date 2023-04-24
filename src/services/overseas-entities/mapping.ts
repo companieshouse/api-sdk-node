@@ -442,7 +442,7 @@ const convertDateToIsoDateString = (day: string, month: string, year: string): s
 }
 
 const convertOptionalInputDate = (date: InputDate): string | undefined => {
-    return Object.keys(date).length > 0 ? convertOptionalDateToIsoDateString(date.day, date.month, date.year) : undefined;
+    return date !== undefined && Object.keys(date).length > 0 ? convertOptionalDateToIsoDateString(date.day, date.month, date.year) : undefined;
 }
 
 const zeroPadNumber = (input: string = ""): string => {
