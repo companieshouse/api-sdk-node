@@ -29,4 +29,17 @@ export default class {
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
         return `/transactions/${transactionId}/officers`;
     }
+
+    public async getCurrentOrFutureDissolved (companyNumber: String, transactionId: string): Promise<Resource<Boolean>> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}/company/${companyNumber}/past-future-dissolved`;
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        const resource: Resource<Boolean> = { httpStatusCode: resp.status, resource: parseBoolean(resp.body) };
+
+        return resource;
+    }
 }
