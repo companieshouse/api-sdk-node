@@ -78,7 +78,8 @@ describe("company-psc", () => {
                         legal_form: "Public Limited Company",
                         place_registered: "Companies House",
                         registration_number: "INC08394823"
-                    }
+                    },
+                    ceased_on: "2023-2-1"
                 }
             ]
         });
@@ -94,35 +95,35 @@ describe("company-psc", () => {
 
         expect(data.httpStatusCode).to.equal(200);
 
-        expect(data.resource.activeCount).to.equal(mockResponseBody.active_count);
-        expect(data.resource.ceasedCount).to.equal(mockResponseBody.ceased_count);
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index);
-        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
+        expect(data.resource?.activeCount).to.equal(mockResponseBody.active_count);
+        expect(data.resource?.ceasedCount).to.equal(mockResponseBody.ceased_count);
+        expect(data.resource?.itemsPerPage).to.equal(mockResponseBody.items_per_page);
+        expect(data.resource?.startIndex).to.equal(mockResponseBody.start_index);
+        expect(data.resource?.totalResults).to.equal(mockResponseBody.total_results);
 
-        expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(data.resource?.links.self).to.equal(mockResponseBody.links.self);
 
-        expect(data.resource.items.length).to.equal(mockResponseBody.items.length);
+        expect(data.resource?.items.length).to.equal(mockResponseBody.items.length);
 
-        expect(data.resource.items[0].countryOfResidence).to.equal(mockResponseBody.items[0].country_of_residence);
-        expect(data.resource.items[0].etag).to.equal(mockResponseBody.items[0].etag);
-        expect(data.resource.items[0].nationality).to.equal(mockResponseBody.items[0].nationality);
-        expect(data.resource.items[0].name).to.equal(mockResponseBody.items[0].name);
+        expect(data.resource?.items[0].countryOfResidence).to.equal(mockResponseBody.items[0].country_of_residence);
+        expect(data.resource?.items[0].etag).to.equal(mockResponseBody.items[0].etag);
+        expect(data.resource?.items[0].nationality).to.equal(mockResponseBody.items[0].nationality);
+        expect(data.resource?.items[0].name).to.equal(mockResponseBody.items[0].name);
 
-        expect(data.resource.items[0].naturesOfControl).to.eql(mockResponseBody.items[0].natures_of_control);
+        expect(data.resource?.items[0].naturesOfControl).to.eql(mockResponseBody.items[0].natures_of_control);
 
-        expect(data.resource.items[0].address.addressLine1).to.equal(mockResponseBody.items[0].address.address_line_1);
-        expect(data.resource.items[0].address.locality).to.equal(mockResponseBody.items[0].address.locality);
-        expect(data.resource.items[0].address.postalCode).to.equal(mockResponseBody.items[0].address.postal_code);
-        expect(data.resource.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
-        expect(data.resource.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
+        expect(data.resource?.items[0].address.addressLine1).to.equal(mockResponseBody.items[0].address.address_line_1);
+        expect(data.resource?.items[0].address.locality).to.equal(mockResponseBody.items[0].address.locality);
+        expect(data.resource?.items[0].address.postalCode).to.equal(mockResponseBody.items[0].address.postal_code);
+        expect(data.resource?.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
+        expect(data.resource?.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
 
-        expect(data.resource.items[0].dateOfBirth.month).to.equal(mockResponseBody.items[0].date_of_birth.month);
-        expect(data.resource.items[0].dateOfBirth.year).to.equal(mockResponseBody.items[0].date_of_birth.year);
+        expect(data.resource?.items[0].dateOfBirth.month).to.equal(mockResponseBody.items[0].date_of_birth.month);
+        expect(data.resource?.items[0].dateOfBirth.year).to.equal(mockResponseBody.items[0].date_of_birth.year);
 
-        expect(data.resource.items[0].identification.legalAuthority).to.equal(mockResponseBody.items[0].identification.legal_authority);
-        expect(data.resource.items[0].identification.legalForm).to.equal(mockResponseBody.items[0].identification.legal_form);
-        expect(data.resource.items[0].identification.placeRegistered).to.equal(mockResponseBody.items[0].identification.place_registered);
-        expect(data.resource.items[0].identification.registrationNumber).to.equal(mockResponseBody.items[0].identification.registration_number)
+        expect(data.resource?.items[0].identification?.legalAuthority).to.equal(mockResponseBody.items[0].identification?.legal_authority);
+        expect(data.resource?.items[0].identification?.legalForm).to.equal(mockResponseBody.items[0].identification?.legal_form);
+        expect(data.resource?.items[0].identification?.placeRegistered).to.equal(mockResponseBody.items[0].identification?.place_registered);
+        expect(data.resource?.items[0].identification?.registrationNumber).to.equal(mockResponseBody.items[0].identification?.registration_number)
     });
 });
