@@ -38,8 +38,6 @@ export default class {
             return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
-        const resource: Resource<Boolean> = { httpStatusCode: resp.status, resource: resp.body == 'true' };
-
-        return resource;
+        return { httpStatusCode: resp.status, resource: resp.body as Boolean };
     }
 }
