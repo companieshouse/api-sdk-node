@@ -31,7 +31,7 @@ export default class {
     }
 
     public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
-        const url = `/officer-filing/company/${companyNumber}/stop-screen-checks/past-future-dissolved`;
+        const url = `/officer-filing/company/${companyNumber}/eligibility-check/past-future-dissolved`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
