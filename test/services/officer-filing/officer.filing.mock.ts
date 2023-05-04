@@ -93,3 +93,12 @@ export const mockGetListActiveDirectorsDetails = {
     404: { status: 404, error: "No active directors details were found" },
     500: { status: 500, error: "Internal server error" }
 };
+
+export const mockGetCurrentOrFutureDissolved = {
+    200: { status: 200, body: true },
+    500: { status: 500, error: "Internal server error" }
+}
+
+export const mockGetCurrentOrFutureDissolvedReturnsFalse = {
+    200: { status: 200, body: false }
+}
