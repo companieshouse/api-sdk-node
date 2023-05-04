@@ -29,4 +29,32 @@ export default class {
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
         return `/transactions/${transactionId}/officers`;
     }
+
+    private getOfficerFilingUrlIncTransactionIdAndSubmissionId (transactionId: string, submissionId: string) {
+        return `/transactions/${transactionId}/officers/submissionId/${submissionId}/`;
+    }
+
+         /**
+            * Get the director details including the termination date out of the filing.
+            * to be used on the check your answers page for TM01.
+            *
+            * @params transaction id and submission id to look up the filing
+            */
+
+    public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
+        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/check-answers-directors-details`;
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        const resource: Resource<CompanyOfficer> = { httpStatusCode: resp.status };
+
+        const body = resp.body as CompanyOfficerResource;
+
+        resource.resource = Mapping.camelCaseKeys<CompanyOfficer>(body);
+
+        return resource;
+    }
 }
