@@ -362,6 +362,7 @@ const mapUpdate = (update: Update): UpdateResource => {
     if (update && Object.keys(update).length) {
         const resource: UpdateResource = {
             date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
+            filing_date: convertOptionalDateToIsoDateString(update.filing_date?.day, update.filing_date?.month, update.filing_date?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
             registrable_beneficial_owner: update.registrable_beneficial_owner
         };
@@ -394,6 +395,7 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
     if (updateResource && Object.keys(updateResource).length) {
         const update: Update = {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
+            filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
             registrable_beneficial_owner: updateResource.registrable_beneficial_owner
         };
