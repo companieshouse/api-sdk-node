@@ -34,12 +34,12 @@ export default class {
         return `/transactions/${transactionId}/officers/submissionId/${submissionId}/`;
     }
 
-         /**
-            * Get the director details including the termination date out of the filing.
-            * to be used on the check your answers page for TM01.
-            *
-            * @params transaction id and submission id to look up the filing
-            */
+/**
+* Get the director details including the termination date out of the filing.
+* to be used on the check your answers page for TM01.
+*
+* @params transaction id and submission id to look up the filing
+*/
 
     public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
         const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/check-answers-directors-details`;
