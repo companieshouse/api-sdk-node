@@ -57,4 +57,15 @@ export default class {
 
         return resource;
     }
+
+    public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
+        const url = `/officer-filing/company/${companyNumber}/eligibility-check/past-future-dissolved`;
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        return { httpStatusCode: resp.status, resource: resp.body as Boolean };
+    }
 }

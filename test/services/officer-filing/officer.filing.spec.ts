@@ -7,6 +7,7 @@ import sinon from "sinon";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
 const TRANSACTION_ID = "12345";
+const COMPANY_NUMBER = "00006400";
 
 beforeEach(() => {
     sinon.reset();
@@ -42,6 +43,35 @@ describe("List active Directors details GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveDirectorsDetails[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors[0]).to.equal("Internal server error");
+    });
+});
+
+describe("Current or future dissolved GET", () => {
+    it("should return Boolean value", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<Boolean> = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER) as Resource<Boolean>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.equal(true);
+    });
+
+    it("should return Boolean value of false", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolvedReturnsFalse[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<Boolean> = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER) as Resource<Boolean>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.equal(false);
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[500]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER);
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");

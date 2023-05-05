@@ -35,10 +35,15 @@ export default class RequestClient extends AbstractClient {
                     accept: "application/json",
                     "content-type": "application/json"
                 },
-                url: `${this.options.baseUrl}${additionalOptions.url}`,
-                data: additionalOptions.body,
-                responseType: "json"
+                url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
+                responseType: "json",
+                validateStatus: status => {
+                    return status < 500; // Resolve only if the status code is less than 500
+                }
             };
+            if (additionalOptions.body) {
+                options.data = additionalOptions.body;
+            }
 
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
@@ -57,5 +62,15 @@ export default class RequestClient extends AbstractClient {
                 error
             };
         }
+    }
+
+    private formatUrl (baseUrl: string, uri: string) {
+        if (uri.length > 0 && uri.charAt(0) !== "/") {
+            uri = `/${uri}`;
+        }
+        if (uri === "/") {
+            return baseUrl;
+        }
+        return `${baseUrl}${uri}`;
     }
 }

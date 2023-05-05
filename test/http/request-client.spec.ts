@@ -7,7 +7,8 @@ import { RequestClient, HttpResponse } from "../../src/http";
 const expect = chai.expect;
 
 describe("request-client", () => {
-    const client = new RequestClient({ baseUrl: "http://api", oauthToken: "123" });
+    const baseUrl: string = "http://api";
+    const client = new RequestClient({ oauthToken: "123", baseUrl });
 
     beforeEach(() => {
         sinon.reset();
@@ -191,5 +192,29 @@ describe("request-client", () => {
         expect(mockRequest).to.have.been.calledOnce;
         expect(resp.error).to.be.undefined;
         expect(resp.status).to.equal(statusCode);
+    });
+
+    it("returns a correctly formatted url if leading slash is missing in the uri", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "path/to/end-point");
+        expect(formattedUrl).to.equal(`${baseUrl}/path/to/end-point`);
+    });
+
+    it("returns a correctly formatted url if leading slash is present in the uri", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "/path/to/end-point");
+        expect(formattedUrl).to.equal(`${baseUrl}/path/to/end-point`);
+    });
+
+    it("returns a correctly formatted url if uri contains only a slash", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "/");
+        expect(formattedUrl).to.equal(`${baseUrl}`);
+    });
+
+    it("returns a correctly formatted url if uri is empty", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, "");
+        expect(formattedUrl).to.equal(`${baseUrl}`);
     });
 });
