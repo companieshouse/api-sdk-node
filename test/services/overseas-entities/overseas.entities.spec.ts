@@ -374,7 +374,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with no Update filing date", async () => {
         const updateResource = {
-            ...mockValues.UPDATE_RESOURCE_MOCK,
+            ...mockValues.UPDATE_RESOURCE_MOCK
         };
         updateResource.filing_date = undefined;
 
@@ -399,7 +399,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with no date of creation", async () => {
         const updateResource = {
-            ...mockValues.UPDATE_RESOURCE_MOCK,
+            ...mockValues.UPDATE_RESOURCE_MOCK
         };
         updateResource.date_of_creation = undefined;
 
