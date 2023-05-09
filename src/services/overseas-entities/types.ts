@@ -269,6 +269,7 @@ export interface ManagingOfficerCorporate {
 
 export interface Update {
     date_of_creation?: InputDate;
+    filing_date?: InputDate;
     bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
     review_beneficial_owners_individual?: BeneficialOwnerIndividual[];
@@ -280,6 +281,7 @@ export interface Update {
 
 export interface UpdateResource {
     date_of_creation?: string;
+    filing_date?: string;
     bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
     review_beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
