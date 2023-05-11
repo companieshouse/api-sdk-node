@@ -7,4 +7,5 @@ test.ts
 .python-version
 /coverage
 .settings
+dist/
 src/services/.DS_Store
