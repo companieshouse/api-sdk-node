@@ -28,7 +28,6 @@ export default class {
     *
     * @params transaction id and submission id to look up the filing
     */
-
     public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
         const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/check-answers-directors-details`;
         return this.getCompanyOfficerDetails(url);
@@ -45,7 +44,7 @@ export default class {
         return { httpStatusCode: resp.status, resource: resp.body as Boolean };
     }
 
-    public async getCompanyOfficerDetails (url: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
+    private async getCompanyOfficerDetails (url: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
