@@ -37,7 +37,7 @@ class default_1 {
     */
     getDirectorAndTerminationDate(transactionId, submissionId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/check-answers-directors-details`;
+            const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/tm01-check-answers-directors-details`;
             return this.getCompanyOfficerDetails(url);
         });
     }
