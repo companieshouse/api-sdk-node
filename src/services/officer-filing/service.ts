@@ -29,7 +29,7 @@ export default class {
     * @params transaction id and submission id to look up the filing
     */
     public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
-        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/check-answers-directors-details`;
+        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/tm01-check-answers-directors-details`;
         return this.getCompanyOfficerDetails(url);
     }
 
