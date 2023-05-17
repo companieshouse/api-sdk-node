@@ -60,5 +60,3 @@ export default class {
         return resource;
     }
 }
-
-
