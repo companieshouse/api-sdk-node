@@ -385,14 +385,16 @@ export const UPDATE_OBJECT_MOCK: Update = {
     date_of_creation: { day: "1", month: "12", year: "2021" },
     filing_date: { day: "1", month: "2", year: "2023" },
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No
+    registrable_beneficial_owner: yesNoResponse.No,
+    no_change: yesNoResponse.No
 }
 
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     date_of_creation: "2021-12-01",
     filing_date: "2023-02-01",
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No
+    registrable_beneficial_owner: yesNoResponse.No,
+    no_change: yesNoResponse.No
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
