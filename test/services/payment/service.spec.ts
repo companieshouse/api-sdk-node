@@ -57,16 +57,16 @@ describe("payment service", () => {
         });
 
         it("returns an error response on failure", async () => {
-            const mockGetResponse = {
+            const mockPostResponse = {
                 status: 401,
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.createPayment(mockRequestBody);
             const data = response.value as ApiResponse<Payment>;
-            expect(data.httpStatusCode).to.be.oneOf([500, 504]);
+            expect(data.httpStatusCode).to.be.oneOf([401]);
         });
 
         it("maps the payment fields", async () => {
