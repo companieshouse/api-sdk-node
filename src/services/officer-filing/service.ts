@@ -11,6 +11,40 @@ export default class {
 
     public async getListActiveDirectorDetails (transactionId: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
         const url = `${this.getOfficerFilingUrlIncTransactionId(transactionId)}/active-directors-details`;
+        return this.getCompanyOfficerDetails(url);
+    }
+
+    private getOfficerFilingUrlIncTransactionId (transactionId: string) {
+        return `/transactions/${transactionId}/officers`;
+    }
+
+    private getOfficerFilingUrlIncTransactionIdAndSubmissionId (transactionId: string, submissionId: string) {
+        return `/transactions/${transactionId}/officers/${submissionId}/`;
+    }
+
+    /**
+    * Get the director details including the termination date out of the filing.
+    * to be used on the check your answers page for TM01.
+    *
+    * @params transaction id and submission id to look up the filing
+    */
+    public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
+        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/tm01-check-answers-directors-details`;
+        return this.getCompanyOfficerDetails(url);
+    }
+
+    public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
+        const url = `/officer-filing/company/${companyNumber}/eligibility-check/past-future-dissolved`;
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        return { httpStatusCode: resp.status, resource: resp.body as Boolean };
+    }
+
+    private async getCompanyOfficerDetails (url: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
         const resp: HttpResponse = await this.client.httpGet(url);
 
         if (resp.status >= 400) {
@@ -24,20 +58,5 @@ export default class {
         resource.resource = Mapping.camelCaseKeys<CompanyOfficer[]>(body);
 
         return resource;
-    }
-
-    private getOfficerFilingUrlIncTransactionId (transactionId: string) {
-        return `/transactions/${transactionId}/officers`;
-    }
-
-    public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
-        const url = `/officer-filing/company/${companyNumber}/eligibility-check/past-future-dissolved`;
-        const resp: HttpResponse = await this.client.httpGet(url);
-
-        if (resp.status >= 400) {
-            return { httpStatusCode: resp.status, errors: [resp.error] };
-        }
-
-        return { httpStatusCode: resp.status, resource: resp.body as Boolean };
     }
 }
