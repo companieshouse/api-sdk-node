@@ -87,6 +87,7 @@ describe("company-officers", () => {
                         registration_number: "some reg"
                     },
                     links: {
+                        self: "appointmentId01",
                         officer: {
                             appointments: "officers/456/appointments"
                         }
