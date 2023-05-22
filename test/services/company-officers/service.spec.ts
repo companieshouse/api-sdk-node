@@ -153,6 +153,7 @@ describe("company-officers", () => {
         expect(data.resource.items[0].identification.registrationNumber).to.equal(mockResponseBody.items[0].identification.registration_number);
 
         expect(data.resource.items[0].links.officer.appointments).to.equal(mockResponseBody.items[0].links.officer.appointments);
+        expect(data.resource.items[0].links.self).to.equal(mockResponseBody.items[0].links.self);
     });
 
     it("should pass url with default parameters when undefined", async () => {
