@@ -15,21 +15,26 @@ export default class {
 
     public async getListActiveDirectorDetails (transactionId: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
         const url = `${this.getOfficerFilingUrlIncTransactionId(transactionId)}/active-directors-details`;
-        const resp: HttpResponse = await this.client.httpGet(url);
-
-        if (resp.status >= 400) {
-            return { httpStatusCode: resp.status, errors: [resp.error] };
-        }
-
-        const resource: Resource<CompanyOfficer[]> = { httpStatusCode: resp.status };
-        const body = resp.body as CompanyOfficerResource[];
-        resource.resource = Mapping.camelCaseKeys<CompanyOfficer[]>(body);
-
-        return resource;
+        return this.getCompanyOfficerDetails(url);
     }
 
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
         return `/transactions/${transactionId}/officers`;
+    }
+
+    private getOfficerFilingUrlIncTransactionIdAndSubmissionId (transactionId: string, submissionId: string) {
+        return `/transactions/${transactionId}/officers/${submissionId}/`;
+    }
+
+    /**
+    * Get the director details including the termination date out of the filing.
+    * to be used on the check your answers page for TM01.
+    *
+    * @params transaction id and submission id to look up the filing
+    */
+    public async getDirectorAndTerminationDate (transactionId: string, submissionId: string): Promise<Resource<CompanyOfficer> | ApiErrorResponse> {
+        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/tm01-check-answers-directors-details`;
+        return this.getCompanyOfficerDetails(url);
     }
 
     public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
@@ -69,7 +74,7 @@ export default class {
     /**
      * Map an OfficerFiling object to an OfficerFilingDto which represents the expected json data model
      */
-    private mapToDto(officerFiling: OfficerFiling): OfficerFilingDto {
+    private mapToDto (officerFiling: OfficerFiling): OfficerFilingDto {
         return {
             reference_appointment_id: officerFiling.referenceAppointmentId,
             reference_etag: officerFiling.referenceEtag,
@@ -87,5 +92,21 @@ export default class {
             submissionId: body.submission_id,
             name: body.name
         };
+    }
+
+    private async getCompanyOfficerDetails (url: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        const resource: Resource<CompanyOfficer[]> = { httpStatusCode: resp.status };
+
+        const body = resp.body as CompanyOfficerResource[];
+
+        resource.resource = Mapping.camelCaseKeys<CompanyOfficer[]>(body);
+
+        return resource;
     }
 }

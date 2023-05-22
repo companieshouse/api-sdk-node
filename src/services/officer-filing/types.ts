@@ -134,7 +134,7 @@ export interface FilingResponseDto {
 }
 
 /**
- * OfficerFiling represents the filing of an officer. It is populated with the necessary information for a filing to be processed. 
+ * OfficerFiling represents the filing of an officer. It is populated with the necessary information for a filing to be processed.
  * This is used for both post and patch requests.
  */
 export interface OfficerFiling {
