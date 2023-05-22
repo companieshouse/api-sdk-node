@@ -141,6 +141,7 @@ export interface Identification {
 }
 
 export interface CompanyOfficerLinks {
+  self: string;
   officer: OfficerLinks;
 }
 
