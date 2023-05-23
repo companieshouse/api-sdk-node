@@ -43,6 +43,7 @@ export const mockIdentification = {
 };
 
 export const mockLinks = {
+    self: "company/00006400/appointments/987",
     officer: {
         appointments: "officers/456/appointments"
     }

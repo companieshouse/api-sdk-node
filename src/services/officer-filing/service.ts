@@ -1,6 +1,10 @@
 import {
     CompanyOfficer,
-    CompanyOfficerResource
+    CompanyOfficerResource,
+    FilingResponse,
+    FilingResponseDto,
+    OfficerFiling,
+    OfficerFilingDto
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -42,6 +46,52 @@ export default class {
         }
 
         return { httpStatusCode: resp.status, resource: resp.body as Boolean };
+    }
+
+    /**
+     * Post an officer filing object to update on the API.
+     */
+    public async postOfficerFiling (transactionId: string, officerFiling: OfficerFiling): Promise<Resource<FilingResponse> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}/officers`;
+        const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
+
+        const resp = await this.client.httpPost(url, officerFilingResource);
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<FilingResponse> = {
+            httpStatusCode: resp.status
+        };
+        const body = resp.body as FilingResponseDto;
+        this.populateResource(resource, body);
+        return resource;
+    }
+
+    /**
+     * Map an OfficerFiling object to an OfficerFilingDto which represents the expected json data model
+     */
+    private mapToDto (officerFiling: OfficerFiling): OfficerFilingDto {
+        return {
+            reference_appointment_id: officerFiling.referenceAppointmentId,
+            reference_etag: officerFiling.referenceEtag,
+            resigned_on: officerFiling.resignedOn
+        }
+    }
+
+    /**
+     * Map a FilingResponseDto in its json data model to a regular FilingResponse object
+     * @param resource Where the FilingResponse fields will be set
+     * @param body The FilingResponseDto json data model that will be mapped
+     */
+    private populateResource (resource: Resource<FilingResponse>, body: FilingResponseDto) {
+        resource.resource = {
+            submissionId: body.submission_id,
+            name: body.name
+        };
     }
 
     private async getCompanyOfficerDetails (url: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
