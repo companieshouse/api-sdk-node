@@ -1,5 +1,5 @@
 import {
-    CompanyOfficerResource
+    CompanyOfficerResource, ValidationStatusErrorResource, ValidationStatusResponseResource
 } from "../../../src/services/officer-filing";
 import { RequestClient } from "../../../src";
 
@@ -103,6 +103,18 @@ export const mockDirectorAndTerminationDate: CompanyOfficerResource = {
     resigned_on: "1 January 2009"
 }
 
+export const mockValidationStatusError: ValidationStatusErrorResource = {
+    error: "European public limited liability company (SE) not permitted",
+    location: "$./transactions/185318-541416-850071/officers/646f2b75f8b00c631d83feb2/validation_status",
+    type: "ch:validation",
+    location_type: "json-path"
+}
+
+export const mockValidationStatusResponse: ValidationStatusResponseResource = {
+    errors: [mockValidationStatusError],
+    is_valid: false
+}
+
 export const mockGetListActiveDirectorsDetails = {
     200: { status: 200, body: mockListActiveDirectorDetails },
     404: { status: 404, error: "No active directors details were found" },
@@ -120,5 +132,11 @@ export const mockGetCurrentOrFutureDissolvedReturnsFalse = {
 
 export const mockGetDirectorAndTerminationDate = {
     200: { status: 200, body: mockDirectorAndTerminationDate },
+    500: { status: 500, error: "Internal server error" }
+};
+
+export const mockGetValidationStatusResponse = {
+    200: { status: 200, body: mockValidationStatusResponse },
+    404: { status: 404, error: "Not Found" },
     500: { status: 500, error: "Internal server error" }
 };

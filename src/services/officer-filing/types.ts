@@ -57,6 +57,18 @@ export interface OfficerResourceLinks {
     appointments: string;
 }
 
+export interface ValidationStatusErrorResource {
+    error: string;
+    location: string;
+    location_type: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponseResource {
+    errors: ValidationStatusErrorResource[];
+    is_valid?: boolean;
+}
+
 /**
  * CompanyOfficers is the interface used within this SDK.
  */
@@ -118,6 +130,18 @@ export interface CompanyOfficerLinks {
 
 export interface OfficerLinks {
     appointments: string;
+}
+
+export interface ValidationStatusError {
+    error: string;
+    location: string;
+    locationType: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponse {
+    errors: ValidationStatusError[];
+    isValid?: boolean;
 }
 
 /**
