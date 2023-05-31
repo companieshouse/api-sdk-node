@@ -129,7 +129,7 @@ export interface FilingResponse {
 }
 
 export interface FilingResponseDto {
-    submission_id: string;
+    submissionId: string;
     appointmentId: string;
 }
 
