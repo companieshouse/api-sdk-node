@@ -20,14 +20,12 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
-import CompanyAppointmentsService from "./services/company-appointments/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
  */
 export default class ApiClient {
   public readonly lateFilingPenalties: LateFilingPenaltyService;
-  public readonly companyAppointments: CompanyAppointmentsService;
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;
@@ -57,7 +55,6 @@ export default class ApiClient {
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
       this.lateFilingPenalties = new LateFilingPenaltyService(apiClient);
-      this.companyAppointments = new CompanyAppointmentsService(apiClient);
       this.companyOfficers = new CompanyOfficersService(apiClient);
       this.companyFilingHistory = new CompanyFilingHistoryService(apiClient);
       this.companyProfile = new CompanyProfileService(apiClient);
