@@ -4,7 +4,9 @@ import {
     FilingResponse,
     FilingResponseDto,
     OfficerFiling,
-    OfficerFilingDto
+    OfficerFilingDto,
+    ValidationStatusResponse,
+    ValidationStatusResponseResource
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -16,6 +18,11 @@ export default class {
     public async getListActiveDirectorDetails (transactionId: string): Promise<Resource<CompanyOfficer[]> | ApiErrorResponse> {
         const url = `${this.getOfficerFilingUrlIncTransactionId(transactionId)}/active-directors-details`;
         return this.getCompanyOfficerDetails(url);
+    }
+
+    public async getValidationStatus (transactionId: string, submissionId: string): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
+        const url = `${this.getOfficerFilingUrlIncTransactionIdAndSubmissionId(transactionId, submissionId)}/validation_status`;
+        return this.getValidationStatusResponse(url);
     }
 
     private getOfficerFilingUrlIncTransactionId (transactionId: string) {
@@ -46,6 +53,22 @@ export default class {
         }
 
         return { httpStatusCode: resp.status, resource: resp.body as Boolean };
+    }
+
+    private async getValidationStatusResponse (url: string): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        const resource: Resource<ValidationStatusResponse> = { httpStatusCode: resp.status };
+
+        const body = resp.body as ValidationStatusResponseResource[];
+
+        resource.resource = Mapping.camelCaseKeys<ValidationStatusResponse>(body);
+
+        return resource;
     }
 
     /**
