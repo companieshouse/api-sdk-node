@@ -72,6 +72,29 @@ export default class {
     }
 
     /**
+     * Patch an officer filing object to update on the API.
+     */
+    public async patchOfficerFiling (transactionId: string, filingId: string, officerFiling: OfficerFiling): Promise<Resource<FilingResponse> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}/officers/${filingId}`;
+        const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
+
+        const resp = await this.client.httpPatch(url, officerFilingResource);
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<FilingResponse> = {
+            httpStatusCode: resp.status
+        };
+        const body = resp.body as FilingResponseDto;
+        this.populateResource(resource, body);
+        return resource;
+    }
+
+    /**
      * Map an OfficerFiling object to an OfficerFilingDto which represents the expected json data model
      */
     private mapToDto (officerFiling: OfficerFiling): OfficerFilingDto {
