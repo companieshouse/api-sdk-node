@@ -7,6 +7,7 @@ import sinon from "sinon";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
 const TRANSACTION_ID = "12345";
+const SUBMISSION_ID = "645d1188c794645afe15f5cc";
 const COMPANY_NUMBER = "00006400";
 
 beforeEach(() => {
@@ -43,6 +44,30 @@ describe("List active Directors details GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveDirectorsDetails[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors[0]).to.equal("Internal server error");
+    });
+});
+
+describe("List TM01 check your answers details GET", () => {
+    it("should return company officer details object", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetDirectorAndTerminationDate[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<CompanyOfficer> = await ofService.getDirectorAndTerminationDate(TRANSACTION_ID, SUBMISSION_ID) as Resource<CompanyOfficer>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.resignedOn).to.contain(mockValues.mockDirectorAndTerminationDate.resigned_on);
+        expect(data.resource?.dateOfBirth).to.contain(mockValues.mockDirectorAndTerminationDate.date_of_birth);
+        expect(data.resource?.appointedOn).to.contain(mockValues.mockDirectorAndTerminationDate.appointed_on);
+        expect(data.resource?.officerRole).to.contain(mockValues.mockDirectorAndTerminationDate.officer_role);
+        expect(data.resource.name).to.contain(mockValues.mockDirectorAndTerminationDate.name);
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetDirectorAndTerminationDate[500]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.getDirectorAndTerminationDate(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");

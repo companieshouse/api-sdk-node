@@ -65,6 +65,7 @@ export interface IdentificationResource {
 }
 
 export interface CompanyOfficerResourceLinks {
+  self: string;
   officer: OfficerResourceLinks;
 }
 
@@ -140,6 +141,7 @@ export interface Identification {
 }
 
 export interface CompanyOfficerLinks {
+  self: string;
   officer: OfficerLinks;
 }
 

@@ -43,6 +43,7 @@ export const mockIdentification = {
 };
 
 export const mockLinks = {
+    self: "company/00006400/appointments/987",
     officer: {
         appointments: "officers/456/appointments"
     }
@@ -88,6 +89,20 @@ export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
     }
 ]
 
+export const mockDirectorAndTerminationDate: CompanyOfficerResource = {
+    name: "Doe, James John",
+    occupation: "singer",
+    nationality: "British",
+    date_of_birth: mockDateOfBirth,
+    appointed_on: "1 January 2009",
+    links: mockLinks,
+    country_of_residence: "Country",
+    address: mockAddress1,
+    officer_role: "SECRETARY",
+    identification: mockIdentification,
+    resigned_on: "1 January 2009"
+}
+
 export const mockGetListActiveDirectorsDetails = {
     200: { status: 200, body: mockListActiveDirectorDetails },
     404: { status: 404, error: "No active directors details were found" },
@@ -102,3 +117,8 @@ export const mockGetCurrentOrFutureDissolved = {
 export const mockGetCurrentOrFutureDissolvedReturnsFalse = {
     200: { status: 200, body: false }
 }
+
+export const mockGetDirectorAndTerminationDate = {
+    200: { status: 200, body: mockDirectorAndTerminationDate },
+    500: { status: 500, error: "Internal server error" }
+};
