@@ -135,8 +135,7 @@ export default class {
      */
     private populateResource (resource: Resource<FilingResponse>, body: FilingResponseDto) {
         resource.resource = {
-            submissionId: body.submission_id,
-            name: body.name
+            submissionId: body.submission_id
         };
     }
 
