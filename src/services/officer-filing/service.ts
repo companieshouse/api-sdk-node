@@ -89,8 +89,7 @@ export default class {
      */
     private populateResource (resource: Resource<FilingResponse>, body: FilingResponseDto) {
         resource.resource = {
-            submissionId: body.submissionId,
-            appointmentId: body.appointmentId
+            submissionId: body.submissionId
         };
     }
 

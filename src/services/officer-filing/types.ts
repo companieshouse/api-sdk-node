@@ -125,12 +125,10 @@ export interface OfficerLinks {
  */
 export interface FilingResponse {
     submissionId: string;
-    appointmentId: string;
 }
 
 export interface FilingResponseDto {
     submissionId: string;
-    appointmentId: string;
 }
 
 /**
