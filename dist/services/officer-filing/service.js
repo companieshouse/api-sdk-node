@@ -90,8 +90,7 @@ class default_1 {
      */
     populateResource(resource, body) {
         resource.resource = {
-            submissionId: body.submissionId,
-            appointmentId: body.appointmentId
+            submissionId: body.submissionId
         };
     }
     getCompanyOfficerDetails(url) {

@@ -109,11 +109,9 @@ export interface OfficerLinks {
  */
 export interface FilingResponse {
     submissionId: string;
-    appointmentId: string;
 }
 export interface FilingResponseDto {
     submissionId: string;
-    appointmentId: string;
 }
 /**
  * OfficerFiling represents the filing of an officer. It is populated with the necessary information for a filing to be processed.
