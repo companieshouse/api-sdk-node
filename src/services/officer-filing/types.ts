@@ -149,12 +149,10 @@ export interface ValidationStatusResponse {
  */
 export interface FilingResponse {
     submissionId: string;
-    name: string;
 }
 
 export interface FilingResponseDto {
     submission_id: string;
-    name: string;
 }
 
 /**
