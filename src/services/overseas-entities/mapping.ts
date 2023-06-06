@@ -25,7 +25,8 @@ import {
     TrustCorporate,
     TrustCorporateResource,
     Update,
-    UpdateResource
+    UpdateResource,
+    OverseasEntityExtraDetails
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -69,6 +70,12 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
         update: mapUpdateResource(body.update)
+    };
+};
+
+export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails): OverseasEntityExtraDetails => {
+    return {
+        email_address: (body.email_address)
     };
 };
 

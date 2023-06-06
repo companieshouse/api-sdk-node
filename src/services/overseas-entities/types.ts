@@ -36,6 +36,10 @@ export interface OverseasEntityResource {
     update?: UpdateResource;
 }
 
+export interface OverseasEntityExtraDetails {
+    email_address: string;
+}
+
 export interface OverseasEntityCreated {
     id: string
 }
