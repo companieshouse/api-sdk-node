@@ -27,7 +27,7 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
-import { ClientType } from "./enums/ClientType";
+import { ClientType } from "./enums";
 
 /**
  * ApiClient is the class that all service objects hang off.
