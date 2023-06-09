@@ -6,10 +6,11 @@ import * as mockValues from "./overseas.entities.mock";
 import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
+    OverseasEntityExtraDetails,
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity, mapOverseasEntityResource } from "../../../src/services/overseas-entities/mapping";
+import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -115,6 +116,30 @@ describe("OverseasEntityService GET Tests suite", () => {
         const data = await oeService.getOverseasEntity(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
+        ) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+    });
+
+    it("should return httpStatusCode 200 for getOverseasEntityDetails method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getOverseasEntityDetails(
+            mockValues.ENTITY_NUMBER_MOCK
+        )) as Resource<OverseasEntityExtraDetails>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(mockValues.OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK);
+    });
+
+    it("should return error 400 (Bad Request) for getOverseasEntityDetails method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.getOverseasEntityDetails(
+            mockValues.ENTITY_NUMBER_MOCK
         ) as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(400);
@@ -453,5 +478,19 @@ describe("Mapping OverseasEntity Tests suite", () => {
         });
 
         expect(Object.keys(dataResource.overseas_entity_due_diligence!).indexOf("identity_date")).to.equal(-1);
+    });
+
+    it('should return OE extra details object with email address', () => {
+        const dataResource = mapOverseasEntityExtraDetails({
+            email_address: 'private@overseasentities.test',
+        });
+
+        expect(dataResource.email_address).to.equal('private@overseasentities.test');
+    });
+
+    it('should return OE extra details object without email address if empty', () => {
+        const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
+
+        expect(dataResource.email_address).to.equal(undefined);
     });
 });

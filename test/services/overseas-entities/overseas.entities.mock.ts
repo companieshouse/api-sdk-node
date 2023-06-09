@@ -33,7 +33,8 @@ import {
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource,
     Update,
-    UpdateResource
+    UpdateResource,
+    OverseasEntityExtraDetails
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -412,6 +413,10 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     update: UPDATE_OBJECT_MOCK
 };
 
+export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
+    email_address: 'private@overseasentities.test',
+};
+
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     type: "type",
     forename: "joe",
@@ -517,6 +522,10 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     update: UPDATE_RESOURCE_MOCK
 };
 
+export const OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK: OverseasEntityExtraDetails = {
+    email_address: 'private@overseasentities.test',
+};
+
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
 export const TRANSACTION_ID = "12345";
@@ -539,4 +548,9 @@ export const mockPutOverseasEntityResponse = {
 export const mockGetOverseasEntityResponse = {
     200: { status: 200, body: OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK },
     400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockGetOverseasEntityExtraDetailsResponse = {
+    200: { status: 200, body: OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK },
+    400: { status: 400, error: BAD_REQUEST },
 };
