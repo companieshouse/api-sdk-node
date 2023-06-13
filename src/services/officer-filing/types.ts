@@ -15,6 +15,7 @@ export interface CompanyOfficerResource {
     occupation?: string;
     officer_role: string;
     resigned_on?: string;
+    is_pre_1992_appointment?: boolean;
 }
 
 export interface AddressResource {
@@ -90,6 +91,7 @@ export interface CompanyOfficer {
     occupation?: string;
     officerRole: string;
     resignedOn?: string;
+    isPre1992Appointment?: boolean;
 }
 
 export interface Address {
