@@ -480,15 +480,15 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(Object.keys(dataResource.overseas_entity_due_diligence!).indexOf("identity_date")).to.equal(-1);
     });
 
-    it('should return OE extra details object with email address', () => {
+    it("should return OE extra details object with email address", () => {
         const dataResource = mapOverseasEntityExtraDetails({
-            email_address: 'private@overseasentities.test',
+            email_address: "private@overseasentities.test"
         });
 
-        expect(dataResource.email_address).to.equal('private@overseasentities.test');
+        expect(dataResource.email_address).to.equal("private@overseasentities.test");
     });
 
-    it('should return OE extra details object without email address if empty', () => {
+    it("should return OE extra details object without email address if empty", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);

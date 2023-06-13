@@ -414,7 +414,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
-    email_address: 'private@overseasentities.test',
+    email_address: "private@overseasentities.test"
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
@@ -523,7 +523,7 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK: OverseasEntityExtraDetails = {
-    email_address: 'private@overseasentities.test',
+    email_address: "private@overseasentities.test"
 };
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
@@ -552,5 +552,5 @@ export const mockGetOverseasEntityResponse = {
 
 export const mockGetOverseasEntityExtraDetailsResponse = {
     200: { status: 200, body: OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK },
-    400: { status: 400, error: BAD_REQUEST },
+    400: { status: 400, error: BAD_REQUEST }
 };

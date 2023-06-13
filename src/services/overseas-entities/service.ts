@@ -3,7 +3,7 @@ import {
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
-    OverseasEntityExtraDetails,
+    OverseasEntityExtraDetails
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
@@ -86,6 +86,6 @@ export default class OverseasEntityService {
             };
         }
 
-        return { httpStatusCode: resp.status }
-    } 
+        return { httpStatusCode: resp.status };
+    }
 }
