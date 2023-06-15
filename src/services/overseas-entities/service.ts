@@ -2,10 +2,11 @@ import { HttpResponse, IHttpClient } from "../../http";
 import {
     HttpStatusCode,
     OverseasEntity,
-    OverseasEntityCreated
+    OverseasEntityCreated,
+    OverseasEntityExtraDetails
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
-import { mapOverseasEntity, mapOverseasEntityResource } from "./mapping";
+import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
@@ -24,6 +25,25 @@ export default class OverseasEntityService {
         const resource: Resource<OverseasEntity> = {
             httpStatusCode: response.status,
             resource: mapOverseasEntityResource(response.body)
+        };
+
+        return resource;
+    }
+
+    public async getOverseasEntityDetails (companyNumber: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
+        const URL = `overseas-entity-details/${companyNumber}`
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<OverseasEntityExtraDetails> = {
+            httpStatusCode: response.status,
+            resource: mapOverseasEntityExtraDetails(response.body)
         };
 
         return resource;
@@ -66,6 +86,6 @@ export default class OverseasEntityService {
             };
         }
 
-        return { httpStatusCode: resp.status }
+        return { httpStatusCode: resp.status };
     }
 }
