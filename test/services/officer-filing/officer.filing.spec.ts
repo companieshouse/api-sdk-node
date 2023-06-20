@@ -1,5 +1,5 @@
 import {
-    CompanyOfficer, OfficerFilingService, ValidationStatusResponse
+    CompanyOfficer, OfficerFiling, OfficerFilingService, ValidationStatusResponse
 } from "../../../src/services/officer-filing";
 import * as mockValues from "./officer.filing.mock";
 import { expect } from "chai";
@@ -128,6 +128,37 @@ describe("Validation Status Response GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID);
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors[0]).to.equal("Internal server error");
+    });
+});
+
+describe("Officer Filing GET", () => {
+    it("should return an officer filing", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<OfficerFiling> = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID) as Resource<OfficerFiling>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.referenceAppointmentId).to.equal("app1");
+        expect(data.resource?.referenceEtag).to.equal("968ada7234bb1eb65778ca4c83a4a42d36669a17");
+        expect(data.resource?.resignedOn).to.equal("2009-08-29");
+    });
+
+    it("should return error 404 - Not found", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[404]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
+
+        expect(data.httpStatusCode).to.equal(404);
+        expect(data.errors[0]).to.equal("Officer filing not found");
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[500]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors[0]).to.equal("Internal server error");

@@ -71,6 +71,25 @@ export default class {
         return resource;
     }
 
+    public async getOfficerFiling (transactionId: string, filingId: string): Promise<Resource<OfficerFiling> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}/officers/${filingId}`;
+        const resp: HttpResponse = await this.client.httpGet(url);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        const resource: Resource<OfficerFiling> = {
+            httpStatusCode: resp.status
+        };
+
+        const body = resp.body as OfficerFilingDto;
+
+        resource.resource = Mapping.camelCaseKeys<OfficerFiling>(body);
+
+        return resource;
+    }
+
     /**
      * Post an officer filing object to update on the API.
      */
