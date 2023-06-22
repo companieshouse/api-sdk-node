@@ -1,5 +1,5 @@
 import {
-    CompanyOfficerResource, ValidationStatusErrorResource, ValidationStatusResponseResource
+    CompanyOfficerResource, ValidationStatusErrorResource, ValidationStatusResponseResource, OfficerFilingDto
 } from "../../../src/services/officer-filing";
 import { RequestClient } from "../../../src";
 
@@ -48,6 +48,12 @@ export const mockLinks = {
         appointments: "officers/456/appointments"
     }
 };
+
+export const mockOfficerFiling: OfficerFilingDto = {
+    reference_appointment_id: "app1",
+    reference_etag: "968ada7234bb1eb65778ca4c83a4a42d36669a17",
+    resigned_on: "2009-08-29"
+}
 
 export const mockActiveDirectorDetails: CompanyOfficerResource = {
     name: "Doe, James John",
@@ -114,6 +120,12 @@ export const mockValidationStatusResponse: ValidationStatusResponseResource = {
     errors: [mockValidationStatusError],
     is_valid: false
 }
+
+export const mockGetOfficerFiling = {
+    200: { status: 200, body: mockOfficerFiling },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
 
 export const mockGetListActiveDirectorsDetails = {
     200: { status: 200, body: mockListActiveDirectorDetails },
