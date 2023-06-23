@@ -1,4 +1,3 @@
-import { updateObjectBindingPattern } from "typescript";
 import {
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
