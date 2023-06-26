@@ -371,7 +371,8 @@ const mapUpdate = (update: Update): UpdateResource => {
             date_of_creation: convertOptionalDateToIsoDateString(update.date_of_creation?.day, update.date_of_creation?.month, update.date_of_creation?.year),
             filing_date: convertOptionalDateToIsoDateString(update.filing_date?.day, update.filing_date?.month, update.filing_date?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
-            registrable_beneficial_owner: update.registrable_beneficial_owner
+            registrable_beneficial_owner: update.registrable_beneficial_owner,
+            no_change: update.no_change
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
@@ -404,7 +405,8 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
             filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
-            registrable_beneficial_owner: updateResource.registrable_beneficial_owner
+            registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
+            no_change: updateResource.no_change
         };
         const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
         if (beneficial_owners_individual.length !== 0) {

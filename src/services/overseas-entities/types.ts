@@ -276,6 +276,7 @@ export interface Update {
     filing_date?: InputDate;
     bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
+    no_change?: yesNoResponse;
     review_beneficial_owners_individual?: BeneficialOwnerIndividual[];
     review_beneficial_owners_corporate?: BeneficialOwnerCorporate[];
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
@@ -288,6 +289,7 @@ export interface UpdateResource {
     filing_date?: string;
     bo_mo_data_fetched?: boolean;
     registrable_beneficial_owner?: yesNoResponse;
+    no_change?: yesNoResponse;
     review_beneficial_owners_individual?: BeneficialOwnerIndividualResource[];
     review_beneficial_owners_corporate?: BeneficialOwnerCorporateResource[];
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
