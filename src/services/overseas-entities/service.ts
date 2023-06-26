@@ -30,8 +30,8 @@ export default class OverseasEntityService {
         return resource;
     }
 
-    public async getOverseasEntityDetails (companyNumber: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
-        const URL = `overseas-entity-details/${companyNumber}`
+    public async getOverseasEntityDetails (overseasEntityId: string): Promise< Resource<OverseasEntityExtraDetails> | ApiErrorResponse > {
+        const URL = `overseas-entity-details/${overseasEntityId}`
         const response: HttpResponse = await this.client.httpGet(URL);
 
         if (response.error) {

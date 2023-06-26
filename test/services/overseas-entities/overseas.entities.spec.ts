@@ -127,7 +127,7 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = (await oeService.getOverseasEntityDetails(
-            mockValues.ENTITY_NUMBER_MOCK
+            mockValues.OVERSEAS_ENTITY_ID
         )) as Resource<OverseasEntityExtraDetails>;
 
         expect(data.httpStatusCode).to.equal(200);
@@ -139,7 +139,7 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = await oeService.getOverseasEntityDetails(
-            mockValues.ENTITY_NUMBER_MOCK
+            mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(400);
