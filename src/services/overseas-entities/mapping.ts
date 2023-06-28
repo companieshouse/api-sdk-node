@@ -45,7 +45,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         managing_officers_corporate: mapManagingOfficersCorporate(body.managing_officers_corporate),
         trusts: mapTrusts(body.trusts),
         update: mapUpdate(body.update),
-        remove_entity: (body.remove_entity) ? body.remove_entity : null
+        remove_entity: (body.remove_entity) ? "" + body.remove_entity : null
     };
 };
 
@@ -71,7 +71,7 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
         update: mapUpdateResource(body.update),
-        remove_entity: (body.remove_entity) ? body.remove_entity : null
+        remove_entity: (body.remove_entity) ? body.remove_entity === "true" : false
     };
 };
 

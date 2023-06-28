@@ -17,7 +17,7 @@ export interface OverseasEntity {
     managing_officers_corporate?: ManagingOfficerCorporate[];
     trusts?: Trust[];
     update?: Update;
-    remove_entity?: yesNoResponse;
+    remove_entity?: boolean;
 }
 
 export interface OverseasEntityResource {
@@ -35,7 +35,7 @@ export interface OverseasEntityResource {
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trusts?: TrustResource[];
     update?: UpdateResource;
-    remove_entity?: yesNoResponse;
+    remove_entity?: string;
 }
 
 export interface OverseasEntityExtraDetails {
