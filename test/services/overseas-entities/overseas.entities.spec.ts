@@ -127,6 +127,7 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = (await oeService.getOverseasEntityDetails(
+            mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         )) as Resource<OverseasEntityExtraDetails>;
 
@@ -139,6 +140,7 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = await oeService.getOverseasEntityDetails(
+            mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
 
