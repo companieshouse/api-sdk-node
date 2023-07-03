@@ -148,11 +148,11 @@ export interface ValidationStatusResponse {
  * The response returned when a filing has been sent to the api. The submission ID can be used to refer back to the saved filing.
  */
 export interface FilingResponse {
-    submissionId: string;
+    id: string;
 }
 
 export interface FilingResponseDto {
-    submission_id: string;
+    id: string;
 }
 
 /**
