@@ -57,6 +57,7 @@ describe("company-officers", () => {
                     resigned_on: (new Date()).toISOString(),
                     name: "Some Director",
                     officer_role: "director",
+                    responsibilities: "Determining the company’s strategic objectives and policies",
                     address: {
                         address_line_1: "123 Street",
                         address_line_2: "Some area",
@@ -127,6 +128,7 @@ describe("company-officers", () => {
         expect(data.resource.items[0].resignedOn).to.equal(mockResponseBody.items[0].resigned_on);
         expect(data.resource.items[0].name).to.equal(mockResponseBody.items[0].name);
         expect(data.resource.items[0].officerRole).to.equal(mockResponseBody.items[0].officer_role);
+        expect(data.resource.items[0].responsibilities).to.equal(mockResponseBody.items[0].responsibilities);
 
         expect(data.resource.items[0].address.addressLine1).to.equal(mockResponseBody.items[0].address.address_line_1);
         expect(data.resource.items[0].address.addressLine2).to.equal(mockResponseBody.items[0].address.address_line_2);
