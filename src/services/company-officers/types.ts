@@ -30,7 +30,7 @@ export interface CompanyOfficerResource {
   nationality?: string;
   occupation?: string;
   officer_role: string;
-  responsibilities: string;
+  responsibilities?: string;
   resigned_on?: string;
 }
 
@@ -107,7 +107,7 @@ export interface CompanyOfficer {
   nationality?: string;
   occupation?: string;
   officerRole: string;
-  responsibilities: string;
+  responsibilities?: string;
   resignedOn?: string;
 }
 
