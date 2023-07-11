@@ -27,6 +27,7 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
+import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
 
 /**
@@ -60,6 +61,7 @@ export default class ApiClient {
   public readonly transaction: TransactionService;
   public readonly overseasEntity: OverseasEntityService;
   public readonly officerFiling: OfficerFilingService;
+  public readonly registeredEmailAddress: RegisteredEmailAddressService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -91,5 +93,6 @@ export default class ApiClient {
       this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
       this.pscDiscrepancyReport = new PSCDiscrepanciesReportService(apiClient);
       this.transaction = new TransactionService(apiClient);
+      this.registeredEmailAddress = new RegisteredEmailAddressService(apiClient);
   }
 }
