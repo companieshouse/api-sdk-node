@@ -87,6 +87,9 @@ describe("company-officers", () => {
                         place_registered: "some place",
                         registration_number: "some reg"
                     },
+                    contact_details: {
+                        contact_name: "Firstname Surname"
+                    },
                     links: {
                         self: "appointmentId01",
                         officer: {
@@ -153,6 +156,8 @@ describe("company-officers", () => {
         expect(data.resource.items[0].identification.legalForm).to.equal(mockResponseBody.items[0].identification.legal_form);
         expect(data.resource.items[0].identification.placeRegistered).to.equal(mockResponseBody.items[0].identification.place_registered);
         expect(data.resource.items[0].identification.registrationNumber).to.equal(mockResponseBody.items[0].identification.registration_number);
+
+        expect(data.resource.items[0].contactDetails.contactName).to.equal(mockResponseBody.items[0].contact_details.contact_name);
 
         expect(data.resource.items[0].links.officer.appointments).to.equal(mockResponseBody.items[0].links.officer.appointments);
         expect(data.resource.items[0].links.self).to.equal(mockResponseBody.items[0].links.self);
