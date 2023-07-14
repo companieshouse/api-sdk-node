@@ -1,6 +1,6 @@
 /**
- * CompanyOfficerResource is what is returned from the api.
- */
+* CompanyOfficerResource is what is returned from the api.
+*/
 
 export interface CompanyOfficerResource {
     address: AddressResource;
@@ -49,6 +49,7 @@ export interface IdentificationResource {
 }
 
 export interface CompanyOfficerResourceLinks {
+    self: string;
     officer: OfficerResourceLinks;
 }
 
@@ -56,9 +57,25 @@ export interface OfficerResourceLinks {
     appointments: string;
 }
 
+export interface ValidationStatusErrorResource {
+    error: string;
+    location: string;
+    location_type: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponseResource {
+    errors: ValidationStatusErrorResource[];
+    is_valid?: boolean;
+}
+
 /**
  * CompanyOfficers is the interface used within this SDK.
  */
+export interface OfficerCard {
+    removeUrl: string;
+    officer: CompanyOfficer;
+}
 
 export interface CompanyOfficer {
     address: Address;
@@ -107,9 +124,49 @@ export interface Identification {
 }
 
 export interface CompanyOfficerLinks {
+    self: string;
     officer: OfficerLinks;
 }
 
 export interface OfficerLinks {
     appointments: string;
+}
+
+export interface ValidationStatusError {
+    error: string;
+    location: string;
+    locationType: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponse {
+    errors: ValidationStatusError[];
+    isValid?: boolean;
+}
+
+/**
+ * The response returned when a filing has been sent to the api. The submission ID can be used to refer back to the saved filing.
+ */
+export interface FilingResponse {
+    id: string;
+}
+
+export interface FilingResponseDto {
+    id: string;
+}
+
+/**
+ * OfficerFiling represents the filing of an officer. It is populated with the necessary information for a filing to be processed.
+ * This is used for both post and patch requests.
+ */
+export interface OfficerFiling {
+    referenceAppointmentId?: string;
+    referenceEtag?: string;
+    resignedOn?: string;
+}
+
+export interface OfficerFilingDto {
+    reference_appointment_id?: string;
+    reference_etag?: string;
+    resigned_on?: string;
 }

@@ -6,10 +6,11 @@ import * as mockValues from "./overseas.entities.mock";
 import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
+    OverseasEntityExtraDetails,
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity, mapOverseasEntityResource } from "../../../src/services/overseas-entities/mapping";
+import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -113,6 +114,32 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = await oeService.getOverseasEntity(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        ) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+    });
+
+    it("should return httpStatusCode 200 for getOverseasEntityDetails method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getOverseasEntityDetails(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<OverseasEntityExtraDetails>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(mockValues.OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK);
+    });
+
+    it("should return error 400 (Bad Request) for getOverseasEntityDetails method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.getOverseasEntityDetails(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
@@ -352,6 +379,76 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
     });
 
+    it("should return OverseasEntity object from mapOverseasEntityResource method with mapped Update dates", async () => {
+        const data = mapOverseasEntityResource({
+            entity_name: undefined,
+            presenter: undefined,
+            entity: undefined,
+            due_diligence: undefined,
+            overseas_entity_due_diligence: undefined,
+            beneficial_owners_statement: undefined,
+            beneficial_owners_individual: undefined,
+            beneficial_owners_corporate: undefined,
+            beneficial_owners_government_or_public_authority: undefined,
+            managing_officers_individual: undefined,
+            managing_officers_corporate: undefined,
+            trusts: undefined,
+            update: mockValues.UPDATE_RESOURCE_MOCK
+        });
+
+        expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with no Update filing date", async () => {
+        const updateResource = {
+            ...mockValues.UPDATE_RESOURCE_MOCK
+        };
+        updateResource.filing_date = undefined;
+
+        const data = mapOverseasEntityResource({
+            entity_name: undefined,
+            presenter: undefined,
+            entity: undefined,
+            due_diligence: undefined,
+            overseas_entity_due_diligence: undefined,
+            beneficial_owners_statement: undefined,
+            beneficial_owners_individual: undefined,
+            beneficial_owners_corporate: undefined,
+            beneficial_owners_government_or_public_authority: undefined,
+            managing_officers_individual: undefined,
+            managing_officers_corporate: undefined,
+            trusts: undefined,
+            update: updateResource
+        });
+
+        expect(data.update?.filing_date).to.undefined;
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with no date of creation", async () => {
+        const updateResource = {
+            ...mockValues.UPDATE_RESOURCE_MOCK
+        };
+        updateResource.date_of_creation = undefined;
+
+        const data = mapOverseasEntityResource({
+            entity_name: undefined,
+            presenter: undefined,
+            entity: undefined,
+            due_diligence: undefined,
+            overseas_entity_due_diligence: undefined,
+            beneficial_owners_statement: undefined,
+            beneficial_owners_individual: undefined,
+            beneficial_owners_corporate: undefined,
+            beneficial_owners_government_or_public_authority: undefined,
+            managing_officers_individual: undefined,
+            managing_officers_corporate: undefined,
+            trusts: undefined,
+            update: updateResource
+        });
+
+        expect(data.update?.date_of_creation).to.undefined;
+    });
+
     it("should return OE Due Diligence object with identity_date as InputDate object if identity date is null", () => {
         const dataResource = mapOverseasEntityResource({
             overseas_entity_due_diligence: {
@@ -383,5 +480,19 @@ describe("Mapping OverseasEntity Tests suite", () => {
         });
 
         expect(Object.keys(dataResource.overseas_entity_due_diligence!).indexOf("identity_date")).to.equal(-1);
+    });
+
+    it("should return OE extra details object with email address", () => {
+        const dataResource = mapOverseasEntityExtraDetails({
+            email_address: "private@overseasentities.test"
+        });
+
+        expect(dataResource.email_address).to.equal("private@overseasentities.test");
+    });
+
+    it("should return OE extra details object without email address if empty", () => {
+        const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
+
+        expect(dataResource.email_address).to.equal(undefined);
     });
 });

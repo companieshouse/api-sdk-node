@@ -1,5 +1,5 @@
 import {
-    CompanyOfficerResource
+    CompanyOfficerResource, ValidationStatusErrorResource, ValidationStatusResponseResource, OfficerFilingDto
 } from "../../../src/services/officer-filing";
 import { RequestClient } from "../../../src";
 
@@ -43,10 +43,17 @@ export const mockIdentification = {
 };
 
 export const mockLinks = {
+    self: "company/00006400/appointments/987",
     officer: {
         appointments: "officers/456/appointments"
     }
 };
+
+export const mockOfficerFiling: OfficerFilingDto = {
+    reference_appointment_id: "app1",
+    reference_etag: "968ada7234bb1eb65778ca4c83a4a42d36669a17",
+    resigned_on: "2009-08-29"
+}
 
 export const mockActiveDirectorDetails: CompanyOfficerResource = {
     name: "Doe, James John",
@@ -88,6 +95,38 @@ export const mockListActiveDirectorDetails: CompanyOfficerResource[] = [
     }
 ]
 
+export const mockDirectorAndTerminationDate: CompanyOfficerResource = {
+    name: "Doe, James John",
+    occupation: "singer",
+    nationality: "British",
+    date_of_birth: mockDateOfBirth,
+    appointed_on: "1 January 2009",
+    links: mockLinks,
+    country_of_residence: "Country",
+    address: mockAddress1,
+    officer_role: "SECRETARY",
+    identification: mockIdentification,
+    resigned_on: "1 January 2009"
+}
+
+export const mockValidationStatusError: ValidationStatusErrorResource = {
+    error: "European public limited liability company (SE) not permitted",
+    location: "$./transactions/185318-541416-850071/officers/646f2b75f8b00c631d83feb2/validation_status",
+    type: "ch:validation",
+    location_type: "json-path"
+}
+
+export const mockValidationStatusResponse: ValidationStatusResponseResource = {
+    errors: [mockValidationStatusError],
+    is_valid: false
+}
+
+export const mockGetOfficerFiling = {
+    200: { status: 200, body: mockOfficerFiling },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+
 export const mockGetListActiveDirectorsDetails = {
     200: { status: 200, body: mockListActiveDirectorDetails },
     404: { status: 404, error: "No active directors details were found" },
@@ -102,3 +141,14 @@ export const mockGetCurrentOrFutureDissolved = {
 export const mockGetCurrentOrFutureDissolvedReturnsFalse = {
     200: { status: 200, body: false }
 }
+
+export const mockGetDirectorAndTerminationDate = {
+    200: { status: 200, body: mockDirectorAndTerminationDate },
+    500: { status: 500, error: "Internal server error" }
+};
+
+export const mockGetValidationStatusResponse = {
+    200: { status: 200, body: mockValidationStatusResponse },
+    404: { status: 404, error: "Not Found" },
+    500: { status: 500, error: "Internal server error" }
+};

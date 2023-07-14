@@ -33,7 +33,8 @@ import {
     TrustHistoricalBeneficialOwner,
     TrustHistoricalBeneficialOwnerResource,
     Update,
-    UpdateResource
+    UpdateResource,
+    OverseasEntityExtraDetails
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -383,14 +384,18 @@ export const TRUSTS_MOCK: Trust[] = [{
 
 export const UPDATE_OBJECT_MOCK: Update = {
     date_of_creation: { day: "1", month: "12", year: "2021" },
+    filing_date: { day: "1", month: "2", year: "2023" },
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No
+    registrable_beneficial_owner: yesNoResponse.No,
+    no_change: yesNoResponse.No
 }
 
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     date_of_creation: "2021-12-01",
+    filing_date: "2023-02-01",
     bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No
+    registrable_beneficial_owner: yesNoResponse.No,
+    no_change: yesNoResponse.No
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
@@ -408,6 +413,10 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
     trusts: TRUSTS_MOCK,
     update: UPDATE_OBJECT_MOCK
+};
+
+export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
+    email_address: "private@overseasentities.test"
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
@@ -515,6 +524,10 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     update: UPDATE_RESOURCE_MOCK
 };
 
+export const OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK: OverseasEntityExtraDetails = {
+    email_address: "private@overseasentities.test"
+};
+
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
 export const TRANSACTION_ID = "12345";
@@ -536,5 +549,10 @@ export const mockPutOverseasEntityResponse = {
 
 export const mockGetOverseasEntityResponse = {
     200: { status: 200, body: OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK },
+    400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockGetOverseasEntityExtraDetailsResponse = {
+    200: { status: 200, body: OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK },
     400: { status: 400, error: BAD_REQUEST }
 };

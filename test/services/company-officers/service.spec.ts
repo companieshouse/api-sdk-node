@@ -57,6 +57,7 @@ describe("company-officers", () => {
                     resigned_on: (new Date()).toISOString(),
                     name: "Some Director",
                     officer_role: "director",
+                    responsibilities: "Determining the company’s strategic objectives and policies",
                     address: {
                         address_line_1: "123 Street",
                         address_line_2: "Some area",
@@ -86,7 +87,11 @@ describe("company-officers", () => {
                         place_registered: "some place",
                         registration_number: "some reg"
                     },
+                    contact_details: {
+                        contact_name: "Firstname Surname"
+                    },
                     links: {
+                        self: "appointmentId01",
                         officer: {
                             appointments: "officers/456/appointments"
                         }
@@ -126,6 +131,7 @@ describe("company-officers", () => {
         expect(data.resource.items[0].resignedOn).to.equal(mockResponseBody.items[0].resigned_on);
         expect(data.resource.items[0].name).to.equal(mockResponseBody.items[0].name);
         expect(data.resource.items[0].officerRole).to.equal(mockResponseBody.items[0].officer_role);
+        expect(data.resource.items[0].responsibilities).to.equal(mockResponseBody.items[0].responsibilities);
 
         expect(data.resource.items[0].address.addressLine1).to.equal(mockResponseBody.items[0].address.address_line_1);
         expect(data.resource.items[0].address.addressLine2).to.equal(mockResponseBody.items[0].address.address_line_2);
@@ -151,7 +157,10 @@ describe("company-officers", () => {
         expect(data.resource.items[0].identification.placeRegistered).to.equal(mockResponseBody.items[0].identification.place_registered);
         expect(data.resource.items[0].identification.registrationNumber).to.equal(mockResponseBody.items[0].identification.registration_number);
 
+        expect(data.resource.items[0].contactDetails.contactName).to.equal(mockResponseBody.items[0].contact_details.contact_name);
+
         expect(data.resource.items[0].links.officer.appointments).to.equal(mockResponseBody.items[0].links.officer.appointments);
+        expect(data.resource.items[0].links.self).to.equal(mockResponseBody.items[0].links.self);
     });
 
     it("should pass url with default parameters when undefined", async () => {
