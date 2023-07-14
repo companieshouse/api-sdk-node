@@ -1,6 +1,7 @@
 import IHttpClient from "./http/http-client";
 import CompanyOfficersService from "./services/company-officers/service";
 import CompanyProfileService from "./services/company-profile/service";
+import CompanyMetricsService from "services/company-metrics/service";
 import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, CheckoutService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
@@ -30,6 +31,7 @@ export default class ApiClient {
     readonly companyOfficers: CompanyOfficersService;
     readonly companyFilingHistory: CompanyFilingHistoryService;
     readonly companyProfile: CompanyProfileService;
+    readonly companyMetrics: CompanyMetricsService;
     readonly companyPsc: CompanyPscService;
     readonly companyPscStatements: CompanyPscStatementsService;
     readonly confirmationStatementService: ConfirmationStatementService;

@@ -1,6 +1,7 @@
 import IHttpClient from "./http/http-client";
 import CompanyOfficersService from "./services/company-officers/service";
 import CompanyProfileService from "./services/company-profile/service";
+import CompanyMetricsService from "services/company-metrics/service";
 import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, CheckoutService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
@@ -29,6 +30,7 @@ export default class ApiClient {
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;
+  public readonly companyMetrics: CompanyMetricsService;
   public readonly companyPsc: CompanyPscService;
   public readonly companyPscStatements: CompanyPscStatementsService;
   public readonly confirmationStatementService: ConfirmationStatementService;
@@ -58,6 +60,7 @@ export default class ApiClient {
       this.companyOfficers = new CompanyOfficersService(apiClient);
       this.companyFilingHistory = new CompanyFilingHistoryService(apiClient);
       this.companyProfile = new CompanyProfileService(apiClient);
+      this.companyMetrics = new CompanyMetricsService(apiClient);
       this.companyPsc = new CompanyPscService(apiClient);
       this.companyPscStatements = new CompanyPscStatementsService(apiClient);
       this.confirmationStatementService = new ConfirmationStatementService(apiClient);
