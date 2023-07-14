@@ -28,6 +28,8 @@ export interface CompanyOfficerResource {
     nationality?: string;
     occupation?: string;
     officer_role: string;
+    contact_details?: ContactDetailsResource;
+    responsibilities?: string;
     resigned_on?: string;
 }
 export interface AddressResource {
@@ -58,10 +60,14 @@ export interface IdentificationResource {
     registration_number?: string;
 }
 export interface CompanyOfficerResourceLinks {
+    self: string;
     officer: OfficerResourceLinks;
 }
 export interface OfficerResourceLinks {
     appointments: string;
+}
+export interface ContactDetailsResource {
+    contact_name?: string;
 }
 /**
  * CompanyOfficers is the interface used within this SDK.
@@ -93,6 +99,8 @@ export interface CompanyOfficer {
     nationality?: string;
     occupation?: string;
     officerRole: string;
+    contactDetails: ContactDetails;
+    responsibilities?: string;
     resignedOn?: string;
 }
 export interface Address {
@@ -123,8 +131,12 @@ export interface Identification {
     registrationNumber?: string;
 }
 export interface CompanyOfficerLinks {
+    self: string;
     officer: OfficerLinks;
 }
 export interface OfficerLinks {
     appointments: string;
+}
+export interface ContactDetails {
+    contactName?: string;
 }

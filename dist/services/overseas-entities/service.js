@@ -31,6 +31,23 @@ class OverseasEntityService {
             return resource;
         });
     }
+    getOverseasEntityDetails(transactionId, overseasEntityId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/details`;
+            const response = yield this.client.httpGet(URL);
+            if (response.error) {
+                return {
+                    httpStatusCode: response.status,
+                    errors: [response.error]
+                };
+            }
+            const resource = {
+                httpStatusCode: response.status,
+                resource: mapping_1.mapOverseasEntityExtraDetails(response.body)
+            };
+            return resource;
+        });
+    }
     postOverseasEntity(transactionId, body, isSaveAndResumeFeatureActive = false) {
         return __awaiter(this, void 0, void 0, function* () {
             const URL = (isSaveAndResumeFeatureActive)

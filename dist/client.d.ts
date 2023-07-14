@@ -4,7 +4,7 @@ import CompanyProfileService from "./services/company-profile/service";
 import CompanyMetricsService from "services/company-metrics/service";
 import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
-import { BasketService, CheckoutService, OrderService, CertificateService, CertifiedCopiesService, MidService } from "./services/order/";
+import { BasketService, CertificateService, CertifiedCopiesService, CheckoutService, MidService, OrderService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
@@ -21,12 +21,14 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
+import { ClientType } from "./enums";
 /**
  * ApiClient is the class that all service objects hang off.
  */
 export default class ApiClient {
     readonly apiClient: IHttpClient;
     readonly accountClient: IHttpClient;
+    clientType: ClientType;
     readonly lateFilingPenalties: LateFilingPenaltyService;
     readonly companyOfficers: CompanyOfficersService;
     readonly companyFilingHistory: CompanyFilingHistoryService;

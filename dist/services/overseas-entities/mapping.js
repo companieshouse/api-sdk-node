@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapOverseasEntityResource = exports.mapOverseasEntity = void 0;
+exports.mapOverseasEntityExtraDetails = exports.mapOverseasEntityResource = exports.mapOverseasEntity = void 0;
 const mapOverseasEntity = (body) => {
     return {
         entity_name: (body.entity_name) ? { name: body.entity_name } : null,
@@ -51,6 +51,12 @@ const mapOverseasEntityResource = (body) => {
     };
 };
 exports.mapOverseasEntityResource = mapOverseasEntityResource;
+const mapOverseasEntityExtraDetails = (body) => {
+    return {
+        email_address: (body.email_address)
+    };
+};
+exports.mapOverseasEntityExtraDetails = mapOverseasEntityExtraDetails;
 const mapBoiResource = boi => {
     return Object.assign(Object.assign({}, boi), { start_date: mapIsoDate(boi.start_date), ceased_date: mapOptionalIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) });
 };
@@ -254,12 +260,14 @@ const mapTrustCorporates = (trustCorporates = []) => {
     });
 };
 const mapUpdate = (update) => {
-    var _a, _b, _c;
+    var _a, _b, _c, _d, _e, _f;
     if (update && Object.keys(update).length) {
         const resource = {
             date_of_creation: convertOptionalDateToIsoDateString((_a = update.date_of_creation) === null || _a === void 0 ? void 0 : _a.day, (_b = update.date_of_creation) === null || _b === void 0 ? void 0 : _b.month, (_c = update.date_of_creation) === null || _c === void 0 ? void 0 : _c.year),
+            filing_date: convertOptionalDateToIsoDateString((_d = update.filing_date) === null || _d === void 0 ? void 0 : _d.day, (_e = update.filing_date) === null || _e === void 0 ? void 0 : _e.month, (_f = update.filing_date) === null || _f === void 0 ? void 0 : _f.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
-            registrable_beneficial_owner: update.registrable_beneficial_owner
+            registrable_beneficial_owner: update.registrable_beneficial_owner,
+            no_change: update.no_change
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
@@ -289,8 +297,10 @@ const mapUpdateResource = (updateResource) => {
     if (updateResource && Object.keys(updateResource).length) {
         const update = {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
+            filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
-            registrable_beneficial_owner: updateResource.registrable_beneficial_owner
+            registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
+            no_change: updateResource.no_change
         };
         const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
         if (beneficial_owners_individual.length !== 0) {
