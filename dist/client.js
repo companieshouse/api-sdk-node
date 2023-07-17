@@ -5,7 +5,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const service_1 = __importDefault(require("./services/company-officers/service"));
 const service_2 = __importDefault(require("./services/company-profile/service"));
-const service_3 = __importDefault(require("services/company-metrics/service"));
+const service_3 = __importDefault(require("./services/company-metrics/service"));
 const service_4 = __importDefault(require("./services/company-psc/service"));
 const lfp_1 = require("./services/lfp");
 const order_1 = require("./services/order/");

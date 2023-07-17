@@ -1,7 +1,7 @@
 import IHttpClient from "./http/http-client";
 import CompanyOfficersService from "./services/company-officers/service";
 import CompanyProfileService from "./services/company-profile/service";
-import CompanyMetricsService from "services/company-metrics/service";
+import CompanyMetricsService from "./services/company-metrics/service";
 import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import {
@@ -28,7 +28,7 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
-import { ClientType } from "./enums";
+import { ClientType } from "./enums/ClientType";
 
 /**
  * ApiClient is the class that all service objects hang off.
