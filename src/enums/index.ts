@@ -1,3 +1,3 @@
-import { ClientType } from "./clientType";
+import { ClientType } from "./ClientType";
 
 export { ClientType };
