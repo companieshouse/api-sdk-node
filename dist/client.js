@@ -25,7 +25,6 @@ const service_13 = require("./services/order/search/service");
 const service_14 = __importDefault(require("./services/order/order-item/service"));
 const service_15 = __importDefault(require("./services/order/checkout-item/service"));
 const service_16 = __importDefault(require("./services/officer-filing/service"));
-// import { ClientType } from "./enums/clientType";
 /**
  * ApiClient is the class that all service objects hang off.
  */
