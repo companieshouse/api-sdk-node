@@ -65,7 +65,7 @@ describe("company-metrics", () => {
         expect(data.httpStatusCode).to.equal(200);
 
         expect(data.resource?.etag).to.equal(mockResponseBody.etag)
-        
+
         expect(data.resource?.counts.appointments.activeCount).to.equal(mockResponseBody.counts.appointments.activeCount)
         expect(data.resource?.counts.appointments.activeDirectorsCount).to.equal(mockResponseBody.counts.appointments.activeDirectorsCount)
         expect(data.resource?.counts.appointments.activeLlpMembersCount).to.equal(mockResponseBody.counts.appointments.activeLlpMembersCount)

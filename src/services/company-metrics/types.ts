@@ -1,7 +1,7 @@
- /**
-  * MetricsApi is what is returned from the api.
-  */
- export interface MetricsApi {
+/**
+ * MetricsApi is what is returned from the api.
+ */
+export interface MetricsApi {
    etag: string;
    counts: CountsApi;
    mortgage: MortgageApi;
