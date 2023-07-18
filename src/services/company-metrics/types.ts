@@ -16,34 +16,34 @@ export interface MetricsApiResource {
 }
 
 export interface CountsApi {
-    // personsWithSignificantControl: PscApi;
+    personsWithSignificantControl: PscApi;
     appointments: AppointmentsApi;
 }
 
 export interface CountsApiResource {
-    // persons-with-significant-control: PscApi;
+    persons_with_significant_control: PscApi;
     appointments: AppointmentsApi;
 }
 
-// export interface PscApi {
-//     statementsCount: number;
-//     ceasedPscsCount: number;
-//     totalCount: number;
-//     activePscsCount: number;
-//     withdrawnStatementsCount: number;
-//     activeStatementsCount: number;
-//     pscsCount: number;
-// }
+export interface PscApi {
+    statementsCount: number;
+    ceasedPscsCount: number;
+    totalCount: number;
+    activePscsCount: number;
+    withdrawnStatementsCount: number;
+    activeStatementsCount: number;
+    pscsCount: number;
+}
 
-// export interface PscApiResource {
-//     statements_count: number;
-//     ceased_pscs_count: number;
-//     total_count: number;
-//     active_pscs_count: number;
-//     withdrawn_statements_count: number;
-//     active_statements_count: number;
-//     pscs_count: number;
-// }
+export interface PscApiResource {
+    statements_count: number;
+    ceased_pscs_count: number;
+    total_count: number;
+    active_pscs_count: number;
+    withdrawn_statements_count: number;
+    active_statements_count: number;
+    pscs_count: number;
+}
 
 export interface AppointmentsApi {
     activeDirectorsCount: number;
