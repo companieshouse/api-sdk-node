@@ -5,23 +5,23 @@
    etag: string;
    counts: CountsApi;
    mortgage: MortgageApi;
-   registers: RegistersApi;
+   registers?: RegistersApi;
  }
 
 export interface MetricsApiResource {
    etag: string;
    counts: CountsApi;
    mortgage: MortgageApi;
-   registers: RegistersApi;
+   registers?: RegistersApi;
 }
 
 export interface CountsApi {
-    personsWithSignificantControl: PscApi;
+    personsWithSignificantControl?: PscApi;
     appointments: AppointmentsApi;
 }
 
 export interface CountsApiResource {
-    persons_with_significant_control: PscApi;
+    persons_with_significant_control?: PscApi;
     appointments: AppointmentsApi;
 }
 
