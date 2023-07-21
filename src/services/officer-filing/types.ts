@@ -11,6 +11,9 @@ export interface CompanyOfficerResource {
     identification?: IdentificationResource;
     links: CompanyOfficerResourceLinks;
     name: string;
+    forename?: string;
+    surname?: string;
+    other_forenames?: string;
     nationality?: string;
     occupation?: string;
     officer_role: string;
@@ -86,6 +89,9 @@ export interface CompanyOfficer {
     identification?: Identification;
     links: CompanyOfficerLinks;
     name: string;
+    forename?: string;
+    surname?: string;
+    otherForenames?: string;
     nationality?: string;
     occupation?: string;
     officerRole: string;
