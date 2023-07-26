@@ -20,10 +20,10 @@ export default class RegisteredEmailAddressService {
         const resp = await this.client.httpPost(url, registeredEmailAddressResource);
 
         if (resp.error) {
-            return {
+            return Promise.reject({
                 httpStatusCode: resp.status,
                 errors: [resp.error]
-            };
+            });
         }
 
         const resource: Resource<RegisteredEmailAddress> = {
@@ -35,7 +35,7 @@ export default class RegisteredEmailAddressService {
 
         this.populateResource(resource, body);
 
-        return resource;
+        return Promise.resolve(resource);
     }
 
     private populateResource (resource: Resource<RegisteredEmailAddress>, body: RegisteredEmailAddressResource) {

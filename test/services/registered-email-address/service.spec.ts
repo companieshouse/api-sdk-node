@@ -17,9 +17,12 @@ describe("registered-email-address", () => {
     const REGISTERED_EMAIL_ADDRESS = "test@test.com";
     const TRANSACTION_ID = "178417-909116-690426";
 
+    let registeredEmailAddressService: RegisteredEmailAddressService;
+
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
+        registeredEmailAddressService = new RegisteredEmailAddressService(requestClient);
     });
 
     afterEach(done => {
@@ -35,30 +38,26 @@ describe("registered-email-address", () => {
         };
 
         const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
-        const registeredEmailAddressService: RegisteredEmailAddressService = new RegisteredEmailAddressService(requestClient);
-        const data = await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, {} as RegisteredEmailAddress);
-
-        expect(data.httpStatusCode).to.equal(401);
-        const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("An error occurred");
+        await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, {} as RegisteredEmailAddress).catch((data) => {
+            expect(data.httpStatusCode).to.equal(401);
+            const castedData: ApiErrorResponse = data;
+            expect(castedData.errors[0]).to.equal("An error occurred");
+        });
     });
 
     it("post maps the registered email address field data items correctly", async () => {
-        const mockResponseBody: RegisteredEmailAddressResource = ({
-            registered_email_address: REGISTERED_EMAIL_ADDRESS
-        });
-
+        const registeredEmailAddress: RegisteredEmailAddress = { registeredEmailAddress: REGISTERED_EMAIL_ADDRESS };
+        const mockResponseBody: RegisteredEmailAddressResource = { registered_email_address: REGISTERED_EMAIL_ADDRESS };
         const mockPostResponse = {
-            status: 200,
-            body: mockResponseBody
+            status: 200, body: mockResponseBody
         };
 
         sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
-        const registeredEmailAddressService: RegisteredEmailAddressService = new RegisteredEmailAddressService(requestClient);
-        const data = await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, { registeredEmailAddress: REGISTERED_EMAIL_ADDRESS } as RegisteredEmailAddress);
 
-        expect(data.httpStatusCode).to.equal(200);
-        const castedData: Resource<RegisteredEmailAddress> = data as Resource<RegisteredEmailAddress>;
-        expect(castedData.resource.registeredEmailAddress).to.equal(mockResponseBody.registered_email_address);
+        await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, registeredEmailAddress).then((data) => {
+            expect(data.httpStatusCode).to.equal(200);
+            const castedData: Resource<RegisteredEmailAddress> = data as Resource<RegisteredEmailAddress>;
+            expect(castedData.resource.registeredEmailAddress).to.equal(mockResponseBody.registered_email_address);
+        });
     });
 });
