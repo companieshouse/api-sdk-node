@@ -1,7 +1,7 @@
 {
     ignorePatterns: ["node_modules/"],
     parserOptions: {
-        ecmaVersion: 8,
+        ecmaVersion: 12,
         sourceType: "module",
         ecmaFeatures: {}
     },
