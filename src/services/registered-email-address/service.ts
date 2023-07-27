@@ -13,7 +13,7 @@ export default class RegisteredEmailAddressService {
      * @param registeredEmailAddress
      */
     public async postRegisteredEmailAddress (transactionId: string, registeredEmailAddress: RegisteredEmailAddress): Promise<Resource<RegisteredEmailAddress> | ApiErrorResponse> {
-        const url = `/transactions/${registeredEmailAddress}/registered-email-address`;
+        const url = `/transactions/${transactionId}/registered-email-address`;
 
         const registeredEmailAddressResource: RegisteredEmailAddressResource = this.mapToResource(registeredEmailAddress);
 
