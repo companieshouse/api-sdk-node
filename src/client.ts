@@ -28,6 +28,7 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
+import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
 
 /**
@@ -60,6 +61,7 @@ export default class ApiClient {
   public readonly pscDiscrepancies: PSCDiscrepancyService;
   public readonly pscDiscrepancyReport: PSCDiscrepanciesReportService;
   public readonly transaction: TransactionService;
+  public readonly registeredEmailAddressService: RegisteredEmailAddressService;
   public readonly overseasEntity: OverseasEntityService;
   public readonly officerFiling: OfficerFilingService;
 
@@ -94,5 +96,6 @@ export default class ApiClient {
       this.pscDiscrepancies = new PSCDiscrepancyService(apiClient);
       this.pscDiscrepancyReport = new PSCDiscrepanciesReportService(apiClient);
       this.transaction = new TransactionService(apiClient);
+      this.registeredEmailAddressService = new RegisteredEmailAddressService(apiClient);
   }
 }
