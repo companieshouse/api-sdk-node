@@ -1,7 +1,7 @@
 import chai from "chai";
 import sinon from "sinon";
-import {RequestClient} from "../../../src/http";
-import {Resource} from "../../../src";
+import { RequestClient } from "../../../src/http";
+import { Resource } from "../../../src";
 import RegisteredEmailAddressService from "../../../src/services/registered-email-address/service";
 import {
     RegisteredEmailAddress,
@@ -10,7 +10,7 @@ import {
 
 const expect = chai.expect;
 
-const requestClient = new RequestClient({baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED"});
+const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("registered-email-address", () => {
     const REGISTERED_EMAIL_ADDRESS = "test@test.com";
@@ -44,8 +44,8 @@ describe("registered-email-address", () => {
     });
 
     it("post maps the registered email address field data items correctly", async () => {
-        const registeredEmailAddress: RegisteredEmailAddress = {registeredEmailAddress: REGISTERED_EMAIL_ADDRESS};
-        const mockResponseBody: RegisteredEmailAddressResource = {registered_email_address: REGISTERED_EMAIL_ADDRESS};
+        const registeredEmailAddress: RegisteredEmailAddress = { registeredEmailAddress: REGISTERED_EMAIL_ADDRESS };
+        const mockResponseBody: RegisteredEmailAddressResource = { registered_email_address: REGISTERED_EMAIL_ADDRESS };
         const mockPostResponse = {
             status: 200, body: mockResponseBody
         };
