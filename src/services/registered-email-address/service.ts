@@ -1,9 +1,9 @@
-import { IHttpClient } from "../../http";
-import Resource, { ApiErrorResponse } from "../resource";
-import { RegisteredEmailAddress, RegisteredEmailAddressResource } from "./types";
+import {IHttpClient} from "../../http";
+import Resource, {ApiErrorResponse} from "../resource";
+import {RegisteredEmailAddress, RegisteredEmailAddressResource} from "./types";
 
 export default class RegisteredEmailAddressService {
-    constructor (private readonly client: IHttpClient) {
+    constructor(private readonly client: IHttpClient) {
     }
 
     /**
@@ -12,7 +12,7 @@ export default class RegisteredEmailAddressService {
      * @param transactionId
      * @param registeredEmailAddress
      */
-    public async postRegisteredEmailAddress (transactionId: string, registeredEmailAddress: RegisteredEmailAddress): Promise<Resource<RegisteredEmailAddress> | ApiErrorResponse> {
+    public async postRegisteredEmailAddress(transactionId: string, registeredEmailAddress: RegisteredEmailAddress): Promise<Resource<RegisteredEmailAddress> | ApiErrorResponse> {
         const url = `/transactions/${registeredEmailAddress}/registered-email-address`;
 
         const registeredEmailAddressResource: RegisteredEmailAddressResource = this.mapToResource(registeredEmailAddress);
@@ -20,10 +20,7 @@ export default class RegisteredEmailAddressService {
         const resp = await this.client.httpPost(url, registeredEmailAddressResource);
 
         if (resp.error) {
-            return Promise.reject({
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            });
+            return Promise.reject(resp);
         }
 
         const resource: Resource<RegisteredEmailAddress> = {
@@ -38,13 +35,13 @@ export default class RegisteredEmailAddressService {
         return Promise.resolve(resource);
     }
 
-    private populateResource (resource: Resource<RegisteredEmailAddress>, body: RegisteredEmailAddressResource) {
+    private populateResource(resource: Resource<RegisteredEmailAddress>, body: RegisteredEmailAddressResource) {
         resource.resource = {
             registeredEmailAddress: body.registered_email_address
         };
     }
 
-    private mapToResource (registeredEmailAddress: RegisteredEmailAddress): RegisteredEmailAddressResource {
+    private mapToResource(registeredEmailAddress: RegisteredEmailAddress): RegisteredEmailAddressResource {
         return {
             registered_email_address: registeredEmailAddress.registeredEmailAddress
         }
