@@ -57,6 +57,7 @@ describe("company-psc", () => {
                     etag: "fe416d8a3e09c93eb961ad89b0c606982c3c01e1",
                     name_elements: {
                         forename: "James",
+                        middle_name: "Sirius",
                         surname: "Potter"
                     },
                     nationality: "British",
@@ -125,5 +126,9 @@ describe("company-psc", () => {
         expect(data.resource?.items[0].identification?.legalForm).to.equal(mockResponseBody.items[0].identification?.legal_form);
         expect(data.resource?.items[0].identification?.placeRegistered).to.equal(mockResponseBody.items[0].identification?.place_registered);
         expect(data.resource?.items[0].identification?.registrationNumber).to.equal(mockResponseBody.items[0].identification?.registration_number)
+
+        expect(data.resource?.items[0].nameElements.forename).to.equal(mockResponseBody.items[0].name_elements.forename);
+        expect(data.resource?.items[0].nameElements.middleName).to.equal(mockResponseBody.items[0].name_elements.middle_name);
+        expect(data.resource?.items[0].nameElements.surname).to.equal(mockResponseBody.items[0].name_elements.surname);
     });
 });

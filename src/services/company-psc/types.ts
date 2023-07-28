@@ -47,6 +47,7 @@ export interface DateOfBirthResource {
 
 export interface NameElementsResource {
   forename?: string;
+  middle_name?: string;
   surname: string;
 };
 
@@ -115,6 +116,7 @@ export interface DateOfBirth {
 
 export interface NameElements {
   forename?: string;
+  middleName?: string;
   surname: string;
 };
 
