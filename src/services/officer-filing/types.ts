@@ -169,10 +169,12 @@ export interface OfficerFiling {
     referenceAppointmentId?: string;
     referenceEtag?: string;
     resignedOn?: string;
+    name?: string;
 }
 
 export interface OfficerFilingDto {
     reference_appointment_id?: string;
     reference_etag?: string;
     resigned_on?: string;
+    name?: string;
 }

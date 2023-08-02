@@ -143,7 +143,8 @@ export default class {
         return {
             reference_appointment_id: officerFiling.referenceAppointmentId,
             reference_etag: officerFiling.referenceEtag,
-            resigned_on: officerFiling.resignedOn
+            resigned_on: officerFiling.resignedOn,
+            name: officerFiling.name
         }
     }
 
