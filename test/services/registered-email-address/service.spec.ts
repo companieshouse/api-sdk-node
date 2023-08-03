@@ -14,7 +14,7 @@ const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "
 
 describe("registered-email-address", () => {
     const EMAIL_ADDRESS_TO_REGISTER = "test@test.com";
-    const ACCEPT_EMAIL_STATEMENT = "true";
+    const ACCEPT_APPROPRIATE_EMAIL_ADDRESS_STATEMENT = "true";
     const TRANSACTION_ID = "178417-909116-690426";
 
     let registeredEmailAddressService: RegisteredEmailAddressService;
@@ -47,13 +47,13 @@ describe("registered-email-address", () => {
     it("post maps the registered email address field data items correctly", async () => {
         const registeredEmailAddress: RegisteredEmailAddress = {
             registeredEmailAddress: EMAIL_ADDRESS_TO_REGISTER,
-            acceptEmailStatement: ACCEPT_EMAIL_STATEMENT
+            acceptAppropriateEmailAddressStatement: ACCEPT_APPROPRIATE_EMAIL_ADDRESS_STATEMENT
         };
         const mockPostResponse = {
             status: 200,
             body: {
                 registered_email_address: EMAIL_ADDRESS_TO_REGISTER,
-                acceptEmailStatement: ACCEPT_EMAIL_STATEMENT
+                accept_appropriate_email_address_statement: ACCEPT_APPROPRIATE_EMAIL_ADDRESS_STATEMENT
             }
         };
 
@@ -63,7 +63,7 @@ describe("registered-email-address", () => {
             expect(data.httpStatusCode).to.equal(200);
             const castedData: Resource<RegisteredEmailAddress> = data as Resource<RegisteredEmailAddress>;
             expect(castedData.resource.registeredEmailAddress).to.equal(EMAIL_ADDRESS_TO_REGISTER);
-            expect(castedData.resource.acceptEmailStatement).to.equal(ACCEPT_EMAIL_STATEMENT);
+            expect(castedData.resource.acceptAppropriateEmailAddressStatement).to.equal(ACCEPT_APPROPRIATE_EMAIL_ADDRESS_STATEMENT);
         });
     });
 });
