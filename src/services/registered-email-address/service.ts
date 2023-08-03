@@ -37,13 +37,15 @@ export default class RegisteredEmailAddressService {
 
     private populateResource (resource: Resource<RegisteredEmailAddress>, body: RegisteredEmailAddressResource) {
         resource.resource = {
-            registeredEmailAddress: body.registered_email_address
+            registeredEmailAddress: body.registered_email_address,
+            acceptEmailStatement: body.acceptEmailStatement
         };
     }
 
     private mapToResource (registeredEmailAddress: RegisteredEmailAddress): RegisteredEmailAddressResource {
         return {
-            registered_email_address: registeredEmailAddress.registeredEmailAddress
+            registered_email_address: registeredEmailAddress.registeredEmailAddress,
+            acceptEmailStatement: registeredEmailAddress.acceptEmailStatement
         }
     }
 }
