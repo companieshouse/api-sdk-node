@@ -13,7 +13,8 @@ const expect = chai.expect;
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("registered-email-address", () => {
-    const REGISTERED_EMAIL_ADDRESS = "test@test.com";
+    const EMAIL_ADDRESS_TO_REGISTER = "test@test.com";
+    const ACCEPT_EMAIL_STATEMENT = "true";
     const TRANSACTION_ID = "178417-909116-690426";
 
     let registeredEmailAddressService: RegisteredEmailAddressService;
@@ -44,10 +45,16 @@ describe("registered-email-address", () => {
     });
 
     it("post maps the registered email address field data items correctly", async () => {
-        const registeredEmailAddress: RegisteredEmailAddress = { registeredEmailAddress: REGISTERED_EMAIL_ADDRESS };
-        const mockResponseBody: RegisteredEmailAddressResource = { registered_email_address: REGISTERED_EMAIL_ADDRESS };
+        const registeredEmailAddress: RegisteredEmailAddress = {
+            registeredEmailAddress: EMAIL_ADDRESS_TO_REGISTER,
+            acceptEmailStatement: ACCEPT_EMAIL_STATEMENT
+        };
         const mockPostResponse = {
-            status: 200, body: mockResponseBody
+            status: 200,
+            body: {
+                registered_email_address: EMAIL_ADDRESS_TO_REGISTER,
+                acceptEmailStatement: ACCEPT_EMAIL_STATEMENT
+            }
         };
 
         sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
@@ -55,7 +62,8 @@ describe("registered-email-address", () => {
         await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, registeredEmailAddress).then((data) => {
             expect(data.httpStatusCode).to.equal(200);
             const castedData: Resource<RegisteredEmailAddress> = data as Resource<RegisteredEmailAddress>;
-            expect(castedData.resource.registeredEmailAddress).to.equal(mockResponseBody.registered_email_address);
+            expect(castedData.resource.registeredEmailAddress).to.equal(EMAIL_ADDRESS_TO_REGISTER);
+            expect(castedData.resource.acceptEmailStatement).to.equal(ACCEPT_EMAIL_STATEMENT);
         });
     });
 });
