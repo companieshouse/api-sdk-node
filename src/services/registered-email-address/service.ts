@@ -1,6 +1,11 @@
 import { IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
-import { RegisteredEmailAddress, RegisteredEmailAddressResource } from "./types";
+import {
+    RegisteredEmailAddressCreatedResource,
+    RegisteredEmailAddress,
+    RegisteredEmailAddressResource,
+    RegisteredEmailAddressResponse
+} from "./types";
 
 export default class RegisteredEmailAddressService {
     constructor (private readonly client: IHttpClient) {
@@ -12,7 +17,7 @@ export default class RegisteredEmailAddressService {
      * @param transactionId
      * @param registeredEmailAddress
      */
-    public async postRegisteredEmailAddress (transactionId: string, registeredEmailAddress: RegisteredEmailAddress): Promise<Resource<RegisteredEmailAddress> | ApiErrorResponse> {
+    public async postRegisteredEmailAddress (transactionId: string, registeredEmailAddress: RegisteredEmailAddress): Promise<Resource<RegisteredEmailAddressCreatedResource> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/registered-email-address`;
 
         const registeredEmailAddressResource: RegisteredEmailAddressResource = this.mapToResource(registeredEmailAddress);
@@ -23,22 +28,32 @@ export default class RegisteredEmailAddressService {
             return Promise.reject(resp);
         }
 
-        const resource: Resource<RegisteredEmailAddress> = {
+        const resource: Resource<RegisteredEmailAddressCreatedResource> = {
             httpStatusCode: resp.status
         };
 
         // cast the response body to the expected type
-        const body = resp.body as RegisteredEmailAddressResource;
+        const body = resp.body as RegisteredEmailAddressResponse;
 
         this.populateResource(resource, body);
 
         return Promise.resolve(resource);
     }
 
-    private populateResource (resource: Resource<RegisteredEmailAddress>, body: RegisteredEmailAddressResource) {
+    private populateResource (resource: Resource<RegisteredEmailAddressCreatedResource>, body: RegisteredEmailAddressResponse) {
         resource.resource = {
-            registeredEmailAddress: body.registered_email_address,
-            acceptAppropriateEmailAddressStatement: body.accept_appropriate_email_address_statement
+            id: body.id,
+            data: {
+                registeredEmailAddress: body.data.registered_email_address,
+                acceptAppropriateEmailAddressStatement: body.data.accept_appropriate_email_address_statement,
+                etag: body.data.etag,
+                kind: body.data.kind
+            },
+            createdAt: body.created_at,
+            updatedAt: body.updated_at,
+            links: {
+                self: body.links.self
+            }
         };
     }
 
