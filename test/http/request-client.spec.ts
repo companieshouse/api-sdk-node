@@ -1,9 +1,8 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
 
-import { RequestClient, HttpResponse } from "../../src/http";
+import { RequestClient } from "../../src/http";
+import nock = require("nock");
 const expect = chai.expect;
 
 describe("request-client", () => {
@@ -123,6 +122,28 @@ describe("request-client", () => {
         expect(resp.error).to.be.undefined;
         expect(resp.body).to.deep.equal(body);
         expect(resp.status).to.equal(statusCode);
+    });
+
+    it("propagates additional header required for PATCH merge", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const requiredMergePatchHeader = {
+            name: "Content-Type",
+            value: "application/merge-patch+json"
+        }
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader(requiredMergePatchHeader.name, requiredMergePatchHeader.value)
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001",
+            { data: "bar" },
+            { "Content-Type": "application/merge-patch+json" });
+
+        // Then
+        scope.done();
+        expect(resp.status).to.equal(200);
     });
 
     it("returns an error response when HTTP PUT request fails", async () => {
