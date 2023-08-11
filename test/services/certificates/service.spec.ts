@@ -804,8 +804,8 @@ describe("update a certificate PATCH", () => {
             Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
 
         // Then
-        scope.done();
         expect(data.value.httpStatusCode).to.equal(200);
+        scope.done();
     });
 });
 

@@ -1,5 +1,5 @@
 import { AbstractClient, HttpResponse, AdditionalOptions, Headers } from "./http-client";
-import axios, { AxiosRequestConfig, AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
 /**
  * RequestClient is an implementation of our http client using the request
@@ -27,12 +27,19 @@ export default class RequestClient extends AbstractClient {
     }
 
     private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
+        // Default values for these headers if not provided in additional headers.
+        const accept = (additionalOptions.headers && additionalOptions.headers.Accept) || "application/json";
+        const contentType =
+            (additionalOptions.headers && additionalOptions.headers["Content-Type"]) || "application/json";
+
         try {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: {
                     ...this.headers,
-                    ...additionalOptions.headers
+                    ...additionalOptions.headers,
+                    Accept: accept,
+                    "Content-Type": contentType
                 },
                 url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 responseType: "json",

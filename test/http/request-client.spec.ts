@@ -124,26 +124,47 @@ describe("request-client", () => {
         expect(resp.status).to.equal(statusCode);
     });
 
-    it("propagates additional header required for PATCH merge", async () => {
+    it("propagates additional headers provided by client", async () => {
         // Given
         const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
-        const requiredMergePatchHeader = {
-            name: "Content-Type",
-            value: "application/merge-patch+json"
-        }
         const scope = nock(/.*/)
             .patch("/orderable/certificates/CHS001")
-            .matchHeader(requiredMergePatchHeader.name, requiredMergePatchHeader.value)
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/merge-patch+json")
+            .matchHeader("Content-Type", "application/merge-patch+json")
+            .matchHeader("Example", "Example value")
             .reply(200);
 
         // When
         const resp = await client.httpPatch("/orderable/certificates/CHS001",
             { data: "bar" },
-            { "Content-Type": "application/merge-patch+json" });
+            {
+                "Content-Type": "application/merge-patch+json",
+                Accept: "application/merge-patch+json",
+                Example: "Example value"
+            });
 
         // Then
-        scope.done();
         expect(resp.status).to.equal(200);
+        scope.done();
+    });
+
+    it("sets default headers correctly where not provided in additional headers", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/json")
+            .matchHeader("Content-Type", "application/json")
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001", { data: "bar" });
+
+        // Then
+        expect(resp.status).to.equal(200);
+        scope.done();
     });
 
     it("returns an error response when HTTP PUT request fails", async () => {
