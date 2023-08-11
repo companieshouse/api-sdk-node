@@ -149,6 +149,31 @@ describe("request-client", () => {
         scope.done();
     });
 
+    it("propagates additional headers provided by client, regardless of header name case", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/merge-patch+json")
+            .matchHeader("Content-Type", "application/merge-patch+json")
+            .matchHeader("Example", "Example value")
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001",
+            { data: "bar" },
+            {
+                "content-type": "application/merge-patch+json",
+                accept: "application/merge-patch+json",
+                Example: "Example value"
+            });
+
+        // Then
+        expect(resp.status).to.equal(200);
+        scope.done();
+    });
+
     it("sets default headers correctly where not provided in additional headers", async () => {
         // Given
         const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
