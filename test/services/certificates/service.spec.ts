@@ -9,9 +9,10 @@ import {
     CertificateItemPatchRequest,
     CertificateItemPostRequest,
     CertificateItemResource
-} from "../../../src/services/order/certificates/types";
+} from "../../../src/services/order/certificates";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
+import nock = require("nock");
 
 const expect = chai.expect;
 
@@ -778,6 +779,33 @@ describe("update a certificate PATCH", () => {
         expect(io.liquidatorsDetails).to.be.undefined;
         expect(io.companyStatus).to.be.undefined;
         expect(io.administratorsDetails).to.be.undefined;
+    });
+
+    it("sets additional header required for PATCH merge", async () => {
+        // Given
+        const requestClient = new RequestClient({
+            baseUrl: "http://localhost",
+            oauthToken: "TOKEN-NOT-USED"
+        });
+        // patchCertificate sets this header, so we expect to see it sent in outgoing HTTP request.
+        // Effectively testing both CertificateService and RequestClient.
+        const expectedMergePatchHeader = {
+            name: "Content-Type",
+            value: "application/merge-patch+json"
+        }
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader(expectedMergePatchHeader.name, expectedMergePatchHeader.value)
+            .reply(200);
+        const certificate: CertificateService = new CertificateService(requestClient);
+
+        // When
+        const data = await certificate.patchCertificate(mockRequestBody, certificateId) as
+            Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
+
+        // Then
+        expect(data.value.httpStatusCode).to.equal(200);
+        scope.done();
     });
 });
 

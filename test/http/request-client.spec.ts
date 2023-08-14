@@ -1,9 +1,8 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
 
-import { RequestClient, HttpResponse } from "../../src/http";
+import { RequestClient } from "../../src/http";
+import nock = require("nock");
 const expect = chai.expect;
 
 describe("request-client", () => {
@@ -123,6 +122,74 @@ describe("request-client", () => {
         expect(resp.error).to.be.undefined;
         expect(resp.body).to.deep.equal(body);
         expect(resp.status).to.equal(statusCode);
+    });
+
+    it("propagates additional headers provided by client", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/merge-patch+json")
+            .matchHeader("Content-Type", "application/merge-patch+json")
+            .matchHeader("Example", "Example value")
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001",
+            { data: "bar" },
+            {
+                "Content-Type": "application/merge-patch+json",
+                Accept: "application/merge-patch+json",
+                Example: "Example value"
+            });
+
+        // Then
+        expect(resp.status).to.equal(200);
+        scope.done();
+    });
+
+    it("propagates additional headers provided by client, regardless of header name case", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/merge-patch+json")
+            .matchHeader("Content-Type", "application/merge-patch+json")
+            .matchHeader("Example", "Example value")
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001",
+            { data: "bar" },
+            {
+                "content-type": "application/merge-patch+json",
+                accept: "application/merge-patch+json",
+                Example: "Example value"
+            });
+
+        // Then
+        expect(resp.status).to.equal(200);
+        scope.done();
+    });
+
+    it("sets default headers correctly where not provided in additional headers", async () => {
+        // Given
+        const client = new RequestClient({ oauthToken: "123", baseUrl: "http://localhost" });
+        const scope = nock(/.*/)
+            .patch("/orderable/certificates/CHS001")
+            .matchHeader("Authorization", "Bearer 123")
+            .matchHeader("Accept", "application/json")
+            .matchHeader("Content-Type", "application/json")
+            .reply(200);
+
+        // When
+        const resp = await client.httpPatch("/orderable/certificates/CHS001", { data: "bar" });
+
+        // Then
+        expect(resp.status).to.equal(200);
+        scope.done();
     });
 
     it("returns an error response when HTTP PUT request fails", async () => {
