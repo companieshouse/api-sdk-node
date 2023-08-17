@@ -76,7 +76,7 @@ export interface ValidationStatusResponseResource {
  * CompanyOfficers is the interface used within this SDK.
  */
 export interface OfficerCard {
-    removeUrl: string;
+    appointmentId: string;
     officer: CompanyOfficer;
 }
 
