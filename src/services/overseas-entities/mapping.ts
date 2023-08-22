@@ -81,19 +81,17 @@ export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails):
     };
 };
 
-export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateData[]): BeneficialOwnerPrivateDataResource[] => {
-    const boPrivateDataResource: BeneficialOwnerPrivateData[] = [];
-    boPrivateData.forEach(bo => {
-        const { dateOfBirth, usualResidentialAddress, principalAddress, ...rest} = bo;
-        boPrivateDataResource.push({
-            ...rest,
-            dateOfBirth,
-            usualResidentialAddress,
-            principalAddress
-        });
-    });
-
-    return boPrivateDataResource;
+export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateDataResource[]): BeneficialOwnerPrivateData[] => {
+    return (boPrivateData || []).map(boPrivateData => {
+        return {
+            pscId: boPrivateData.pscId,
+            usualResidentialAddress: boPrivateData.usualResidentialAddress,
+            principalAddress: boPrivateData.principalAddress,
+            dateOfBirth: boPrivateData.dateOfBirth,
+            dateBecameRegistrable: boPrivateData.dateBecameRegistrable,
+            isServiceAddressSameAsUsualAddress: boPrivateData.isServiceAddressSameAsUsualAddress
+        }
+    })
 };
 
 const mapBoiResource = boi => {
