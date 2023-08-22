@@ -95,7 +95,7 @@ export default class OverseasEntityService {
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
-    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnerPrivateData> | ApiErrorResponse> {
+    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnerPrivateData[]> | ApiErrorResponse> {
         const URL =  `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
         const response: HttpResponse = await this.client.httpGet(URL);
         if(response.error) {
@@ -105,7 +105,7 @@ export default class OverseasEntityService {
             };
         };
 
-        const resource: Resource<BeneficialOwnerPrivateData> = {
+        const resource: Resource<BeneficialOwnerPrivateData[]> = {
             httpStatusCode: response.status,
             resource: mapBeneficialOwnerPrivateData(response.body)
         };

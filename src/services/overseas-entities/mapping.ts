@@ -26,7 +26,9 @@ import {
     TrustCorporateResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    BeneficialOwnerPrivateData,
+    BeneficialOwnerPrivateDataResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -79,10 +81,19 @@ export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails):
     };
 };
 
-export const mapBeneficialOwnerPrivateData = boPrivateData => {
-    return {
-        ...boPrivateData
-    };
+export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateData[]): BeneficialOwnerPrivateDataResource[] => {
+    const boPrivateDataResource: BeneficialOwnerPrivateData[] = [];
+    boPrivateData.forEach(bo => {
+        const { dateOfBirth, usualResidentialAddress, principalAddress, ...rest} = bo;
+        boPrivateDataResource.push({
+            ...rest,
+            dateOfBirth,
+            usualResidentialAddress,
+            principalAddress
+        });
+    });
+
+    return boPrivateDataResource;
 };
 
 const mapBoiResource = boi => {

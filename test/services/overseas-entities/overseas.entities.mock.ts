@@ -60,14 +60,17 @@ export const privateBoADDRESS = {
     "region": "region1"
 };
 
-export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK = {
-        pscId: "0000000",
+export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK = 
+    [    
+       { pscId: "0000000",
         dateBecameRegistrable: "string",
         isServiceAddressSameAsUsualAddress: "string",
         dateOfBirth: "1950-01-01",
         usualResidentialAddress: privateBoADDRESS,
         principalAddress: privateBoADDRESS
-};
+    }
+    ]
+
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
@@ -444,7 +447,11 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateData = {
     pscId: "0000000",
     usualResidentialAddress: privateBoADDRESS,
-    dateOfBirth: "1950-01-01",
+    dateOfBirth: {
+        day: "01",
+        month: "01",
+        year: "1950"
+    },
     dateBecameRegistrable: "string",
     isServiceAddressSameAsUsualAddress: "string",
     principalAddress: privateBoADDRESS,

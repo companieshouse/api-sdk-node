@@ -157,10 +157,9 @@ describe("OverseasEntityService GET Tests suite", () => {
         const data = (await oeService.getBeneficialOwnerPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
-        )) as Resource<BeneficialOwnerPrivateData>;
-
+        )) as Resource<BeneficialOwnerPrivateData[]>;
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK);
+        expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
     });
 
     it("should return error 400 (Bad Request) for getBeneficialOwners method", async () => {
@@ -525,11 +524,17 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     it("should return beneficial owner private data with usual residential address", () => {
-        const dataResource = mapBeneficialOwnerPrivateData({
+        const dataResource = mapBeneficialOwnerPrivateData(
+            [
+                {
                 pscId: "string",
                 dateBecameRegistrable: "string",
                 isServiceAddressSameAsUsualAddress: "string",
-                dateOfBirth: "string",
+                dateOfBirth: {
+                    day: "10",
+                    month: "01",
+                    year: "1965"
+                },
                 usualResidentialAddress: {
                     "addressLine1": "line1",
                     "addressLine2": "line2",
@@ -551,14 +556,16 @@ describe("Mapping OverseasEntity Tests suite", () => {
                   "postcode": "string",
                   "premises": "string",
                   "region": "string"
-                }
-        });
-        expect(dataResource.usualResidentialAddress).to.deep.equal(mockValues.privateBoADDRESS)
+                },
+             }
+            ]
+        );
+        expect(dataResource[0].usualResidentialAddress).to.deep.equal(mockValues.privateBoADDRESS);
     });
 
     it("should return private Beneficial owners data object without usual residential if empty", () => {
-        const dataResource = mapBeneficialOwnerPrivateData({} as BeneficialOwnerPrivateData);
+        const dataResource = mapBeneficialOwnerPrivateData([] as BeneficialOwnerPrivateData[]);
 
-        expect(dataResource.usualResidentialAddress).to.equal(undefined);
+        expect(dataResource[0]?.usualResidentialAddress).to.equal(undefined);
     });
 });
