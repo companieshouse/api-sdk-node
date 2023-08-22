@@ -17,6 +17,7 @@
     "analyse-code": "sonar-scanner"
   },
   "dependencies": {
+    "@companieshouse/api-sdk-node": "^2.0.101",
     "axios": "^0.21.4",
     "camelcase-keys": "~6.2.2",
     "snakecase-keys": "~3.2.0",
