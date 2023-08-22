@@ -219,6 +219,15 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
+export interface BeneficialOwnerPrivateData {
+    pscId: string,
+    dateBecameRegistrable: string,
+    dateOfBirth: any
+    isServiceAddressSameAsUsualAddress: string,
+    usualResidentialAddress: Address,
+    principalAddress: Address,
+  }
+
 export interface ManagingOfficerIndividual {
     ch_reference?: string
     first_name?: string

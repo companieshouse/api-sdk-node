@@ -4,13 +4,15 @@ import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
 import {
+    BeneficialOwnerPrivateData,
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
-    OverseasEntityService
+    OverseasEntityService,
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
+import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails, mapBeneficialOwnerPrivateData } from "../../../src/services/overseas-entities/mapping";
+import CompanyPscService from "../../../src/services/company-psc/service";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -140,6 +142,32 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = await oeService.getOverseasEntityDetails(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        ) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+    });
+
+    it("should return httpStatusCode 200 for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getBeneficialOwnerPrivateData(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<BeneficialOwnerPrivateData>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK);
+    });
+
+    it("should return error 400 (Bad Request) for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.getBeneficialOwnerPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
@@ -494,5 +522,43 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
+    });
+
+    it("should return beneficial owner private data with usual residential address", () => {
+        const dataResource = mapBeneficialOwnerPrivateData({
+                pscId: "string",
+                dateBecameRegistrable: "string",
+                isServiceAddressSameAsUsualAddress: "string",
+                dateOfBirth: "string",
+                usualResidentialAddress: {
+                    "addressLine1": "line1",
+                    "addressLine2": "line2",
+                    "careOf": "careof",
+                    "country": "Country1",
+                    "locality": "locality1",
+                    "poBox": "poxbox1",
+                    "postcode": "postcode1",
+                    "premises": "premise1",
+                    "region": "region1"
+                },
+                principalAddress: {
+                  "addressLine1": "string",
+                  "addressLine2": "string",
+                  "careOf": "string",
+                  "country": "string",
+                  "locality": "string",
+                  "poBox": "string",
+                  "postcode": "string",
+                  "premises": "string",
+                  "region": "string"
+                }
+        });
+        expect(dataResource.usualResidentialAddress).to.deep.equal(mockValues.privateBoADDRESS)
+    });
+
+    it("should return private Beneficial owners data object without usual residential if empty", () => {
+        const dataResource = mapBeneficialOwnerPrivateData({} as BeneficialOwnerPrivateData);
+
+        expect(dataResource.usualResidentialAddress).to.equal(undefined);
     });
 });

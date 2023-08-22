@@ -1,12 +1,13 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
+    BeneficialOwnerPrivateData,
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
     OverseasEntityExtraDetails
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
-import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
+import { mapBeneficialOwnerPrivateData, mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
@@ -87,5 +88,28 @@ export default class OverseasEntityService {
         }
 
         return { httpStatusCode: resp.status };
+    }
+
+    /**
+     * Get private beneficial owner data for an overseasentity
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     */
+    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnerPrivateData> | ApiErrorResponse> {
+        const URL =  `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
+        const response: HttpResponse = await this.client.httpGet(URL);
+        if(response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        };
+
+        const resource: Resource<BeneficialOwnerPrivateData> = {
+            httpStatusCode: response.status,
+            resource: mapBeneficialOwnerPrivateData(response.body)
+        };
+
+        return resource;
     }
 }

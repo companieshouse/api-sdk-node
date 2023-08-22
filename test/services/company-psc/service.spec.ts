@@ -1,7 +1,5 @@
 import chai from "chai";
 import sinon from "sinon";
-import chaiAsPromised from "chai-as-promised";
-import chaiHttp from "chai-http";
 
 import CompanyPscService from "../../../src/services/company-psc/service";
 import { RequestClient, HttpResponse } from "../../../src/http";

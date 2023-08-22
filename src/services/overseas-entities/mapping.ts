@@ -79,6 +79,12 @@ export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails):
     };
 };
 
+export const mapBeneficialOwnerPrivateData = boPrivateData => {
+    return {
+        ...boPrivateData
+    };
+};
+
 const mapBoiResource = boi => {
     return { ...boi, start_date: mapIsoDate(boi.start_date), ceased_date: mapOptionalIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) };
 };

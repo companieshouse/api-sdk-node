@@ -34,7 +34,8 @@ import {
     TrustHistoricalBeneficialOwnerResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    BeneficialOwnerPrivateData
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -45,6 +46,27 @@ export const ADDRESS: Address = {
     county: "county",
     country: "country",
     postcode: "BY 2"
+};
+
+export const privateBoADDRESS = {
+    "addressLine1": "line1",
+    "addressLine2": "line2",
+    "careOf": "careof",
+    "country": "Country1",
+    "locality": "locality1",
+    "poBox": "poxbox1",
+    "postcode": "postcode1",
+    "premises": "premise1",
+    "region": "region1"
+};
+
+export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK = {
+        pscId: "0000000",
+        dateBecameRegistrable: "string",
+        isServiceAddressSameAsUsualAddress: "string",
+        dateOfBirth: "1950-01-01",
+        usualResidentialAddress: privateBoADDRESS,
+        principalAddress: privateBoADDRESS
 };
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
@@ -419,6 +441,15 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
     email_address: "private@overseasentities.test"
 };
 
+export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateData = {
+    pscId: "0000000",
+    usualResidentialAddress: privateBoADDRESS,
+    dateOfBirth: "1950-01-01",
+    dateBecameRegistrable: "string",
+    isServiceAddressSameAsUsualAddress: "string",
+    principalAddress: privateBoADDRESS,
+};
+
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     type: "type",
     forename: "joe",
@@ -554,5 +585,10 @@ export const mockGetOverseasEntityResponse = {
 
 export const mockGetOverseasEntityExtraDetailsResponse = {
     200: { status: 200, body: OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK },
+    400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockBeneficialOwnerPrivateDataResponse = {
+    200: { status: 200, body: BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK },
     400: { status: 400, error: BAD_REQUEST }
 };
