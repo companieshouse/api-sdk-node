@@ -13,7 +13,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const mapping_1 = require("./mapping");
-const mapping_2 = __importDefault(require("mapping/mapping"));
+const mapping_2 = __importDefault(require("../../mapping/mapping"));
 class OverseasEntityService {
     constructor(client) {
         this.client = client;

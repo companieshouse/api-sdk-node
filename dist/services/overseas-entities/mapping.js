@@ -11,7 +11,7 @@ var __rest = (this && this.__rest) || function (s, e) {
     return t;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.mapBeneficialOwnerPrivateData = exports.mapOverseasEntityExtraDetails = exports.mapOverseasEntityResource = exports.mapOverseasEntity = void 0;
+exports.mapOverseasEntityExtraDetails = exports.mapOverseasEntityResource = exports.mapOverseasEntity = void 0;
 const mapOverseasEntity = (body) => {
     return {
         entity_name: (body.entity_name) ? { name: body.entity_name } : null,
@@ -57,19 +57,6 @@ const mapOverseasEntityExtraDetails = (body) => {
     };
 };
 exports.mapOverseasEntityExtraDetails = mapOverseasEntityExtraDetails;
-const mapBeneficialOwnerPrivateData = (boPrivateData) => {
-    return (boPrivateData || []).map(boPrivateData => {
-        return {
-            pscId: boPrivateData.pscId,
-            usualResidentialAddress: boPrivateData.usualResidentialAddress,
-            principalAddress: boPrivateData.principalAddress,
-            dateOfBirth: boPrivateData.dateOfBirth,
-            dateBecameRegistrable: boPrivateData.dateBecameRegistrable,
-            isServiceAddressSameAsUsualAddress: boPrivateData.isServiceAddressSameAsUsualAddress
-        };
-    });
-};
-exports.mapBeneficialOwnerPrivateData = mapBeneficialOwnerPrivateData;
 const mapBoiResource = boi => {
     return Object.assign(Object.assign({}, boi), { start_date: mapIsoDate(boi.start_date), ceased_date: mapOptionalIsoDate(boi.ceased_date), date_of_birth: mapIsoDate(boi.date_of_birth) });
 };
