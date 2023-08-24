@@ -27,7 +27,6 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateDataResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -78,19 +77,6 @@ export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails):
     return {
         email_address: (body.email_address)
     };
-};
-
-export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateDataResource[]): BeneficialOwnerPrivateDataResource[] => {
-    return (boPrivateData || []).map(boPrivateData => {
-        return {
-            pscId: boPrivateData.pscId,
-            usualResidentialAddress: boPrivateData.usualResidentialAddress,
-            principalAddress: boPrivateData.principalAddress,
-            dateOfBirth: boPrivateData.dateOfBirth,
-            dateBecameRegistrable: boPrivateData.dateBecameRegistrable,
-            isServiceAddressSameAsUsualAddress: boPrivateData.isServiceAddressSameAsUsualAddress
-        }
-    })
 };
 
 const mapBoiResource = boi => {

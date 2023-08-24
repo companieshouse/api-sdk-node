@@ -233,14 +233,6 @@ export interface BeneficialOwnersPrivateDataResource {
     boPrivateData: BeneficialOwnerPrivateDataResource[];
 }
 
-// export interface BeneficialOwnerPrivateData {
-//     pscId: string,
-//     dateBecameRegistrable: string,
-//     dateOfBirth: InputDate,
-//     isServiceAddressSameAsUsualAddress: string,
-//     usualResidentialAddress: privateBoADDRESS,
-//     principalAddress: privateBoADDRESS,
-// }
 export interface privateBoADDRESS {
         addressLine1: string,
         addressLine2: string,

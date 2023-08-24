@@ -35,7 +35,7 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateData
+    BeneficialOwnerPrivateDataResource,
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -444,7 +444,7 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
     email_address: "private@overseasentities.test"
 };
 
-export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateData = {
+export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
     pscId: "0000000",
     usualResidentialAddress: privateBoADDRESS,
     dateOfBirth: {

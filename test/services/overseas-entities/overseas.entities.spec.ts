@@ -4,15 +4,14 @@ import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
 import {
-    BeneficialOwnerPrivateData,
+    BeneficialOwnersPrivateDataResource,
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
     OverseasEntityService,
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails, mapBeneficialOwnerPrivateData } from "../../../src/services/overseas-entities/mapping";
-import CompanyPscService from "../../../src/services/company-psc/service";
+import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -157,7 +156,7 @@ describe("OverseasEntityService GET Tests suite", () => {
         const data = (await oeService.getBeneficialOwnerPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
-        )) as Resource<BeneficialOwnerPrivateData[]>;
+        )) as Resource<BeneficialOwnersPrivateDataResource>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
     });
@@ -521,51 +520,5 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
-    });
-
-    it("should return beneficial owner private data with usual residential address", () => {
-        const dataResource = mapBeneficialOwnerPrivateData(
-            [
-                {
-                pscId: "string",
-                dateBecameRegistrable: "string",
-                isServiceAddressSameAsUsualAddress: "string",
-                dateOfBirth: {
-                    day: "10",
-                    month: "01",
-                    year: "1965"
-                },
-                usualResidentialAddress: {
-                    "addressLine1": "line1",
-                    "addressLine2": "line2",
-                    "careOf": "careof",
-                    "country": "Country1",
-                    "locality": "locality1",
-                    "poBox": "poxbox1",
-                    "postcode": "postcode1",
-                    "premises": "premise1",
-                    "region": "region1"
-                },
-                principalAddress: {
-                  "addressLine1": "string",
-                  "addressLine2": "string",
-                  "careOf": "string",
-                  "country": "string",
-                  "locality": "string",
-                  "poBox": "string",
-                  "postcode": "string",
-                  "premises": "string",
-                  "region": "string"
-                },
-             }
-            ]
-        );
-        expect(dataResource[0].usualResidentialAddress).to.deep.equal(mockValues.privateBoADDRESS);
-    });
-
-    it("should return private Beneficial owners data object without usual residential if empty", () => {
-        const dataResource = mapBeneficialOwnerPrivateData([] as BeneficialOwnerPrivateData[]);
-
-        expect(dataResource[0]?.usualResidentialAddress).to.equal(undefined);
     });
 });

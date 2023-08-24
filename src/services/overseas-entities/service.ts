@@ -7,8 +7,8 @@ import {
     OverseasEntityExtraDetails
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
-import { mapBeneficialOwnerPrivateData, mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
-import Mapping from "mapping/mapping";
+import {mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
+import Mapping from "../../mapping/mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
@@ -108,7 +108,6 @@ export default class OverseasEntityService {
 
         const resource: Resource<BeneficialOwnersPrivateDataResource> = {
             httpStatusCode: response.status,
-            // resource: mapBeneficialOwnerPrivateData(response.body)
         };
 
         const body = response.body as BeneficialOwnersPrivateDataResource;
