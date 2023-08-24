@@ -220,26 +220,26 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 }
 
 export interface BeneficialOwnerPrivateDataResource {
-    pscId?: string,
-    dateBecameRegistrable?: string,
-    dateOfBirth?: InputDate,
-    isServiceAddressSameAsUsualAddress?: string,
-    usualResidentialAddress?: privateBoADDRESS,
-    principalAddress?: privateBoADDRESS,
+    psc_id?: string,
+    date_became_registrable?: string,
+    date_of_birth?: InputDate,
+    is_service_address_same_as_usual_address?: string,
+    usual_residential_address?: privateBoADDRESS,
+    principal_address?: privateBoADDRESS,
 }
 
 export interface BeneficialOwnersPrivateDataResource {
-    boPrivateData: BeneficialOwnerPrivateDataResource[];
+    bo_private_data?: BeneficialOwnerPrivateDataResource[];
 }
 
 export interface privateBoADDRESS {
-        addressLine1?: string,
-        addressLine2?: string,
-        careOf?: string,
+        address_line_1?: string,
+        address_line_2?: string,
+        care_of?: string,
         country?: string,
         locality?: string,
-        poBox?: string,
-        postcode?: string,
+        po_box?: string,
+        post_code?: string,
         premises?: string,
         region?: string
 }

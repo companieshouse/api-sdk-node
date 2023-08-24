@@ -445,16 +445,16 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 };
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
-    pscId: "0000000",
-    usualResidentialAddress: privateBoADDRESS,
-    dateOfBirth: {
+    psc_id: "0000000",
+    usual_residential_address: privateBoADDRESS,
+    date_of_birth: {
         day: "01",
         month: "01",
         year: "1950"
     },
-    dateBecameRegistrable: "string",
-    isServiceAddressSameAsUsualAddress: "string",
-    principalAddress: privateBoADDRESS
+    date_became_registrable: "string",
+    is_service_address_same_as_usual_address: "string",
+    principal_address: privateBoADDRESS
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
