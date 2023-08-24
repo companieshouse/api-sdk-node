@@ -219,7 +219,6 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
-
 export interface BeneficialOwnerPrivateDataResource {
     pscId: string,
     dateBecameRegistrable: string,

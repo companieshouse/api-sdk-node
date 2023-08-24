@@ -26,7 +26,7 @@ import {
     TrustCorporateResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails,
+    OverseasEntityExtraDetails
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {

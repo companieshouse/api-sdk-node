@@ -7,7 +7,7 @@ import {
     OverseasEntityExtraDetails
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
-import {mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
+import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
 import Mapping from "../../mapping/mapping";
 
 export default class OverseasEntityService {
@@ -97,9 +97,9 @@ export default class OverseasEntityService {
      * @param overseasEntityId of the entity
      */
     public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnersPrivateDataResource> | ApiErrorResponse> {
-        const URL =  `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
         const response: HttpResponse = await this.client.httpGet(URL);
-        if(response.error) {
+        if (response.error) {
             return {
                 httpStatusCode: response.status,
                 errors: [response.error]
@@ -107,7 +107,7 @@ export default class OverseasEntityService {
         };
 
         const resource: Resource<BeneficialOwnersPrivateDataResource> = {
-            httpStatusCode: response.status,
+            httpStatusCode: response.status
         };
 
         const body = response.body as BeneficialOwnersPrivateDataResource;

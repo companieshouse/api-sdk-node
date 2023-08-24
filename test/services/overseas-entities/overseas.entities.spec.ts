@@ -8,7 +8,7 @@ import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
-    OverseasEntityService,
+    OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";

@@ -35,7 +35,7 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateDataResource,
+    BeneficialOwnerPrivateDataResource
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -49,28 +49,28 @@ export const ADDRESS: Address = {
 };
 
 export const privateBoADDRESS = {
-    "addressLine1": "line1",
-    "addressLine2": "line2",
-    "careOf": "careof",
-    "country": "Country1",
-    "locality": "locality1",
-    "poBox": "poxbox1",
-    "postcode": "postcode1",
-    "premises": "premise1",
-    "region": "region1"
+    addressLine1: "line1",
+    addressLine2: "line2",
+    careOf: "careof",
+    country: "Country1",
+    locality: "locality1",
+    poBox: "poxbox1",
+    postcode: "postcode1",
+    premises: "premise1",
+    region: "region1"
 };
 
-export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK = 
-    [    
-       { pscId: "0000000",
-        dateBecameRegistrable: "string",
-        isServiceAddressSameAsUsualAddress: "string",
-        dateOfBirth: "1950-01-01",
-        usualResidentialAddress: privateBoADDRESS,
-        principalAddress: privateBoADDRESS
-    }
+export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
+    [
+        {
+            pscId: "0000000",
+            dateBecameRegistrable: "string",
+            isServiceAddressSameAsUsualAddress: "string",
+            dateOfBirth: "1950-01-01",
+            usualResidentialAddress: privateBoADDRESS,
+            principalAddress: privateBoADDRESS
+        }
     ]
-
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
@@ -454,7 +454,7 @@ export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDa
     },
     dateBecameRegistrable: "string",
     isServiceAddressSameAsUsualAddress: "string",
-    principalAddress: privateBoADDRESS,
+    principalAddress: privateBoADDRESS
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
