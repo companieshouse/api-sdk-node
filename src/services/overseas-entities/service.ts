@@ -3,10 +3,12 @@ import {
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    ManagingOfficerData
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
+import Mapping from "mapping/mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
@@ -87,5 +89,28 @@ export default class OverseasEntityService {
         }
 
         return { httpStatusCode: resp.status };
+    }
+
+    public async getManagingOfficers (
+        transactionId: string,
+        overseasEntityId: string
+    ): Promise<Resource<ManagingOfficerData[]> | ApiErrorResponse> {
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/managing-officers`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const body = response.body.managingOfficerData;
+        const managingOfficers: ManagingOfficerData[] = Mapping.camelCaseKeys<ManagingOfficerData[]>(body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: managingOfficers
+        };
     }
 }

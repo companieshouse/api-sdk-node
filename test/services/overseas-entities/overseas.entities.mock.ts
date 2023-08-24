@@ -1,6 +1,7 @@
 import { RequestClient } from "../../../src";
 import {
     Address,
+    AddressApi,
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
     BeneficialOwnerGovernmentOrPublicAuthority,
@@ -34,7 +35,8 @@ import {
     TrustHistoricalBeneficialOwnerResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    ManagingOfficerData
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -46,6 +48,19 @@ export const ADDRESS: Address = {
     country: "country",
     postcode: "BY 2"
 };
+
+export const ADDRESSAPI: AddressApi = {
+    addressLine1: "addressLine1",
+    addressLine2: "addressLine2",
+    careOf: "care of information",
+    country: "country",
+    locality: "locality information",
+    poBox: "PO Box information",
+    postalCode: "postal code information",
+    premises: "premises information",
+    region: "region information"
+};
+
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
@@ -179,6 +194,15 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
 ];
+
+export const MANAGING_OFFICERS_DATA_MOCK: ManagingOfficerData = {
+    managingOfficerAppointmentId: "123456789",
+    residentialAddress: ,
+    principalAddress: ADDRESS,
+    dateOfBirth: "1980-01-01",
+    contactNameFull: "John Doe",
+    contactEmailAddress: "john.doe@example.com",
+};
 
 export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[] = [
     {

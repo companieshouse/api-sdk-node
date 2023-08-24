@@ -313,6 +313,15 @@ export interface ManagingOfficerCorporateResource {
     resigned_on?: string
 }
 
+export interface ManagingOfficerData {
+    managingOfficerAppointmentId: string;
+    residentialAddress: AddressApi;
+    principalAddress: AddressApi;
+    dateOfBirth: string;
+    contactNameFull: string;
+    contactEmailAddress: string;
+}
+
 export interface Trust{
     trust_id: string;
     trust_name: string;
@@ -498,6 +507,18 @@ export interface Address {
     county?: string
     country?: string
     postcode?: string
+}
+
+export interface AddressApi {
+    addressLine1?: string;
+    addressLine2?: string;
+    careOf?: string;
+    country?: string;
+    locality?: string;
+    poBox?: string;
+    postalCode?: string;
+    premises?: string;
+    region?: string;
 }
 
 export enum yesNoResponse {
