@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { BeneficialOwnerPrivateData, HttpStatusCode, OverseasEntity, OverseasEntityCreated, OverseasEntityExtraDetails } from "./types";
+import { BeneficialOwnersPrivateDataResource, HttpStatusCode, OverseasEntity, OverseasEntityCreated, OverseasEntityExtraDetails } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 export default class OverseasEntityService {
     private readonly client;
@@ -13,5 +13,5 @@ export default class OverseasEntityService {
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
-    getBeneficialOwnerPrivateData(transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnerPrivateData[]> | ApiErrorResponse>;
+    getBeneficialOwnerPrivateData(transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnersPrivateDataResource> | ApiErrorResponse>;
 }

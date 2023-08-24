@@ -200,7 +200,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     beneficial_owner_nature_of_control_types?: NatureOfControlType[];
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
-export interface BeneficialOwnerPrivateData {
+export interface BeneficialOwnerPrivateDataResource {
     pscId: string;
     dateBecameRegistrable: string;
     dateOfBirth: InputDate;
@@ -208,13 +208,8 @@ export interface BeneficialOwnerPrivateData {
     usualResidentialAddress: privateBoADDRESS;
     principalAddress: privateBoADDRESS;
 }
-export interface BeneficialOwnerPrivateDataResource {
-    pscId: string;
-    dateBecameRegistrable: string;
-    dateOfBirth: any;
-    isServiceAddressSameAsUsualAddress: string;
-    usualResidentialAddress: privateBoADDRESS;
-    principalAddress: privateBoADDRESS;
+export interface BeneficialOwnersPrivateDataResource {
+    boPrivateData: BeneficialOwnerPrivateDataResource[];
 }
 export interface privateBoADDRESS {
     addressLine1: string;
