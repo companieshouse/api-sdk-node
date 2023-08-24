@@ -27,7 +27,6 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateData,
     BeneficialOwnerPrivateDataResource
 } from "./types";
 
@@ -81,7 +80,7 @@ export const mapOverseasEntityExtraDetails = (body: OverseasEntityExtraDetails):
     };
 };
 
-export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateDataResource[]): BeneficialOwnerPrivateData[] => {
+export const mapBeneficialOwnerPrivateData = (boPrivateData: BeneficialOwnerPrivateDataResource[]): BeneficialOwnerPrivateDataResource[] => {
     return (boPrivateData || []).map(boPrivateData => {
         return {
             pscId: boPrivateData.pscId,

@@ -1,6 +1,6 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
-    BeneficialOwnerPrivateData,
+    BeneficialOwnersPrivateDataResource,
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
@@ -8,6 +8,7 @@ import {
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapBeneficialOwnerPrivateData, mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
+import Mapping from "mapping/mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
@@ -95,7 +96,7 @@ export default class OverseasEntityService {
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
-    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnerPrivateData[]> | ApiErrorResponse> {
+    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnersPrivateDataResource> | ApiErrorResponse> {
         const URL =  `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
         const response: HttpResponse = await this.client.httpGet(URL);
         if(response.error) {
@@ -105,10 +106,14 @@ export default class OverseasEntityService {
             };
         };
 
-        const resource: Resource<BeneficialOwnerPrivateData[]> = {
+        const resource: Resource<BeneficialOwnersPrivateDataResource> = {
             httpStatusCode: response.status,
-            resource: mapBeneficialOwnerPrivateData(response.body)
+            // resource: mapBeneficialOwnerPrivateData(response.body)
         };
+
+        const body = response.body as BeneficialOwnersPrivateDataResource;
+
+        resource.resource = Mapping.camelCaseKeys<BeneficialOwnersPrivateDataResource>(body);
 
         return resource;
     }
