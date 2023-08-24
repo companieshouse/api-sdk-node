@@ -220,12 +220,12 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 }
 
 export interface BeneficialOwnerPrivateDataResource {
-    pscId: string,
-    dateBecameRegistrable: string,
-    dateOfBirth: InputDate,
-    isServiceAddressSameAsUsualAddress: string,
-    usualResidentialAddress: privateBoADDRESS,
-    principalAddress: privateBoADDRESS,
+    pscId?: string,
+    dateBecameRegistrable?: string,
+    dateOfBirth?: InputDate,
+    isServiceAddressSameAsUsualAddress?: string,
+    usualResidentialAddress?: privateBoADDRESS,
+    principalAddress?: privateBoADDRESS,
 }
 
 export interface BeneficialOwnersPrivateDataResource {
@@ -233,15 +233,15 @@ export interface BeneficialOwnersPrivateDataResource {
 }
 
 export interface privateBoADDRESS {
-        addressLine1: string,
-        addressLine2: string,
-        careOf: string,
-        country: string,
-        locality: string,
-        poBox: string,
-        postcode: string,
-        premises: string,
-        region: string
+        addressLine1?: string,
+        addressLine2?: string,
+        careOf?: string,
+        country?: string,
+        locality?: string,
+        poBox?: string,
+        postcode?: string,
+        premises?: string,
+        region?: string
 }
 
 export interface ManagingOfficerIndividual {
