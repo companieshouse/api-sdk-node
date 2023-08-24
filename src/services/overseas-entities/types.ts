@@ -222,7 +222,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 export interface BeneficialOwnerPrivateDataResource {
     psc_id?: string,
     date_became_registrable?: string,
-    date_of_birth?: InputDate,
+    date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
     usual_residential_address?: privateBoADDRESS,
     principal_address?: privateBoADDRESS,
