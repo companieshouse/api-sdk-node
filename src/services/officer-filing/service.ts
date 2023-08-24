@@ -147,7 +147,9 @@ export default class {
             name: officerFiling.name,
             first_name: officerFiling.firstName,
             middle_names: officerFiling.middleNames,
-            last_name: officerFiling.lastName
+            last_name: officerFiling.lastName,
+            title: officerFiling.title,
+            former_names: officerFiling.formerNames
         }
     }
 

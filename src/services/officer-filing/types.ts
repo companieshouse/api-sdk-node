@@ -173,6 +173,8 @@ export interface OfficerFiling {
     firstName?: string;
     middleNames?: string;
     lastName?: string;
+    title?: string;
+    formerNames?: string;
 }
 
 export interface OfficerFilingDto {
@@ -183,4 +185,6 @@ export interface OfficerFilingDto {
     first_name?: string;
     middle_names?: string;
     last_name?: string;
+    title?: string;
+    former_names?: string;
 }
