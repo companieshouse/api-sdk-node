@@ -61,7 +61,6 @@ export const ADDRESSAPI: AddressApi = {
     region: "region information"
 };
 
-
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
 };
