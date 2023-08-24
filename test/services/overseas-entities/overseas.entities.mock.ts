@@ -197,11 +197,11 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
 
 export const MANAGING_OFFICERS_DATA_MOCK: ManagingOfficerData = {
     managingOfficerAppointmentId: "123456789",
-    residentialAddress: ,
-    principalAddress: ADDRESS,
+    residentialAddress: ADDRESSAPI,
+    principalAddress: ADDRESSAPI,
     dateOfBirth: "1980-01-01",
     contactNameFull: "John Doe",
-    contactEmailAddress: "john.doe@example.com",
+    contactEmailAddress: "john.doe@example.com"
 };
 
 export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[] = [

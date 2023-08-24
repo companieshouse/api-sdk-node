@@ -8,7 +8,7 @@ import {
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
-import Mapping from "mapping/mapping";
+import Mapping from "../../mapping/mapping";
 
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }

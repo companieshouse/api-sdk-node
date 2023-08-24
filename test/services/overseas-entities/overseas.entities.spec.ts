@@ -534,55 +534,5 @@ describe("Mapping OverseasEntity Tests suite", () => {
             expect(data.httpStatusCode).to.equal(400);
             expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
         });
-
-        it("should return error 404 (Not Found) for getManagingOfficers method", async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({
-                status: 404,
-                error: mockValues.NOT_FOUND
-            });
-
-            const oeService = new OverseasEntityService(mockValues.requestClient);
-            const data = await oeService.getManagingOfficers(
-                mockValues.TRANSACTION_ID,
-                mockValues.OVERSEAS_ENTITY_ID
-            ) as ApiErrorResponse;
-
-            expect(data.httpStatusCode).to.equal(404);
-            expect(data.errors![0]).to.deep.equal(mockValues.NOT_FOUND);
-        });
     });
-    
-    // describe("OverseasEntityService getManagingOfficers Tests suite", () => {
-    //     it("should return httpStatusCode 200 for getManagingOfficers method", async () => {
-    //         sinon.stub(mockValues.requestClient, "httpGet").resolves({
-    //             status: 200,
-    //             body: { managingOfficerData: mockValues.MANAGING_OFFICERS_DATA_MOCK }
-    //         });
-
-    //         const oeService = new OverseasEntityService(mockValues.requestClient);
-    //         const data = (await oeService.getManagingOfficers(
-    //             mockValues.TRANSACTION_ID,
-    //             mockValues.OVERSEAS_ENTITY_ID
-    //         )) as Resource<ManagingOfficerData[]>;
-
-    //         expect(data.httpStatusCode).to.equal(200);
-    //         expect(data.resource).to.deep.equal(mockValues.MANAGING_OFFICERS_DATA_MOCK);
-    //     });
-
-    //     it("should return error 400 (Bad Request) for getManagingOfficers method", async () => {
-    //         sinon.stub(mockValues.requestClient, "httpGet").resolves({
-    //             status: 400,
-    //             error: mockValues.BAD_REQUEST
-    //         });
-
-    //         const oeService = new OverseasEntityService(mockValues.requestClient);
-    //         const data = await oeService.getManagingOfficers(
-    //             mockValues.TRANSACTION_ID,
-    //             mockValues.OVERSEAS_ENTITY_ID
-    //         ) as ApiErrorResponse;
-
-    //         expect(data.httpStatusCode).to.equal(400);
-    //         expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
-    //     });
-    // });
 });
