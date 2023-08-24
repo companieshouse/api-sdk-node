@@ -25,7 +25,7 @@ export default class {
             itemsPerPage: resp.body.items_per_page,
             startIndex: resp.body.start_index,
             totalResults: resp.body.total_results,
-            items: resp.body.items.map((i) => ({
+            items: resp.body.items ? resp.body.items.map((i) => ({
                 id: i.id,
                 etag: i.etag,
                 kind: i.kind,
@@ -37,7 +37,7 @@ export default class {
                 originalAmount: i.original_amount,
                 outstandingAmount: i.outstanding,
                 type: i.type
-            }))
+            })) : []
         };
 
         return resource;
