@@ -497,20 +497,20 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(dataResource.email_address).to.equal(undefined);
     });
 
-    describe("OverseasEntityService getManagingOfficers Tests suite", () => {
+    describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
         });
 
-        it("should return httpStatusCode 200 for getManagingOfficers method", async () => {
+        it("should return httpStatusCode 200 for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
                 body: { managingOfficerData: mockValues.MANAGING_OFFICERS_DATA_MOCK }
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
-            const data = (await oeService.getManagingOfficers(
+            const data = (await oeService.getManagingOfficersPrivateData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
             )) as Resource<ManagingOfficerData[]>;
@@ -519,14 +519,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
             expect(data.resource).to.deep.equal(mockValues.MANAGING_OFFICERS_DATA_MOCK);
         });
 
-        it("should return error 400 (Bad Request) for getManagingOfficers method", async () => {
+        it("should return error 400 (Bad Request) for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 400,
                 error: mockValues.BAD_REQUEST
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
-            const data = await oeService.getManagingOfficers(
+            const data = await oeService.getManagingOfficersPrivateData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
             ) as ApiErrorResponse;
