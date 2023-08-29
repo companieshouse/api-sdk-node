@@ -175,6 +175,7 @@ export interface OfficerFiling {
     lastName?: string;
     title?: string;
     formerNames?: string;
+    formerNamesRadio?: boolean;
 }
 
 export interface OfficerFilingDto {
@@ -187,4 +188,5 @@ export interface OfficerFilingDto {
     last_name?: string;
     title?: string;
     former_names?: string;
+    former_names_radio?: boolean;
 }
