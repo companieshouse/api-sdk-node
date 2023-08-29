@@ -224,21 +224,19 @@ export interface BeneficialOwnerPrivateDataResource {
     date_became_registrable?: string,
     date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
-    usual_residential_address?: privateBoADDRESS,
-    principal_address?: privateBoADDRESS,
+    usual_residential_address?: privateADDRESS,
+    principal_address?: privateADDRESS,
 }
 
 export interface BeneficialOwnersPrivateDataResource {
     bo_private_data?: BeneficialOwnerPrivateDataResource[];
 }
 
-export interface privateBoADDRESS {
+export interface privateADDRESS {
         address_line_1?: string,
         address_line_2?: string,
-        care_of?: string,
         country?: string,
         locality?: string,
-        po_box?: string,
         post_code?: string,
         premises?: string,
         region?: string

@@ -48,29 +48,27 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const privateBoADDRESS = {
+export const privateADDRESS = {
     addressLine1: "line1",
     addressLine2: "line2",
-    careOf: "careof",
     country: "Country1",
     locality: "locality1",
-    poBox: "poxbox1",
     postcode: "postcode1",
     premises: "premise1",
     region: "region1"
 };
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
-    [
-        {
-            pscId: "0000000",
-            dateBecameRegistrable: "string",
-            isServiceAddressSameAsUsualAddress: "string",
-            dateOfBirth: "1950-01-01",
-            usualResidentialAddress: privateBoADDRESS,
-            principalAddress: privateBoADDRESS
-        }
-    ]
+[
+    {
+        pscId: "0000000",
+        dateBecameRegistrable: "string",
+        isServiceAddressSameAsUsualAddress: "string",
+        dateOfBirth: "1950-01-01",
+        usualResidentialAddress: privateADDRESS,
+        principalAddress: privateADDRESS
+    }
+]
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
@@ -446,11 +444,11 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
     psc_id: "0000000",
-    usual_residential_address: privateBoADDRESS,
+    usual_residential_address: privateADDRESS,
     date_of_birth: "1959-01-01",
     date_became_registrable: "string",
     is_service_address_same_as_usual_address: "string",
-    principal_address: privateBoADDRESS
+    principal_address: privateADDRESS
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
