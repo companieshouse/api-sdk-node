@@ -232,6 +232,19 @@ export interface BeneficialOwnersPrivateDataResource {
     bo_private_data?: BeneficialOwnerPrivateDataResource[];
 }
 
+export interface BeneficialOwnersPrivateData {
+    bo_private_data?: BeneficialOwnerPrivateData[];
+}
+
+export interface BeneficialOwnerPrivateData {
+    pscId?: string,
+    dateBecameRegistrable?: string,
+    dateOfBirth?: string,
+    isServiceAddressSameAsUsualAddress?: string,
+    usualResidentialAddress?: privateADDRESS,
+    principalAddress?: privateADDRESS,
+}
+
 export interface privateADDRESS {
         address_line_1?: string,
         address_line_2?: string,

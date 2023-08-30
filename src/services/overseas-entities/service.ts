@@ -1,5 +1,6 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
+    BeneficialOwnersPrivateData,
     BeneficialOwnersPrivateDataResource,
     HttpStatusCode,
     OverseasEntity,
@@ -106,13 +107,13 @@ export default class OverseasEntityService {
             };
         };
 
-        const resource: Resource<BeneficialOwnersPrivateDataResource> = {
+        const resource: Resource<BeneficialOwnersPrivateData> = {
             httpStatusCode: response.status
         };
 
         const body = response.body as BeneficialOwnersPrivateDataResource;
 
-        resource.resource = Mapping.camelCaseKeys<BeneficialOwnersPrivateDataResource>(body);
+        resource.resource = Mapping.camelCaseKeys<BeneficialOwnersPrivateData>(body);
 
         return resource;
     }
