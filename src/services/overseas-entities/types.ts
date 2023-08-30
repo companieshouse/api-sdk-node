@@ -315,11 +315,11 @@ export interface ManagingOfficerCorporateResource {
 
 export interface ManagingOfficerData {
     managingOfficerAppointmentId: string;
-    residentialAddress: AddressApi;
-    principalAddress: AddressApi;
-    dateOfBirth: string;
-    contactNameFull: string;
-    contactEmailAddress: string;
+    residential_address: AddressApi;
+    principal_address: AddressApi;
+    date_of_birth: string;
+    contact_name_full: string;
+    contact_email_address: string;
 }
 
 export interface Trust{
@@ -510,13 +510,13 @@ export interface Address {
 }
 
 export interface AddressApi {
-    addressLine1?: string;
-    addressLine2?: string;
-    careOf?: string;
+    address_line_1?: string;
+    address_line_2?: string;
+    care_of?: string;
     country?: string;
     locality?: string;
-    poBox?: string;
-    postalCode?: string;
+    po_box?: string;
+    postal_code?: string;
     premises?: string;
     region?: string;
 }

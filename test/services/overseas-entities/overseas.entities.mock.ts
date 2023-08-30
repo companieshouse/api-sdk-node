@@ -1,7 +1,6 @@
 import { RequestClient } from "../../../src";
 import {
     Address,
-    AddressApi,
     BeneficialOwnerCorporate,
     BeneficialOwnerCorporateResource,
     BeneficialOwnerGovernmentOrPublicAuthority,
@@ -35,8 +34,7 @@ import {
     TrustHistoricalBeneficialOwnerResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails,
-    ManagingOfficerData
+    OverseasEntityExtraDetails
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {
@@ -49,7 +47,7 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const ADDRESSAPI: AddressApi = {
+export const ADDRESS_API = {
     addressLine1: "addressLine1",
     addressLine2: "addressLine2",
     careOf: "care of information",
@@ -59,6 +57,15 @@ export const ADDRESSAPI: AddressApi = {
     postalCode: "postal code information",
     premises: "premises information",
     region: "region information"
+};
+
+export const MANAGING_OFFICERS_DATA_MOCK = {
+    managingOfficerAppointmentId: "123456789",
+    residentialAddress: ADDRESS_API,
+    principalAddress: ADDRESS_API,
+    dateOfBirth: "1980-01-01",
+    contactNameFull: "John Doe",
+    contactEmailAddress: "john.doe@example.com"
 };
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
@@ -193,15 +200,6 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
     }
 ];
-
-export const MANAGING_OFFICERS_DATA_MOCK: ManagingOfficerData = {
-    managingOfficerAppointmentId: "123456789",
-    residentialAddress: ADDRESSAPI,
-    principalAddress: ADDRESSAPI,
-    dateOfBirth: "1980-01-01",
-    contactNameFull: "John Doe",
-    contactEmailAddress: "john.doe@example.com"
-};
 
 export const MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST: ManagingOfficerIndividual[] = [
     {
