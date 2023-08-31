@@ -506,7 +506,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: { managingOfficerData: [mockValues.MANAGING_OFFICERS_DATA_MOCK] } // Note: Wrapped the mock data within an array
+                body: { managingOfficerData: [mockValues.MANAGING_OFFICERS_DATA_MOCK] }
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
@@ -516,7 +516,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             )) as Resource<ManagingOfficerData[]>;
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]); // Note: Wrapped the mock data within an array for deep equality check
+            expect(data.resource).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
         });
 
 
