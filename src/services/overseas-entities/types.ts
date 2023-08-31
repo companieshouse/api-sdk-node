@@ -320,6 +320,7 @@ export interface ManagingOfficerData {
     date_of_birth: string;
     contact_name_full: string;
     contact_email_address: string;
+    hashed_id: string;
 }
 
 export interface Trust{

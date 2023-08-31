@@ -65,7 +65,8 @@ export const MANAGING_OFFICERS_DATA_MOCK = {
     principalAddress: ADDRESS_API,
     dateOfBirth: "1980-01-01",
     contactNameFull: "John Doe",
-    contactEmailAddress: "john.doe@example.com"
+    contactEmailAddress: "john.doe@example.com",
+    hashedId: "hashed123456789"
 };
 
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
