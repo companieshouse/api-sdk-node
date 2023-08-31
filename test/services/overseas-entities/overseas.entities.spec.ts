@@ -519,7 +519,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
             expect(data.resource).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
         });
 
-
         it("should return error 400 (Bad Request) for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 400,
