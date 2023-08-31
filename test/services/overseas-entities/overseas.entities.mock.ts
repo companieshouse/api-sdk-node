@@ -443,7 +443,7 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 };
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
-    psc_id: "0000000",
+    id: "0000000",
     usual_residential_address: privateADDRESS,
     date_of_birth: "1959-01-01",
     date_became_registrable: "string",

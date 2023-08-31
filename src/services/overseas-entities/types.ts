@@ -220,7 +220,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 }
 
 export interface BeneficialOwnerPrivateDataResource {
-    psc_id?: string,
+    id?: string,
     date_became_registrable?: string,
     date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
@@ -237,7 +237,7 @@ export interface BeneficialOwnersPrivateData {
 }
 
 export interface BeneficialOwnerPrivateData {
-    pscId?: string,
+    id?: string,
     dateBecameRegistrable?: string,
     dateOfBirth?: string,
     isServiceAddressSameAsUsualAddress?: string,
