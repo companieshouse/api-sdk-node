@@ -37,6 +37,7 @@ import {
     OverseasEntityExtraDetails,
     BeneficialOwnerPrivateDataResource
 } from "../../../src/services/overseas-entities";
+import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
 export const ADDRESS: Address = {
     property_name_number: "property name 1",
@@ -445,11 +446,11 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
     id: "0000000",
-    usual_residential_address: privateADDRESS,
+    usual_residential_address: mockAddress1,
     date_of_birth: "1959-01-01",
     date_became_registrable: "string",
     is_service_address_same_as_usual_address: "string",
-    principal_address: privateADDRESS
+    principal_address: mockAddress1
 };
 
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{

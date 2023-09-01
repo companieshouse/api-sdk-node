@@ -2,6 +2,8 @@
  * Overseas Entity interface used within this SDK
  */
 
+import { AddressResource } from "../../services/company-officers";
+
 export interface OverseasEntity {
     entity_name?: string;
     entity_number?: string;
@@ -225,8 +227,8 @@ export interface BeneficialOwnerPrivateDataResource {
     date_became_registrable?: string,
     date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
-    usual_residential_address?: privateADDRESS,
-    principal_address?: privateADDRESS,
+    usual_residential_address?: AddressResource,
+    principal_address?: AddressResource,
 }
 
 export interface BeneficialOwnersPrivateDataResource {
