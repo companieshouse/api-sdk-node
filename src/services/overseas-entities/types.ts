@@ -221,6 +221,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 
 export interface BeneficialOwnerPrivateDataResource {
     id?: string,
+    hashed_id?: string,
     date_became_registrable?: string,
     date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
@@ -229,15 +230,16 @@ export interface BeneficialOwnerPrivateDataResource {
 }
 
 export interface BeneficialOwnersPrivateDataResource {
-    bo_private_data?: BeneficialOwnerPrivateDataResource[];
+    bo_private_data: BeneficialOwnerPrivateDataResource[];
 }
 
 export interface BeneficialOwnersPrivateData {
-    bo_private_data?: BeneficialOwnerPrivateData[];
+    boPrivateData: BeneficialOwnerPrivateData[];
 }
 
 export interface BeneficialOwnerPrivateData {
     id?: string,
+    hashedId: string,
     dateBecameRegistrable?: string,
     dateOfBirth?: string,
     isServiceAddressSameAsUsualAddress?: string,
@@ -246,11 +248,11 @@ export interface BeneficialOwnerPrivateData {
 }
 
 export interface privateADDRESS {
-        address_line_1?: string,
-        address_line_2?: string,
+        addressLine1?: string,
+        addressLine2?: string,
         country?: string,
         locality?: string,
-        post_code?: string,
+        postCode?: string,
         premises?: string,
         region?: string
 }

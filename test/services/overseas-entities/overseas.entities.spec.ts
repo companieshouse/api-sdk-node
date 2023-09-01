@@ -4,7 +4,7 @@ import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
 import {
-    BeneficialOwnersPrivateDataResource,
+    BeneficialOwnersPrivateData,
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
@@ -12,6 +12,7 @@ import {
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
+import Mapping from "../../../src/mapping/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -156,7 +157,7 @@ describe("OverseasEntityService GET Tests suite", () => {
         const data = (await oeService.getBeneficialOwnerPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
-        )) as Resource<BeneficialOwnersPrivateDataResource>;
+        )) as Resource<BeneficialOwnersPrivateData>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
     });
@@ -520,5 +521,34 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
+    });
+
+    it("maps private beneficial owner data fields correctly", async () => {
+        const addressResource = {
+            address_line_1: "20 Any road",
+            address_line_2: "Any",
+            country: "Anyland",
+            locality: "Anytown",
+            post_code: "1",
+            premises: "premise1",
+            region: "region1"
+        }
+        const data = Mapping.camelCaseKeys({
+            bo_private_data: [
+                {
+                    id: "0000000",
+                    hashed_id: "sometestvalues",
+                    date_became_registrable: "1965-01-01",
+                    is_service_address_same_as_usual_address: "N",
+                    date_of_birth: "1950-01-01",
+                    usual_residential_address: addressResource,
+                    principal_address: addressResource
+                }
+            ]
+        }) as BeneficialOwnersPrivateData;
+        expect(data.boPrivateData[0].dateOfBirth).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].dateOfBirth);
+        expect(data.boPrivateData[0].usualResidentialAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].usualResidentialAddress);
+        expect(data.boPrivateData[0].principalAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].principalAddress);
+        expect(data.boPrivateData[0].dateBecameRegistrable).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].dateBecameRegistrable);
     });
 });

@@ -97,9 +97,10 @@ export default class OverseasEntityService {
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
-    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<BeneficialOwnersPrivateDataResource> | ApiErrorResponse> {
+    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise< Resource<BeneficialOwnersPrivateData> | ApiErrorResponse > {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
         const response: HttpResponse = await this.client.httpGet(URL);
+
         if (response.error) {
             return {
                 httpStatusCode: response.status,
@@ -108,12 +109,9 @@ export default class OverseasEntityService {
         };
 
         const resource: Resource<BeneficialOwnersPrivateData> = {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: Mapping.camelCaseKeys<BeneficialOwnersPrivateData>(response.body as BeneficialOwnersPrivateDataResource)
         };
-
-        const body = response.body as BeneficialOwnersPrivateDataResource;
-
-        resource.resource = Mapping.camelCaseKeys<BeneficialOwnersPrivateData>(body);
 
         return resource;
     }

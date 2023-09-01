@@ -49,11 +49,11 @@ export const ADDRESS: Address = {
 };
 
 export const privateADDRESS = {
-    addressLine1: "line1",
-    addressLine2: "line2",
-    country: "Country1",
-    locality: "locality1",
-    postcode: "postcode1",
+    addressLine1: "20 Any road",
+    addressLine2: "Any",
+    country: "Anyland",
+    locality: "Anytown",
+    postCode: "1",
     premises: "premise1",
     region: "region1"
 };
@@ -62,7 +62,8 @@ export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
 [
     {
         pscId: "0000000",
-        dateBecameRegistrable: "string",
+        hashedId: "somehashedvalue2783",
+        dateBecameRegistrable: "1965-01-01",
         isServiceAddressSameAsUsualAddress: "string",
         dateOfBirth: "1950-01-01",
         usualResidentialAddress: privateADDRESS,
