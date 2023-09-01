@@ -91,7 +91,7 @@ export default class OverseasEntityService {
         return { httpStatusCode: resp.status };
     }
 
-    public async getManagingOfficersPrivateData (
+    public async getManagingOfficerPrivateData (
         transactionId: string,
         overseasEntityId: string
     ): Promise<Resource<ManagingOfficerData[]> | ApiErrorResponse> {
