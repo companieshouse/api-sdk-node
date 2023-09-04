@@ -225,8 +225,8 @@ export interface BeneficialOwnerPrivateDataResource {
     date_became_registrable?: string,
     date_of_birth?: string,
     is_service_address_same_as_usual_address?: string,
-    usual_residential_address?: privateAddressResource,
-    principal_address?: privateAddressResource,
+    usual_residential_address?: PrivateAddressResource,
+    principal_address?: PrivateAddressResource,
 }
 
 export interface BeneficialOwnersPrivateDataResource {
@@ -243,11 +243,11 @@ export interface BeneficialOwnerPrivateData {
     dateBecameRegistrable?: string,
     dateOfBirth?: string,
     isServiceAddressSameAsUsualAddress?: string,
-    usualResidentialAddress?: privateADDRESS,
-    principalAddress?: privateADDRESS,
+    usualResidentialAddress?: PrivateADDRESS,
+    principalAddress?: PrivateADDRESS,
 }
 
-export interface privateADDRESS {
+export interface PrivateADDRESS {
         addressLine1?: string,
         addressLine2?: string,
         country?: string,
@@ -257,7 +257,7 @@ export interface privateADDRESS {
         region?: string
 }
 
-export interface privateAddressResource {
+export interface PrivateAddressResource {
     address_line_1: string;
     address_line_2?: string;
     care_of?: string;
