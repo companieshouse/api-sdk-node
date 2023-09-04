@@ -49,14 +49,16 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const privateADDRESS = {
-    addressLine1: "20 Any road",
-    addressLine2: "Any",
-    country: "Anyland",
-    locality: "Anytown",
-    postCode: "1",
-    premises: "premise1",
-    region: "region1"
+export const PRIVATE_ADDRESS_MOCK = {
+    addressLine1: "addressLine1",
+    addressLine2: "addressLine2",
+    careOf: "care of information",
+    country: "country",
+    locality: "locality information",
+    poBox: "PO Box information",
+    postalCode: "postal code information",
+    premises: "premises information",
+    region: "region information"
 };
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
@@ -66,11 +68,20 @@ export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
         dateBecameRegistrable: "1965-01-01",
         isServiceAddressSameAsUsualAddress: "string",
         dateOfBirth: "1950-01-01",
-        usualResidentialAddress: privateADDRESS,
-        principalAddress: privateADDRESS
+        usualResidentialAddress: PRIVATE_ADDRESS_MOCK,
+        principalAddress: PRIVATE_ADDRESS_MOCK
     }
 ]
 
+export const MANAGING_OFFICERS_DATA_MOCK = {
+    managingOfficerAppointmentId: "123456789",
+    residentialAddress: PRIVATE_ADDRESS_MOCK,
+    principalAddress: PRIVATE_ADDRESS_MOCK,
+    dateOfBirth: "1980-01-01",
+    contactNameFull: "John Doe",
+    contactEmailAddress: "john.doe@example.com",
+    hashedId: "hashed123456789"
+};
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
 };

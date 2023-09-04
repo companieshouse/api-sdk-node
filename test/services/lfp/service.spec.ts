@@ -35,6 +35,32 @@ describe("lfp", () => {
         expect(data.resource).to.be.undefined
     });
 
+    it("maps the penalty data correctly if there are no penalties", async () => {
+        const mockResponseBody = ({
+            etag: "string",
+            items_per_page: 0,
+            start_index: 0,
+            total_results: 0,
+            items: null // lfp-pay-api returns null if there are no penalties
+        });
+
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
+        const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.etag).to.equal(mockResponseBody.etag);
+        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
+        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index);
+        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
+        expect(data.resource.items.length).to.eql(0);
+    });
+
     it("maps the penalty data items correctly", async () => {
         const mockResponseBody = ({
             etag: "string",
