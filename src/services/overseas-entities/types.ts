@@ -313,6 +313,58 @@ export interface ManagingOfficerCorporateResource {
     resigned_on?: string
 }
 
+export interface ManagingOfficerDataResource {
+    managingOfficerAppointmentId?: string;
+    residential_address?: PrivateAddressResource;
+    principal_address?: PrivateAddressResource;
+    date_of_birth?: string;
+    contact_name_full?: string;
+    contact_email_address?: string;
+    hashed_id?: string;
+}
+
+export interface PrivateAddressResource {
+    address_line_1?: string;
+    address_line_2?: string;
+    care_of?: string;
+    country?: string;
+    locality?: string;
+    po_box?: string;
+    postal_code?: string;
+    premises?: string;
+    region?: string;
+}
+
+export interface ManagingOfficersPrivateDataResource {
+    mo_private_data: ManagingOfficerDataResource[];
+}
+
+export interface ManagingOfficersPrivateData {
+    moPrivateData: ManagingOfficerData[];
+}
+
+export interface ManagingOfficerData {
+    managingOfficerAppointmentId?: string;
+    residentialAddress?: PrivateAddress;
+    principalAddress?: PrivateAddress;
+    dateOfBirth?: string;
+    contactNameFull?: string;
+    contactEmailAddress?: string;
+    hashedId?: string;
+}
+
+export interface PrivateAddress {
+    addressLine1?: string;
+    addressLine2?: string;
+    careOf?: string;
+    country?: string;
+    locality?: string;
+    poBox?: string;
+    postalCode?: string;
+    premises?: string;
+    region?: string;
+}
+
 export interface Trust{
     trust_id: string;
     trust_name: string;
