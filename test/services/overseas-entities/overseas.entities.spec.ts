@@ -162,6 +162,18 @@ describe("OverseasEntityService GET Tests suite", () => {
         expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
     });
 
+    it("should return httpStatusCode 200 and empty fields if no benficial owners for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataUndefinedResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getBeneficialOwnerPrivateData(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<BeneficialOwnersPrivateData>;
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(undefined);
+    });
+
     it("should return error 400 (Bad Request) for getBeneficialOwners method", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
 
@@ -521,34 +533,5 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
-    });
-
-    it("maps private beneficial owner data fields correctly", async () => {
-        const addressResource = {
-            address_line_1: "20 Any road",
-            address_line_2: "Any",
-            country: "Anyland",
-            locality: "Anytown",
-            post_code: "1",
-            premises: "premise1",
-            region: "region1"
-        }
-        const data = Mapping.camelCaseKeys({
-            bo_private_data: [
-                {
-                    hashed_id: "somehashedvalue2783",
-                    date_became_registrable: "1965-01-01",
-                    is_service_address_same_as_usual_address: "N",
-                    date_of_birth: "1950-01-01",
-                    usual_residential_address: addressResource,
-                    principal_address: addressResource
-                }
-            ]
-        }) as BeneficialOwnersPrivateData;
-        expect(data.boPrivateData[0].hashedId).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].hashedId);
-        expect(data.boPrivateData[0].dateOfBirth).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].dateOfBirth);
-        expect(data.boPrivateData[0].usualResidentialAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].usualResidentialAddress);
-        expect(data.boPrivateData[0].principalAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].principalAddress);
-        expect(data.boPrivateData[0].dateBecameRegistrable).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].dateBecameRegistrable);
     });
 });

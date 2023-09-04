@@ -93,7 +93,7 @@ export default class OverseasEntityService {
     }
 
     /**
-     * Get private beneficial owner data for an overseasentity
+     * Get private beneficial owner data for an overseas entity
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
@@ -106,7 +106,7 @@ export default class OverseasEntityService {
                 httpStatusCode: response.status,
                 errors: [response.error]
             };
-        };
+        }
 
         const resource: Resource<BeneficialOwnersPrivateData> = {
             httpStatusCode: response.status,

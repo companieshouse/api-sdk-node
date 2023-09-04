@@ -594,3 +594,7 @@ export const mockBeneficialOwnerPrivateDataResponse = {
     200: { status: 200, body: BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK },
     400: { status: 400, error: BAD_REQUEST }
 };
+
+export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
+    200: { status: 200, body: undefined }
+};
