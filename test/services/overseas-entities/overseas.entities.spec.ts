@@ -5,7 +5,7 @@ import sinon from "sinon";
 import * as mockValues from "./overseas.entities.mock";
 import {
     BeneficialOwnersStatementType,
-    ManagingOfficerData,
+    ManagingOfficersPrivateData,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
     OverseasEntityService
@@ -506,17 +506,17 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: { managingOfficerData: [mockValues.MANAGING_OFFICERS_DATA_MOCK] }
+                body: { mo_private_data: [mockValues.MANAGING_OFFICERS_DATA_MOCK] }
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getManagingOfficersPrivateData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
-            )) as Resource<ManagingOfficerData[]>;
+            )) as Resource<ManagingOfficersPrivateData>;
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
+            expect(data.resource.moPrivateData).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
         });
 
         it("should return error 400 (Bad Request) for getManagingOfficersPrivateData method", async () => {
