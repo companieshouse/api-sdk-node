@@ -65,17 +65,17 @@ describe("company-filing-history", () => {
 
         expect(data.httpStatusCode).to.equal(200);
 
-        expect(data.resource.etag).to.equal(mockResponseBody.etag)
-        expect(data.resource.filingHistoryStatus).to.equal(mockResponseBody.filing_history_status)
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page)
-        expect(data.resource.kind).to.equal(mockResponseBody.kind)
-        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index)
-        expect(data.resource.totalCount).to.equal(mockResponseBody.total_count)
+        expect(data.resource?.etag).to.equal(mockResponseBody.etag)
+        expect(data.resource?.filingHistoryStatus).to.equal(mockResponseBody.filing_history_status)
+        expect(data.resource?.itemsPerPage).to.equal(mockResponseBody.items_per_page)
+        expect(data.resource?.kind).to.equal(mockResponseBody.kind)
+        expect(data.resource?.startIndex).to.equal(mockResponseBody.start_index)
+        expect(data.resource?.totalCount).to.equal(mockResponseBody.total_count)
 
-        expect(data.resource.items[0].category).to.equal(mockFilingHistoryItem.category);
-        expect(data.resource.items[0].date).to.equal(mockFilingHistoryItem.date);
-        expect(data.resource.items[0].description).to.equal(mockFilingHistoryItem.description);
-        expect(data.resource.items[0].transactionId).to.equal(mockFilingHistoryItem.transaction_id);
-        expect(data.resource.items[0].type).to.equal(mockFilingHistoryItem.type);
+        expect(data.resource?.items[0].category).to.equal(mockFilingHistoryItem.category);
+        expect(data.resource?.items[0].date).to.equal(mockFilingHistoryItem.date);
+        expect(data.resource?.items[0].description).to.equal(mockFilingHistoryItem.description);
+        expect(data.resource?.items[0].transactionId).to.equal(mockFilingHistoryItem.transaction_id);
+        expect(data.resource?.items[0].type).to.equal(mockFilingHistoryItem.type);
     });
 });
