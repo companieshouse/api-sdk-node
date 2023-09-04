@@ -13,6 +13,7 @@ import {
     OrderService
 } from "./services/order/";
 import { PaymentService } from "./services/payment/";
+import * as BankruptOfficer from "services/bankrupt-officer";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
 import AdvancedSearchService from "./services/search/advanced-search/service";
@@ -37,6 +38,7 @@ import { ClientType } from "./enums";
 export default class ApiClient {
   public clientType: ClientType;
   public readonly lateFilingPenalties: LateFilingPenaltyService;
+  public readonly BankruptOfficer: BankruptOfficer.BadosService;
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;

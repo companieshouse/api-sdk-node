@@ -1,0 +1,1 @@
+export { BadosService } from "./scottish";
