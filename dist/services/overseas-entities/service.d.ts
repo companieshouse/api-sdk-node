@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { HttpStatusCode, OverseasEntity, OverseasEntityCreated, OverseasEntityExtraDetails, ManagingOfficerData } from "./types";
+import { HttpStatusCode, OverseasEntity, OverseasEntityCreated, OverseasEntityExtraDetails, ManagingOfficersPrivateData } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 export default class OverseasEntityService {
     private readonly client;
@@ -8,5 +8,5 @@ export default class OverseasEntityService {
     getOverseasEntityDetails(transactionId: string, overseasEntityId: string): Promise<Resource<OverseasEntityExtraDetails> | ApiErrorResponse>;
     postOverseasEntity(transactionId: string, body: OverseasEntity, isSaveAndResumeFeatureActive?: boolean): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse>;
     putOverseasEntity(transactionId: string, overseasEntityId: string, body: OverseasEntity): Promise<Resource<HttpStatusCode> | ApiErrorResponse>;
-    getManagingOfficersPrivateData(transactionId: string, overseasEntityId: string): Promise<Resource<ManagingOfficerData[]> | ApiErrorResponse>;
+    getManagingOfficersPrivateData(transactionId: string, overseasEntityId: string): Promise<Resource<ManagingOfficersPrivateData> | ApiErrorResponse>;
 }

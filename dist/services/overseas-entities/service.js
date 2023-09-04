@@ -94,12 +94,11 @@ class OverseasEntityService {
                     errors: [response.error]
                 };
             }
-            const body = response.body.managingOfficerData;
-            const managingOfficers = mapping_2.default.camelCaseKeys(body);
-            return {
+            const resource = {
                 httpStatusCode: response.status,
-                resource: managingOfficers
+                resource: mapping_2.default.camelCaseKeys(response.body)
             };
+            return resource;
         });
     }
 }
