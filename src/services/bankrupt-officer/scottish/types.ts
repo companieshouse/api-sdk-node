@@ -6,8 +6,7 @@ export interface Address {
     county?: string;
     postcode?: string;
   }
-  
-  export interface BankruptOfficer extends Address {
+export interface BankruptOfficer extends Address {
     ephemeralKey: string;
     forename1?: string;
     forename2?: string;
@@ -17,21 +16,18 @@ export interface Address {
     debtorDischargeDate?: string;
     caseType?: string;
   }
-  
-  export interface FullBankruptOfficer extends BankruptOfficer {
+export interface FullBankruptOfficer extends BankruptOfficer {
     caseReference?: string;
     bankruptcyType?: string;
     startDate?: string;
     trusteeDischargeDate?: string;
   }
-  
-  export interface BankruptOfficerSearchQuery {
+export interface BankruptOfficerSearchQuery {
     startIndex: number;
     itemsPerPage: number;
     filters: BankruptOfficerSearchFilters;
   }
-  
-  export interface BankruptOfficerSearchFilters {
+export interface BankruptOfficerSearchFilters {
     forename1?: string;
     surname?: string;
     alias?: string;
@@ -39,8 +35,7 @@ export interface Address {
     toDateOfBirth?: string;
     postcode?: string;
   }
-  
-  export interface BankruptOfficerSearchResults {
+export interface BankruptOfficerSearchResults {
     itemsPerPage: number;
     startIndex: number;
     totalResults: number;

@@ -23,7 +23,7 @@ describe("bankrupt-officer", () => {
             status: 401,
             error: "An error occurred"
         };
-        
+
         sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
 
         const bankruptOfficerService : BankruptOfficer.BadosService = new BadosService(requestClient);
@@ -33,7 +33,6 @@ describe("bankrupt-officer", () => {
         expect(data.resource).to.be.undefined;
     });
     it("maps the company filing history data items correctly", async () => {
-
         const mockGetResponse = {
             status: 200,
             body: <BankruptOfficer.FullBankruptOfficer> {
@@ -52,6 +51,5 @@ describe("bankrupt-officer", () => {
         expect(data.resource?.ephemeralKey).to.equal(mockGetResponse.body.ephemeralKey);
         expect(data.resource?.caseReference).to.equal(mockGetResponse.body.caseReference);
         expect(data.resource?.bankruptcyType).to.equal(mockGetResponse.body.bankruptcyType);
-
     });
 });
