@@ -239,7 +239,7 @@ export interface BeneficialOwnersPrivateData {
 
 export interface BeneficialOwnerPrivateData {
     id?: string,
-    hashedId: string,
+    hashedId?: string,
     dateBecameRegistrable?: string,
     dateOfBirth?: string,
     isServiceAddressSameAsUsualAddress?: string,
