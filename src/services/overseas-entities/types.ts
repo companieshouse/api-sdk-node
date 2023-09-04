@@ -220,7 +220,6 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
 }
 
 export interface BeneficialOwnerPrivateDataResource {
-    id?: string,
     hashed_id?: string,
     date_became_registrable?: string,
     date_of_birth?: string,
@@ -238,7 +237,6 @@ export interface BeneficialOwnersPrivateData {
 }
 
 export interface BeneficialOwnerPrivateData {
-    id?: string,
     hashedId?: string,
     dateBecameRegistrable?: string,
     dateOfBirth?: string,

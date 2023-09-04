@@ -536,8 +536,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const data = Mapping.camelCaseKeys({
             bo_private_data: [
                 {
-                    id: "0000000",
-                    hashed_id: "sometestvalues",
+                    hashed_id: "somehashedvalue2783",
                     date_became_registrable: "1965-01-01",
                     is_service_address_same_as_usual_address: "N",
                     date_of_birth: "1950-01-01",
@@ -546,6 +545,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
                 }
             ]
         }) as BeneficialOwnersPrivateData;
+        expect(data.boPrivateData[0].hashedId).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].hashedId);
         expect(data.boPrivateData[0].dateOfBirth).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].dateOfBirth);
         expect(data.boPrivateData[0].usualResidentialAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].usualResidentialAddress);
         expect(data.boPrivateData[0].principalAddress).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK[0].principalAddress);

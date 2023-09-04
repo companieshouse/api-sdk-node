@@ -62,7 +62,6 @@ export const privateADDRESS = {
 export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
 [
     {
-        pscId: "0000000",
         hashedId: "somehashedvalue2783",
         dateBecameRegistrable: "1965-01-01",
         isServiceAddressSameAsUsualAddress: "string",
@@ -445,7 +444,7 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
 };
 
 export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
-    id: "0000000",
+    hashed_id: "0000000",
     usual_residential_address: mockAddress1,
     date_of_birth: "1959-01-01",
     date_became_registrable: "string",
