@@ -47,7 +47,7 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
-export const ADDRESS_API = {
+export const PRIVATE_ADDRESS_MOCK = {
     addressLine1: "addressLine1",
     addressLine2: "addressLine2",
     careOf: "care of information",
