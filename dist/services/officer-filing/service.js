@@ -141,7 +141,8 @@ class default_1 {
             middle_names: officerFiling.middleNames,
             last_name: officerFiling.lastName,
             title: officerFiling.title,
-            former_names: officerFiling.formerNames
+            former_names: officerFiling.formerNames,
+            occupation: officerFiling.occupation
         };
     }
     /**
