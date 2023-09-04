@@ -61,8 +61,8 @@ export const PRIVATE_ADDRESS_MOCK = {
 
 export const MANAGING_OFFICERS_DATA_MOCK = {
     managingOfficerAppointmentId: "123456789",
-    residentialAddress: ADDRESS_API,
-    principalAddress: ADDRESS_API,
+    residentialAddress: PRIVATE_ADDRESS_MOCK,
+    principalAddress: PRIVATE_ADDRESS_MOCK,
     dateOfBirth: "1980-01-01",
     contactNameFull: "John Doe",
     contactEmailAddress: "john.doe@example.com",
