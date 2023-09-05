@@ -1,5 +1,7 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
+    BeneficialOwnersPrivateData,
+    BeneficialOwnersPrivateDataResource,
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
@@ -90,6 +92,30 @@ export default class OverseasEntityService {
         }
 
         return { httpStatusCode: resp.status };
+    }
+
+    /**
+     * Get private beneficial owner data for an overseas entity
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     */
+    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise< Resource<BeneficialOwnersPrivateData> | ApiErrorResponse > {
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<BeneficialOwnersPrivateData> = {
+            httpStatusCode: response.status,
+            resource: Mapping.camelCaseKeys<BeneficialOwnersPrivateData>(response.body as BeneficialOwnersPrivateDataResource)
+        };
+
+        return resource;
     }
 
     public async getManagingOfficersPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<ManagingOfficersPrivateData> | ApiErrorResponse> {

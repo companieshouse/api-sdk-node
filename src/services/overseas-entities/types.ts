@@ -219,6 +219,32 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
+export interface BeneficialOwnerPrivateDataResource {
+    hashed_id?: string,
+    date_became_registrable?: string,
+    date_of_birth?: string,
+    is_service_address_same_as_usual_address?: string,
+    usual_residential_address?: PrivateAddressResource,
+    principal_address?: PrivateAddressResource,
+}
+
+export interface BeneficialOwnersPrivateDataResource {
+    bo_private_data: BeneficialOwnerPrivateDataResource[];
+}
+
+export interface BeneficialOwnersPrivateData {
+    boPrivateData: BeneficialOwnerPrivateData[];
+}
+
+export interface BeneficialOwnerPrivateData {
+    hashedId?: string,
+    dateBecameRegistrable?: string,
+    dateOfBirth?: string,
+    isServiceAddressSameAsUsualAddress?: string,
+    usualResidentialAddress?: PrivateAddress,
+    principalAddress?: PrivateAddress,
+}
+
 export interface ManagingOfficerIndividual {
     ch_reference?: string
     first_name?: string
