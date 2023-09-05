@@ -241,11 +241,11 @@ export interface BeneficialOwnerPrivateData {
     dateBecameRegistrable?: string,
     dateOfBirth?: string,
     isServiceAddressSameAsUsualAddress?: string,
-    usualResidentialAddress?: PrivateADDRESS,
-    principalAddress?: PrivateADDRESS,
+    usualResidentialAddress?: PrivateAddress,
+    principalAddress?: PrivateAddress,
 }
 
-export interface PrivateADDRESS {
+export interface PrivateAddress {
         addressLine1?: string,
         addressLine2?: string,
         country?: string,
