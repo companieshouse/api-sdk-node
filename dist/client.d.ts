@@ -6,6 +6,7 @@ import CompanyPscService from "./services/company-psc/service";
 import { LateFilingPenaltyService } from "./services/lfp";
 import { BasketService, CertificateService, CertifiedCopiesService, CheckoutService, MidService, OrderService } from "./services/order/";
 import { PaymentService } from "./services/payment/";
+import * as BankruptOfficer from "./services/bankrupt-officer";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
 import AdvancedSearchService from "./services/search/advanced-search/service";
@@ -31,6 +32,7 @@ export default class ApiClient {
     readonly accountClient: IHttpClient;
     clientType: ClientType;
     readonly lateFilingPenalties: LateFilingPenaltyService;
+    readonly BankruptOfficer: BankruptOfficer.BadosService;
     readonly companyOfficers: CompanyOfficersService;
     readonly companyFilingHistory: CompanyFilingHistoryService;
     readonly companyProfile: CompanyProfileService;
