@@ -219,6 +219,32 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 
+export interface BeneficialOwnerPrivateDataResource {
+    hashed_id?: string,
+    date_became_registrable?: string,
+    date_of_birth?: string,
+    is_service_address_same_as_usual_address?: string,
+    usual_residential_address?: PrivateAddressResource,
+    principal_address?: PrivateAddressResource,
+}
+
+export interface BeneficialOwnersPrivateDataResource {
+    bo_private_data: BeneficialOwnerPrivateDataResource[];
+}
+
+export interface BeneficialOwnersPrivateData {
+    boPrivateData: BeneficialOwnerPrivateData[];
+}
+
+export interface BeneficialOwnerPrivateData {
+    hashedId?: string,
+    dateBecameRegistrable?: string,
+    dateOfBirth?: string,
+    isServiceAddressSameAsUsualAddress?: string,
+    usualResidentialAddress?: PrivateAddress,
+    principalAddress?: PrivateAddress,
+}
+
 export interface ManagingOfficerIndividual {
     ch_reference?: string
     first_name?: string
@@ -311,6 +337,58 @@ export interface ManagingOfficerCorporateResource {
     role_and_responsibilities?: string
     start_date?: string
     resigned_on?: string
+}
+
+export interface ManagingOfficerDataResource {
+    managingOfficerAppointmentId?: string;
+    residential_address?: PrivateAddressResource;
+    principal_address?: PrivateAddressResource;
+    date_of_birth?: string;
+    contact_name_full?: string;
+    contact_email_address?: string;
+    hashed_id?: string;
+}
+
+export interface PrivateAddressResource {
+    address_line_1?: string;
+    address_line_2?: string;
+    care_of?: string;
+    country?: string;
+    locality?: string;
+    po_box?: string;
+    postal_code?: string;
+    premises?: string;
+    region?: string;
+}
+
+export interface ManagingOfficersPrivateDataResource {
+    mo_private_data: ManagingOfficerDataResource[];
+}
+
+export interface ManagingOfficersPrivateData {
+    moPrivateData: ManagingOfficerData[];
+}
+
+export interface ManagingOfficerData {
+    managingOfficerAppointmentId?: string;
+    residentialAddress?: PrivateAddress;
+    principalAddress?: PrivateAddress;
+    dateOfBirth?: string;
+    contactNameFull?: string;
+    contactEmailAddress?: string;
+    hashedId?: string;
+}
+
+export interface PrivateAddress {
+    addressLine1?: string;
+    addressLine2?: string;
+    careOf?: string;
+    country?: string;
+    locality?: string;
+    poBox?: string;
+    postalCode?: string;
+    premises?: string;
+    region?: string;
 }
 
 export interface Trust{

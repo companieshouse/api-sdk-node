@@ -34,8 +34,10 @@ import {
     TrustHistoricalBeneficialOwnerResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    BeneficialOwnerPrivateDataResource
 } from "../../../src/services/overseas-entities";
+import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
 export const ADDRESS: Address = {
     property_name_number: "property name 1",
@@ -47,6 +49,39 @@ export const ADDRESS: Address = {
     postcode: "BY 2"
 };
 
+export const PRIVATE_ADDRESS_MOCK = {
+    addressLine1: "addressLine1",
+    addressLine2: "addressLine2",
+    careOf: "care of information",
+    country: "country",
+    locality: "locality information",
+    poBox: "PO Box information",
+    postalCode: "postal code information",
+    premises: "premises information",
+    region: "region information"
+};
+
+export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
+[
+    {
+        hashedId: "somehashedvalue2783",
+        dateBecameRegistrable: "1965-01-01",
+        isServiceAddressSameAsUsualAddress: "string",
+        dateOfBirth: "1950-01-01",
+        usualResidentialAddress: PRIVATE_ADDRESS_MOCK,
+        principalAddress: PRIVATE_ADDRESS_MOCK
+    }
+]
+
+export const MANAGING_OFFICERS_DATA_MOCK = {
+    managingOfficerAppointmentId: "123456789",
+    residentialAddress: PRIVATE_ADDRESS_MOCK,
+    principalAddress: PRIVATE_ADDRESS_MOCK,
+    dateOfBirth: "1980-01-01",
+    contactNameFull: "John Doe",
+    contactEmailAddress: "john.doe@example.com",
+    hashedId: "hashed123456789"
+};
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
 };
@@ -419,6 +454,15 @@ export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetai
     email_address: "private@overseasentities.test"
 };
 
+export const BENEFICIAL_OWNER_PRIVATE_DATA_OBJECT_MOCK: BeneficialOwnerPrivateDataResource = {
+    hashed_id: "0000000",
+    usual_residential_address: mockAddress1,
+    date_of_birth: "1959-01-01",
+    date_became_registrable: "string",
+    is_service_address_same_as_usual_address: "string",
+    principal_address: mockAddress1
+};
+
 export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     type: "type",
     forename: "joe",
@@ -555,4 +599,13 @@ export const mockGetOverseasEntityResponse = {
 export const mockGetOverseasEntityExtraDetailsResponse = {
     200: { status: 200, body: OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK },
     400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockBeneficialOwnerPrivateDataResponse = {
+    200: { status: 200, body: BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK },
+    400: { status: 400, error: BAD_REQUEST }
+};
+
+export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
+    200: { status: 200, body: undefined }
 };

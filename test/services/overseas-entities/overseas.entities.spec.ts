@@ -4,13 +4,16 @@ import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
 import {
+    BeneficialOwnersPrivateData,
     BeneficialOwnersStatementType,
+    ManagingOfficersPrivateData,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
     OverseasEntityService
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
+import Mapping from "../../../src/mapping/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -140,6 +143,43 @@ describe("OverseasEntityService GET Tests suite", () => {
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = await oeService.getOverseasEntityDetails(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        ) as ApiErrorResponse;
+
+        expect(data.httpStatusCode).to.equal(400);
+        expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+    });
+
+    it("should return httpStatusCode 200 for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getBeneficialOwnerPrivateData(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<BeneficialOwnersPrivateData>;
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
+    });
+
+    it("should return httpStatusCode 200 and empty fields if no benficial owners for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataUndefinedResponse[200]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = (await oeService.getBeneficialOwnerPrivateData(
+            mockValues.TRANSACTION_ID,
+            mockValues.OVERSEAS_ENTITY_ID
+        )) as Resource<BeneficialOwnersPrivateData>;
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource).to.deep.equal(undefined);
+    });
+
+    it("should return error 400 (Bad Request) for getBeneficialOwners method", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
+
+        const oeService = new OverseasEntityService(mockValues.requestClient);
+        const data = await oeService.getBeneficialOwnerPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
@@ -494,5 +534,44 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
+    });
+
+    describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getManagingOfficersPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: { mo_private_data: [mockValues.MANAGING_OFFICERS_DATA_MOCK] }
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getManagingOfficersPrivateData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            )) as Resource<ManagingOfficersPrivateData>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource.moPrivateData).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
+        });
+
+        it("should return error 400 (Bad Request) for getManagingOfficersPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getManagingOfficersPrivateData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
     });
 });
