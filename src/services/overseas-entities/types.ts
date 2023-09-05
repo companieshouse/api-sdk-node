@@ -245,16 +245,6 @@ export interface BeneficialOwnerPrivateData {
     principalAddress?: PrivateAddress,
 }
 
-export interface PrivateAddress {
-        addressLine1?: string,
-        addressLine2?: string,
-        country?: string,
-        locality?: string,
-        postCode?: string,
-        premises?: string,
-        region?: string
-}
-
 export interface ManagingOfficerIndividual {
     ch_reference?: string
     first_name?: string
