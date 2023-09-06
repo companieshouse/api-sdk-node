@@ -372,7 +372,8 @@ const mapUpdate = (update: Update): UpdateResource => {
             filing_date: convertOptionalDateToIsoDateString(update.filing_date?.day, update.filing_date?.month, update.filing_date?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
             registrable_beneficial_owner: update.registrable_beneficial_owner,
-            no_change: update.no_change
+            no_change: update.no_change,
+            trust_data_fetched: update.trust_data_fetched
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
@@ -394,6 +395,12 @@ const mapUpdate = (update: Update): UpdateResource => {
         if (managing_officers_corporate.length !== 0) {
             resource.review_managing_officers_corporate = managing_officers_corporate;
         }
+        if (update.review_trusts) {
+            const review_trusts = mapTrusts(update.review_trusts);
+            if (review_trusts.length !== 0) {
+                resource.review_trusts = review_trusts;
+            }
+        }
         return resource;
     }
     return {};
@@ -406,7 +413,8 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
             registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
-            no_change: updateResource.no_change
+            no_change: updateResource.no_change,
+            trust_data_fetched: updateResource.trust_data_fetched
         };
         const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
         if (beneficial_owners_individual.length !== 0) {
@@ -427,6 +435,12 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
         const managing_officers_corporate = (updateResource.review_managing_officers_corporate || []).map(mapMocResource);
         if (managing_officers_corporate.length !== 0) {
             update.review_managing_officers_corporate = managing_officers_corporate;
+        }
+        if (updateResource.review_trusts) {
+            const review_trusts = mapTrustsResource(updateResource.review_trusts);
+            if (review_trusts.length !== 0) {
+                update.review_trusts = review_trusts;
+            }
         }
         return update
     }

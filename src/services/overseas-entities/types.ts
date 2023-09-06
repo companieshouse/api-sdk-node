@@ -308,6 +308,8 @@ export interface Update {
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthority[];
     review_managing_officers_individual?: ManagingOfficerIndividual[];
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
+    trust_data_fetched?: boolean;
+    review_trusts?: Trust[];
 }
 
 export interface UpdateResource {
@@ -321,6 +323,8 @@ export interface UpdateResource {
     review_beneficial_owners_government_or_public_authority?: BeneficialOwnerGovernmentOrPublicAuthorityResource[];
     review_managing_officers_individual?: ManagingOfficerIndividualResource[];
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
+    trust_data_fetched?: boolean;
+    review_trusts?: TrustResource[];
 }
 
 export interface ManagingOfficerCorporateResource {
