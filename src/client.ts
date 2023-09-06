@@ -13,7 +13,7 @@ import {
     OrderService
 } from "./services/order/";
 import { PaymentService } from "./services/payment/";
-import * as BankruptOfficer from "./services/bankrupt-officer";
+import { BadosService } from "./services/bankrupt-officer";
 import CompanyFilingHistoryService from "./services/company-filing-history/service";
 import { RefreshTokenService } from "./services/refresh-token";
 import AdvancedSearchService from "./services/search/advanced-search/service";
@@ -38,7 +38,7 @@ import { ClientType } from "./enums";
 export default class ApiClient {
   public clientType: ClientType;
   public readonly lateFilingPenalties: LateFilingPenaltyService;
-  public readonly BankruptOfficer: BankruptOfficer.BadosService;
+  public readonly badosService: BadosService;
   public readonly companyOfficers: CompanyOfficersService;
   public readonly companyFilingHistory: CompanyFilingHistoryService;
   public readonly companyProfile: CompanyProfileService;
@@ -70,6 +70,7 @@ export default class ApiClient {
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
       this.lateFilingPenalties = new LateFilingPenaltyService(apiClient);
+      this.badosService = new BadosService(apiClient)
       this.companyOfficers = new CompanyOfficersService(apiClient);
       this.companyFilingHistory = new CompanyFilingHistoryService(apiClient);
       this.companyProfile = new CompanyProfileService(apiClient);
