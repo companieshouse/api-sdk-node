@@ -422,15 +422,9 @@ export const UPDATE_OBJECT_MOCK: Update = {
     filing_date: { day: "1", month: "2", year: "2023" },
     bo_mo_data_fetched: false,
     registrable_beneficial_owner: yesNoResponse.No,
-    no_change: yesNoResponse.No
-}
-
-export const UPDATE_RESOURCE_MOCK: UpdateResource = {
-    date_of_creation: "2021-12-01",
-    filing_date: "2023-02-01",
-    bo_mo_data_fetched: false,
-    registrable_beneficial_owner: yesNoResponse.No,
-    no_change: yesNoResponse.No
+    no_change: yesNoResponse.No,
+    trust_data_fetched: false,
+    review_trusts: TRUSTS_MOCK
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
@@ -550,6 +544,16 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK
 }]
+
+export const UPDATE_RESOURCE_MOCK: UpdateResource = {
+    date_of_creation: "2021-12-01",
+    filing_date: "2023-02-01",
+    bo_mo_data_fetched: false,
+    registrable_beneficial_owner: yesNoResponse.No,
+    no_change: yesNoResponse.No,
+    trust_data_fetched: false,
+    review_trusts: TRUSTS_RESOURCE_MOCK
+}
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     entity_name: ENTITY_NAME_BLOCK_MOCK,
