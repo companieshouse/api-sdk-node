@@ -150,7 +150,8 @@ export default class {
             last_name: officerFiling.lastName,
             title: officerFiling.title,
             former_names: officerFiling.formerNames,
-            occupation: officerFiling.occupation
+            occupation: officerFiling.occupation,
+            date_of_birth: officerFiling.dateOfBirth
         }
     }
 

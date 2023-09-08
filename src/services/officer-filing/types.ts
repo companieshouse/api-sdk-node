@@ -176,6 +176,7 @@ export interface OfficerFiling {
     title?: string;
     formerNames?: string;
     occupation?: string;
+    dateOfBirth?: string;
 }
 
 export interface OfficerFilingDto {
@@ -189,4 +190,5 @@ export interface OfficerFilingDto {
     title?: string;
     former_names?: string;
     occupation?: string;
+    date_of_birth?: string;
 }
