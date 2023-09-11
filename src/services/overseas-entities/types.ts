@@ -228,14 +228,6 @@ export interface BeneficialOwnerPrivateDataResource {
     principal_address?: PrivateAddressResource,
 }
 
-export interface BeneficialOwnersPrivateDataResource {
-    bo_private_data: BeneficialOwnerPrivateDataResource[];
-}
-
-export interface BeneficialOwnersPrivateData {
-    boPrivateData: BeneficialOwnerPrivateData[];
-}
-
 export interface BeneficialOwnerPrivateData {
     hashedId?: string,
     dateBecameRegistrable?: string,
@@ -343,7 +335,7 @@ export interface ManagingOfficerCorporateResource {
     resigned_on?: string
 }
 
-export interface ManagingOfficerDataResource {
+export interface ManagingOfficerPrivateDataResource {
     managingOfficerAppointmentId?: string;
     residential_address?: PrivateAddressResource;
     principal_address?: PrivateAddressResource;
@@ -351,6 +343,16 @@ export interface ManagingOfficerDataResource {
     contact_name_full?: string;
     contact_email_address?: string;
     hashed_id?: string;
+}
+
+export interface ManagingOfficerPrivateData {
+    managingOfficerAppointmentId?: string;
+    residentialAddress?: PrivateAddress;
+    principalAddress?: PrivateAddress;
+    dateOfBirth?: string;
+    contactNameFull?: string;
+    contactEmailAddress?: string;
+    hashedId?: string;
 }
 
 export interface PrivateAddressResource {
@@ -363,24 +365,6 @@ export interface PrivateAddressResource {
     postal_code?: string;
     premises?: string;
     region?: string;
-}
-
-export interface ManagingOfficersPrivateDataResource {
-    mo_private_data: ManagingOfficerDataResource[];
-}
-
-export interface ManagingOfficersPrivateData {
-    moPrivateData: ManagingOfficerData[];
-}
-
-export interface ManagingOfficerData {
-    managingOfficerAppointmentId?: string;
-    residentialAddress?: PrivateAddress;
-    principalAddress?: PrivateAddress;
-    dateOfBirth?: string;
-    contactNameFull?: string;
-    contactEmailAddress?: string;
-    hashedId?: string;
 }
 
 export interface PrivateAddress {
