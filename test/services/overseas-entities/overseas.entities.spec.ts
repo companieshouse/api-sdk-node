@@ -4,12 +4,12 @@ import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
 import {
-    BeneficialOwnersPrivateData,
     BeneficialOwnersStatementType,
-    ManagingOfficersPrivateData,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
-    OverseasEntityService
+    OverseasEntityService,
+    BeneficialOwnerPrivateData,
+    ManagingOfficerPrivateData
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
@@ -155,10 +155,10 @@ describe("OverseasEntityService GET Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[200]);
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
-        const data = (await oeService.getBeneficialOwnerPrivateData(
+        const data = (await oeService.getBeneficialOwnersPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
-        )) as Resource<BeneficialOwnersPrivateData>;
+        )) as Resource<BeneficialOwnerPrivateData[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource).to.deep.equal(mockValues.BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK);
     });
@@ -167,10 +167,10 @@ describe("OverseasEntityService GET Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataUndefinedResponse[200]);
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
-        const data = (await oeService.getBeneficialOwnerPrivateData(
+        const data = (await oeService.getBeneficialOwnersPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
-        )) as Resource<BeneficialOwnersPrivateData>;
+        )) as Resource<BeneficialOwnerPrivateData[]>;
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource).to.deep.equal(undefined);
     });
@@ -179,7 +179,7 @@ describe("OverseasEntityService GET Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
 
         const oeService = new OverseasEntityService(mockValues.requestClient);
-        const data = await oeService.getBeneficialOwnerPrivateData(
+        const data = await oeService.getBeneficialOwnersPrivateData(
             mockValues.TRANSACTION_ID,
             mockValues.OVERSEAS_ENTITY_ID
         ) as ApiErrorResponse;
@@ -545,17 +545,17 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getManagingOfficersPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: { mo_private_data: [mockValues.MANAGING_OFFICERS_DATA_MOCK] }
+                body: mockValues.MANAGING_OFFICERS_PRIVATE_DATA_MOCK
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getManagingOfficersPrivateData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
-            )) as Resource<ManagingOfficersPrivateData>;
+            )) as Resource<ManagingOfficerPrivateData[]>;
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.moPrivateData).to.deep.equal([mockValues.MANAGING_OFFICERS_DATA_MOCK]);
+            expect(data.resource).to.deep.equal(mockValues.MANAGING_OFFICERS_PRIVATE_DATA_MOCK);
         });
 
         it("should return error 400 (Bad Request) for getManagingOfficersPrivateData method", async () => {

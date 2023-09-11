@@ -73,7 +73,7 @@ export const BENEFICIAL_OWNER_PRIVATE_DATA_RESOURCE_MOCK =
     }
 ]
 
-export const MANAGING_OFFICERS_DATA_MOCK = {
+export const MANAGING_OFFICERS_PRIVATE_DATA_MOCK = [{
     managingOfficerAppointmentId: "123456789",
     residentialAddress: PRIVATE_ADDRESS_MOCK,
     principalAddress: PRIVATE_ADDRESS_MOCK,
@@ -81,7 +81,8 @@ export const MANAGING_OFFICERS_DATA_MOCK = {
     contactNameFull: "John Doe",
     contactEmailAddress: "john.doe@example.com",
     hashedId: "hashed123456789"
-};
+}];
+
 export const ENTITY_NAME_BLOCK_MOCK: EntityName = {
     name: "Entity Name"
 };

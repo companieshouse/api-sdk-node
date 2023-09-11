@@ -1,13 +1,13 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
-    BeneficialOwnersPrivateData,
-    BeneficialOwnersPrivateDataResource,
     HttpStatusCode,
     OverseasEntity,
     OverseasEntityCreated,
     OverseasEntityExtraDetails,
-    ManagingOfficersPrivateData,
-    ManagingOfficersPrivateDataResource
+    BeneficialOwnerPrivateData,
+    BeneficialOwnerPrivateDataResource,
+    ManagingOfficerPrivateData,
+    ManagingOfficerPrivateDataResource
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
@@ -99,7 +99,7 @@ export default class OverseasEntityService {
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
      */
-    public async getBeneficialOwnerPrivateData (transactionId: string, overseasEntityId: string): Promise< Resource<BeneficialOwnersPrivateData> | ApiErrorResponse > {
+    public async getBeneficialOwnersPrivateData (transactionId: string, overseasEntityId: string): Promise< Resource<BeneficialOwnerPrivateData[]> | ApiErrorResponse > {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/beneficial-owners`
         const response: HttpResponse = await this.client.httpGet(URL);
 
@@ -110,15 +110,20 @@ export default class OverseasEntityService {
             };
         }
 
-        const resource: Resource<BeneficialOwnersPrivateData> = {
+        const resource: Resource<BeneficialOwnerPrivateData[]> = {
             httpStatusCode: response.status,
-            resource: Mapping.camelCaseKeys<BeneficialOwnersPrivateData>(response.body as BeneficialOwnersPrivateDataResource)
+            resource: Mapping.camelCaseKeys<BeneficialOwnerPrivateData[]>(response.body as BeneficialOwnerPrivateDataResource[])
         };
 
         return resource;
     }
 
-    public async getManagingOfficersPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<ManagingOfficersPrivateData> | ApiErrorResponse> {
+    /**
+     * Get private managing officer data for an overseas entity
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     */
+    public async getManagingOfficersPrivateData (transactionId: string, overseasEntityId: string): Promise<Resource<ManagingOfficerPrivateData[]> | ApiErrorResponse> {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/managing-officers`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
@@ -129,9 +134,9 @@ export default class OverseasEntityService {
             };
         }
 
-        const resource: Resource<ManagingOfficersPrivateData> = {
+        const resource: Resource<ManagingOfficerPrivateData[]> = {
             httpStatusCode: response.status,
-            resource: Mapping.camelCaseKeys<ManagingOfficersPrivateData>(response.body as ManagingOfficersPrivateDataResource)
+            resource: Mapping.camelCaseKeys<ManagingOfficerPrivateData[]>(response.body as ManagingOfficerPrivateDataResource[])
         };
 
         return resource;
