@@ -144,6 +144,7 @@ export default class {
             reference_appointment_id: officerFiling.referenceAppointmentId,
             reference_etag: officerFiling.referenceEtag,
             resigned_on: officerFiling.resignedOn,
+            appointed_on: officerFiling.appointedOn,
             name: officerFiling.name,
             first_name: officerFiling.firstName,
             middle_names: officerFiling.middleNames,
