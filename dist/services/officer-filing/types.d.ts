@@ -159,8 +159,8 @@ export interface OfficerFiling {
     nationality1?: string;
     nationality2?: string;
     nationality3?: string;
-    nationalityTwoLink?: string;
-    nationalityThreeLink?: string;
+    nationality2Link?: string;
+    nationality3Link?: string;
 }
 export interface OfficerFilingDto {
     reference_appointment_id?: string;
