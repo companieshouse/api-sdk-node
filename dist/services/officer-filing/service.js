@@ -145,11 +145,11 @@ class default_1 {
             former_names: officerFiling.formerNames,
             occupation: officerFiling.occupation,
             date_of_birth: officerFiling.dateOfBirth,
-            nationality_one: officerFiling.nationalityOne,
-            nationality_two: officerFiling.nationalityTwo,
-            nationality_three: officerFiling.nationalityThree,
-            nationality_two_link: officerFiling.nationalityTwoLink,
-            nationality_three_link: officerFiling.nationalityThreeLink
+            nationality1: officerFiling.nationality1,
+            nationality2: officerFiling.nationality2,
+            nationality3: officerFiling.nationality3,
+            nationality2_link: officerFiling.nationalityTwoLink,
+            nationality3_link: officerFiling.nationalityThreeLink
         };
     }
     /**
