@@ -156,8 +156,8 @@ export default class {
             nationality1: officerFiling.nationality1,
             nationality2: officerFiling.nationality2,
             nationality3: officerFiling.nationality3,
-            nationality2_link: officerFiling.nationalityTwoLink,
-            nationality3_link: officerFiling.nationalityThreeLink
+            nationality2_link: officerFiling.nationality2Link,
+            nationality3_link: officerFiling.nationality3Link
         }
     }
 
