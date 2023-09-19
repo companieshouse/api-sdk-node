@@ -152,7 +152,12 @@ export default class {
             title: officerFiling.title,
             former_names: officerFiling.formerNames,
             occupation: officerFiling.occupation,
-            date_of_birth: officerFiling.dateOfBirth
+            date_of_birth: officerFiling.dateOfBirth,
+            nationality1: officerFiling.nationality1,
+            nationality2: officerFiling.nationality2,
+            nationality3: officerFiling.nationality3,
+            nationality2_link: officerFiling.nationality2Link,
+            nationality3_link: officerFiling.nationality3Link
         }
     }
 

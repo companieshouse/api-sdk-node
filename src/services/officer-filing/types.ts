@@ -178,6 +178,11 @@ export interface OfficerFiling {
     formerNames?: string;
     occupation?: string;
     dateOfBirth?: string;
+    nationality1?: string;
+    nationality2?: string;
+    nationality3?: string;
+    nationality2Link?: string;
+    nationality3Link?: string;
 }
 
 export interface OfficerFilingDto {
@@ -193,4 +198,9 @@ export interface OfficerFilingDto {
     former_names?: string;
     occupation?: string;
     date_of_birth?: string;
+    nationality1?: string;
+    nationality2?: string;
+    nationality3?: string;
+    nationality2_link?: string;
+    nationality3_link?: string;
 }
