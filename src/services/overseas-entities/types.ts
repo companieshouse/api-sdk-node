@@ -554,6 +554,24 @@ export interface TrustCorporateResource {
 }
 
 /**
+ * Trust data loaded from the API
+ */
+
+export interface TrustData {
+    trust_id: string;
+    trust_name: string;
+    creation_date: string;
+    unable_to_obtain_all_trust_info: boolean;
+}
+
+export interface TrustDataResource {
+    trust_id: string;
+    trust_name: string;
+    creation_date: string;
+    unable_to_obtain_all_trust_info: boolean;
+}
+
+/**
  * Shared Data Type
  */
 export interface Address {
