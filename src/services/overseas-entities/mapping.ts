@@ -26,7 +26,9 @@ import {
     TrustCorporateResource,
     Update,
     UpdateResource,
-    OverseasEntityExtraDetails
+    OverseasEntityExtraDetails,
+    TrustToReviewResource,
+    TrustToReview
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -105,58 +107,77 @@ const mapMocResource = moc => {
 * @returns Array of Trust objects
 */
 const mapTrustsResource = (trusts: TrustResource[] = []): Trust[] => {
-    return (trusts || []).map(trust => {
-        const creationDate = mapIsoDate(trust.creation_date);
-        return {
-            trust_id: trust.trust_id,
-            trust_name: trust.trust_name,
-            creation_date_day: creationDate.day,
-            creation_date_month: creationDate.month,
-            creation_date_year: creationDate.year,
-            unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
-            // Convert the Trust Individuals Resource Data into the format that the WEB expects
-            INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
-                const { date_of_birth, date_became_interested_person, ...rest } = trustInd;
-                const dobDate = mapIsoDate(date_of_birth);
-                const dbipDate = mapIsoDate(date_became_interested_person);
-                return {
-                    ...rest,
-                    dob_day: dobDate.day,
-                    dob_month: dobDate.month,
-                    dob_year: dobDate.year,
-                    date_became_interested_person_day: dbipDate.day,
-                    date_became_interested_person_month: dbipDate.month,
-                    date_became_interested_person_year: dbipDate.year
-                }
-            }),
-            // Convert the Trust Historical BO Resource Data into the format that the WEB expects
-            HISTORICAL_BO: (trust.HISTORICAL_BO || []).map(trustHist => {
-                const { notified_date, ceased_date, ...rest } = trustHist;
-                const notifiedDate = mapIsoDate(notified_date);
-                const ceasedDate = mapIsoDate(ceased_date);
-                return {
-                    ...rest,
-                    notified_date_day: notifiedDate.day,
-                    notified_date_month: notifiedDate.month,
-                    notified_date_year: notifiedDate.year,
-                    ceased_date_day: ceasedDate.day,
-                    ceased_date_month: ceasedDate.month,
-                    ceased_date_year: ceasedDate.year
-                }
-            }),
-            // Convert the Trust Corporates Resource Data into the format that the WEB expects
-            CORPORATES: (trust.CORPORATE || []).map(trustCorp => {
-                const { date_became_interested_person, ...rest } = trustCorp;
-                const dbipDate = mapIsoDate(date_became_interested_person);
-                return {
-                    ...rest,
-                    date_became_interested_person_day: dbipDate.day,
-                    date_became_interested_person_month: dbipDate.month,
-                    date_became_interested_person_year: dbipDate.year
-                }
-            })
-        }
-    });
+    return (trusts || []).map(trust => mapToTrust(trust));
+}
+
+/**
+* Convert the TrustToReview Data Resource format coming from the API to WEB TrustToReview
+* @param  trusts Array of TrustToReviewResource objects
+* @returns Array of TrustToReview objects
+*/
+const mapTrustsToReviewResource = (trusts: TrustToReviewResource[] = []): TrustToReview[] => {
+    return (trusts || []).map(trust => mapToTrustToReview(trust));
+}
+
+const mapToTrust = (trust: TrustResource): Trust => {
+    const creationDate = mapIsoDate(trust.creation_date);
+
+    return {
+        trust_id: trust.trust_id,
+        trust_name: trust.trust_name,
+        creation_date_day: creationDate.day,
+        creation_date_month: creationDate.month,
+        creation_date_year: creationDate.year,
+        unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
+        // Convert the Trust Individuals Resource Data into the format that the WEB expects
+        INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
+            const { date_of_birth, date_became_interested_person, ...rest } = trustInd;
+            const dobDate = mapIsoDate(date_of_birth);
+            const dbipDate = mapIsoDate(date_became_interested_person);
+            return {
+                ...rest,
+                dob_day: dobDate.day,
+                dob_month: dobDate.month,
+                dob_year: dobDate.year,
+                date_became_interested_person_day: dbipDate.day,
+                date_became_interested_person_month: dbipDate.month,
+                date_became_interested_person_year: dbipDate.year
+            }
+        }),
+        // Convert the Trust Historical BO Resource Data into the format that the WEB expects
+        HISTORICAL_BO: (trust.HISTORICAL_BO || []).map(trustHist => {
+            const { notified_date, ceased_date, ...rest } = trustHist;
+            const notifiedDate = mapIsoDate(notified_date);
+            const ceasedDate = mapIsoDate(ceased_date);
+            return {
+                ...rest,
+                notified_date_day: notifiedDate.day,
+                notified_date_month: notifiedDate.month,
+                notified_date_year: notifiedDate.year,
+                ceased_date_day: ceasedDate.day,
+                ceased_date_month: ceasedDate.month,
+                ceased_date_year: ceasedDate.year
+            }
+        }),
+        // Convert the Trust Corporates Resource Data into the format that the WEB expects
+        CORPORATES: (trust.CORPORATE || []).map(trustCorp => {
+            const { date_became_interested_person, ...rest } = trustCorp;
+            const dbipDate = mapIsoDate(date_became_interested_person);
+            return {
+                ...rest,
+                date_became_interested_person_day: dbipDate.day,
+                date_became_interested_person_month: dbipDate.month,
+                date_became_interested_person_year: dbipDate.year
+            }
+        })
+    }
+}
+
+const mapToTrustToReview = (trust: TrustToReviewResource): TrustToReview => {
+    return {
+        ...mapToTrust(trust),
+        review_status: trust.review_status
+    };
 }
 
 /**
@@ -302,17 +323,36 @@ const mapOverseasEntityDueDiligence = (oeDueDiligence: OverseasEntityDueDiligenc
  * @returns Array of TrustResource
  */
 const mapTrusts = (trusts: Trust[] = []): TrustResource[] => {
-    return trusts.map(trust => {
-        const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
-        return {
-            ...rest,
-            creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
-            INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
-            HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
-            CORPORATE: mapTrustCorporates(CORPORATES),
-            unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info === "Yes")
-        }
-    });
+    return trusts.map(trust => mapTrust(trust));
+}
+
+/**
+ * Convert the TrustToReview Data into the Resource format which the API expects
+ * (just converting dates currently)
+ * @param trusts Array of TrustToReview objects
+ * @returns Array of TrustToReviewResource
+ */
+const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[] => {
+    return trusts.map(trust => mapTrustToReview(trust));
+}
+
+const mapTrust = (trust: Trust): TrustResource => {
+    const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
+    return {
+        ...rest,
+        creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
+        INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
+        HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
+        CORPORATE: mapTrustCorporates(CORPORATES),
+        unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info === "Yes")
+    };
+}
+
+const mapTrustToReview = (trust: TrustToReview): TrustToReviewResource => {
+    return {
+        ...mapTrust(trust),
+        review_status: trust.review_status
+    };
 }
 
 /**
@@ -396,7 +436,7 @@ const mapUpdate = (update: Update): UpdateResource => {
             resource.review_managing_officers_corporate = managing_officers_corporate;
         }
         if (update.review_trusts) {
-            const review_trusts = mapTrusts(update.review_trusts);
+            const review_trusts = mapTrustsToReview(update.review_trusts);
             if (review_trusts.length !== 0) {
                 resource.review_trusts = review_trusts;
             }
@@ -437,7 +477,7 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             update.review_managing_officers_corporate = managing_officers_corporate;
         }
         if (updateResource.review_trusts) {
-            const review_trusts = mapTrustsResource(updateResource.review_trusts);
+            const review_trusts = mapTrustsToReviewResource(updateResource.review_trusts);
             if (review_trusts.length !== 0) {
                 update.review_trusts = review_trusts;
             }

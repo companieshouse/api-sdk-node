@@ -35,7 +35,9 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateDataResource
+    BeneficialOwnerPrivateDataResource,
+    TrustToReviewResource,
+    TrustToReview
 } from "../../../src/services/overseas-entities";
 import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
@@ -418,6 +420,24 @@ export const TRUSTS_MOCK: Trust[] = [{
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
 }]
 
+export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
+    trust_id: "1234",
+    trust_name: "review_trust_name",
+    creation_date_day: "2",
+    creation_date_month: "1",
+    creation_date_year: "2023",
+    unable_to_obtain_all_trust_info: "No",
+    INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
+    CORPORATES: TRUST_CORPORATES_MOCK,
+    HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK,
+    review_status: {
+        in_review: true,
+        reviewed_former_bos: false,
+        reviewed_individuals: false,
+        reviewed_legal_entities: false
+    }
+}]
+
 export const UPDATE_OBJECT_MOCK: Update = {
     date_of_creation: { day: "1", month: "12", year: "2021" },
     filing_date: { day: "1", month: "2", year: "2023" },
@@ -425,7 +445,7 @@ export const UPDATE_OBJECT_MOCK: Update = {
     registrable_beneficial_owner: yesNoResponse.No,
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
-    review_trusts: TRUSTS_MOCK
+    review_trusts: REVIEW_TRUSTS_MOCK
 }
 
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
@@ -526,14 +546,12 @@ export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerR
     notified_date: "1985-11-13",
     ceased_date: "1986-12-14",
     corporate_indicator: false
-
 },
 {
     notified_date: "1985-11-13",
     ceased_date: "1986-12-14",
     corporate_indicator: true,
     corporate_name: "corp_former_bo"
-
 }]
 
 export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
@@ -546,6 +564,22 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK
 }]
 
+export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
+    trust_id: "1234",
+    trust_name: "review_trust_name",
+    creation_date: "2023-01-02",
+    unable_to_obtain_all_trust_info: false,
+    INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
+    CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
+    HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK,
+    review_status: {
+        in_review: true,
+        reviewed_former_bos: false,
+        reviewed_individuals: false,
+        reviewed_legal_entities: false
+    }
+}]
+
 export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     date_of_creation: "2021-12-01",
     filing_date: "2023-02-01",
@@ -553,7 +587,7 @@ export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     registrable_beneficial_owner: yesNoResponse.No,
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
-    review_trusts: TRUSTS_RESOURCE_MOCK
+    review_trusts: REVIEW_TRUSTS_RESOURCE_MOCK
 }
 
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
