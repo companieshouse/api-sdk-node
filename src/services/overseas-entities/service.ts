@@ -7,7 +7,8 @@ import {
     BeneficialOwnerPrivateData,
     BeneficialOwnerPrivateDataResource,
     ManagingOfficerPrivateData,
-    ManagingOfficerPrivateDataResource
+    ManagingOfficerPrivateDataResource,
+    TrustData
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
@@ -137,6 +138,32 @@ export default class OverseasEntityService {
         const resource: Resource<ManagingOfficerPrivateData[]> = {
             httpStatusCode: response.status,
             resource: Mapping.camelCaseKeys<ManagingOfficerPrivateData[]>(response.body as ManagingOfficerPrivateDataResource[])
+        };
+
+        return resource;
+    }
+
+    /**
+     *  Get trust data for an overseas entity
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     * @param trustId of the trust   
+     * @returns trust data for an overseas entity
+     */
+    public async getTrustData (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<TrustData[]> | ApiErrorResponse> {
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trust/${trustId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<TrustData[]> = {
+            httpStatusCode: response.status,
+            resource: response.body as TrustData[]
         };
 
         return resource;
