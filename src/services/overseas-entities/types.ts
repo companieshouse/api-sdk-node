@@ -301,7 +301,7 @@ export interface Update {
     review_managing_officers_individual?: ManagingOfficerIndividual[];
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
-    review_trusts?: Trust[];
+    review_trusts?: TrustToReview[];
 }
 
 export interface UpdateResource {
@@ -316,7 +316,7 @@ export interface UpdateResource {
     review_managing_officers_individual?: ManagingOfficerIndividualResource[];
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trust_data_fetched?: boolean;
-    review_trusts?: TrustResource[];
+    review_trusts?: TrustToReviewResource[];
 }
 
 export interface ManagingOfficerCorporateResource {
@@ -379,7 +379,7 @@ export interface PrivateAddress {
     region?: string;
 }
 
-export interface Trust{
+export interface Trust {
     trust_id: string;
     trust_name: string;
     creation_date_day: string;
@@ -399,6 +399,21 @@ export interface TrustResource {
     INDIVIDUAL?: TrustIndividualResource[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwnerResource[];
     CORPORATE?: TrustCorporateResource[];
+}
+
+export interface TrustReviewStatus {
+    in_review: boolean;
+    reviewed_former_bos: boolean;
+    reviewed_individuals: boolean;
+    reviewed_legal_entities: boolean;
+}
+
+export interface TrustToReview extends Trust {
+    review_status?: TrustReviewStatus;
+}
+
+export interface TrustToReviewResource extends TrustResource {
+    review_status?: TrustReviewStatus;
 }
 
 export interface TrustIndividual {
