@@ -35,7 +35,8 @@ import {
     Update,
     UpdateResource,
     OverseasEntityExtraDetails,
-    BeneficialOwnerPrivateDataResource
+    BeneficialOwnerPrivateDataResource,
+    TrustLinkData
 } from "../../../src/services/overseas-entities";
 import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
@@ -622,4 +623,9 @@ export const PRIVATE_TRUST_DATA_MOCK = [{
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     unable_to_obtain_all_trust_info: false
+}];
+
+export const TRUST_LINKS_MOCK = [{
+    trust_id: "123",
+    corporate_body_appointment_id: "456"
 }];

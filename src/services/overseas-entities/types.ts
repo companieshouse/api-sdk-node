@@ -571,6 +571,16 @@ export interface TrustDataResource {
     unable_to_obtain_all_trust_info: boolean;
 }
 
+export interface TrustLinkData {
+    trust_id: string;
+    corporate_body_appointment_id: string;
+}
+
+export interface TrustLinkDataResource {
+    trust_id: string;
+    corporate_body_appointment_id: string;
+}
+
 /**
  * Shared Data Type
  */
