@@ -9,11 +9,11 @@ import {
     OverseasEntityExtraDetails,
     OverseasEntityService,
     BeneficialOwnerPrivateData,
-    ManagingOfficerPrivateData
+    ManagingOfficerPrivateData,
+    TrustData
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
-import Mapping from "../../../src/mapping/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -568,6 +568,48 @@ describe("Mapping OverseasEntity Tests suite", () => {
             const data = await oeService.getManagingOfficersPrivateData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getTrustsPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.PRIVATE_TRUST_DATA_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUST_DATA_ID_MOCK
+            )) as Resource<TrustData[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUST_DATA_MOCK);
+        });
+
+        // test for 400 error
+        it("should return error 400 (Bad Request) for getTrustsPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUST_DATA_ID_MOCK
             ) as ApiErrorResponse;
 
             expect(data.httpStatusCode).to.equal(400);

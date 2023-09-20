@@ -8,7 +8,8 @@ import {
     BeneficialOwnerPrivateDataResource,
     ManagingOfficerPrivateData,
     ManagingOfficerPrivateDataResource,
-    TrustData
+    TrustData,
+    TrustDataResource
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
@@ -147,8 +148,8 @@ export default class OverseasEntityService {
      *  Get trust data for an overseas entity
      * @param transactionId of the entity
      * @param overseasEntityId of the entity
-     * @param trustId of the trust   
-     * @returns trust data for an overseas entity
+     * @param trustId of the trust
+     * @returns an array of trusts for an overseas entity
      */
     public async getTrustData (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<TrustData[]> | ApiErrorResponse> {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trust/${trustId}`;
@@ -163,7 +164,7 @@ export default class OverseasEntityService {
 
         const resource: Resource<TrustData[]> = {
             httpStatusCode: response.status,
-            resource: response.body as TrustData[]
+            resource: response.body as TrustDataResource[] as TrustData[]
         };
 
         return resource;

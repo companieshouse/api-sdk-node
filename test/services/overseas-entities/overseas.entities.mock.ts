@@ -614,3 +614,12 @@ export const mockBeneficialOwnerPrivateDataResponse = {
 export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
     200: { status: 200, body: undefined }
 };
+
+export const PRIVATE_TRUST_DATA_ID_MOCK = "123";
+
+export const PRIVATE_TRUST_DATA_MOCK = [{
+    trust_id: PRIVATE_TRUST_DATA_ID_MOCK,
+    trust_name: "trust_name",
+    creation_date: "2020-02-20",
+    unable_to_obtain_all_trust_info: false
+}];
