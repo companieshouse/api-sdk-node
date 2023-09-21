@@ -159,17 +159,19 @@ class default_1 {
      * @return AddressResource addressResource
      */
     mapToAddressDto(address) {
-        return {
-            address_line_1: address.addressLine1,
-            address_line_2: address.addressLine2,
-            care_of: address.careOf,
-            country: address.country,
-            locality: address.locality,
-            po_box: address.poBox,
-            postal_code: address.postalCode,
-            premises: address.premises,
-            region: address.region
-        };
+        if (address !== null) {
+            return {
+                address_line_1: address.addressLine1,
+                address_line_2: address.addressLine2,
+                care_of: address.careOf,
+                country: address.country,
+                locality: address.locality,
+                po_box: address.poBox,
+                postal_code: address.postalCode,
+                premises: address.premises,
+                region: address.region
+            };
+        }
     }
     /**
      * Map a FilingResponseDto in its json data model to a regular FilingResponse object
