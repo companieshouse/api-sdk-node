@@ -19,11 +19,11 @@ export interface CompanyOfficerResource {
     resigned_on?: string;
 }
 export interface AddressResource {
-    address_line_1: string;
+    address_line_1?: string;
     address_line_2?: string;
     care_of?: string;
-    country: string;
-    locality: string;
+    country?: string;
+    locality?: string;
     po_box?: string;
     postal_code?: string;
     premises?: string;
@@ -87,11 +87,11 @@ export interface CompanyOfficer {
     resignedOn?: string;
 }
 export interface Address {
-    addressLine1: string;
-    addressLine2: string;
+    addressLine1?: string;
+    addressLine2?: string;
     careOf?: string;
-    country: string;
-    locality: string;
+    country?: string;
+    locality?: string;
     poBox?: string;
     postalCode?: string;
     premises?: string;
