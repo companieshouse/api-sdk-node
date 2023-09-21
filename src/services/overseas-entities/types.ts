@@ -336,7 +336,6 @@ export interface ManagingOfficerCorporateResource {
 }
 
 export interface ManagingOfficerPrivateDataResource {
-    managingOfficerAppointmentId?: string;
     residential_address?: PrivateAddressResource;
     principal_address?: PrivateAddressResource;
     date_of_birth?: string;
@@ -346,7 +345,6 @@ export interface ManagingOfficerPrivateDataResource {
 }
 
 export interface ManagingOfficerPrivateData {
-    managingOfficerAppointmentId?: string;
     residentialAddress?: PrivateAddress;
     principalAddress?: PrivateAddress;
     dateOfBirth?: string;
@@ -558,10 +556,10 @@ export interface TrustCorporateResource {
  */
 
 export interface TrustData {
-    trust_id: string;
-    trust_name: string;
-    creation_date: string;
-    unable_to_obtain_all_trust_info: boolean;
+    trustId: string;
+    trustName: string;
+    creationDate: string;
+    unableToObtainAllTrustInfo: boolean;
 }
 
 export interface TrustDataResource {
@@ -572,8 +570,8 @@ export interface TrustDataResource {
 }
 
 export interface TrustLinkData {
-    trust_id: string;
-    corporate_body_appointment_id: string;
+    trustId: string;
+    corporateBodyAppointmentId: string;
 }
 
 export interface TrustLinkDataResource {

@@ -619,13 +619,25 @@ export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
 export const PRIVATE_TRUST_DATA_ID_MOCK = "123";
 
 export const PRIVATE_TRUST_DATA_MOCK = [{
+    trustId: PRIVATE_TRUST_DATA_ID_MOCK,
+    trustName: "trust_name",
+    creationDate: "2020-02-20",
+    unableToObtainAllTrustInfo: false
+}];
+
+export const TRUST_LINKS_MOCK = [{
+    trustId: "123",
+    corporateBodyAppointmentId: "456"
+}];
+
+export const PRIVATE_TRUST_DATA_RESOURCE_MOCK = [{
     trust_id: PRIVATE_TRUST_DATA_ID_MOCK,
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     unable_to_obtain_all_trust_info: false
 }];
 
-export const TRUST_LINKS_MOCK = [{
+export const TRUST_LINKS_RESOURCE_MOCK = [{
     trust_id: "123",
     corporate_body_appointment_id: "456"
 }];

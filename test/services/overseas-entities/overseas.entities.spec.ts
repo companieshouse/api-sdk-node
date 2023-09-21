@@ -585,7 +585,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: mockValues.PRIVATE_TRUST_DATA_MOCK
+                body: mockValues.PRIVATE_TRUST_DATA_RESOURCE_MOCK
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
@@ -627,7 +627,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getTrustLinksPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: mockValues.TRUST_LINKS_MOCK
+                body: mockValues.TRUST_LINKS_RESOURCE_MOCK
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);

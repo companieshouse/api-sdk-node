@@ -166,7 +166,7 @@ export default class OverseasEntityService {
 
         const resource: Resource<TrustData[]> = {
             httpStatusCode: response.status,
-            resource: response.body as TrustDataResource[] as TrustData[]
+            resource: Mapping.camelCaseKeys<TrustData[]>(response.body as TrustDataResource[])
         };
 
         return resource;
@@ -191,7 +191,7 @@ export default class OverseasEntityService {
 
         const resource: Resource<TrustLinkData[]> = {
             httpStatusCode: response.status,
-            resource: response.body as TrustLinkDataResource[] as TrustLinkData[]
+            resource: Mapping.camelCaseKeys<TrustLinkData[]>(response.body as TrustLinkDataResource[])
         };
 
         return resource;
