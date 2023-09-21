@@ -159,7 +159,7 @@ class default_1 {
      * @return AddressResource addressResource
      */
     mapToAddressDto(address) {
-        if (address !== null) {
+        if (address !== null && address !== undefined) {
             return {
                 address_line_1: address.addressLine1,
                 address_line_2: address.addressLine2,
