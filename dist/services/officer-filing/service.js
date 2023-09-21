@@ -168,7 +168,7 @@ class default_1 {
             po_box: address.poBox,
             postal_code: address.postalCode,
             premises: address.premises,
-            region: address.region,
+            region: address.region
         };
     }
     /**
