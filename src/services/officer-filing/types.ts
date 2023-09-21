@@ -100,7 +100,7 @@ export interface CompanyOfficer {
 
 export interface Address {
     addressLine1: string;
-    addressLine2: string;
+    addressLine2?: string;
     careOf?: string;
     country: string;
     locality: string;
@@ -185,6 +185,7 @@ export interface OfficerFiling {
     nationality3?: string;
     nationality2Link?: string;
     nationality3Link?: string;
+    residentialAddress?: Address;
 }
 
 export interface OfficerFilingDto {
@@ -205,4 +206,5 @@ export interface OfficerFilingDto {
     nationality3?: string;
     nationality2_link?: string;
     nationality3_link?: string;
+    residential_address?: AddressResource;
 }
