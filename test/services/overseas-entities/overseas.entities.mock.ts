@@ -616,13 +616,20 @@ export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
     200: { status: 200, body: undefined }
 };
 
-export const PRIVATE_TRUST_DATA_ID_MOCK = "123";
+export const PRIVATE_TRUSTS_DATA_ID_MOCK = "123";
 
-export const PRIVATE_TRUST_DATA_MOCK = [{
-    trustId: PRIVATE_TRUST_DATA_ID_MOCK,
+export const PRIVATE_TRUSTS_DATA_MOCK = [{
+    trustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
     trustName: "trust_name",
     creationDate: "2020-02-20",
     unableToObtainAllTrustInfo: false
+}];
+
+export const PRIVATE_TRUSTS_DATA_RESOURCE_MOCK = [{
+    trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    trust_name: "trust_name",
+    creation_date: "2020-02-20",
+    unable_to_obtain_all_trust_info: false
 }];
 
 export const TRUST_LINKS_MOCK = [{
@@ -630,14 +637,61 @@ export const TRUST_LINKS_MOCK = [{
     corporateBodyAppointmentId: "456"
 }];
 
-export const PRIVATE_TRUST_DATA_RESOURCE_MOCK = [{
-    trust_id: PRIVATE_TRUST_DATA_ID_MOCK,
-    trust_name: "trust_name",
-    creation_date: "2020-02-20",
-    unable_to_obtain_all_trust_info: false
-}];
-
 export const TRUST_LINKS_RESOURCE_MOCK = [{
     trust_id: "123",
     corporate_body_appointment_id: "456"
+}];
+
+export const INDIVIDUAL_TRUSTEES_DATA_MOCK = [{
+    trusteeId: "123",
+    trusteeForename1: "joe",
+    trusteeForename2: "jim",
+    trusteeSurname: "bloggs",
+    dateOfBirth: "2003-03-31",
+    nationality: "German",
+    corporateIndicator: "N",
+    trusteeTypeId: "50002",
+    appointmentDate: "2020-02-20",
+    ceasedDate: "2020-02-20"
+}];
+
+export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
+    trustee_id: "123",
+    trustee_forename_1: "joe",
+    trustee_forename_2: "jim",
+    trustee_surname: "bloggs",
+    date_of_birth: "2003-03-31",
+    nationality: "German",
+    corporate_indicator: "N",
+    trustee_type_id: "50002",
+    appointment_date: "2020-02-20",
+    ceased_date: "2020-02-20"
+}];
+
+export const CORPORATE_TRUSTEES_DATA_MOCK = [{
+    trusteeId: "123",
+    trusteeName: "trust_name",
+    registerLocation: "register_location",
+    registrationNumber: "registration_number",
+    lawGoverned: "law_governed",
+    legalForm: "legal_form",
+    onRegisterInCountryFormedIn: "Y",
+    corporateIndicator: "Y",
+    trusteeTypeId: "50002",
+    appointmentDate: "2020-02-20",
+    ceasedDate: "2020-02-20"
+}];
+
+export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
+    trustee_id: "123",
+    trustee_name: "trust_name",
+    register_location: "register_location",
+    registration_number: "registration_number",
+    law_governed: "law_governed",
+    legal_form: "legal_form",
+    on_register_in_country_formed_in: "Y",
+    corporate_indicator: "Y",
+    trustee_type_id: "50002",
+    appointment_date: "2020-02-20",
+    ceased_date: "2020-02-20"
 }];

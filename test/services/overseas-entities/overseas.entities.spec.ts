@@ -11,7 +11,9 @@ import {
     BeneficialOwnerPrivateData,
     ManagingOfficerPrivateData,
     TrustData,
-    TrustLinkData
+    TrustLinkData,
+    IndividualTrusteeDataResource,
+    CorporateTrusteeDataResource
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
@@ -585,18 +587,18 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
-                body: mockValues.PRIVATE_TRUST_DATA_RESOURCE_MOCK
+                body: mockValues.PRIVATE_TRUSTS_DATA_RESOURCE_MOCK
             });
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getTrustData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID,
-                mockValues.PRIVATE_TRUST_DATA_ID_MOCK
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
             )) as Resource<TrustData[]>;
 
             expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUST_DATA_MOCK);
+            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_DATA_MOCK);
         });
 
         // test for 400 error
@@ -610,7 +612,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             const data = await oeService.getTrustData(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID,
-                mockValues.PRIVATE_TRUST_DATA_ID_MOCK
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
             ) as ApiErrorResponse;
 
             expect(data.httpStatusCode).to.equal(400);
@@ -650,6 +652,88 @@ describe("Mapping OverseasEntity Tests suite", () => {
             const data = await oeService.getTrustLinks(
                 mockValues.TRANSACTION_ID,
                 mockValues.OVERSEAS_ENTITY_ID
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getIndividualTrusteesPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getIndividualTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getIndividualTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            )) as Resource<IndividualTrusteeDataResource[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.INDIVIDUAL_TRUSTEES_DATA_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getIndividualTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getIndividualTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getCorporateTrusteesPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getCorporateTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getCorporateTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            )) as Resource<CorporateTrusteeDataResource[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.CORPORATE_TRUSTEES_DATA_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getCorporateTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getCorporateTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
             ) as ApiErrorResponse;
 
             expect(data.httpStatusCode).to.equal(400);

@@ -579,6 +579,62 @@ export interface TrustLinkDataResource {
     corporate_body_appointment_id: string;
 }
 
+export interface IndividualTrusteeData {
+    trustId: string;
+    trusteeForename1: string;
+    trusteeForename2: string;
+    trusteeSurname: string;
+    dateOfBirth: string;
+    nationality: string;
+    corporateIndicator: string;
+    trusteeTypeId: string;
+    appointmentData: string;
+    ceasedDate: string;
+}
+
+export interface IndividualTrusteeDataResource {
+    trustee_id: string;
+    trustee_forename_1: string;
+    trustee_forename_2: string;
+    trustee_surname: string;
+    date_of_birth: string;
+    nationality: string;
+    corporate_indicator: string;
+    trustee_type_id: string;
+    appointment_data: string;
+    ceased_date: string;
+}
+
+export interface CorporateTrusteeData {
+    trusteeId: string;
+    trusteeName: string;
+    registerLocation: string;
+    registrationNumber: string;
+    lawGoverned: string;
+    legalForm: string;
+    country: string;
+    onRegisterInCountryFormed: string;
+    corporateIndicator: string;
+    trusteeTypeId: string;
+    appointmentData: string;
+    ceasedDate: string;
+}
+
+export interface CorporateTrusteeDataResource {
+    trustee_id: string;
+    trustee_name: string;
+    register_location: string;
+    registration_number: string;
+    law_governed: string;
+    legal_form: string;
+    country: string;
+    on_register_in_country_formed: string;
+    corporate_indicator: string;
+    trustee_type_id: string;
+    appointment_data: string;
+    ceased_date: string;
+}
+
 /**
  * Shared Data Type
  */

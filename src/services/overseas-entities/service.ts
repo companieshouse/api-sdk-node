@@ -11,7 +11,11 @@ import {
     TrustData,
     TrustDataResource,
     TrustLinkData,
-    TrustLinkDataResource
+    TrustLinkDataResource,
+    IndividualTrusteeData,
+    IndividualTrusteeDataResource,
+    CorporateTrusteeData,
+    CorporateTrusteeDataResource
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 import { mapOverseasEntity, mapOverseasEntityExtraDetails, mapOverseasEntityResource } from "./mapping";
@@ -192,6 +196,58 @@ export default class OverseasEntityService {
         const resource: Resource<TrustLinkData[]> = {
             httpStatusCode: response.status,
             resource: Mapping.camelCaseKeys<TrustLinkData[]>(response.body as TrustLinkDataResource[])
+        };
+
+        return resource;
+    }
+
+    /**
+     * Get the individual trustees for a trust
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     * @param trustId of the trust
+     * @returns an array of individual trustees for a trust
+    */
+    public async getIndividualTrustees (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<IndividualTrusteeData[]> | ApiErrorResponse> {
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/individual-trustees`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<IndividualTrusteeData[]> = {
+            httpStatusCode: response.status,
+            resource: Mapping.camelCaseKeys<IndividualTrusteeData[]>(response.body as IndividualTrusteeDataResource[])
+        };
+
+        return resource;
+    }
+
+    /**
+     * Get the corporate trustees for a trust
+     * @param transactionId of the entity
+     * @param overseasEntityId of the entity
+     * @param trustId of the trust
+     * @returns an array of corporate trustees for a trust
+     */
+    public async getCorporateTrustees (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<CorporateTrusteeData[]> | ApiErrorResponse> {
+        const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/corporate-trustees`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<CorporateTrusteeData[]> = {
+            httpStatusCode: response.status,
+            resource: Mapping.camelCaseKeys<CorporateTrusteeData[]>(response.body as CorporateTrusteeDataResource[])
         };
 
         return resource;
