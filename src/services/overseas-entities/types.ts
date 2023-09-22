@@ -590,6 +590,8 @@ export interface IndividualTrusteeData {
     trusteeTypeId: string;
     appointmentData: string;
     ceasedDate: string;
+    serviceAddress: PrivateAddress;
+    usualResidentialAddress: PrivateAddress;
 }
 
 export interface IndividualTrusteeDataResource {
@@ -603,6 +605,8 @@ export interface IndividualTrusteeDataResource {
     trustee_type_id: string;
     appointment_data: string;
     ceased_date: string;
+    service_address: PrivateAddressResource;
+    usual_residential_address: PrivateAddressResource;
 }
 
 export interface CorporateTrusteeData {
@@ -618,6 +622,8 @@ export interface CorporateTrusteeData {
     trusteeTypeId: string;
     appointmentData: string;
     ceasedDate: string;
+    serviceAddress: PrivateAddress;
+    registeredOfficeAddress: PrivateAddress;
 }
 
 export interface CorporateTrusteeDataResource {
@@ -633,6 +639,8 @@ export interface CorporateTrusteeDataResource {
     trustee_type_id: string;
     appointment_data: string;
     ceased_date: string;
+    service_address: PrivateAddressResource;
+    registered_office_address: PrivateAddressResource;
 }
 
 /**

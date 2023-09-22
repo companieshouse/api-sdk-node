@@ -652,7 +652,29 @@ export const INDIVIDUAL_TRUSTEES_DATA_MOCK = [{
     corporateIndicator: "N",
     trusteeTypeId: "50002",
     appointmentDate: "2020-02-20",
-    ceasedDate: "2020-02-20"
+    ceasedDate: "2020-02-20",
+    serviceAddress: {
+        addressLine1: "sa_addressline1",
+        addressLine2: "sa_addressline2",
+        careOf: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        poBox: "sa_pobox",
+        postalCode: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    usualResidentialAddress: {
+        addressLine1: "ura_addressline1",
+        addressLine2: "ura_addressline2",
+        careOf: "ura_careof",
+        country: "ura_country",
+        locality: "ura_locality",
+        poBox: "ura_pobox",
+        postalCode: "ura_postcode",
+        premises: "ura_premises",
+        region: "ura_region"
+    }
 }];
 
 export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
@@ -665,7 +687,29 @@ export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
     corporate_indicator: "N",
     trustee_type_id: "50002",
     appointment_date: "2020-02-20",
-    ceased_date: "2020-02-20"
+    ceased_date: "2020-02-20",
+    service_address: {
+        address_line_1: "sa_addressline1",
+        address_line_2: "sa_addressline2",
+        care_of: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        po_box: "sa_pobox",
+        postal_code: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    usual_residential_address: {
+        address_line_1: "ura_addressline1",
+        address_line_2: "ura_addressline2",
+        care_of: "ura_careof",
+        country: "ura_country",
+        locality: "ura_locality",
+        po_box: "ura_pobox",
+        postal_code: "ura_postcode",
+        premises: "ura_premises",
+        region: "ura_region"
+    }
 }];
 
 export const CORPORATE_TRUSTEES_DATA_MOCK = [{
@@ -679,7 +723,29 @@ export const CORPORATE_TRUSTEES_DATA_MOCK = [{
     corporateIndicator: "Y",
     trusteeTypeId: "50002",
     appointmentDate: "2020-02-20",
-    ceasedDate: "2020-02-20"
+    ceasedDate: "2020-02-20",
+    serviceAddress: {
+        addressLine1: "sa_addressline1",
+        addressLine2: "sa_addressline2",
+        careOf: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        poBox: "sa_pobox",
+        postalCode: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    registeredOfficeAddress: {
+        addressLine1: "ro_addressline1",
+        addressLine2: "ro_addressline2",
+        careOf: "ro_careof",
+        country: "ro_country",
+        locality: "ro_locality",
+        poBox: "ro_pobox",
+        postalCode: "ro_postcode",
+        premises: "ro_premises",
+        region: "ro_region"
+    }
 }];
 
 export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
@@ -693,5 +759,27 @@ export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
     corporate_indicator: "Y",
     trustee_type_id: "50002",
     appointment_date: "2020-02-20",
-    ceased_date: "2020-02-20"
+    ceased_date: "2020-02-20",
+    service_address: {
+        address_line_1: "sa_addressline1",
+        address_line_2: "sa_addressline2",
+        care_of: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        po_box: "sa_pobox",
+        postal_code: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    registered_office_address: {
+        address_line_1: "ro_addressline1",
+        address_line_2: "ro_addressline2",
+        care_of: "ro_careof",
+        country: "ro_country",
+        locality: "ro_locality",
+        po_box: "ro_pobox",
+        postal_code: "ro_postcode",
+        premises: "ro_premises",
+        region: "ro_region"
+    }
 }];
