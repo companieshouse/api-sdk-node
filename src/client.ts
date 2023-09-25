@@ -30,6 +30,7 @@ import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
 import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
+import { PostcodeLookupService } from "services/postcode-lookup";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -64,6 +65,7 @@ export default class ApiClient {
   public readonly registeredEmailAddressService: RegisteredEmailAddressService;
   public readonly overseasEntity: OverseasEntityService;
   public readonly officerFiling: OfficerFilingService;
+  public readonly postCodeLookup: PostcodeLookupService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -97,5 +99,6 @@ export default class ApiClient {
       this.pscDiscrepancyReport = new PSCDiscrepanciesReportService(apiClient);
       this.transaction = new TransactionService(apiClient);
       this.registeredEmailAddressService = new RegisteredEmailAddressService(apiClient);
+      this.postCodeLookup = new PostcodeLookupService(apiClient);
   }
 }

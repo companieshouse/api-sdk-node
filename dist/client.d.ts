@@ -23,6 +23,7 @@ import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
 import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
+import { PostcodeLookupService } from "services/postcode-lookup";
 /**
  * ApiClient is the class that all service objects hang off.
  */
@@ -58,5 +59,6 @@ export default class ApiClient {
     readonly registeredEmailAddressService: RegisteredEmailAddressService;
     readonly overseasEntity: OverseasEntityService;
     readonly officerFiling: OfficerFilingService;
+    readonly postCodeLookup: PostcodeLookupService;
     constructor(apiClient: IHttpClient, accountClient: IHttpClient);
 }
