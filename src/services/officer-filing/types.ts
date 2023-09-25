@@ -21,11 +21,11 @@ export interface CompanyOfficerResource {
 }
 
 export interface AddressResource {
-    address_line_1: string;
+    address_line_1?: string;
     address_line_2?: string;
     care_of?: string;
-    country: string;
-    locality: string;
+    country?: string;
+    locality?: string;
     po_box?: string;
     postal_code?: string;
     premises?: string;
@@ -99,11 +99,11 @@ export interface CompanyOfficer {
 }
 
 export interface Address {
-    addressLine1: string;
-    addressLine2: string;
+    addressLine1?: string;
+    addressLine2?: string;
     careOf?: string;
-    country: string;
-    locality: string;
+    country?: string;
+    locality?: string;
     poBox?: string;
     postalCode?: string;
     premises?: string;
@@ -177,6 +177,7 @@ export interface OfficerFiling {
     title?: string;
     formerNames?: string;
     occupation?: string;
+    residentialAddress?: Address;
     dateOfBirth?: string;
     nationality1?: string;
     nationality2?: string;
@@ -197,6 +198,7 @@ export interface OfficerFilingDto {
     title?: string;
     former_names?: string;
     occupation?: string;
+    residential_address?: AddressResource;
     date_of_birth?: string;
     nationality1?: string;
     nationality2?: string;
