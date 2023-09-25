@@ -155,10 +155,12 @@ export interface ValidationStatusResponse {
  */
 export interface FilingResponse {
     id: string;
+    data: OfficerFiling;
 }
 
 export interface FilingResponseDto {
     id: string;
+    data: OfficerFilingDto;
 }
 
 /**

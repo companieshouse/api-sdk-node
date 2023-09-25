@@ -168,7 +168,8 @@ export default class {
      */
     private populateResource (resource: Resource<FilingResponse>, body: FilingResponseDto) {
         resource.resource = {
-            id: body.id
+            id: body.id,
+            data: this.mapToDto(body.data)
         };
     }
 
