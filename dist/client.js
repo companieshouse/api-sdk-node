@@ -26,7 +26,7 @@ const service_14 = __importDefault(require("./services/order/order-item/service"
 const service_15 = __importDefault(require("./services/order/checkout-item/service"));
 const service_16 = __importDefault(require("./services/officer-filing/service"));
 const service_17 = __importDefault(require("./services/registered-email-address/service"));
-const postcode_lookup_1 = require("services/postcode-lookup");
+const service_18 = __importDefault(require("./services/postcode-lookup/service"));
 /**
  * ApiClient is the class that all service objects hang off.
  */
@@ -65,7 +65,7 @@ class ApiClient {
         this.pscDiscrepancyReport = new service_10.default(apiClient);
         this.transaction = new service_11.default(apiClient);
         this.registeredEmailAddressService = new service_17.default(apiClient);
-        this.postCodeLookup = new postcode_lookup_1.PostcodeLookupService(apiClient);
+        this.postCodeLookup = new service_18.default(apiClient);
     }
 }
 exports.default = ApiClient;

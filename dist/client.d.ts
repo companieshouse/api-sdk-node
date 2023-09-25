@@ -23,7 +23,7 @@ import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
 import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
-import { PostcodeLookupService } from "services/postcode-lookup";
+import PostcodeLookupService from "./services/postcode-lookup/service";
 /**
  * ApiClient is the class that all service objects hang off.
  */
