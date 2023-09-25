@@ -31,6 +31,10 @@ export default class {
      */
     private mapToDto;
     /**
+     * Map an OfficerFilingDto to an OfficerFiling object
+     */
+    private mapFromDto;
+    /**
      * Map a FilingResponseDto in its json data model to a regular FilingResponse object
      * @param resource Where the FilingResponse fields will be set
      * @param body The FilingResponseDto json data model that will be mapped
