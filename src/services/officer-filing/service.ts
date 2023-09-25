@@ -162,13 +162,39 @@ export default class {
     }
 
     /**
+     * Map an OfficerFilingDto to an OfficerFiling object
+     */
+    private mapFromDto (officerFilingDto: OfficerFilingDto): OfficerFiling {
+        return {
+            referenceAppointmentId: officerFilingDto.reference_appointment_id,
+            referenceEtag: officerFilingDto.reference_etag,
+            resignedOn: officerFilingDto.resigned_on,
+            appointedOn: officerFilingDto.appointed_on,
+            name: officerFilingDto.name,
+            firstName: officerFilingDto.first_name,
+            middleNames: officerFilingDto.middle_names,
+            lastName: officerFilingDto.last_name,
+            title: officerFilingDto.title,
+            formerNames: officerFilingDto.former_names,
+            occupation: officerFilingDto.occupation,
+            dateOfBirth: officerFilingDto.date_of_birth,
+            nationality1: officerFilingDto.nationality1,
+            nationality2: officerFilingDto.nationality2,
+            nationality3: officerFilingDto.nationality3,
+            nationality2Link: officerFilingDto.nationality2_link,
+            nationality3Link: officerFilingDto.nationality3_link
+        }
+    }
+
+    /**
      * Map a FilingResponseDto in its json data model to a regular FilingResponse object
      * @param resource Where the FilingResponse fields will be set
      * @param body The FilingResponseDto json data model that will be mapped
      */
     private populateResource (resource: Resource<FilingResponse>, body: FilingResponseDto) {
         resource.resource = {
-            id: body.id
+            id: body.id,
+            data: this.mapFromDto(body.data)
         };
     }
 
