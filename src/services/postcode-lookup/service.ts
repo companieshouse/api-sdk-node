@@ -7,7 +7,8 @@ export default class PostcodeLookupService {
     constructor (private readonly client: IHttpClient) { }
 
     public async getListOfValidPostcodeAddresses (postcode: string): Promise<Resource<UKAddresses[]>> {
-        const url = `${this.getPostcodeLookupUrl()}/multiple-addresses/${postcode}`;
+        const url = `${this.getPostcodeLookupUrl()}multiple-addresses/${postcode}`;
+        console.log(`url is ${url}`);
         return this.getPostcodeLookupResponse(url);
     }
 

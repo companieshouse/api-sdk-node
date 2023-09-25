@@ -19,7 +19,8 @@ class PostcodeLookupService {
     }
     getListOfValidPostcodeAddresses(postcode) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.getPostcodeLookupUrl()}/multiple-addresses/${postcode}`;
+            const url = `${this.getPostcodeLookupUrl()}multiple-addresses/${postcode}`;
+            console.log(`url is ${url}`);
             return this.getPostcodeLookupResponse(url);
         });
     }
