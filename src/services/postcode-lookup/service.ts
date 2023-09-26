@@ -6,7 +6,7 @@ import Mapping from "../../mapping/mapping";
 export default class PostcodeLookupService {
     constructor (private readonly client: IHttpClient) { }
 
-    public async isValidUKPostcode (postcode: string): Promise<Resource<UKAddresses>> {
+    public async isValidUKPostcode (postcode: string): Promise<boolean> {
         const url = `${this.getPostcodeLookupUrl()}/postcode/${postcode}`;
         console.log(`url is ${url}`);
         return this.getValidatePostcodeLookupResponse(url);
@@ -38,19 +38,8 @@ export default class PostcodeLookupService {
         return resource;
     }
 
-    private async getValidatePostcodeLookupResponse (url: string): Promise<Resource<UKAddresses>> {
+    private async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
         const resp: HttpResponse = await this.client.httpGet(url);
-
-        if (resp.status >= 400) {
-            return { httpStatusCode: resp.status, resource: null };
-        }
-
-        const resource: Resource<UKAddresses> = { httpStatusCode: resp.status, resource: null };
-
-        const body = resp.body as UKAddresses;
-
-        resource.resource = Mapping.camelCaseKeys<UKAddresses>(body)
-
-        return resource;
+        return resp.status === 200;
     }
 }

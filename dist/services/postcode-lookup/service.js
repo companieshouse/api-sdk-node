@@ -49,13 +49,7 @@ class PostcodeLookupService {
     getValidatePostcodeLookupResponse(url) {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet(url);
-            if (resp.status >= 400) {
-                return { httpStatusCode: resp.status, resource: null };
-            }
-            const resource = { httpStatusCode: resp.status, resource: null };
-            const body = resp.body;
-            resource.resource = mapping_1.default.camelCaseKeys(body);
-            return resource;
+            return resp.status === 200;
         });
     }
 }
