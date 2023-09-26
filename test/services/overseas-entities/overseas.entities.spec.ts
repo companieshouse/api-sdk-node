@@ -593,8 +593,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getTrustData(
                 mockValues.TRANSACTION_ID,
-                mockValues.OVERSEAS_ENTITY_ID,
-                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+                mockValues.OVERSEAS_ENTITY_ID
             )) as Resource<TrustData[]>;
 
             expect(data.httpStatusCode).to.equal(200);
@@ -611,8 +610,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.getTrustData(
                 mockValues.TRANSACTION_ID,
-                mockValues.OVERSEAS_ENTITY_ID,
-                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+                mockValues.OVERSEAS_ENTITY_ID
             ) as ApiErrorResponse;
 
             expect(data.httpStatusCode).to.equal(400);

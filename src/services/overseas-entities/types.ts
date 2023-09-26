@@ -582,65 +582,65 @@ export interface TrustLinkDataResource {
 export interface IndividualTrusteeData {
     trustId: string;
     trusteeForename1: string;
-    trusteeForename2: string;
+    trusteeForename2?: string;
     trusteeSurname: string;
-    dateOfBirth: string;
-    nationality: string;
+    dateOfBirth?: string;
+    nationality?: string;
     corporateIndicator: string;
     trusteeTypeId: string;
-    appointmentData: string;
-    ceasedDate: string;
-    serviceAddress: PrivateAddress;
-    usualResidentialAddress: PrivateAddress;
+    appointmentDate: string;
+    ceasedDate?: string;
+    serviceAddress?: PrivateAddress;
+    usualResidentialAddress?: PrivateAddress;
 }
 
 export interface IndividualTrusteeDataResource {
     trustee_id: string;
     trustee_forename_1: string;
-    trustee_forename_2: string;
+    trustee_forename_2?: string;
     trustee_surname: string;
-    date_of_birth: string;
-    nationality: string;
+    date_of_birth?: string;
+    nationality?: string;
     corporate_indicator: string;
     trustee_type_id: string;
-    appointment_data: string;
-    ceased_date: string;
-    service_address: PrivateAddressResource;
-    usual_residential_address: PrivateAddressResource;
+    appointment_date: string;
+    ceased_date?: string;
+    service_address?: PrivateAddressResource;
+    usual_residential_address?: PrivateAddressResource;
 }
 
 export interface CorporateTrusteeData {
     trusteeId: string;
     trusteeName: string;
-    registerLocation: string;
-    registrationNumber: string;
-    lawGoverned: string;
-    legalForm: string;
-    country: string;
-    onRegisterInCountryFormed: string;
+    registerLocation?: string;
+    registrationNumber?: string;
+    lawGoverned?: string;
+    legalForm?: string;
+    country?: string;
+    onRegisterInCountryFormed?: string;
     corporateIndicator: string;
     trusteeTypeId: string;
-    appointmentData: string;
-    ceasedDate: string;
-    serviceAddress: PrivateAddress;
-    registeredOfficeAddress: PrivateAddress;
+    appointmentDate: string;
+    ceasedDate?: string;
+    serviceAddress?: PrivateAddress;
+    registeredOfficeAddress?: PrivateAddress;
 }
 
 export interface CorporateTrusteeDataResource {
     trustee_id: string;
     trustee_name: string;
-    register_location: string;
-    registration_number: string;
-    law_governed: string;
-    legal_form: string;
-    country: string;
-    on_register_in_country_formed: string;
+    register_location?: string;
+    registration_number?: string;
+    law_governed?: string;
+    legal_form?: string;
+    country?: string;
+    on_register_in_country_formed?: string;
     corporate_indicator: string;
     trustee_type_id: string;
-    appointment_data: string;
-    ceased_date: string;
-    service_address: PrivateAddressResource;
-    registered_office_address: PrivateAddressResource;
+    appointment_date: string;
+    ceased_date?: string;
+    service_address?: PrivateAddressResource;
+    registered_office_address?: PrivateAddressResource;
 }
 
 /**
