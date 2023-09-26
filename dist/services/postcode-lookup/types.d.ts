@@ -4,5 +4,5 @@ export interface UKAddresses {
     addressLine1: string;
     addressLine2?: string;
     postTown: string;
-    county: string;
+    country: string;
 }
