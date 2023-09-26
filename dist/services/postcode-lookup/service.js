@@ -17,17 +17,36 @@ class PostcodeLookupService {
     constructor(client) {
         this.client = client;
     }
+    isValidUKPostcode(postcode) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `${this.getPostcodeLookupUrl()}/postcode/${postcode}`;
+            console.log(`url is ${url}`);
+            return this.getValidatePostcodeLookupResponse(url);
+        });
+    }
     getListOfValidPostcodeAddresses(postcode) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.getPostcodeLookupUrl()}multiple-addresses/${postcode}`;
+            const url = `${this.getPostcodeLookupUrl()}/multiple-addresses/${postcode}`;
             console.log(`url is ${url}`);
             return this.getPostcodeLookupResponse(url);
         });
     }
     getPostcodeLookupUrl() {
-        return `http://postcode.cidev.aws.chdev.org/`;
+        return `http://postcode.cidev.aws.chdev.org`;
     }
     getPostcodeLookupResponse(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = yield this.client.httpGet(url);
+            if (resp.status >= 400) {
+                return { httpStatusCode: resp.status, resource: null };
+            }
+            const resource = { httpStatusCode: resp.status, resource: null };
+            const body = resp.body;
+            resource.resource = mapping_1.default.camelCaseKeys(body);
+            return resource;
+        });
+    }
+    getValidatePostcodeLookupResponse(url) {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet(url);
             if (resp.status >= 400) {
