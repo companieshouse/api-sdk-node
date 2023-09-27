@@ -2,9 +2,10 @@ import {HttpResponse, IHttpClient} from "../../http";
 import Resource from "../resource";
 import {UKAddresses} from "./types";
 import Mapping from "../../mapping/mapping";
+import Util from "../psc-discrepancies-report/util"
 
 export default class PostcodeLookupService {
-    constructor (private readonly client: IHttpClient) { }
+    constructor (readonly client: IHttpClient) {  }
 
     public async isValidUKPostcode (postcode: string): Promise<boolean> {
         const url = `${this.getPostcodeLookupUrl()}/postcode/${postcode}`;
@@ -18,7 +19,7 @@ export default class PostcodeLookupService {
         return this.getPostcodeLookupResponse(url);
     }
 
-    private getPostcodeLookupUrl () {
+    public getPostcodeLookupUrl () {
         return `http://postcode.cidev.aws.chdev.org`;
     }
 
@@ -38,8 +39,11 @@ export default class PostcodeLookupService {
         return resource;
     }
 
-    private async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
+    async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
+        debugger;
         const resp: HttpResponse = await this.client.httpGet(url);
+        debugger;
+        console.log(resp.status);
         return resp.status === 200;
     }
 }

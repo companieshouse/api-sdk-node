@@ -73,6 +73,9 @@ export default class RequestClient extends AbstractClient {
     }
 
     private formatUrl (baseUrl: string, uri: string) {
+        if (baseUrl === "URL_NOT_USED") {
+            return uri;
+        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
         }
