@@ -44,7 +44,7 @@ export default interface IHttpClient {
      *
      * @param url the url relative to the base url
      */
-    httpGet(url: string, headers?: Headers, formatUrl?: boolean): Promise<HttpResponse>;
+    httpGet(url: string, headers?: Headers): Promise<HttpResponse>;
     httpPost(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
@@ -79,7 +79,7 @@ export declare abstract class AbstractClient implements IHttpClient {
      *
      * @param url the full url to make a request to
      */
-    abstract httpGet(url: string, headers?: Headers, formatUrl?: boolean): Promise<HttpResponse>;
+    abstract httpGet(url: string, headers?: Headers): Promise<HttpResponse>;
     abstract httpPost(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     abstract httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     abstract httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;

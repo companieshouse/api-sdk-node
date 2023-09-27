@@ -19,9 +19,9 @@ const axios_1 = __importDefault(require("axios"));
  * library.
  */
 class RequestClient extends http_client_1.AbstractClient {
-    httpGet(url, headers, formatUri) {
+    httpGet(url, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.request({ method: "GET", url, headers }, formatUri);
+            return this.request({ method: "GET", url, headers });
         });
     }
     httpPost(url, body, headers) {
