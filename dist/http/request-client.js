@@ -90,14 +90,17 @@ class RequestClient extends http_client_1.AbstractClient {
     }
     formatUrl(baseUrl, uri) {
         if (baseUrl === "URL_NOT_USED") {
+            console.log(`returning url : ${uri}`);
             return uri;
         }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
         }
         if (uri === "/") {
+            console.log(`returning baseUrl : ${baseUrl}`);
             return baseUrl;
         }
+        console.log(`returning baseUrluri : ${baseUrl}${uri}`);
         return `${baseUrl}${uri}`;
     }
 }

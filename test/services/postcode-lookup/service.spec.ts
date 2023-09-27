@@ -34,16 +34,9 @@ describe("PostcodeLookupService", () => {
     // });
 
     describe("custom code to GET call", () => {
-        it("should return true if the postcode is valid 2", async () => {
-            const url = `http://10.75.117.189/postcode/CF30AD`;
-            const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
-            const data: boolean = await postcodeLookupService.getValidatePostcodeLookupResponse(url);
-
-            console.log(`resp1 is ${data}`);
-        });
 
         it("should return true if the postcode is valid 2", async () => {
-            const url = `http://postcode.cidev.aws.chdev.org/postcode/CF30AD`;
+            const url = `http://postcode.cidev.aws.chdev.org/postcode/ST63LJ`;
             const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
             const data: boolean = await postcodeLookupService.getValidatePostcodeLookupResponse(url);
 

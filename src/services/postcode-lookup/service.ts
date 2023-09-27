@@ -5,7 +5,7 @@ import Mapping from "../../mapping/mapping";
 import Util from "../psc-discrepancies-report/util"
 
 export default class PostcodeLookupService {
-    constructor (readonly client: IHttpClient) {  }
+    constructor (readonly client: IHttpClient) { }
 
     public async isValidUKPostcode (postcode: string): Promise<boolean> {
         const url = `${this.getPostcodeLookupUrl()}/postcode/${postcode}`;
