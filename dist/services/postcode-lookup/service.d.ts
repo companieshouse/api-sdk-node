@@ -2,11 +2,11 @@ import { IHttpClient } from "../../http";
 import Resource from "../resource";
 import { UKAddresses } from "./types";
 export default class PostcodeLookupService {
-    private readonly client;
+    readonly client: IHttpClient;
     constructor(client: IHttpClient);
     isValidUKPostcode(postcode: string): Promise<boolean>;
     getListOfValidPostcodeAddresses(postcode: string): Promise<Resource<UKAddresses[]>>;
-    private getPostcodeLookupUrl;
+    getPostcodeLookupUrl(): string;
     private getPostcodeLookupResponse;
-    private getValidatePostcodeLookupResponse;
+    getValidatePostcodeLookupResponse(url: string): Promise<boolean>;
 }

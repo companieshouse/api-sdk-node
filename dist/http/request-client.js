@@ -89,6 +89,9 @@ class RequestClient extends http_client_1.AbstractClient {
         });
     }
     formatUrl(baseUrl, uri) {
+        if (baseUrl === "URL_NOT_USED") {
+            return uri;
+        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
         }

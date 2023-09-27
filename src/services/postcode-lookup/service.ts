@@ -40,9 +40,8 @@ export default class PostcodeLookupService {
     }
 
     async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
-        debugger;
+        console.log(`url in api sdk node is ${url}`);
         const resp: HttpResponse = await this.client.httpGet(url);
-        debugger;
         console.log(resp.status);
         return resp.status === 200;
     }

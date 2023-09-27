@@ -48,7 +48,9 @@ class PostcodeLookupService {
     }
     getValidatePostcodeLookupResponse(url) {
         return __awaiter(this, void 0, void 0, function* () {
+            console.log(`url in api sdk node is ${url}`);
             const resp = yield this.client.httpGet(url);
+            console.log(resp.status);
             return resp.status === 200;
         });
     }
