@@ -6,8 +6,8 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
  * library.
  */
 export default class RequestClient extends AbstractClient {
-    public async httpGet (url: string, headers?: Headers): Promise<HttpResponse> {
-        return this.request({ method: "GET", url, headers });
+    public async httpGet (url: string, headers?: Headers, formatUri?: boolean): Promise<HttpResponse> {
+        return this.request({ method: "GET", url, headers }, formatUri);
     }
 
     public async httpPost (url: string, body?: any, headers?: Headers): Promise<HttpResponse> {
@@ -26,7 +26,8 @@ export default class RequestClient extends AbstractClient {
         return this.request({ method: "DELETE", url });
     }
 
-    private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
+    private async request (additionalOptions: AdditionalOptions, formatUrl?: boolean): Promise<HttpResponse> {
+        const url = formatUrl ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
         const headers = {
             ...this.headers,
             ...additionalOptions.headers
@@ -43,7 +44,7 @@ export default class RequestClient extends AbstractClient {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: headers,
-                url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
+                url: url,
                 responseType: "json",
                 validateStatus: status => {
                     return status < 500; // Resolve only if the status code is less than 500

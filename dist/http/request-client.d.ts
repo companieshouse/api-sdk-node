@@ -4,7 +4,7 @@ import { AbstractClient, HttpResponse, Headers } from "./http-client";
  * library.
  */
 export default class RequestClient extends AbstractClient {
-    httpGet(url: string, headers?: Headers): Promise<HttpResponse>;
+    httpGet(url: string, headers?: Headers, formatUri?: boolean): Promise<HttpResponse>;
     httpPost(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpPatch(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;
     httpPut(url: string, body?: any, headers?: Headers): Promise<HttpResponse>;

@@ -19,9 +19,9 @@ const axios_1 = __importDefault(require("axios"));
  * library.
  */
 class RequestClient extends http_client_1.AbstractClient {
-    httpGet(url, headers) {
+    httpGet(url, headers, formatUri) {
         return __awaiter(this, void 0, void 0, function* () {
-            return this.request({ method: "GET", url, headers });
+            return this.request({ method: "GET", url, headers }, formatUri);
         });
     }
     httpPost(url, body, headers) {
@@ -44,9 +44,10 @@ class RequestClient extends http_client_1.AbstractClient {
             return this.request({ method: "DELETE", url });
         });
     }
-    request(additionalOptions) {
+    request(additionalOptions, formatUrl) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            const url = formatUrl ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
             const headers = Object.assign(Object.assign({}, this.headers), additionalOptions.headers);
             // Default values for these headers if not provided in additional headers.
             if (!headers.accept && !headers.Accept) {
@@ -59,7 +60,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 const options = {
                     method: additionalOptions.method,
                     headers: headers,
-                    url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
+                    url: url,
                     responseType: "json",
                     validateStatus: status => {
                         return status < 500; // Resolve only if the status code is less than 500
