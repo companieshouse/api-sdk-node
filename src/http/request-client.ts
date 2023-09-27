@@ -27,7 +27,8 @@ export default class RequestClient extends AbstractClient {
     }
 
     private async request (additionalOptions: AdditionalOptions, formatUrl?: boolean): Promise<HttpResponse> {
-        const url = formatUrl ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
+        const url = formatUrl === true ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
+        console.log(`url in api sdk node before calling: ${url}`)
         const headers = {
             ...this.headers,
             ...additionalOptions.headers
@@ -74,10 +75,6 @@ export default class RequestClient extends AbstractClient {
     }
 
     private formatUrl (baseUrl: string, uri: string) {
-        if (baseUrl === "URL_NOT_USED") {
-            console.log(`returning url : ${uri}`);
-            return uri;
-        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
         }

@@ -47,7 +47,8 @@ class RequestClient extends http_client_1.AbstractClient {
     request(additionalOptions, formatUrl) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const url = formatUrl ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
+            const url = formatUrl === true ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
+            console.log(`url in api sdk node before calling: ${url}`);
             const headers = Object.assign(Object.assign({}, this.headers), additionalOptions.headers);
             // Default values for these headers if not provided in additional headers.
             if (!headers.accept && !headers.Accept) {
@@ -90,10 +91,6 @@ class RequestClient extends http_client_1.AbstractClient {
         });
     }
     formatUrl(baseUrl, uri) {
-        if (baseUrl === "URL_NOT_USED") {
-            console.log(`returning url : ${uri}`);
-            return uri;
-        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             uri = `/${uri}`;
         }
