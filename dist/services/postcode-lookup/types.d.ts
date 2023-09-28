@@ -1,6 +1,6 @@
 export interface UKAddresses {
     postcode: string;
-    premises: string;
+    premise: string;
     addressLine1: string;
     addressLine2?: string;
     postTown: string;
