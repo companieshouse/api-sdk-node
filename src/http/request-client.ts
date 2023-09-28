@@ -73,6 +73,9 @@ export default class RequestClient extends AbstractClient {
     }
 
     private formatUrl (baseUrl: string, uri: string) {
+        if (uri.startsWith("http")) {
+            return uri;
+        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             console.log(`returning uri : ${uri}`);
             uri = `/${uri}`;

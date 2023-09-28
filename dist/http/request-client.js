@@ -89,6 +89,9 @@ class RequestClient extends http_client_1.AbstractClient {
         });
     }
     formatUrl(baseUrl, uri) {
+        if (uri.startsWith("http")) {
+            return uri;
+        }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
             console.log(`returning uri : ${uri}`);
             uri = `/${uri}`;
