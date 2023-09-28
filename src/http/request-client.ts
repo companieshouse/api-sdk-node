@@ -77,14 +77,11 @@ export default class RequestClient extends AbstractClient {
             return uri;
         }
         if (uri.length > 0 && uri.charAt(0) !== "/") {
-            console.log(`returning uri : ${uri}`);
             uri = `/${uri}`;
         }
         if (uri === "/") {
-            console.log(`returning baseUrl : ${baseUrl}`);
             return baseUrl;
         }
-        console.log(`returning baseUrluri : ${baseUrl}${uri}`);
         return `${baseUrl}${uri}`;
     }
 }
