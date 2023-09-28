@@ -1,4 +1,6 @@
 import {
+    Address,
+    AddressResource,
     CompanyOfficer,
     CompanyOfficerResource,
     FilingResponse,
@@ -157,7 +159,28 @@ export default class {
             nationality2: officerFiling.nationality2,
             nationality3: officerFiling.nationality3,
             nationality2_link: officerFiling.nationality2Link,
-            nationality3_link: officerFiling.nationality3Link
+            nationality3_link: officerFiling.nationality3Link,
+            residential_address: this.mapAddressToDto(officerFiling.residentialAddress)
+        }
+    }
+
+    /**
+     * Map an Address to AddressResource which represents the expected json data model
+     */
+    private mapAddressToDto (address: Address): AddressResource {
+        if (address === undefined) {
+            return undefined;
+        }
+        return {
+            address_line_1: address.addressLine1,
+            address_line_2: address.addressLine2,
+            care_of: address.careOf,
+            country: address.country,
+            locality: address.locality,
+            po_box: address.poBox,
+            postal_code: address.postalCode,
+            premises: address.premises,
+            region: address.region
         }
     }
 
@@ -182,7 +205,28 @@ export default class {
             nationality2: officerFilingDto.nationality2,
             nationality3: officerFilingDto.nationality3,
             nationality2Link: officerFilingDto.nationality2_link,
-            nationality3Link: officerFilingDto.nationality3_link
+            nationality3Link: officerFilingDto.nationality3_link,
+            residentialAddress: this.mapAddressFromDto(officerFilingDto.residential_address)
+        }
+    }
+
+    /**
+     * Map an AddressResource to an Address object
+     */
+    private mapAddressFromDto (addressDto: AddressResource): Address {
+        if (addressDto === undefined) {
+            return undefined;
+        }
+        return {
+            addressLine1: addressDto.address_line_1,
+            addressLine2: addressDto.address_line_2,
+            careOf: addressDto.care_of,
+            country: addressDto.country,
+            locality: addressDto.locality,
+            poBox: addressDto.po_box,
+            postalCode: addressDto.postal_code,
+            premises: addressDto.premises,
+            region: addressDto.region
         }
     }
 
