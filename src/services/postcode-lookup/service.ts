@@ -1,11 +1,10 @@
-import {HttpResponse, IHttpClient} from "../../http";
+import { HttpResponse, IHttpClient } from "../../http";
 import Resource from "../resource";
-import {UKAddresses} from "./types";
+import { UKAddresses } from "./types";
 import Mapping from "../../mapping/mapping";
 import Util from "../psc-discrepancies-report/util"
 
 export default class PostcodeLookupService {
-    utility: Util;
     constructor (readonly client: IHttpClient) { }
 
     public async isValidUKPostcode (postcodeValidationUrl: string, postcode: string): Promise<boolean> {
@@ -18,6 +17,11 @@ export default class PostcodeLookupService {
         return this.getPostcodeAddressesLookup(url);
     }
 
+    async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
+        const resp: HttpResponse = await this.client.httpGet(url);
+        return resp.status === 200;
+    }
+
     private async getPostcodeAddressesLookup (url: string): Promise<Resource<UKAddresses[]>> {
         const resp: HttpResponse = await this.client.httpGet(url);
         if (resp.status !== 200) {
@@ -27,10 +31,5 @@ export default class PostcodeLookupService {
         const body = resp.body as UKAddresses[];
         resource.resource = Mapping.camelCaseKeys<UKAddresses[]>(body)
         return resource;
-    }
-
-    async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
-        const resp: HttpResponse = await this.client.httpGet(url);
-        return resp.status === 200;
     }
 }

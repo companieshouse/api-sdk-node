@@ -29,6 +29,12 @@ class PostcodeLookupService {
             return this.getPostcodeAddressesLookup(url);
         });
     }
+    getValidatePostcodeLookupResponse(url) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resp = yield this.client.httpGet(url);
+            return resp.status === 200;
+        });
+    }
     getPostcodeAddressesLookup(url) {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet(url);
@@ -39,12 +45,6 @@ class PostcodeLookupService {
             const body = resp.body;
             resource.resource = mapping_1.default.camelCaseKeys(body);
             return resource;
-        });
-    }
-    getValidatePostcodeLookupResponse(url) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield this.client.httpGet(url);
-            return resp.status === 200;
         });
     }
 }
