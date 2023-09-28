@@ -26,9 +26,7 @@ export default class RequestClient extends AbstractClient {
         return this.request({ method: "DELETE", url });
     }
 
-    private async request (additionalOptions: AdditionalOptions, formatUrl?: boolean): Promise<HttpResponse> {
-        const url = formatUrl === true ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
-        console.log(`url in api sdk node before calling: ${url}`)
+    private async request (additionalOptions: AdditionalOptions): Promise<HttpResponse> {
         const headers = {
             ...this.headers,
             ...additionalOptions.headers
@@ -45,7 +43,7 @@ export default class RequestClient extends AbstractClient {
             const options: AxiosRequestConfig = {
                 method: additionalOptions.method,
                 headers: headers,
-                url: url,
+                url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                 responseType: "json",
                 validateStatus: status => {
                     return status < 500; // Resolve only if the status code is less than 500
@@ -76,6 +74,7 @@ export default class RequestClient extends AbstractClient {
 
     private formatUrl (baseUrl: string, uri: string) {
         if (uri.length > 0 && uri.charAt(0) !== "/") {
+            console.log(`returning uri : ${uri}`);
             uri = `/${uri}`;
         }
         if (uri === "/") {

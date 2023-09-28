@@ -44,11 +44,9 @@ class RequestClient extends http_client_1.AbstractClient {
             return this.request({ method: "DELETE", url });
         });
     }
-    request(additionalOptions, formatUrl) {
+    request(additionalOptions) {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
-            const url = formatUrl === true ? this.formatUrl(this.options.baseUrl, additionalOptions.url) : additionalOptions.url;
-            console.log(`url in api sdk node before calling: ${url}`);
             const headers = Object.assign(Object.assign({}, this.headers), additionalOptions.headers);
             // Default values for these headers if not provided in additional headers.
             if (!headers.accept && !headers.Accept) {
@@ -61,7 +59,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 const options = {
                     method: additionalOptions.method,
                     headers: headers,
-                    url: url,
+                    url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
                     responseType: "json",
                     validateStatus: status => {
                         return status < 500; // Resolve only if the status code is less than 500
@@ -92,6 +90,7 @@ class RequestClient extends http_client_1.AbstractClient {
     }
     formatUrl(baseUrl, uri) {
         if (uri.length > 0 && uri.charAt(0) !== "/") {
+            console.log(`returning uri : ${uri}`);
             uri = `/${uri}`;
         }
         if (uri === "/") {

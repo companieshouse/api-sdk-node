@@ -34,7 +34,6 @@ describe("PostcodeLookupService", () => {
     // });
 
     describe("custom code to GET call", () => {
-
         it("should return true if the postcode is valid 2", async () => {
             const url = `http://postcode.cidev.aws.chdev.org/postcode/ST63LJ`;
             const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
