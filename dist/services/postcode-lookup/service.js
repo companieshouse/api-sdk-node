@@ -17,28 +17,23 @@ class PostcodeLookupService {
     constructor(client) {
         this.client = client;
     }
-    isValidUKPostcode(postcode) {
+    isValidUKPostcode(postcodeValidationUrl, postcode) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.getPostcodeLookupUrl()}/postcode/${postcode}`;
-            console.log(`url is ${url}`);
+            const url = `${postcodeValidationUrl}/${postcode}`;
             return this.getValidatePostcodeLookupResponse(url);
         });
     }
-    getListOfValidPostcodeAddresses(postcode) {
+    getListOfValidPostcodeAddresses(postcodeAddressesLookupUrl, postcode) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `${this.getPostcodeLookupUrl()}/multiple-addresses/${postcode}`;
-            console.log(`url is ${url}`);
-            return this.getPostcodeLookupResponse(url);
+            const url = `${postcodeAddressesLookupUrl}/${postcode}`;
+            return this.getPostcodeAddressesLookup(url);
         });
     }
-    getPostcodeLookupUrl() {
-        return `http://postcode.cidev.aws.chdev.org`;
-    }
-    getPostcodeLookupResponse(url) {
+    getPostcodeAddressesLookup(url) {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet(url);
-            if (resp.status >= 400) {
-                return { httpStatusCode: resp.status, resource: null };
+            if (resp.status !== 200) {
+                return { httpStatusCode: resp.status, resource: {} };
             }
             const resource = { httpStatusCode: resp.status, resource: null };
             const body = resp.body;
@@ -48,9 +43,7 @@ class PostcodeLookupService {
     }
     getValidatePostcodeLookupResponse(url) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log(`url in api sdk node is ${url}`);
             const resp = yield this.client.httpGet(url);
-            console.log(resp.status);
             return resp.status === 200;
         });
     }
