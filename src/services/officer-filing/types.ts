@@ -155,10 +155,12 @@ export interface ValidationStatusResponse {
  */
 export interface FilingResponse {
     id: string;
+    data: OfficerFiling;
 }
 
 export interface FilingResponseDto {
     id: string;
+    data: OfficerFilingDto;
 }
 
 /**
@@ -177,13 +179,13 @@ export interface OfficerFiling {
     title?: string;
     formerNames?: string;
     occupation?: string;
-    residentialAddress?: Address;
     dateOfBirth?: string;
     nationality1?: string;
     nationality2?: string;
     nationality3?: string;
     nationality2Link?: string;
     nationality3Link?: string;
+    residentialAddress?: Address;
 }
 
 export interface OfficerFilingDto {
@@ -198,11 +200,11 @@ export interface OfficerFilingDto {
     title?: string;
     former_names?: string;
     occupation?: string;
-    residential_address?: AddressResource;
     date_of_birth?: string;
     nationality1?: string;
     nationality2?: string;
     nationality3?: string;
     nationality2_link?: string;
     nationality3_link?: string;
+    residential_address?: AddressResource;
 }
