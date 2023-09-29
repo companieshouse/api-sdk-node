@@ -1,6 +1,6 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource from "../resource";
-import { UKAddresses } from "./types";
+import { UKAddress } from "./types";
 import Mapping from "../../mapping/mapping";
 import Util from "../psc-discrepancies-report/util"
 
@@ -12,7 +12,7 @@ export default class PostcodeLookupService {
         return this.getValidatePostcodeLookupResponse(url);
     }
 
-    public async getListOfValidPostcodeAddresses (postcodeAddressesLookupUrl: string, postcode: string): Promise<Resource<UKAddresses[]>> {
+    public async getListOfValidPostcodeAddresses (postcodeAddressesLookupUrl: string, postcode: string): Promise<Resource<UKAddress[]>> {
         const url = `${postcodeAddressesLookupUrl}/${postcode}`;
         return this.getPostcodeAddressesLookup(url);
     }
@@ -22,14 +22,14 @@ export default class PostcodeLookupService {
         return resp.status === 200;
     }
 
-    private async getPostcodeAddressesLookup (url: string): Promise<Resource<UKAddresses[]>> {
+    private async getPostcodeAddressesLookup (url: string): Promise<Resource<UKAddress[]>> {
         const resp: HttpResponse = await this.client.httpGet(url);
         if (resp.status !== 200) {
-            return { httpStatusCode: resp.status, resource: {} as UKAddresses[] };
+            return { httpStatusCode: resp.status, resource: {} as UKAddress[] };
         }
-        const resource: Resource<UKAddresses[]> = { httpStatusCode: resp.status, resource: null };
-        const body = resp.body as UKAddresses[];
-        resource.resource = Mapping.camelCaseKeys<UKAddresses[]>(body)
+        const resource: Resource<UKAddress[]> = { httpStatusCode: resp.status, resource: null };
+        const body = resp.body as UKAddress[];
+        resource.resource = Mapping.camelCaseKeys<UKAddress[]>(body)
         return resource;
     }
 }

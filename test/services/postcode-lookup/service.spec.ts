@@ -1,24 +1,24 @@
 import sinon from "sinon";
-import { PostcodeLookupService, UKAddresses } from "../../../src/services/postcode-lookup";
+import { PostcodeLookupService, UKAddress } from "../../../src/services/postcode-lookup";
 import { RequestClient } from "../../../src";
 import { expect } from "chai";
 
 const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "NOT USED" });
-const mockResponseBodyOfUKAddress1: UKAddresses = ({
+const mockResponseBodyOfUKAddress1: UKAddress = ({
     premise: "123",
     addressLine1: "123 Main St",
     postTown: "London",
     postcode: "SW1A 1AA",
     country: "GB-ENG"
 });
-const mockResponseBodyOfUKAddress2: UKAddresses = ({
+const mockResponseBodyOfUKAddress2: UKAddress = ({
     premise: "125",
     addressLine1: "123 Main St",
     postTown: "London",
     postcode: "SW1A 1AA",
     country: "GB-ENG"
 });
-const mockResponseBody: UKAddresses[] = [
+const mockResponseBody: UKAddress[] = [
     mockResponseBodyOfUKAddress1,
     mockResponseBodyOfUKAddress2
 ]

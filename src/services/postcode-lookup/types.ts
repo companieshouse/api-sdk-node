@@ -1,4 +1,4 @@
-export interface UKAddresses {
+export interface UKAddress {
     postcode: string,
     premise: string,
     addressLine1: string,
