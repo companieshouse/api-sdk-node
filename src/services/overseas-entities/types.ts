@@ -580,7 +580,7 @@ export interface TrustLinkDataResource {
 }
 
 export interface IndividualTrusteeData {
-    trustId: string;
+    trusteeId: string;
     trusteeForename1: string;
     trusteeForename2?: string;
     trusteeSurname: string;

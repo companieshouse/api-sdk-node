@@ -600,7 +600,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
             expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_DATA_MOCK);
         });
 
-        // test for 400 error
         it("should return error 400 (Bad Request) for getTrustsPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 400,
