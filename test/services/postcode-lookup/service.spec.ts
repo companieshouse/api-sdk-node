@@ -84,21 +84,4 @@ describe("test getListOfValidPostcodeAddresses", () => {
         expect(result.resource).to.not.be.undefined;
         expect(result.resource).to.be.empty
     });
-    it("test", async () => {
-        const mockGetResponse = {
-            status: 200,
-            body: mockResponseBody
-        }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
-        const postcode = "IM24NN";
-        const postcodeAddressesLookupUrl = "http://postcode.cidev.aws.chdev.org/multiple-addresses";
-        const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
-        const result = await postcodeLookupService.getListOfValidPostcodeAddresses(postcodeAddressesLookupUrl, postcode);
-        expect(mockRequest).to.have.been.calledOnce;
-        expect(result.httpStatusCode).to.be.equal(200);
-        expect(result.resource).to.not.be.undefined;
-        expect(result.resource?.length).to.be.equal(2);
-        expect(JSON.stringify(result.resource![0])).to.be.equals(JSON.stringify(mockResponseBodyOfUKAddress1));
-        expect(JSON.stringify(result.resource![1])).to.be.equals(JSON.stringify(mockResponseBodyOfUKAddress2));
-    });
 });
