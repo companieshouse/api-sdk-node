@@ -17,7 +17,7 @@ export default class PostcodeLookupService {
         return this.getPostcodeAddressesLookup(url);
     }
 
-    async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
+    private async getValidatePostcodeLookupResponse (url: string): Promise<boolean> {
         const resp: HttpResponse = await this.client.httpGet(url);
         return resp.status === 200;
     }
