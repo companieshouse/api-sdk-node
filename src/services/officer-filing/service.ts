@@ -154,6 +154,7 @@ export default class {
             title: officerFiling.title,
             former_names: officerFiling.formerNames,
             occupation: officerFiling.occupation,
+            residential_address: this.mapToAddressDto(officerFiling.residentialAddress),
             date_of_birth: officerFiling.dateOfBirth,
             nationality1: officerFiling.nationality1,
             nationality2: officerFiling.nationality2,
@@ -227,6 +228,27 @@ export default class {
             postalCode: addressDto.postal_code,
             premises: addressDto.premises,
             region: addressDto.region
+        }
+    }
+
+    /**
+     * Map the Address to AddressResource
+     * @param address as Address
+     * @return AddressResource addressResource
+     */
+    private mapToAddressDto (address: Address): AddressResource {
+        if (address !== null && address !== undefined) {
+            return {
+                address_line_1: address.addressLine1,
+                address_line_2: address.addressLine2,
+                care_of: address.careOf,
+                country: address.country,
+                locality: address.locality,
+                po_box: address.poBox,
+                postal_code: address.postalCode,
+                premises: address.premises,
+                region: address.region
+            }
         }
     }
 

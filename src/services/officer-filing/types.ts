@@ -179,6 +179,7 @@ export interface OfficerFiling {
     title?: string;
     formerNames?: string;
     occupation?: string;
+    residentialAddress?: Address;
     dateOfBirth?: string;
     nationality1?: string;
     nationality2?: string;
@@ -200,6 +201,7 @@ export interface OfficerFilingDto {
     title?: string;
     former_names?: string;
     occupation?: string;
+    residential_address?: AddressResource;
     date_of_birth?: string;
     nationality1?: string;
     nationality2?: string;
