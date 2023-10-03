@@ -284,4 +284,11 @@ describe("request-client", () => {
         const formattedUrl = clientPrototype.formatUrl(baseUrl, "");
         expect(formattedUrl).to.equal(`${baseUrl}`);
     });
+
+    it("returns url only when url starts with http", () => {
+        const clientPrototype = Object.getPrototypeOf(client);
+        const externalRestUrl = "http://external-rest-url"
+        const formattedUrl = clientPrototype.formatUrl(baseUrl, externalRestUrl);
+        expect(formattedUrl).to.equal(externalRestUrl);
+    });
 });
