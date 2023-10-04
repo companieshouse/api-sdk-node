@@ -100,7 +100,7 @@ export interface CompanyOfficer {
 
 export interface Address {
     addressLine1: string;
-    addressLine2: string;
+    addressLine2?: string;
     careOf?: string;
     country: string;
     locality: string;
@@ -155,10 +155,12 @@ export interface ValidationStatusResponse {
  */
 export interface FilingResponse {
     id: string;
+    data: OfficerFiling;
 }
 
 export interface FilingResponseDto {
     id: string;
+    data: OfficerFilingDto;
 }
 
 /**
@@ -178,6 +180,13 @@ export interface OfficerFiling {
     formerNames?: string;
     occupation?: string;
     dateOfBirth?: string;
+    nationality1?: string;
+    nationality2?: string;
+    nationality3?: string;
+    nationality2Link?: string;
+    nationality3Link?: string;
+    residentialAddress?: Address;
+    serviceAddress?: Address;
 }
 
 export interface OfficerFilingDto {
@@ -193,4 +202,11 @@ export interface OfficerFilingDto {
     former_names?: string;
     occupation?: string;
     date_of_birth?: string;
+    nationality1?: string;
+    nationality2?: string;
+    nationality3?: string;
+    nationality2_link?: string;
+    nationality3_link?: string;
+    residential_address?: AddressResource;
+    service_address?: AddressResource;
 }
