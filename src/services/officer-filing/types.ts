@@ -209,5 +209,6 @@ export interface OfficerFilingDto {
     nationality2_link?: string;
     nationality3_link?: string;
     residential_address?: AddressResource;
+    residentialAddressBackLink?: string;
     service_address?: AddressResource;
 }
