@@ -186,6 +186,7 @@ export interface OfficerFiling {
     nationality2Link?: string;
     nationality3Link?: string;
     residentialAddress?: Address;
+    residentialAddressBackLink?: string;
     serviceAddress?: Address;
 }
 
