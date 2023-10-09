@@ -571,31 +571,31 @@ export interface TrustCorporateResource {
  */
 
 export interface TrustData {
-    trustId: string;
+    hashedTrustId: string;
     trustName: string;
     creationDate: string;
     unableToObtainAllTrustInfo: boolean;
 }
 
 export interface TrustDataResource {
-    trust_id: string;
+    hashed_trust_id: string;
     trust_name: string;
     creation_date: string;
     unable_to_obtain_all_trust_info: boolean;
 }
 
 export interface TrustLinkData {
-    trustId: string;
-    corporateBodyAppointmentId: string;
+    hashedTrustId: string;
+    hashedCorporateBodyAppointmentId: string;
 }
 
 export interface TrustLinkDataResource {
-    trust_id: string;
-    corporate_body_appointment_id: string;
+    hashed_trust_id: string;
+    hashed_corporate_body_appointment_id: string;
 }
 
 export interface IndividualTrusteeData {
-    trusteeId: string;
+    hashedTrusteeId: string;
     trusteeForename1: string;
     trusteeForename2?: string;
     trusteeSurname: string;
@@ -610,7 +610,7 @@ export interface IndividualTrusteeData {
 }
 
 export interface IndividualTrusteeDataResource {
-    trustee_id: string;
+    hashed_trustee_id: string;
     trustee_forename_1: string;
     trustee_forename_2?: string;
     trustee_surname: string;
@@ -625,7 +625,7 @@ export interface IndividualTrusteeDataResource {
 }
 
 export interface CorporateTrusteeData {
-    trusteeId: string;
+    hashedTrusteeId: string;
     trusteeName: string;
     registerLocation?: string;
     registrationNumber?: string;
@@ -642,7 +642,7 @@ export interface CorporateTrusteeData {
 }
 
 export interface CorporateTrusteeDataResource {
-    trustee_id: string;
+    hashed_trustee_id: string;
     trustee_name: string;
     register_location?: string;
     registration_number?: string;

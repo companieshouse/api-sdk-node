@@ -653,31 +653,31 @@ export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
 export const PRIVATE_TRUSTS_DATA_ID_MOCK = "123";
 
 export const PRIVATE_TRUSTS_DATA_MOCK = [{
-    trustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    hashedTrustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
     trustName: "trust_name",
     creationDate: "2020-02-20",
     unableToObtainAllTrustInfo: false
 }];
 
 export const PRIVATE_TRUSTS_DATA_RESOURCE_MOCK = [{
-    trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    hashed_trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     unable_to_obtain_all_trust_info: false
 }];
 
 export const TRUST_LINKS_MOCK = [{
-    trustId: "123",
-    corporateBodyAppointmentId: "456"
+    hashedTrustId: "123",
+    hashedCorporateBodyAppointmentId: "456"
 }];
 
 export const TRUST_LINKS_RESOURCE_MOCK = [{
-    trust_id: "123",
-    corporate_body_appointment_id: "456"
+    hashed_trust_id: "123",
+    hashed_corporate_body_appointment_id: "456"
 }];
 
 export const INDIVIDUAL_TRUSTEES_DATA_MOCK = [{
-    trusteeId: "123",
+    hashedTrusteeId: "123",
     trusteeForename1: "joe",
     trusteeForename2: "jim",
     trusteeSurname: "bloggs",
@@ -712,7 +712,7 @@ export const INDIVIDUAL_TRUSTEES_DATA_MOCK = [{
 }];
 
 export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
-    trustee_id: "123",
+    hashed_trustee_id: "123",
     trustee_forename_1: "joe",
     trustee_forename_2: "jim",
     trustee_surname: "bloggs",
@@ -747,7 +747,7 @@ export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
 }];
 
 export const CORPORATE_TRUSTEES_DATA_MOCK = [{
-    trusteeId: "123",
+    hashedTrusteeId: "123",
     trusteeName: "trust_name",
     registerLocation: "register_location",
     registrationNumber: "registration_number",
@@ -783,7 +783,7 @@ export const CORPORATE_TRUSTEES_DATA_MOCK = [{
 }];
 
 export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
-    trustee_id: "123",
+    hashed_trustee_id: "123",
     trustee_name: "trust_name",
     register_location: "register_location",
     registration_number: "registration_number",
