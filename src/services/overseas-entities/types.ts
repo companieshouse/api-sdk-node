@@ -574,14 +574,16 @@ export interface TrustData {
     hashedTrustId: string;
     trustName: string;
     creationDate: string;
-    unableToObtainAllTrustInfo: boolean;
+    ceasedDate?: string;
+    unableToObtainAllTrustInfoIndicator: boolean;
 }
 
 export interface TrustDataResource {
     hashed_trust_id: string;
     trust_name: string;
     creation_date: string;
-    unable_to_obtain_all_trust_info: boolean;
+    ceased_date?: string;
+    unable_to_obtain_all_trust_info_indicator: boolean;
 }
 
 export interface TrustLinkData {
