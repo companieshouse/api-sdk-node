@@ -656,14 +656,16 @@ export const PRIVATE_TRUSTS_DATA_MOCK = [{
     hashedTrustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
     trustName: "trust_name",
     creationDate: "2020-02-20",
-    unableToObtainAllTrustInfo: false
+    ceasedDate: "2023-03-03",
+    unableToObtainAllTrustInfoIndicator: false
 }];
 
 export const PRIVATE_TRUSTS_DATA_RESOURCE_MOCK = [{
     hashed_trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
     trust_name: "trust_name",
     creation_date: "2020-02-20",
-    unable_to_obtain_all_trust_info: false
+    ceased_date: "2023-03-03",
+    unable_to_obtain_all_trust_info_indicator: false
 }];
 
 export const TRUST_LINKS_MOCK = [{

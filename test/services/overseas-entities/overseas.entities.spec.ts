@@ -13,10 +13,12 @@ import {
     TrustData,
     TrustLinkData,
     IndividualTrusteeDataResource,
-    CorporateTrusteeDataResource
+    CorporateTrusteeDataResource,
+    IndividualTrusteeData
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
+import Mapping from "../../../src/mapping/mapping";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -735,6 +737,42 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             expect(data.httpStatusCode).to.equal(400);
             expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+
+        it("should pass camel case though but convert snake case for trust retrieval", () => {
+            const response = [
+                {
+                    hashedTrusteeId: "123",
+                    trusteeForename1: "test",
+                    trusteeForename2: undefined,
+                    trustee_surname: "Smith",
+                    serviceAddress: {
+                        address_line_1: "line1",
+                        addressLine2: "line2"
+                    },
+                    usual_residential_address: {
+                        addressLine1: "lineA",
+                        address_line_2: "lineB"
+                    }
+                }
+            ];
+            const mappedResponse = Mapping.camelCaseKeys<IndividualTrusteeData[]>(response as unknown as IndividualTrusteeDataResource[]);
+            expect(mappedResponse).to.deep.equal([
+                {
+                    hashedTrusteeId: "123",
+                    trusteeForename1: "test",
+                    trusteeForename2: undefined,
+                    trusteeSurname: "Smith",
+                    serviceAddress: {
+                        addressLine1: "line1",
+                        addressLine2: "line2"
+                    },
+                    usualResidentialAddress: {
+                        addressLine1: "lineA",
+                        addressLine2: "lineB"
+                    }
+                }
+            ]);
         });
     });
 });
