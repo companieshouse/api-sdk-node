@@ -162,7 +162,8 @@ export default class {
             nationality3_link: officerFiling.nationality3Link,
             residential_address: this.mapAddressToDto(officerFiling.residentialAddress),
             residential_address_back_link: officerFiling.residentialAddressBackLink,
-            service_address: this.mapAddressToDto(officerFiling.serviceAddress)
+            service_address: this.mapAddressToDto(officerFiling.serviceAddress),
+            service_address_back_link: officerFiling.serviceAddressBackLink
         }
     }
 
@@ -210,7 +211,8 @@ export default class {
             nationality3Link: officerFilingDto.nationality3_link,
             residentialAddress: this.mapAddressFromDto(officerFilingDto.residential_address),
             residentialAddressBackLink: officerFilingDto.residential_address_back_link,
-            serviceAddress: this.mapAddressFromDto(officerFilingDto.service_address)
+            serviceAddress: this.mapAddressFromDto(officerFilingDto.service_address),
+            serviceAddressBackLink: officerFilingDto.service_address_back_link
         }
     }
 
