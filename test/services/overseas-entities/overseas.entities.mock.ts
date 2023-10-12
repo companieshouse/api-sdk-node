@@ -432,6 +432,7 @@ export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK,
     review_status: {
         in_review: true,
+        reviewed_trust_details: false,
         reviewed_former_bos: false,
         reviewed_individuals: false,
         reviewed_legal_entities: false
@@ -574,6 +575,7 @@ export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK,
     review_status: {
         in_review: true,
+        reviewed_trust_details: false,
         reviewed_former_bos: false,
         reviewed_individuals: false,
         reviewed_legal_entities: false
