@@ -403,6 +403,7 @@ export interface TrustResource {
 
 export interface TrustReviewStatus {
     in_review: boolean;
+    reviewed_trust_details: boolean;
     reviewed_former_bos: boolean;
     reviewed_individuals: boolean;
     reviewed_legal_entities: boolean;
