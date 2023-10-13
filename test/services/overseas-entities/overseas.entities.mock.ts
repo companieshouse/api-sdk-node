@@ -36,6 +36,7 @@ import {
     UpdateResource,
     OverseasEntityExtraDetails,
     BeneficialOwnerPrivateDataResource,
+    TrustLinkData,
     TrustToReviewResource,
     TrustToReview
 } from "../../../src/services/overseas-entities";
@@ -650,3 +651,173 @@ export const mockBeneficialOwnerPrivateDataResponse = {
 export const mockBeneficialOwnerPrivateDataUndefinedResponse = {
     200: { status: 200, body: undefined }
 };
+
+export const PRIVATE_TRUSTS_DATA_ID_MOCK = "123";
+
+export const PRIVATE_TRUSTS_DATA_MOCK = [{
+    hashedTrustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    trustName: "trust_name",
+    creationDate: "2020-02-20",
+    ceasedDate: "2023-03-03",
+    unableToObtainAllTrustInfoIndicator: false
+}];
+
+export const PRIVATE_TRUSTS_DATA_RESOURCE_MOCK = [{
+    hashed_trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    trust_name: "trust_name",
+    creation_date: "2020-02-20",
+    ceased_date: "2023-03-03",
+    unable_to_obtain_all_trust_info_indicator: false
+}];
+
+export const TRUST_LINKS_MOCK = [{
+    hashedTrustId: "123",
+    hashedCorporateBodyAppointmentId: "456"
+}];
+
+export const TRUST_LINKS_RESOURCE_MOCK = [{
+    hashed_trust_id: "123",
+    hashed_corporate_body_appointment_id: "456"
+}];
+
+export const INDIVIDUAL_TRUSTEES_DATA_MOCK = [{
+    hashedTrusteeId: "123",
+    trusteeForename1: "joe",
+    trusteeForename2: "jim",
+    trusteeSurname: "bloggs",
+    dateOfBirth: "2003-03-31",
+    nationality: "German",
+    corporateIndicator: "N",
+    trusteeTypeId: "50002",
+    appointmentDate: "2020-02-20",
+    ceasedDate: "2020-02-20",
+    serviceAddress: {
+        addressLine1: "sa_addressline1",
+        addressLine2: "sa_addressline2",
+        careOf: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        poBox: "sa_pobox",
+        postalCode: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    usualResidentialAddress: {
+        addressLine1: "ura_addressline1",
+        addressLine2: "ura_addressline2",
+        careOf: "ura_careof",
+        country: "ura_country",
+        locality: "ura_locality",
+        poBox: "ura_pobox",
+        postalCode: "ura_postcode",
+        premises: "ura_premises",
+        region: "ura_region"
+    }
+}];
+
+export const INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK = [{
+    hashed_trustee_id: "123",
+    trustee_forename_1: "joe",
+    trustee_forename_2: "jim",
+    trustee_surname: "bloggs",
+    date_of_birth: "2003-03-31",
+    nationality: "German",
+    corporate_indicator: "N",
+    trustee_type_id: "50002",
+    appointment_date: "2020-02-20",
+    ceased_date: "2020-02-20",
+    service_address: {
+        address_line_1: "sa_addressline1",
+        address_line_2: "sa_addressline2",
+        care_of: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        po_box: "sa_pobox",
+        postal_code: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    usual_residential_address: {
+        address_line_1: "ura_addressline1",
+        address_line_2: "ura_addressline2",
+        care_of: "ura_careof",
+        country: "ura_country",
+        locality: "ura_locality",
+        po_box: "ura_pobox",
+        postal_code: "ura_postcode",
+        premises: "ura_premises",
+        region: "ura_region"
+    }
+}];
+
+export const CORPORATE_TRUSTEES_DATA_MOCK = [{
+    hashedTrusteeId: "123",
+    trusteeName: "trust_name",
+    registerLocation: "register_location",
+    registrationNumber: "registration_number",
+    lawGoverned: "law_governed",
+    legalForm: "legal_form",
+    onRegisterInCountryFormedIn: "Y",
+    corporateIndicator: "Y",
+    trusteeTypeId: "50002",
+    appointmentDate: "2020-02-20",
+    ceasedDate: "2020-02-20",
+    serviceAddress: {
+        addressLine1: "sa_addressline1",
+        addressLine2: "sa_addressline2",
+        careOf: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        poBox: "sa_pobox",
+        postalCode: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    registeredOfficeAddress: {
+        addressLine1: "ro_addressline1",
+        addressLine2: "ro_addressline2",
+        careOf: "ro_careof",
+        country: "ro_country",
+        locality: "ro_locality",
+        poBox: "ro_pobox",
+        postalCode: "ro_postcode",
+        premises: "ro_premises",
+        region: "ro_region"
+    }
+}];
+
+export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
+    hashed_trustee_id: "123",
+    trustee_name: "trust_name",
+    register_location: "register_location",
+    registration_number: "registration_number",
+    law_governed: "law_governed",
+    legal_form: "legal_form",
+    on_register_in_country_formed_in: "Y",
+    corporate_indicator: "Y",
+    trustee_type_id: "50002",
+    appointment_date: "2020-02-20",
+    ceased_date: "2020-02-20",
+    service_address: {
+        address_line_1: "sa_addressline1",
+        address_line_2: "sa_addressline2",
+        care_of: "sa_careof",
+        country: "sa_country",
+        locality: "sa_locality",
+        po_box: "sa_pobox",
+        postal_code: "sa_postcode",
+        premises: "sa_premises",
+        region: "sa_region"
+    },
+    registered_office_address: {
+        address_line_1: "ro_addressline1",
+        address_line_2: "ro_addressline2",
+        care_of: "ro_careof",
+        country: "ro_country",
+        locality: "ro_locality",
+        po_box: "ro_pobox",
+        postal_code: "ro_postcode",
+        premises: "ro_premises",
+        region: "ro_region"
+    }
+}];

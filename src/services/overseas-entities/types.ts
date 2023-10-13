@@ -336,7 +336,6 @@ export interface ManagingOfficerCorporateResource {
 }
 
 export interface ManagingOfficerPrivateDataResource {
-    managingOfficerAppointmentId?: string;
     residential_address?: PrivateAddressResource;
     principal_address?: PrivateAddressResource;
     date_of_birth?: string;
@@ -346,7 +345,6 @@ export interface ManagingOfficerPrivateDataResource {
 }
 
 export interface ManagingOfficerPrivateData {
-    managingOfficerAppointmentId?: string;
     residentialAddress?: PrivateAddress;
     principalAddress?: PrivateAddress;
     dateOfBirth?: string;
@@ -567,6 +565,100 @@ export interface TrustCorporateResource {
     identification_place_registered?: string;
     identification_registration_number?: string;
     is_on_register_in_country_formed_in: yesNoResponse;
+}
+
+/**
+ * Trust data loaded from the API
+ */
+
+export interface TrustData {
+    hashedTrustId: string;
+    trustName: string;
+    creationDate: string;
+    ceasedDate?: string;
+    unableToObtainAllTrustInfoIndicator: boolean;
+}
+
+export interface TrustDataResource {
+    hashed_trust_id: string;
+    trust_name: string;
+    creation_date: string;
+    ceased_date?: string;
+    unable_to_obtain_all_trust_info_indicator: boolean;
+}
+
+export interface TrustLinkData {
+    hashedTrustId: string;
+    hashedCorporateBodyAppointmentId: string;
+}
+
+export interface TrustLinkDataResource {
+    hashed_trust_id: string;
+    hashed_corporate_body_appointment_id: string;
+}
+
+export interface IndividualTrusteeData {
+    hashedTrusteeId: string;
+    trusteeForename1: string;
+    trusteeForename2?: string;
+    trusteeSurname: string;
+    dateOfBirth?: string;
+    nationality?: string;
+    corporateIndicator: string;
+    trusteeTypeId: string;
+    appointmentDate: string;
+    ceasedDate?: string;
+    serviceAddress?: PrivateAddress;
+    usualResidentialAddress?: PrivateAddress;
+}
+
+export interface IndividualTrusteeDataResource {
+    hashed_trustee_id: string;
+    trustee_forename_1: string;
+    trustee_forename_2?: string;
+    trustee_surname: string;
+    date_of_birth?: string;
+    nationality?: string;
+    corporate_indicator: string;
+    trustee_type_id: string;
+    appointment_date: string;
+    ceased_date?: string;
+    service_address?: PrivateAddressResource;
+    usual_residential_address?: PrivateAddressResource;
+}
+
+export interface CorporateTrusteeData {
+    hashedTrusteeId: string;
+    trusteeName: string;
+    registerLocation?: string;
+    registrationNumber?: string;
+    lawGoverned?: string;
+    legalForm?: string;
+    country?: string;
+    onRegisterInCountryFormed?: string;
+    corporateIndicator: string;
+    trusteeTypeId: string;
+    appointmentDate: string;
+    ceasedDate?: string;
+    serviceAddress?: PrivateAddress;
+    registeredOfficeAddress?: PrivateAddress;
+}
+
+export interface CorporateTrusteeDataResource {
+    hashed_trustee_id: string;
+    trustee_name: string;
+    register_location?: string;
+    registration_number?: string;
+    law_governed?: string;
+    legal_form?: string;
+    country?: string;
+    on_register_in_country_formed?: string;
+    corporate_indicator: string;
+    trustee_type_id: string;
+    appointment_date: string;
+    ceased_date?: string;
+    service_address?: PrivateAddressResource;
+    registered_office_address?: PrivateAddressResource;
 }
 
 /**

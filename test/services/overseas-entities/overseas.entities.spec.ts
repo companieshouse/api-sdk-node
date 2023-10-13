@@ -9,7 +9,12 @@ import {
     OverseasEntityExtraDetails,
     OverseasEntityService,
     BeneficialOwnerPrivateData,
-    ManagingOfficerPrivateData
+    ManagingOfficerPrivateData,
+    TrustData,
+    TrustLinkData,
+    IndividualTrusteeDataResource,
+    CorporateTrusteeDataResource,
+    IndividualTrusteeData
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
@@ -572,6 +577,202 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             expect(data.httpStatusCode).to.equal(400);
             expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getTrustsPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.PRIVATE_TRUSTS_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            )) as Resource<TrustData[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_DATA_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getTrustsPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getTrustLinksPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getTrustLinksPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.TRUST_LINKS_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getTrustLinks(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            )) as Resource<TrustLinkData[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.TRUST_LINKS_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getTrustLinksPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getTrustLinks(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getIndividualTrusteesPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getIndividualTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getIndividualTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            )) as Resource<IndividualTrusteeDataResource[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.INDIVIDUAL_TRUSTEES_DATA_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getIndividualTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getIndividualTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+    });
+
+    describe("OverseasEntityService getCorporateTrusteesPrivateData Tests suite", () => {
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+        });
+
+        it("should return httpStatusCode 200 for getCorporateTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getCorporateTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            )) as Resource<CorporateTrusteeDataResource[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.CORPORATE_TRUSTEES_DATA_MOCK);
+        });
+
+        it("should return error 400 (Bad Request) for getCorporateTrusteesPrivateData method", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 400,
+                error: mockValues.BAD_REQUEST
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = await oeService.getCorporateTrustees(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID,
+                mockValues.PRIVATE_TRUSTS_DATA_ID_MOCK
+            ) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(400);
+            expect(data.errors![0]).to.deep.equal(mockValues.BAD_REQUEST);
+        });
+
+        it("should pass camel case though but convert snake case for trust retrieval", () => {
+            const response = [
+                {
+                    hashedTrusteeId: "123",
+                    trusteeForename1: "test",
+                    trusteeForename2: undefined,
+                    trustee_surname: "Smith",
+                    serviceAddress: {
+                        address_line_1: "line1",
+                        addressLine2: "line2"
+                    },
+                    usual_residential_address: {
+                        addressLine1: "lineA",
+                        address_line_2: "lineB"
+                    }
+                }
+            ];
+            const mappedResponse = Mapping.camelCaseKeys<IndividualTrusteeData[]>(response as unknown as IndividualTrusteeDataResource[]);
+            expect(mappedResponse).to.deep.equal([
+                {
+                    hashedTrusteeId: "123",
+                    trusteeForename1: "test",
+                    trusteeForename2: undefined,
+                    trusteeSurname: "Smith",
+                    serviceAddress: {
+                        addressLine1: "line1",
+                        addressLine2: "line2"
+                    },
+                    usualResidentialAddress: {
+                        addressLine1: "lineA",
+                        addressLine2: "lineB"
+                    }
+                }
+            ]);
         });
     });
 });
