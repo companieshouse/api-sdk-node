@@ -123,6 +123,7 @@ export interface BeneficialOwnerIndividual {
     first_name?: string
     last_name?: string
     date_of_birth?: InputDate
+    have_day_of_birth?: boolean
     nationality?: string
     second_nationality?: string
     usual_residential_address?: Address
@@ -141,6 +142,7 @@ export interface BeneficialOwnerIndividualResource {
     first_name?: string
     last_name?: string
     date_of_birth?: string
+    have_day_of_birth?: boolean
     nationality?: string
     second_nationality?: string
     usual_residential_address?: Address
@@ -244,6 +246,7 @@ export interface ManagingOfficerIndividual {
     has_former_names?: yesNoResponse
     former_names?: string
     date_of_birth?: InputDate
+    have_day_of_birth?: boolean
     nationality?: string
     second_nationality?: string
     usual_residential_address?: Address
@@ -262,6 +265,7 @@ export interface ManagingOfficerIndividualResource {
     has_former_names?: yesNoResponse
     former_names?: string
     date_of_birth?: string
+    have_day_of_birth?: boolean
     nationality?: string
     second_nationality?: string
     usual_residential_address?: Address
