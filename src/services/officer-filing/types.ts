@@ -189,7 +189,7 @@ export interface OfficerFiling {
     residentialAddressBackLink?: string;
     serviceAddress?: Address;
     serviceAddressBackLink?: string;
-    directorAppliedToProtectDetails?: boolean;
+    directorAppliedToProtectDetails?: string;
 }
 
 export interface OfficerFilingDto {
@@ -214,5 +214,5 @@ export interface OfficerFilingDto {
     residential_address_back_link?: string;
     service_address?: AddressResource;
     service_address_back_link?: string;
-    director_applied_to_protect_details?: boolean;
+    director_applied_to_protect_details?: string;
 }
