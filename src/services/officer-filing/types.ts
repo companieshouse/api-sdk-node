@@ -189,6 +189,7 @@ export interface OfficerFiling {
     residentialAddressBackLink?: string;
     serviceAddress?: Address;
     serviceAddressBackLink?: string;
+    checkYourAnswersLink?: string;
 }
 
 export interface OfficerFilingDto {
@@ -213,4 +214,5 @@ export interface OfficerFilingDto {
     residential_address_back_link?: string;
     service_address?: AddressResource;
     service_address_back_link?: string;
+    check_your_answers_link?: string;
 }
