@@ -171,7 +171,7 @@ export default class {
      * Map an Address to AddressResource which represents the expected json data model
      */
     private mapAddressToDto (address: Address): AddressResource {
-        if (address === undefined) {
+        if (!address) {
             return undefined;
         }
         return {
