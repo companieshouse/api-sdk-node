@@ -246,7 +246,7 @@ export default class OverseasEntityService {
         const response: HttpResponse = await this.client.httpGet(URL);
 
         console.log(`mylog API SDK NODE getCorporateTrustees url ->->->:`, URL)
-        console.log(`mylog API SDK NODE getCorporateTrustees Status ->->->: `, response.status)
+        console.log(`mylog API SDK NODE getCorporateTrustees Status ->->->:`, response.status)
         console.log(`mylog API SDK NODE getCorporateTrustees response body ->->->: `, JSON.stringify(response.body, null, 4))
 
         if (response.error) {
