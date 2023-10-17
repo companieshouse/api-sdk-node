@@ -160,6 +160,10 @@ export default class OverseasEntityService {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/details`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
+        console.log(`mylog API SDK NODE getTrustData url ->->->: `, URL)
+        console.log(`mylog API SDK NODE getTrustData Status ->->->: `, response.status)
+        console.log(`mylog API SDK NODE getTrustData response body ->->->: `, JSON.stringify(response.body, null, 4))
+
         if (response.error) {
             return {
                 httpStatusCode: response.status,
@@ -211,6 +215,10 @@ export default class OverseasEntityService {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/individual-trustees`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
+        console.log(`mylog API SDK NODE getIndividualTrustees url ->->->: `, URL)
+        console.log(`mylog API SDK NODE getIndividualTrustees Status ->->->: `, response.status)
+        console.log(`mylog API SDK NODE getIndividualTrustees response body ->->->: `, JSON.stringify(response.body, null, 4))
+
         if (response.error) {
             return {
                 httpStatusCode: response.status,
@@ -236,6 +244,10 @@ export default class OverseasEntityService {
     public async getCorporateTrustees (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<CorporateTrusteeData[]> | ApiErrorResponse> {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/corporate-trustees`;
         const response: HttpResponse = await this.client.httpGet(URL);
+
+        console.log(`mylog API SDK NODE getCorporateTrustees url ->->->: `, URL)
+        console.log(`mylog API SDK NODE getCorporateTrustees Status ->->->: `, response.status)
+        console.log(`mylog API SDK NODE getCorporateTrustees response body ->->->: `, JSON.stringify(response.body, null, 4))
 
         if (response.error) {
             return {
