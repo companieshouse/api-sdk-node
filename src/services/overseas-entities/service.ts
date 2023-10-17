@@ -245,7 +245,7 @@ export default class OverseasEntityService {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/corporate-trustees`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
-        console.log(`mylog API SDK NODE getCorporateTrustees url ->->->: `, URL)
+        console.log(`mylog API SDK NODE getCorporateTrustees url ->->->:`, URL)
         console.log(`mylog API SDK NODE getCorporateTrustees Status ->->->: `, response.status)
         console.log(`mylog API SDK NODE getCorporateTrustees response body ->->->: `, JSON.stringify(response.body, null, 4))
 
