@@ -164,7 +164,7 @@ export default class {
             residential_address_back_link: officerFiling.residentialAddressBackLink,
             service_address: this.mapAddressToDto(officerFiling.serviceAddress),
             service_address_back_link: officerFiling.serviceAddressBackLink,
-            director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails,
+            director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails
         }
     }
 
