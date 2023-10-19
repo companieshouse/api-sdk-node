@@ -155,7 +155,7 @@ class default_1 {
             protected_details_back_link: officerFiling.protectedDetailsBackLink,
             service_address: this.mapAddressToDto(officerFiling.serviceAddress),
             service_address_back_link: officerFiling.serviceAddressBackLink,
-            where_director_live_choice: officerFiling.whereDirectorLiveChoice,
+            director_residential_address_choice: officerFiling.directorResidentialAddressChoice,
             director_correspondence_address_choice: officerFiling.directorCorrespondenceAddressChoice,
             director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails
         };
@@ -206,8 +206,8 @@ class default_1 {
             protectedDetailsBackLink: officerFilingDto.protected_details_back_link,
             serviceAddress: this.mapAddressFromDto(officerFilingDto.service_address),
             serviceAddressBackLink: officerFilingDto.service_address_back_link,
-            whereDirectorLiveChoice: officerFilingDto.where_director_live_choice,
-            directorCorrespondenceAddressChoice: officerFilingDto.where_director_live_choice,
+            directorResidentialAddressChoice: officerFilingDto.director_residential_address_choice,
+            directorCorrespondenceAddressChoice: officerFilingDto.director_correspondence_address_choice,
             directorAppliedToProtectDetails: officerFilingDto.director_applied_to_protect_details
         };
     }
