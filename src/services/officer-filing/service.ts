@@ -165,7 +165,9 @@ export default class {
             protected_details_back_link: officerFiling.protectedDetailsBackLink,
             service_address: this.mapAddressToDto(officerFiling.serviceAddress),
             service_address_back_link: officerFiling.serviceAddressBackLink,
-            director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails
+            director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails,
+            director_residential_address_choice: officerFiling.directorResidentialAddressChoice,
+            director_correspondence_address_choice: officerFiling.directorCorrespondenceAddressChoice
         }
     }
 
@@ -216,7 +218,9 @@ export default class {
             protectedDetailsBackLink: officerFilingDto.protected_details_back_link,
             serviceAddress: this.mapAddressFromDto(officerFilingDto.service_address),
             serviceAddressBackLink: officerFilingDto.service_address_back_link,
-            directorAppliedToProtectDetails: officerFilingDto.director_applied_to_protect_details
+            directorAppliedToProtectDetails: officerFilingDto.director_applied_to_protect_details,
+            directorResidentialAddressChoice: officerFilingDto.director_residential_address_choice,
+            directorCorrespondenceAddressChoice: officerFilingDto.director_correspondence_address_choice
         }
     }
 
