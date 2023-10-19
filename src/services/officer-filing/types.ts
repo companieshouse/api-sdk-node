@@ -189,6 +189,8 @@ export interface OfficerFiling {
     residentialAddressBackLink?: string;
     serviceAddress?: Address;
     serviceAddressBackLink?: string;
+    whereDirectorLiveChoice?: string;
+    directorCorrespondenceAddressChoice?: string;
 }
 
 export interface OfficerFilingDto {
@@ -213,4 +215,6 @@ export interface OfficerFilingDto {
     residential_address_back_link?: string;
     service_address?: AddressResource;
     service_address_back_link?: string;
+    where_director_live_choice?: string;
+    director_correspondence_address_choice?: string;
 }
