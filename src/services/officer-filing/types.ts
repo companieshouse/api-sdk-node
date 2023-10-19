@@ -187,8 +187,10 @@ export interface OfficerFiling {
     nationality3Link?: string;
     residentialAddress?: Address;
     residentialAddressBackLink?: string;
+    protectedDetailsBackLink?: string;
     serviceAddress?: Address;
     serviceAddressBackLink?: string;
+    directorAppliedToProtectDetails?: boolean;
     whereDirectorLiveChoice?: string;
     directorCorrespondenceAddressChoice?: string;
 }
@@ -213,8 +215,10 @@ export interface OfficerFilingDto {
     nationality3_link?: string;
     residential_address?: AddressResource;
     residential_address_back_link?: string;
+    protected_details_back_link?: string;
     service_address?: AddressResource;
     service_address_back_link?: string;
+    director_applied_to_protect_details?: boolean;
     where_director_live_choice?: string;
     director_correspondence_address_choice?: string;
 }
