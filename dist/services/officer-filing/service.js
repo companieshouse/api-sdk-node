@@ -152,9 +152,13 @@ class default_1 {
             nationality3_link: officerFiling.nationality3Link,
             residential_address: this.mapAddressToDto(officerFiling.residentialAddress),
             residential_address_back_link: officerFiling.residentialAddressBackLink,
+            protected_details_back_link: officerFiling.protectedDetailsBackLink,
             service_address: this.mapAddressToDto(officerFiling.serviceAddress),
             service_address_back_link: officerFiling.serviceAddressBackLink,
-            check_your_answers_link: officerFiling.checkYourAnswersLink
+            check_your_answers_link: officerFiling.checkYourAnswersLink,
+            director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails,
+            director_residential_address_choice: officerFiling.directorResidentialAddressChoice,
+            director_correspondence_address_choice: officerFiling.directorCorrespondenceAddressChoice
         };
     }
     /**
@@ -200,9 +204,13 @@ class default_1 {
             nationality3Link: officerFilingDto.nationality3_link,
             residentialAddress: this.mapAddressFromDto(officerFilingDto.residential_address),
             residentialAddressBackLink: officerFilingDto.residential_address_back_link,
+            protectedDetailsBackLink: officerFilingDto.protected_details_back_link,
             serviceAddress: this.mapAddressFromDto(officerFilingDto.service_address),
             serviceAddressBackLink: officerFilingDto.service_address_back_link,
-            checkYourAnswersLink: officerFilingDto.check_your_answers_link
+            checkYourAnswersLink: officerFilingDto.check_your_answers_link,
+            directorAppliedToProtectDetails: officerFilingDto.director_applied_to_protect_details,
+            directorResidentialAddressChoice: officerFilingDto.director_residential_address_choice,
+            directorCorrespondenceAddressChoice: officerFilingDto.director_correspondence_address_choice
         };
     }
     /**
