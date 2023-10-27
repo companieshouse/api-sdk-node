@@ -4,6 +4,7 @@ import { RequestClient, HttpClientOptions, IHttpClient } from "./http";
 import Resource from "./services/resource";
 
 /**
+ * 
  * @warning - Please do not use this method to create API clients directly. Use the sdk-manager-node instead
  *
  * Creates a new API Client.
