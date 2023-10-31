@@ -194,6 +194,8 @@ export interface OfficerFiling {
     directorAppliedToProtectDetails?: boolean;
     directorResidentialAddressChoice?: string;
     directorCorrespondenceAddressChoice?: string;
+    isMailingAddressSameAsRegisteredOfficeAddress?: boolean;
+    isMailingAddressSameAsHomeAddress?: boolean;
 }
 
 export interface OfficerFilingDto {
@@ -223,4 +225,6 @@ export interface OfficerFilingDto {
     director_applied_to_protect_details?: boolean;
     director_residential_address_choice?: string;
     director_correspondence_address_choice?: string;
+    is_mailing_address_same_as_registered_office_address?: boolean;
+    is_mailing_address_same_as_home_address?: boolean;
 }
