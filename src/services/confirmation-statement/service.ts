@@ -19,6 +19,8 @@ import {
     PersonOfSignificantControlResource,
     RegisteredOfficeAddressData,
     RegisteredOfficeAddressDataResource,
+    RegisteredEmailAddressData,
+    RegisteredEmailAddressDataResource,
     SicCode,
     SicCodeData,
     SicCodeDataResource,
@@ -299,6 +301,7 @@ export default class {
             ...(dataResource.statement_of_capital_data && { statementOfCapitalData: this.mapToStatementOfCapitalData(dataResource.statement_of_capital_data) }),
             ...(dataResource.sic_code_data && { sicCodeData: this.mapToSicCodeData(dataResource.sic_code_data) }),
             ...(dataResource.registered_office_address_data && { registeredOfficeAddressData: this.mapToRegisteredOfficeAddressData(dataResource.registered_office_address_data) }),
+            ...(dataResource.registered_email_address_data && { registeredEmailAddressData: this.mapToRegisteredEmailAddressData(dataResource.registered_email_address_data) }),
             ...(dataResource.active_officer_details_data && { activeOfficerDetailsData: this.mapToActiveOfficerDetailsData(dataResource.active_officer_details_data) }),
             ...(dataResource.shareholder_data && { shareholderData: this.mapToShareholderData(dataResource.shareholder_data) }),
             ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) }),
@@ -313,6 +316,7 @@ export default class {
             ...(data.statementOfCapitalData && { statement_of_capital_data: this.mapToStatementOfCapitalDataResource(data.statementOfCapitalData) }),
             ...(data.sicCodeData && { sic_code_data: this.mapToSicCodeDataResource(data.sicCodeData) }),
             ...(data.registeredOfficeAddressData && { registered_office_address_data: this.mapToRegisteredOfficeAddressDataResource(data.registeredOfficeAddressData) }),
+            ...(data.registeredEmailAddressData && { registered_email_address_data: this.mapToRegisteredEmailAddressDataResource(data.registeredEmailAddressData) }),
             ...(data.activeOfficerDetailsData && { active_officer_details_data: this.mapToActiveOfficerDetailsDataResource(data.activeOfficerDetailsData) }),
             ...(data.shareholderData && { shareholder_data: this.mapToShareholderDataResource(data.shareholderData) }),
             ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) }),
@@ -564,6 +568,18 @@ export default class {
     private mapToRegisteredOfficeAddressData (registeredOfficeAddressResource: RegisteredOfficeAddressDataResource): RegisteredOfficeAddressData {
         return {
             sectionStatus: registeredOfficeAddressResource.section_status
+        }
+    }
+
+    private mapToRegisteredEmailAddressDataResource (registeredEmailAddress: RegisteredEmailAddressData): RegisteredEmailAddressDataResource {
+        return {
+            section_status: registeredEmailAddress.sectionStatus
+        }
+    }
+
+    private mapToRegisteredEmailAddressData (registeredEmailAddressResource: RegisteredEmailAddressDataResource): RegisteredEmailAddressData {
+        return {
+            sectionStatus: registeredEmailAddressResource.section_status
         }
     }
 

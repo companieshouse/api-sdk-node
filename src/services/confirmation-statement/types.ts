@@ -20,6 +20,7 @@ export interface ConfirmationStatementSubmissionDataResource {
     persons_significant_control_data?: PersonsOfSignificantControlDataResource,
     register_locations_data?: RegisterLocationsDataResource,
     registered_office_address_data?: RegisteredOfficeAddressDataResource,
+    registered_email_address_data?: RegisteredEmailAddressDataResource,
     shareholder_data?: ShareholderDataResource,
     sic_code_data?: SicCodeDataResource,
     statement_of_capital_data?: StatementOfCapitalDataResource,
@@ -31,6 +32,7 @@ export interface ConfirmationStatementSubmissionData {
     confirmationStatementMadeUpToDate: string,
     personsSignificantControlData?: PersonsOfSignificantControlData,
     registeredOfficeAddressData?: RegisteredOfficeAddressData,
+    registeredEmailAddressData?: RegisteredEmailAddressData,
     registerLocationsData?: RegisterLocationsData,
     shareholderData?: ShareholderData,
     sicCodeData?: SicCodeData,
@@ -76,6 +78,12 @@ export interface RegisteredOfficeAddressDataResource extends ConfirmationStateme
 export interface RegisteredOfficeAddressData extends ConfirmationStatementSubmissionSection {
 }
 
+export interface RegisteredEmailAddressDataResource extends ConfirmationStatementSubmissionSectionResource {
+}
+
+export interface RegisteredEmailAddressData extends ConfirmationStatementSubmissionSection {
+}
+
 export interface ActiveOfficerDetailsDataResource extends ConfirmationStatementSubmissionSectionResource {
 }
 
@@ -97,7 +105,8 @@ export interface RegisterLocationsData extends ConfirmationStatementSubmissionSe
 export enum SectionStatus {
     CONFIRMED = "CONFIRMED",
     NOT_CONFIRMED = "NOT_CONFIRMED",
-    RECENT_FILING = "RECENT_FILING"
+    RECENT_FILING = "RECENT_FILING",
+    INITIAL_FILING = "INITIAL_FILING"
 }
 
 export enum EligibilityStatusCode {

@@ -60,6 +60,7 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
             personsOfSignificantControl: []
         },
         registeredOfficeAddressData: { sectionStatus: SectionStatus.CONFIRMED },
+        registeredEmailAddressData: { sectionStatus: SectionStatus.INITIAL_FILING },
         statementOfCapitalData: {
             sectionStatus: null,
             statementOfCapital: {
@@ -261,6 +262,7 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
         },
         active_officer_details_data: { section_status: SectionStatus.CONFIRMED },
         registered_office_address_data: { section_status: SectionStatus.CONFIRMED },
+        registered_email_address_data: { section_status: SectionStatus.INITIAL_FILING },
         register_locations_data: { section_status: SectionStatus.CONFIRMED },
         statement_of_capital_data: {
             section_status: SectionStatus.CONFIRMED,

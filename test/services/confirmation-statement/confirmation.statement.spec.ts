@@ -157,6 +157,7 @@ describe("Update confirmation statement POST", () => {
         expect(updatedConfirmationStatement.data.sicCodeData.sectionStatus).to.equal(mockSubmission.data.sic_code_data.section_status);
         expect(updatedConfirmationStatement.data.sicCodeData.sicCode.code).to.equal(mockSubmission.data.sic_code_data.sic_code.code);
         expect(updatedConfirmationStatement.data.registeredOfficeAddressData.sectionStatus).to.equal(mockSubmission.data.registered_office_address_data.section_status);
+        expect(updatedConfirmationStatement.data.registeredEmailAddressData.sectionStatus).to.equal(mockSubmission.data.registered_email_address_data.section_status);
         expect(updatedConfirmationStatement.data.activeOfficerDetailsData.sectionStatus).to.equal(mockSubmission.data.active_officer_details_data.section_status);
         expect(updatedConfirmationStatement.data.shareholderData.sectionStatus).to.equal(mockSubmission.data.shareholder_data.section_status);
         expect(updatedConfirmationStatement.data.registerLocationsData.sectionStatus).to.equal(mockSubmission.data.register_locations_data.section_status);
