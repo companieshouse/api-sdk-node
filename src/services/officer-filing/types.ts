@@ -198,6 +198,7 @@ export interface OfficerFiling {
     directorCorrespondenceAddressChoice?: string;
     isMailingAddressSameAsRegisteredOfficeAddress?: boolean;
     isMailingAddressSameAsHomeAddress?: boolean;
+    consentToAct?: boolean;
 }
 
 export interface OfficerFilingDto {
@@ -231,4 +232,5 @@ export interface OfficerFilingDto {
     director_correspondence_address_choice?: string;
     is_mailing_address_same_as_registered_office_address?: boolean;
     is_mailing_address_same_as_home_address?: boolean;
+    consent_to_act?: boolean;
 }
