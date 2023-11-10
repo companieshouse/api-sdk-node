@@ -1,6 +1,6 @@
 artifact_name       := api-sdk-node
 version             := "unversioned"
-
+  
 .PHONY: clean
 clean:
 	rm -f ./$(artifact_name)-*.zip
