@@ -172,7 +172,8 @@ export default class {
             director_residential_address_choice: officerFiling.directorResidentialAddressChoice,
             director_correspondence_address_choice: officerFiling.directorCorrespondenceAddressChoice,
             is_mailing_address_same_as_registered_office_address: officerFiling.isMailingAddressSameAsRegisteredOfficeAddress,
-            is_mailing_address_same_as_home_address: officerFiling.isMailingAddressSameAsHomeAddress
+            is_mailing_address_same_as_home_address: officerFiling.isMailingAddressSameAsHomeAddress,
+            consent_to_act: officerFiling.consentToAct
         }
     }
 
@@ -230,7 +231,8 @@ export default class {
             directorResidentialAddressChoice: officerFilingDto.director_residential_address_choice,
             directorCorrespondenceAddressChoice: officerFilingDto.director_correspondence_address_choice,
             isMailingAddressSameAsRegisteredOfficeAddress: officerFilingDto.is_mailing_address_same_as_registered_office_address,
-            isMailingAddressSameAsHomeAddress: officerFilingDto.is_mailing_address_same_as_home_address
+            isMailingAddressSameAsHomeAddress: officerFilingDto.is_mailing_address_same_as_home_address,
+            consentToAct: officerFilingDto.consent_to_act
         }
     }
 
