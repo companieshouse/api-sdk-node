@@ -17,7 +17,7 @@
     "analyse-code": "sonar-scanner"
   },
   "dependencies": {
-    "axios": "^0.21.4",
+    "axios": "^1.6.1",
     "camelcase-keys": "~6.2.2",
     "snakecase-keys": "~3.2.0",
     "url-search-params-polyfill": "~8.1.1"
@@ -49,8 +49,8 @@
     "sinon": "^9.2.4",
     "sinon-chai": "~3.5.0",
     "sonarqube-scanner": "^2.8.1",
-    "ts-node": "10.4.0",
-    "typescript": "4.4"
+    "ts-node": "9.1.1",
+    "typescript": "4.1.6"
   },
   "overrides": {
     "semver": "7.5.2"
