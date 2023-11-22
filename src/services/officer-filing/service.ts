@@ -170,9 +170,9 @@ export default class {
             check_your_answers_link: officerFiling.checkYourAnswersLink,
             director_applied_to_protect_details: officerFiling.directorAppliedToProtectDetails,
             director_residential_address_choice: officerFiling.directorResidentialAddressChoice,
-            director_correspondence_address_choice: officerFiling.directorCorrespondenceAddressChoice,
-            is_mailing_address_same_as_registered_office_address: officerFiling.isMailingAddressSameAsRegisteredOfficeAddress,
-            is_mailing_address_same_as_home_address: officerFiling.isMailingAddressSameAsHomeAddress,
+            director_service_address_choice: officerFiling.directorServiceAddressChoice,
+            is_service_address_same_as_registered_office_address: officerFiling.isServiceAddressSameAsRegisteredOfficeAddress,
+            is_service_address_same_as_home_address: officerFiling.isServiceAddressSameAsHomeAddress,
             consent_to_act: officerFiling.consentToAct
         }
     }
@@ -229,9 +229,9 @@ export default class {
             checkYourAnswersLink: officerFilingDto.check_your_answers_link,
             directorAppliedToProtectDetails: officerFilingDto.director_applied_to_protect_details,
             directorResidentialAddressChoice: officerFilingDto.director_residential_address_choice,
-            directorCorrespondenceAddressChoice: officerFilingDto.director_correspondence_address_choice,
-            isMailingAddressSameAsRegisteredOfficeAddress: officerFilingDto.is_mailing_address_same_as_registered_office_address,
-            isMailingAddressSameAsHomeAddress: officerFilingDto.is_mailing_address_same_as_home_address,
+            directorServiceAddressChoice: officerFilingDto.director_service_address_choice,
+            isServiceAddressSameAsRegisteredOfficeAddress: officerFilingDto.is_service_address_same_as_registered_office_address,
+            isServiceAddressSameAsHomeAddress: officerFilingDto.is_service_address_same_as_home_address,
             consentToAct: officerFilingDto.consent_to_act
         }
     }

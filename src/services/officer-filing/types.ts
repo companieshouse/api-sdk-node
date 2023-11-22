@@ -195,9 +195,9 @@ export interface OfficerFiling {
     checkYourAnswersLink?: string;
     directorAppliedToProtectDetails?: boolean;
     directorResidentialAddressChoice?: string;
-    directorCorrespondenceAddressChoice?: string;
-    isMailingAddressSameAsRegisteredOfficeAddress?: boolean;
-    isMailingAddressSameAsHomeAddress?: boolean;
+    directorServiceAddressChoice?: string;
+    isServiceAddressSameAsRegisteredOfficeAddress?: boolean;
+    isServiceAddressSameAsHomeAddress?: boolean;
     consentToAct?: boolean;
 }
 
@@ -229,8 +229,8 @@ export interface OfficerFilingDto {
     check_your_answers_link?: string;
     director_applied_to_protect_details?: boolean;
     director_residential_address_choice?: string;
-    director_correspondence_address_choice?: string;
-    is_mailing_address_same_as_registered_office_address?: boolean;
-    is_mailing_address_same_as_home_address?: boolean;
+    director_service_address_choice?: string;
+    is_service_address_same_as_registered_office_address?: boolean;
+    is_service_address_same_as_home_address?: boolean;
     consent_to_act?: boolean;
 }
