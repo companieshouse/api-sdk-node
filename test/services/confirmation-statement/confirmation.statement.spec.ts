@@ -416,6 +416,21 @@ describe("confirmation statement submission GET", () => {
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors[0]).to.equal("No confirmation statement submission found");
     });
+
+    it("should return confirmation statement submission object with registered email address", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetConfirmationStatementSubmission[200]);
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+        const data: Resource<ConfirmationStatementSubmission> =
+            await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
+
+        const mockResource = mockValues.mockConfirmationStatementSubmissionResource;
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource.id).to.equal(mockResource.id);
+        expect(data.resource.links).to.equal(mockResource.links);
+        expect(data.resource.data.confirmationStatementMadeUpToDate).to.equal(mockResource.data.confirmation_statement_made_up_to_date);
+        expect(data.resource.data.registeredEmailAddressData.sectionStatus).to.equal(mockResource.data.registered_email_address_data.section_status);
+        expect(data.resource.data.registeredEmailAddressData.registeredEmailAddress).to.equal(mockResource.data.registered_email_address_data.registered_email_address);
+    });
 });
 
 describe("getNextMadeUpToDate tests", () => {

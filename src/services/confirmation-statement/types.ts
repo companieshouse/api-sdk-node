@@ -79,9 +79,11 @@ export interface RegisteredOfficeAddressData extends ConfirmationStatementSubmis
 }
 
 export interface RegisteredEmailAddressDataResource extends ConfirmationStatementSubmissionSectionResource {
+    registered_email_address?: string
 }
 
 export interface RegisteredEmailAddressData extends ConfirmationStatementSubmissionSection {
+    registeredEmailAddress?: string
 }
 
 export interface ActiveOfficerDetailsDataResource extends ConfirmationStatementSubmissionSectionResource {
