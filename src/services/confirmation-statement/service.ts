@@ -573,13 +573,15 @@ export default class {
 
     private mapToRegisteredEmailAddressDataResource (registeredEmailAddress: RegisteredEmailAddressData): RegisteredEmailAddressDataResource {
         return {
-            section_status: registeredEmailAddress.sectionStatus
+            section_status: registeredEmailAddress.sectionStatus,
+            registered_email_address: registeredEmailAddress.registeredEmailAddress
         }
     }
 
     private mapToRegisteredEmailAddressData (registeredEmailAddressResource: RegisteredEmailAddressDataResource): RegisteredEmailAddressData {
         return {
-            sectionStatus: registeredEmailAddressResource.section_status
+            sectionStatus: registeredEmailAddressResource.section_status,
+            registeredEmailAddress: registeredEmailAddressResource.registered_email_address
         }
     }
 
