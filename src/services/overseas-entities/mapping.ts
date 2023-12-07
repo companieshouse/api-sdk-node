@@ -71,7 +71,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         managing_officers_individual: (body.managing_officers_individual || []).map(mapMoiResource),
         managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
-        update: mapUpdateResource(body.update)
+        update: mapUpdateResource(body.update),
+        is_remove: body.is_remove
     };
 };
 
