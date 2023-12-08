@@ -466,7 +466,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
     trusts: TRUSTS_MOCK,
-    update: UPDATE_OBJECT_MOCK
+    update: UPDATE_OBJECT_MOCK,
+    is_remove: undefined
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
