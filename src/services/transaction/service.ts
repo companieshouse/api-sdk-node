@@ -11,6 +11,10 @@ export default class TransactionService {
    * @param transaction the transaction to create
    */
     public async postTransaction (transaction: Transaction): Promise<Resource<Transaction>|ApiErrorResponse> {
+
+        console.log("\n\n*** POST transaction in SDK **\n\n");
+
+
         let url = "/transactions"
         if (transaction.id) {
             url += "/" + transaction.id

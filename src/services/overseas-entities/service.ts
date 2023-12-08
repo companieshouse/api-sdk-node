@@ -67,6 +67,10 @@ export default class OverseasEntityService {
         body: OverseasEntity,
         isSaveAndResumeFeatureActive: boolean = false
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
+
+        console.log("\n\n*** POST OE in SDK **\n\n");
+
+
         const URL = (isSaveAndResumeFeatureActive)
             ? `/transactions/${transactionId}/overseas-entity/start`
             : `/transactions/${transactionId}/overseas-entity`;
