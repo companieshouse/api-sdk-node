@@ -173,7 +173,12 @@ export default class {
             director_service_address_choice: officerFiling.directorServiceAddressChoice,
             is_service_address_same_as_registered_office_address: officerFiling.isServiceAddressSameAsRegisteredOfficeAddress,
             is_service_address_same_as_home_address: officerFiling.isServiceAddressSameAsHomeAddress,
-            consent_to_act: officerFiling.consentToAct
+            consent_to_act: officerFiling.consentToAct,
+            name_has_been_updated: officerFiling.nameHasBeenUpdated,
+            nationality_has_been_updated: officerFiling.nationalityHasBeenUpdated,
+            occupation_has_been_updated: officerFiling.occupationHasBeenUpdated,
+            correspondence_address_has_been_updated: officerFiling.correspondenceAddressHasBeenUpdated,
+            residential_address_has_been_updated: officerFiling.residentialAddressHasBeenUpdated
         }
     }
 
@@ -232,7 +237,12 @@ export default class {
             directorServiceAddressChoice: officerFilingDto.director_service_address_choice,
             isServiceAddressSameAsRegisteredOfficeAddress: officerFilingDto.is_service_address_same_as_registered_office_address,
             isServiceAddressSameAsHomeAddress: officerFilingDto.is_service_address_same_as_home_address,
-            consentToAct: officerFilingDto.consent_to_act
+            consentToAct: officerFilingDto.consent_to_act,
+            nameHasBeenUpdated: officerFilingDto.name_has_been_updated,
+            nationalityHasBeenUpdated: officerFilingDto.nationality_has_been_updated,
+            occupationHasBeenUpdated: officerFilingDto.occupation_has_been_updated,
+            correspondenceAddressHasBeenUpdated: officerFilingDto.correspondence_address_has_been_updated,
+            residentialAddressHasBeenUpdated: officerFilingDto.residential_address_has_been_updated
         }
     }
 

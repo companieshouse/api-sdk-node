@@ -199,6 +199,11 @@ export interface OfficerFiling {
     isServiceAddressSameAsRegisteredOfficeAddress?: boolean;
     isServiceAddressSameAsHomeAddress?: boolean;
     consentToAct?: boolean;
+    nameHasBeenUpdated?: boolean;
+    nationalityHasBeenUpdated?: boolean;
+    occupationHasBeenUpdated?: boolean;
+    correspondenceAddressHasBeenUpdated?: boolean;
+    residentialAddressHasBeenUpdated?: boolean;
 }
 
 export interface OfficerFilingDto {
@@ -233,4 +238,9 @@ export interface OfficerFilingDto {
     is_service_address_same_as_registered_office_address?: boolean;
     is_service_address_same_as_home_address?: boolean;
     consent_to_act?: boolean;
+    name_has_been_updated?: boolean;
+    nationality_has_been_updated?: boolean;
+    occupation_has_been_updated?: boolean;
+    correspondence_address_has_been_updated?: boolean;
+    residential_address_has_been_updated?: boolean;
 }
