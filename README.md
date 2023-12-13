@@ -52,7 +52,7 @@ import {createApiClient} from "@companieshouse/api-sdk-node";
 
 To test the changes made to this sdk inside your project, you can use either `npm link` or modify the `prepare` script definition in your project's `package.json` file.
 
-### `npm link`
+#### `npm link`
 
 From within this directory, run the following command to make symbolic links to it within the global node modules directory. 
 
@@ -64,7 +64,7 @@ Then from within your local project, simply link it with the following command
 
 Note that if your local project is running within a Vagrant Virtual Machine, this command will need to be run on the VM.
 
-### `prepare` script
+#### `prepare` script
 
 Change the definition of the `prepare` script in the package.json file to match the following, replacing `YOUR-BRANCH-NAME` with the name of the branch in the api-sdk-node repository that contains your changes:
 
@@ -72,7 +72,7 @@ Change the definition of the `prepare` script in the package.json file to match 
 
 Once done it should just be necessary to restart your project's service in Tilt (assumes that your local project is running in 'development mode').
 
-Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment.
+Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment. The change should NOT be committed or pushed to the project repository.
 
 ## Testing
 
