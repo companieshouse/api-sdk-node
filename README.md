@@ -70,6 +70,8 @@ Change the definition of the `prepare` script in the package.json file to match 
 
     "prepare": "husky install && npm install --save https://github.com/companieshouse/api-sdk-node/tarball/YOUR-BRANCH-NAME && cd node_modules/@companieshouse/api-sdk-node && npm run build"
 
+(The `husky install` command should only be present if already there in the `prepare` script definition of your project)
+
 Once done it should just be necessary to restart your project's service in Tilt (assumes that your local project is running in 'development mode').
 
 Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment. The change should NOT be committed or pushed to the project repository.
