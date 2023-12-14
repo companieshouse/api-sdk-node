@@ -24,7 +24,8 @@ export interface ConfirmationStatementSubmissionDataResource {
     shareholder_data?: ShareholderDataResource,
     sic_code_data?: SicCodeDataResource,
     statement_of_capital_data?: StatementOfCapitalDataResource,
-    trading_status_data?: TradingStatusDataResource
+    trading_status_data?: TradingStatusDataResource,
+    accept_lawful_purpose_statement?: boolean
 }
 
 export interface ConfirmationStatementSubmissionData {
@@ -37,7 +38,8 @@ export interface ConfirmationStatementSubmissionData {
     shareholderData?: ShareholderData,
     sicCodeData?: SicCodeData,
     statementOfCapitalData?: StatementOfCapitalData,
-    tradingStatusData?: TradingStatusData
+    tradingStatusData?: TradingStatusData,
+    acceptLawfulPurposeStatement?: boolean
 }
 
 export interface ConfirmationStatementSubmissionSectionResource {
