@@ -162,6 +162,7 @@ describe("Update confirmation statement POST", () => {
         expect(updatedConfirmationStatement.data.shareholderData.sectionStatus).to.equal(mockSubmission.data.shareholder_data.section_status);
         expect(updatedConfirmationStatement.data.registerLocationsData.sectionStatus).to.equal(mockSubmission.data.register_locations_data.section_status);
         expect(updatedConfirmationStatement.data.tradingStatusData.tradingStatusAnswer).to.equal(mockSubmission.data.trading_status_data.trading_status_answer);
+        expect(updatedConfirmationStatement.data.acceptLawfulPurposeStatement).to.equal(mockSubmission.data.accept_lawful_purpose_statement);
     });
 
     it("should return error 404 - not found", async () => {
@@ -392,6 +393,7 @@ describe("confirmation statement submission GET", () => {
         expect(statementOfCapital.totalAggregateNominalValue).to.equal(mockStatementOfCapital.total_aggregate_nominal_value);
         expect(statementOfCapital.totalAmountUnpaidForCurrency).to.equal(mockStatementOfCapital.total_amount_unpaid_for_currency);
         expect(statementOfCapital.totalNumberOfShares).to.equal(mockStatementOfCapital.total_number_of_shares);
+        expect(data.resource.data.acceptLawfulPurposeStatement).to.equal(mockResource.data.accept_lawful_purpose_statement);
     });
 
     it("should return confirmation statement submission object with no statement of capital", async () => {

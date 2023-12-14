@@ -291,7 +291,8 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
             }
         },
         shareholder_data: { section_status: SectionStatus.CONFIRMED },
-        trading_status_data: { trading_status_answer: true }
+        trading_status_data: { trading_status_answer: true },
+        accept_lawful_purpose_statement: true
     },
     links: {
         self: "self/link"

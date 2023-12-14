@@ -305,7 +305,8 @@ export default class {
             ...(dataResource.active_officer_details_data && { activeOfficerDetailsData: this.mapToActiveOfficerDetailsData(dataResource.active_officer_details_data) }),
             ...(dataResource.shareholder_data && { shareholderData: this.mapToShareholderData(dataResource.shareholder_data) }),
             ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) }),
-            ...(dataResource.trading_status_data && { tradingStatusData: this.mapToTradingStatusData(dataResource.trading_status_data) })
+            ...(dataResource.trading_status_data && { tradingStatusData: this.mapToTradingStatusData(dataResource.trading_status_data) }),
+            acceptLawfulPurposeStatement: dataResource.accept_lawful_purpose_statement
         }
     }
 
@@ -320,7 +321,8 @@ export default class {
             ...(data.activeOfficerDetailsData && { active_officer_details_data: this.mapToActiveOfficerDetailsDataResource(data.activeOfficerDetailsData) }),
             ...(data.shareholderData && { shareholder_data: this.mapToShareholderDataResource(data.shareholderData) }),
             ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) }),
-            ...(data.tradingStatusData && { trading_status_data: this.mapToTradingStatusDataResource(data.tradingStatusData) })
+            ...(data.tradingStatusData && { trading_status_data: this.mapToTradingStatusDataResource(data.tradingStatusData) }),
+            accept_lawful_purpose_statement: data.acceptLawfulPurposeStatement
         }
     }
 
