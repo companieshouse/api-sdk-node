@@ -178,7 +178,8 @@ export default class {
             nationality_has_been_updated: officerFiling.nationalityHasBeenUpdated,
             occupation_has_been_updated: officerFiling.occupationHasBeenUpdated,
             correspondence_address_has_been_updated: officerFiling.correspondenceAddressHasBeenUpdated,
-            residential_address_has_been_updated: officerFiling.residentialAddressHasBeenUpdated
+            residential_address_has_been_updated: officerFiling.residentialAddressHasBeenUpdated,
+            directors_details_changed_date: officerFiling.directorsDetailsChangedDate
         }
     }
 
@@ -242,7 +243,8 @@ export default class {
             nationalityHasBeenUpdated: officerFilingDto.nationality_has_been_updated,
             occupationHasBeenUpdated: officerFilingDto.occupation_has_been_updated,
             correspondenceAddressHasBeenUpdated: officerFilingDto.correspondence_address_has_been_updated,
-            residentialAddressHasBeenUpdated: officerFilingDto.residential_address_has_been_updated
+            residentialAddressHasBeenUpdated: officerFilingDto.residential_address_has_been_updated,
+            directorsDetailsChangedDate: officerFilingDto.directors_details_changed_date
         }
     }
 
