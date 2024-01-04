@@ -204,6 +204,7 @@ export interface OfficerFiling {
     occupationHasBeenUpdated?: boolean;
     correspondenceAddressHasBeenUpdated?: boolean;
     residentialAddressHasBeenUpdated?: boolean;
+    directorsDetailsChangedDate?: string;
 }
 
 export interface OfficerFilingDto {
@@ -243,4 +244,5 @@ export interface OfficerFilingDto {
     occupation_has_been_updated?: boolean;
     correspondence_address_has_been_updated?: boolean;
     residential_address_has_been_updated?: boolean;
+    directors_details_changed_date?: string;
 }
