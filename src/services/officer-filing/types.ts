@@ -197,7 +197,7 @@ export interface OfficerFiling {
     directorResidentialAddressChoice?: string;
     directorServiceAddressChoice?: string;
     isServiceAddressSameAsRegisteredOfficeAddress?: boolean;
-    isServiceAddressSameAsHomeAddress?: boolean;
+    isHomeAddressSameAsServiceAddress?: boolean;
     consentToAct?: boolean;
     nameHasBeenUpdated?: boolean;
     nationalityHasBeenUpdated?: boolean;
@@ -237,7 +237,7 @@ export interface OfficerFilingDto {
     director_residential_address_choice?: string;
     director_service_address_choice?: string;
     is_service_address_same_as_registered_office_address?: boolean;
-    is_service_address_same_as_home_address?: boolean;
+    is_home_address_same_as_service_address?: boolean;
     consent_to_act?: boolean;
     name_has_been_updated?: boolean;
     nationality_has_been_updated?: boolean;
