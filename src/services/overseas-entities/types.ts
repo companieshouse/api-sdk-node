@@ -18,6 +18,7 @@ export interface OverseasEntity {
     trusts?: Trust[];
     update?: Update;
     is_remove?: boolean;
+    is_remove_not_proprietor_of_land?: boolean;
 }
 
 export interface OverseasEntityResource {
@@ -36,6 +37,7 @@ export interface OverseasEntityResource {
     trusts?: TrustResource[];
     update?: UpdateResource;
     is_remove?: boolean;
+    is_remove_not_proprietor_of_land?: boolean;
 }
 
 export interface OverseasEntityExtraDetails {
