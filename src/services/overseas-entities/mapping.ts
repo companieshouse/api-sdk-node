@@ -28,7 +28,9 @@ import {
     UpdateResource,
     OverseasEntityExtraDetails,
     TrustToReviewResource,
-    TrustToReview
+    TrustToReview,
+    Remove,
+    RemoveResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
@@ -47,8 +49,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         managing_officers_corporate: mapManagingOfficersCorporate(body.managing_officers_corporate),
         trusts: mapTrusts(body.trusts),
         update: mapUpdate(body.update),
+        remove: mapRemove(body.remove),
         is_remove: (body.is_remove) ? body.is_remove : null,
-        is_remove_not_proprietor_of_land: (body.is_remove_not_proprietor_of_land) ? body.is_remove_not_proprietor_of_land : null
     };
 };
 
@@ -74,8 +76,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         managing_officers_corporate: (body.managing_officers_corporate || []).map(mapMocResource),
         trusts: mapTrustsResource(body.trusts),
         update: mapUpdateResource(body.update),
-        is_remove: body.is_remove,
-        is_remove_not_proprietor_of_land: body.is_remove_not_proprietor_of_land
+        remove: mapRemoveResource(body.remove),
+        is_remove: body.is_remove
     };
 };
 
@@ -446,6 +448,27 @@ const mapUpdate = (update: Update): UpdateResource => {
             }
         }
         return resource;
+    }
+    return {};
+}
+
+const mapRemove = (remove: Remove): RemoveResource => {
+    if (remove && Object.keys(remove).length) {
+        const resource: RemoveResource = {
+            is_not_proprietor_of_land: (remove.is_not_proprietor_of_land) ? remove.is_not_proprietor_of_land : null
+        };
+        return resource;
+    }
+    return {};
+}
+
+const mapRemoveResource = (removeResource: RemoveResource): Remove => {
+    if (removeResource && Object.keys(removeResource).length) {
+        const remove: Remove = {
+            is_not_proprietor_of_land: removeResource.is_not_proprietor_of_land
+        };
+
+        return remove;
     }
     return {};
 }

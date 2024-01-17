@@ -17,8 +17,8 @@ export interface OverseasEntity {
     managing_officers_corporate?: ManagingOfficerCorporate[];
     trusts?: Trust[];
     update?: Update;
+    remove?: Remove;
     is_remove?: boolean;
-    is_remove_not_proprietor_of_land?: boolean;
 }
 
 export interface OverseasEntityResource {
@@ -36,8 +36,8 @@ export interface OverseasEntityResource {
     managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trusts?: TrustResource[];
     update?: UpdateResource;
+    remove?: RemoveResource;
     is_remove?: boolean;
-    is_remove_not_proprietor_of_land?: boolean;
 }
 
 export interface OverseasEntityExtraDetails {
@@ -310,6 +310,14 @@ export interface Update {
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReview[];
+}
+
+export interface Remove {
+    is_not_proprietor_of_land?: boolean;
+}
+
+export interface RemoveResource {
+    is_not_proprietor_of_land?: boolean;
 }
 
 export interface UpdateResource {
