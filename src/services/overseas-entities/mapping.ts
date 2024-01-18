@@ -50,7 +50,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         trusts: mapTrusts(body.trusts),
         update: mapUpdate(body.update),
         remove: mapRemove(body.remove),
-        is_remove: (body.is_remove) ? body.is_remove : null,
+        is_remove: (body.is_remove) ? body.is_remove : null
     };
 };
 
