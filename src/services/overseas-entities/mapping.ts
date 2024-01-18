@@ -453,14 +453,10 @@ const mapUpdate = (update: Update): UpdateResource => {
 }
 
 const mapRemove = (remove: Remove): RemoveResource => {
-    console.log("\n\nSDK T1\n\n");
-
     if (remove && Object.keys(remove).length) {
         const resource: RemoveResource = {
             is_not_proprietor_of_land: (remove.is_not_proprietor_of_land) ? remove.is_not_proprietor_of_land : null
         };
-
-        console.log("\n\nSDK T2: " + JSON.stringify(resource, null, 2) + "\n\n");
 
         return resource;
     }

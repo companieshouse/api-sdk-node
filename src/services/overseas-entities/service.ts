@@ -90,8 +90,6 @@ export default class OverseasEntityService {
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
 
-        console.log("\n\nSDK T0\n\n");
-
         const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 
         if (resp.error) {
