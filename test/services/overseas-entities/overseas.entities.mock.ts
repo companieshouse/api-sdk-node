@@ -36,9 +36,10 @@ import {
     UpdateResource,
     OverseasEntityExtraDetails,
     BeneficialOwnerPrivateDataResource,
-    TrustLinkData,
     TrustToReviewResource,
-    TrustToReview
+    TrustToReview,
+    Remove,
+    RemoveResource
 } from "../../../src/services/overseas-entities";
 import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
@@ -452,6 +453,10 @@ export const UPDATE_OBJECT_MOCK: Update = {
     review_trusts: REVIEW_TRUSTS_MOCK
 }
 
+export const REMOVE_OBJECT_MOCK: Remove = {
+    is_not_proprietor_of_land: true
+}
+
 export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     entity_name: ENTITY_NAME_FIELD_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
@@ -467,6 +472,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
     trusts: TRUSTS_MOCK,
     update: UPDATE_OBJECT_MOCK,
+    remove: REMOVE_OBJECT_MOCK,
     is_remove: undefined
 };
 
@@ -596,6 +602,10 @@ export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     review_trusts: REVIEW_TRUSTS_RESOURCE_MOCK
 }
 
+export const REMOVE_RESOURCE_MOCK: RemoveResource = {
+    is_not_proprietor_of_land: true
+}
+
 export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     entity_name: ENTITY_NAME_BLOCK_MOCK,
     entity_number: ENTITY_NUMBER_MOCK,
@@ -610,7 +620,8 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     managing_officers_individual: MANAGING_OFFICERS_INDIVIDUAL_RESOURCE_MOCK_LIST,
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
     trusts: TRUSTS_RESOURCE_MOCK,
-    update: UPDATE_RESOURCE_MOCK
+    update: UPDATE_RESOURCE_MOCK,
+    remove: REMOVE_RESOURCE_MOCK
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK: OverseasEntityExtraDetails = {
