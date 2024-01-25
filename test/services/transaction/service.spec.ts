@@ -152,4 +152,36 @@ describe("transaction", () => {
         const castedData: ApiErrorResponse = data;
         expect(castedData.errors[0]).to.equal("Unprocessable Entity");
     });
+
+    it("patch returns successful response", async () => {
+        const mockPatchResponse = {
+            headers: {
+                "X-Payment-Required": "http://link-to-payment"
+            },
+            status: 202
+        };
+
+        sinon.stub(requestClient, "httpPatch").resolves(mockPatchResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.patchTransaction({ id: "abc", description: "patch" } as Transaction);
+
+        expect(data.httpStatusCode).to.equal(202);
+        const castedData: ApiResponse<Transaction> = data as ApiResponse<Transaction>;
+        expect(castedData.headers["X-Payment-Required"]).to.equal("http://link-to-payment");
+    });
+
+    it("patch returns an error response on failure", async () => {
+        const mockPutResponse = {
+            status: 422,
+            error: "Unprocessable Entity"
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPutResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.patchTransaction({ id: "abc", description: "patch" } as Transaction);
+
+        expect(data.httpStatusCode).to.equal(422);
+        const castedData: ApiErrorResponse = data;
+        expect(castedData.errors[0]).to.equal("Unprocessable Entity");
+    });
 });

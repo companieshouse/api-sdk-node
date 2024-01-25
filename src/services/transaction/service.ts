@@ -42,13 +42,39 @@ export default class TransactionService {
     /**
      * Put a transaction
      *
-     * @param replacment transaction
+     * @param transaction the transaction to put
      */
     public async putTransaction (transaction: Transaction): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
         const url = "/transactions/" + transaction.id
 
         const transactionResource: TransactionResource = this.mapToResource(transaction);
         const resp = await this.client.httpPut(url, transactionResource);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: ApiResponse<Transaction> = {
+            headers: resp.headers,
+            httpStatusCode: resp.status
+        };
+
+        return resource;
+    }
+
+    /**
+     * Patch a transaction
+     *
+     * @param transaction the transaction to patch
+     */
+    public async patchTransaction (transaction: Transaction): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
+        const url = "/transactions/" + transaction.id
+
+        const transactionResource: TransactionResource = this.mapToResource(transaction);
+        const resp = await this.client.httpPatch(url, transactionResource);
 
         if (resp.error) {
             return {
