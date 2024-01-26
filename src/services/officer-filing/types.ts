@@ -168,6 +168,7 @@ export interface FilingResponseDto {
  * This is used for both post and patch requests.
  */
 export interface OfficerFiling {
+    description?: string;
     referenceAppointmentId?: string;
     referenceEtag?: string;
     resignedOn?: string;
@@ -203,6 +204,7 @@ export interface OfficerFiling {
 }
 
 export interface OfficerFilingDto {
+    description?: string;
     reference_appointment_id?: string;
     reference_etag?: string;
     resigned_on?: string;

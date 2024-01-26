@@ -143,6 +143,7 @@ export default class {
      */
     private mapToDto (officerFiling: OfficerFiling): OfficerFilingDto {
         return {
+            description: officerFiling.description,
             reference_appointment_id: officerFiling.referenceAppointmentId,
             reference_etag: officerFiling.referenceEtag,
             resigned_on: officerFiling.resignedOn,
@@ -203,6 +204,7 @@ export default class {
      */
     private mapFromDto (officerFilingDto: OfficerFilingDto): OfficerFiling {
         return {
+            description: officerFilingDto.description,
             referenceAppointmentId: officerFilingDto.reference_appointment_id,
             referenceEtag: officerFilingDto.reference_etag,
             resignedOn: officerFilingDto.resigned_on,
