@@ -17,7 +17,7 @@
     "analyse-code": "sonar-scanner"
   },
   "dependencies": {
-    "axios": "^1.6.1",
+    "axios": "^1.6.7",
     "camelcase-keys": "~6.2.2",
     "snakecase-keys": "~3.2.0",
     "url-search-params-polyfill": "~8.1.1"
