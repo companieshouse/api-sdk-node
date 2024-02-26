@@ -135,8 +135,8 @@ const mapToTrust = (trust: TrustResource): Trust => {
         creation_date_day: creationDate.day,
         creation_date_month: creationDate.month,
         creation_date_year: creationDate.year,
-        ceased_date_day: ceased_date.day, 
-        ceased_date_month: ceased_date.month, 
+        ceased_date_day: ceased_date.day,
+        ceased_date_month: ceased_date.month,
         ceased_date_year: ceased_date.year,
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
