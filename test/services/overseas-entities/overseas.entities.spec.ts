@@ -613,7 +613,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         };
 
         if (updateResource.review_trusts) {
-            updateResource.review_trusts[0].ceased_date = undefined;
+            updateResource.review_trusts[0].ceased_date = "";
         }
 
         const overseasEntity = mapOverseasEntityResource({
@@ -666,7 +666,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         };
 
         if (overseasEntityResource.trusts && overseasEntityResource.trusts[0]) {
-            overseasEntityResource.trusts[0].ceased_date = undefined;
+            overseasEntityResource.trusts[0].ceased_date = "";
         };
 
         const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
