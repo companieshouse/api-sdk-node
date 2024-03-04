@@ -641,7 +641,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update
         });
 
-        expect(overseasEntityResource.update?.review_trusts?.[0].ceased_date).to.be.undefined;
+        expect(overseasEntityResource.update?.review_trusts?.[0].ceased_date).to.equal("");
         expect(overseasEntityResource.update?.review_trusts?.[0].trust_id).to.equal("1234");
     });
 
@@ -656,7 +656,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
         const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
 
-        expect(overseasEntityResource.trusts?.[0].ceased_date).to.be.undefined;
+        expect(overseasEntityResource.trusts?.[0].ceased_date).to.equal("");
         expect(overseasEntityResource.trusts?.[0].trust_id).to.equal("123");
     });
 
