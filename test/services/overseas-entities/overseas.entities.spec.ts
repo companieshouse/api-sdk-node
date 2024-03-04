@@ -14,7 +14,9 @@ import {
     TrustLinkData,
     IndividualTrusteeDataResource,
     CorporateTrusteeDataResource,
-    IndividualTrusteeData
+    IndividualTrusteeData,
+    OverseasEntityResource,
+    OverseasEntity
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
@@ -603,6 +605,76 @@ describe("Mapping OverseasEntity Tests suite", () => {
         const dataResource = mapOverseasEntityExtraDetails({} as OverseasEntityExtraDetails);
 
         expect(dataResource.email_address).to.equal(undefined);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with no review trust ceased date", async () => {
+        const updateResource = {
+            ...mockValues.UPDATE_RESOURCE_MOCK
+        };
+
+        if (updateResource.review_trusts) {
+            updateResource.review_trusts[0].ceased_date = undefined;
+        }
+
+        const overseasEntity = mapOverseasEntityResource({
+            update: updateResource
+        });
+
+        expect(overseasEntity.update?.review_trusts?.[0].ceased_date_day).to.be.undefined;
+        expect(overseasEntity.update?.review_trusts?.[0].ceased_date_month).to.be.undefined;
+        expect(overseasEntity.update?.review_trusts?.[0].ceased_date_year).to.be.undefined;
+        expect(overseasEntity.update?.review_trusts?.[0].trust_id).to.equal("1234");
+    });
+
+    it("should return OverseasEntityResource object from mapOverseasEntity method with no review trust ceased date", async () => {
+        const update = {
+            ...mockValues.UPDATE_OBJECT_MOCK
+        };
+
+        if (update.review_trusts) {
+            update.review_trusts[0].ceased_date_day = undefined;
+            update.review_trusts[0].ceased_date_month = undefined;
+            update.review_trusts[0].ceased_date_year = undefined;
+        }
+
+        const overseasEntityResource = mapOverseasEntity({
+            update
+        });
+
+        expect(overseasEntityResource.update?.review_trusts?.[0].ceased_date).to.be.undefined;
+        expect(overseasEntityResource.update?.review_trusts?.[0].trust_id).to.equal("1234");
+    });
+
+    it("should return OverseasEntityResource object from mapOverseasEntity method with Trust data but no ceased date", async () => {
+        const overseasEntity = {
+            trusts: mockValues.TRUSTS_MOCK
+        };
+
+        overseasEntity.trusts[0].ceased_date_day = undefined;
+        overseasEntity.trusts[0].ceased_date_month = undefined;
+        overseasEntity.trusts[0].ceased_date_year = undefined;
+
+        const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
+
+        expect(overseasEntityResource.trusts?.[0].ceased_date).to.be.undefined;
+        expect(overseasEntityResource.trusts?.[0].trust_id).to.equal("123");
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with Trust data but no ceased date", async () => {
+        const overseasEntityResource: OverseasEntityResource = {
+            trusts: mockValues.TRUSTS_RESOURCE_MOCK
+        };
+
+        if (overseasEntityResource.trusts && overseasEntityResource.trusts[0]) {
+            overseasEntityResource.trusts[0].ceased_date = undefined;
+        };
+
+        const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
+
+        expect(overseasEntity.trusts?.[0].ceased_date_day).to.be.undefined;
+        expect(overseasEntity.trusts?.[0].ceased_date_month).to.be.undefined;
+        expect(overseasEntity.trusts?.[0].ceased_date_year).to.be.undefined;
+        expect(overseasEntity.trusts?.[0].trust_id).to.equal("123");
     });
 
     describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
