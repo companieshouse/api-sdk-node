@@ -127,6 +127,7 @@ const mapTrustsToReviewResource = (trusts: TrustToReviewResource[] = []): TrustT
 
 const mapToTrust = (trust: TrustResource): Trust => {
     const creationDate = mapIsoDate(trust.creation_date);
+    const ceased_date = trust.ceased_date ? mapIsoDate(trust.ceased_date) : undefined;
 
     return {
         trust_id: trust.trust_id,
@@ -134,6 +135,9 @@ const mapToTrust = (trust: TrustResource): Trust => {
         creation_date_day: creationDate.day,
         creation_date_month: creationDate.month,
         creation_date_year: creationDate.year,
+        ceased_date_day: ceased_date?.day,
+        ceased_date_month: ceased_date?.month,
+        ceased_date_year: ceased_date?.year,
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
@@ -343,10 +347,11 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 }
 
 const mapTrust = (trust: Trust): TrustResource => {
-    const { creation_date_day, creation_date_month, creation_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
+    const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
     return {
         ...rest,
         creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),
+        ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
         INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
         HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
         CORPORATE: mapTrustCorporates(CORPORATES),
