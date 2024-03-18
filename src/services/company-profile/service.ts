@@ -69,6 +69,7 @@ export default class CompanyProfileService {
             companyStatus: body.company_status,
             companyStatusDetail: body.company_status_detail,
             dateOfCreation: body.date_of_creation,
+            dateOfCessation: body.date_of_cessation,
             jurisdiction: body.jurisdiction,
             sicCodes: body.sic_codes,
             hasBeenLiquidated: body.has_been_liquidated,

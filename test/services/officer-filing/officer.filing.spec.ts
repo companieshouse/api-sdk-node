@@ -28,7 +28,7 @@ describe("List active Directors details GET", () => {
         const data: Resource<CompanyOfficer[]> = await ofService.getListActiveDirectorDetails(TRANSACTION_ID) as Resource<CompanyOfficer[]>;
 
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource[1].dateOfBirth).to.contain(mockValues.mockActiveDirectorDetails.date_of_birth);
+        expect(data.resource?.[1].dateOfBirth).to.contain(mockValues.mockActiveDirectorDetails.date_of_birth);
     });
 
     it("should return error 404 - No active director details were found", async () => {
@@ -37,7 +37,7 @@ describe("List active Directors details GET", () => {
         const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
 
         expect(data.httpStatusCode).to.equal(404);
-        expect(data.errors[0]).to.equal("No active directors details were found");
+        expect(data.errors?.[0]).to.equal("No active directors details were found");
     });
 
     it("should return error 500 - Internal server error", async () => {
@@ -46,7 +46,7 @@ describe("List active Directors details GET", () => {
         const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors[0]).to.equal("Internal server error");
+        expect(data.errors?.[0]).to.equal("Internal server error");
     });
 });
 
@@ -61,7 +61,7 @@ describe("List TM01 check your answers details GET", () => {
         expect(data.resource?.dateOfBirth).to.contain(mockValues.mockDirectorAndTerminationDate.date_of_birth);
         expect(data.resource?.appointedOn).to.contain(mockValues.mockDirectorAndTerminationDate.appointed_on);
         expect(data.resource?.officerRole).to.contain(mockValues.mockDirectorAndTerminationDate.officer_role);
-        expect(data.resource.name).to.contain(mockValues.mockDirectorAndTerminationDate.name);
+        expect(data.resource?.name).to.contain(mockValues.mockDirectorAndTerminationDate.name);
     });
 
     it("should return error 500 - Internal server error", async () => {
@@ -70,7 +70,7 @@ describe("List TM01 check your answers details GET", () => {
         const data: ApiErrorResponse = await ofService.getDirectorAndTerminationDate(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors[0]).to.equal("Internal server error");
+        expect(data.errors?.[0]).to.equal("Internal server error");
     });
 });
 
@@ -99,7 +99,7 @@ describe("Current or future dissolved GET", () => {
         const data: ApiErrorResponse = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER);
 
         expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors[0]).to.equal("Internal server error");
+        expect(data.errors?.[0]).to.equal("Internal server error");
     });
 });
 
@@ -121,7 +121,7 @@ describe("Validation Status Response GET", () => {
         const data: ApiErrorResponse = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID) as Resource<Boolean>;
 
         expect(data.httpStatusCode).to.equal(404);
-        expect(data.errors[0]).to.equal("Not Found");
+        expect(data.errors?.[0]).to.equal("Not Found");
     });
 
     it("should return error 500 - Internal server error", async () => {
@@ -130,7 +130,7 @@ describe("Validation Status Response GET", () => {
         const data: ApiErrorResponse = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors[0]).to.equal("Internal server error");
+        expect(data.errors?.[0]).to.equal("Internal server error");
     });
 });
 
@@ -152,7 +152,7 @@ describe("Officer Filing GET", () => {
         const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(404);
-        expect(data.errors[0]).to.equal("Officer filing not found");
+        expect(data.errors?.[0]).to.equal("Officer filing not found");
     });
 
     it("should return error 500 - Internal server error", async () => {
@@ -161,6 +161,6 @@ describe("Officer Filing GET", () => {
         const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
 
         expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors[0]).to.equal("Internal server error");
+        expect(data.errors?.[0]).to.equal("Internal server error");
     });
 });
