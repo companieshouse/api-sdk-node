@@ -8,7 +8,6 @@ export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthT
 export const mockAddress1 = {
     address_line_1: "123 Street",
     address_line_2: "Some area",
-    care_of: "Some council",
     country: "United Kingdom",
     locality: "Wales",
     po_box: "123",
@@ -20,7 +19,6 @@ export const mockAddress1 = {
 export const mockAddress2 = {
     address_line_1: "10 This road",
     address_line_2: "This",
-    care_of: "abc",
     country: "Thisland",
     locality: "Thistown",
     po_box: "1",
