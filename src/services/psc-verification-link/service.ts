@@ -4,8 +4,6 @@ import {
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
-import Mapping from "../../mapping/mapping";
-import { FilingResponse } from "services/officer-filing";
 
 export default class {
     constructor (private readonly client: IHttpClient) {}

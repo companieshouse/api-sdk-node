@@ -24,7 +24,7 @@ import OfficerFilingService from "./services/officer-filing/service";
 import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
 import { PostcodeLookupService } from "./services/postcode-lookup";
-import { PscVerificationService } from "services/psc-verification-link";
+import PscVerificationService from "./services/psc-verification-link/service";
 /**
  * ApiClient is the class that all service objects hang off.
  */
