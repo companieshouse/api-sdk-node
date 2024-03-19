@@ -101,7 +101,6 @@ export interface CompanyOfficer {
 export interface Address {
     addressLine1: string;
     addressLine2?: string;
-    careOf?: string;
     country: string;
     locality: string;
     poBox?: string;
