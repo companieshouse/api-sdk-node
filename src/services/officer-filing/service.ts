@@ -189,7 +189,6 @@ export default class {
         return {
             address_line_1: address.addressLine1,
             address_line_2: address.addressLine2,
-            care_of: address.careOf,
             country: address.country,
             locality: address.locality,
             po_box: address.poBox,
@@ -250,7 +249,6 @@ export default class {
         return {
             addressLine1: addressDto.address_line_1,
             addressLine2: addressDto.address_line_2,
-            careOf: addressDto.care_of,
             country: addressDto.country,
             locality: addressDto.locality,
             poBox: addressDto.po_box,
