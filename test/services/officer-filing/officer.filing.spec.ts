@@ -74,35 +74,6 @@ describe("List TM01 check your answers details GET", () => {
     });
 });
 
-describe("Current or future dissolved GET", () => {
-    it("should return Boolean value", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[200]);
-        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
-        const data: Resource<Boolean> = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER) as Resource<Boolean>;
-
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource).to.equal(true);
-    });
-
-    it("should return Boolean value of false", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolvedReturnsFalse[200]);
-        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
-        const data: Resource<Boolean> = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER) as Resource<Boolean>;
-
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource).to.equal(false);
-    });
-
-    it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[500]);
-        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
-        const data: ApiErrorResponse = await ofService.getCurrentOrFutureDissolved(COMPANY_NUMBER);
-
-        expect(data.httpStatusCode).to.equal(500);
-        expect(data.errors?.[0]).to.equal("Internal server error");
-    });
-});
-
 describe("Validation Status Response GET", () => {
     it("should return list of error/s and validation status", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetValidationStatusResponse[200]);
