@@ -89,11 +89,9 @@ export default class {
         const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
 
         const resp = await this.client.httpPost(url, officerFilingResource);
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
         const resource: Resource<FilingResponse> = {
@@ -112,11 +110,9 @@ export default class {
         const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
 
         const resp = await this.client.httpPatch(url, officerFilingResource);
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
         const resource: Resource<FilingResponse> = {
