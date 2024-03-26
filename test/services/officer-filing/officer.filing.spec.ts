@@ -1,5 +1,5 @@
 import {
-    CompanyOfficer, OfficerFiling, OfficerFilingService, ValidationStatusResponse
+    CompanyOfficer, FilingResponse, OfficerFiling, OfficerFilingService, ValidationStatusResponse
 } from "../../../src/services/officer-filing";
 import * as mockValues from "./officer.filing.mock";
 import { expect } from "chai";
@@ -130,6 +130,66 @@ describe("Officer Filing GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors?.[0]).to.equal("Internal server error");
+    });
+});
+
+describe("Officer Filing POST", () => {
+    it("should return an officer filing", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOfficerFiling[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<FilingResponse> = await ofService.postOfficerFiling(TRANSACTION_ID, {}) as Resource<FilingResponse>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.id).to.equal("567");
+        expect(data.resource?.data?.description).to.equal("Update a Director");
+    });
+
+    it("should return error 404 - Not found", async () => {
+        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[404]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
+
+        expect(data.httpStatusCode).to.equal(404);
+        expect(data.errors?.[0]).to.equal("Officer filing not found");
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[500]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
+
+        expect(data.httpStatusCode).to.equal(500);
+        expect(data.errors?.[0]).to.equal("Internal server error");
+    });
+});
+
+describe("Officer Filing PATCH", () => {
+    it("should return an officer filing", async () => {
+        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[200]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: Resource<FilingResponse> = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {}) as Resource<FilingResponse>;
+
+        expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.id).to.equal("123");
+        expect(data.resource?.data?.description).to.equal("Appoint a new Director");
+    });
+
+    it("should return error 404 - Not found", async () => {
+        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[404]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
+
+        expect(data.httpStatusCode).to.equal(404);
+        expect(data.errors?.[0]).to.equal("Officer filing not found");
+    });
+
+    it("should return error 500 - Internal server error", async () => {
+        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[500]);
+        const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
+        const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
 
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors?.[0]).to.equal("Internal server error");
