@@ -129,6 +129,7 @@ export const mockPatchOfficerFiling = {
     200: {
         status: 200,
         body: {
+            id: "123",
             data: {
                 description: "Appoint a new Director"
             }
@@ -142,6 +143,7 @@ export const mockPostOfficerFiling = {
     200: {
         status: 200,
         body: {
+            id: "567",
             data: {
                 description: "Update a Director"
             }

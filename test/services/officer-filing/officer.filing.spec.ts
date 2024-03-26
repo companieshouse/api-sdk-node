@@ -143,6 +143,7 @@ describe("Officer Filing POST", () => {
         const data: Resource<FilingResponse> = await ofService.postOfficerFiling(TRANSACTION_ID, {}) as Resource<FilingResponse>;
 
         expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.id).to.equal("567");
         expect(data.resource?.data?.description).to.equal("Update a Director");
     });
 
@@ -172,6 +173,7 @@ describe("Officer Filing PATCH", () => {
         const data: Resource<FilingResponse> = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {}) as Resource<FilingResponse>;
 
         expect(data.httpStatusCode).to.equal(200);
+        expect(data.resource?.id).to.equal("123");
         expect(data.resource?.data?.description).to.equal("Appoint a new Director");
     });
 
