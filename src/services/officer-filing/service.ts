@@ -119,6 +119,7 @@ export default class {
             httpStatusCode: resp.status
         };
         const body = resp.body as FilingResponseDto;
+
         this.populateResource(resource, body);
         return resource;
     }

@@ -125,6 +125,32 @@ export const mockGetOfficerFiling = {
     500: { status: 500, error: "Internal server error" }
 };
 
+export const mockPatchOfficerFiling = {
+    200: {
+        status: 200,
+        body: {
+            data: {
+                description: "Appoint a new Director"
+            }
+        }
+    },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+
+export const mockPostOfficerFiling = {
+    200: {
+        status: 200,
+        body: {
+            data: {
+                description: "Update a Director"
+            }
+        }
+    },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+
 export const mockGetListActiveDirectorsDetails = {
     200: { status: 200, body: mockListActiveDirectorDetails },
     404: { status: 404, error: "No active directors details were found" },
