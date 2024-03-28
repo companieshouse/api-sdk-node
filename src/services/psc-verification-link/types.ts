@@ -31,6 +31,7 @@ export interface VerificationDetails {
 }
 
 export interface PscVerification {
+    company_number: string,
     psc_appointment_id: string,
     relevant_officer?: RelevantOfficer,
     verification_details: VerificationDetails
