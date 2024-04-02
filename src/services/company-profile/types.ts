@@ -7,6 +7,7 @@ export interface CompanyProfileResource {
   company_status: string;
   company_status_detail: string;
   date_of_creation: string;
+  date_of_cessation?: string,
   jurisdiction: string;
   sic_codes: string[];
   has_been_liquidated: boolean;
@@ -134,6 +135,7 @@ export interface CompanyProfile {
   companyStatus: string;
   companyStatusDetail: string;
   dateOfCreation: string;
+  dateOfCessation?: string,
   jurisdiction: string;
   sicCodes: string[];
   hasBeenLiquidated: boolean;

@@ -46,17 +46,6 @@ export default class {
         return this.getCompanyOfficerDetails(url);
     }
 
-    public async getCurrentOrFutureDissolved (companyNumber: String): Promise<Resource<Boolean> | ApiErrorResponse> {
-        const url = `/officer-filing/company/${companyNumber}/eligibility-check/past-future-dissolved`;
-        const resp: HttpResponse = await this.client.httpGet(url);
-
-        if (resp.status >= 400) {
-            return { httpStatusCode: resp.status, errors: [resp.error] };
-        }
-
-        return { httpStatusCode: resp.status, resource: resp.body as Boolean };
-    }
-
     private async getValidationStatusResponse (url: string): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
         const resp: HttpResponse = await this.client.httpGet(url);
 
@@ -100,11 +89,9 @@ export default class {
         const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
 
         const resp = await this.client.httpPost(url, officerFilingResource);
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
         const resource: Resource<FilingResponse> = {
@@ -123,17 +110,16 @@ export default class {
         const officerFilingResource: OfficerFilingDto = this.mapToDto(officerFiling);
 
         const resp = await this.client.httpPatch(url, officerFilingResource);
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
         const resource: Resource<FilingResponse> = {
             httpStatusCode: resp.status
         };
         const body = resp.body as FilingResponseDto;
+
         this.populateResource(resource, body);
         return resource;
     }
@@ -173,7 +159,7 @@ export default class {
             name_has_been_updated: officerFiling.nameHasBeenUpdated,
             nationality_has_been_updated: officerFiling.nationalityHasBeenUpdated,
             occupation_has_been_updated: officerFiling.occupationHasBeenUpdated,
-            correspondence_address_has_been_updated: officerFiling.correspondenceAddressHasBeenUpdated,
+            service_address_has_been_updated: officerFiling.serviceAddressHasBeenUpdated,
             residential_address_has_been_updated: officerFiling.residentialAddressHasBeenUpdated,
             directors_details_changed_date: officerFiling.directorsDetailsChangedDate
         }
@@ -189,7 +175,6 @@ export default class {
         return {
             address_line_1: address.addressLine1,
             address_line_2: address.addressLine2,
-            care_of: address.careOf,
             country: address.country,
             locality: address.locality,
             po_box: address.poBox,
@@ -234,7 +219,7 @@ export default class {
             nameHasBeenUpdated: officerFilingDto.name_has_been_updated,
             nationalityHasBeenUpdated: officerFilingDto.nationality_has_been_updated,
             occupationHasBeenUpdated: officerFilingDto.occupation_has_been_updated,
-            correspondenceAddressHasBeenUpdated: officerFilingDto.correspondence_address_has_been_updated,
+            serviceAddressHasBeenUpdated: officerFilingDto.service_address_has_been_updated,
             residentialAddressHasBeenUpdated: officerFilingDto.residential_address_has_been_updated,
             directorsDetailsChangedDate: officerFilingDto.directors_details_changed_date
         }
@@ -250,7 +235,6 @@ export default class {
         return {
             addressLine1: addressDto.address_line_1,
             addressLine2: addressDto.address_line_2,
-            careOf: addressDto.care_of,
             country: addressDto.country,
             locality: addressDto.locality,
             poBox: addressDto.po_box,

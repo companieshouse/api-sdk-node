@@ -101,7 +101,6 @@ export interface CompanyOfficer {
 export interface Address {
     addressLine1: string;
     addressLine2?: string;
-    careOf?: string;
     country: string;
     locality: string;
     poBox?: string;
@@ -198,7 +197,7 @@ export interface OfficerFiling {
     nameHasBeenUpdated?: boolean;
     nationalityHasBeenUpdated?: boolean;
     occupationHasBeenUpdated?: boolean;
-    correspondenceAddressHasBeenUpdated?: boolean;
+    serviceAddressHasBeenUpdated?: boolean;
     residentialAddressHasBeenUpdated?: boolean;
     directorsDetailsChangedDate?: string;
 }
@@ -234,7 +233,7 @@ export interface OfficerFilingDto {
     name_has_been_updated?: boolean;
     nationality_has_been_updated?: boolean;
     occupation_has_been_updated?: boolean;
-    correspondence_address_has_been_updated?: boolean;
+    service_address_has_been_updated?: boolean;
     residential_address_has_been_updated?: boolean;
     directors_details_changed_date?: string;
 }
