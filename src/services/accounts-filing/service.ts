@@ -4,6 +4,7 @@ import { isAccountValidatorResponse } from "../../services/account-validator/typ
 import { AccountsFilingValidationRequest, AccountsFileValidationResponse, AccountsFilingCompanyResponse, PackageType, PackageTypeRequest, ConfirmCompanyRequest } from "./types";
 import Mapping from "../../mapping/mapping";
 import { Failure, Result, Success } from "../result";
+import { addReuestIdHeader } from "../../util";
 
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_NOT_FOUND = 404;
@@ -33,9 +34,10 @@ export class AccountsFilingService {
      * @param transactionId The transaction Id
      * @returns the company response.
      */
-    public async confirmCompany (companyNumber: string, transactionId: string, confirmCompanyRequest: ConfirmCompanyRequest): Promise<Resource<AccountsFilingCompanyResponse>> {
+    public async confirmCompany (companyNumber: string, transactionId: string, confirmCompanyRequest: ConfirmCompanyRequest, requestId?: string): Promise<Resource<AccountsFilingCompanyResponse>> {
         const url = `/transactions/${transactionId}/accounts-filing/company/${companyNumber}/confirm`;
-        const resp = await this.client.httpPut(url, confirmCompanyRequest);
+        const headers = addReuestIdHeader(requestId);
+        const resp = await this.client.httpPut(url, confirmCompanyRequest, headers);
 
         const resource: Resource<AccountsFilingCompanyResponse> = {
             httpStatusCode: resp.status
@@ -208,7 +210,7 @@ export class AccountsFilingService {
         };
     }
 
-    public async setPackageType (transactionId: string, accountsFilingId: string, packageType: PackageType): Promise<Result<void, Error>> {
+    public async setPackageType (transactionId: string, accountsFilingId: string, packageType: PackageType, requestId?: string): Promise<Result<void, Error>> {
         const url = `/transactions/${transactionId}/accounts-filing/${accountsFilingId}`;
 
         const packageTypeRequest: PackageTypeRequest = {
@@ -216,7 +218,8 @@ export class AccountsFilingService {
         }
 
         const requestBody = Mapping.snakeCaseKeys(packageTypeRequest);
-        const resp = await this.client.httpPut(url, requestBody);
+        const headers = addReuestIdHeader(requestId)
+        const resp = await this.client.httpPut(url, requestBody, headers);
 
         // Needed due to javascripts switch block scoping rules
         let errorMessage = "";
