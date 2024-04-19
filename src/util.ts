@@ -13,7 +13,7 @@ import { Headers } from "./http";
  * @param {Headers} otherHeaders Existing set of headers to which the Request ID header will be added.
  * @returns {Headers | undefined} A new headers object with the Request ID added, or undefined if no Request ID was provided.
  */
-export function addReuestIdHeader (requestId?: string, otherHeaders: Headers = {}): Headers | undefined {
+export function addRequestIdHeader (requestId?: string, otherHeaders: Headers = {}): Headers | undefined {
     if (requestId === undefined) {
         return undefined
     }

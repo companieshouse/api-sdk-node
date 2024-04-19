@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
-import { addReuestIdHeader } from "../../util";
+import { addRequestIdHeader } from "../../util";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -19,7 +19,7 @@ export default class TransactionService {
 
         const transactionResource: TransactionResource = this.mapToResource(transaction);
 
-        const headers = addReuestIdHeader(requestId);
+        const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpPost(url, transactionResource, headers);
 
         if (resp.error) {
@@ -51,7 +51,7 @@ export default class TransactionService {
     public async putTransaction (transaction: Transaction, requestId?: string): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
         const url = "/transactions/" + transaction.id
 
-        const headers = addReuestIdHeader(requestId);
+        const headers = addRequestIdHeader(requestId);
 
         const transactionResource: TransactionResource = this.mapToResource(transaction);
         const resp = await this.client.httpPut(url, transactionResource, headers);
@@ -96,7 +96,7 @@ export default class TransactionService {
      */
     public async getTransaction (transactionId: string, requestId?: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         const url = "/transactions/" + transactionId
-        const headers = addReuestIdHeader(requestId);
+        const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpGet(url, headers);
 
         if (resp.error) {
@@ -139,7 +139,7 @@ export default class TransactionService {
      */
     public async patchTransaction (transactionId: string, transactionResource: Partial<TransactionResource>, requestId?: string): Promise<Resource<Transaction> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}`;
-        const headers = addReuestIdHeader(requestId);
+        const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpPatch(url, transactionResource, headers);
 
         if (resp.error) {

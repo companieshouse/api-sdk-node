@@ -4,7 +4,7 @@ import { isAccountValidatorResponse } from "../../services/account-validator/typ
 import { AccountsFilingValidationRequest, AccountsFileValidationResponse, AccountsFilingCompanyResponse, PackageType, PackageTypeRequest, ConfirmCompanyRequest } from "./types";
 import Mapping from "../../mapping/mapping";
 import { Failure, Result, Success } from "../result";
-import { addReuestIdHeader } from "../../util";
+import { addRequestIdHeader } from "../../util";
 
 const HTTP_STATUS_OK = 200;
 const HTTP_STATUS_NOT_FOUND = 404;
@@ -36,7 +36,7 @@ export class AccountsFilingService {
      */
     public async confirmCompany (companyNumber: string, transactionId: string, confirmCompanyRequest: ConfirmCompanyRequest, requestId?: string): Promise<Resource<AccountsFilingCompanyResponse>> {
         const url = `/transactions/${transactionId}/accounts-filing/company/${companyNumber}/confirm`;
-        const headers = addReuestIdHeader(requestId);
+        const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpPut(url, confirmCompanyRequest, headers);
 
         const resource: Resource<AccountsFilingCompanyResponse> = {
@@ -218,7 +218,7 @@ export class AccountsFilingService {
         }
 
         const requestBody = Mapping.snakeCaseKeys(packageTypeRequest);
-        const headers = addReuestIdHeader(requestId)
+        const headers = addRequestIdHeader(requestId)
         const resp = await this.client.httpPut(url, requestBody, headers);
 
         // Needed due to javascripts switch block scoping rules
