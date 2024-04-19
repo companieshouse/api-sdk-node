@@ -1,6 +1,7 @@
 import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
+import { REQUEST_ID_HEADER } from "../../config";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -42,13 +43,17 @@ export default class TransactionService {
     /**
      * Put a transaction
      *
-     * @param replacment transaction
+     * @param {Transaction} transaction The transaction object to be updated
+     * @param {string} [requestId] Optional unique identifier for the request used for correlating logs between services
+     * @returns {Promise<ApiResponse<Transaction> | ApiErrorResponse>} A promise resolving to the transaction update response
      */
-    public async putTransaction (transaction: Transaction): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
+    public async putTransaction (transaction: Transaction, requestId?: string): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
         const url = "/transactions/" + transaction.id
 
+        const headers = requestId !== undefined ? { REQUEST_ID_HEADER: requestId } : undefined;
+
         const transactionResource: TransactionResource = this.mapToResource(transaction);
-        const resp = await this.client.httpPut(url, transactionResource);
+        const resp = await this.client.httpPut(url, transactionResource, headers);
 
         if (resp.error) {
             return {
@@ -121,6 +126,34 @@ export default class TransactionService {
             description: body.description,
             resources: body.resources
         }
+        return resource;
+    }
+
+    /**
+     * Patch a transaction.
+     *
+     * @param transactionId the ID of the transaction to update
+     * @param transactionResource the partial transaction resource with updates
+     */
+    public async patchTransaction (transactionId: string, transactionResource: Partial<TransactionResource>): Promise<Resource<Transaction> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}`;
+        const resp = await this.client.httpPatch(url, transactionResource);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<Transaction> = {
+            httpStatusCode: resp.status
+        };
+
+        const body = resp.body as TransactionResource;
+
+        this.populateResource(resource, body);
+
         return resource;
     }
 
