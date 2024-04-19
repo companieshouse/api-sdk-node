@@ -1,6 +1,7 @@
 import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
+import { addRequestIdHeader } from "../../util";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -10,7 +11,7 @@ export default class TransactionService {
    *
    * @param transaction the transaction to create
    */
-    public async postTransaction (transaction: Transaction): Promise<Resource<Transaction>|ApiErrorResponse> {
+    public async postTransaction (transaction: Transaction, requestId?: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         let url = "/transactions"
         if (transaction.id) {
             url += "/" + transaction.id
@@ -18,7 +19,8 @@ export default class TransactionService {
 
         const transactionResource: TransactionResource = this.mapToResource(transaction);
 
-        const resp = await this.client.httpPost(url, transactionResource);
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpPost(url, transactionResource, headers);
 
         if (resp.error) {
             return {
@@ -42,13 +44,17 @@ export default class TransactionService {
     /**
      * Put a transaction
      *
-     * @param replacment transaction
+     * @param {Transaction} transaction The transaction object to be updated
+     * @param {string} [requestId] Optional unique identifier for the request used for correlating logs between services
+     * @returns {Promise<ApiResponse<Transaction> | ApiErrorResponse>} A promise resolving to the transaction update response
      */
-    public async putTransaction (transaction: Transaction): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
+    public async putTransaction (transaction: Transaction, requestId?: string): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
         const url = "/transactions/" + transaction.id
 
+        const headers = addRequestIdHeader(requestId);
+
         const transactionResource: TransactionResource = this.mapToResource(transaction);
-        const resp = await this.client.httpPut(url, transactionResource);
+        const resp = await this.client.httpPut(url, transactionResource, headers);
 
         if (resp.error) {
             return {
@@ -88,9 +94,10 @@ export default class TransactionService {
      *
      * @param transactionId the id of the transaction to retrieve
      */
-    public async getTransaction (transactionId: string): Promise<Resource<Transaction>|ApiErrorResponse> {
+    public async getTransaction (transactionId: string, requestId?: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         const url = "/transactions/" + transactionId
-        const resp = await this.client.httpGet(url);
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpGet(url, headers);
 
         if (resp.error) {
             return {
@@ -121,6 +128,35 @@ export default class TransactionService {
             description: body.description,
             resources: body.resources
         }
+        return resource;
+    }
+
+    /**
+     * Patch a transaction.
+     *
+     * @param transactionId the ID of the transaction to update
+     * @param transactionResource the partial transaction resource with updates
+     */
+    public async patchTransaction (transactionId: string, transactionResource: Partial<TransactionResource>, requestId?: string): Promise<Resource<Transaction> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}`;
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpPatch(url, transactionResource, headers);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<Transaction> = {
+            httpStatusCode: resp.status
+        };
+
+        const body = resp.body as TransactionResource;
+
+        this.populateResource(resource, body);
+
         return resource;
     }
 
