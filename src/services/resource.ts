@@ -12,6 +12,7 @@ export interface ApiResponse<T> extends Resource<T> {
 export interface ApiErrorResponse {
   httpStatusCode?: number;
   errors?: ApiError[];
+  errorString?: string;
 }
 
 export interface ApiError {
