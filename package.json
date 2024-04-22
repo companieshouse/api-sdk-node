@@ -10,7 +10,8 @@
     "scripts": {
         "build": "tsc",
         "test": "mocha",
-        "test:coverage": "nyc npm run test",
+        "test:coverage": "nyc --check-coverage --reporter=text-summary npm run test",
+        "coverage:report": "nyc --reporter=lcov --reporter=text npm run test",
         "lint": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts'",
         "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
         "prepublishOnly": "[ ! -d node_modules ] && npm install; tsc",
