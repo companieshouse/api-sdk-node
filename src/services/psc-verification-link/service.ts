@@ -5,7 +5,7 @@ import {
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
 
-export default class {
+export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
     public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {

@@ -9,3 +9,4 @@ test.ts
 .settings
 dist/
 src/services/.DS_Store
+.nyc_output/
