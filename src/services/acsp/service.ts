@@ -15,8 +15,6 @@ export default class {
         const url = `/transactions/${transactionId}/acsp/${id}`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
-        console.log("inside api-sdk-node getAcsp", resp, resp.error);
-
         if (resp.status >= 400) {
             return { httpStatusCode: resp.status, errors: [resp.error] };
         }
