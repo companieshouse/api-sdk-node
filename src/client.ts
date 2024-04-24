@@ -28,6 +28,7 @@ import { CheckoutSearchService } from "./services/order/search/service";
 import OrderItemService from "./services/order/order-item/service";
 import CheckoutItemService from "./services/order/checkout-item/service";
 import OfficerFilingService from "./services/officer-filing/service";
+import AcspService from "./services/acsp/service";
 import RegisteredEmailAddressService from "./services/registered-email-address/service";
 import { ClientType } from "./enums";
 import { PostcodeLookupService } from "./services/postcode-lookup";
@@ -67,6 +68,7 @@ export default class ApiClient {
   public readonly registeredEmailAddressService: RegisteredEmailAddressService;
   public readonly overseasEntity: OverseasEntityService;
   public readonly officerFiling: OfficerFilingService;
+  public readonly acsp: AcspService;
   public readonly postCodeLookup: PostcodeLookupService;
   public readonly pscVerificationService: PscVerificationService;
   public readonly accountsFilingService: AccountsFilingService;
@@ -90,6 +92,7 @@ export default class ApiClient {
       this.order = new OrderService(apiClient);
       this.orderItem = new OrderItemService(apiClient);
       this.officerFiling = new OfficerFilingService(apiClient);
+      this.acsp = new AcspService(apiClient);
       this.checkoutSearchService = new CheckoutSearchService(apiClient);
       this.mid = new MidService(apiClient);
       this.alphabeticalSearch = new AlphabeticalSearchService(apiClient);
