@@ -21,6 +21,7 @@
     "dependencies": {
         "axios": "^1.6.7",
         "camelcase-keys": "~6.2.2",
+        "http-status-codes": "^2.3.0",
         "snakecase-keys": "~3.2.0",
         "url-search-params-polyfill": "~8.1.1"
     },
