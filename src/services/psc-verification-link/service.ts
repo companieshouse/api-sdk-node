@@ -19,15 +19,34 @@ export default class PscVerificationService {
             }
         }
 
+        return this.populateResource(response);
+    }
+
+    public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+        const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${filingId}`;
+        const response = await this.client.httpPatch(resourceUri, pscVerificationPatch);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            }
+        }
+
         const resource: Resource<PscVerificationResource> = {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: response.body
         };
-        const body = response.body as PscVerificationResource
-        this.populateResource(resource, body);
+
         return resource;
     }
 
-    private populateResource (resource: Resource<PscVerificationResource>, body: PscVerificationResource) {
-        resource.resource = body;
+    private populateResource (response: HttpResponse): Resource<PscVerificationResource> {
+        const resource: Resource<PscVerificationResource> = {
+            httpStatusCode: response.status,
+            resource: response.body as PscVerificationResource
+        };
+
+        return resource;
     }
 }
