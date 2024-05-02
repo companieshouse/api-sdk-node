@@ -7,10 +7,10 @@ export interface NameElements {
 }
 
 export interface RelevantOfficer {
-    name_elements: NameElements,
-    date_of_birth: Date,
-    is_employee: boolean,
-    is_director: boolean
+    name_elements?: NameElements,
+    date_of_birth?: Date,
+    is_employee?: boolean,
+    is_director?: boolean
 }
 
 export enum NameMismatchReason {
@@ -27,11 +27,11 @@ export enum VerificationStatement {
 
 export interface VerificationDetails {
     name_mismatch_reason?: NameMismatchReason,
-    verification_statements: VerificationStatement[]
+    verification_statements?: VerificationStatement[]
 }
 
 export interface PscVerification {
-    company_number: string,
+    company_number?: string,
     psc_appointment_id?: string,
     relevant_officer?: RelevantOfficer,
     verification_details?: VerificationDetails
