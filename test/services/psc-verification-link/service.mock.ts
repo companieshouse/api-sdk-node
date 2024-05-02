@@ -125,3 +125,17 @@ export const mockPscVerificationRleResponse = {
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
 };
+
+export const mockPscVerificationPatchRleResponse = {
+    200: { status: StatusCodes.OK, body: mockPscVerificationPatchRleRoResource },
+    400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
+    401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+};
+
+export const mockPscVerificationPatchIndResponse = {
+    200: { status: StatusCodes.OK, body: mockPscVerificationPatchIndResource },
+    400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
+    401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+};
