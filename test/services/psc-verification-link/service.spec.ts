@@ -1,13 +1,13 @@
-import { describe } from "mocha";
 import { expect } from "chai";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
 import { PscVerificationResource } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_MOCK, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPscVerificationCreatedResource, mockPscVerificationCreatedResponse, mockPscVerificationPatchIndResource, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleRoResource, mockPscVerificationPatchRleResponse, requestClient } from "./service.mock";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPscVerificationCreatedResource, mockPscVerificationCreatedResponse, mockPscVerificationIndResource, mockPscVerificationIndResponse, mockPscVerificationPatchIndResource, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRoResource, requestClient } from "./service.mock";
 
-describe("PSC Verification Link tests", () => {
+describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
 
     describe("POST endpoint", () => {
@@ -22,16 +22,16 @@ describe("PSC Verification Link tests", () => {
             done();
         });
 
-        it("should return status 200 OK and filing resource representation on authorised access", async () => {
+        it("should return status 201 Created and filing resource representation on authorised access", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[201]);
 
             const response = (await pscService.postPscVerification(
                 TRANSACTION_ID,
-                PSC_VERIFICATION_MOCK
+                PSC_VERIFICATION_CREATED
             )) as Resource<PscVerificationResource>;
 
-            expect(response.httpStatusCode).to.equal(201);
-            expect(response.resource).to.equal(mockPscVerificationCreatedResource);
+            expect(response.httpStatusCode).to.equal(StatusCodes.CREATED);
+            expect(response.resource).to.eql(mockPscVerificationCreatedResource);
         });
 
         it("should return status 401 Unauthorised on unauthorised access", async () => {
@@ -39,7 +39,7 @@ describe("PSC Verification Link tests", () => {
 
             const response = await pscService.postPscVerification(TRANSACTION_ID, { company_number: COMPANY_NUMBER }) as ApiErrorResponse;
 
-            expect(response.httpStatusCode).to.equal(401);
+            expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
         });
 
@@ -48,8 +48,40 @@ describe("PSC Verification Link tests", () => {
 
             const data = await pscService.postPscVerification(TRANSACTION_ID, { company_number: "" }) as ApiErrorResponse;
 
-            expect(data.httpStatusCode).to.equal(400);
+            expect(data.httpStatusCode).to.equal(StatusCodes.BAD_REQUEST);
             expect(data.errors?.[0]).to.equal(ReasonPhrases.BAD_REQUEST);
+        });
+    });
+
+    describe("GET endpoint", () => {
+        it("should return status 200 OK and filing resource representation on authorised access", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[200]);
+
+            const response = (await pscService.getPscVerification(
+                TRANSACTION_ID,
+                PSC_VERIFICATION_ID
+            )) as Resource<PscVerificationResource>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockPscVerificationIndResource);
+        });
+
+        it("should return status 401 Unauthorised on unauthorised access", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[401]);
+
+            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
+        });
+
+        it("should return status 404 Not Found if resource id not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[404]);
+
+            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
         });
     });
 

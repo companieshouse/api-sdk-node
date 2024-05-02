@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { NameMismatchReason, PscVerification, PscVerificationResource, VerificationStatement } from "../../../src/services/psc-verification-link/types";
+import { NameElements, NameMismatchReason, PscVerification, PscVerificationResource, VerificationStatement } from "../../../src/services/psc-verification-link/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -9,13 +9,13 @@ export const PSC_VERIFICATION_ID = "662a0de6a2c6f9aead0f32ab"
 export const TRANSACTION_ID = "12345";
 export const FILING_ID = "00112233";
 export const FIRST_DATE = new Date("2024-03-13T10:08:42Z");
-const UPDATE_DATE = new Date("2024-04-13T10:08:42Z");
+export const UPDATE_DATE = new Date("2024-04-13T10:08:42Z");
 export const DOB_DATE = new Date("1970-01-01");
 export const SELF_LINK = `/transactions/${TRANSACTION_ID}/persons-with-significant-control-verification/${FILING_ID}`;
 
-export const PSC_VERIFICATION_MOCK: PscVerification = {
+export const PSC_VERIFICATION_CREATED: PscVerification = {
     company_number: COMPANY_NUMBER
-}
+};
 
 export const PSC_VERIFICATION_IND: PscVerification = {
     company_number: COMPANY_NUMBER,
@@ -26,16 +26,18 @@ export const PSC_VERIFICATION_IND: PscVerification = {
     }
 };
 
+const NAME_ELEMENTS: NameElements = {
+    title: "Sir",
+    forename: "Forename",
+    middlename: "Middlename",
+    surname: "Surname"
+};
+
 export const PSC_VERIFICATION_RLE: PscVerification = {
     company_number: COMPANY_NUMBER,
     psc_appointment_id: PSC_VERIFICATION_ID,
     relevant_officer: {
-        name_elements: {
-            title: "Sir",
-            forename: "Forename",
-            middlename: "Middlename",
-            surname: "Surname"
-        },
+        name_elements: NAME_ELEMENTS,
         date_of_birth: DOB_DATE,
         is_director: true,
         is_employee: true
@@ -49,41 +51,21 @@ export const PSC_VERIFICATION_RLE: PscVerification = {
 export const mockPscVerificationCreatedResource: PscVerificationResource = {
     created_at: FIRST_DATE,
     updated_at: FIRST_DATE,
-    data: PSC_VERIFICATION_MOCK,
+    data: PSC_VERIFICATION_CREATED,
     links: {
         self: SELF_LINK,
         validation_status: `${SELF_LINK}/validation_status`
     }
 };
 
-const PSC_VERIFICATION_INDV_PATCH: PscVerification = {
-    company_number: COMPANY_NUMBER,
+export const PSC_VERIFICATION_INDV_PATCH: PscVerification = {
     psc_appointment_id: PSC_VERIFICATION_ID
 };
 
-const PSC_VERIFICATION_RO_PATCH: PscVerification = {
-    company_number: COMPANY_NUMBER,
+export const PSC_VERIFICATION_RO_PATCH: PscVerification = {
     psc_appointment_id: PSC_VERIFICATION_ID,
     relevant_officer: {
-        name_elements: {
-            title: "Sir",
-            forename: "Forename",
-            middlename: "Middlename",
-            surname: "Surname"
-        }
-    }
-};
-
-const PSC_VERIFICATION_STATEMENTS_PATCH: PscVerification = {
-    company_number: COMPANY_NUMBER,
-    psc_appointment_id: PSC_VERIFICATION_ID,
-    relevant_officer: {
-        name_elements: {
-            title: "Sir",
-            forename: "Forename",
-            middlename: "Middlename",
-            surname: "Surname"
-        }
+        name_elements: NAME_ELEMENTS
     }
 };
 
@@ -113,16 +95,33 @@ export const mockPscVerificationCreatedResponse = {
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED }
 };
 
-export const mockPscVerificationPatchRleResponse = {
-    200: { status: StatusCodes.OK, body: mockPscVerificationPatchRleRoResource },
-    400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
+export const mockPscVerificationIndResource: PscVerificationResource = {
+    created_at: FIRST_DATE,
+    updated_at: FIRST_DATE,
+    data: PSC_VERIFICATION_IND,
+    links: {
+        self: SELF_LINK,
+        validation_status: `${SELF_LINK}/validation_status`
+    }
+};
+
+export const mockPscVerificationRleResource: PscVerificationResource = {
+    created_at: FIRST_DATE,
+    updated_at: FIRST_DATE,
+    data: PSC_VERIFICATION_RLE,
+    links: {
+        self: SELF_LINK,
+        validation_status: `${SELF_LINK}/validation_status`
+    }
+};
+
+export const mockPscVerificationIndResponse = {
+    200: { status: StatusCodes.OK, body: mockPscVerificationIndResource },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
 };
-
-export const mockPscVerificationPatchIndResponse = {
-    200: { status: StatusCodes.OK, body: mockPscVerificationPatchIndResource },
-    400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
+export const mockPscVerificationRleResponse = {
+    200: { status: StatusCodes.OK, body: mockPscVerificationRleResource },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
 };

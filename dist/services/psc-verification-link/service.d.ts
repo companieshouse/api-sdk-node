@@ -5,6 +5,7 @@ export default class PscVerificationService {
     private readonly client;
     constructor(client: IHttpClient);
     postPscVerification(transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse>;
+    getPscVerification(transactionId: string, pscVerificationId: string): Promise<Resource<PscVerificationResource> | ApiErrorResponse>;
     patchPscVerification(transactionId: string, filingId: string, pscVerificationPatch: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse>;
     private populateResource;
 }

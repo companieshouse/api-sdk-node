@@ -9,8 +9,22 @@ export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
     public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
-        const url = `/transactions/${transactionId}/persons-with-significant-control-verification`;
-        const response = await this.client.httpPost(url, pscVerification);
+        const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
+        const response = await this.client.httpPost(resourceUri, pscVerification);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            }
+        }
+
+        return this.populateResource(response);
+    }
+
+    public async getPscVerification (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+        const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
+        const response = await this.client.httpGet(resourceUri);
 
         if (response.error) {
             return {

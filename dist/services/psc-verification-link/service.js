@@ -15,8 +15,21 @@ class PscVerificationService {
     }
     postPscVerification(transactionId, pscVerification) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `/transactions/${transactionId}/persons-with-significant-control-verification`;
-            const response = yield this.client.httpPost(url, pscVerification);
+            const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
+            const response = yield this.client.httpPost(resourceUri, pscVerification);
+            if (response.error) {
+                return {
+                    httpStatusCode: response.status,
+                    errors: [response.error]
+                };
+            }
+            return this.populateResource(response);
+        });
+    }
+    getPscVerification(transactionId, pscVerificationId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
+            const response = yield this.client.httpGet(resourceUri);
             if (response.error) {
                 return {
                     httpStatusCode: response.status,
