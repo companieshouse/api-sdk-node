@@ -15,7 +15,7 @@ export default class PscService {
    * @param companyNumber the company number to look up
    * @param notificationId the PSC Id to retrieve
    */
-    public async getPscIndividual (companyNumber: string, notificationId: string ): Promise<Resource<PersonWithSignificantControl>> {
+    public async getPscIndividual (companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl>> {
         const resp = await this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
 
         const resource: Resource<PersonWithSignificantControl> = {
