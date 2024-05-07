@@ -40,5 +40,4 @@ describe("PSC details", () => {
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
         });
     });
-
 });
