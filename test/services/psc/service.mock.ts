@@ -24,10 +24,10 @@ export const NAME_ELEMENTS = {
     surname: "Surname"
 };
 export const ADDRESS = {
-        postal_code: "CF14 3UZ",
-        locality: "Cardiff",
-        region: "South Glamorgan",
-        address_line_1: "Crown Way"
+    postal_code: "CF14 3UZ",
+    locality: "Cardiff",
+    region: "South Glamorgan",
+    address_line_1: "Crown Way"
 };
 export const COUNTRY_OF_RESIDENCE = "Wales";
 
