@@ -31,7 +31,6 @@ export const ADDRESS = {
 };
 export const COUNTRY_OF_RESIDENCE = "Wales";
 
-
 export const PSC_VERIFICATION_CREATED: PscVerification = {
     company_number: COMPANY_NUMBER
 };
@@ -78,11 +77,6 @@ export const mockPscVerificationCreatedResponse = {
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED }
 };
-
-// export const mockPscIndividualResource: PersonWithSignificantControlResource = {
-//     data: PSC_INDIVIDUAL,
-
-// };
 
 export const mockIndividualResponse = {
     200: { status: StatusCodes.OK, body: PSC_INDIVIDUAL },

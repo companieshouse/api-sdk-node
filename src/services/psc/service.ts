@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../http";
 import Mapping from "../../mapping/mapping";
-import Resource from "../resource";
+import Resource, { ApiErrorResponse } from "../resource";
 import { PersonWithSignificantControl, PersonWithSignificantControlResource } from "./types";
 
 /**
@@ -13,21 +13,23 @@ export default class PscService {
    * Get the PSC details for an individual person.
    *
    * @param companyNumber the company number to look up
-   * @param notificationId the PSC Id to retrieve
+   * @param notificationId the PSC Notification Id to retrieve
    */
-    public async getPscIndividual (companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl>> {
-        const resp = await this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
+    public async getPscIndividual (companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
+        const response = await this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
 
         const resource: Resource<PersonWithSignificantControl> = {
-            httpStatusCode: resp.status
+            httpStatusCode: response.status
         };
 
-        if (resp.error) {
-            return resource;
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            }
         }
 
-        const body = resp.body as PersonWithSignificantControlResource;
-
+        const body = response.body as PersonWithSignificantControlResource;
         resource.resource = Mapping.camelCaseKeys<PersonWithSignificantControl>(body);
 
         return resource;

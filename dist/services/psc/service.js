@@ -24,18 +24,21 @@ class PscService {
    * Get the PSC details for an individual person.
    *
    * @param companyNumber the company number to look up
-   * @param notificationId the PSC Id to retrieve
+   * @param notificationId the PSC Notification Id to retrieve
    */
     getPscIndividual(companyNumber, notificationId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
+            const response = yield this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
             const resource = {
-                httpStatusCode: resp.status
+                httpStatusCode: response.status
             };
-            if (resp.error) {
-                return resource;
+            if (response.error) {
+                return {
+                    httpStatusCode: response.status,
+                    errors: [response.error]
+                };
             }
-            const body = resp.body;
+            const body = response.body;
             resource.resource = mapping_1.default.camelCaseKeys(body);
             return resource;
         });
