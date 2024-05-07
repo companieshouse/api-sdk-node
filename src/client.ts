@@ -34,6 +34,7 @@ import { ClientType } from "./enums";
 import { PostcodeLookupService } from "./services/postcode-lookup";
 import PscVerificationService from "./services/psc-verification-link/service";
 import { AccountsFilingService } from "./services/accounts-filing";
+import PscService from "./services/psc/service";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -72,6 +73,7 @@ export default class ApiClient {
   public readonly postCodeLookup: PostcodeLookupService;
   public readonly pscVerificationService: PscVerificationService;
   public readonly accountsFilingService: AccountsFilingService;
+  public readonly pscService: PscService;
 
   constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
       // services on the api domain using the apiClient
@@ -109,5 +111,6 @@ export default class ApiClient {
       this.postCodeLookup = new PostcodeLookupService(apiClient);
       this.pscVerificationService = new PscVerificationService(apiClient);
       this.accountsFilingService = new AccountsFilingService(apiClient);
+      this.pscService = new PscService(apiClient);
   }
 }
