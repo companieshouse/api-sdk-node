@@ -7,9 +7,9 @@ export interface AccountValidatorRequest {
 }
 
 export interface Data {
-    balanceSheetDate: string;
-    accountsType: string;
-    companieshouseRegisteredNumber: string;
+    balanceSheetDate?: string;
+    accountsType?: string;
+    companieshouseRegisteredNumber?: string;
 }
 
 export interface ErrorMessage {
@@ -55,12 +55,6 @@ export function isAccountValidatorResponse (object: any): object is AccountValid
     }
 
     if (!["OK", "FAILED"].includes(validationStatus)) {
-        return false;
-    }
-
-    if (typeof data.balance_sheet_date !== "string" ||
-       typeof data.accounts_type !== "string" ||
-       typeof data.companieshouse_registered_number !== "string") {
         return false;
     }
 
