@@ -18,7 +18,7 @@ export interface ErrorMessage {
 
 export interface Result {
     errorMessages: ErrorMessage[];
-    data: Data;
+    data?: Data;
     validationStatus: ValidationStatus;
 }
 
