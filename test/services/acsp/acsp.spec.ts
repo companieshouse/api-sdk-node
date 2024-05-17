@@ -1,5 +1,5 @@
 import {
-    Acsp,
+    AcspData,
     AcspResponse,
     AcspService
 } from "../../../src/services/acsp";
@@ -26,7 +26,7 @@ describe("Acsp Registration GET", () => {
     it("should return an Acsp registration", async () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetAcsp[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data: Resource<Acsp> = await ofService.getAcsp(TRANSACTION_ID, SUBMISSION_ID) as Resource<Acsp>;
+        const data: Resource<AcspData> = await ofService.getAcsp(TRANSACTION_ID, SUBMISSION_ID) as Resource<AcspData>;
 
         expect(data.httpStatusCode).to.equal(200);
         expect(data.resource?.typeOfBusiness).to.equal("LIMITED_LIABILITY_PARTNERSHIP");

@@ -1,5 +1,5 @@
 import {
-    Acsp,
+    AcspData,
     AcspDto,
     AcspResponse,
     AcspResponseDto
@@ -11,7 +11,7 @@ import Mapping from "../../mapping/mapping";
 export default class {
     constructor (private readonly client: IHttpClient) { }
 
-    public async getAcsp (transactionId: string, id: string): Promise<Resource<Acsp> | ApiErrorResponse> {
+    public async getAcsp (transactionId: string, id: string): Promise<Resource<AcspData> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/acsp/${id}`;
         const resp: HttpResponse = await this.client.httpGet(url);
 
@@ -19,21 +19,20 @@ export default class {
             return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
-        const resource: Resource<Acsp> = {
+        const resource: Resource<AcspData> = {
             httpStatusCode: resp.status
         };
 
         const body = resp.body as AcspDto;
 
-        resource.resource = Mapping.camelCaseKeys<Acsp>(body);
-
+        resource.resource = Mapping.camelCaseKeys<AcspData>(body);
         return resource;
     }
 
     /**
      * Post an ACSP object to update on the API.
      */
-    public async postACSP (transactionId: string, acsp: Acsp): Promise<Resource<AcspResponse> | ApiErrorResponse> {
+    public async postACSP (transactionId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/acsp`;
 
         const resp = await this.client.httpPut(url, acsp);

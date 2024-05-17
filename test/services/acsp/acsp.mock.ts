@@ -1,5 +1,5 @@
 import { RequestClient } from "../../../src";
-import { Acsp, AcspDto } from "../../../src/services/acsp";
+import { AcspData, AcspDto } from "../../../src/services/acsp";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
@@ -35,7 +35,7 @@ export const mockAcspDto: AcspDto = {
     typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
 };
 
-export const mockAcsp: Acsp = {
+export const mockAcsp: AcspData = {
     id: "test@test.com",
     typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
 };
