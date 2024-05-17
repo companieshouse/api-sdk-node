@@ -1,3 +1,5 @@
+import { RegisteredOfficeAddress, ServiceAddress } from "../company-profile/types";
+
 export interface AddressResource {
     address_line_1: string;
     address_line_2?: string;
@@ -23,13 +25,13 @@ export interface DateOfBirth {
 }
 
 export interface Address {
-    propertyDetails: string;
-    line1: string;
-    line2: string;
-    town: string;
-    county: string;
-    country: string;
-    postcode: string;
+    propertyDetails?: string;
+    line1?: string;
+    line2?: string;
+    town?: string;
+    county?: string;
+    country?: string;
+    postcode?: string;
 }
 
 export interface nationality {
@@ -38,40 +40,68 @@ export interface nationality {
     thirdNationality?: string;
 }
 
-export interface AcspDto {
-    id: string;
-    typeOfBusiness: string;
-    firstName?: string;
-    lastName?: string;
-    addresses?: Address[];
-    roleType?: string;
-    dateOfBirth?: string;
-    verified?: boolean;
-    nationality?: nationality[];
-    countryOfResidence?: string;
-    businessName?: string;
-    workSector?: string;
-    companyAuthCodeProvided?: boolean;
+export interface Company {
+    companyName?: string;
+    companyNumber?: string;
+    status?: string;
+    incorporationDate?: string;
+    companyType?: string;
+    registeredOfficeAddress?: RegisteredOfficeAddress;
 }
 
-export interface Acsp {
+export interface AmlSupervisoryBody {
+    amlSupervisoryBody? : string;
+    membershipId? : string;
+}
+
+export interface AcspDto {
+      id: string;
+      firstName?: string;
+      middleName?: string;
+      lastName?: string;
+      email?: string;
+      roleInTheBusiness?: string;
+      correspondenceAddress?: Address;
+      businessAddress?: Address;
+      typeOfBusiness?:  string;
+      roleType?: string;
+      dateOfBirth?: string;
+      verified?: boolean;
+      nationality?: nationality;
+      countryOfResidence?: string;
+      businessName?: string;
+      workSector?: string;
+      amlSupervisoryBodies?: AmlSupervisoryBody[];
+      companyDetails?: Company;
+      companyAuthCodeProvided?: boolean;
+      howAreYouRegisteredWithAML?: string;
+}
+
+export interface AcspData {
     id: string;
-    typeOfBusiness: string;
     firstName?: string;
+    middleName?: string;
     lastName?: string;
-    addresses?: Address[];
+    email?: string;
+    roleInTheBusiness?: string;
+    correspondenceAddress?: Address;
+    businessAddress?: Address;
+    typeOfBusiness?:  string;
     roleType?: string;
     dateOfBirth?: string;
     verified?: boolean;
-    nationality?: nationality[];
+    nationality?: nationality;
     countryOfResidence?: string;
     businessName?: string;
     workSector?: string;
+    amlSupervisoryBodies?: AmlSupervisoryBody[];
+    companyDetails?: Company;
     companyAuthCodeProvided?: boolean;
+    howAreYouRegisteredWithAML?: string;
 }
 
 export interface AcspResponse {
-    data: Acsp;
+    data: AcspData;
 }
 
 export interface AcspResponseDto {
