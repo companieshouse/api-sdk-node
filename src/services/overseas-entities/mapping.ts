@@ -129,6 +129,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
     const creationDate = mapIsoDate(trust.creation_date);
     const ceased_date = trust.ceased_date ? mapIsoDate(trust.ceased_date) : undefined;
 
+    console.log("\n\n*** SDK received " + trust.trust_still_involved_in_overseas_entity + " for trust_still_involved_in_overseas_entity from the API ****\n\n");
+
+    // Convert trust.trust_still_involved_in_overseas_entity to undefined here maybe????
+
     return {
         trust_id: trust.trust_id,
         trust_name: trust.trust_name,
@@ -138,6 +142,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
         ceased_date_day: ceased_date?.day,
         ceased_date_month: ceased_date?.month,
         ceased_date_year: ceased_date?.year,
+        trust_still_involved_in_overseas_entity: trust.trust_still_involved_in_overseas_entity,
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
@@ -348,6 +353,9 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 
 const mapTrust = (trust: Trust): TrustResource => {
     const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
+
+    console.log("\n\n*** SDK sending " + trust.trust_still_involved_in_overseas_entity + " for trust_still_involved_in_overseas_entity to the API ****\n\n");
+
     return {
         ...rest,
         creation_date: convertOptionalDateToIsoDateString(creation_date_day, creation_date_month, creation_date_year),

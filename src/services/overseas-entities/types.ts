@@ -402,6 +402,7 @@ export interface Trust {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
+    trust_still_involved_in_overseas_entity: string;
     unable_to_obtain_all_trust_info: string;
     INDIVIDUALS?: TrustIndividual[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwner[];
@@ -413,6 +414,7 @@ export interface TrustResource {
     trust_name: string;
     creation_date: string;
     ceased_date?: string;
+    trust_still_involved_in_overseas_entity: string;
     unable_to_obtain_all_trust_info: boolean;
     INDIVIDUAL?: TrustIndividualResource[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwnerResource[];
@@ -604,6 +606,7 @@ export interface TrustDataResource {
     trust_name: string;
     creation_date: string;
     ceased_date?: string;
+    trust_still_involved_in_overseas_entity: string;
     unable_to_obtain_all_trust_info_indicator: boolean;
 }
 
