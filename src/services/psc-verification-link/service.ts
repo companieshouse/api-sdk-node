@@ -10,7 +10,8 @@ export default class PscVerificationService {
 
     public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
-        const response = await this.client.httpPost(resourceUri, pscVerification);
+        const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
+        const response = await this.client.httpPost(resourceUri, pscVerification, additionalHeaders);
 
         if (response.error) {
             return {
