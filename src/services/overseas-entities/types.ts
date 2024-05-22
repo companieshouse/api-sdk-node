@@ -606,7 +606,7 @@ export interface TrustDataResource {
     trust_name: string;
     creation_date: string;
     ceased_date?: string;
-    trust_still_involved_in_overseas_entity: string;
+    trust_still_involved_in_overseas_entity_indicator: string;
     unable_to_obtain_all_trust_info_indicator: boolean;
 }
 
