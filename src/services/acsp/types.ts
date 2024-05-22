@@ -65,7 +65,7 @@ export interface AcspDto {
       businessAddress?: Address;
       typeOfBusiness?: string;
       roleType?: string;
-      dateOfBirth?: string;
+      dateOfBirth?: Date;
       verified?: boolean;
       nationality?: nationality;
       countryOfResidence?: string;
@@ -88,7 +88,7 @@ export interface AcspData {
     businessAddress?: Address;
     typeOfBusiness?: string;
     roleType?: string;
-    dateOfBirth?: string;
+    dateOfBirth?: Date;
     verified?: boolean;
     nationality?: nationality;
     countryOfResidence?: string;
