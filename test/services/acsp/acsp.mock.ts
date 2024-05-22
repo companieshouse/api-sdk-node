@@ -26,8 +26,9 @@ export const mockAddress2 = {
 };
 
 export const mockDateOfBirth = {
+    year: "1998",
     month: "1",
-    year: "1998"
+    day: "1"
 };
 
 export const mockAcspDto: AcspDto = {
