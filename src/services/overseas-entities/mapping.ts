@@ -133,6 +133,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
 
     // Convert trust.trust_still_involved_in_overseas_entity to undefined here maybe????
 
+    const stillInvolved = trust.trust_still_involved_in_overseas_entity ? (trust.trust_still_involved_in_overseas_entity ? "Yes" : "No") : null;
+
+    console.log("\n\n*** SDK setting " + stillInvolved + " for trust_still_involved_in_overseas_entity ****\n\n");
+
     return {
         trust_id: trust.trust_id,
         trust_name: trust.trust_name,
@@ -142,7 +146,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
         ceased_date_day: ceased_date?.day,
         ceased_date_month: ceased_date?.month,
         ceased_date_year: ceased_date?.year,
-        trust_still_involved_in_overseas_entity: trust.trust_still_involved_in_overseas_entity,
+        trust_still_involved_in_overseas_entity: stillInvolved, // trust.trust_still_involved_in_overseas_entity,
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
@@ -352,9 +356,13 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 }
 
 const mapTrust = (trust: Trust): TrustResource => {
-    const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, ...rest } = trust;
+    const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, trust_still_involved_in_overseas_entity, ...rest } = trust;
 
-    console.log("\n\n*** SDK sending " + trust.trust_still_involved_in_overseas_entity + " for trust_still_involved_in_overseas_entity to the API ****\n\n");
+    console.log("\n\n*** SDK got " + trust_still_involved_in_overseas_entity + " for trust_still_involved_in_overseas_entity from the web ****\n\n");
+
+    const stillInvolved = trust_still_involved_in_overseas_entity ? (trust_still_involved_in_overseas_entity === "Yes") : null;
+
+    console.log("\n\n*** SDK sending " + stillInvolved + " for trust_still_involved_in_overseas_entity to the API ****\n\n");
 
     return {
         ...rest,
@@ -363,6 +371,7 @@ const mapTrust = (trust: Trust): TrustResource => {
         INDIVIDUAL: mapTrustIndividuals(INDIVIDUALS),
         HISTORICAL_BO: mapTrustHistoricalBeneficialOwners(HISTORICAL_BO),
         CORPORATE: mapTrustCorporates(CORPORATES),
+        trust_still_involved_in_overseas_entity: stillInvolved,
         unable_to_obtain_all_trust_info: (unable_to_obtain_all_trust_info === "Yes")
     };
 }
