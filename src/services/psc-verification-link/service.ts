@@ -10,8 +10,7 @@ export default class PscVerificationService {
 
     public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
-        const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
-        const response = await this.client.httpPost(resourceUri, pscVerification, additionalHeaders);
+        const response = await this.client.httpPost(resourceUri, pscVerification);
 
         if (response.error) {
             return {
@@ -38,8 +37,9 @@ export default class PscVerificationService {
     }
 
     public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+        const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${filingId}`;
-        const response = await this.client.httpPatch(resourceUri, pscVerificationPatch);
+        const response = await this.client.httpPatch(resourceUri, pscVerificationPatch, additionalHeaders);
 
         if (response.error) {
             return {
