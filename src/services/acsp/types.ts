@@ -34,7 +34,7 @@ export interface Address {
     postcode?: string;
 }
 
-export interface nationality {
+export interface Nationality {
     firstNationality: string;
     secondNationality?: string;
     thirdNationality?: string;
@@ -67,7 +67,7 @@ export interface AcspDto {
       roleType?: string;
       dateOfBirth?: Date;
       verified?: boolean;
-      nationality?: nationality;
+      nationality?: Nationality;
       countryOfResidence?: string;
       businessName?: string;
       workSector?: string;
@@ -90,7 +90,7 @@ export interface AcspData {
     roleType?: string;
     dateOfBirth?: Date;
     verified?: boolean;
-    nationality?: nationality;
+    nationality?: Nationality;
     countryOfResidence?: string;
     businessName?: string;
     workSector?: string;
