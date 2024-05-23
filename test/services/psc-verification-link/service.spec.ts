@@ -6,7 +6,6 @@ import PscVerificationService from "../../../src/services/psc-verification-link/
 import { PscVerificationResource } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPscVerificationCreatedResource, mockPscVerificationCreatedResponse, mockPscVerificationIndResource, mockPscVerificationIndResponse, mockPscVerificationPatchIndResource, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRoResource, requestClient } from "./service.mock";
-import nock from "nock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
