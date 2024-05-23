@@ -130,7 +130,8 @@ export const mockPscVerificationPatchRleResponse = {
     200: { status: StatusCodes.OK, body: mockPscVerificationPatchRleRoResource },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
-    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
+    415: { status: StatusCodes.UNSUPPORTED_MEDIA_TYPE, error: ReasonPhrases.UNSUPPORTED_MEDIA_TYPE }
 };
 
 export const mockPscVerificationPatchIndResponse = {
