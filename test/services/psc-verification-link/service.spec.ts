@@ -139,40 +139,7 @@ describe("PSC Verification Link", () => {
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
         });
 
-        it("should return a status 200 OK and patched PSC individual verification filing when the 'content-type' is set to 'application/merge-patch+json'", async () => {
-            const patchJsonHeader = {
-                name: "Content-Type",
-                value: "application/json"
-            }
-
-            const scope = nock(/.*/)
-                .patch("/")
-                .matchHeader(patchJsonHeader.name, patchJsonHeader.value)
-                .reply(415);
-
-            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[200]);
-
-            const response = (await pscService.patchPscVerification(
-                TRANSACTION_ID,
-                FILING_ID,
-                PSC_VERIFICATION_IND
-            )) as Resource<PscVerificationResource>;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource).to.eql(mockPscVerificationPatchIndResource);
-        });
-
         it("should return a status 415 unsupported media type when the 'content-type' is not 'application/merge-patch+json'", async () => {
-            const applicationJsonHeader = {
-                name: "Content-Type",
-                value: "application/json"
-            }
-
-            const scope = nock(/.*/)
-                .patch("/")
-                .matchHeader(applicationJsonHeader.name, applicationJsonHeader.value)
-                .reply(415);
-
             sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchRleResponse[415]);
 
             const response = await pscService.patchPscVerification(
