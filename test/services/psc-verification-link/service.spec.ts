@@ -137,5 +137,18 @@ describe("PSC Verification Link", () => {
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
         });
+
+        it("should return a status 415 unsupported media type when the 'content-type' is not 'application/merge-patch+json'", async () => {
+            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchRleResponse[415]);
+
+            const response = await pscService.patchPscVerification(
+                TRANSACTION_ID,
+                FILING_ID,
+                PSC_VERIFICATION_RLE
+            ) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.UNSUPPORTED_MEDIA_TYPE);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.UNSUPPORTED_MEDIA_TYPE);
+        });
     });
 });
