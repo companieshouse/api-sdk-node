@@ -74,7 +74,7 @@ export interface AcspDto {
       amlSupervisoryBodies?: AmlSupervisoryBody[];
       companyDetails?: Company;
       companyAuthCodeProvided?: boolean;
-      howAreYouRegisteredWithAML?: string;
+      howAreYouRegisteredWithAml?: string;
 }
 
 export interface AcspData {
@@ -97,7 +97,7 @@ export interface AcspData {
     amlSupervisoryBodies?: AmlSupervisoryBody[];
     companyDetails?: Company;
     companyAuthCodeProvided?: boolean;
-    howAreYouRegisteredWithAML?: string;
+    howAreYouRegisteredWithAml?: string;
 }
 
 export interface AcspResponse {
