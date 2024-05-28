@@ -26,6 +26,7 @@ export enum VerificationStatement {
 }
 
 export interface VerificationDetails {
+    uvid?: string,
     name_mismatch_reason?: NameMismatchReason,
     verification_statements?: VerificationStatement[]
 }
