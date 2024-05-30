@@ -310,6 +310,9 @@ export interface Update {
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReview[];
+    ceased_to_be_registrable_beneficial_owner?: RelevantPeriodStatementOne;
+    trust_involved_in_the_oe?: RelevantPeriodStatementTwo;
+    become_or_ceased_beneficiary_of_a_trust?: RelevantPeriodStatementThree;
 }
 
 export interface Remove {
@@ -333,6 +336,9 @@ export interface UpdateResource {
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReviewResource[];
+    ceased_to_be_registrable_beneficial_owner?: RelevantPeriodStatementOne;
+    trust_involved_in_the_oe?: RelevantPeriodStatementTwo;
+    become_or_ceased_beneficiary_of_a_trust?: RelevantPeriodStatementThree;
 }
 
 export interface ManagingOfficerCorporateResource {
@@ -716,4 +722,19 @@ export enum NatureOfControlType {
     OVER_25_PERCENT_OF_VOTING_RIGHTS = "OVER_25_PERCENT_OF_VOTING_RIGHTS",
     APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS = "APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS",
     SIGNIFICANT_INFLUENCE_OR_CONTROL = "SIGNIFICANT_INFLUENCE_OR_CONTROL"
+}
+
+export enum RelevantPeriodStatementOne {
+    YES = "CEASED_TO_BE_REGISTRABLE_BENEFICIAL_OWNER",
+    NO = "NO_CEASED_TO_BE_REGISTRABLE_BENEFICIAL_OWNER"
+}
+
+export enum RelevantPeriodStatementTwo {
+    YES = "TRUST_INVOLVED_IN_THE_OE",
+    NO = "NO_TRUST_INVOLVED_IN_THE_OE"
+}
+
+export enum RelevantPeriodStatementThree {
+    YES = "BECOME_OR_CEASED_BENEFICIARY_OF_A_TRUST",
+    NO = "NO_BECOME_OR_CEASED_BENEFICIARY_OF_A_TRUST"
 }

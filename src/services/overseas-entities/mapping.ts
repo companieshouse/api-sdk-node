@@ -424,7 +424,10 @@ const mapUpdate = (update: Update): UpdateResource => {
             bo_mo_data_fetched: update.bo_mo_data_fetched,
             registrable_beneficial_owner: update.registrable_beneficial_owner,
             no_change: update.no_change,
-            trust_data_fetched: update.trust_data_fetched
+            trust_data_fetched: update.trust_data_fetched,
+            ceased_to_be_registrable_beneficial_owner: update.ceased_to_be_registrable_beneficial_owner,
+            trust_involved_in_the_oe: update.trust_involved_in_the_oe,
+            become_or_ceased_beneficiary_of_a_trust: update.become_or_ceased_beneficiary_of_a_trust
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
