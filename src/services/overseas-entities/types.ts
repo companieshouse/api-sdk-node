@@ -310,9 +310,9 @@ export interface Update {
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReview[];
-    ceased_to_be_registrable_beneficial_owner?: RelevantPeriodStatementOne;
-    trust_involved_in_the_oe?: RelevantPeriodStatementTwo;
-    become_or_ceased_beneficiary_of_a_trust?: RelevantPeriodStatementThree;
+    change_bo_relevant_period?: RelevantPeriodStatementOne;
+    trustee_involved_relevant_period?: RelevantPeriodStatementTwo;
+    change_beneficiary_relevant_period?: RelevantPeriodStatementThree;
 }
 
 export interface Remove {
@@ -336,9 +336,9 @@ export interface UpdateResource {
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReviewResource[];
-    ceased_to_be_registrable_beneficial_owner?: RelevantPeriodStatementOne;
-    trust_involved_in_the_oe?: RelevantPeriodStatementTwo;
-    become_or_ceased_beneficiary_of_a_trust?: RelevantPeriodStatementThree;
+    change_bo_relevant_period?: RelevantPeriodStatementOne;
+    trustee_involved_relevant_period?: RelevantPeriodStatementTwo;
+    change_beneficiary_relevant_period?: RelevantPeriodStatementThree;
 }
 
 export interface ManagingOfficerCorporateResource {
