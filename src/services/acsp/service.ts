@@ -49,7 +49,7 @@ export default class {
         return resource;
     }
 
-/* get saved application */
+    /* get saved application */
     public async getSavedApplication (userId: string): Promise<HttpResponse> {
         const url = `/acsp-api/user/${userId}/application`;
         const resp: HttpResponse = await this.client.httpGet(url);
