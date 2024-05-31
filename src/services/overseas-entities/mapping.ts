@@ -133,7 +133,13 @@ const mapToTrust = (trust: TrustResource): Trust => {
 
     // Convert trust.trust_still_involved_in_overseas_entity to undefined here maybe????
 
-    const stillInvolved = trust.trust_still_involved_in_overseas_entity ? (trust.trust_still_involved_in_overseas_entity ? "Yes" : "No") : null;
+    let stillInvolved = trust.trust_still_involved_in_overseas_entity ? "Yes" : "No";
+
+    if (trust.trust_still_involved_in_overseas_entity == null) {
+        stillInvolved = null;
+    }
+
+    // const stillInvolved = trust.trust_still_involved_in_overseas_entity ? (trust.trust_still_involved_in_overseas_entity ? "Yes" : "No") : null;
 
     console.log("\n\n*** SDK setting " + stillInvolved + " for trust_still_involved_in_overseas_entity ****\n\n");
 

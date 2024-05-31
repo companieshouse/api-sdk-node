@@ -722,7 +722,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             sinon.restore();
         });
 
-        it.skip("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
+        it("should return httpStatusCode 200 for getTrustsPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 200,
                 body: mockValues.PRIVATE_TRUSTS_DATA_RESOURCE_MOCK
