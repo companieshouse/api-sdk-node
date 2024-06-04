@@ -310,6 +310,9 @@ export interface Update {
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReview[];
+    change_bo_relevant_period?: ChangeBoRelevantPeriodType;
+    trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
+    change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
 }
 
 export interface Remove {
@@ -333,6 +336,9 @@ export interface UpdateResource {
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReviewResource[];
+    change_bo_relevant_period?: ChangeBoRelevantPeriodType;
+    trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
+    change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
 }
 
 export interface ManagingOfficerCorporateResource {
@@ -716,4 +722,19 @@ export enum NatureOfControlType {
     OVER_25_PERCENT_OF_VOTING_RIGHTS = "OVER_25_PERCENT_OF_VOTING_RIGHTS",
     APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS = "APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS",
     SIGNIFICANT_INFLUENCE_OR_CONTROL = "SIGNIFICANT_INFLUENCE_OR_CONTROL"
+}
+
+export enum ChangeBoRelevantPeriodType {
+    YES = "CHANGE_BO_RELEVANT_PERIOD",
+    NO = "NO_CHANGE_BO_RELEVANT_PERIOD"
+}
+
+export enum TrusteeInvolvedRelevantPeriodType {
+    YES = "TRUSTEE_INVOLVED_RELEVANT_PERIOD",
+    NO = "NO_TRUSTEE_INVOLVED_RELEVANT_PERIOD"
+}
+
+export enum ChangeBeneficiaryRelevantPeriodType {
+    YES = "CHANGE_BENEFICIARY_RELEVANT_PERIOD",
+    NO = "NO_CHANGE_BENEFICIARY_RELEVANT_PERIOD"
 }

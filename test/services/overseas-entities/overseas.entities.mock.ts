@@ -39,7 +39,10 @@ import {
     TrustToReviewResource,
     TrustToReview,
     Remove,
-    RemoveResource
+    RemoveResource,
+    ChangeBoRelevantPeriodType,
+    TrusteeInvolvedRelevantPeriodType,
+    ChangeBeneficiaryRelevantPeriodType
 } from "../../../src/services/overseas-entities";
 import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
@@ -456,7 +459,10 @@ export const UPDATE_OBJECT_MOCK: Update = {
     registrable_beneficial_owner: yesNoResponse.No,
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
-    review_trusts: REVIEW_TRUSTS_MOCK
+    review_trusts: REVIEW_TRUSTS_MOCK,
+    change_bo_relevant_period: ChangeBoRelevantPeriodType.YES,
+    trustee_involved_relevant_period: TrusteeInvolvedRelevantPeriodType.YES,
+    change_beneficiary_relevant_period: ChangeBeneficiaryRelevantPeriodType.NO
 }
 
 export const REMOVE_OBJECT_MOCK: Remove = {
@@ -607,7 +613,10 @@ export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     registrable_beneficial_owner: yesNoResponse.No,
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
-    review_trusts: REVIEW_TRUSTS_RESOURCE_MOCK
+    review_trusts: REVIEW_TRUSTS_RESOURCE_MOCK,
+    change_bo_relevant_period: ChangeBoRelevantPeriodType.YES,
+    trustee_involved_relevant_period: TrusteeInvolvedRelevantPeriodType.YES,
+    change_beneficiary_relevant_period: ChangeBeneficiaryRelevantPeriodType.NO
 }
 
 export const REMOVE_RESOURCE_MOCK: RemoveResource = {
