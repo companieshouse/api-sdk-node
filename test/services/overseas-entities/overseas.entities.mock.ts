@@ -424,6 +424,7 @@ export const TRUSTS_MOCK: Trust[] = [{
     ceased_date_day: "30",
     ceased_date_month: "3",
     ceased_date_year: "2021",
+    trust_still_involved_in_overseas_entity: "No",
     unable_to_obtain_all_trust_info: "No",
     INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
     CORPORATES: TRUST_CORPORATES_MOCK,
@@ -439,6 +440,7 @@ export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
     ceased_date_day: "2",
     ceased_date_month: "2",
     ceased_date_year: "2024",
+    trust_still_involved_in_overseas_entity: "No",
     unable_to_obtain_all_trust_info: "No",
     INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
     CORPORATES: TRUST_CORPORATES_MOCK,
@@ -582,6 +584,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     ceased_date: "2021-03-30",
+    trust_still_involved_in_overseas_entity: false,
     unable_to_obtain_all_trust_info: false,
     INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
     CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
@@ -593,6 +596,7 @@ export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
     trust_name: "review_trust_name",
     creation_date: "2023-01-02",
     ceased_date: "2024-02-02",
+    trust_still_involved_in_overseas_entity: false,
     unable_to_obtain_all_trust_info: false,
     INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
     CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
@@ -690,6 +694,7 @@ export const PRIVATE_TRUSTS_DATA_MOCK = [{
     trustName: "trust_name",
     creationDate: "2020-02-20",
     ceasedDate: "2023-03-03",
+    trustStillInvolvedInOverseasEntityIndicator: false,
     unableToObtainAllTrustInfoIndicator: false
 }];
 
@@ -698,6 +703,21 @@ export const PRIVATE_TRUSTS_DATA_RESOURCE_MOCK = [{
     trust_name: "trust_name",
     creation_date: "2020-02-20",
     ceased_date: "2023-03-03",
+    trust_still_involved_in_overseas_entity_indicator: false,
+    unable_to_obtain_all_trust_info_indicator: false
+}];
+
+export const PRIVATE_TRUSTS_NOT_CEASED_DATA_MOCK = [{
+    hashedTrustId: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    trustName: "trust_name",
+    creationDate: "2020-02-20",
+    unableToObtainAllTrustInfoIndicator: false
+}];
+
+export const PRIVATE_TRUSTS_NOT_CEASED_DATA_RESOURCE_MOCK = [{
+    hashed_trust_id: PRIVATE_TRUSTS_DATA_ID_MOCK,
+    trust_name: "trust_name",
+    creation_date: "2020-02-20",
     unable_to_obtain_all_trust_info_indicator: false
 }];
 

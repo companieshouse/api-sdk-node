@@ -677,6 +677,58 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(overseasEntity.trusts?.[0].trust_id).to.equal("123");
     });
 
+    it("should return OverseasEntityResource object from mapOverseasEntity method with Trust data but with 'still involved' flag set to null", async () => {
+        const overseasEntity = {
+            trusts: mockValues.TRUSTS_MOCK
+        };
+
+        overseasEntity.trusts[0].trust_still_involved_in_overseas_entity = null as unknown as string;
+
+        const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
+
+        expect(overseasEntityResource.trusts?.[0].trust_still_involved_in_overseas_entity).to.equal(null);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with Trust data but with 'still involved' flag set to null", async () => {
+        const overseasEntityResource: OverseasEntityResource = {
+            trusts: mockValues.TRUSTS_RESOURCE_MOCK
+        };
+
+        if (overseasEntityResource.trusts && overseasEntityResource.trusts[0]) {
+            overseasEntityResource.trusts[0].trust_still_involved_in_overseas_entity = null as unknown as boolean;
+        };
+
+        const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
+
+        expect(overseasEntity.trusts?.[0].trust_still_involved_in_overseas_entity).to.equal(null);
+    });
+
+    it("should return OverseasEntityResource object from mapOverseasEntity method with Trust data but with 'still involved' flag mapped from undefined to null", async () => {
+        const overseasEntity = {
+            trusts: mockValues.TRUSTS_MOCK
+        };
+
+        overseasEntity.trusts[0].trust_still_involved_in_overseas_entity = undefined as unknown as string;
+
+        const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
+
+        expect(overseasEntityResource.trusts?.[0].trust_still_involved_in_overseas_entity).to.equal(null);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with Trust data but with 'still involved' flag mapped from undefined to null", async () => {
+        const overseasEntityResource: OverseasEntityResource = {
+            trusts: mockValues.TRUSTS_RESOURCE_MOCK
+        };
+
+        if (overseasEntityResource.trusts && overseasEntityResource.trusts[0]) {
+            overseasEntityResource.trusts[0].trust_still_involved_in_overseas_entity = undefined as unknown as boolean;
+        };
+
+        const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
+
+        expect(overseasEntity.trusts?.[0].trust_still_involved_in_overseas_entity).to.equal(null);
+    });
+
     describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
         beforeEach(() => {
             sinon.reset();
@@ -736,6 +788,22 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             expect(data.httpStatusCode).to.equal(200);
             expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_DATA_MOCK);
+        });
+
+        it("should return httpStatusCode 200 for getTrustsPrivateData method when trust is not ceased", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.PRIVATE_TRUSTS_NOT_CEASED_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            )) as Resource<TrustData[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_NOT_CEASED_DATA_MOCK);
         });
 
         it("should return error 400 (Bad Request) for getTrustsPrivateData method", async () => {
