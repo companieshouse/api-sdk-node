@@ -63,3 +63,8 @@ export const mockPostAcsp = {
     404: { status: 404, error: "Acsp registration not found" },
     500: { status: 500, error: "Internal server error" }
 };
+
+export const mockDeleteAcsp = {
+    204: { status: 204 },
+    404: { status: 404 }
+};

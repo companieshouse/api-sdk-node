@@ -69,3 +69,21 @@ describe("Acsp Registration POST", () => {
         expect(data.errors?.[0]).to.equal("Acsp registration not found");
     });
 });
+
+describe("Acsp Registration DELETE", () => {
+    it("should return 204 on successful delete", async () => {
+        sinon.stub(mockValues.requestClient, "httpDelete").resolves(mockValues.mockDeleteAcsp[204]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.deleteSavedApplication(SUBMISSION_ID);
+        console.log("data: ", JSON.stringify(data));
+        expect(data.status).to.equal(204);
+    })
+
+    it("should return 404 if no application exists", async () => {
+        sinon.stub(mockValues.requestClient, "httpDelete").resolves(mockValues.mockDeleteAcsp[404]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.deleteSavedApplication(SUBMISSION_ID);
+        console.log("data: ", JSON.stringify(data));
+        expect(data.status).to.equal(404);
+    })
+})
