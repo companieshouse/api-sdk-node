@@ -598,7 +598,7 @@ export interface TrustData {
     trustName: string;
     creationDate: string;
     ceasedDate?: string;
-    trustStillInvolvedInOverseasEntityIndicator: string;
+    trustStillInvolvedInOverseasEntityIndicator?: string;
     unableToObtainAllTrustInfoIndicator: boolean;
 }
 
