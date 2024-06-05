@@ -132,7 +132,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
     let stillInvolved = trust.trust_still_involved_in_overseas_entity ? "Yes" : "No";
 
     // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
-    if (trust.trust_still_involved_in_overseas_entity == null) {
+    if (trust.trust_still_involved_in_overseas_entity === null || trust.trust_still_involved_in_overseas_entity === undefined) {
         stillInvolved = null;
     }
 
@@ -357,6 +357,10 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 const mapTrust = (trust: Trust): TrustResource => {
     const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, trust_still_involved_in_overseas_entity, ...rest } = trust;
 
+    // TODO Remove this, once local Docker test against the branch has passed
+    console.log("\n\n*** 'mapTrust' called *** \n\n");
+
+    // The first 'truthy' check here is to see whether 'trust_still_involved_in_overseas_entity' contains a non-empty string
     const stillInvolved = trust_still_involved_in_overseas_entity ? (trust_still_involved_in_overseas_entity === "Yes") : null;
 
     return {

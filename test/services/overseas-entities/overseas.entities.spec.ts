@@ -790,6 +790,22 @@ describe("Mapping OverseasEntity Tests suite", () => {
             expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_DATA_MOCK);
         });
 
+        it("should return httpStatusCode 200 for getTrustsPrivateData method when trust is not ceased", async () => {
+            sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                status: 200,
+                body: mockValues.PRIVATE_TRUSTS_NOT_CEASED_DATA_RESOURCE_MOCK
+            });
+
+            const oeService = new OverseasEntityService(mockValues.requestClient);
+            const data = (await oeService.getTrustData(
+                mockValues.TRANSACTION_ID,
+                mockValues.OVERSEAS_ENTITY_ID
+            )) as Resource<TrustData[]>;
+
+            expect(data.httpStatusCode).to.equal(200);
+            expect(data.resource).to.deep.equal(mockValues.PRIVATE_TRUSTS_NOT_CEASED_DATA_MOCK);
+        });
+
         it("should return error 400 (Bad Request) for getTrustsPrivateData method", async () => {
             sinon.stub(mockValues.requestClient, "httpGet").resolves({
                 status: 400,

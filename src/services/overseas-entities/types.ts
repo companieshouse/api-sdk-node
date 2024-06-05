@@ -402,7 +402,7 @@ export interface Trust {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
-    trust_still_involved_in_overseas_entity: string;
+    trust_still_involved_in_overseas_entity?: string;
     unable_to_obtain_all_trust_info: string;
     INDIVIDUALS?: TrustIndividual[];
     HISTORICAL_BO?: TrustHistoricalBeneficialOwner[];
