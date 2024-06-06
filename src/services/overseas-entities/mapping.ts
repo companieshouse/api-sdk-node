@@ -179,13 +179,30 @@ const mapToTrust = (trust: TrustResource): Trust => {
         }),
         // Convert the Trust Corporates Resource Data into the format that the WEB expects
         CORPORATES: (trust.CORPORATE || []).map(trustCorp => {
-            const { date_became_interested_person, ...rest } = trustCorp;
+            const { date_became_interested_person, 
+                is_corporate_body_still_involved_in_trust,
+                ceased_date,
+                ...rest } = trustCorp;
+            
+            
             const dbipDate = mapIsoDate(date_became_interested_person);
+            const ceasedDate = mapIsoDate(ceased_date);
+            let isInvolved = is_corporate_body_still_involved_in_trust? "Yes" : "No";
+            // Possible that the api may return null
+            if (is_corporate_body_still_involved_in_trust  === null || 
+                is_corporate_body_still_involved_in_trust === undefined) { 
+                isInvolved = null;
+            }
+            
             return {
                 ...rest,
                 date_became_interested_person_day: dbipDate.day,
                 date_became_interested_person_month: dbipDate.month,
-                date_became_interested_person_year: dbipDate.year
+                date_became_interested_person_year: dbipDate.year,
+                is_corporate_body_still_involved_in_trust: isInvolved,
+                ceased_date_day: ceasedDate.day,
+                ceased_date_month: ceasedDate.month,
+                ceased_date_year: ceasedDate.year
             }
         })
     }
@@ -421,10 +438,15 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  */
 const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {
     return trustCorporates.map(trustCorporate => {
-        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
+        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, 
+            is_corporate_body_still_involved_in_trust,
+            ceased_date_day, ceased_date_month, ceased_date_year,
+            ...rest } = trustCorporate;
         return {
             ...rest,
-            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
+            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
+            is_corporate_body_still_involved_in_trust: is_corporate_body_still_involved_in_trust? (is_corporate_body_still_involved_in_trust === "Yes") : null, 
+            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
         }
     })
 }
