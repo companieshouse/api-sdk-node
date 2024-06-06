@@ -56,6 +56,7 @@ export interface AmlSupervisoryBody {
 
 export interface AcspDto {
       id: string;
+      transactionId?: string;
       firstName?: string;
       middleName?: string;
       lastName?: string;
@@ -79,6 +80,7 @@ export interface AcspDto {
 
 export interface AcspData {
     id: string;
+    transactionId?: string;
     firstName?: string;
     middleName?: string;
     lastName?: string;
