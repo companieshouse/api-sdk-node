@@ -840,8 +840,7 @@ export const CORPORATE_TRUSTEES_DATA_MOCK = [{
         postalCode: "ro_postcode",
         premises: "ro_premises",
         region: "ro_region"
-    },
-    isCorporateBodyStillInvolvedInTrust: "No",
+    }
 }];
 
 export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
@@ -877,6 +876,5 @@ export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
         postal_code: "ro_postcode",
         premises: "ro_premises",
         region: "ro_region"
-    },
-    is_corporate_body_still_involved_in_trust: "No",
+    }
 }];

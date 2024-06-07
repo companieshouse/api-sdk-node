@@ -679,7 +679,6 @@ export interface CorporateTrusteeData {
     ceasedDate?: string;
     serviceAddress?: PrivateAddress;
     registeredOfficeAddress?: PrivateAddress;
-    is_corporate_body_still_involved_in_trust?: string;
 }
 
 export interface CorporateTrusteeDataResource {
@@ -697,7 +696,6 @@ export interface CorporateTrusteeDataResource {
     ceased_date?: string;
     service_address?: PrivateAddressResource;
     registered_office_address?: PrivateAddressResource;
-    is_corporate_body_still_involved_in_trust?: string;
 }
 
 /**
