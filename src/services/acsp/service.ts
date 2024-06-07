@@ -61,7 +61,7 @@ export default class {
      * @param userId the id of the user whose application will be deleted
      */
     public async deleteSavedApplication (userId: string): Promise<HttpResponse> {
-        const url = `/acsp-api/user/${userId}/application/delete`;
+        const url = `/acsp-api/user/${userId}/application`;
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
     }
