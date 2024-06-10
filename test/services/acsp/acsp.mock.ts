@@ -60,6 +60,19 @@ export const mockPostAcsp = {
             typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
         }
     },
+    400: { status: 400, error: "Error saving data" },
+    409: { status: 409, error: "A document already exist with this id" },
+    500: { status: 500, error: "Internal server error" }
+};
+
+export const mockPutAcsp = {
+    200: {
+        status: 200,
+        body: {
+            id: "test@test.com",
+            typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
+        }
+    },
     404: { status: 404, error: "Acsp registration not found" },
     500: { status: 500, error: "Internal server error" }
 };
