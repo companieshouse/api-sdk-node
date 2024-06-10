@@ -1,8 +1,7 @@
 import {
     AcspData,
     AcspDto,
-    AcspResponse,
-    AcspResponseDto
+    AcspResponse
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -30,9 +29,31 @@ export default class {
     }
 
     /**
-     * Post an ACSP object to update on the API.
+     * Post an ACSP object to create on the API.
+     * @param transactionId transaction id associated with the data to be saved
+     * @param acsp the data to be saved
      */
     public async postACSP (transactionId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
+        const url = `/transactions/${transactionId}/acsp`;
+
+        const resp = await this.client.httpPost(url, acsp);
+
+        if (resp.status >= 400) {
+            return { httpStatusCode: resp.status, errors: [resp.error] };
+        }
+
+        return {
+            httpStatusCode: resp.status,
+            resource: resp.body
+        } as Resource<AcspResponse>;
+    }
+
+    /**
+     * Put an ACSP object to update on the API.
+     * @param transactionId transaction id associated with the data to be saved
+     * @param acsp the data to be saved
+     */
+    public async putACSP (transactionId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/acsp`;
 
         const resp = await this.client.httpPut(url, acsp);
@@ -41,12 +62,10 @@ export default class {
             return { httpStatusCode: resp.status, errors: [resp.error] };
         }
 
-        const resource: Resource<AcspResponse> = {
-            httpStatusCode: resp.status
-        };
-        const body = resp.body as AcspResponseDto;
-        resource.resource = resp.body as AcspResponse
-        return resource;
+        return {
+            httpStatusCode: resp.status,
+            resource: resp.body
+        } as Resource<AcspResponse>;
     }
 
     /* get saved application */
