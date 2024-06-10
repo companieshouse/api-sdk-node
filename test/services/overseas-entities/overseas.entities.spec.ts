@@ -935,9 +935,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
             trustCorporates[0].is_corporate_body_still_involved_in_trust = null as unknown as string;
-
             const overseasEntityResource = mapOverseasEntity(overseasEntity);
-    
             expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_body_still_involved_in_trust).to.equal(null);
         });
 
@@ -948,9 +946,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
             trustCorporatesResource[0].is_corporate_body_still_involved_in_trust = null as unknown as boolean;
-
             const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
-    
             expect(overseasEntity.trusts?.[0].CORPORATES?.[0].is_corporate_body_still_involved_in_trust).to.equal(null);
         });
 
@@ -961,9 +957,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
             trustCorporates[0].is_corporate_body_still_involved_in_trust = "Yes" as string;
-
             const overseasEntityResource = mapOverseasEntity(overseasEntity);
-    
             expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_body_still_involved_in_trust).to.equal(true);
         });
 
@@ -974,9 +968,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
             trustCorporatesResource[0].is_corporate_body_still_involved_in_trust = true as boolean;
-
             const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
-    
             expect(overseasEntity.trusts?.[0].CORPORATES?.[0].is_corporate_body_still_involved_in_trust).to.equal("Yes");
         });
 
@@ -987,9 +979,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
             trustCorporates[0].is_corporate_body_still_involved_in_trust = "No" as string;
-
             const overseasEntityResource = mapOverseasEntity(overseasEntity);
-    
             expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_body_still_involved_in_trust).to.equal(false);
             expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].ceased_date).to.equal("2005-09-01");
         });
@@ -1001,9 +991,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
             trustCorporatesResource[0].is_corporate_body_still_involved_in_trust = false as boolean;
-
             const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
-    
             expect(overseasEntity.trusts?.[0].CORPORATES?.[0].is_corporate_body_still_involved_in_trust).to.equal("No");
             expect(overseasEntity.trusts?.[0].CORPORATES?.[0].ceased_date_day).to.equal("1");
             expect(overseasEntity.trusts?.[0].CORPORATES?.[0].ceased_date_month).to.equal("9");
