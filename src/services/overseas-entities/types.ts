@@ -562,7 +562,7 @@ export interface TrustCorporate {
     identification_place_registered?: string;
     identification_registration_number?: string;
     is_on_register_in_country_formed_in: yesNoResponse;
-    is_corporate_body_still_involved_in_trust?: string;
+    is_corporate_still_involved_in_trust?: string;
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
@@ -598,7 +598,7 @@ export interface TrustCorporateResource {
     identification_place_registered?: string;
     identification_registration_number?: string;
     is_on_register_in_country_formed_in: yesNoResponse;
-    is_corporate_body_still_involved_in_trust?: boolean;
+    is_corporate_still_involved_in_trust?: boolean;
     ceased_date? : string;
 }
 
