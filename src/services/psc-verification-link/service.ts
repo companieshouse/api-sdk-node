@@ -1,14 +1,16 @@
 import {
-    PscVerification, PscVerificationResource
+    PersonWithSignificantControl, PscVerification, PscVerificationResource
 } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
+import Mapping from "../../mapping/mapping";
+import { PersonWithSignificantControlResource } from "../psc/types";
 
 export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
-    public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+    public async postPscVerification (transactionId: string, pscVerification: PscVerificationResource): Promise<Resource<PscVerificationDataResource> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
         const response = await this.client.httpPost(resourceUri, pscVerification);
 
@@ -56,11 +58,14 @@ export default class PscVerificationService {
         return resource;
     }
 
-    private populateResource (response: HttpResponse): Resource<PscVerificationResource> {
-        const resource: Resource<PscVerificationResource> = {
+    private populateResource (response: HttpResponse): Resource<PscVerification> {
+        const resource: Resource<PscVerification> = {
             httpStatusCode: response.status,
-            resource: response.body as PscVerificationResource
+            resource: response.body as PscVerification
         };
+
+        const body = response.body as PersonWithSignificantControl;
+        resource.resource = Mapping.camelCaseKeys<PscVerification>(body);
 
         return resource;
     }

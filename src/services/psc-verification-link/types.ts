@@ -1,4 +1,4 @@
-export interface NameElements {
+export interface NameElementsResource {
     forename?: string,
     other_forenames?: string,
     middlename?: string,
@@ -6,39 +6,39 @@ export interface NameElements {
     title?: string
 }
 
-export interface RelevantOfficer {
-    name_elements?: NameElements,
+export interface RelevantOfficerResource {
+    name_elements?: NameElementsResource,
     date_of_birth?: Date,
     is_employee?: boolean,
     is_director?: boolean
 }
 
-export enum NameMismatchReason {
+export enum NameMismatchReasonResource {
     PREFERRED_NAME = "PREFERRED_NAME",
     MAIDEN_NAME = "MAIDEN_NAME"
 }
 
-export enum VerificationStatement {
+export enum VerificationStatementResource {
     INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED",
     RO_IDENTIFIED= "RO_IDENTIFIED",
     RO_VERIFIED = "RO_VERIFIED",
     RO_DECLARATION = "RO_DECLARATION"
 }
 
-export interface VerificationDetails {
+export interface VerificationDetailsResource {
     uvid?: string,
-    name_mismatch_reason?: NameMismatchReason,
-    verification_statements?: VerificationStatement[]
+    name_mismatch_reason?: NameMismatchReasonResource,
+    verification_statements?: VerificationStatementResource[]
 }
 
-export interface PscVerification {
+export interface PscVerificationDataResource {
     company_number?: string,
     psc_appointment_id?: string,
-    relevant_officer?: RelevantOfficer,
-    verification_details?: VerificationDetails
+    relevant_officer?: RelevantOfficerResource,
+    verification_details?: VerificationDetailsResource
 }
 
-export interface Links {
+export interface LinksResource {
     self: string,
     validation_status: string
 }
@@ -46,6 +46,74 @@ export interface Links {
 export interface PscVerificationResource {
     created_at: Date,
     updated_at: Date,
-    links: Links,
-    data: PscVerification;
+    links: LinksResource,
+    data: PscVerificationDataResource;
 }
+
+export interface PscVerification {
+  createdAt: Date,
+  updatedAt: Date,
+  links: LinksResource,
+  data: PscVerificationDataResource;
+}
+
+export interface PersonWithSignificantControl {
+  address: Address,
+  countryOfResidence: string,
+  dateOfBirth: DateOfBirth,
+  ceasedOn?: string,
+  etag: string,
+  links: ItemLinks,
+  name: string,
+  nameElements: NameElements,
+  nationality: string,
+  naturesOfControl: string[],
+  notifiedOn: string,
+  isSanctioned?: boolean,
+  kind?: string,
+  identification?: Identification
+};
+
+export interface Address {
+  addressLine1: string;
+  addressLine2?: string;
+  careOf?: string;
+  locality: string;
+  poBox?: string;
+  postalCode?: string;
+  premises?: string;
+  region?: string;
+};
+
+export interface DateOfBirth {
+  day?: string;
+  month: string;
+  year: string;
+};
+
+export interface NameElements {
+  title?: string;
+  forename?: string;
+  otherForenames?: string;
+  middleName?: string;
+  surname: string;
+};
+
+export interface Identification {
+  identificationType?: string,
+  legalAuthority?: string,
+  legalForm?: string,
+  placeRegistered?: string,
+  registrationNumber?: string,
+  countryRegistered?: string
+};
+
+export interface ResultsLinks {
+  self: string,
+  personsWithSignificantControlStatementsList?: string;
+};
+
+export interface ItemLinks {
+  self: string,
+  statement?: string;
+};
