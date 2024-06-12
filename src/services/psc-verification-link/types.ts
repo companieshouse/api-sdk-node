@@ -71,7 +71,6 @@ export interface ResultsLinksResource {
   persons_with_significant_control_statements_list?: string;
 };
 
-
 export interface ResultsLinks {
     self: string,
     personsWithSignificantControlStatementsList?: string;
@@ -175,22 +174,22 @@ export interface PscVerificationData {
 
 export interface VerificationDetailsResource {
     uvid?: string,
-    name_mismatch_reason?: NameMismatchReasonResource,
-    verification_statements?: VerificationStatementResource[]
+    name_mismatch_reason?: NameMismatchReasonEnum,
+    verification_statements?: VerificationStatementEnum[]
 }
 
 export interface VerificationDetails {
     uvid?: string,
-    nameMismatchReason?: NameMismatchReason,
-    verificationStatements?: VerificationStatement[]
+    nameMismatchReason?: NameMismatchReasonEnum,
+    verificationStatements?: VerificationStatementEnum[]
 }
 
-export enum NameMismatchReasonResource {
+export enum NameMismatchReasonEnum {
     PREFERRED_NAME = "PREFERRED_NAME",
     MAIDEN_NAME = "MAIDEN_NAME"
 }
 
-export enum VerificationStatementResource {
+export enum VerificationStatementEnum {
     INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED",
     RO_IDENTIFIED= "RO_IDENTIFIED",
     RO_VERIFIED = "RO_VERIFIED",
