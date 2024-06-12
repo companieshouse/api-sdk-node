@@ -1,3 +1,20 @@
+export interface PersonWithSignificantControlResource {
+    address: AddressResource,
+    country_of_residence: string,
+    date_of_birth: DateOfBirthResource,
+    ceased_on?: string,
+    etag: string,
+    links: ItemLinksResource,
+    name: string,
+    name_elements: NameElementsResource,
+    nationality: string,
+    natures_of_control: string[],
+    notified_on: string,
+    is_sanctioned?: boolean,
+    kind?: string,
+    identification?: IdentificationResource
+};
+
 export interface PersonWithSignificantControl {
     address: Address,
     countryOfResidence: string,
@@ -15,6 +32,17 @@ export interface PersonWithSignificantControl {
     identification?: Identification
 };
 
+export interface AddressResource {
+    address_line_1: string;
+    address_line_2?: string;
+    careOf?: string;
+    locality: string;
+    poBox?: string;
+    postal_code?: string;
+    premises?: string;
+    region?: string;
+};
+
 export interface Address {
     addressLine1: string;
     addressLine2?: string;
@@ -26,15 +54,34 @@ export interface Address {
     region?: string;
 };
 
+// TODO ??
+export interface DateOfBirthResource {
+    day?: string;
+    month: string;
+    year: string;
+};
+
 export interface DateOfBirth {
     day?: string;
     month: string;
     year: string;
 };
 
+export interface ResultsLinksResource {
+  self: string,
+  persons_with_significant_control_statements_list?: string;
+};
+
+
 export interface ResultsLinks {
     self: string,
     personsWithSignificantControlStatementsList?: string;
+};
+
+// TODO ??
+export interface ItemLinksResource {
+  self: string,
+  statement?: string;
 };
 
 export interface ItemLinks {
@@ -45,6 +92,11 @@ export interface ItemLinks {
 export interface LinksResource {
     self: string,
     validation_status: string
+}
+
+export interface Links {
+    self: string,
+    validationStatus: string
 }
 
 export interface NameElementsResource {
@@ -63,6 +115,15 @@ export interface NameElements {
   surname: string;
 };
 
+export interface IdentificationResource {
+    identification_type?: string,
+    legal_authority?: string,
+    legal_form?: string,
+    place_registered?: string,
+    registration_number?: string,
+    country_registered?: string
+};
+
 export interface Identification {
     identificationType?: string,
     legalAuthority?: string,
@@ -79,11 +140,11 @@ export interface RelevantOfficerResource {
     is_director?: boolean
 }
 
-export interface PscVerification {
-    createdAt: Date,
-    updatedAt: Date,
-    links: LinksResource,
-    data: PscVerificationDataResource;
+export interface RelevantOfficer {
+    nameElements?: NameElements,
+    dateOfBirth?: Date,
+    isEmployee?: boolean,
+    isDirector?: boolean
 }
 
 export interface PscVerificationResource {
@@ -93,6 +154,13 @@ export interface PscVerificationResource {
     data: PscVerificationDataResource;
 }
 
+export interface PscVerification {
+    createdAt: Date,
+    updatedAt: Date,
+    links: Links,
+    data: PscVerificationData;
+}
+
 export interface PscVerificationDataResource {
     company_number?: string,
     psc_appointment_id?: string,
@@ -100,10 +168,23 @@ export interface PscVerificationDataResource {
     verification_details?: VerificationDetailsResource
 }
 
+export interface PscVerificationData {
+    companyNumber?: string,
+    pscAppointmentId?: string,
+    relevantOfficer?: RelevantOfficer,
+    verificationDetails?: VerificationDetails
+}
+
 export interface VerificationDetailsResource {
     uvid?: string,
     name_mismatch_reason?: NameMismatchReasonResource,
     verification_statements?: VerificationStatementResource[]
+}
+
+export interface VerificationDetails {
+    uvid?: string,
+    nameMismatchReason?: NameMismatchReason,
+    verificationStatements?: VerificationStatement[]
 }
 
 export enum NameMismatchReasonResource {
