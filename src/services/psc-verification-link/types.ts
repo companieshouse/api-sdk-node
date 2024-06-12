@@ -54,7 +54,6 @@ export interface Address {
     region?: string;
 };
 
-// TODO ??
 export interface DateOfBirthResource {
     day?: string;
     month: string;
@@ -78,7 +77,6 @@ export interface ResultsLinks {
     personsWithSignificantControlStatementsList?: string;
 };
 
-// TODO ??
 export interface ItemLinksResource {
   self: string,
   statement?: string;
@@ -108,11 +106,11 @@ export interface NameElementsResource {
 }
 
 export interface NameElements {
-  title?: string;
-  forename?: string;
-  otherForenames?: string;
-  middleName?: string;
-  surname: string;
+    title?: string;
+    forename?: string;
+    otherForenames?: string;
+    middleName?: string;
+    surname: string;
 };
 
 export interface IdentificationResource {
