@@ -1,12 +1,14 @@
-import {
-    PersonWithSignificantControl, PscVerification, PscVerificationData, PscVerificationResource
-} from "./types"
+import { PscVerification, PscVerificationData } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 import { PersonWithSignificantControlResource } from "../psc/types";
-
+/**
+ * The PSC Verification Service expects request body data to be configured in camelCase format and will
+ * unwrap this data into snake case format before submitting this on to the PSC verification API. Response
+ * body data received from the API is then converted from snake case back into camel case before it is returned.
+ */
 export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
