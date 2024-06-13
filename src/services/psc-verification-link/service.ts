@@ -1,5 +1,5 @@
 import {
-    PersonWithSignificantControl, PscVerification, PscVerificationResource
+    PersonWithSignificantControl, PscVerification, PscVerificationData, PscVerificationResource
 } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
@@ -10,7 +10,7 @@ import { PersonWithSignificantControlResource } from "../psc/types";
 export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
-    public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
         const pscVerificationResource = Mapping.snakeCaseKeys(pscVerification);
         const response = await this.client.httpPost(resourceUri, pscVerificationResource);
@@ -39,7 +39,7 @@ export default class PscVerificationService {
         return this.populateFrontEndResource(response);
     }
 
-    public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerification): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${filingId}`;
         const pscVerificationPatchResource = Mapping.snakeCaseKeys(pscVerificationPatch);

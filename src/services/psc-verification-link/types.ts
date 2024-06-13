@@ -151,13 +151,6 @@ export interface PscVerificationResource {
     data: PscVerificationDataResource;
 }
 
-export interface PscVerification {
-    createdAt: Date,
-    updatedAt: Date,
-    links: Links,
-    data: PscVerificationData;
-}
-
 export interface PscVerificationDataResource {
     company_number?: string,
     psc_appointment_id?: string,
@@ -165,6 +158,12 @@ export interface PscVerificationDataResource {
     verification_details?: VerificationDetailsResource
 }
 
+export interface PscVerification {
+    createdAt: Date,
+    updatedAt: Date,
+    links: Links,
+    data: PscVerificationData;
+}
 export interface PscVerificationData {
     companyNumber?: string,
     pscAppointmentId?: string,
