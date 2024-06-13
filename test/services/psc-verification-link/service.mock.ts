@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { NameElements, NameMismatchReasonEnum, PscVerificationData, PscVerificationDataResource, PscVerificationResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
+import { NameElements, NameMismatchReasonEnum, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -52,6 +52,20 @@ const PSC_VERIFICATION_CREATED_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER
 }
 
+const PSC_VERIFICATION_CREATED_CAMEL: PscVerificationData = {
+    companyNumber: COMPANY_NUMBER
+}
+
+export const mockPscVerificationCreated: PscVerification = {
+    createdAt: FIRST_DATE,
+    updatedAt: FIRST_DATE,
+    data: PSC_VERIFICATION_CREATED_CAMEL,
+    links: {
+        self: SELF_LINK,
+        validationStatus: `${SELF_LINK}/validation_status`
+    }
+};
+
 export const mockPscVerificationCreatedResource: PscVerificationResource = {
     created_at: FIRST_DATE,
     updated_at: FIRST_DATE,
@@ -93,6 +107,23 @@ export const mockPscVerificationPatchRleRoResource: PscVerificationResource = {
     }
 };
 
+const PSC_VERIFICATION_RO_PATCH_CAMEL: PscVerificationData = {
+    pscAppointmentId: PSC_VERIFICATION_ID,
+    relevantOfficer: {
+        nameElements: NAME_ELEMENTS
+    }
+};
+
+export const mockPscVerificationPatchRleRo: PscVerification = {
+    createdAt: FIRST_DATE,
+    updatedAt: UPDATE_DATE,
+    data: PSC_VERIFICATION_RO_PATCH_CAMEL,
+    links: {
+        self: SELF_LINK,
+        validationStatus: `${SELF_LINK}/validation_status`
+    }
+};
+
 export const mockPscVerificationPatchIndResource: PscVerificationResource = {
     created_at: FIRST_DATE,
     updated_at: UPDATE_DATE,
@@ -100,6 +131,20 @@ export const mockPscVerificationPatchIndResource: PscVerificationResource = {
     links: {
         self: SELF_LINK,
         validation_status: `${SELF_LINK}/validation_status`
+    }
+};
+
+const PSC_VERIFICATION_INDV_PATCH_CAMEL: PscVerificationData = {
+    pscAppointmentId: PSC_VERIFICATION_ID
+};
+
+export const mockPscVerificationPatchInd: PscVerification = {
+    createdAt: FIRST_DATE,
+    updatedAt: UPDATE_DATE,
+    data: PSC_VERIFICATION_INDV_PATCH_CAMEL,
+    links: {
+        self: SELF_LINK,
+        validationStatus: `${SELF_LINK}/validation_status`
     }
 };
 
@@ -118,6 +163,15 @@ const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
     }
 };
 
+export const PSC_VERIFICATION_IND_CAMEL: PscVerificationData = {
+    companyNumber: COMPANY_NUMBER,
+    pscAppointmentId: PSC_VERIFICATION_ID,
+    verificationDetails: {
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
+    }
+};
+
 export const mockPscVerificationIndResource: PscVerificationResource = {
     created_at: FIRST_DATE,
     updated_at: FIRST_DATE,
@@ -125,6 +179,16 @@ export const mockPscVerificationIndResource: PscVerificationResource = {
     links: {
         self: SELF_LINK,
         validation_status: `${SELF_LINK}/validation_status`
+    }
+};
+
+export const mockPscVerificationInd: PscVerification = {
+    createdAt: FIRST_DATE,
+    updatedAt: FIRST_DATE,
+    data: PSC_VERIFICATION_IND_CAMEL,
+    links: {
+        self: SELF_LINK,
+        validationStatus: `${SELF_LINK}/validation_status`
     }
 };
 

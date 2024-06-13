@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { PscVerification, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
+import { PscVerification, PscVerificationDataResource, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
 import { PersonWithSignificantControlResource } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
@@ -31,7 +31,7 @@ export const ADDRESS = {
 };
 export const COUNTRY_OF_RESIDENCE = "Wales";
 
-export const PSC_VERIFICATION_CREATED: PscVerification = {
+export const PSC_VERIFICATION_CREATED_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER
 };
 
@@ -54,18 +54,18 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControlResource = {
 export const mockPscVerificationCreatedResource: PscVerificationResource = {
     created_at: FIRST_DATE,
     updated_at: FIRST_DATE,
-    data: PSC_VERIFICATION_CREATED,
+    data: PSC_VERIFICATION_CREATED_RESOURCE,
     links: {
         self: SELF_LINK,
         validation_status: `${SELF_LINK}/validation_status`
     }
 };
 
-export const PSC_VERIFICATION_INDV_PATCH: PscVerification = {
+export const PSC_VERIFICATION_INDV_PATCH: PscVerificationDataResource = {
     psc_appointment_id: PSC_ID
 };
 
-export const PSC_VERIFICATION_RO_PATCH: PscVerification = {
+export const PSC_VERIFICATION_RO_PATCH: PscVerificationDataResource = {
     psc_appointment_id: PSC_ID,
     relevant_officer: {
         name_elements: NAME_ELEMENTS
