@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { PscVerification, PscVerificationDataResource, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
+import { DateOfBirthResource, PscVerificationDataResource, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
 import { PersonWithSignificantControlResource } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
@@ -35,6 +35,12 @@ export const PSC_VERIFICATION_CREATED_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER
 };
 
+const PSC_INDIVIDUAL_DOB: DateOfBirthResource = {
+    day: undefined,
+    month: "10",
+    year: "21"
+}
+
 export const PSC_INDIVIDUAL: PersonWithSignificantControlResource = {
     natures_of_control: NATURE_OF_CONTROL,
     kind: KIND_INDIVIDUAL,
@@ -46,7 +52,7 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControlResource = {
     links: {
         self: SELF_LINK
     },
-    date_of_birth: undefined,
+    date_of_birth: PSC_INDIVIDUAL_DOB,
     etag: "",
     notified_on: ""
 };
