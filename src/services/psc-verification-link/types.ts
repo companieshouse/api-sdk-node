@@ -174,13 +174,13 @@ export interface PscVerificationData {
 export interface VerificationDetailsResource {
     uvid?: string,
     name_mismatch_reason?: NameMismatchReasonEnum,
-    verification_statements?: VerificationStatementEnum[]
+    statements?: VerificationStatementEnum[]
 }
 
 export interface VerificationDetails {
     uvid?: string,
     nameMismatchReason?: NameMismatchReasonEnum,
-    verificationStatements?: VerificationStatementEnum[]
+    statements?: VerificationStatementEnum[]
 }
 
 export enum NameMismatchReasonEnum {
