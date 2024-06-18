@@ -170,17 +170,21 @@ export interface PscVerificationData {
     relevantOfficer?: RelevantOfficer,
     verificationDetails?: VerificationDetails
 }
-
 export interface VerificationDetailsResource {
-    uvid?: string,
-    name_mismatch_reason?: NameMismatchReasonEnumResource,
-    statements?: VerificationStatementEnumResource[]
+    uvid?: string;
+    name_mismatch_reason?: NameMismatchReasonEnumResource;
+    statements?: [VerificationStatementEnumResource.individual_verified]
+    | [VerificationStatementEnumResource.ro_declaration,
+        VerificationStatementEnumResource.ro_identified,
+        VerificationStatementEnumResource.ro_verified];
 }
-
 export interface VerificationDetails {
-    uvid?: string,
-    nameMismatchReason?: NameMismatchReasonEnum,
-    statements?: VerificationStatementEnum[]
+    uvid?: string;
+    nameMismatchReason?: NameMismatchReasonEnum;
+    statements?: [VerificationStatementEnum.individualVerified]
+    | [VerificationStatementEnum.roDeclaration,
+        VerificationStatementEnum.roIdentified,
+        VerificationStatementEnum.roVerified];
 }
 
 export enum NameMismatchReasonEnumResource {
