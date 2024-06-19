@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { NameElements, NameMismatchReasonEnum, NameMismatchReasonEnumResource, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, VerificationStatementEnum, VerificationStatementEnumResource } from "../../../src/services/psc-verification-link/types";
+import { NameElements, NameMismatchReasonEnum, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -21,8 +21,8 @@ export const PSC_VERIFICATION_IND: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscAppointmentId: PSC_VERIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.maidenName,
-        statements: [VerificationStatementEnum.individualVerified]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
+        statements: [VerificationStatementEnum.INDIVIDUAL]
     }
 };
 
@@ -43,10 +43,10 @@ export const PSC_VERIFICATION_RLE: PscVerificationData = {
         isEmployee: true
     },
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.maidenName,
-        statements: [VerificationStatementEnum.roDeclaration,
-            VerificationStatementEnum.roIdentified,
-            VerificationStatementEnum.roVerified]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
+        statements: [VerificationStatementEnum.RODECLARATION,
+            VerificationStatementEnum.ROIDENTIFIED,
+            VerificationStatementEnum.ROVERIFIED]
     }
 };
 
@@ -160,8 +160,8 @@ const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER,
     psc_appointment_id: PSC_VERIFICATION_ID,
     verification_details: {
-        name_mismatch_reason: NameMismatchReasonEnumResource.maiden_name,
-        statements: [VerificationStatementEnumResource.individual_verified]
+        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN,
+        statements: [VerificationStatementEnum.INDIVIDUAL]
     }
 };
 
@@ -169,8 +169,8 @@ export const PSC_VERIFICATION_IND_CAMEL: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscAppointmentId: PSC_VERIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.maidenName,
-        statements: [VerificationStatementEnum.individualVerified]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
+        statements: [VerificationStatementEnum.INDIVIDUAL]
     }
 };
 
@@ -204,10 +204,10 @@ export const PSC_VERIFICATION_RLE_RESOURCE: PscVerificationDataResource = {
         is_employee: true
     },
     verification_details: {
-        name_mismatch_reason: NameMismatchReasonEnumResource.maiden_name,
-        statements: [VerificationStatementEnumResource.ro_declaration,
-            VerificationStatementEnumResource.ro_identified,
-            VerificationStatementEnumResource.ro_verified]
+        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN,
+        statements: [VerificationStatementEnum.RODECLARATION,
+            VerificationStatementEnum.ROIDENTIFIED,
+            VerificationStatementEnum.ROVERIFIED]
     }
 };
 
