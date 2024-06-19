@@ -203,6 +203,7 @@ export interface BeneficialOwnerCorporateResource {
 }
 
 export interface BeneficialOwnerGovernmentOrPublicAuthority {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
@@ -216,6 +217,7 @@ export interface BeneficialOwnerGovernmentOrPublicAuthority {
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
 }
 export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
@@ -248,6 +250,7 @@ export interface BeneficialOwnerPrivateData {
 }
 
 export interface ManagingOfficerIndividual {
+    id?: string
     ch_reference?: string
     first_name?: string
     last_name?: string
@@ -267,6 +270,7 @@ export interface ManagingOfficerIndividual {
 }
 
 export interface ManagingOfficerIndividualResource {
+    id?: string
     ch_reference?: string
     first_name?: string
     last_name?: string
@@ -286,6 +290,7 @@ export interface ManagingOfficerIndividualResource {
 }
 
 export interface ManagingOfficerCorporate {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
@@ -346,6 +351,7 @@ export interface UpdateResource {
 }
 
 export interface ManagingOfficerCorporateResource {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
