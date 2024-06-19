@@ -163,6 +163,7 @@ export interface BeneficialOwnerIndividualResource {
 }
 
 export interface BeneficialOwnerCorporate {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
@@ -182,6 +183,7 @@ export interface BeneficialOwnerCorporate {
 }
 
 export interface BeneficialOwnerCorporateResource {
+    id?: string
     ch_reference?: string
     name?: string
     principal_address?: Address
