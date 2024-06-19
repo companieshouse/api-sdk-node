@@ -153,20 +153,12 @@ export interface PscVerificationData {
 export interface VerificationDetailsResource {
     uvid?: string;
     name_mismatch_reason?: NameMismatchReasonEnum;
-    statements?: [VerificationStatementEnum.INDIVIDUAL] | [
-        VerificationStatementEnum.RODECLARATION,
-        VerificationStatementEnum.ROIDENTIFIED,
-        VerificationStatementEnum.ROVERIFIED
-    ];
+    statements?: string;
 }
 export interface VerificationDetails {
     uvid?: string;
     nameMismatchReason?: NameMismatchReasonEnum;
-    statements?: [VerificationStatementEnum.INDIVIDUAL] | [
-        VerificationStatementEnum.RODECLARATION,
-        VerificationStatementEnum.ROIDENTIFIED,
-        VerificationStatementEnum.ROVERIFIED
-    ];
+    statements?: string;
 }
 export declare enum NameMismatchReasonEnum {
     PREFERRED = "PREFERRED_NAME",
