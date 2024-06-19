@@ -18,7 +18,6 @@ var NameMismatchReasonEnum;
 (function (NameMismatchReasonEnum) {
     NameMismatchReasonEnum["PREFERRED"] = "PREFERRED_NAME";
     NameMismatchReasonEnum["MAIDEN"] = "MAIDEN_NAME";
-    NameMismatchReasonEnum["maidenName"] = "maidenName";
 })(NameMismatchReasonEnum = exports.NameMismatchReasonEnum || (exports.NameMismatchReasonEnum = {}));
 var VerificationStatementEnum;
 (function (VerificationStatementEnum) {
@@ -26,9 +25,5 @@ var VerificationStatementEnum;
     VerificationStatementEnum["ROIDENTIFIED"] = "RO_IDENTIFIED";
     VerificationStatementEnum["ROVERIFIED"] = "RO_VERIFIED";
     VerificationStatementEnum["RODECLARATION"] = "RO_DECLARATION";
-    VerificationStatementEnum["individualVerified"] = "individualVerified";
-    VerificationStatementEnum["roDeclaration"] = "roDeclaration";
-    VerificationStatementEnum["roIdentified"] = "roIdentified";
-    VerificationStatementEnum["roVerified"] = "roVerified";
 })(VerificationStatementEnum = exports.VerificationStatementEnum || (exports.VerificationStatementEnum = {}));
 //# sourceMappingURL=types.js.map

@@ -170,16 +170,11 @@ export interface VerificationDetails {
 }
 export declare enum NameMismatchReasonEnum {
     PREFERRED = "PREFERRED_NAME",
-    MAIDEN = "MAIDEN_NAME",
-    maidenName = "maidenName"
+    MAIDEN = "MAIDEN_NAME"
 }
 export declare enum VerificationStatementEnum {
     INDIVIDUAL = "INDIVIDUAL_VERIFIED",
     ROIDENTIFIED = "RO_IDENTIFIED",
     ROVERIFIED = "RO_VERIFIED",
-    RODECLARATION = "RO_DECLARATION",
-    individualVerified = "individualVerified",
-    roDeclaration = "roDeclaration",
-    roIdentified = "roIdentified",
-    roVerified = "roVerified"
+    RODECLARATION = "RO_DECLARATION"
 }
