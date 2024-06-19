@@ -193,16 +193,22 @@ export enum VerificationStatementEnumResource {
     ro_identified = "RO_IDENTIFIED",
     ro_verified = "RO_VERIFIED",
     ro_declaration = "RO_DECLARATION"
+    uvid?: string;
+    nameMismatchReason?: NameMismatchReasonEnum;
+    statements?: [VerificationStatementEnum.INDIVIDUAL]
+    | [VerificationStatementEnum.RODECLARATION,
+        VerificationStatementEnum.ROIDENTIFIED,
+        VerificationStatementEnum.ROVERIFIED];
 }
 
 export enum NameMismatchReasonEnum {
-    preferredName = "PREFERRED_NAME",
-    maidenName = "MAIDEN_NAME"
+    PREFERRED = "PREFERRED_NAME",
+    MAIDEN = "MAIDEN_NAME"
 }
 
 export enum VerificationStatementEnum {
-    individualVerified = "INDIVIDUAL_VERIFIED",
-    roIdentified = "RO_IDENTIFIED",
-    roVerified = "RO_VERIFIED",
-    roDeclaration = "RO_DECLARATION"
+    INDIVIDUAL = "INDIVIDUAL_VERIFIED",
+    ROIDENTIFIED = "RO_IDENTIFIED",
+    ROVERIFIED = "RO_VERIFIED",
+    RODECLARATION = "RO_DECLARATION",
 }

@@ -152,31 +152,29 @@ export interface PscVerificationData {
 }
 export interface VerificationDetailsResource {
     uvid?: string;
-    name_mismatch_reason?: NameMismatchReasonEnumResource;
-    statements?: string[];
+    name_mismatch_reason?: NameMismatchReasonEnum;
+    statements?: [VerificationStatementEnum.INDIVIDUAL] | [
+        VerificationStatementEnum.RODECLARATION,
+        VerificationStatementEnum.ROIDENTIFIED,
+        VerificationStatementEnum.ROVERIFIED
+    ];
 }
 export interface VerificationDetails {
     uvid?: string;
     nameMismatchReason?: NameMismatchReasonEnum;
-    statements?: string[];
-}
-export declare enum NameMismatchReasonEnumResource {
-    preferred_name = "PREFERRED_NAME",
-    maiden_name = "MAIDEN_NAME"
-}
-export declare enum VerificationStatementEnumResource {
-    individual_verified = "INDIVIDUAL_VERIFIED",
-    ro_identified = "RO_IDENTIFIED",
-    ro_verified = "RO_VERIFIED",
-    ro_declaration = "RO_DECLARATION"
+    statements?: [VerificationStatementEnum.INDIVIDUAL] | [
+        VerificationStatementEnum.RODECLARATION,
+        VerificationStatementEnum.ROIDENTIFIED,
+        VerificationStatementEnum.ROVERIFIED
+    ];
 }
 export declare enum NameMismatchReasonEnum {
-    preferredName = "PREFERRED_NAME",
-    maidenName = "MAIDEN_NAME"
+    PREFERRED = "PREFERRED_NAME",
+    MAIDEN = "MAIDEN_NAME"
 }
 export declare enum VerificationStatementEnum {
-    individualVerified = "INDIVIDUAL_VERIFIED",
-    roIdentified = "RO_IDENTIFIED",
-    roVerified = "RO_VERIFIED",
-    roDeclaration = "RO_DECLARATION"
+    INDIVIDUAL = "INDIVIDUAL_VERIFIED",
+    ROIDENTIFIED = "RO_IDENTIFIED",
+    ROVERIFIED = "RO_VERIFIED",
+    RODECLARATION = "RO_DECLARATION"
 }
