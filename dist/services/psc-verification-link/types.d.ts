@@ -152,21 +152,31 @@ export interface PscVerificationData {
 }
 export interface VerificationDetailsResource {
     uvid?: string;
-    name_mismatch_reason?: NameMismatchReasonEnum;
+    name_mismatch_reason?: NameMismatchReasonEnumResource;
     statements?: string[];
 }
 export interface VerificationDetails {
     uvid?: string;
     nameMismatchReason?: NameMismatchReasonEnum;
-    statements?: string[];
+    statements?: VerificationStatementEnumResource[];
+}
+export declare enum NameMismatchReasonEnumResource {
+    preferred_name = "PREFERRED_NAME",
+    maiden_name = "MAIDEN_NAME"
+}
+export declare enum VerificationStatementEnumResource {
+    individual_verified = "INDIVIDUAL_VERIFIED",
+    ro_identified = "RO_IDENTIFIED",
+    ro_verified = "RO_VERIFIED",
+    ro_declaration = "RO_DECLARATION"
 }
 export declare enum NameMismatchReasonEnum {
-    PREFERRED = "PREFERRED_NAME",
-    MAIDEN = "MAIDEN_NAME"
+    preferredName = "PREFERRED_NAME",
+    maidenName = "MAIDEN_NAME"
 }
 export declare enum VerificationStatementEnum {
-    INDIVIDUAL = "INDIVIDUAL_VERIFIED",
-    ROIDENTIFIED = "RO_IDENTIFIED",
-    ROVERIFIED = "RO_VERIFIED",
-    RODECLARATION = "RO_DECLARATION"
+    individualVerified = "INDIVIDUAL_VERIFIED",
+    roIdentified = "RO_IDENTIFIED",
+    roVerified = "RO_VERIFIED",
+    roDeclaration = "RO_DECLARATION"
 }
