@@ -21,8 +21,8 @@ export const PSC_VERIFICATION_IND: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscAppointmentId: PSC_VERIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
-        statements: [VerificationStatementEnum.INDIVIDUAL]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
 
@@ -43,10 +43,10 @@ export const PSC_VERIFICATION_RLE: PscVerificationData = {
         isEmployee: true
     },
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
-        statements: [VerificationStatementEnum.RODECLARATION,
-            VerificationStatementEnum.ROIDENTIFIED,
-            VerificationStatementEnum.ROVERIFIED]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verificationStatements: [VerificationStatementEnum.RO_DECLARATION,
+            VerificationStatementEnum.RO_IDENTIFIED,
+            VerificationStatementEnum.RO_VERIFIED]
     }
 };
 
@@ -160,8 +160,8 @@ const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER,
     psc_appointment_id: PSC_VERIFICATION_ID,
     verification_details: {
-        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN,
-        statements: [VerificationStatementEnum.INDIVIDUAL]
+        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verification_statements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
 
@@ -169,8 +169,8 @@ export const PSC_VERIFICATION_IND_CAMEL: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscAppointmentId: PSC_VERIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.MAIDEN,
-        statements: [VerificationStatementEnum.INDIVIDUAL]
+        nameMismatchReason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
 
@@ -204,10 +204,10 @@ export const PSC_VERIFICATION_RLE_RESOURCE: PscVerificationDataResource = {
         is_employee: true
     },
     verification_details: {
-        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN,
-        statements: [VerificationStatementEnum.RODECLARATION,
-            VerificationStatementEnum.ROIDENTIFIED,
-            VerificationStatementEnum.ROVERIFIED]
+        name_mismatch_reason: NameMismatchReasonEnum.MAIDEN_NAME,
+        verification_statements: [VerificationStatementEnum.RO_DECLARATION,
+            VerificationStatementEnum.RO_IDENTIFIED,
+            VerificationStatementEnum.RO_VERIFIED]
     }
 };
 
