@@ -374,7 +374,7 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 
 const mapTrust = (trust: Trust): TrustResource => {
     const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, trust_still_involved_in_overseas_entity, ...rest } = trust;
-
+    console.log("\n\n\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(CORPORATES) + "\n\n\n");
     // The first 'truthy' check here is to see whether 'trust_still_involved_in_overseas_entity' contains a non-empty string
     const stillInvolved = trust_still_involved_in_overseas_entity ? (trust_still_involved_in_overseas_entity === "Yes") : null;
 
@@ -437,8 +437,7 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  * @param  trustCorporates Array of TrustCorporate objects
  * @returns Array of TrustCorporateResource
  */
-const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {
-    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(trustCorporates));
+const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {   
     return trustCorporates.map(trustCorporate => {
         const {
             date_became_interested_person_day,
@@ -447,6 +446,7 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
             ceased_date_day, ceased_date_month, ceased_date_year,
             ...rest
         } = trustCorporate;
+         console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(trustCorporates));
         return {
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
