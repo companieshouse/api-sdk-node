@@ -136,7 +136,7 @@ const mapToTrust = (trust) => {
                 is_corporate_still_involved_in_trust === undefined) {
                 isInvolved = null;
             }
-            return Object.assign(Object.assign({}, rest), { date_became_interested_person_day: dbipDate.day, date_became_interested_person_month: dbipDate.month, date_became_interested_person_year: dbipDate.year, is_corporate_still_involved_in_trust: isInvolved, ceased_date_day: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.day, ceased_date_month: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.month, ceased_date_year: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.year });
+            return Object.assign(Object.assign({}, rest), { date_became_interested_person_day: dbipDate.day, date_became_interested_person_month: dbipDate.month, date_became_interested_person_year: dbipDate.year, still_involved: isInvolved, ceased_date_day: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.day, ceased_date_month: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.month, ceased_date_year: ceasedDate === null || ceasedDate === void 0 ? void 0 : ceasedDate.year });
         })
     };
 };
@@ -302,9 +302,10 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos = []) => {
  * @returns Array of TrustCorporateResource
  */
 const mapTrustCorporates = (trustCorporates = []) => {
+    console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(trustCorporates));
     return trustCorporates.map(trustCorporate => {
-        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, is_corporate_still_involved_in_trust, ceased_date_day, ceased_date_month, ceased_date_year } = trustCorporate, rest = __rest(trustCorporate, ["date_became_interested_person_day", "date_became_interested_person_month", "date_became_interested_person_year", "is_corporate_still_involved_in_trust", "ceased_date_day", "ceased_date_month", "ceased_date_year"]);
-        return Object.assign(Object.assign({}, rest), { date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year), is_corporate_still_involved_in_trust: is_corporate_still_involved_in_trust ? (is_corporate_still_involved_in_trust === "Yes") : null, ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year) });
+        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, still_involved, ceased_date_day, ceased_date_month, ceased_date_year } = trustCorporate, rest = __rest(trustCorporate, ["date_became_interested_person_day", "date_became_interested_person_month", "date_became_interested_person_year", "still_involved", "ceased_date_day", "ceased_date_month", "ceased_date_year"]);
+        return Object.assign(Object.assign({}, rest), { date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year), is_corporate_still_involved_in_trust: still_involved ? (still_involved === "Yes") : null, ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year) });
     });
 };
 const mapUpdate = (update) => {
