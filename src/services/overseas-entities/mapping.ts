@@ -200,7 +200,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
                 date_became_interested_person_day: dbipDate.day,
                 date_became_interested_person_month: dbipDate.month,
                 date_became_interested_person_year: dbipDate.year,
-                still_involved: isInvolved,
+                is_corporate_still_involved_in_trust: isInvolved,
                 ceased_date_day: ceasedDate?.day,
                 ceased_date_month: ceasedDate?.month,
                 ceased_date_year: ceasedDate?.year
@@ -374,7 +374,7 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 
 const mapTrust = (trust: Trust): TrustResource => {
     const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, trust_still_involved_in_overseas_entity, ...rest } = trust;
-    console.log("\n\n\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(CORPORATES) + "\n\n\n");
+    console.log("\n\n\n\n>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> JSON FROM THE WEB " + JSON.stringify(CORPORATES) + "\n\n\n");
     // The first 'truthy' check here is to see whether 'trust_still_involved_in_overseas_entity' contains a non-empty string
     const stillInvolved = trust_still_involved_in_overseas_entity ? (trust_still_involved_in_overseas_entity === "Yes") : null;
 
@@ -442,15 +442,14 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
         const {
             date_became_interested_person_day,
             date_became_interested_person_month, date_became_interested_person_year,
-            still_involved,
+            is_corporate_still_involved_in_trust,
             ceased_date_day, ceased_date_month, ceased_date_year,
             ...rest
-        } = trustCorporate;
-         console.log(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>> FROM THE WEB " + JSON.stringify(trustCorporates));
+        } = trustCorporate;         
         return {
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
-            is_corporate_still_involved_in_trust: still_involved ? (still_involved === "Yes") : null,
+            is_corporate_still_involved_in_trust: is_corporate_still_involved_in_trust ? (is_corporate_still_involved_in_trust === "Yes") : null,
             ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
         }
     })
