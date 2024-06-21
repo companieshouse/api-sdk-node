@@ -729,6 +729,66 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(overseasEntity.trusts?.[0].trust_still_involved_in_overseas_entity).to.equal(null);
     });
 
+    it("should return OverseasEntityResource object from mapOverseasEntity method with Trust Individual data but with 'is_individual_still_involved_in_trust' flag set to null", async () => {
+        const overseasEntity = {
+            trusts: mockValues.TRUSTS_MOCK,
+            update: mockValues.UPDATE_OBJECT_MOCK
+        };
+
+        overseasEntity.trusts[0].INDIVIDUALS![0].still_involved = null as unknown as string;
+        overseasEntity.update.review_trusts![0].INDIVIDUALS![0].still_involved = null as unknown as string;
+
+        const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
+
+        expect(overseasEntityResource.trusts?.[0].INDIVIDUAL?.[0].is_individual_still_involved_in_trust).to.equal(null);
+        expect(overseasEntityResource.update?.review_trusts?.[0].INDIVIDUAL?.[0].is_individual_still_involved_in_trust).to.equal(null);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with Trust Individual data but with 'still involved' flag set to null", async () => {
+        const overseasEntityResource: OverseasEntityResource = {
+            trusts: mockValues.TRUSTS_RESOURCE_MOCK,
+            update: mockValues.UPDATE_RESOURCE_MOCK
+        };
+
+        overseasEntityResource.trusts![0].INDIVIDUAL![0].is_individual_still_involved_in_trust = null as unknown as boolean;
+        overseasEntityResource.update!.review_trusts![0].INDIVIDUAL![0].is_individual_still_involved_in_trust = null as unknown as boolean;
+
+        const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
+
+        expect(overseasEntity.trusts?.[0].INDIVIDUALS?.[0].still_involved).to.equal(null);
+        expect(overseasEntity.update?.review_trusts?.[0].INDIVIDUALS?.[0].still_involved).to.equal(null);
+    });
+
+    it("should return OverseasEntityResource object from mapOverseasEntity method with Trust Individual data but with 'is_individual_still_involved_in_trust' flag mapped from undefined to null", async () => {
+        const overseasEntity = {
+            trusts: mockValues.TRUSTS_MOCK,
+            update: mockValues.UPDATE_OBJECT_MOCK
+        };
+
+        overseasEntity.trusts[0].INDIVIDUALS![0].still_involved = undefined as unknown as string;
+        overseasEntity.update.review_trusts![0].INDIVIDUALS![0].still_involved = undefined as unknown as string;
+
+        const overseasEntityResource: OverseasEntityResource = mapOverseasEntity(overseasEntity);
+
+        expect(overseasEntityResource.trusts?.[0].INDIVIDUAL?.[0].is_individual_still_involved_in_trust).to.equal(null);
+        expect(overseasEntityResource.update?.review_trusts?.[0].INDIVIDUAL?.[0].is_individual_still_involved_in_trust).to.equal(null);
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method with Trust Individual data but with 'still involved' flag mapped from undefined to null", async () => {
+        const overseasEntityResource: OverseasEntityResource = {
+            trusts: mockValues.TRUSTS_RESOURCE_MOCK,
+            update: mockValues.UPDATE_RESOURCE_MOCK
+        };
+
+        overseasEntityResource.trusts![0].INDIVIDUAL![0].is_individual_still_involved_in_trust = undefined as unknown as boolean;
+        overseasEntityResource.update!.review_trusts![0].INDIVIDUAL![0].is_individual_still_involved_in_trust = undefined as unknown as boolean;
+
+        const overseasEntity: OverseasEntity = mapOverseasEntityResource(overseasEntityResource);
+
+        expect(overseasEntity.trusts?.[0].INDIVIDUALS?.[0].still_involved).to.equal(null);
+        expect(overseasEntity.update?.review_trusts?.[0].INDIVIDUALS?.[0].still_involved).to.equal(null);
+    });
+
     describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
         beforeEach(() => {
             sinon.reset();
