@@ -11,16 +11,7 @@ describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
 
     describe("POST endpoint", () => {
-        beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
-        });
-
-        afterEach(done => {
-            sinon.reset();
-            sinon.restore();
-            done();
-        });
+        afterEach(sinon.restore);
 
         it("should return status 201 Created and filing resource representation on authorised access", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[201]);
@@ -86,16 +77,7 @@ describe("PSC Verification Link", () => {
     });
 
     describe("PATCH endpoint", () => {
-        beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
-        });
-
-        afterEach(done => {
-            sinon.reset();
-            sinon.restore();
-            done();
-        });
+        afterEach(sinon.restore);
 
         it("should return a status 200 OK and patched PSC individual verification filing", async () => {
             sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[200]);
