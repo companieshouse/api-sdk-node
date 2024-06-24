@@ -200,7 +200,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
                 date_became_interested_person_day: dbipDate.day,
                 date_became_interested_person_month: dbipDate.month,
                 date_became_interested_person_year: dbipDate.year,
-                is_corporate_still_involved_in_trust: isInvolved,
+                still_involved: isInvolved,
                 ceased_date_day: ceasedDate?.day,
                 ceased_date_month: ceasedDate?.month,
                 ceased_date_year: ceasedDate?.year
@@ -442,14 +442,14 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
         const {
             date_became_interested_person_day,
             date_became_interested_person_month, date_became_interested_person_year,
-            is_corporate_still_involved_in_trust,
+            still_involved,
             ceased_date_day, ceased_date_month, ceased_date_year,
             ...rest
         } = trustCorporate;         
         return {
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
-            is_corporate_still_involved_in_trust: is_corporate_still_involved_in_trust ? (is_corporate_still_involved_in_trust === "Yes") : null,
+            is_corporate_still_involved_in_trust: still_involved ? (still_involved === "Yes") : null,
             ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
         }
     })
