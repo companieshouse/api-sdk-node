@@ -132,7 +132,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
     let stillInvolved = trust.trust_still_involved_in_overseas_entity ? "Yes" : "No";
 
     // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
-    if (trust.trust_still_involved_in_overseas_entity === null || trust.trust_still_involved_in_overseas_entity === undefined) {
+    if (typeof trust.trust_still_involved_in_overseas_entity !== "boolean") {
         stillInvolved = null;
     }
 
@@ -157,7 +157,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
 
             let isIndividualStillInvolvedInTrust = is_individual_still_involved_in_trust ? "Yes" : "No";
             // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
-            if (is_individual_still_involved_in_trust === null || is_individual_still_involved_in_trust === undefined) {
+            if (typeof is_individual_still_involved_in_trust !== "boolean") {
                 isIndividualStillInvolvedInTrust = null;
             }
 
