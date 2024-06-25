@@ -16,8 +16,7 @@
         "lint:fix": "eslint 'src/*.ts' 'src/**/*.ts' 'test/**/*.ts' --fix",
         "prepublishOnly": "[ ! -d node_modules ] && npm install; tsc",
         "postpublish": "rm -rf dist",
-        "analyse-code": "sonar-scanner",
-"prepare": "husky install && npm install --save https://github.com/companieshouse/api-sdk-node/tarball/uar-1533-roe-trust-corporate-involved-flag && cd node_modules/@companieshouse/api-sdk-node && npm run build"
+        "analyse-code": "sonar-scanner"
     },
     "dependencies": {
         "axios": "^1.6.7",
