@@ -84,4 +84,15 @@ export default class {
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
     }
+
+    /**
+     * Send a confirmation email for application complete
+     * @param userId the id of the user who will recieve the email
+     * @param applicationReference the reference number of the application
+     */
+    public async sendConfirmationEmail (userId: string, applicationReference: string): Promise<HttpResponse> {
+        const url = `/acsp-api/user/${userId}/application-submit/${applicationReference}`;
+        const resp: HttpResponse = await this.client.httpPost(url);
+        return resp;
+    }
 }
