@@ -106,3 +106,26 @@ describe("Acsp Registration DELETE", () => {
         expect(data.status).to.equal(404);
     })
 })
+
+describe("Acsp email POST", () => {
+    it("should return 200 on successful email request", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
+        expect(data.status).to.equal(200);
+    })
+
+    it("should return 404 if no application exists", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[404]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
+        expect(data.status).to.equal(404);
+    })
+
+    it("should return 500 if an error occurs", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[500]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
+        expect(data.status).to.equal(500);
+    })
+})

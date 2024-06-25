@@ -81,3 +81,9 @@ export const mockDeleteAcsp = {
     204: { status: 204 },
     404: { status: 404 }
 };
+
+export const mockAcspApplicationCompleteEmail = {
+    200: { status: 200 },
+    404: { status: 404 },
+    500: { status: 500 }
+};
