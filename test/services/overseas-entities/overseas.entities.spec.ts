@@ -624,6 +624,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(overseasEntity.update?.review_trusts?.[0].ceased_date_month).to.be.undefined;
         expect(overseasEntity.update?.review_trusts?.[0].ceased_date_year).to.be.undefined;
         expect(overseasEntity.update?.review_trusts?.[0].trust_id).to.equal("1234");
+        expect(overseasEntity.update?.review_trusts?.[0].ch_reference).to.equal("ch_reference");
     });
 
     it("should return OverseasEntityResource object from mapOverseasEntity method with no review trust ceased date", async () => {
@@ -643,6 +644,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
         expect(overseasEntityResource.update?.review_trusts?.[0].ceased_date).to.equal("");
         expect(overseasEntityResource.update?.review_trusts?.[0].trust_id).to.equal("1234");
+        expect(overseasEntityResource.update?.review_trusts?.[0].ch_reference).to.equal("ch_reference");
     });
 
     it("should return OverseasEntityResource object from mapOverseasEntity method with Trust data but no ceased date", async () => {

@@ -422,7 +422,7 @@ export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
 export const TRUSTS_MOCK: Trust[] = [{
     trust_id: "123",
     trust_name: "trust_name",
-    ch_reference: "ch_reference",
+    ch_reference: undefined,
     creation_date_day: "20",
     creation_date_month: "2",
     creation_date_year: "2020",
@@ -590,7 +590,7 @@ export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerR
 export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     trust_id: "123",
     trust_name: "trust_name",
-    ch_reference: "ch_reference",
+    ch_reference: undefined,
     creation_date: "2020-02-20",
     ceased_date: "2021-03-30",
     trust_still_involved_in_overseas_entity: false,
