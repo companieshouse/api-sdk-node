@@ -132,7 +132,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
     let stillInvolved = trust.trust_still_involved_in_overseas_entity ? "Yes" : "No";
 
     // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
-    if (trust.trust_still_involved_in_overseas_entity === null || trust.trust_still_involved_in_overseas_entity === undefined) {
+    if (typeof trust.trust_still_involved_in_overseas_entity !== "boolean") {
         stillInvolved = null;
     }
 
@@ -149,9 +149,18 @@ const mapToTrust = (trust: TrustResource): Trust => {
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
-            const { date_of_birth, date_became_interested_person, ...rest } = trustInd;
+            const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, ...rest } = trustInd;
             const dobDate = mapIsoDate(date_of_birth);
             const dbipDate = mapIsoDate(date_became_interested_person);
+
+            const individualCeasedDate = individual_ceased_date ? mapIsoDate(individual_ceased_date) : undefined;
+
+            let isIndividualStillInvolvedInTrust = is_individual_still_involved_in_trust ? "Yes" : "No";
+            // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
+            if (typeof is_individual_still_involved_in_trust !== "boolean") {
+                isIndividualStillInvolvedInTrust = null;
+            }
+
             return {
                 ...rest,
                 dob_day: dobDate.day,
@@ -159,7 +168,11 @@ const mapToTrust = (trust: TrustResource): Trust => {
                 dob_year: dobDate.year,
                 date_became_interested_person_day: dbipDate.day,
                 date_became_interested_person_month: dbipDate.month,
-                date_became_interested_person_year: dbipDate.year
+                date_became_interested_person_year: dbipDate.year,
+                still_involved: isIndividualStillInvolvedInTrust,
+                ceased_date_day: individualCeasedDate?.day,
+                ceased_date_month: individualCeasedDate?.month,
+                ceased_date_year: individualCeasedDate?.year
             }
         }),
         // Convert the Trust Historical BO Resource Data into the format that the WEB expects
@@ -405,11 +418,17 @@ const mapTrustToReview = (trust: TrustToReview): TrustToReviewResource => {
  */
 const mapTrustIndividuals = (trustIndividuals: TrustIndividual[] = []): TrustIndividualResource[] => {
     return trustIndividuals.map(trustIndividual => {
-        const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustIndividual;
+        const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, still_involved, ceased_date_day, ceased_date_month, ceased_date_year, ...rest } = trustIndividual;
+
+        // The first 'truthy' check here is to see whether 'still_involved' contains a non-empty string
+        const isStillInvolved = still_involved ? (still_involved === "Yes") : null;
+
         return {
             ...rest,
             date_of_birth: convertOptionalDateToIsoDateString(dob_day, dob_month, dob_year),
-            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
+            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
+            is_individual_still_involved_in_trust: isStillInvolved,
+            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
         }
     })
 }
