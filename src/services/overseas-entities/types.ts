@@ -475,6 +475,10 @@ export interface TrustIndividual {
     date_became_interested_person_day?: string;
     date_became_interested_person_month?: string;
     date_became_interested_person_year?: string;
+    still_involved?: string;
+    ceased_date_day?: string;
+    ceased_date_month?: string;
+    ceased_date_year?: string;
   }
 
 export interface TrustIndividualResource {
@@ -505,6 +509,8 @@ export interface TrustIndividualResource {
     ura_address_premises?: string;
     ura_address_region?: string;
     date_became_interested_person?: string;
+    is_individual_still_involved_in_trust?: boolean;
+    ceased_date?: string;
 }
 
 export interface TrustHistoricalBeneficialOwner {

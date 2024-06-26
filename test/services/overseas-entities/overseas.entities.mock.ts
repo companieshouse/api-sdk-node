@@ -356,7 +356,11 @@ export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     ura_address_region: "ura_region",
     date_became_interested_person_day: "30",
     date_became_interested_person_month: "4",
-    date_became_interested_person_year: "2004"
+    date_became_interested_person_year: "2004",
+    still_involved: "No",
+    ceased_date_day: "31",
+    ceased_date_month: "8",
+    ceased_date_year: "2005"
 }]
 
 export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
@@ -530,7 +534,9 @@ export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     ura_address_postal_code: "ura_postcode",
     ura_address_premises: "ura_premises",
     ura_address_region: "ura_region",
-    date_became_interested_person: "2004-04-30"
+    date_became_interested_person: "2004-04-30",
+    is_individual_still_involved_in_trust: false,
+    ceased_date: "2005-08-31"
 }]
 
 export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
