@@ -307,6 +307,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_individual).to.deep.equal(mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST);
         expect(data.managing_officers_corporate).to.deep.equal(mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST);
         expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
+        expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(true);
@@ -624,7 +625,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(overseasEntity.update?.review_trusts?.[0].ceased_date_month).to.be.undefined;
         expect(overseasEntity.update?.review_trusts?.[0].ceased_date_year).to.be.undefined;
         expect(overseasEntity.update?.review_trusts?.[0].trust_id).to.equal("1234");
-        expect(overseasEntity.update?.review_trusts?.[0].ch_reference).to.equal("ch_reference");
+        expect(overseasEntity.update?.review_trusts?.[0].ch_reference).to.equal("_ecba-4TzUTXaln-g8daGtvS4a0");
     });
 
     it("should return OverseasEntityResource object from mapOverseasEntity method with no review trust ceased date", async () => {
@@ -644,7 +645,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
         expect(overseasEntityResource.update?.review_trusts?.[0].ceased_date).to.equal("");
         expect(overseasEntityResource.update?.review_trusts?.[0].trust_id).to.equal("1234");
-        expect(overseasEntityResource.update?.review_trusts?.[0].ch_reference).to.equal("ch_reference");
+        expect(overseasEntityResource.update?.review_trusts?.[0].ch_reference).to.equal("_ecba-4TzUTXaln-g8daGtvS4a0");
     });
 
     it("should return OverseasEntityResource object from mapOverseasEntity method with Trust data but no ceased date", async () => {

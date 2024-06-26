@@ -439,7 +439,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
     trust_id: "1234",
     trust_name: "review_trust_name",
-    ch_reference: "ch_reference",
+    ch_reference: "_ecba-4TzUTXaln-g8daGtvS4a0",
     creation_date_day: "2",
     creation_date_month: "1",
     creation_date_year: "2023",
@@ -603,7 +603,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
 export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
     trust_id: "1234",
     trust_name: "review_trust_name",
-    ch_reference: "ch_reference",
+    ch_reference: "_ecba-4TzUTXaln-g8daGtvS4a0",
     creation_date: "2023-01-02",
     ceased_date: "2024-02-02",
     trust_still_involved_in_overseas_entity: false,
