@@ -139,6 +139,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
     return {
         trust_id: trust.trust_id,
         trust_name: trust.trust_name,
+        ch_reference: trust.ch_reference,
         creation_date_day: creationDate.day,
         creation_date_month: creationDate.month,
         creation_date_year: creationDate.year,

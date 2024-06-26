@@ -402,6 +402,7 @@ export interface PrivateAddress {
 export interface Trust {
     trust_id: string;
     trust_name: string;
+    ch_reference?: string;
     creation_date_day: string;
     creation_date_month: string;
     creation_date_year: string;
@@ -418,6 +419,7 @@ export interface Trust {
 export interface TrustResource {
     trust_id: string;
     trust_name: string;
+    ch_reference?: string;
     creation_date: string;
     ceased_date?: string;
     trust_still_involved_in_overseas_entity?: boolean;
