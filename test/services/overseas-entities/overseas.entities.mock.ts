@@ -393,7 +393,11 @@ export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
     identification_legal_form: "form",
     identification_place_registered: "uk",
     identification_registration_number: "456",
-    is_on_register_in_country_formed_in: yesNoResponse.Yes
+    is_on_register_in_country_formed_in: yesNoResponse.Yes,
+    still_involved: "No",
+    ceased_date_day: "1",
+    ceased_date_month: "9",
+    ceased_date_year: "2005"
 }]
 
 export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
@@ -569,7 +573,9 @@ export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
     identification_legal_form: "form",
     identification_place_registered: "uk",
     identification_registration_number: "456",
-    is_on_register_in_country_formed_in: yesNoResponse.Yes
+    is_on_register_in_country_formed_in: yesNoResponse.Yes,
+    is_corporate_still_involved_in_trust: false,
+    ceased_date: "2005-09-01"
 }]
 
 export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerResource[] = [{

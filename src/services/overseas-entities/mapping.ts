@@ -193,13 +193,32 @@ const mapToTrust = (trust: TrustResource): Trust => {
         }),
         // Convert the Trust Corporates Resource Data into the format that the WEB expects
         CORPORATES: (trust.CORPORATE || []).map(trustCorp => {
-            const { date_became_interested_person, ...rest } = trustCorp;
+            const
+                {
+                    date_became_interested_person,
+                    is_corporate_still_involved_in_trust,
+                    ceased_date,
+                    ...rest
+                } = trustCorp;
+
             const dbipDate = mapIsoDate(date_became_interested_person);
+            const ceasedDate = ceased_date ? mapIsoDate(ceased_date) : undefined;
+
+            let isInvolved = is_corporate_still_involved_in_trust ? "Yes" : "No";
+            // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
+            if (typeof is_corporate_still_involved_in_trust !== "boolean") {
+                isInvolved = null;
+            }
+
             return {
                 ...rest,
                 date_became_interested_person_day: dbipDate.day,
                 date_became_interested_person_month: dbipDate.month,
-                date_became_interested_person_year: dbipDate.year
+                date_became_interested_person_year: dbipDate.year,
+                still_involved: isInvolved,
+                ceased_date_day: ceasedDate?.day,
+                ceased_date_month: ceasedDate?.month,
+                ceased_date_year: ceasedDate?.year
             }
         })
     }
@@ -370,7 +389,6 @@ const mapTrustsToReview = (trusts: TrustToReview[] = []): TrustToReviewResource[
 
 const mapTrust = (trust: Trust): TrustResource => {
     const { creation_date_day, creation_date_month, creation_date_year, ceased_date_day, ceased_date_month, ceased_date_year, INDIVIDUALS, HISTORICAL_BO, CORPORATES, unable_to_obtain_all_trust_info, trust_still_involved_in_overseas_entity, ...rest } = trust;
-
     // The first 'truthy' check here is to see whether 'trust_still_involved_in_overseas_entity' contains a non-empty string
     const stillInvolved = trust_still_involved_in_overseas_entity ? (trust_still_involved_in_overseas_entity === "Yes") : null;
 
@@ -441,10 +459,18 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  */
 const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {
     return trustCorporates.map(trustCorporate => {
-        const { date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, ...rest } = trustCorporate;
+        const {
+            date_became_interested_person_day,
+            date_became_interested_person_month, date_became_interested_person_year,
+            still_involved,
+            ceased_date_day, ceased_date_month, ceased_date_year,
+            ...rest
+        } = trustCorporate;
         return {
             ...rest,
-            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year)
+            date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
+            is_corporate_still_involved_in_trust: still_involved ? (still_involved === "Yes") : null,
+            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
         }
     })
 }

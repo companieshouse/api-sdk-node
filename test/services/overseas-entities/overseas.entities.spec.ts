@@ -16,7 +16,9 @@ import {
     CorporateTrusteeDataResource,
     IndividualTrusteeData,
     OverseasEntityResource,
-    OverseasEntity
+    OverseasEntity,
+    TrustCorporate,
+    TrustCorporateResource
 } from "../../../src/services/overseas-entities";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
@@ -987,6 +989,76 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
             expect(data.httpStatusCode).to.equal(200);
             expect(data.resource).to.deep.equal(mockValues.CORPORATE_TRUSTEES_DATA_MOCK);
+        });
+
+        it("should return OverseasEntityResource object from mapOverseasEntity method with trust corporate still involved flag set to null", async () => {
+            const overseasEntity = {
+                trusts: mockValues.TRUSTS_MOCK
+            }
+
+            const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
+            trustCorporates[0].still_involved = null as unknown as string;
+            const overseasEntityResource = mapOverseasEntity(overseasEntity);
+            expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_still_involved_in_trust).to.equal(null);
+        });
+
+        it("should return OverseasEntity object from mapOverseasEntityResource method with trust corporate still involved flag set to null", async () => {
+            const overseasEntityResource = {
+                trusts: mockValues.TRUSTS_RESOURCE_MOCK
+            }
+
+            const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
+            trustCorporatesResource[0].is_corporate_still_involved_in_trust = null as unknown as boolean;
+            const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].still_involved).to.equal(null);
+        });
+
+        it("should return OverseasEntityResource object from mapOverseasEntity method with trust corporate still involved flag set to true", async () => {
+            const overseasEntity = {
+                trusts: mockValues.TRUSTS_MOCK
+            }
+
+            const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
+            trustCorporates[0].still_involved = "Yes" as string;
+            const overseasEntityResource = mapOverseasEntity(overseasEntity);
+            expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_still_involved_in_trust).to.equal(true);
+        });
+
+        it("should return OverseasEntity object from mapOverseasEntityResource method with trust corporate still involved flag set to yes", async () => {
+            const overseasEntityResource = {
+                trusts: mockValues.TRUSTS_RESOURCE_MOCK
+            }
+
+            const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
+            trustCorporatesResource[0].is_corporate_still_involved_in_trust = true as boolean;
+            const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].still_involved).to.equal("Yes");
+        });
+
+        it("should return OverseasEntityResource object from mapOverseasEntity method with trust corporate still involved flag set to false", async () => {
+            const overseasEntity = {
+                trusts: mockValues.TRUSTS_MOCK
+            }
+
+            const trustCorporates = overseasEntity.trusts[0].CORPORATES as TrustCorporate[];
+            trustCorporates[0].still_involved = "No" as string;
+            const overseasEntityResource = mapOverseasEntity(overseasEntity);
+            expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].is_corporate_still_involved_in_trust).to.equal(false);
+            expect(overseasEntityResource.trusts?.[0].CORPORATE?.[0].ceased_date).to.equal("2005-09-01");
+        });
+
+        it("should return OverseasEntity object from mapOverseasEntityResource method with trust corporate still involved flag set to no", async () => {
+            const overseasEntityResource = {
+                trusts: mockValues.TRUSTS_RESOURCE_MOCK
+            }
+
+            const trustCorporatesResource = overseasEntityResource.trusts[0].CORPORATE as TrustCorporateResource[];
+            trustCorporatesResource[0].is_corporate_still_involved_in_trust = false as boolean;
+            const overseasEntity = mapOverseasEntityResource(overseasEntityResource);
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].still_involved).to.equal("No");
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].ceased_date_day).to.equal("1");
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].ceased_date_month).to.equal("9");
+            expect(overseasEntity.trusts?.[0].CORPORATES?.[0].ceased_date_year).to.equal("2005");
         });
 
         it("should return error 400 (Bad Request) for getCorporateTrusteesPrivateData method", async () => {
