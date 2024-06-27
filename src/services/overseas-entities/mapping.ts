@@ -208,7 +208,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
             if (typeof is_corporate_still_involved_in_trust !== "boolean") {
                 isInvolved = null;
             }
-     
+
             return {
                 ...rest,
                 date_became_interested_person_day: dbipDate.day,
