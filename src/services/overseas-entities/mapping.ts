@@ -203,11 +203,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
             const dbipDate = mapIsoDate(date_became_interested_person);
             const ceasedDate = ceased_date ? mapIsoDate(ceased_date) : undefined;
             let isInvolved = is_corporate_still_involved_in_trust ? "Yes" : "No";
-            // Possible that the api may return null
-            if (is_corporate_still_involved_in_trust === null ||
-                is_corporate_still_involved_in_trust === undefined) {
+            // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
+            if (typeof is_corporate_still_involved_in_trust !== "boolean") {
                 isInvolved = null;
-            }
+            }           
             return {
                 ...rest,
                 date_became_interested_person_day: dbipDate.day,
@@ -455,7 +454,7 @@ const mapTrustHistoricalBeneficialOwners = (trustHistoricalBos: TrustHistoricalB
  * @param  trustCorporates Array of TrustCorporate objects
  * @returns Array of TrustCorporateResource
  */
-const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {   
+const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorporateResource[] => {
     return trustCorporates.map(trustCorporate => {
         const {
             date_became_interested_person_day,
@@ -463,7 +462,7 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
             still_involved,
             ceased_date_day, ceased_date_month, ceased_date_year,
             ...rest
-        } = trustCorporate;         
+        } = trustCorporate;
         return {
             ...rest,
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
