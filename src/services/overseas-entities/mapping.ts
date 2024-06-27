@@ -202,11 +202,13 @@ const mapToTrust = (trust: TrustResource): Trust => {
 
             const dbipDate = mapIsoDate(date_became_interested_person);
             const ceasedDate = ceased_date ? mapIsoDate(ceased_date) : undefined;
+
             let isInvolved = is_corporate_still_involved_in_trust ? "Yes" : "No";
             // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
             if (typeof is_corporate_still_involved_in_trust !== "boolean") {
                 isInvolved = null;
-            }           
+            }
+                       
             return {
                 ...rest,
                 date_became_interested_person_day: dbipDate.day,
