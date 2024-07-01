@@ -655,7 +655,7 @@ export interface TrustLinkDataResource {
 export interface IndividualTrusteeData {
     hashedTrusteeId: string;
     trusteeForename1: string;
-    trusteeForename2?: string;  
+    trusteeForename2?: string;
     trusteeSurname: string;
     dateOfBirth?: string;
     nationality?: string;
