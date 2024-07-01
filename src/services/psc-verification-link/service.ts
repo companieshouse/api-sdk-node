@@ -1,16 +1,21 @@
-import {
-    PscVerification, PscVerificationResource
-} from "./types"
+import { PscVerification, PscVerificationData } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
-
+import Mapping from "../../mapping/mapping";
+import { PersonWithSignificantControlResource } from "../psc/types";
+/**
+ * The PSC Verification Service expects request body data to be configured in camelCase format and will
+ * unwrap this data into snake case format before submitting this on to the PSC verification API. Response
+ * body data received from the API is then converted from snake case back into camel case before it is returned.
+ */
 export default class PscVerificationService {
     constructor (private readonly client: IHttpClient) {}
 
-    public async postPscVerification (transactionId: string, pscVerification: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
-        const response = await this.client.httpPost(resourceUri, pscVerification);
+        const pscVerificationResource = Mapping.snakeCaseKeys(pscVerification);
+        const response = await this.client.httpPost(resourceUri, pscVerificationResource);
 
         if (response.error) {
             return {
@@ -19,10 +24,10 @@ export default class PscVerificationService {
             }
         }
 
-        return this.populateResource(response);
+        return this.populateFrontEndResource(response);
     }
 
-    public async getPscVerification (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+    public async getPscVerification (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
         const response = await this.client.httpGet(resourceUri);
 
@@ -33,13 +38,14 @@ export default class PscVerificationService {
             }
         }
 
-        return this.populateResource(response);
+        return this.populateFrontEndResource(response);
     }
 
-    public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerification): Promise<Resource<PscVerificationResource> | ApiErrorResponse> {
+    public async patchPscVerification (transactionId: string, filingId: string, pscVerificationPatch: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${filingId}`;
-        const response = await this.client.httpPatch(resourceUri, pscVerificationPatch, additionalHeaders);
+        const pscVerificationPatchResource = Mapping.snakeCaseKeys(pscVerificationPatch);
+        const response = await this.client.httpPatch(resourceUri, pscVerificationPatchResource, additionalHeaders);
 
         if (response.error) {
             return {
@@ -48,20 +54,18 @@ export default class PscVerificationService {
             }
         }
 
-        const resource: Resource<PscVerificationResource> = {
-            httpStatusCode: response.status,
-            resource: response.body
-        };
-
-        return resource;
+        return this.populateFrontEndResource(response);
     }
 
-    private populateResource (response: HttpResponse): Resource<PscVerificationResource> {
-        const resource: Resource<PscVerificationResource> = {
+    private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {
+        const frontEndResource: Resource<PscVerification> = {
             httpStatusCode: response.status,
-            resource: response.body as PscVerificationResource
+            resource: response.body as PscVerification
         };
 
-        return resource;
+        const body = response.body as PersonWithSignificantControlResource;
+        frontEndResource.resource = Mapping.camelCaseKeys<PscVerification>(body);
+
+        return frontEndResource;
     }
 }

@@ -412,6 +412,7 @@ export interface PrivateAddress {
 export interface Trust {
     trust_id: string;
     trust_name: string;
+    ch_reference?: string;
     creation_date_day: string;
     creation_date_month: string;
     creation_date_year: string;
@@ -428,6 +429,7 @@ export interface Trust {
 export interface TrustResource {
     trust_id: string;
     trust_name: string;
+    ch_reference?: string;
     creation_date: string;
     ceased_date?: string;
     trust_still_involved_in_overseas_entity?: boolean;
@@ -485,6 +487,10 @@ export interface TrustIndividual {
     date_became_interested_person_day?: string;
     date_became_interested_person_month?: string;
     date_became_interested_person_year?: string;
+    still_involved?: string;
+    ceased_date_day?: string;
+    ceased_date_month?: string;
+    ceased_date_year?: string;
   }
 
 export interface TrustIndividualResource {
@@ -515,6 +521,8 @@ export interface TrustIndividualResource {
     ura_address_premises?: string;
     ura_address_region?: string;
     date_became_interested_person?: string;
+    is_individual_still_involved_in_trust?: boolean;
+    ceased_date?: string;
 }
 
 export interface TrustHistoricalBeneficialOwner {
@@ -572,6 +580,11 @@ export interface TrustCorporate {
     identification_place_registered?: string;
     identification_registration_number?: string;
     is_on_register_in_country_formed_in: yesNoResponse;
+    still_involved: string;
+    ceased_date_day?: string;
+    ceased_date_month?: string;
+    ceased_date_year?: string;
+
 }
 
 export interface TrustCorporateResource {
@@ -603,6 +616,8 @@ export interface TrustCorporateResource {
     identification_place_registered?: string;
     identification_registration_number?: string;
     is_on_register_in_country_formed_in: yesNoResponse;
+    is_corporate_still_involved_in_trust?: boolean;
+    ceased_date? : string;
 }
 
 /**

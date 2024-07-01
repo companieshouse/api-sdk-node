@@ -356,7 +356,11 @@ export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     ura_address_region: "ura_region",
     date_became_interested_person_day: "30",
     date_became_interested_person_month: "4",
-    date_became_interested_person_year: "2004"
+    date_became_interested_person_year: "2004",
+    still_involved: "No",
+    ceased_date_day: "31",
+    ceased_date_month: "8",
+    ceased_date_year: "2005"
 }]
 
 export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
@@ -389,7 +393,11 @@ export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
     identification_legal_form: "form",
     identification_place_registered: "uk",
     identification_registration_number: "456",
-    is_on_register_in_country_formed_in: yesNoResponse.Yes
+    is_on_register_in_country_formed_in: yesNoResponse.Yes,
+    still_involved: "No",
+    ceased_date_day: "1",
+    ceased_date_month: "9",
+    ceased_date_year: "2005"
 }]
 
 export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
@@ -418,6 +426,7 @@ export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
 export const TRUSTS_MOCK: Trust[] = [{
     trust_id: "123",
     trust_name: "trust_name",
+    ch_reference: undefined,
     creation_date_day: "20",
     creation_date_month: "2",
     creation_date_year: "2020",
@@ -434,6 +443,7 @@ export const TRUSTS_MOCK: Trust[] = [{
 export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
     trust_id: "1234",
     trust_name: "review_trust_name",
+    ch_reference: "_ecba-4TzUTXaln-g8daGtvS4a0",
     creation_date_day: "2",
     creation_date_month: "1",
     creation_date_year: "2023",
@@ -530,7 +540,9 @@ export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     ura_address_postal_code: "ura_postcode",
     ura_address_premises: "ura_premises",
     ura_address_region: "ura_region",
-    date_became_interested_person: "2004-04-30"
+    date_became_interested_person: "2004-04-30",
+    is_individual_still_involved_in_trust: false,
+    ceased_date: "2005-08-31"
 }]
 
 export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
@@ -561,7 +573,9 @@ export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
     identification_legal_form: "form",
     identification_place_registered: "uk",
     identification_registration_number: "456",
-    is_on_register_in_country_formed_in: yesNoResponse.Yes
+    is_on_register_in_country_formed_in: yesNoResponse.Yes,
+    is_corporate_still_involved_in_trust: false,
+    ceased_date: "2005-09-01"
 }]
 
 export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerResource[] = [{
@@ -582,6 +596,7 @@ export const TRUST_HISTORICAL_BOS_RESOURCE_MOCK: TrustHistoricalBeneficialOwnerR
 export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     trust_id: "123",
     trust_name: "trust_name",
+    ch_reference: undefined,
     creation_date: "2020-02-20",
     ceased_date: "2021-03-30",
     trust_still_involved_in_overseas_entity: false,
@@ -594,6 +609,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
 export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
     trust_id: "1234",
     trust_name: "review_trust_name",
+    ch_reference: "_ecba-4TzUTXaln-g8daGtvS4a0",
     creation_date: "2023-01-02",
     ceased_date: "2024-02-02",
     trust_still_involved_in_overseas_entity: false,
