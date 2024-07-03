@@ -456,6 +456,7 @@ export interface TrustToReviewResource extends TrustResource {
 }
 
 export interface TrustIndividual {
+    id?: string;
     type?: string;
     forename?: string;
     other_forenames?: string;
@@ -494,6 +495,7 @@ export interface TrustIndividual {
   }
 
 export interface TrustIndividualResource {
+    id?: string;
     type?: string;
     forename?: string;
     other_forenames?: string;
@@ -526,6 +528,7 @@ export interface TrustIndividualResource {
 }
 
 export interface TrustHistoricalBeneficialOwner {
+    id?: string;
     forename?: string;
     other_forenames?: string;
     surname?: string;
@@ -540,6 +543,7 @@ export interface TrustHistoricalBeneficialOwner {
 }
 
 export interface TrustHistoricalBeneficialOwnerResource {
+    id?: string;
     forename?: string;
     other_forenames?: string;
     surname?: string;
@@ -550,6 +554,7 @@ export interface TrustHistoricalBeneficialOwnerResource {
 }
 
 export interface TrustCorporate {
+    id?: string;
     type?: string;
     name?: string;
     date_became_interested_person_day?: string;
@@ -588,6 +593,7 @@ export interface TrustCorporate {
 }
 
 export interface TrustCorporateResource {
+    id?: string;
     type?: string;
     name?: string;
     date_became_interested_person?: string;
