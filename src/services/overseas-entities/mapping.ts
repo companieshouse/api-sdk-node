@@ -50,7 +50,10 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         trusts: mapTrusts(body.trusts),
         update: mapUpdate(body.update),
         remove: mapRemove(body.remove),
-        is_remove: (body.is_remove) ? body.is_remove : null
+        is_remove: (body.is_remove) ? body.is_remove : null,
+        has_sold_land: body.has_sold_land ?? null,
+        is_secure_register: body.is_secure_register ?? null,
+        who_is_registering: body.who_is_registering ?? null
     };
 };
 
