@@ -497,7 +497,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     trusts: TRUSTS_MOCK,
     update: UPDATE_OBJECT_MOCK,
     remove: REMOVE_OBJECT_MOCK,
-    is_remove: undefined
+    is_remove: undefined,
+    has_sold_land: undefined
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {

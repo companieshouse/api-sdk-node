@@ -51,9 +51,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         update: mapUpdate(body.update),
         remove: mapRemove(body.remove),
         is_remove: (body.is_remove) ? body.is_remove : null,
-        has_sold_land: body.has_sold_land ?? null,
-        is_secure_register: body.is_secure_register ?? null,
-        who_is_registering: body.who_is_registering ?? null
+        has_sold_land: mapHasSoldLand(body.has_sold_land)
     };
 };
 
@@ -80,7 +78,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         trusts: mapTrustsResource(body.trusts),
         update: mapUpdateResource(body.update),
         remove: mapRemoveResource(body.remove),
-        is_remove: body.is_remove
+        is_remove: body.is_remove,
+        has_sold_land: mapHasSoldLandResource(body.has_sold_land)
     };
 };
 
@@ -597,6 +596,13 @@ const mapIsoDate = (date: string): InputDate => {
     // Remove leading zeros, split and init variables
     const [year, month, day] = mapDate.replace(/\b0/g, "").split("-");
     return { day, month, year }
+}
+
+const mapHasSoldLand = (option: string | undefined): boolean | undefined => {
+    return typeof option === "undefined" ? option : (option !== "0");
+}
+const mapHasSoldLandResource = (option: boolean | undefined): string | undefined => {
+    return typeof option === "undefined" ? option : (option ? "1" : "0");
 }
 
 const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
