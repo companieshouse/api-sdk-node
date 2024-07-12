@@ -241,6 +241,7 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
     const boIndividualResources: BeneficialOwnerIndividualResource[] = [];
     boIndividuals.forEach(boIndividual => {
         const { date_of_birth, start_date, ceased_date, ...rest } = boIndividual;
+        console.log("DOB BEFORE = " + JSON.stringify(date_of_birth, null, 2));
         boIndividualResources.push({
             ...rest,
             date_of_birth: convertDateToIsoDateString(date_of_birth?.day, date_of_birth?.month, date_of_birth?.year),
