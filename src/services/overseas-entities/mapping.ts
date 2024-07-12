@@ -249,6 +249,7 @@ const mapBeneficialOwnersIndividual = (boIndividuals: BeneficialOwnerIndividual[
             ceased_date: convertOptionalInputDate(ceased_date)
         })
     });
+    console.log("RESOURCES = " + JSON.stringify(boIndividualResources, null, 2));
     return boIndividualResources;
 }
 
