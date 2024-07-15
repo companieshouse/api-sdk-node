@@ -16,7 +16,7 @@ export default class CompanyPscService {
    */
     public async getCompanyPsc (number: string): Promise<Resource<CompanyPersonsWithSignificantControl>> {
         const resp = await this.client.httpGet(`/company/${number}/persons-with-significant-control`);
-
+        console.log("****** SDK ****** getCompanyPsc = " + `/company/${number}/persons-with-significant-control`);
         const resource: Resource<CompanyPersonsWithSignificantControl> = {
             httpStatusCode: resp.status
         };
