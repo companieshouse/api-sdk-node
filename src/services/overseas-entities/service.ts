@@ -122,6 +122,7 @@ export default class OverseasEntityService {
             httpStatusCode: response.status,
             resource: Mapping.camelCaseKeys<BeneficialOwnerPrivateData[]>(response.body as BeneficialOwnerPrivateDataResource[])
         };
+        console.log("****** SDK ****** getBeneficialOwnersPrivateData = " + JSON.stringify(resource, null, 2));
 
         return resource;
     }

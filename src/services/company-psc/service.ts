@@ -28,7 +28,7 @@ export default class CompanyPscService {
         const body = resp.body as CompanyPersonsWithSignificantControlResource;
 
         resource.resource = Mapping.camelCaseKeys<CompanyPersonsWithSignificantControl>(body);
-
+console.log("****** SDK ****** getCompanyPsc = " + JSON.stringify(resource, null, 2));
         return resource;
     }
 }
