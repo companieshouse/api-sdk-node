@@ -53,6 +53,8 @@ export default class RequestClient extends AbstractClient {
                 options.data = additionalOptions.body;
             }
 
+            console.log("****** AXIOS REQUEST ****** = " + JSON.stringify(options, null, 2));
+
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
             const resp = await axios(options) as AxiosResponse;
