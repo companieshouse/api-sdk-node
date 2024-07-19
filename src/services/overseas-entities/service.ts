@@ -64,7 +64,7 @@ export default class OverseasEntityService {
 
     public async postOverseasEntity (
         transactionId: string,
-        body: OverseasEntity,
+        body: OverseasEntity
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
         const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
