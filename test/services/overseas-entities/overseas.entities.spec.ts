@@ -216,7 +216,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: mockValues.TRUSTS_MOCK,
             update: mockValues.UPDATE_OBJECT_MOCK,
             remove: mockValues.REMOVE_OBJECT_MOCK,
-            is_remove: true
+            is_remove: true,
+            has_sold_land: "0"
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
@@ -235,6 +236,48 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.trusts?.[0]);
         expect(data.update).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update);
         expect(data.is_remove).to.deep.equal(true);
+        expect(data.has_sold_land).to.deep.equal(false);
+        expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
+    });
+
+    it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
+        const data = mapOverseasEntity({
+            entity_name: mockValues.ENTITY_NAME_FIELD_MOCK,
+            entity_number: mockValues.ENTITY_NUMBER_MOCK,
+            presenter: mockValues.PRESENTER_OBJECT_MOCK,
+            entity: mockValues.ENTITY_OBJECT_MOCK,
+            due_diligence: mockValues.DUE_DILIGENCE_MOCK,
+            overseas_entity_due_diligence: mockValues.OE_DUE_DILIGENCE_MOCK,
+            beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
+            beneficial_owners_individual: mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST,
+            beneficial_owners_corporate: mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST,
+            beneficial_owners_government_or_public_authority: mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST,
+            managing_officers_individual: mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST,
+            managing_officers_corporate: mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST,
+            trusts: mockValues.TRUSTS_MOCK,
+            update: mockValues.UPDATE_OBJECT_MOCK,
+            remove: mockValues.REMOVE_OBJECT_MOCK,
+            is_remove: true,
+            has_sold_land: "1"
+        });
+
+        expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
+        expect(data.entity_number).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_number);
+        expect(data.presenter).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.presenter);
+        expect(data.entity).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity);
+        expect(data.due_diligence).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.due_diligence);
+        expect(data.overseas_entity_due_diligence).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.overseas_entity_due_diligence);
+        expect(data.beneficial_owners_statement).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_statement);
+        expect(data.beneficial_owners_individual?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_individual?.[0]);
+        expect(data.beneficial_owners_corporate?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_corporate?.[0]);
+        expect(data.beneficial_owners_government_or_public_authority?.[0]).to.deep.equal(
+            mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.beneficial_owners_government_or_public_authority?.[0]);
+        expect(data.managing_officers_individual?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_individual?.[0]);
+        expect(data.managing_officers_corporate?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.managing_officers_corporate?.[0]);
+        expect(data.trusts?.[0]).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.trusts?.[0]);
+        expect(data.update).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update);
+        expect(data.is_remove).to.deep.equal(true);
+        expect(data.has_sold_land).to.deep.equal(true);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
     });
 
@@ -255,7 +298,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: [],
             update: undefined,
             remove: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
         expect(data.entity_name).to.deep.equal(null);
         expect(data.entity_number).to.deep.equal(null);
@@ -273,6 +317,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal({});
         expect(data.remove).to.deep.equal({});
         expect(data.is_remove).to.deep.equal(null);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
@@ -293,7 +338,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: OE_RESOURCE.trusts,
             update: OE_RESOURCE.update,
             remove: OE_RESOURCE.remove,
-            is_remove: true
+            is_remove: true,
+            has_sold_land: true
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -313,6 +359,49 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(true);
+        expect(data.has_sold_land).to.deep.equal("1");
+    });
+
+    it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
+        const OE_RESOURCE = mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK;
+        const data = mapOverseasEntityResource({
+            entity_name: OE_RESOURCE.entity_name,
+            entity_number: OE_RESOURCE.entity_number,
+            presenter: OE_RESOURCE.presenter,
+            entity: OE_RESOURCE.entity,
+            due_diligence: OE_RESOURCE.due_diligence,
+            overseas_entity_due_diligence: OE_RESOURCE.overseas_entity_due_diligence,
+            beneficial_owners_statement: BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS,
+            beneficial_owners_individual: OE_RESOURCE.beneficial_owners_individual,
+            beneficial_owners_corporate: OE_RESOURCE.beneficial_owners_corporate,
+            beneficial_owners_government_or_public_authority: OE_RESOURCE.beneficial_owners_government_or_public_authority,
+            managing_officers_individual: OE_RESOURCE.managing_officers_individual,
+            managing_officers_corporate: OE_RESOURCE.managing_officers_corporate,
+            trusts: OE_RESOURCE.trusts,
+            update: OE_RESOURCE.update,
+            remove: OE_RESOURCE.remove,
+            is_remove: true,
+            has_sold_land: false
+        });
+
+        expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
+        expect(data.entity_number).to.deep.equal(mockValues.ENTITY_NUMBER_MOCK);
+        expect(data.presenter).to.deep.equal(mockValues.PRESENTER_OBJECT_MOCK);
+        expect(data.entity).to.deep.equal(mockValues.ENTITY_OBJECT_MOCK);
+        expect(data.due_diligence).to.deep.equal(mockValues.DUE_DILIGENCE_MOCK);
+        expect(data.overseas_entity_due_diligence).to.deep.equal(mockValues.OE_DUE_DILIGENCE_MOCK);
+        expect(data.beneficial_owners_statement).to.deep.equal(BeneficialOwnersStatementType.ALL_IDENTIFIED_ALL_DETAILS);
+        expect(data.beneficial_owners_individual).to.deep.equal(mockValues.BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST);
+        expect(data.beneficial_owners_corporate).to.deep.equal(mockValues.BENEFICIAL_OWNER_CORPORATE_MOCK_LIST);
+        expect(data.beneficial_owners_government_or_public_authority).to.deep.equal(mockValues.BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST);
+        expect(data.managing_officers_individual).to.deep.equal(mockValues.MANAGING_OFFICERS_INDIVIDUAL_MOCK_LIST);
+        expect(data.managing_officers_corporate).to.deep.equal(mockValues.MANAGING_OFFICERS_CORPORATE_MOCK_LIST);
+        expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
+        expect(data.trusts).to.deep.equal(mockValues.TRUSTS_MOCK);
+        expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
+        expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
+        expect(data.is_remove).to.deep.equal(true);
+        expect(data.has_sold_land).to.deep.equal("0");
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just EntityName data", async () => {
@@ -330,7 +419,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_individual: undefined,
             managing_officers_corporate: undefined,
             trusts: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -347,6 +437,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_corporate).to.deep.equal([]);
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just entity number data", async () => {
@@ -364,7 +455,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_individual: undefined,
             managing_officers_corporate: undefined,
             trusts: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -381,6 +473,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_corporate).to.deep.equal([]);
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
@@ -397,7 +490,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_individual: undefined,
             managing_officers_corporate: undefined,
             trusts: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -413,6 +507,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.managing_officers_corporate).to.deep.equal([]);
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Update data", async () => {
@@ -431,7 +526,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined,
             update: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update,
             remove: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -449,6 +545,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
         expect(data.remove).to.deep.equal({});
         expect(data.is_remove).to.deep.equal(undefined);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Remove data", async () => {
@@ -467,7 +564,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined,
             update: undefined,
             remove: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -485,6 +583,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal({});
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(undefined);
+        expect(data.has_sold_land).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with mapped Update dates", async () => {
@@ -503,7 +602,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined,
             update: mockValues.UPDATE_RESOURCE_MOCK,
             remove: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
@@ -530,7 +630,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined,
             update: updateResource,
             remove: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.update?.filing_date).to.undefined;
@@ -557,7 +658,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             trusts: undefined,
             update: updateResource,
             remove: undefined,
-            is_remove: undefined
+            is_remove: undefined,
+            has_sold_land: undefined
         });
 
         expect(data.update?.date_of_creation).to.undefined;
