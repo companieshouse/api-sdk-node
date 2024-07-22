@@ -409,8 +409,8 @@ export interface PrivateAddress {
     postalCode?: string;
     premises?: string;
     region?: string;
-    is_service_address_same_as_principal_address?: string;
-    is_service_address_same_as_usual_residential_address?: string;
+    isServiceAddressSameAsPrincipalAddress?: string;
+    isServiceAddressSameAsUsualResidentialAddress?: string;
 }
 
 export interface Trust {
