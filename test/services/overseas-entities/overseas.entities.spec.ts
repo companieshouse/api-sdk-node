@@ -217,7 +217,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: mockValues.UPDATE_OBJECT_MOCK,
             remove: mockValues.REMOVE_OBJECT_MOCK,
             is_remove: true,
-            has_sold_land: "0"
+            has_sold_land: "0",
+            is_secure_register: "0"
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
@@ -237,6 +238,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update);
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal(false);
+        expect(data.is_secure_register).to.deep.equal(false);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
     });
 
@@ -258,7 +260,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: mockValues.UPDATE_OBJECT_MOCK,
             remove: mockValues.REMOVE_OBJECT_MOCK,
             is_remove: true,
-            has_sold_land: "1"
+            has_sold_land: "1",
+            is_secure_register: "1"
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
@@ -278,6 +281,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.update).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update);
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal(true);
+        expect(data.is_secure_register).to.deep.equal(true);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
     });
 
@@ -299,7 +303,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: undefined,
             remove: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
         expect(data.entity_name).to.deep.equal(null);
         expect(data.entity_number).to.deep.equal(null);
@@ -318,6 +323,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.remove).to.deep.equal({});
         expect(data.is_remove).to.deep.equal(null);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
@@ -339,7 +345,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: OE_RESOURCE.update,
             remove: OE_RESOURCE.remove,
             is_remove: true,
-            has_sold_land: true
+            has_sold_land: true,
+            is_secure_register: true
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -360,6 +367,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal("1");
+        expect(data.is_secure_register).to.deep.equal("1");
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
@@ -381,7 +389,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: OE_RESOURCE.update,
             remove: OE_RESOURCE.remove,
             is_remove: true,
-            has_sold_land: false
+            has_sold_land: false,
+            is_secure_register: false
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -402,6 +411,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal("0");
+        expect(data.is_secure_register).to.deep.equal("0");
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just EntityName data", async () => {
@@ -420,7 +430,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_corporate: undefined,
             trusts: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -438,6 +449,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just entity number data", async () => {
@@ -456,7 +468,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_corporate: undefined,
             trusts: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -474,6 +487,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
@@ -491,7 +505,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             managing_officers_corporate: undefined,
             trusts: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -508,6 +523,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.trusts).to.deep.equal([]);
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Update data", async () => {
@@ -527,7 +543,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.update,
             remove: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -546,6 +563,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.remove).to.deep.equal({});
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Remove data", async () => {
@@ -565,7 +583,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: undefined,
             remove: mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -584,6 +603,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.remove).to.deep.equal(mockValues.REMOVE_OBJECT_MOCK);
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
+        expect(data.is_secure_register).to.deep.equal(undefined);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with mapped Update dates", async () => {
@@ -603,7 +623,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: mockValues.UPDATE_RESOURCE_MOCK,
             remove: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
@@ -631,7 +652,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: updateResource,
             remove: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.update?.filing_date).to.undefined;
@@ -659,7 +681,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: updateResource,
             remove: undefined,
             is_remove: undefined,
-            has_sold_land: undefined
+            has_sold_land: undefined,
+            is_secure_register: undefined
         });
 
         expect(data.update?.date_of_creation).to.undefined;

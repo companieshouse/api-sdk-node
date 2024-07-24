@@ -20,6 +20,7 @@ export interface OverseasEntity {
     remove?: Remove;
     is_remove?: boolean;
     has_sold_land?: string;
+    is_secure_register?: string;
 }
 
 export interface OverseasEntityResource {
@@ -40,6 +41,7 @@ export interface OverseasEntityResource {
     remove?: RemoveResource;
     is_remove?: boolean;
     has_sold_land?: boolean;
+    is_secure_register?: boolean;
 }
 
 export interface OverseasEntityExtraDetails {

@@ -498,7 +498,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     update: UPDATE_OBJECT_MOCK,
     remove: REMOVE_OBJECT_MOCK,
     is_remove: undefined,
-    has_sold_land: undefined
+    has_sold_land: undefined,
+    is_secure_register: undefined
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
