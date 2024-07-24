@@ -19,6 +19,7 @@ export interface OverseasEntity {
     update?: Update;
     remove?: Remove;
     is_remove?: boolean;
+    has_sold_land?: string;
 }
 
 export interface OverseasEntityResource {
@@ -38,6 +39,7 @@ export interface OverseasEntityResource {
     update?: UpdateResource;
     remove?: RemoveResource;
     is_remove?: boolean;
+    has_sold_land?: boolean;
 }
 
 export interface OverseasEntityExtraDetails {
@@ -395,6 +397,8 @@ export interface PrivateAddressResource {
     postal_code?: string;
     premises?: string;
     region?: string;
+    is_service_address_same_as_principal_address?: string;
+    is_service_address_same_as_usual_residential_address?: string;
 }
 
 export interface PrivateAddress {
@@ -407,6 +411,8 @@ export interface PrivateAddress {
     postalCode?: string;
     premises?: string;
     region?: string;
+    isServiceAddressSameAsPrincipalAddress?: string;
+    isServiceAddressSameAsUsualResidentialAddress?: string;
 }
 
 export interface Trust {
