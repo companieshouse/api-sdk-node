@@ -51,7 +51,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         update: mapUpdate(body.update),
         remove: mapRemove(body.remove),
         is_remove: (body.is_remove) ? body.is_remove : null,
-        has_sold_land: mapHasSoldLand(body.has_sold_land)
+        has_sold_land: mapHasSoldLand(body.has_sold_land),
+        is_secure_register: mapIsSecureRegister(body.is_secure_register)
     };
 };
 
@@ -79,7 +80,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         update: mapUpdateResource(body.update),
         remove: mapRemoveResource(body.remove),
         is_remove: body.is_remove,
-        has_sold_land: mapHasSoldLandResource(body.has_sold_land)
+        has_sold_land: mapHasSoldLandResource(body.has_sold_land),
+        is_secure_register: mapIsSecureRegisterResource(body.is_secure_register)
     };
 };
 
@@ -602,6 +604,13 @@ const mapHasSoldLand = (option: string | undefined): boolean | undefined => {
     return typeof option === "undefined" ? option : (option !== "0");
 }
 const mapHasSoldLandResource = (option: boolean | undefined): string | undefined => {
+    return typeof option === "undefined" ? option : (option ? "1" : "0");
+}
+
+const mapIsSecureRegister = (option: string | undefined): boolean | undefined => {
+    return typeof option === "undefined" ? option : (option !== "0");
+}
+const mapIsSecureRegisterResource = (option: boolean | undefined): string | undefined => {
     return typeof option === "undefined" ? option : (option ? "1" : "0");
 }
 
