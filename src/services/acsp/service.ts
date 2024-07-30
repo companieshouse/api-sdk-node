@@ -85,5 +85,4 @@ export default class {
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
     }
-    
 }
