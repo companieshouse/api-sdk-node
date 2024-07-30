@@ -55,7 +55,7 @@ export default class {
      * @param acsp the data to be saved
      */
     public async putACSP (transactionId: string, acspApplicationId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
-        const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications/${acspApplicationId}`;
+        const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications${acspApplicationId}`;
 
         const resp = await this.client.httpPut(url, acsp);
 
@@ -85,5 +85,5 @@ export default class {
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
     }
-
+    
 }
