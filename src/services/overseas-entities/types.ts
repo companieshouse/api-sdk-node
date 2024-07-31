@@ -21,6 +21,7 @@ export interface OverseasEntity {
     is_remove?: boolean;
     has_sold_land?: string;
     is_secure_register?: string;
+    who_is_registering?: string;
 }
 
 export interface OverseasEntityResource {
@@ -42,6 +43,7 @@ export interface OverseasEntityResource {
     is_remove?: boolean;
     has_sold_land?: boolean;
     is_secure_register?: boolean;
+    who_is_registering?: string;
 }
 
 export interface OverseasEntityExtraDetails {

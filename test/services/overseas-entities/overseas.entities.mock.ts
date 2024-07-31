@@ -103,6 +103,11 @@ export const PRESENTER_OBJECT_MOCK: Presenter = {
     email: "user@domain.roe"
 };
 
+export enum ENTITY_WHO_IS_REGISTERING {
+    AGENT = "agent",
+    SOMEONE_ELSE = "someone_else"
+}
+
 export const ENTITY_OBJECT_MOCK: Entity = {
     incorporation_country: "incorporationCountry",
     principal_address: ADDRESS,
@@ -499,7 +504,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     remove: REMOVE_OBJECT_MOCK,
     is_remove: undefined,
     has_sold_land: undefined,
-    is_secure_register: undefined
+    is_secure_register: undefined,
+    who_is_registering: undefined
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
