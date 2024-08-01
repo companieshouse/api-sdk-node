@@ -30,7 +30,7 @@ import {
     TrustToReviewResource,
     TrustToReview,
     Remove,
-    RemoveResource, yesNoResponse
+    RemoveResource
 } from "./types";
 
 export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource => {
