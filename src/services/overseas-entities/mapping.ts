@@ -490,7 +490,7 @@ const mapUpdate = (update: Update): UpdateResource => {
             registrable_beneficial_owner: update.registrable_beneficial_owner,
             no_change: update.no_change,
             trust_data_fetched: update.trust_data_fetched,
-            relevant_period_no_change: update.relevant_period_no_change,
+            owned_land_relevant_period: update.owned_land_relevant_period,
             change_bo_relevant_period: update.change_bo_relevant_period,
             trustee_involved_relevant_period: update.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: update.change_beneficiary_relevant_period
@@ -557,7 +557,7 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
             no_change: updateResource.no_change,
             trust_data_fetched: updateResource.trust_data_fetched,
-            relevant_period_no_change: updateResource.relevant_period_no_change,
+            owned_land_relevant_period: updateResource.owned_land_relevant_period,
             change_bo_relevant_period: updateResource.change_bo_relevant_period,
             trustee_involved_relevant_period: updateResource.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: updateResource.change_beneficiary_relevant_period
