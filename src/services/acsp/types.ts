@@ -61,7 +61,6 @@ export interface ApplicantDetails {
     correspondenceAddressIsSameAsRegisteredOfficeAddress?: boolean;
 }
 
-
 export interface AcspDto {
       id: string;
       transactionId?: string;
