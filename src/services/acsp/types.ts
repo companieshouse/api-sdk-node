@@ -55,7 +55,7 @@ export interface ApplicantDetails {
     middleName?: string;
     lastName?: string;
     dateOfBirth?: Date;
-    nationality?: Array<Nationality>;
+    nationality?: Nationality;
     countryOfResidence?: string;
     correspondenceAddress?: Address;
     correspondenceAddressIsSameAsRegisteredOfficeAddress?: boolean;
