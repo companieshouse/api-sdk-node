@@ -601,6 +601,9 @@ export interface TrustCorporate {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
+    start_date_day?: string;
+    start_date_month?: string;
+    start_date_year?: string;
 
 }
 
@@ -636,6 +639,7 @@ export interface TrustCorporateResource {
     is_on_register_in_country_formed_in: yesNoResponse;
     is_corporate_still_involved_in_trust?: boolean;
     ceased_date? : string;
+    start_date?: string;
 }
 
 /**
