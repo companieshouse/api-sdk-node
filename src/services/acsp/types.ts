@@ -50,52 +50,52 @@ export interface AmlSupervisoryBody {
     membershipId? : string;
 }
 
+export interface ApplicantDetails {
+    firstName?: string;
+    middleName?: string;
+    lastName?: string;
+    dateOfBirth?: Date;
+    nationality?: Array<Nationality>;
+    countryOfResidence?: string;
+    correspondenceAddress?: Address;
+    correspondenceAddressIsSameAsRegisteredOfficeAddress?: boolean;
+}
+
+
 export interface AcspDto {
       id: string;
       transactionId?: string;
-      firstName?: string;
-      middleName?: string;
-      lastName?: string;
       email?: string;
       roleInTheBusiness?: string;
-      correspondenceAddress?: Address;
       businessAddress?: Address;
       typeOfBusiness?: string;
       roleType?: string;
-      dateOfBirth?: Date;
       verified?: boolean;
-      nationality?: Nationality;
-      countryOfResidence?: string;
       businessName?: string;
       workSector?: string;
       amlSupervisoryBodies?: AmlSupervisoryBody[];
       companyDetails?: Company;
       companyAuthCodeProvided?: boolean;
       howAreYouRegisteredWithAml?: string;
+      applicantDetails?: ApplicantDetails;
 }
 
 export interface AcspData {
     id: string;
     transactionId?: string;
-    firstName?: string;
-    middleName?: string;
-    lastName?: string;
     email?: string;
     roleInTheBusiness?: string;
-    correspondenceAddress?: Address;
     businessAddress?: Address;
     typeOfBusiness?: string;
     roleType?: string;
-    dateOfBirth?: Date;
     verified?: boolean;
-    nationality?: Nationality;
-    countryOfResidence?: string;
     businessName?: string;
     workSector?: string;
     amlSupervisoryBodies?: AmlSupervisoryBody[];
     companyDetails?: Company;
     companyAuthCodeProvided?: boolean;
     howAreYouRegisteredWithAml?: string;
+    applicantDetails?: ApplicantDetails;
 }
 
 export interface AcspResponse {
