@@ -403,7 +403,7 @@ export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
     ceased_date_day: "1",
     ceased_date_month: "9",
     ceased_date_year: "2005",
-    start_date: { day: "1", month: "1", year: "2012" }
+    start_date: { day: "11", month: "5", year: "2006" }
 }]
 
 export const TRUST_HISTORICAL_BOS_MOCK: TrustHistoricalBeneficialOwner[] = [{
