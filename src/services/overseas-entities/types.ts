@@ -717,6 +717,7 @@ export interface CorporateTrusteeData {
     trusteeTypeId: string;
     appointmentDate: string;
     ceasedDate?: string;
+    startDate?: string;
     serviceAddress?: PrivateAddress;
     registeredOfficeAddress?: PrivateAddress;
 }
@@ -734,6 +735,7 @@ export interface CorporateTrusteeDataResource {
     trustee_type_id: string;
     appointment_date: string;
     ceased_date?: string;
+    start_date?: string;
     service_address?: PrivateAddressResource;
     registered_office_address?: PrivateAddressResource;
 }
