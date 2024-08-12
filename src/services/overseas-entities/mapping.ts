@@ -483,7 +483,7 @@ const mapTrustCorporates = (trustCorporates: TrustCorporate[] = []): TrustCorpor
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
             is_corporate_still_involved_in_trust: still_involved ? (still_involved === "Yes") : null,
             ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
-            start_date: convertOptionalInputDate(start_date),
+            start_date: convertOptionalInputDate(start_date)
         }
     })
 }
