@@ -601,9 +601,7 @@ export interface TrustCorporate {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
-    start_date_day?: string;
-    start_date_month?: string;
-    start_date_year?: string;
+    start_date?: InputDate;
 
 }
 
