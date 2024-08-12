@@ -156,11 +156,12 @@ const mapToTrust = (trust: TrustResource): Trust => {
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
-            const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, ...rest } = trustInd;
+            const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, start_date, ...rest } = trustInd;
             const dobDate = mapIsoDate(date_of_birth);
             const dbipDate = mapIsoDate(date_became_interested_person);
 
             const individualCeasedDate = individual_ceased_date ? mapIsoDate(individual_ceased_date) : undefined;
+            const startDate = mapIsoDate(start_date);
 
             let isIndividualStillInvolvedInTrust = is_individual_still_involved_in_trust ? "Yes" : "No";
             // If a boolean value isn't receieved from the API (could be null or undefined), need to set null
@@ -179,7 +180,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
                 still_involved: isIndividualStillInvolvedInTrust,
                 ceased_date_day: individualCeasedDate?.day,
                 ceased_date_month: individualCeasedDate?.month,
-                ceased_date_year: individualCeasedDate?.year
+                ceased_date_year: individualCeasedDate?.year,
+                start_date_day: startDate?.day,
+                start_date_month: startDate?.month,
+                start_date_year: startDate?.year
             }
         }),
         // Convert the Trust Historical BO Resource Data into the format that the WEB expects
