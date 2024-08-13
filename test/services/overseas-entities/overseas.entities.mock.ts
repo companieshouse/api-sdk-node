@@ -843,7 +843,6 @@ export const CORPORATE_TRUSTEES_DATA_MOCK = [{
     trusteeTypeId: "50002",
     appointmentDate: "2020-02-20",
     ceasedDate: "2020-02-20",
-    startDate: "2006-05-11",
     serviceAddress: {
         addressLine1: "sa_addressline1",
         addressLine2: "sa_addressline2",
@@ -880,7 +879,6 @@ export const CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK = [{
     trustee_type_id: "50002",
     appointment_date: "2020-02-20",
     ceased_date: "2020-02-20",
-    start_date: "2006-05-11",
     service_address: {
         address_line_1: "sa_addressline1",
         address_line_2: "sa_addressline2",
