@@ -156,10 +156,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
-            const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, ...rest } = trustInd;
+            const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, start_date, ...rest } = trustInd;
             const dobDate = mapIsoDate(date_of_birth);
             const dbipDate = mapIsoDate(date_became_interested_person);
-
+            const startDate = start_date ? mapIsoDate(start_date) : undefined
             const individualCeasedDate = individual_ceased_date ? mapIsoDate(individual_ceased_date) : undefined;
 
             let isIndividualStillInvolvedInTrust = is_individual_still_involved_in_trust ? "Yes" : "No";
@@ -179,7 +179,10 @@ const mapToTrust = (trust: TrustResource): Trust => {
                 still_involved: isIndividualStillInvolvedInTrust,
                 ceased_date_day: individualCeasedDate?.day,
                 ceased_date_month: individualCeasedDate?.month,
-                ceased_date_year: individualCeasedDate?.year
+                ceased_date_year: individualCeasedDate?.year,
+                start_date_day: startDate?.day,
+                start_date_month: startDate?.month,
+                start_date_year: startDate?.year
             }
         }),
         // Convert the Trust Historical BO Resource Data into the format that the WEB expects
@@ -425,7 +428,7 @@ const mapTrustToReview = (trust: TrustToReview): TrustToReviewResource => {
  */
 const mapTrustIndividuals = (trustIndividuals: TrustIndividual[] = []): TrustIndividualResource[] => {
     return trustIndividuals.map(trustIndividual => {
-        const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, still_involved, ceased_date_day, ceased_date_month, ceased_date_year, ...rest } = trustIndividual;
+        const { dob_day, dob_month, dob_year, date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year, still_involved, ceased_date_day, ceased_date_month, ceased_date_year, start_date_day, start_date_month, start_date_year, ...rest } = trustIndividual;
 
         // The first 'truthy' check here is to see whether 'still_involved' contains a non-empty string
         const isStillInvolved = still_involved ? (still_involved === "Yes") : null;
@@ -435,7 +438,8 @@ const mapTrustIndividuals = (trustIndividuals: TrustIndividual[] = []): TrustInd
             date_of_birth: convertOptionalDateToIsoDateString(dob_day, dob_month, dob_year),
             date_became_interested_person: convertOptionalDateToIsoDateString(date_became_interested_person_day, date_became_interested_person_month, date_became_interested_person_year),
             is_individual_still_involved_in_trust: isStillInvolved,
-            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year)
+            ceased_date: convertOptionalDateToIsoDateString(ceased_date_day, ceased_date_month, ceased_date_year),
+            start_date: convertOptionalDateToIsoDateString(start_date_day, start_date_month, start_date_year)
         }
     })
 }

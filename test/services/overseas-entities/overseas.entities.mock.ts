@@ -365,7 +365,10 @@ export const TRUST_INDIVIDUALS_MOCK: TrustIndividual[] = [{
     still_involved: "No",
     ceased_date_day: "31",
     ceased_date_month: "8",
-    ceased_date_year: "2005"
+    ceased_date_year: "2005",
+    start_date_day: "11",
+    start_date_month: "5",
+    start_date_year: "2006"
 }]
 
 export const TRUST_CORPORATES_MOCK: TrustCorporate[] = [{
@@ -551,7 +554,8 @@ export const TRUST_INDIVIDUALS_RESOURCE_MOCK: TrustIndividualResource[] = [{
     ura_address_region: "ura_region",
     date_became_interested_person: "2004-04-30",
     is_individual_still_involved_in_trust: false,
-    ceased_date: "2005-08-31"
+    ceased_date: "2005-08-31",
+    start_date: "2006-05-11"
 }]
 
 export const TRUST_CORPORATES_RESOURCE_MOCK: TrustCorporateResource[] = [{
