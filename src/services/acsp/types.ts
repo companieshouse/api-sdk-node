@@ -62,9 +62,8 @@ export interface ApplicantDetails {
 export interface AcspDto {
       id: string;
       transactionId?: string;
-      email?: string;
       roleInTheBusiness?: string;
-      businessAddress?: Address;
+      registeredOfficeAddress?: Address;
       typeOfBusiness?: string;
       roleType?: string;
       verified?: boolean;
@@ -80,9 +79,8 @@ export interface AcspDto {
 export interface AcspData {
     id: string;
     transactionId?: string;
-    email?: string;
     roleInTheBusiness?: string;
-    businessAddress?: Address;
+    registeredOfficeAddress?: Address;
     typeOfBusiness?: string;
     roleType?: string;
     verified?: boolean;
