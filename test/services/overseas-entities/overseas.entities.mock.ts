@@ -477,7 +477,7 @@ export const UPDATE_OBJECT_MOCK: Update = {
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
     review_trusts: REVIEW_TRUSTS_MOCK,
-    owned_land_relevant_period: yesNoResponse.No,
+    owned_land_relevant_period: false,
     change_bo_relevant_period: ChangeBoRelevantPeriodType.YES,
     trustee_involved_relevant_period: TrusteeInvolvedRelevantPeriodType.YES,
     change_beneficiary_relevant_period: ChangeBeneficiaryRelevantPeriodType.NO
@@ -643,7 +643,7 @@ export const UPDATE_RESOURCE_MOCK: UpdateResource = {
     no_change: yesNoResponse.No,
     trust_data_fetched: false,
     review_trusts: REVIEW_TRUSTS_RESOURCE_MOCK,
-    owned_land_relevant_period: yesNoResponse.No,
+    owned_land_relevant_period: false,
     change_bo_relevant_period: ChangeBoRelevantPeriodType.YES,
     trustee_involved_relevant_period: TrusteeInvolvedRelevantPeriodType.YES,
     change_beneficiary_relevant_period: ChangeBeneficiaryRelevantPeriodType.NO

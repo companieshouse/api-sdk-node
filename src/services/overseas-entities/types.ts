@@ -325,7 +325,7 @@ export interface Update {
     review_managing_officers_corporate?: ManagingOfficerCorporate[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReview[];
-    owned_land_relevant_period?: yesNoResponse;
+    owned_land_relevant_period?: boolean;
     change_bo_relevant_period?: ChangeBoRelevantPeriodType;
     trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
     change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
@@ -352,7 +352,7 @@ export interface UpdateResource {
     review_managing_officers_corporate?: ManagingOfficerCorporateResource[];
     trust_data_fetched?: boolean;
     review_trusts?: TrustToReviewResource[];
-    owned_land_relevant_period?: yesNoResponse;
+    owned_land_relevant_period?: boolean;
     change_bo_relevant_period?: ChangeBoRelevantPeriodType;
     trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
     change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
