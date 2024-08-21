@@ -74,7 +74,7 @@ describe("Acsp Registration PUT", () => {
     it("should return an Acsp registration", async () => {
         sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutAcsp[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data: Resource<AcspResponse> = await ofService.putACSP(TRANSACTION_ID, mockValues.mockAcspResponce) as Resource<AcspResponse>;
+        const data: Resource<AcspResponse> = await ofService.putACSP(TRANSACTION_ID, SUBMISSION_ID, mockValues.mockAcspResponce) as Resource<AcspResponse>;
         console.log("data: ", JSON.stringify(data));
         expect(data.httpStatusCode).to.equal(200);
     });
@@ -82,7 +82,7 @@ describe("Acsp Registration PUT", () => {
     it("should return error 404 - Not found", async () => {
         sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutAcsp[404]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data: ApiErrorResponse = await ofService.putACSP(TRANSACTION_ID, mockValues.mockAcsp);
+        const data: ApiErrorResponse = await ofService.putACSP(TRANSACTION_ID, SUBMISSION_ID, mockValues.mockAcsp);
 
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors?.[0]).to.equal("Acsp registration not found");
@@ -104,28 +104,5 @@ describe("Acsp Registration DELETE", () => {
         const data = await ofService.deleteSavedApplication(SUBMISSION_ID);
         console.log("data: ", JSON.stringify(data));
         expect(data.status).to.equal(404);
-    })
-})
-
-describe("Acsp email POST", () => {
-    it("should return 200 on successful email request", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[200]);
-        const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
-        expect(data.status).to.equal(200);
-    })
-
-    it("should return 404 if no application exists", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[404]);
-        const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
-        expect(data.status).to.equal(404);
-    })
-
-    it("should return 500 if an error occurs", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockAcspApplicationCompleteEmail[500]);
-        const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data = await ofService.sendConfirmationEmail("userID", SUBMISSION_ID)
-        expect(data.status).to.equal(500);
     })
 })
