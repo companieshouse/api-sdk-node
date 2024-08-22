@@ -27,9 +27,8 @@ describe("Acsp Registration GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetAcsp[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: Resource<AcspData> = await ofService.getAcsp(TRANSACTION_ID, SUBMISSION_ID) as Resource<AcspData>;
-
         expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource?.typeOfBusiness).to.equal("LIMITED_LIABILITY_PARTNERSHIP");
+        expect(data.resource).to.deep.equal(mockValues.mockAcsp);
     });
 
     it("should return error 404 - Not found", async () => {
@@ -45,7 +44,6 @@ describe("Acsp Registration GET", () => {
         sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetAcsp[500]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getAcsp(TRANSACTION_ID, SUBMISSION_ID);
-
         expect(data.httpStatusCode).to.equal(500);
         expect(data.errors?.[0]).to.equal("Internal server error");
     });
@@ -56,7 +54,6 @@ describe("Acsp Registration POST", () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostAcsp[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: Resource<AcspResponse> = await ofService.postACSP(TRANSACTION_ID, mockValues.mockAcspResponce) as Resource<AcspResponse>;
-        console.log("data: ", JSON.stringify(data));
         expect(data.httpStatusCode).to.equal(200);
     });
 
@@ -64,7 +61,6 @@ describe("Acsp Registration POST", () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostAcsp[409]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.postACSP(TRANSACTION_ID, mockValues.mockAcsp);
-
         expect(data.httpStatusCode).to.equal(409);
         expect(data.errors?.[0]).to.equal("A document already exist with this id");
     });
@@ -75,7 +71,6 @@ describe("Acsp Registration PUT", () => {
         sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutAcsp[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: Resource<AcspResponse> = await ofService.putACSP(TRANSACTION_ID, SUBMISSION_ID, mockValues.mockAcspResponce) as Resource<AcspResponse>;
-        console.log("data: ", JSON.stringify(data));
         expect(data.httpStatusCode).to.equal(200);
     });
 
@@ -83,7 +78,6 @@ describe("Acsp Registration PUT", () => {
         sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutAcsp[404]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.putACSP(TRANSACTION_ID, SUBMISSION_ID, mockValues.mockAcsp);
-
         expect(data.httpStatusCode).to.equal(404);
         expect(data.errors?.[0]).to.equal("Acsp registration not found");
     });
@@ -94,7 +88,6 @@ describe("Acsp Registration DELETE", () => {
         sinon.stub(mockValues.requestClient, "httpDelete").resolves(mockValues.mockDeleteAcsp[204]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data = await ofService.deleteSavedApplication(SUBMISSION_ID);
-        console.log("data: ", JSON.stringify(data));
         expect(data.status).to.equal(204);
     })
 
@@ -102,7 +95,6 @@ describe("Acsp Registration DELETE", () => {
         sinon.stub(mockValues.requestClient, "httpDelete").resolves(mockValues.mockDeleteAcsp[404]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
         const data = await ofService.deleteSavedApplication(SUBMISSION_ID);
-        console.log("data: ", JSON.stringify(data));
         expect(data.status).to.equal(404);
     })
 })
