@@ -1,6 +1,6 @@
 import {
     AcspData,
-    AcspDto,
+    AcspDataDto,
     AcspResponse
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
@@ -22,7 +22,7 @@ export default class {
             httpStatusCode: resp.status
         };
 
-        const body = resp.body as AcspDto;
+        const body = resp.body as AcspDataDto;
 
         resource.resource = Mapping.camelCaseKeys<AcspData>(body);
         return resource;
@@ -36,7 +36,9 @@ export default class {
     public async postACSP (transactionId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications`;
 
-        const resp = await this.client.httpPost(url, acsp);
+        const acspDto = Mapping.snakeCaseKeys(acsp);
+
+        const resp = await this.client.httpPost(url, acspDto);
 
         if (resp.status >= 400) {
             return { httpStatusCode: resp.status, errors: [resp.error] };
@@ -56,8 +58,8 @@ export default class {
      */
     public async putACSP (transactionId: string, acspApplicationId: string, acsp: AcspData): Promise<Resource<AcspResponse> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications/${acspApplicationId}`;
-
-        const resp = await this.client.httpPut(url, acsp);
+        const acspDto = Mapping.snakeCaseKeys(acsp);
+        const resp = await this.client.httpPut(url, acspDto);
 
         if (resp.status >= 400) {
             return { httpStatusCode: resp.status, errors: [resp.error] };

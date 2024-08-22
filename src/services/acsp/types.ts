@@ -1,27 +1,3 @@
-export interface AddressResource {
-    address_line_1: string;
-    address_line_2?: string;
-    care_of?: string;
-    country: string;
-    locality: string;
-    po_box?: string;
-    postal_code?: string;
-    premises?: string;
-    region?: string;
-}
-
-export interface DateOfBirthResource {
-    day?: string;
-    month: string;
-    year: string;
-}
-
-export interface DateOfBirth {
-    day?: string;
-    month: string;
-    year: string;
-}
-
 export interface Address {
     premises?: string;
     addressLine1?: string;
@@ -58,28 +34,8 @@ export interface ApplicantDetails {
     correspondenceAddress?: Address;
     correspondenceAddressIsSameAsRegisteredOfficeAddress?: boolean;
 }
-
-export interface AcspDto {
-      id: string;
-      transactionId?: string;
-      roleInTheBusiness?: string;
-      registeredOfficeAddress?: Address;
-      typeOfBusiness?: string;
-      roleType?: string;
-      verified?: boolean;
-      businessName?: string;
-      workSector?: string;
-      amlSupervisoryBodies?: AmlSupervisoryBody[];
-      companyDetails?: Company;
-      companyAuthCodeProvided?: boolean;
-      howAreYouRegisteredWithAml?: string;
-      applicantDetails?: ApplicantDetails;
-}
-
 export interface AcspData {
     id: string;
-    transactionId?: string;
-    roleInTheBusiness?: string;
     registeredOfficeAddress?: Address;
     typeOfBusiness?: string;
     roleType?: string;
@@ -94,9 +50,57 @@ export interface AcspData {
 }
 
 export interface AcspResponse {
-    data: AcspData;
+    data: AcspDataDto;
 }
 
-export interface AcspResponseDto {
-    data: AcspDto;
+// DTOs
+export interface AcspDataDto {
+    id: string;
+    registered_office_address?: AddressDto;
+    type_of_business?: string;
+    role_type?: string;
+    verified?: boolean;
+    business_name?: string;
+    work_sector?: string;
+    aml_supervisory_bodies?: AmlSupervisoryBodyDto[];
+    company_details?: CompanyDto;
+    company_auth_code_provided?: boolean;
+    how_are_you_registered_with_aml?: string;
+    applicant_details?: ApplicantDetailsDto;
+}
+
+export interface ApplicantDetailsDto {
+    first_name?: string;
+    middle_name?: string;
+    last_name?: string;
+    date_of_birth?: Date;
+    nationality?: NationalityDto;
+    country_of_residence?: string;
+    correspondence_address?: AddressDto;
+    correspondence_address_is_same_as_registered_office_address?: boolean;
+}
+export interface AddressDto {
+    premises?: string;
+    address_line_1?: string;
+    address_line_2?: string;
+    locality?: string;
+    region?: string;
+    country?: string;
+    postal_code?: string;
+}
+
+export interface CompanyDto {
+    company_name?: string;
+    company_number?: string;
+}
+
+export interface AmlSupervisoryBodyDto {
+    aml_supervisory_body? : string;
+    membership_id? : string;
+}
+
+export interface NationalityDto {
+    first_nationality: string;
+    second_nationality?: string;
+    third_nationality?: string;
 }

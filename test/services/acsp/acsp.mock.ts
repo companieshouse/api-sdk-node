@@ -1,5 +1,5 @@
 import { RequestClient } from "../../../src";
-import { AcspData, AcspDto } from "../../../src/services/acsp";
+import { AcspData, AcspDataDto, Address, AddressDto } from "../../../src/services/acsp";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
@@ -14,31 +14,42 @@ export const mockAddress1 = {
     region: "South"
 };
 
-export const mockAddress2 = {
+export const mockAddress2: AddressDto = {
     address_line_1: "10 This road",
     address_line_2: "This",
     country: "Thisland",
     locality: "Thistown",
-    po_box: "1",
     postal_code: "TH1 1AB",
     premises: "10",
     region: "Thisshire"
 };
 
-export const mockDateOfBirth = {
-    year: "1998",
-    month: "1",
-    day: "1"
+export const mockAddress2CamelCase: Address = {
+    addressLine1: "10 This road",
+    addressLine2: "This",
+    country: "Thisland",
+    locality: "Thistown",
+    postalCode: "TH1 1AB",
+    premises: "10",
+    region: "Thisshire"
 };
 
-export const mockAcspDto: AcspDto = {
+export const mockAcspDto: AcspDataDto = {
     id: "test@test.com",
-    typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
+    type_of_business: "LIMITED_LIABILITY_PARTNERSHIP",
+    registered_office_address: mockAddress2,
+    role_type: "Member",
+    business_name: "Test business",
+    work_sector: "AIA"
 };
 
 export const mockAcsp: AcspData = {
     id: "test@test.com",
-    typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP"
+    typeOfBusiness: "LIMITED_LIABILITY_PARTNERSHIP",
+    registeredOfficeAddress: mockAddress2CamelCase,
+    roleType: "Member",
+    businessName: "Test business",
+    workSector: "AIA"
 };
 
 export const mockAcspResponce = {
