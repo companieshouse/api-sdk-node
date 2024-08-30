@@ -504,6 +504,9 @@ export interface TrustIndividual {
     ceased_date_day?: string;
     ceased_date_month?: string;
     ceased_date_year?: string;
+    start_date_day?: string;
+    start_date_month?: string;
+    start_date_year?: string;
   }
 
 export interface TrustIndividualResource {
@@ -537,6 +540,7 @@ export interface TrustIndividualResource {
     date_became_interested_person?: string;
     is_individual_still_involved_in_trust?: boolean;
     ceased_date?: string;
+    start_date?: string;
 }
 
 export interface TrustHistoricalBeneficialOwner {
