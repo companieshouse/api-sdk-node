@@ -4,6 +4,7 @@ export interface AccountValidatorRequest {
     fileName: string;
     id: string;
     packageType?: PackageType;
+    companyNumber?: string;
 }
 
 export interface Data {
