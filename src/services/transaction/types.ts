@@ -29,6 +29,14 @@ export interface TransactionResource {
     }
 }
 
+export interface TransactionList {
+    etag: string;
+    itemsPerPage: number;
+    startIndex: number;
+    totalResults: number;
+    items: TransactionResource[];
+}
+
 export interface Transaction {
     id?: string,
     etag?: string,
