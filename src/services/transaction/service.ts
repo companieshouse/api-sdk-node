@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { Transaction, TransactionResource } from "./types";
+import { Transaction, TransactionResource, TransactionList } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import { addRequestIdHeader } from "../../util";
 
@@ -176,5 +176,45 @@ export default class TransactionService {
             status: transaction.status,
             updated_at: transaction.updatedAt
         }
+    }
+
+    public async getTransactionsForResourceKind (requestId?: string, resourceKind?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
+        const url = "/transactions/?resource_kind=" + resourceKind;
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpGet(url, headers);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<TransactionList> = {
+            httpStatusCode: resp.status
+        };
+
+        resource.resource = {
+            etag: resp.body.etag,
+            itemsPerPage: resp.body.items_per_page,
+            startIndex: resp.body.start_index,
+            totalResults: resp.body.total_results,
+            items: resp.body.items ? resp.body.items.map((i) => ({
+                id: i.id,
+                etag: i.etag,
+                links: i.links,
+                reference: i.reference,
+                status: i.status,
+                kind: i.kind,
+                companyName: i.company_name,
+                companyNumber: i.company_number,
+                createdAt: i.created_at,
+                createdBy: i.created_by,
+                updatedAt: i.updated_at,
+                description: i.description,
+                resources: i.resources
+            })) : []
+        };
+        return resource;
     }
 }
