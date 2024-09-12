@@ -145,6 +145,10 @@ export interface BeneficialOwnerIndividual {
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_control_nature_of_control_types?: NatureOfControlType[]
+    trust_control_nature_of_control_types?: NatureOfControlType[]
+    owner_of_land_person_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
+    owner_of_land_other_entity_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
     is_on_sanctions_list?: yesNoResponse
 }
 
@@ -165,6 +169,10 @@ export interface BeneficialOwnerIndividualResource {
     beneficial_owner_nature_of_control_types?: NatureOfControlType[]
     trustees_nature_of_control_types?: NatureOfControlType[]
     non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_control_nature_of_control_types?: NatureOfControlType[]
+    trust_control_nature_of_control_types?: NatureOfControlType[]
+    owner_of_land_person_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
+    owner_of_land_other_entity_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
     is_on_sanctions_list?: yesNoResponse
 }
 
@@ -778,6 +786,12 @@ export enum NatureOfControlType {
     APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS = "APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS",
     SIGNIFICANT_INFLUENCE_OR_CONTROL = "SIGNIFICANT_INFLUENCE_OR_CONTROL"
 }
+
+export enum NatureOfControlJurisdictionType {
+    ENGLAND_AND_WALES = "ENGLAND_AND_WALES",
+    SCOTLAND = "SCOTLAND",
+    NORTHERN_IRELAND = "NORTHERN_IRELAND"
+  }
 
 export enum ChangeBoRelevantPeriodType {
     YES = "CHANGE_BO_RELEVANT_PERIOD",

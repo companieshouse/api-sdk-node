@@ -17,6 +17,7 @@ import {
     ManagingOfficerIndividual,
     ManagingOfficerIndividualResource,
     NatureOfControlType,
+    NatureOfControlJurisdictionType,
     OverseasEntity,
     OverseasEntityCreated,
     OverseasEntityDueDiligence,
@@ -136,6 +137,10 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_MOCK_LIST: BeneficialOwnerIndividual[] 
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
@@ -155,6 +160,10 @@ export const BENEFICIAL_OWNER_INDIVIDUAL_RESOURCE_MOCK_LIST: BeneficialOwnerIndi
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
