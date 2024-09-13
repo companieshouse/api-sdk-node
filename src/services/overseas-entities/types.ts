@@ -227,8 +227,12 @@ export interface BeneficialOwnerGovernmentOrPublicAuthority {
     law_governed?: string
     start_date?: InputDate
     ceased_date?: InputDate
-    beneficial_owner_nature_of_control_types?: NatureOfControlType[];
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_control_nature_of_control_types?: NatureOfControlType[]
+    trust_control_nature_of_control_types?: NatureOfControlType[]
+    owner_of_land_person_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
+    owner_of_land_other_entity_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
 }
 export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     id?: string
@@ -241,8 +245,12 @@ export interface BeneficialOwnerGovernmentOrPublicAuthorityResource {
     law_governed?: string
     start_date?: string
     ceased_date?: string
-    beneficial_owner_nature_of_control_types?: NatureOfControlType[];
-    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[];
+    beneficial_owner_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_members_nature_of_control_types?: NatureOfControlType[]
+    non_legal_firm_control_nature_of_control_types?: NatureOfControlType[]
+    trust_control_nature_of_control_types?: NatureOfControlType[]
+    owner_of_land_person_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
+    owner_of_land_other_entity_nature_of_control_jurisdictions?: NatureOfControlJurisdictionType[]
 }
 
 export interface BeneficialOwnerPrivateDataResource {
