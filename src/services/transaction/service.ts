@@ -179,7 +179,7 @@ export default class TransactionService {
     }
 
     public async getTransactionsForResourceKind (requestId?: string, resourceKind?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
-        const url = "/transactions/?resource_kind=" + resourceKind;
+        const url = "/transactions?resource_kind=" + resourceKind;
         const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpGet(url, headers);
 
