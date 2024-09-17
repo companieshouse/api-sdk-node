@@ -29,14 +29,6 @@ export interface TransactionResource {
     }
 }
 
-export interface TransactionList {
-    etag: string;
-    itemsPerPage: number;
-    startIndex: number;
-    totalResults: number;
-    items: TransactionResource[];
-}
-
 export interface Transaction {
     id?: string,
     etag?: string,
@@ -63,4 +55,19 @@ export interface Transaction {
             }
         }
     }
+}
+
+export interface TransactionList {
+    items: TransactionData[];
+}
+
+export interface TransactionData {
+    id?: String;
+    updatedAt?: Date;
+    status?: String;
+    filings?: Map<String, Filing>;
+}
+
+export interface Filing {
+    status?: String;
 }
