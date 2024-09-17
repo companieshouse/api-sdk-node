@@ -195,25 +195,12 @@ export default class TransactionService {
         };
 
         resource.resource = {
-            etag: resp.body.etag,
-            itemsPerPage: resp.body.items_per_page,
-            startIndex: resp.body.start_index,
-            totalResults: resp.body.total_results,
-            items: resp.body.items ? resp.body.items.map((i) => ({
-                id: i.id,
-                etag: i.etag,
-                links: i.links,
-                reference: i.reference,
-                status: i.status,
-                kind: i.kind,
-                companyName: i.company_name,
-                companyNumber: i.company_number,
-                createdAt: i.created_at,
-                createdBy: i.created_by,
-                updatedAt: i.updated_at,
-                description: i.description,
-                resources: i.resources
-            })) : []
+              items: resp.body.items ? resp.body.items.map((i) => ({
+                  id: i.id,
+                  updatedAt: i.updated_at,
+                  status: i.status,
+                  filings: i.filings
+              })) : []
         };
         return resource;
     }
