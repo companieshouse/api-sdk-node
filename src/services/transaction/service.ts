@@ -195,12 +195,12 @@ export default class TransactionService {
         };
 
         resource.resource = {
-              items: resp.body.items ? resp.body.items.map((i) => ({
-                  id: i.id,
-                  updatedAt: i.updated_at,
-                  status: i.status,
-                  filings: i.filings
-              })) : []
+            items: resp.body.items ? resp.body.items.map((i) => ({
+                id: i.id,
+                updatedAt: i.updated_at,
+                status: i.status,
+                filings: i.filings
+            })) : []
         };
         return resource;
     }
