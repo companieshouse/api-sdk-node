@@ -65,7 +65,9 @@ export interface TransactionData {
     id?: String;
     updatedAt?: Date;
     status?: String;
-    filings?: Map<String, Filing>;
+    filings?: {
+        [key: string]: Filing;
+    };
 }
 
 export interface Filing {
