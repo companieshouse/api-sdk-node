@@ -3,7 +3,7 @@ import sinon from "sinon";
 
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
-import { Transaction, TransactionResource } from "../../../src/services/transaction";
+import { Transaction, TransactionData, TransactionList, TransactionResource } from "../../../src/services/transaction";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
 const expect = chai.expect;
@@ -151,5 +151,31 @@ describe("transaction", () => {
         expect(data.httpStatusCode).to.equal(422);
         const castedData: ApiErrorResponse = data;
         expect(castedData.errors[0]).to.equal("Unprocessable Entity");
+    });
+
+    it("get transaction list for resource kind returns success response ", async () => {
+        const itemsArray: TransactionData[] = ([
+            {
+                id: "123",
+                status: "closed"
+            }
+        ]);
+
+        const transactionList: TransactionList = ({
+            items: itemsArray
+        });
+
+        const mockGetResponse = {
+            status: 200,
+            body: transactionList
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransactionsForResourceKind({} as string);
+        expect(data.httpStatusCode).to.equal(200);
+        const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
+        expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
+        expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
     });
 });
