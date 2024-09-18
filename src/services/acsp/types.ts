@@ -33,7 +33,7 @@ export interface ApplicantDetails {
     countryOfResidence?: string;
     correspondenceAddress?: Address;
     correspondenceAddressIsSameAsRegisteredOfficeAddress?: boolean;
-    correspondenceEmail: string;
+    correspondenceEmail?: string;
 }
 export interface AcspData {
     id: string;
@@ -79,7 +79,7 @@ export interface ApplicantDetailsDto {
     country_of_residence?: string;
     correspondence_address?: AddressDto;
     correspondence_address_is_same_as_registered_office_address?: boolean;
-    correspondence_email: string;
+    correspondence_email?: string;
 }
 export interface AddressDto {
     premises?: string;
