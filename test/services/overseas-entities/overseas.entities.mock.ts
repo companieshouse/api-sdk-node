@@ -220,7 +220,11 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         start_date: { day: "1", month: "12", year: "1950" },
         ceased_date: { day: "1", month: "2", year: "2023" },
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
     }
 ];
 
@@ -235,7 +239,11 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
         start_date: "1950-12-01",
         ceased_date: "2023-02-01",
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
-        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL]
+        non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
     }
 ];
 
