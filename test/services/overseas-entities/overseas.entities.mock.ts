@@ -184,6 +184,10 @@ export const BENEFICIAL_OWNER_CORPORATE_MOCK_LIST: BeneficialOwnerCorporate[] = 
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_VOTING_RIGHTS],
+        trust_control_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.NORTHERN_IRELAND],
         is_on_sanctions_list: yesNoResponse.No
     }
 ];
@@ -204,6 +208,10 @@ export const BENEFICIAL_OWNER_CORPORATE_RESOURCE_MOCK_LIST: BeneficialOwnerCorpo
         beneficial_owner_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trustees_nature_of_control_types: [NatureOfControlType.APPOINT_OR_REMOVE_MAJORITY_BOARD_DIRECTORS],
         non_legal_firm_members_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_VOTING_RIGHTS],
+        trust_control_nature_of_control_types: [NatureOfControlType.SIGNIFICANT_INFLUENCE_OR_CONTROL],
+        owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.NORTHERN_IRELAND],
         is_on_sanctions_list: yesNoResponse.No
 
     }
