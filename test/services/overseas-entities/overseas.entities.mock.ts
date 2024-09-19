@@ -232,7 +232,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_MOCK_LIST: BeneficialOwnerGovernmentOrP
         non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
-        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND]
     }
 ];
 
@@ -251,7 +251,7 @@ export const BENEFICIAL_OWNER_GOVERNMENT_RESOURCE_MOCK_LIST: BeneficialOwnerGove
         non_legal_firm_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         trust_control_nature_of_control_types: [NatureOfControlType.OVER_25_PERCENT_OF_SHARES],
         owner_of_land_person_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.ENGLAND_AND_WALES],
-        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND],
+        owner_of_land_other_entity_nature_of_control_jurisdictions: [NatureOfControlJurisdictionType.SCOTLAND]
     }
 ];
 
