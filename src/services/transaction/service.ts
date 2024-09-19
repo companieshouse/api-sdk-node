@@ -193,7 +193,7 @@ export default class TransactionService {
         const resource: Resource<TransactionList> = {
             httpStatusCode: resp.status
         };
-    
+
         resource.resource = {
             items: resp.body.items ? resp.body.items.map((i) => ({
                 id: i.id,

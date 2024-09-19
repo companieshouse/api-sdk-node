@@ -67,4 +67,3 @@ export interface TransactionData {
     status?: String;
     filingStatus?: String;
 }
-
