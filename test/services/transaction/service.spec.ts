@@ -157,8 +157,7 @@ describe("transaction", () => {
         const itemsArray: TransactionData[] = ([
             {
                 id: "123",
-                status: "closed",
-                filingStatus: "closed"
+                status: "closed"
             }
         ]);
 
@@ -178,6 +177,5 @@ describe("transaction", () => {
         const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
         expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
         expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
-        expect(castedData.resource?.items[0].filingStatus).to.equal(transactionList.items[0].filingStatus);
     });
 });
