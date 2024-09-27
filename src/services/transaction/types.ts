@@ -68,6 +68,7 @@ export interface TransactionData {
     filings?: {
         [key: string]: Filing;
     };
+    resumeJourneyUri?: String
 }
 
 export interface Filing {
