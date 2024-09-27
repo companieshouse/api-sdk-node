@@ -62,15 +62,15 @@ export interface TransactionList {
 }
 
 export interface TransactionData {
-    id?: String;
+    id?: string;
     updatedAt?: Date;
-    status?: String;
+    status?: string;
     filings?: {
         [key: string]: Filing;
     };
-    resumeJourneyUri?: String
+    resumeJourneyUri?: string
 }
 
 export interface Filing {
-    status?: String;
+    status?: string;
 }
