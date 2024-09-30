@@ -200,7 +200,7 @@ export default class TransactionService {
                 updatedAt: i.updated_at,
                 status: i.status,
                 filings: i.filings,
-                resumeJourneyUri: i.resumeJourneyUri
+                resumeJourneyUri: i.resume_journey_uri
             })) : []
         };
         return resource;
