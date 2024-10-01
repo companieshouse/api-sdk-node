@@ -36,7 +36,7 @@ export interface ApplicantDetails {
     correspondenceEmail?: string;
 }
 export interface AcspData {
-    id: string;
+    id?: string;
     registeredOfficeAddress?: Address;
     typeOfBusiness?: string;
     roleType?: string;
