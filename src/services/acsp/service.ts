@@ -79,12 +79,22 @@ export default class {
     }
 
     /**
-     * Delete an existing ACSP application from MongoDB
+     * Delete an existing ACSP application from MongoDB and its corresponding transaction
      * @param transactionId the id of the transaction associated with the application. This will also be deleted.
      * @param acspApplicationId the id of the user whose application will be deleted
      */
-    public async deleteSavedApplication (transactionId: string, acspApplicationId: string): Promise<HttpResponse> {
+    public async deleteSavedApplicationAndTransaction (transactionId: string, acspApplicationId: string): Promise<HttpResponse> {
         const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications/${acspApplicationId}`;
+        const resp: HttpResponse = await this.client.httpDelete(url);
+        return resp;
+    }
+
+    /**
+     * Delete an existing ACSP application from MongoDB
+     * @param acspApplicationId the id of the user whose application will be deleted
+     */
+    public async deleteSavedApplication (acspApplicationId: string): Promise<HttpResponse> {
+        const url = `/acsp-api/user/${acspApplicationId}/application`;
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
     }
