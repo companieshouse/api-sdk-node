@@ -618,7 +618,7 @@ const mapIsoDate = (date: string): InputDate => {
 const mapHasSoldLand = (option: string | undefined): boolean | undefined => {
     return typeof option === "undefined" ? option : (option !== "0");
 }
-const mapHasSoldLandResource = (option: boolean | undefined): string | undefined => {
+const mapHasSoldLandResource = (option: boolean | undefined | null): string | undefined => {
     return typeof option !== "boolean" ? undefined : (option ? "1" : "0");
 }
 
