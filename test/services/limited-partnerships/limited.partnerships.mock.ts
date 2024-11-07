@@ -14,7 +14,7 @@ export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
 
-export const mockLimitedPartnershipCreatedResource: LimitedPartnershipCreated = { 
+export const mockLimitedPartnershipCreatedResource: LimitedPartnershipCreated = {
     id: LIMITED_PARTNERSHIP_ID
 };
 

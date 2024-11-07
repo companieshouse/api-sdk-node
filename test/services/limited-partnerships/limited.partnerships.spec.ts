@@ -3,7 +3,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import * as mockValues from "./limited.partnerships.mock";
-import { LimitedPartnershipCreated, LimitedPartnershipsService} from "../../../src/services/limited-partnerships";
+import { LimitedPartnershipCreated, LimitedPartnershipsService } from "../../../src/services/limited-partnerships";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
 describe("OverseasEntityService POST Tests suite", () => {
