@@ -2,7 +2,9 @@ import { LimitedPartnership, LimitedPartnershipResource } from "./types";
 
 export const mapLimitedPartnership = (body: LimitedPartnership): LimitedPartnershipResource => {
     return {
-        name: body.name,
-        name_ending: body.name_ending
+        data: {
+            partnership_name: body.data?.partnership_name,
+            name_ending: body.data?.name_ending
+        }
     };
 };

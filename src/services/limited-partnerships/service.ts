@@ -9,6 +9,7 @@ export default class LimitedPartnershipsService {
     public async postLimitedPartnership (
         body: LimitedPartnership
     ): Promise<Resource<LimitedPartnershipCreated> | ApiErrorResponse> {
+        // TODO Populate a transaction id here in place of NO-TRANSACTION-ID once it has been created
         const URL = `/transactions/NO-TRANSACTION-ID/limited_partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, mapLimitedPartnership(body));
 
