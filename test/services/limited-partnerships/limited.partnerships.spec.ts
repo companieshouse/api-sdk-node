@@ -22,6 +22,7 @@ describe("OverseasEntityService POST Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[201]);
         const service = new LimitedPartnershipsService(mockValues.requestClient);
         const data = (await service.postLimitedPartnership(
+            mockValues.TRANSACTION_ID,
             mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK
         )) as Resource<LimitedPartnershipCreated>;
 
@@ -33,7 +34,7 @@ describe("OverseasEntityService POST Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[401]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const data = await service.postLimitedPartnership({}) as ApiErrorResponse;
+        const data = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(401);
         expect(data.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
@@ -43,7 +44,7 @@ describe("OverseasEntityService POST Tests suite", () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[400]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const data = await service.postLimitedPartnership({}) as ApiErrorResponse;
+        const data = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
 
         expect(data.httpStatusCode).to.equal(400);
         expect(data.errors?.[0]).to.equal(mockValues.BAD_REQUEST);

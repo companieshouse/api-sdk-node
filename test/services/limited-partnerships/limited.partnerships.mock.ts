@@ -10,6 +10,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
     }
 }
 
+export const TRANSACTION_ID = "12345";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
