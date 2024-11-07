@@ -48,6 +48,7 @@ export interface AcspData {
     companyAuthCodeProvided?: boolean;
     howAreYouRegisteredWithAml?: string;
     applicantDetails?: ApplicantDetails;
+    acspType?: string;
 }
 
 export interface AcspResponse {
@@ -68,6 +69,7 @@ export interface AcspDataDto {
     company_auth_code_provided?: boolean;
     how_are_you_registered_with_aml?: string;
     applicant_details?: ApplicantDetailsDto;
+    acsp_type?: string;
 }
 
 export interface ApplicantDetailsDto {
