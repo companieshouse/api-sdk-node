@@ -7,10 +7,10 @@ export default class LimitedPartnershipsService {
     constructor (private readonly client: IHttpClient) { }
 
     public async postLimitedPartnership (
+        transactionId: string,
         body: LimitedPartnership
     ): Promise<Resource<LimitedPartnershipCreated> | ApiErrorResponse> {
-        // TODO Populate a transaction id here in place of NO-TRANSACTION-ID once it has been created
-        const URL = `/transactions/NO-TRANSACTION-ID/limited_partnership/partnership`;
+        const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, mapLimitedPartnership(body));
 
         if (response.error) {
