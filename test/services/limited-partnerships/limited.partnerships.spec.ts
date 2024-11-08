@@ -6,7 +6,7 @@ import * as mockValues from "./limited.partnerships.mock";
 import { LimitedPartnershipCreated, LimitedPartnershipsService } from "../../../src/services/limited-partnerships";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
-describe("OverseasEntityService POST Tests suite", () => {
+describe("LimitedPartnershipsService POST Tests suite", () => {
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -32,7 +32,7 @@ describe("OverseasEntityService POST Tests suite", () => {
                 {
                     data: {
                         partnership_name: "Legalised Asset Stashing",
-                        name_ending: "LIMITED_PARTNERSHIP"
+                        name_ending: "Limited Partnership"
                     }
                 })
         ).to.be.true;
@@ -49,7 +49,7 @@ describe("OverseasEntityService POST Tests suite", () => {
 
         expect(mockRequest).to.have.been.calledOnce;
         expect(
-            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: {} })
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", {})
         ).to.be.true;
 
         expect(response.httpStatusCode).to.equal(401);
@@ -64,7 +64,7 @@ describe("OverseasEntityService POST Tests suite", () => {
 
         expect(mockRequest).to.have.been.calledOnce;
         expect(
-            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: {} })
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", {})
         ).to.be.true;
 
         expect(response.httpStatusCode).to.equal(400);

@@ -3,22 +3,12 @@
  */
 
 /**
- * The data model used by the web application for a Limited Partnership.
+ * The data model used by the web and API for a Limited Partnership.
  */
 export interface LimitedPartnership {
     data?: {
-        partnership_name?: string;
-        name_ending?: NameEndingType;
-    }
-}
-
-/**
- * The data model used by the API that represents a Limited Partnership resource.
- */
-export interface LimitedPartnershipResource {
-    data: {
-        partnership_name: string;
-        name_ending: NameEndingType;
+        partnership_name: string | null;
+        name_ending: NameEndingType | null;
     }
 }
 
@@ -31,10 +21,10 @@ export interface LimitedPartnershipCreated {
 }
 
 export enum NameEndingType {
-    LIMITED_PARTNERSHIP = "LIMITED_PARTNERSHIP",
+    LIMITED_PARTNERSHIP = "Limited Partnership",
     LP = "LP",
-    L_DOT_P_DOT = "L_DOT_P_DOT", // Represents 'L.P.'
-    PARTNERIAETH_CYFYNGEDIG = "PARTNERIAETH_CYFYNGEDIG",
+    L_DOT_P_DOT = "L.P.",
+    PARTNERIAETH_CYFYNGEDIG = "Partneriaeth Cyfyngedig",
     PC = "PC",
-    P_DOT_C_DOT = "P_DOT_C_DOT" // Represents 'P.C.'
+    P_DOT_C_DOT = "P.C."
 }
