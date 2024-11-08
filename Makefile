@@ -49,5 +49,5 @@ endif
 dist: lint test-unit clean package
 
 .PHONY: sonar
-sonar:
+sonar: test
 	npm run analyse-code
