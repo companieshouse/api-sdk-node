@@ -19,34 +19,55 @@ describe("OverseasEntityService POST Tests suite", () => {
     });
 
     it("should return object Id for postLimitedPartnership method", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[201]);
+        const mockRequest = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[201]);
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const data = (await service.postLimitedPartnership(
+        const response = (await service.postLimitedPartnership(
             mockValues.TRANSACTION_ID,
             mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK
         )) as Resource<LimitedPartnershipCreated>;
 
-        expect(data.httpStatusCode).to.equal(201);
-        expect(data.resource?.id).to.equal(mockValues.mockLimitedPartnershipCreatedResource.id);
+        expect(mockRequest).to.have.been.calledOnce;
+        expect(
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership",
+                {
+                    data: {
+                        partnership_name: "Legalised Asset Stashing",
+                        name_ending: "LIMITED_PARTNERSHIP"
+                    }
+                })
+        ).to.be.true;
+
+        expect(response.httpStatusCode).to.equal(201);
+        expect(response.resource?.id).to.equal(mockValues.mockLimitedPartnershipCreatedResource.id);
     });
 
     it("should return error 401 (Unauthorised) for postLimitedPartnership method", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[401]);
+        const mockRequest = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[401]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const data = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+        expect(mockRequest).to.have.been.calledOnce;
+        expect(
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: {} })
+        ).to.be.true;
+
+        expect(response.httpStatusCode).to.equal(401);
+        expect(response.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
     });
 
     it("should return error 400 (Bad Request) for postLimitedPartnership method", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[400]);
+        const mockRequest = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[400]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const data = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(400);
-        expect(data.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+        expect(mockRequest).to.have.been.calledOnce;
+        expect(
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: {} })
+        ).to.be.true;
+
+        expect(response.httpStatusCode).to.equal(400);
+        expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
     });
 });
