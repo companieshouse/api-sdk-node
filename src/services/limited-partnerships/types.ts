@@ -7,8 +7,8 @@
  */
 export interface LimitedPartnership {
     data?: {
-        partnership_name: string | null;
-        name_ending: NameEndingType | null;
+        partnership_name?: string;
+        name_ending?: NameEndingType;
     }
 }
 

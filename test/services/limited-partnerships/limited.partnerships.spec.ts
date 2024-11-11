@@ -3,7 +3,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import * as mockValues from "./limited.partnerships.mock";
-import { LimitedPartnershipCreated, LimitedPartnershipsService } from "../../../src/services/limited-partnerships";
+import { LimitedPartnershipCreated, LimitedPartnershipsService, NameEndingType } from "../../../src/services/limited-partnerships";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
 describe("LimitedPartnershipsService POST Tests suite", () => {
@@ -45,11 +45,11 @@ describe("LimitedPartnershipsService POST Tests suite", () => {
         const mockRequest = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[401]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, { data: {} }) as ApiErrorResponse;
 
         expect(mockRequest).to.have.been.calledOnce;
         expect(
-            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", {})
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: {} })
         ).to.be.true;
 
         expect(response.httpStatusCode).to.equal(401);
@@ -60,11 +60,11 @@ describe("LimitedPartnershipsService POST Tests suite", () => {
         const mockRequest = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostLimitedPartnershipResponse[400]);
 
         const service = new LimitedPartnershipsService(mockValues.requestClient);
-        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
+        const response = await service.postLimitedPartnership(mockValues.TRANSACTION_ID, { data: { name_ending: NameEndingType.LP } }) as ApiErrorResponse;
 
         expect(mockRequest).to.have.been.calledOnce;
         expect(
-            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", {})
+            mockRequest.calledWith("/transactions/12345/limited-partnership/partnership", { data: { name_ending: NameEndingType.LP } })
         ).to.be.true;
 
         expect(response.httpStatusCode).to.equal(400);
