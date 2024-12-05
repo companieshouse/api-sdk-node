@@ -161,12 +161,12 @@ export interface VerificationDetails {
     verificationStatements?: VerificationStatementEnum[];
 }
 export declare enum NameMismatchReasonEnum {
-    NONE = "",
     PREFERRED_NAME = "PREFERRED_NAME",
     LEGAL_NAME_CHANGE = "LEGAL_NAME_CHANGE",
     TRANSLATION_OR_DIFFERENT_CONVENTION = "TRANSLATION_OR_DIFFERENT_CONVENTION",
     PUBLIC_REGISTER_ERROR = "PUBLIC_REGISTER_ERROR",
-    PREFER_NOT_TO_SAY = "PREFER_NOT_TO_SAY"
+    PREFER_NOT_TO_SAY = "PREFER_NOT_TO_SAY",
+    NONE = ""
 }
 export declare enum VerificationStatementEnum {
     INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED",
