@@ -161,6 +161,7 @@ export interface VerificationDetails {
     verificationStatements?: VerificationStatementEnum[];
 }
 export declare enum NameMismatchReasonEnum {
+    NONE = "",
     PREFERRED_NAME = "PREFERRED_NAME",
     LEGAL_NAME_CHANGE = "LEGAL_NAME_CHANGE",
     TRANSLATION_OR_DIFFERENT_CONVENTION = "TRANSLATION_OR_DIFFERENT_CONVENTION",

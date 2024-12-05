@@ -16,6 +16,7 @@ exports.VerificationStatementEnum = exports.NameMismatchReasonEnum = void 0;
 ;
 var NameMismatchReasonEnum;
 (function (NameMismatchReasonEnum) {
+    NameMismatchReasonEnum["NONE"] = "";
     NameMismatchReasonEnum["PREFERRED_NAME"] = "PREFERRED_NAME";
     NameMismatchReasonEnum["LEGAL_NAME_CHANGE"] = "LEGAL_NAME_CHANGE";
     NameMismatchReasonEnum["TRANSLATION_OR_DIFFERENT_CONVENTION"] = "TRANSLATION_OR_DIFFERENT_CONVENTION";
