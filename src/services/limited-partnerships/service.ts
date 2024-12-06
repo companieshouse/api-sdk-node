@@ -42,10 +42,8 @@ export default class LimitedPartnershipsService {
             };
         }
 
-        const resource = {
+        return {
             httpStatusCode: response.status
         };
-
-        return resource;
     }
 }
