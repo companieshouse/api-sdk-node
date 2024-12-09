@@ -31,7 +31,7 @@ export default class LimitedPartnershipsService {
         transactionId: string,
         submissionId: string,
         body: { type: string; data: Record<string, any> }
-    ): Promise<Resource<LimitedPartnershipCreated> | ApiErrorResponse> {
+    ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
 

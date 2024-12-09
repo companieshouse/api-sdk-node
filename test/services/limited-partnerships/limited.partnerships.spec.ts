@@ -140,5 +140,39 @@ describe("LimitedPartnershipsService POST Tests suite", () => {
             ).to.be.true;
             expect(response.httpStatusCode).to.equal(200);
         });
+
+        it("should return error 400 (Bad Request)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpPatch")
+                .resolves(mockValues.mockPostLimitedPartnershipResponse[400]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+
+            const response = await service.patchLimitedPartnership(
+                mockValues.TRANSACTION_ID,
+                mockValues.SUBMISSION_ID,
+                {
+                    type: "email",
+                    data: {}
+                }
+            ) as ApiErrorResponse;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/partnership/09876",
+                    {
+                        type: "email",
+                        data: {}
+
+                    }
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(400);
+            expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+        });
     })
 });
