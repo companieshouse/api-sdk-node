@@ -42,7 +42,8 @@ describe("LimitedPartnershipsService POST Tests suite", () => {
                     {
                         data: {
                             partnership_name: "Legalised Asset Stashing",
-                            name_ending: "Limited Partnership"
+                            name_ending: "Limited Partnership",
+                            partnership_type: "LP"
                         }
                     }
                 )

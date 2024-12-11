@@ -2,7 +2,8 @@ import { RequestClient } from "../../../src";
 import {
     LimitedPartnership,
     LimitedPartnershipCreated,
-    NameEndingType
+    NameEndingType,
+    PartnershipType
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -13,7 +14,8 @@ export const requestClient = new RequestClient({
 export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
     data: {
         partnership_name: "Legalised Asset Stashing",
-        name_ending: NameEndingType.LIMITED_PARTNERSHIP
+        name_ending: NameEndingType.LIMITED_PARTNERSHIP,
+        partnership_type: PartnershipType.LP
     }
 };
 
