@@ -185,7 +185,10 @@ export interface VerificationDetails {
 
 export enum NameMismatchReasonEnum {
     PREFERRED_NAME = "PREFERRED_NAME",
-    MAIDEN_NAME = "MAIDEN_NAME"
+    LEGAL_NAME_CHANGE = "LEGAL_NAME_CHANGE",
+    DIFFERENT_NAMING_CONVENTION = "DIFFERENT_NAMING_CONVENTION",
+    PUBLIC_REGISTER_ERROR = "PUBLIC_REGISTER_ERROR",
+    PREFER_NOT_TO_SAY = "PREFER_NOT_TO_SAY"
 }
 
 export enum VerificationStatementEnum {

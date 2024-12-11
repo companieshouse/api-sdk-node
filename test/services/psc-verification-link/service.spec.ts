@@ -34,7 +34,7 @@ describe("PSC Verification Link", () => {
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
         });
 
-        it("should return staus 400 Bad Request for bad data", async () => {
+        it("should return status 400 Bad Request for bad data", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[400]);
 
             const data = await pscService.postPscVerification(TRANSACTION_ID, { companyNumber: "" }) as ApiErrorResponse;
