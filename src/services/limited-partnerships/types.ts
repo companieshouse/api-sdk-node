@@ -9,6 +9,7 @@ export interface LimitedPartnership {
     data?: {
         partnership_name?: string;
         name_ending?: NameEndingType;
+        partnership_type?: PartnershipType;
     }
 }
 
@@ -27,4 +28,11 @@ export enum NameEndingType {
     PARTNERIAETH_CYFYNGEDIG = "Partneriaeth Cyfyngedig",
     PC = "PC",
     P_DOT_C_DOT = "P.C."
+}
+
+export enum PartnershipType {
+    LP = "LP",
+    PFLP = "PFLP",
+    SLP = "SLP",
+    SPFLP = "SPFLP"
 }
