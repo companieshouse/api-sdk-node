@@ -1,4 +1,4 @@
-import { PscVerification, PscVerificationData } from "./types"
+import { PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -55,6 +55,23 @@ export default class PscVerificationService {
         }
 
         return this.populateFrontEndResource(response);
+    }
+
+    public async getValidationStatus (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse> {
+        const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}/validation_status`;
+        const response = await this.client.httpGet(resourceUri);
+
+        if (response.status >= 400) {
+            return { httpStatusCode: response.status, errors: [response.error] };
+        }
+
+        const resource: Resource<ValidationStatusResponse> = { httpStatusCode: response.status };
+
+        const body = response.body as ValidationStatusResponseResource;
+
+        resource.resource = Mapping.camelCaseKeys<ValidationStatusResponse>(body);
+
+        return resource;
     }
 
     private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {

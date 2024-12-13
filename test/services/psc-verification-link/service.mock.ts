@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { NameElements, NameMismatchReasonEnum, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
+import { NameElements, NameMismatchReasonEnum, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, ValidationStatusError, ValidationStatusErrorResource, ValidationStatusResponse, ValidationStatusResponseResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -221,6 +221,40 @@ export const mockPscVerificationRleResource: PscVerificationResource = {
     }
 };
 
+export const mockValidationStatusError: ValidationStatusError = {
+    error: "The name on the public register is different to the name this PSC used for identity verification: a name mismatch reason must be provided",
+    location: "$.uvid_match",
+    type: "ch:validation",
+    locationType: "json-path"
+}
+
+export const mockValidationStatusResponseValid: ValidationStatusResponse = {
+    errors: [],
+    isValid: true
+}
+
+export const mockValidationStatusResponseErrors: ValidationStatusResponse = {
+    errors: [mockValidationStatusError],
+    isValid: false
+}
+
+const mockValidationStatusErrorResource: ValidationStatusErrorResource = {
+    error: "The name on the public register is different to the name this PSC used for identity verification: a name mismatch reason must be provided",
+    location: "$.uvid_match",
+    type: "ch:validation",
+    location_type: "json-path"
+}
+
+const mockValidationStatusResponseValidResource: ValidationStatusResponseResource = {
+    errors: [],
+    is_valid: true
+}
+
+const mockValidationStatusResponseErrorsResource: ValidationStatusResponseResource = {
+    errors: [mockValidationStatusErrorResource],
+    is_valid: false
+}
+
 export const mockPscVerificationIndResponse = {
     200: { status: StatusCodes.OK, body: mockPscVerificationIndResource },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
@@ -245,4 +279,15 @@ export const mockPscVerificationPatchIndResponse = {
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+};
+
+export const mockGetValidationStatusResponse = {
+    200: { status: StatusCodes.OK, body: mockValidationStatusResponseValidResource },
+    401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
+    500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
+};
+
+export const mockGetValidationStatusResponseErrors = {
+    200: { status: StatusCodes.OK, body: mockValidationStatusResponseErrorsResource }
 };
