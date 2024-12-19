@@ -39,16 +39,16 @@ export default class RequestClient extends AbstractClient {
             headers["content-type"] = "application/json";
         }
 
+        const options: AxiosRequestConfig = {
+            method: additionalOptions.method,
+            headers: headers,
+            url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
+            responseType: "json",
+            validateStatus: status => {
+                return status < 500; // Resolve only if the status code is less than 500
+            }
+        };
         try {
-            const options: AxiosRequestConfig = {
-                method: additionalOptions.method,
-                headers: headers,
-                url: this.formatUrl(this.options.baseUrl, additionalOptions.url),
-                responseType: "json",
-                validateStatus: status => {
-                    return status < 500; // Resolve only if the status code is less than 500
-                }
-            };
             if (additionalOptions.body) {
                 options.data = additionalOptions.body;
             }
@@ -64,7 +64,7 @@ export default class RequestClient extends AbstractClient {
         } catch (e) {
             // e can be an instance of AxiosError or a generic error
             // however, we cannot specify a type for e coz type annotations for catch block errors must be 'any' or 'unknown' if specified
-            const error = e?.response?.data || { message: `failed to execute http request: ${e}` };
+            const error = e?.response?.data || { message: `failed to execute http request: option: ${options} - e: ${e}` };
             return {
                 status: e?.status || 500,
                 error
