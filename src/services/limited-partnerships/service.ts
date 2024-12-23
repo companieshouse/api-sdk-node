@@ -46,4 +46,26 @@ export default class LimitedPartnershipsService {
             httpStatusCode: response.status
         };
     }
+
+    public async getLimitedPartnership (
+        transactionId: string,
+        submissionId: string
+    ): Promise<Resource<LimitedPartnership> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<LimitedPartnership> = {
+            httpStatusCode: response.status
+        };
+
+        resource.resource = { ...response.body };
+        return resource;
+    }
 }
