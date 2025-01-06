@@ -127,8 +127,8 @@ describe("LimitedPartnershipsService", () => {
             const response = await service.patchLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
-                {     
-                    email: "test@email.com"                    
+                {
+                    email: "test@email.com"
                 }
             );
 
@@ -136,8 +136,8 @@ describe("LimitedPartnershipsService", () => {
             expect(
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
-                    {                       
-                        email: "test@email.com"                       
+                    {
+                        email: "test@email.com"
                     }
                 )
             ).to.be.true;
