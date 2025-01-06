@@ -127,11 +127,8 @@ describe("LimitedPartnershipsService", () => {
             const response = await service.patchLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
-                {
-                    type: "email",
-                    data: {
-                        email: "test@email.com"
-                    }
+                {     
+                    email: "test@email.com"                    
                 }
             );
 
@@ -139,11 +136,8 @@ describe("LimitedPartnershipsService", () => {
             expect(
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
-                    {
-                        type: "email",
-                        data: {
-                            email: "test@email.com"
-                        }
+                    {                       
+                        email: "test@email.com"                       
                     }
                 )
             ).to.be.true;
@@ -162,9 +156,8 @@ describe("LimitedPartnershipsService", () => {
             const response = await service.patchLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
-                {
-                    type: "email",
-                    data: {}
+                {                    
+                    
                 }
             ) as ApiErrorResponse;
 
@@ -172,9 +165,7 @@ describe("LimitedPartnershipsService", () => {
             expect(
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
-                    {
-                        type: "email",
-                        data: {}
+                    {                        
 
                     }
                 )

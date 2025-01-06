@@ -30,7 +30,7 @@ export default class LimitedPartnershipsService {
     public async patchLimitedPartnership (
         transactionId: string,
         submissionId: string,
-        body: { type: string; data: Record<string, any> }
+        body: LimitedPartnership["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
