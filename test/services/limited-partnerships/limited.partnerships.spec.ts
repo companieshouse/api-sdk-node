@@ -156,18 +156,14 @@ describe("LimitedPartnershipsService", () => {
             const response = await service.patchLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
-                {                    
-                    
-                }
+                {}
             ) as ApiErrorResponse;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
-                    {                        
-
-                    }
+                    {}
                 )
             ).to.be.true;
 
