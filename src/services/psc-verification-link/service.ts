@@ -1,7 +1,7 @@
 import { PlannedMaintenance, PscVerification, PscVerificationData } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
-import Resource, { ApiErrorResponse } from "../resource";
+import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 import { PersonWithSignificantControlResource } from "../psc/types";
 /**
@@ -57,7 +57,7 @@ export default class PscVerificationService {
         return this.populateFrontEndResource(response);
     }
 
-    public async checkPlannedMaintenance (): Promise<PlannedMaintenance | ApiErrorResponse> {
+    public async checkPlannedMaintenance (): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
         const maintenanceUri = `/persons-with-significant-control-verification/maintenance`;
         const response = await this.client.httpGet(maintenanceUri);
 
@@ -68,7 +68,12 @@ export default class PscVerificationService {
             }
         }
 
-        return response.body;
+        const frontEndResponse: ApiResponse<PlannedMaintenance> = {
+            httpStatusCode: response.status,
+            resource: response.body as PlannedMaintenance
+        };
+
+        return frontEndResponse;
     }
 
     private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {

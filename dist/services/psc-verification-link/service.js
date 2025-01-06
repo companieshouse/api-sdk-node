@@ -74,7 +74,11 @@ class PscVerificationService {
                     errors: [response.error]
                 };
             }
-            return response.body;
+            const frontEndResponse = {
+                httpStatusCode: response.status,
+                resource: response.body
+            };
+            return frontEndResponse;
         });
     }
     populateFrontEndResource(response) {
