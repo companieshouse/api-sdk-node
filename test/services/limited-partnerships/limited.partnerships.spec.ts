@@ -128,10 +128,7 @@ describe("LimitedPartnershipsService", () => {
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
                 {
-                    type: "email",
-                    data: {
-                        email: "test@email.com"
-                    }
+                    email: "test@email.com"
                 }
             );
 
@@ -140,10 +137,7 @@ describe("LimitedPartnershipsService", () => {
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
                     {
-                        type: "email",
-                        data: {
-                            email: "test@email.com"
-                        }
+                        email: "test@email.com"
                     }
                 )
             ).to.be.true;
@@ -163,8 +157,7 @@ describe("LimitedPartnershipsService", () => {
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
                 {
-                    type: "email",
-                    data: {}
+                    email: "testemail.com"
                 }
             ) as ApiErrorResponse;
 
@@ -173,9 +166,7 @@ describe("LimitedPartnershipsService", () => {
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
                     {
-                        type: "email",
-                        data: {}
-
+                        email: "testemail.com"
                     }
                 )
             ).to.be.true;
