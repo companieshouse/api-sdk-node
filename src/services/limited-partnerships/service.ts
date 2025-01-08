@@ -34,7 +34,6 @@ export default class LimitedPartnershipsService {
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
-        console.log("\n\n\n\n>>>>>>>>>>>>>>>>>>> THE NEW SDK");
         if (response.error) {
             return {
                 httpStatusCode: response.status,
