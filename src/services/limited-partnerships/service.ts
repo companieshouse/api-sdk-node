@@ -13,10 +13,10 @@ export default class LimitedPartnershipsService {
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
         const resource: Resource<LimitedPartnershipCreated> = {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
 
-        resource.resource = { ...response.body };
         return resource;
     }
 
@@ -42,10 +42,10 @@ export default class LimitedPartnershipsService {
         const response: HttpResponse = await this.client.httpGet(URL);
 
         const resource: Resource<LimitedPartnership> = {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
 
-        resource.resource = { ...response.body };
         return resource;
     }
 }
