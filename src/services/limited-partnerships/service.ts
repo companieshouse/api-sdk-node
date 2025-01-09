@@ -32,8 +32,12 @@ export default class LimitedPartnershipsService {
         submissionId: string,
         body: LimitedPartnership["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
+        console.log("jsndcjdshvjwdividwjivjdwoijviwdpiv ");
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
+
+        console.log(response);
+
         if (response.error) {
             return {
                 httpStatusCode: response.status,
