@@ -12,13 +12,6 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
         const resource: Resource<LimitedPartnershipCreated> = {
             httpStatusCode: response.status
         };
@@ -32,21 +25,12 @@ export default class LimitedPartnershipsService {
         submissionId: string,
         body: LimitedPartnership["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
-        console.log("jsndcjdshvjwdividwjivjdwoijviwdpiv ");
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
 
-        console.log(response);
-
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
         return {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
     }
 
@@ -56,13 +40,6 @@ export default class LimitedPartnershipsService {
     ): Promise<Resource<LimitedPartnership> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
-
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
 
         const resource: Resource<LimitedPartnership> = {
             httpStatusCode: response.status
