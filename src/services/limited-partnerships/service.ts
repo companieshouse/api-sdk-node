@@ -12,12 +12,10 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
-        const resource: Resource<LimitedPartnershipCreated> = {
+        return {
             httpStatusCode: response.status,
             resource: { ...response.body }
         };
-
-        return resource;
     }
 
     public async patchLimitedPartnership (
@@ -41,11 +39,9 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
-        const resource: Resource<LimitedPartnership> = {
+        return {
             httpStatusCode: response.status,
             resource: { ...response.body }
         };
-
-        return resource;
     }
 }
