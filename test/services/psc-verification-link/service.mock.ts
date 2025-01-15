@@ -255,5 +255,6 @@ export const mockPscVerificationPatchIndResponse = {
 };
 
 export const mockPlannedMaintenanceResponse = {
-    200: { status: StatusCodes.OK, body: mockPlannedMaintenanceResource }
+    200: { status: StatusCodes.OK, body: mockPlannedMaintenanceResource },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
 };

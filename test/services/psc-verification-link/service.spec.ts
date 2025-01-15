@@ -155,5 +155,15 @@ describe("PSC Verification Link", () => {
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource).to.eql(mockPlannedMaintenanceResource);
         });
+
+        it("should return status 404 Not Found if resource not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[404]);
+
+            const response = (await pscService.checkPlannedMaintenance(
+            )) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
     });
 });
