@@ -3,9 +3,9 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
-import { PscVerification } from "../../../src/services/psc-verification-link/types";
-import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRo, requestClient } from "./service.mock";
+import { PlannedMaintenance, PscVerification } from "../../../src/services/psc-verification-link/types";
+import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRo, requestClient } from "./service.mock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
@@ -142,6 +142,18 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNSUPPORTED_MEDIA_TYPE);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNSUPPORTED_MEDIA_TYPE);
+        });
+    });
+
+    describe("checkPlannedMaintenance endpoint", () => {
+        it("should return status 200 OK and Planned Maintenance resource", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[200]);
+
+            const response = (await pscService.checkPlannedMaintenance(
+            )) as ApiResponse<PlannedMaintenance>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockPlannedMaintenanceResource);
         });
     });
 });
