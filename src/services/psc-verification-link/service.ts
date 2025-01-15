@@ -68,12 +68,10 @@ export default class PscVerificationService {
             }
         }
 
-        const frontEndResponse: ApiResponse<PlannedMaintenance> = {
+        return {
             httpStatusCode: response.status,
             resource: response.body as PlannedMaintenance
         };
-
-        return frontEndResponse;
     }
 
     private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {
