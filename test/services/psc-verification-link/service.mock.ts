@@ -1,6 +1,6 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
-import { NameElements, NameMismatchReasonEnum, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, ValidationStatusError, ValidationStatusErrorResource, ValidationStatusResponse, ValidationStatusResponseResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
+import { NameElements, NameMismatchReasonEnum, PlannedMaintenance, PscVerification, PscVerificationData, PscVerificationDataResource, PscVerificationResource, ValidationStatusError, ValidationStatusErrorResource, ValidationStatusResponse, ValidationStatusResponseResource, VerificationStatementEnum } from "../../../src/services/psc-verification-link/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -221,6 +221,13 @@ export const mockPscVerificationRleResource: PscVerificationResource = {
     }
 };
 
+export const mockPlannedMaintenanceResource: PlannedMaintenance = {
+    status: "UP",
+    message: "",
+    maintenance_start_time: new Date(),
+    maintenance_end_time: new Date()
+}
+
 export const mockValidationStatusError: ValidationStatusError = {
     error: "The name on the public register is different to the name this PSC used for identity verification: a name mismatch reason must be provided",
     location: "$.uvid_match",
@@ -278,6 +285,11 @@ export const mockPscVerificationPatchIndResponse = {
     200: { status: StatusCodes.OK, body: mockPscVerificationPatchIndResource },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+};
+
+export const mockPlannedMaintenanceResponse = {
+    200: { status: StatusCodes.OK, body: mockPlannedMaintenanceResource },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
 };
 
