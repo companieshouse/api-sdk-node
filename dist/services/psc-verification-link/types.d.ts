@@ -160,6 +160,12 @@ export interface VerificationDetails {
     nameMismatchReason?: NameMismatchReasonEnum;
     verificationStatements?: VerificationStatementEnum[];
 }
+export interface PlannedMaintenance {
+    status: string;
+    message: string;
+    maintenance_start_time: Date;
+    maintenance_end_time: Date;
+}
 export declare enum NameMismatchReasonEnum {
     PREFERRED_NAME = "PREFERRED_NAME",
     LEGAL_NAME_CHANGE = "LEGAL_NAME_CHANGE",
