@@ -10,6 +10,7 @@ export interface LimitedPartnership {
         partnership_name?: string;
         name_ending?: NameEndingType;
         partnership_type?: PartnershipType;
+        email?: string
     }
 }
 

@@ -12,38 +12,36 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
-        const resource: Resource<LimitedPartnershipCreated> = {
-            httpStatusCode: response.status
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
-
-        resource.resource = { ...response.body };
-        return resource;
     }
 
     public async patchLimitedPartnership (
         transactionId: string,
         submissionId: string,
-        body: { type: string; data: Record<string, any> }
+        body: LimitedPartnership["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getLimitedPartnership (
+        transactionId: string,
+        submissionId: string
+    ): Promise<Resource<LimitedPartnership> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
     }
 }
