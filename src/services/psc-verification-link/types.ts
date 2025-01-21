@@ -204,3 +204,25 @@ export enum VerificationStatementEnum {
     RO_VERIFIED= "RO_VERIFIED",
     RO_DECLARATION = "RO_DECLARATION"
 }
+export interface ValidationStatusError {
+    error: string;
+    location: string;
+    type?: string;
+    locationType: string;
+}
+export interface ValidationStatusResponse {
+    errors: ValidationStatusError[];
+    isValid?: boolean;
+}
+
+export interface ValidationStatusErrorResource {
+    error: string;
+    location: string;
+    location_type: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponseResource {
+    errors: ValidationStatusErrorResource[];
+    is_valid?: boolean;
+}
