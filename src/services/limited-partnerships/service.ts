@@ -91,5 +91,5 @@ export default class LimitedPartnershipsService {
         resource.resource = { ...response.body };
 
         return resource;
-    };
+    }
 }
