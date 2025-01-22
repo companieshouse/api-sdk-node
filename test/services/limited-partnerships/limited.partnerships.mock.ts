@@ -26,6 +26,7 @@ export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
 export const NOT_FOUND = "Not Found";
+export const INTERNAL_SERVER_ERROR = "Internal Server Error";
 
 export const mockLimitedPartnershipCreatedResource: LimitedPartnershipCreated =
     {
@@ -42,5 +43,11 @@ export const mockPostLimitedPartnershipResponse = {
 export const mockGetLimitedPartnershipResponse = {
     200: { status: 200, body: LIMITED_PARTNERSHIP_OBJECT_MOCK },
     404: { status: 404, error: NOT_FOUND },
+    401: { status: 401, error: UNAUTHORISED }
+};
+
+export const mockPostLimitedPartnershipIncorporationResponse = {
+    201: { status: 201, body: mockLimitedPartnershipCreatedResource },
+    400: { status: 400, error: BAD_REQUEST },
     401: { status: 401, error: UNAUTHORISED }
 };

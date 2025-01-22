@@ -249,4 +249,76 @@ describe("LimitedPartnershipsService", () => {
             expect(response.errors?.[0]).to.equal(mockValues.NOT_FOUND);
         });
     })
+
+    describe("postLimitedPartnershipIncorporation", () => {
+        it("should return object Id for postLimitedPartnershipIncorporation method", async () => {
+            const mockRequest = sinon
+            .stub(mockValues.requestClient, "httpPost")
+            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[201]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.postLimitedPartnershipIncorporation(
+              mockValues.TRANSACTION_ID
+            )) as Resource<LimitedPartnershipCreated>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership"                    
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(201);
+            expect(response.resource?.id).to.equal(
+                mockValues.mockLimitedPartnershipCreatedResource.id
+            );
+        });
+
+        it("should return error 400 (Bad Request) for postLimitedPartnershipIncorporation method", async () => {
+            const mockRequest = sinon
+            .stub(mockValues.requestClient, "httpPost")
+            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[400]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.postLimitedPartnershipIncorporation(
+              mockValues.TRANSACTION_ID
+            )) as ApiErrorResponse;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership"                    
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(400);
+            expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+        });
+
+        it("should return error 401 (Unauthorised) for postLimitedPartnershipIncorporation method", async () => {
+            const mockRequest = sinon
+            .stub(mockValues.requestClient, "httpPost")
+            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[401]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.postLimitedPartnershipIncorporation(
+              mockValues.TRANSACTION_ID
+            )) as ApiErrorResponse;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership"                    
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(401);
+            expect(response.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+        });
+    });
 });

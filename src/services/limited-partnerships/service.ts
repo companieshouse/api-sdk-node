@@ -67,4 +67,31 @@ export default class LimitedPartnershipsService {
         resource.resource = { ...response.body };
         return resource;
     }
+
+    /*
+     * Calls to incorporation endpoints
+     */
+
+    public async postLimitedPartnershipIncorporation(
+        transactionId: string): Promise<Resource<LimitedPartnershipCreated> | ApiErrorResponse> {
+        
+        const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
+        
+        const response: HttpResponse = await this.client.httpPost(URL);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            };
+        }
+
+        const resource: Resource<LimitedPartnershipCreated> = {
+            httpStatusCode: response.status
+        };
+
+        resource.resource = { ...response.body };
+
+        return resource;
+    };
 }
