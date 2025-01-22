@@ -253,20 +253,20 @@ describe("LimitedPartnershipsService", () => {
     describe("postLimitedPartnershipIncorporation", () => {
         it("should return object Id for postLimitedPartnershipIncorporation method", async () => {
             const mockRequest = sinon
-            .stub(mockValues.requestClient, "httpPost")
-            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[201]);
+                .stub(mockValues.requestClient, "httpPost")
+                .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[201]);
 
             const service = new LimitedPartnershipsService(
                 mockValues.requestClient
             );
             const response = (await service.postLimitedPartnershipIncorporation(
-              mockValues.TRANSACTION_ID
+                mockValues.TRANSACTION_ID
             )) as Resource<LimitedPartnershipCreated>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
                 mockRequest.calledWith(
-                    "/transactions/12345/incorporation/limited-partnership"                    
+                    "/transactions/12345/incorporation/limited-partnership"
                 )
             ).to.be.true;
             expect(response.httpStatusCode).to.equal(201);
@@ -277,20 +277,20 @@ describe("LimitedPartnershipsService", () => {
 
         it("should return error 400 (Bad Request) for postLimitedPartnershipIncorporation method", async () => {
             const mockRequest = sinon
-            .stub(mockValues.requestClient, "httpPost")
-            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[400]);
+                .stub(mockValues.requestClient, "httpPost")
+                .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[400]);
 
             const service = new LimitedPartnershipsService(
                 mockValues.requestClient
             );
             const response = (await service.postLimitedPartnershipIncorporation(
-              mockValues.TRANSACTION_ID
+                mockValues.TRANSACTION_ID
             )) as ApiErrorResponse;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
                 mockRequest.calledWith(
-                    "/transactions/12345/incorporation/limited-partnership"                    
+                    "/transactions/12345/incorporation/limited-partnership"
                 )
             ).to.be.true;
 
@@ -300,20 +300,20 @@ describe("LimitedPartnershipsService", () => {
 
         it("should return error 401 (Unauthorised) for postLimitedPartnershipIncorporation method", async () => {
             const mockRequest = sinon
-            .stub(mockValues.requestClient, "httpPost")
-            .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[401]);
+                .stub(mockValues.requestClient, "httpPost")
+                .resolves(mockValues.mockPostLimitedPartnershipIncorporationResponse[401]);
 
             const service = new LimitedPartnershipsService(
                 mockValues.requestClient
             );
             const response = (await service.postLimitedPartnershipIncorporation(
-              mockValues.TRANSACTION_ID
+                mockValues.TRANSACTION_ID
             )) as ApiErrorResponse;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
                 mockRequest.calledWith(
-                    "/transactions/12345/incorporation/limited-partnership"                    
+                    "/transactions/12345/incorporation/limited-partnership"
                 )
             ).to.be.true;
 
