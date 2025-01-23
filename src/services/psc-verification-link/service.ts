@@ -1,7 +1,7 @@
-import { PscVerification, PscVerificationData } from "./types"
+import { PlannedMaintenance, PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
-import Resource, { ApiErrorResponse } from "../resource";
+import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 import { PersonWithSignificantControlResource } from "../psc/types";
 /**
@@ -55,6 +55,40 @@ export default class PscVerificationService {
         }
 
         return this.populateFrontEndResource(response);
+    }
+
+    public async getValidationStatus (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse> {
+        const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}/validation_status`;
+        const response = await this.client.httpGet(resourceUri);
+
+        if (response.status >= 400) {
+            return { httpStatusCode: response.status, errors: [response.error] };
+        }
+
+        const resource: Resource<ValidationStatusResponse> = { httpStatusCode: response.status };
+
+        const body = response.body as ValidationStatusResponseResource;
+
+        resource.resource = Mapping.camelCaseKeys<ValidationStatusResponse>(body);
+
+        return resource;
+    }
+
+    public async checkPlannedMaintenance (): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
+        const maintenanceUri = `/persons-with-significant-control-verification/maintenance`;
+        const response = await this.client.httpGet(maintenanceUri);
+
+        if (response.error) {
+            return {
+                httpStatusCode: response.status,
+                errors: [response.error]
+            }
+        }
+
+        return {
+            httpStatusCode: response.status,
+            resource: response.body as PlannedMaintenance
+        };
     }
 
     private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {

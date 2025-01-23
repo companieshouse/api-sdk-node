@@ -35,14 +35,14 @@ export const mockLimitedPartnershipCreatedResource: LimitedPartnershipResourceCr
 export const mockPostLimitedPartnershipResponse = {
     200: { status: 200 },
     201: { status: 201, body: mockLimitedPartnershipCreatedResource },
-    400: { status: 400, error: BAD_REQUEST },
-    401: { status: 401, error: UNAUTHORISED }
+    400: { status: 400, body: { error: BAD_REQUEST } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
 export const mockGetLimitedPartnershipResponse = {
     200: { status: 200, body: LIMITED_PARTNERSHIP_OBJECT_MOCK },
-    404: { status: 404, error: NOT_FOUND },
-    401: { status: 401, error: UNAUTHORISED }
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
 export const mockPostLimitedPartnershipIncorporationResponse = {

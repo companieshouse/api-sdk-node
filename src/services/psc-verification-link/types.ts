@@ -183,6 +183,13 @@ export interface VerificationDetails {
     verificationStatements?: VerificationStatementEnum[]
 }
 
+export interface PlannedMaintenance {
+    status: string,
+    message: string,
+    maintenance_start_time: Date,
+    maintenance_end_time: Date
+}
+
 export enum NameMismatchReasonEnum {
     PREFERRED_NAME = "PREFERRED_NAME",
     LEGAL_NAME_CHANGE = "LEGAL_NAME_CHANGE",
@@ -196,4 +203,26 @@ export enum VerificationStatementEnum {
     RO_IDENTIFIED = "RO_IDENTIFIED",
     RO_VERIFIED= "RO_VERIFIED",
     RO_DECLARATION = "RO_DECLARATION"
+}
+export interface ValidationStatusError {
+    error: string;
+    location: string;
+    type?: string;
+    locationType: string;
+}
+export interface ValidationStatusResponse {
+    errors: ValidationStatusError[];
+    isValid?: boolean;
+}
+
+export interface ValidationStatusErrorResource {
+    error: string;
+    location: string;
+    location_type: string;
+    type?: string;
+}
+
+export interface ValidationStatusResponseResource {
+    errors: ValidationStatusErrorResource[];
+    is_valid?: boolean;
 }

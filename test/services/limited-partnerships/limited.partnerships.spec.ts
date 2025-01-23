@@ -9,7 +9,7 @@ import {
     LimitedPartnershipsService,
     NameEndingType
 } from "../../../src/services/limited-partnerships";
-import Resource, { ApiErrorResponse } from "../../../src/services/resource";
+import Resource from "../../../src/services/resource";
 
 describe("LimitedPartnershipsService", () => {
     beforeEach(() => {
@@ -74,7 +74,7 @@ describe("LimitedPartnershipsService", () => {
             const response = (await service.postLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 { data: {} }
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -85,7 +85,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(401);
-            expect(response.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+            expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
         });
 
         it("should return error 400 (Bad Request) for postLimitedPartnership method", async () => {
@@ -99,7 +99,7 @@ describe("LimitedPartnershipsService", () => {
             const response = (await service.postLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 { data: { name_ending: NameEndingType.LP } }
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -110,7 +110,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(400);
-            expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+            expect(response.resource.error).to.equal(mockValues.BAD_REQUEST);
         });
     })
 
@@ -159,7 +159,7 @@ describe("LimitedPartnershipsService", () => {
                 {
                     email: "testemail.com"
                 }
-            ) as ApiErrorResponse;
+            ) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -172,7 +172,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(400);
-            expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+            expect(response.resource.error).to.equal(mockValues.BAD_REQUEST);
         });
     })
 
@@ -212,7 +212,7 @@ describe("LimitedPartnershipsService", () => {
             const response = (await service.getLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -222,7 +222,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(401);
-            expect(response.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+            expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
         });
 
         it("should return error 404 (Not Found)", async () => {
@@ -236,7 +236,7 @@ describe("LimitedPartnershipsService", () => {
             const response = (await service.getLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 "wrong-id"
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -246,7 +246,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(404);
-            expect(response.errors?.[0]).to.equal(mockValues.NOT_FOUND);
+            expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
         });
     })
 

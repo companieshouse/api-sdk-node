@@ -12,19 +12,10 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
-        const resource: Resource<LimitedPartnershipResourceCreated> = {
-            httpStatusCode: response.status
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
-
-        resource.resource = { ...response.body };
-        return resource;
     }
 
     public async patchLimitedPartnership (
@@ -34,15 +25,10 @@ export default class LimitedPartnershipsService {
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
 
         return {
-            httpStatusCode: response.status
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
     }
 
@@ -53,19 +39,10 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
-        const resource: Resource<LimitedPartnership> = {
-            httpStatusCode: response.status
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
-
-        resource.resource = { ...response.body };
-        return resource;
     }
 
     /*
@@ -84,12 +61,9 @@ export default class LimitedPartnershipsService {
             };
         }
 
-        const resource: Resource<LimitedPartnershipResourceCreated> = {
-            httpStatusCode: response.status
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
         };
-
-        resource.resource = { ...response.body };
-
-        return resource;
     }
 }

@@ -3,9 +3,9 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
-import { PscVerification } from "../../../src/services/psc-verification-link/types";
-import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRo, requestClient } from "./service.mock";
+import { PlannedMaintenance, PscVerification, ValidationStatusResponse } from "../../../src/services/psc-verification-link/types";
+import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRo, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors } from "./service.mock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
@@ -142,6 +142,94 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNSUPPORTED_MEDIA_TYPE);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNSUPPORTED_MEDIA_TYPE);
+        });
+    });
+
+    describe("Validation status GET endpoint", () => {
+        it("should return status 200 OK with no errors when the validation status returns true", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[200]);
+
+            const response = (await pscService.getValidationStatus(
+                TRANSACTION_ID,
+                PSC_VERIFICATION_ID
+            )) as Resource<ValidationStatusResponse>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockValidationStatusResponseValid);
+            expect(response.resource?.errors).length.to.be.empty;
+            expect(response.resource?.isValid).to.eql(true);
+        });
+
+        it("should return status 200 OK when the validation status returns false with errors", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponseErrors[200]);
+
+            const response = (await pscService.getValidationStatus(
+                TRANSACTION_ID,
+                PSC_VERIFICATION_ID
+            )) as Resource<ValidationStatusResponse>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockValidationStatusResponseErrors);
+            expect(response.resource?.errors).length.to.be.gt(0);
+            expect(response.resource?.isValid).to.eql(false);
+        });
+
+        it("should return status 401 Unauthorised on unauthorised access", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[401]);
+
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
+        });
+
+        it("should return status 404 Not Found if resource is not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[404]);
+
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
+
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
+    });
+
+    describe("checkPlannedMaintenance endpoint", () => {
+        it("should return status 200 OK and Planned Maintenance resource", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[200]);
+
+            const response = (await pscService.checkPlannedMaintenance(
+            )) as ApiResponse<PlannedMaintenance>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockPlannedMaintenanceResource);
+        });
+
+        it("should return status 404 Not Found if resource not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[404]);
+
+            const response = (await pscService.checkPlannedMaintenance(
+            )) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
+
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
     });
 });
