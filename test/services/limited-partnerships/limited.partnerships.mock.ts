@@ -1,7 +1,7 @@
 import { RequestClient } from "../../../src";
 import {
     LimitedPartnership,
-    LimitedPartnershipCreated,
+    LimitedPartnershipResourceCreated,
     NameEndingType,
     PartnershipType
 } from "../../../src/services/limited-partnerships";
@@ -26,9 +26,8 @@ export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
 export const NOT_FOUND = "Not Found";
-export const INTERNAL_SERVER_ERROR = "Internal Server Error";
 
-export const mockLimitedPartnershipCreatedResource: LimitedPartnershipCreated =
+export const mockLimitedPartnershipCreatedResource: LimitedPartnershipResourceCreated =
     {
         id: LIMITED_PARTNERSHIP_ID
     };

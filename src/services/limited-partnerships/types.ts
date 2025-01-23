@@ -18,7 +18,7 @@ export interface LimitedPartnership {
  * The data structure returned by the API when a new Limited Partnership resource has
  * successfully been created.
  */
-export interface LimitedPartnershipCreated {
+export interface LimitedPartnershipResourceCreated {
     id: string
 }
 

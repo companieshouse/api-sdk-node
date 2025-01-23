@@ -5,7 +5,7 @@ import sinon from "sinon";
 import * as mockValues from "./limited.partnerships.mock";
 import {
     LimitedPartnership,
-    LimitedPartnershipCreated,
+    LimitedPartnershipResourceCreated,
     LimitedPartnershipsService,
     NameEndingType
 } from "../../../src/services/limited-partnerships";
@@ -41,7 +41,7 @@ describe("LimitedPartnershipsService", () => {
 
                     }
                 }
-            )) as Resource<LimitedPartnershipCreated>;
+            )) as Resource<LimitedPartnershipResourceCreated>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -261,7 +261,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.postLimitedPartnershipIncorporation(
                 mockValues.TRANSACTION_ID
-            )) as Resource<LimitedPartnershipCreated>;
+            )) as Resource<LimitedPartnershipResourceCreated>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
