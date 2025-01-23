@@ -2,6 +2,7 @@ import { RequestClient } from "../../../src";
 import {
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
+    LimitedPartnershipIncorporation,
     NameEndingType,
     PartnershipType
 } from "../../../src/services/limited-partnerships";
@@ -20,9 +21,25 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
     }
 };
 
+export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK: LimitedPartnershipIncorporation = {
+    etag: "",
+    kind: ""
+};
+
+export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPartnershipIncorporation = {
+    etag: "",
+    kind: "",
+    sub_resources: {
+        general_partners: [],
+        limited_partners: [],
+        partnership: LIMITED_PARTNERSHIP_OBJECT_MOCK
+    }
+};
+
 export const TRANSACTION_ID = "12345";
 export const SUBMISSION_ID = "09876";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
+export const FILE_RESOURCE_ID = "a1b2c3";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
 export const NOT_FOUND = "Not Found";
@@ -50,3 +67,13 @@ export const mockPostLimitedPartnershipIncorporationResponse = {
     400: { status: 400, body: { error: BAD_REQUEST } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
+
+export const mockGetLimitedPartnershipIncorporationResponse = {
+    200: { status: 200, body: LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockGetLimitedPartnershipIncorporationResponseWithSub = {
+    200: { status: 200, body: LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB }
+}

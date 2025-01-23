@@ -7,6 +7,7 @@ import {
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
     LimitedPartnershipsService,
+    LimitedPartnershipIncorporation,
     NameEndingType
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
@@ -319,6 +320,130 @@ describe("LimitedPartnershipsService", () => {
 
             expect(response.httpStatusCode).to.equal(401);
             expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+        });
+    });
+
+    describe("getLimitedPartnershipIncorporation", () => {
+        it("should return a status 200 and the limitedPartnershipIncorporation object no query no sub resources", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetLimitedPartnershipIncorporationResponse[200]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+
+            const response = await service.getLimitedPartnershipIncorporation(
+                mockValues.TRANSACTION_ID,
+                mockValues.FILE_RESOURCE_ID
+            ) as Resource<LimitedPartnershipIncorporation>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership/a1b2c3"
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(200);
+            expect(response?.resource).to.eql(mockValues.LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK);
+        });
+
+        it("should return a status 200 and the limitedPartnershipIncorporation object false query no sub resources", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetLimitedPartnershipIncorporationResponse[200]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+
+            const response = await service.getLimitedPartnershipIncorporation(
+                mockValues.TRANSACTION_ID,
+                mockValues.FILE_RESOURCE_ID,
+                false
+            ) as Resource<LimitedPartnershipIncorporation>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership/a1b2c3"
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(200);
+            expect(response?.resource).to.eql(mockValues.LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK);
+        });
+
+        it("should return a status 200 and the limitedPartnershipIncorporation object true query returns sub resources", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetLimitedPartnershipIncorporationResponseWithSub[200]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+
+            const response = await service.getLimitedPartnershipIncorporation(
+                mockValues.TRANSACTION_ID,
+                mockValues.FILE_RESOURCE_ID,
+                true
+            ) as Resource<LimitedPartnershipIncorporation>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership/a1b2c3?include_sub_resources=true"
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(200);
+            expect(response?.resource).to.eql(mockValues.LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB);
+        });
+
+        it("should return error 401 (Unauthorised)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetLimitedPartnershipIncorporationResponse[401]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.getLimitedPartnershipIncorporation(
+                mockValues.TRANSACTION_ID,
+                mockValues.FILE_RESOURCE_ID
+            )) as Resource<any>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership/a1b2c3"
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(401);
+            expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+        });
+
+        it("should return error 404 (Not Found)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetLimitedPartnershipIncorporationResponse[404]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.getLimitedPartnershipIncorporation(
+                mockValues.TRANSACTION_ID,
+                "wrong-id"
+            )) as Resource<any>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/incorporation/limited-partnership/wrong-id"
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(404);
+            expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
         });
     });
 });
