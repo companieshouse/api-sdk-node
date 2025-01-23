@@ -54,13 +54,6 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
         const response: HttpResponse = await this.client.httpPost(URL);
 
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            };
-        }
-
         return {
             httpStatusCode: response.status,
             resource: { ...response.body }
