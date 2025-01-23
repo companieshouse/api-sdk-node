@@ -285,7 +285,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.postLimitedPartnershipIncorporation(
                 mockValues.TRANSACTION_ID
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -295,7 +295,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(400);
-            expect(response.errors?.[0]).to.equal(mockValues.BAD_REQUEST);
+            expect(response.resource.error).to.equal(mockValues.BAD_REQUEST);
         });
 
         it("should return error 401 (Unauthorised) for postLimitedPartnershipIncorporation method", async () => {
@@ -308,7 +308,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.postLimitedPartnershipIncorporation(
                 mockValues.TRANSACTION_ID
-            )) as ApiErrorResponse;
+            )) as Resource<any>;
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
@@ -318,7 +318,7 @@ describe("LimitedPartnershipsService", () => {
             ).to.be.true;
 
             expect(response.httpStatusCode).to.equal(401);
-            expect(response.errors?.[0]).to.equal(mockValues.UNAUTHORISED);
+            expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
         });
     });
 });

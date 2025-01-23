@@ -47,6 +47,6 @@ export const mockGetLimitedPartnershipResponse = {
 
 export const mockPostLimitedPartnershipIncorporationResponse = {
     201: { status: 201, body: mockLimitedPartnershipCreatedResource },
-    400: { status: 400, error: BAD_REQUEST },
-    401: { status: 401, error: UNAUTHORISED }
+    400: { status: 400, body: { error: BAD_REQUEST } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
 };
