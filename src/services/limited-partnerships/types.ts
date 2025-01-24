@@ -37,3 +37,13 @@ export enum PartnershipType {
     SLP = "SLP",
     SPFLP = "SPFLP"
 }
+
+export interface LimitedPartnershipIncorporation {
+    etag: string,
+    kind: string,
+    sub_resources?: {
+        general_partners: any[],
+        limited_partners: any[],
+        partnership: LimitedPartnership
+    }
+}

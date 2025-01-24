@@ -1,5 +1,5 @@
 import { HttpResponse, IHttpClient } from "../../http";
-import { LimitedPartnership, LimitedPartnershipResourceCreated } from "./types";
+import { LimitedPartnership, LimitedPartnershipResourceCreated, LimitedPartnershipIncorporation } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
 export default class LimitedPartnershipsService {
@@ -53,6 +53,21 @@ export default class LimitedPartnershipsService {
         transactionId: string): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
         const response: HttpResponse = await this.client.httpPost(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getLimitedPartnershipIncorporation (
+        transactionId: string,
+        filingResourceId: string,
+        includeSubResources?: boolean): Promise<Resource<LimitedPartnershipIncorporation> | ApiErrorResponse> {
+        const subResourcesQuery :string = (includeSubResources ? ("?include_sub_resources=" + includeSubResources) : "");
+        const URL = `/transactions/${transactionId}/incorporation/limited-partnership/${filingResourceId}${subResourcesQuery}`;
+
+        const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
             httpStatusCode: response.status,
