@@ -91,7 +91,7 @@ export default class {
     }
 
     public async sendIdentityVerificationEmail (emailData: ClientVerificationEmail): Promise<HttpResponse> {
-        const url = `acsp-api/send-identity-verification-email`;
+        const url = `/acsp-api/send-identity-verification-email`;
         return this.client.httpPost(url, emailData);
     }
 }
