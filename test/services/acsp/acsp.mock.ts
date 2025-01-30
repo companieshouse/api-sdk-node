@@ -1,5 +1,5 @@
 import { RequestClient } from "../../../src";
-import { AcspData, AcspDataDto, Address, AddressDto } from "../../../src/services/acsp";
+import { AcspData, AcspDataDto, Address, AddressDto, ClientVerificationEmail } from "../../../src/services/acsp";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
 
@@ -97,4 +97,16 @@ export const mockAcspApplicationCompleteEmail = {
     200: { status: 200 },
     404: { status: 404 },
     500: { status: 500 }
+};
+
+export const mockSendEmail = {
+    200: { status: 200 },
+    500: { status: 500 }
+};
+
+export const mockClientVerificationEmail: ClientVerificationEmail = {
+    to: "email@acsp.com",
+    clientName: "Test Client",
+    referenceNumber: "123456",
+    clientEmailAddress: "TestClient@clientemail.com"
 };
