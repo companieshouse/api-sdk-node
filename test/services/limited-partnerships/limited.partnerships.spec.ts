@@ -8,7 +8,8 @@ import {
     LimitedPartnershipResourceCreated,
     LimitedPartnershipsService,
     LimitedPartnershipIncorporation,
-    NameEndingType
+    NameEndingType,
+    Jurisdiction
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -38,8 +39,8 @@ describe("LimitedPartnershipsService", () => {
                     data: {
                         partnership_name: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_name,
                         name_ending: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.name_ending,
-                        partnership_type: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_type
-
+                        partnership_type: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_type,
+                        jurisdiction: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.jurisdiction
                     }
                 }
             )) as Resource<LimitedPartnershipResourceCreated>;
@@ -52,7 +53,8 @@ describe("LimitedPartnershipsService", () => {
                         data: {
                             partnership_name: "Legalised Asset Stashing",
                             name_ending: "Limited Partnership",
-                            partnership_type: "LP"
+                            partnership_type: "LP",
+                            jurisdiction: Jurisdiction.ENGLAND_AND_WALES
                         }
                     }
                 )

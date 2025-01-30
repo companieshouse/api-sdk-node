@@ -4,7 +4,8 @@ import {
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
     NameEndingType,
-    PartnershipType
+    PartnershipType,
+    Jurisdiction
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -17,7 +18,8 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
         partnership_name: "Legalised Asset Stashing",
         name_ending: NameEndingType.LIMITED_PARTNERSHIP,
         partnership_type: PartnershipType.LP,
-        email: "test@email.com"
+        email: "test@email.com",
+        jurisdiction: Jurisdiction.ENGLAND_AND_WALES
     }
 };
 

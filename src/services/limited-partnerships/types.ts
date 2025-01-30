@@ -10,7 +10,8 @@ export interface LimitedPartnership {
         partnership_name?: string;
         name_ending?: NameEndingType;
         partnership_type?: PartnershipType;
-        email?: string
+        email?: string;
+        jurisdiction?: Jurisdiction;
     }
 }
 
@@ -36,6 +37,12 @@ export enum PartnershipType {
     PFLP = "PFLP",
     SLP = "SLP",
     SPFLP = "SPFLP"
+}
+
+export enum Jurisdiction {
+    ENGLAND_AND_WALES = "England and Wales",
+    NORTHERN_IRELAND = "Northern Ireland",
+    SCOTLAND = "Scotland"
 }
 
 export interface LimitedPartnershipIncorporation {
