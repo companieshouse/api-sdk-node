@@ -1,7 +1,8 @@
 import {
     AcspData,
     AcspDataDto,
-    AcspResponse
+    AcspResponse,
+    ClientVerificationEmail
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -87,5 +88,10 @@ export default class {
         const url = `/transactions/${transactionId}/authorised-corporate-service-provider-applications/${acspApplicationId}`;
         const resp: HttpResponse = await this.client.httpDelete(url);
         return resp;
+    }
+
+    public async sendIdentityVerificationEmail (emailData: ClientVerificationEmail): Promise<HttpResponse> {
+        const url = `acsp-api/send-identity-verification-email`;
+        return this.client.httpPost(url, emailData);
     }
 }

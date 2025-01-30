@@ -108,3 +108,10 @@ export interface NationalityDto {
     second_nationality?: string;
     third_nationality?: string;
 }
+
+export interface ClientVerificationEmail {
+    to: string;
+    clientName: string;
+    referenceNumber: string;
+    clientEmailAddress: string;
+}

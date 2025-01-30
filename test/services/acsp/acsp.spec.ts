@@ -98,3 +98,18 @@ describe("Acsp Registration DELETE", () => {
         expect(data.status).to.equal(404);
     })
 })
+
+describe("ACSP Verifiy a client send confirmation email", async () => {
+    it("should return 200 on successful email send", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail);
+        expect(data.status).to.equal(200);
+    })
+    it("should return 500 if email fails", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[500]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail);
+        expect(data.status).to.equal(500);
+    })
+})
