@@ -53,7 +53,8 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         is_remove: (body.is_remove) ? body.is_remove : null,
         has_sold_land: mapHasSoldLand(body.has_sold_land),
         is_secure_register: mapIsSecureRegister(body.is_secure_register),
-        who_is_registering: body.who_is_registering
+        who_is_registering: body.who_is_registering,
+        payment: body.payment ? body.payment : null
     };
 };
 
@@ -83,7 +84,8 @@ export const mapOverseasEntityResource = (body: OverseasEntityResource): Oversea
         is_remove: body.is_remove,
         has_sold_land: mapHasSoldLandResource(body.has_sold_land),
         is_secure_register: mapIsSecureRegisterResource(body.is_secure_register),
-        who_is_registering: body.who_is_registering
+        who_is_registering: body.who_is_registering,
+        payment: body.payment ? body.payment : null
     };
 };
 

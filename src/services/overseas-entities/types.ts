@@ -1,6 +1,7 @@
 /**
  * Overseas Entity interface used within this SDK
  */
+import { CreatePaymentRequest, CreatePaymentRequestResource } from "../payment";
 
 export interface OverseasEntity {
     entity_name?: string;
@@ -22,6 +23,7 @@ export interface OverseasEntity {
     has_sold_land?: string;
     is_secure_register?: string;
     who_is_registering?: string;
+    payment?: CreatePaymentRequest;
 }
 
 export interface OverseasEntityResource {
@@ -44,6 +46,7 @@ export interface OverseasEntityResource {
     has_sold_land?: boolean;
     is_secure_register?: boolean;
     who_is_registering?: string;
+    payment?: CreatePaymentRequest;
 }
 
 export interface OverseasEntityExtraDetails {

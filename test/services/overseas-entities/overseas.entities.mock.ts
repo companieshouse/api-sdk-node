@@ -1,4 +1,6 @@
 import { RequestClient } from "../../../src";
+import { CreatePaymentRequest } from "../../../src/services/payment/types"
+import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 import {
     Address,
     BeneficialOwnerCorporate,
@@ -43,9 +45,8 @@ import {
     RemoveResource,
     ChangeBoRelevantPeriodType,
     TrusteeInvolvedRelevantPeriodType,
-    ChangeBeneficiaryRelevantPeriodType
+    ChangeBeneficiaryRelevantPeriodType,
 } from "../../../src/services/overseas-entities";
-import { mockAddress1 } from "../officer-filing/officer.filing.mock";
 
 export const ADDRESS: Address = {
     property_name_number: "property name 1",
@@ -102,6 +103,13 @@ export const ENTITY_NUMBER_MOCK = "Entity Number";
 export const PRESENTER_OBJECT_MOCK: Presenter = {
     full_name: "Full Name",
     email: "user@domain.roe"
+};
+
+export const PAYMENT_OBJECT_MOCK: CreatePaymentRequest = {
+    resource: "http://api.base-domain/transactions/abc123/payment",
+    state: "9a82902b-5292-4908-9898-14212b7ee1d5",
+    redirectUri: "http://base-domain/service-name/transaction/abc1234/submission/xyz890/payment",
+    reference: "ServiceNameReference_058235-235017-353205"
 };
 
 export enum ENTITY_WHO_IS_REGISTERING {
@@ -537,7 +545,8 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     is_remove: undefined,
     has_sold_land: undefined,
     is_secure_register: undefined,
-    who_is_registering: undefined
+    who_is_registering: undefined,
+    payment: PAYMENT_OBJECT_MOCK
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_OBJECT_MOCK: OverseasEntityExtraDetails = {
@@ -701,7 +710,8 @@ export const OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK: OverseasEntityResource = {
     managing_officers_corporate: MANAGING_OFFICERS_CORPORATE_RESOURCE_MOCK_LIST,
     trusts: TRUSTS_RESOURCE_MOCK,
     update: UPDATE_RESOURCE_MOCK,
-    remove: REMOVE_RESOURCE_MOCK
+    remove: REMOVE_RESOURCE_MOCK,
+    payment: PAYMENT_OBJECT_MOCK
 };
 
 export const OVERSEAS_ENTITY_EXTRA_DETAILS_RESOURCE_MOCK: OverseasEntityExtraDetails = {
