@@ -24,8 +24,8 @@ import Mapping from "../../mapping/mapping";
 export default class OverseasEntityService {
     constructor (private readonly client: IHttpClient) { }
 
-    public async getOverseasEntity (transactionId: string, overseasEntityId: string): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
-        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
+    public async getOverseasEntity (transactionId: string, overseasEntityId: string, forceFetch: boolean = false): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
+        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceFetch ? "?force=true" : "")}`
         const response: HttpResponse = await this.client.httpGet(URL);
 
         if (response.error) {
@@ -84,8 +84,8 @@ export default class OverseasEntityService {
         return resource;
     }
 
-    public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
-        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}`
+    public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
+        const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
 
         const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 

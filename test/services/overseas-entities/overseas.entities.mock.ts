@@ -45,7 +45,7 @@ import {
     RemoveResource,
     ChangeBoRelevantPeriodType,
     TrusteeInvolvedRelevantPeriodType,
-    ChangeBeneficiaryRelevantPeriodType,
+    ChangeBeneficiaryRelevantPeriodType
 } from "../../../src/services/overseas-entities";
 
 export const ADDRESS: Address = {

@@ -1,7 +1,7 @@
 /**
  * Overseas Entity interface used within this SDK
  */
-import { CreatePaymentRequest, CreatePaymentRequestResource } from "../payment";
+import { CreatePaymentRequest } from "../payment";
 
 export interface OverseasEntity {
     entity_name?: string;
