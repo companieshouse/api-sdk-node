@@ -33,7 +33,6 @@ import {
 } from "../../../src/services/overseas-entities";
 
 describe("OverseasEntityService POST Tests suite", () => {
-
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -79,7 +78,6 @@ describe("OverseasEntityService POST Tests suite", () => {
 });
 
 describe("OverseasEntityService PUT Tests suite", () => {
-
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -113,7 +111,6 @@ describe("OverseasEntityService PUT Tests suite", () => {
 });
 
 describe("OverseasEntityService GET Tests suite", () => {
-
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
@@ -210,7 +207,6 @@ describe("OverseasEntityService GET Tests suite", () => {
 });
 
 describe("Mapping OverseasEntity Tests suite", () => {
-
     it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
         const data = mapOverseasEntity({
             entity_name: mockValues.ENTITY_NAME_FIELD_MOCK,
@@ -973,7 +969,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
-
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
@@ -1013,7 +1008,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     describe("OverseasEntityService getTrustsPrivateData Tests suite", () => {
-
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
@@ -1069,7 +1063,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     describe("OverseasEntityService getTrustLinksPrivateData Tests suite", () => {
-
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
@@ -1109,7 +1102,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     describe("OverseasEntityService getIndividualTrusteesPrivateData Tests suite", () => {
-
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
@@ -1151,7 +1143,6 @@ describe("Mapping OverseasEntity Tests suite", () => {
     });
 
     describe("OverseasEntityService getCorporateTrusteesPrivateData Tests suite", () => {
-
         beforeEach(() => {
             sinon.reset();
             sinon.restore();
