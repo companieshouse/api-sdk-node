@@ -130,20 +130,6 @@ export interface Identification {
     countryRegistered?: string
 };
 
-export interface RelevantOfficerResource {
-    name_elements?: NameElementsResource,
-    date_of_birth?: Date,
-    is_employee?: boolean,
-    is_director?: boolean
-}
-
-export interface RelevantOfficer {
-    nameElements?: NameElements,
-    dateOfBirth?: Date,
-    isEmployee?: boolean,
-    isDirector?: boolean
-}
-
 export interface PscVerificationResource {
     created_at: Date,
     updated_at: Date,
@@ -154,7 +140,6 @@ export interface PscVerificationResource {
 export interface PscVerificationDataResource {
     company_number?: string,
     psc_appointment_id?: string,
-    relevant_officer?: RelevantOfficerResource,
     verification_details?: VerificationDetailsResource
 }
 
@@ -167,7 +152,6 @@ export interface PscVerification {
 export interface PscVerificationData {
     companyNumber?: string,
     pscAppointmentId?: string,
-    relevantOfficer?: RelevantOfficer,
     verificationDetails?: VerificationDetails
 }
 
@@ -200,9 +184,6 @@ export enum NameMismatchReasonEnum {
 
 export enum VerificationStatementEnum {
     INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED",
-    RO_IDENTIFIED = "RO_IDENTIFIED",
-    RO_VERIFIED= "RO_VERIFIED",
-    RO_DECLARATION = "RO_DECLARATION"
 }
 export interface ValidationStatusError {
     error: string;
