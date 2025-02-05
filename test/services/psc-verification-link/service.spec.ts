@@ -5,7 +5,7 @@ import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
 import { PlannedMaintenance, PscVerification, ValidationStatusResponse } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, PSC_VERIFICATION_RLE, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, mockPscVerificationPatchRleResponse, mockPscVerificationPatchRleRo, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors } from "./service.mock";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors } from "./service.mock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
@@ -92,19 +92,6 @@ describe("PSC Verification Link", () => {
             expect(response.resource).to.eql(mockPscVerificationPatchInd);
         });
 
-        it("should return a status 200 OK and patched PSC RLE verification filing", async () => {
-            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchRleResponse[200]);
-
-            const response = (await pscService.patchPscVerification(
-                TRANSACTION_ID,
-                FILING_ID,
-                PSC_VERIFICATION_RLE
-            )) as Resource<PscVerification>;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource).to.eql(mockPscVerificationPatchRleRo);
-        });
-
         it("should return a status 401 Unauthorised on unauthorised access", async () => {
             sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[401]);
 
@@ -116,32 +103,6 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
-        });
-
-        it("should return a status 404 Not Found if resource id not found", async () => {
-            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchRleResponse[404]);
-
-            const response = await pscService.patchPscVerification(
-                TRANSACTION_ID,
-                FILING_ID,
-                PSC_VERIFICATION_RLE
-            ) as ApiErrorResponse;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
-            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
-        });
-
-        it("should return a status 415 unsupported media type when the 'content-type' is not 'application/merge-patch+json'", async () => {
-            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchRleResponse[415]);
-
-            const response = await pscService.patchPscVerification(
-                TRANSACTION_ID,
-                FILING_ID,
-                PSC_VERIFICATION_RLE
-            ) as ApiErrorResponse;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.UNSUPPORTED_MEDIA_TYPE);
-            expect(response.errors?.[0]).to.equal(ReasonPhrases.UNSUPPORTED_MEDIA_TYPE);
         });
     });
 

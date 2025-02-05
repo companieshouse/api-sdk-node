@@ -71,13 +71,6 @@ export const PSC_VERIFICATION_INDV_PATCH: PscVerificationDataResource = {
     psc_appointment_id: PSC_ID
 };
 
-export const PSC_VERIFICATION_RO_PATCH: PscVerificationDataResource = {
-    psc_appointment_id: PSC_ID,
-    relevant_officer: {
-        name_elements: NAME_ELEMENTS
-    }
-};
-
 export const mockPscVerificationCreatedResponse = {
     201: { status: StatusCodes.CREATED, body: mockPscVerificationCreatedResource },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
