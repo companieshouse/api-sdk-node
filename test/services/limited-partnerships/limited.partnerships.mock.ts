@@ -19,7 +19,16 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
         name_ending: NameEndingType.LIMITED_PARTNERSHIP,
         partnership_type: PartnershipType.LP,
         email: "test@email.com",
-        jurisdiction: Jurisdiction.ENGLAND_AND_WALES
+        jurisdiction: Jurisdiction.ENGLAND_AND_WALES,
+        registered_office_address: {
+            premises: "22",
+            address_line_1: "Some Street",
+            address_line_2: "Some Line 2",
+            locality: "Some Locality",
+            region: "Some Region",
+            country: "Some Country",
+            postal_code: "SC12 1WE"
+        }
     }
 };
 

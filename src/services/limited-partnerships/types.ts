@@ -12,6 +12,7 @@ export interface LimitedPartnership {
         partnership_type?: PartnershipType;
         email?: string;
         jurisdiction?: Jurisdiction;
+        registered_office_address?: Address;
     }
 }
 
@@ -54,3 +55,13 @@ export interface LimitedPartnershipIncorporation {
         partnership: LimitedPartnership
     }
 }
+
+export type Address = {
+    address_line_1: string;
+    address_line_2?: string;
+    country: string;
+    locality: string;
+    postal_code: string;
+    premises: string;
+    region?: string;
+  };
