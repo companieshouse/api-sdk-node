@@ -3,6 +3,17 @@ import { expect } from "chai";
 import sinon from "sinon";
 
 import * as mockValues from "./overseas.entities.mock";
+import Mapping from "../../../src/mapping/mapping";
+import { ENTITY_WHO_IS_REGISTERING, PAYMENT_OBJECT_MOCK } from "./overseas.entities.mock";
+
+import Resource, { ApiErrorResponse } from "../../../src/services/resource";
+
+import {
+    mapOverseasEntity,
+    mapOverseasEntityResource,
+    mapOverseasEntityExtraDetails
+} from "../../../src/services/overseas-entities/mapping";
+
 import {
     BeneficialOwnersStatementType,
     OverseasEntityCreated,
@@ -20,10 +31,6 @@ import {
     TrustCorporate,
     TrustCorporateResource
 } from "../../../src/services/overseas-entities";
-import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { mapOverseasEntity, mapOverseasEntityResource, mapOverseasEntityExtraDetails } from "../../../src/services/overseas-entities/mapping";
-import Mapping from "../../../src/mapping/mapping";
-import { ENTITY_WHO_IS_REGISTERING } from "./overseas.entities.mock";
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
@@ -220,7 +227,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: "0",
             is_secure_register: "0",
-            who_is_registering: "agent"
+            who_is_registering: "agent",
+            payment: mockValues.PAYMENT_OBJECT_MOCK
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.entity_name);
@@ -243,6 +251,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_secure_register).to.deep.equal(false);
         expect(data.who_is_registering).to.deep.equal(ENTITY_WHO_IS_REGISTERING.AGENT);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
+        expect(data.payment).to.deep.equal(mockValues.PAYMENT_OBJECT_MOCK);
     });
 
     it("should return OverseasEntityResource object from mapOverseasEntity method", async () => {
@@ -310,7 +319,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
         expect(data.entity_name).to.deep.equal(null);
         expect(data.entity_number).to.deep.equal(null);
@@ -331,6 +341,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
@@ -354,7 +365,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: true,
             is_secure_register: true,
-            who_is_registering: ENTITY_WHO_IS_REGISTERING.AGENT
+            who_is_registering: ENTITY_WHO_IS_REGISTERING.AGENT,
+            payment: OE_RESOURCE.payment
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -377,6 +389,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal("1");
         expect(data.is_secure_register).to.deep.equal("1");
         expect(data.who_is_registering).to.deep.equal("agent");
+        expect(data.payment).to.deep.equal(mockValues.PAYMENT_OBJECT_MOCK);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method", async () => {
@@ -443,7 +456,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.entity_name).to.deep.equal(mockValues.ENTITY_NAME_FIELD_MOCK);
@@ -462,7 +476,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
-        expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just entity number data", async () => {
@@ -483,7 +497,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -503,6 +518,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Presenter data", async () => {
@@ -522,7 +538,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -541,6 +558,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Update data", async () => {
@@ -562,7 +580,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -583,6 +602,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with just Remove data", async () => {
@@ -604,7 +624,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.entity_name).to.deep.equal(null);
@@ -625,6 +646,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
+        expect(data.payment).to.deep.equal(null);
     });
 
     it("should return OverseasEntity object from mapOverseasEntityResource method with mapped Update dates", async () => {
@@ -646,7 +668,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.update).to.deep.equal(mockValues.UPDATE_OBJECT_MOCK);
@@ -676,7 +699,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.update?.filing_date).to.undefined;
@@ -706,7 +730,8 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
-            who_is_registering: undefined
+            who_is_registering: undefined,
+            payment: undefined
         });
 
         expect(data.update?.date_of_creation).to.undefined;
