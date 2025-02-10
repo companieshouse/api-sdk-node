@@ -9,7 +9,8 @@ import {
     LimitedPartnershipsService,
     LimitedPartnershipIncorporation,
     NameEndingType,
-    Jurisdiction
+    Jurisdiction,
+    Term
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -39,9 +40,7 @@ describe("LimitedPartnershipsService", () => {
                     data: {
                         partnership_name: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_name,
                         name_ending: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.name_ending,
-                        partnership_type: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_type,
-                        jurisdiction: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.jurisdiction,
-                        registered_office_address: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.registered_office_address
+                        partnership_type: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_type
                     }
                 }
             )) as Resource<LimitedPartnershipResourceCreated>;
@@ -54,17 +53,7 @@ describe("LimitedPartnershipsService", () => {
                         data: {
                             partnership_name: "Legalised Asset Stashing",
                             name_ending: "Limited Partnership",
-                            partnership_type: "LP",
-                            jurisdiction: Jurisdiction.ENGLAND_AND_WALES,
-                            registered_office_address: {
-                                premises: "22",
-                                address_line_1: "Some Street",
-                                address_line_2: "Some Line 2",
-                                locality: "Some Locality",
-                                region: "Some Region",
-                                country: "Some Country",
-                                postal_code: "SC12 1WE"
-                            }
+                            partnership_type: "LP"
                         }
                     }
                 )
@@ -141,7 +130,10 @@ describe("LimitedPartnershipsService", () => {
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
                 {
-                    email: "test@email.com"
+                    email: "test@email.com",
+                    jurisdiction: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.jurisdiction,
+                    registered_office_address: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.registered_office_address,
+                    term: Term.BY_AGREEMENT
                 }
             );
 
@@ -150,7 +142,18 @@ describe("LimitedPartnershipsService", () => {
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
                     {
-                        email: "test@email.com"
+                        email: "test@email.com",
+                        jurisdiction: Jurisdiction.ENGLAND_AND_WALES,
+                        registered_office_address: {
+                            premises: "22",
+                            address_line_1: "Some Street",
+                            address_line_2: "Some Line 2",
+                            locality: "Some Locality",
+                            region: "Some Region",
+                            country: "Some Country",
+                            postal_code: "SC12 1WE"
+                        },
+                        term: Term.BY_AGREEMENT
                     }
                 )
             ).to.be.true;

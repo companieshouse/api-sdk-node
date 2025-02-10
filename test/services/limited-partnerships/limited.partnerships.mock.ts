@@ -5,7 +5,8 @@ import {
     LimitedPartnershipIncorporation,
     NameEndingType,
     PartnershipType,
-    Jurisdiction
+    Jurisdiction,
+    Term
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -28,7 +29,8 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
             region: "Some Region",
             country: "Some Country",
             postal_code: "SC12 1WE"
-        }
+        },
+        term: Term.BY_AGREEMENT
     }
 };
 
