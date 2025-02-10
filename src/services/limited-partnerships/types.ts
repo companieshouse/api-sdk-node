@@ -13,7 +13,7 @@ export interface LimitedPartnership {
         email?: string;
         jurisdiction?: Jurisdiction;
         registered_office_address?: Address;
-        term: Term;
+        term?: Term;
     };
 }
 
