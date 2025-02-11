@@ -8,9 +8,7 @@ import {
     LimitedPartnershipResourceCreated,
     LimitedPartnershipsService,
     LimitedPartnershipIncorporation,
-    NameEndingType,
-    Jurisdiction,
-    Term
+    NameEndingType
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -129,32 +127,14 @@ describe("LimitedPartnershipsService", () => {
             const response = await service.patchLimitedPartnership(
                 mockValues.TRANSACTION_ID,
                 mockValues.SUBMISSION_ID,
-                {
-                    email: "test@email.com",
-                    jurisdiction: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.jurisdiction,
-                    registered_office_address: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.registered_office_address,
-                    term: Term.BY_AGREEMENT
-                }
+                mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data
             );
 
             expect(mockRequest).to.have.been.calledOnce;
             expect(
                 mockRequest.calledWith(
                     "/transactions/12345/limited-partnership/partnership/09876",
-                    {
-                        email: "test@email.com",
-                        jurisdiction: Jurisdiction.ENGLAND_AND_WALES,
-                        registered_office_address: {
-                            premises: "22",
-                            address_line_1: "Some Street",
-                            address_line_2: "Some Line 2",
-                            locality: "Some Locality",
-                            region: "Some Region",
-                            country: "Some Country",
-                            postal_code: "SC12 1WE"
-                        },
-                        term: Term.BY_AGREEMENT
-                    }
+                    mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data
                 )
             ).to.be.true;
             expect(response.httpStatusCode).to.equal(200);
