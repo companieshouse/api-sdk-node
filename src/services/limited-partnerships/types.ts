@@ -13,7 +13,8 @@ export interface LimitedPartnership {
         email?: string;
         jurisdiction?: Jurisdiction;
         registered_office_address?: Address;
-    }
+        term?: Term;
+    };
 }
 
 /**
@@ -21,7 +22,7 @@ export interface LimitedPartnership {
  * successfully been created.
  */
 export interface LimitedPartnershipResourceCreated {
-    id: string
+    id: string;
 }
 
 export enum NameEndingType {
@@ -30,30 +31,30 @@ export enum NameEndingType {
     L_DOT_P_DOT = "L.P.",
     PARTNERIAETH_CYFYNGEDIG = "Partneriaeth Cyfyngedig",
     PC = "PC",
-    P_DOT_C_DOT = "P.C."
+    P_DOT_C_DOT = "P.C.",
 }
 
 export enum PartnershipType {
     LP = "LP",
     PFLP = "PFLP",
     SLP = "SLP",
-    SPFLP = "SPFLP"
+    SPFLP = "SPFLP",
 }
 
 export enum Jurisdiction {
     ENGLAND_AND_WALES = "England and Wales",
     NORTHERN_IRELAND = "Northern Ireland",
-    SCOTLAND = "Scotland"
+    SCOTLAND = "Scotland",
 }
 
 export interface LimitedPartnershipIncorporation {
-    etag: string,
-    kind: string,
+    etag: string;
+    kind: string;
     sub_resources?: {
-        general_partners: any[],
-        limited_partners: any[],
-        partnership: LimitedPartnership
-    }
+        general_partners: any[];
+        limited_partners: any[];
+        partnership: LimitedPartnership;
+    };
 }
 
 export type Address = {
@@ -64,4 +65,10 @@ export type Address = {
     postal_code: string;
     premises: string;
     region?: string;
-  };
+};
+
+export enum Term {
+    BY_AGREEMENT = "BY_AGREEMENT",
+    UNTIL_DISSOLUTION = "UNTIL_DISSOLUTION",
+    NONE = "NONE",
+}
