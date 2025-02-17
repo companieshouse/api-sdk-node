@@ -30,6 +30,15 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
             country: "Some Country",
             postal_code: "SC12 1WE"
         },
+        principal_place_of_business_address: {
+            premises: "23",
+            address_line_1: "Some Other Street",
+            address_line_2: "Some Other Line 2",
+            locality: "Some Other Locality",
+            region: "Some Other Region",
+            country: "Some Country",
+            postal_code: "SC13 1WE"
+        },
         term: Term.BY_AGREEMENT
     }
 };
