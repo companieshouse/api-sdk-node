@@ -44,6 +44,7 @@ export interface AcspData {
     businessName?: string;
     workSector?: string;
     amlSupervisoryBodies?: AmlSupervisoryBody[];
+    removedAmlSupervisoryBodies?: AmlSupervisoryBody[];
     companyDetails?: Company;
     companyAuthCodeProvided?: boolean;
     howAreYouRegisteredWithAml?: string;
@@ -65,6 +66,7 @@ export interface AcspDataDto {
     business_name?: string;
     work_sector?: string;
     aml_supervisory_bodies?: AmlSupervisoryBodyDto[];
+    removed_aml_supervisory_bodies?: AmlSupervisoryBodyDto[];
     company_details?: CompanyDto;
     company_auth_code_provided?: boolean;
     how_are_you_registered_with_aml?: string;
