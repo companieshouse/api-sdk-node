@@ -50,6 +50,7 @@ export interface AcspData {
     howAreYouRegisteredWithAml?: string;
     applicantDetails?: ApplicantDetails;
     acspType?: string;
+    acspId?: string;
 }
 
 export interface AcspResponse {
@@ -72,6 +73,7 @@ export interface AcspDataDto {
     how_are_you_registered_with_aml?: string;
     applicant_details?: ApplicantDetailsDto;
     acsp_type?: string;
+    acsp_id?: string;
 }
 
 export interface ApplicantDetailsDto {
