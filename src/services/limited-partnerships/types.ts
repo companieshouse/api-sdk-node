@@ -57,7 +57,7 @@ export interface GeneralPartner {
  * The data structure returned by the API when a new Limited Partnership resource has
  * successfully been created.
  */
-export interface ResourceCreated {
+export interface LimitedPartnershipResourceCreated {
     id: string;
 }
 

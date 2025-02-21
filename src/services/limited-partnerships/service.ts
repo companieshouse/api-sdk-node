@@ -1,5 +1,5 @@
 import { HttpResponse, IHttpClient } from "../../http";
-import { LimitedPartnership, ResourceCreated, LimitedPartnershipIncorporation, GeneralPartner } from "./types";
+import { LimitedPartnership, LimitedPartnershipResourceCreated, LimitedPartnershipIncorporation, GeneralPartner } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
 export default class LimitedPartnershipsService {
@@ -8,7 +8,7 @@ export default class LimitedPartnershipsService {
     public async postLimitedPartnership (
         transactionId: string,
         body: LimitedPartnership
-    ): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
+    ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
@@ -50,7 +50,7 @@ export default class LimitedPartnershipsService {
      */
 
     public async postLimitedPartnershipIncorporation (
-        transactionId: string): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
+        transactionId: string): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
         const response: HttpResponse = await this.client.httpPost(URL);
 
@@ -81,7 +81,7 @@ export default class LimitedPartnershipsService {
 
     public async postGeneralPartner (
         transactionId: string,
-        body: GeneralPartner): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
+        body: GeneralPartner): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/general-partner`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 

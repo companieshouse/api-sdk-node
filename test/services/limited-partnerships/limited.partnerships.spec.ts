@@ -5,7 +5,7 @@ import sinon from "sinon";
 import * as mockValues from "./limited.partnerships.mock";
 import {
     LimitedPartnership,
-    ResourceCreated,
+    LimitedPartnershipResourceCreated,
     LimitedPartnershipsService,
     LimitedPartnershipIncorporation,
     NameEndingType
@@ -42,7 +42,7 @@ describe("LimitedPartnershipsService", () => {
                             partnership_type: mockValues.LIMITED_PARTNERSHIP_OBJECT_MOCK.data?.partnership_type
                         }
                     }
-                )) as Resource<ResourceCreated>;
+                )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
@@ -60,7 +60,7 @@ describe("LimitedPartnershipsService", () => {
 
                 expect(response.httpStatusCode).to.equal(201);
                 expect(response.resource?.id).to.equal(
-                    mockValues.mockCreatedResource.id
+                    mockValues.mockLimitedPartnershipCreatedResource.id
                 );
             });
 
@@ -260,7 +260,7 @@ describe("LimitedPartnershipsService", () => {
                 );
                 const response = (await service.postLimitedPartnershipIncorporation(
                     mockValues.TRANSACTION_ID
-                )) as Resource<ResourceCreated>;
+                )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
@@ -270,7 +270,7 @@ describe("LimitedPartnershipsService", () => {
                 ).to.be.true;
                 expect(response.httpStatusCode).to.equal(201);
                 expect(response.resource?.id).to.equal(
-                    mockValues.mockCreatedResource.id
+                    mockValues.mockLimitedPartnershipCreatedResource.id
                 );
             });
 
@@ -458,7 +458,7 @@ describe("LimitedPartnershipsService", () => {
                 const response = (await service.postGeneralPartner(
                     mockValues.TRANSACTION_ID,
                     mockValues.GENERAL_PARTNER_OBJECT_MOCK
-                )) as Resource<ResourceCreated>;
+                )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
@@ -470,7 +470,7 @@ describe("LimitedPartnershipsService", () => {
 
                 expect(response.httpStatusCode).to.equal(201);
                 expect(response.resource?.id).to.equal(
-                    mockValues.mockCreatedResource.id
+                    mockValues.mockLimitedPartnershipCreatedResource.id
                 );
             });
 
@@ -484,7 +484,7 @@ describe("LimitedPartnershipsService", () => {
                 const response = (await service.postGeneralPartner(
                     mockValues.TRANSACTION_ID,
                     {}
-                )) as Resource<ResourceCreated>;
+                )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
