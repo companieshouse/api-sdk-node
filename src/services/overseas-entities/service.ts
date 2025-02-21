@@ -89,8 +89,8 @@ export default class OverseasEntityService {
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
 
-        console.log("DDDDDDDDDDD3 getOverseasEntity forceFetch: "+forceUpdate);
-        console.log("DDDDDDDDDDD4 getOverseasEntity URL: "+URL);
+        console.log("DDDDDDDDDDD3 getOverseasEntity forceFetch: " + forceUpdate);
+        console.log("DDDDDDDDDDD4 getOverseasEntity URL: " + URL);
         const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 
         if (resp.error) {
