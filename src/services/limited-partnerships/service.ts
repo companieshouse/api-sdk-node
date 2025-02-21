@@ -1,5 +1,5 @@
 import { HttpResponse, IHttpClient } from "../../http";
-import { LimitedPartnership, LimitedPartnershipResourceCreated, LimitedPartnershipIncorporation } from "./types";
+import { LimitedPartnership, ResourceCreated, LimitedPartnershipIncorporation, GeneralPartner } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
 export default class LimitedPartnershipsService {
@@ -8,7 +8,7 @@ export default class LimitedPartnershipsService {
     public async postLimitedPartnership (
         transactionId: string,
         body: LimitedPartnership
-    ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
+    ): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
@@ -50,7 +50,7 @@ export default class LimitedPartnershipsService {
      */
 
     public async postLimitedPartnershipIncorporation (
-        transactionId: string): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
+        transactionId: string): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
         const response: HttpResponse = await this.client.httpPost(URL);
 
@@ -68,6 +68,22 @@ export default class LimitedPartnershipsService {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership/${filingResourceId}${subResourcesQuery}`;
 
         const response: HttpResponse = await this.client.httpGet(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    /*
+     * Calls to general partner endpoints
+     */
+
+    public async postGeneralPartner (
+        transactionId: string,
+        body: GeneralPartner): Promise<Resource<ResourceCreated> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/general-partner`;
+        const response: HttpResponse = await this.client.httpPost(URL, body);
 
         return {
             httpStatusCode: response.status,

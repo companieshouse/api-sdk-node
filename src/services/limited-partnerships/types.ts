@@ -18,11 +18,46 @@ export interface LimitedPartnership {
     };
 }
 
+export interface GeneralPartner {
+    data?: {
+        country?: string,
+        date_effective_from?: string,
+        date_of_birth?: string,
+        etag?: string,
+        forename?: string,
+        former_names?: string,
+        governing_law?: string,
+        internal_id?: string,
+        kind?: string,
+        legal_entity_register_name?: string,
+        legal_entity_registration_location?: string,
+        legal_form?: string,
+        nationality1?: string,
+        nationality2?: string,
+        not_disqualified_statement_checked?: boolean,
+        principal_office_address?: Address & {
+            care_of?: string,
+            po_box?: string
+        },
+        registered_company_number?: string,
+        resignation_date?: string,
+        service_address?: Address & {
+            care_of?: string,
+            po_box?: string,
+        },
+        surname?: string,
+        usual_residential_address?: Address & {
+            care_of?: string,
+            po_box?: string,
+        }
+    }
+}
+
 /**
  * The data structure returned by the API when a new Limited Partnership resource has
  * successfully been created.
  */
-export interface LimitedPartnershipResourceCreated {
+export interface ResourceCreated {
     id: string;
 }
 
