@@ -68,9 +68,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
             locality: "Some Locality",
             region: "Some Region",
             country: "Some Country",
-            postal_code: "SC12 1WE",
-            care_of: "",
-            po_box: ""
+            postal_code: "SC12 1WE"
         },
         registered_company_number: "223456",
         resignation_date: "",
@@ -81,9 +79,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
             locality: "This Locality",
             region: "This Region",
             country: "This Country",
-            postal_code: "SC45 1XF",
-            care_of: "",
-            po_box: ""
+            postal_code: "SC45 1XF"
         },
         surname: "Doe",
         usual_residential_address: {
@@ -93,9 +89,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
             locality: "That Locality",
             region: "That Region",
             country: "That Country",
-            postal_code: "SC15 1N2",
-            care_of: "",
-            po_box: ""
+            postal_code: "SC15 1N2"
         }
     }
 }
