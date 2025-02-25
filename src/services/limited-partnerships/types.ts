@@ -35,21 +35,12 @@ export interface GeneralPartner {
         nationality1?: string,
         nationality2?: string,
         not_disqualified_statement_checked?: boolean,
-        principal_office_address?: Address & {
-            care_of?: string,
-            po_box?: string
-        },
+        principal_office_address?: Address,
         registered_company_number?: string,
         resignation_date?: string,
-        service_address?: Address & {
-            care_of?: string,
-            po_box?: string,
-        },
+        service_address?: Address,
         surname?: string,
-        usual_residential_address?: Address & {
-            care_of?: string,
-            po_box?: string,
-        }
+        usual_residential_address?: Address
     }
 }
 
