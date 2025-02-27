@@ -27,7 +27,6 @@ export interface GeneralPartner {
         forename?: string,
         former_names?: string,
         governing_law?: string,
-        internal_id?: string,
         kind?: string,
         legal_entity_register_name?: string,
         legal_entity_registration_location?: string,

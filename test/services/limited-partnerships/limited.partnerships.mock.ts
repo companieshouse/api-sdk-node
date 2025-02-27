@@ -53,7 +53,6 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         forename: "John",
         former_names: "Mary",
         governing_law: "British Government",
-        internal_id: "123456",
         kind: "",
         legal_entity_register_name: "Entity Name",
         legal_entity_registration_location: "UK",
