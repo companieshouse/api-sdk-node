@@ -56,10 +56,11 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         kind: "",
         legal_entity_register_name: "Entity Name",
         legal_entity_registration_location: "UK",
-        legal_form: "",
+        legal_form: "abc",
         nationality1: "English",
         nationality2: "French",
         not_disqualified_statement_checked: true,
+        legal_personality_statement_checked: true,
         principal_office_address: {
             premises: "22",
             address_line_1: "Some Street",
