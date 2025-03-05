@@ -20,7 +20,6 @@ export interface LimitedPartnership {
 
 export interface GeneralPartner {
     data?: {
-        country?: string,
         date_effective_from?: string,
         date_of_birth?: string,
         etag?: string,
