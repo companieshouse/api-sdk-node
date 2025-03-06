@@ -6,13 +6,13 @@ import { PersonWithSignificantControlResource } from "../../../src/services/psc/
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
 export const COMPANY_NUMBER = "12345678";
-export const PSC_ID = "67edfE436y35hetsie6zuAZtr"
+export const PSC_NOTIFICATION_ID = "67edfE436y35hetsie6zuAZtr"
 export const TRANSACTION_ID = "12345";
 export const FILING_ID = "00112233";
 export const FIRST_DATE = new Date("2024-03-13T10:08:42Z");
 export const UPDATE_DATE = new Date("2024-04-13T10:08:42Z");
 export const DOB_DATE = new Date("1970-01-01");
-export const SELF_LINK = `/company/${COMPANY_NUMBER}/persons-with-significant-control/individual/${PSC_ID}`;
+export const SELF_LINK = `/company/${COMPANY_NUMBER}/persons-with-significant-control/individual/${PSC_NOTIFICATION_ID}`;
 export const KIND_INDIVIDUAL = "individual-person-with-significant-control";
 export const NATURE_OF_CONTROL = ["ownership-of-shares-75-to-100-percent", "voting-rights-75-to-100-percent-as-trust"]
 export const NAME = "Sir Forename Middlename Surname";
@@ -68,7 +68,7 @@ export const mockPscVerificationCreatedResource: PscVerificationResource = {
 };
 
 export const PSC_VERIFICATION_INDV_PATCH: PscVerificationDataResource = {
-    psc_appointment_id: PSC_ID
+    psc_notification_id: PSC_NOTIFICATION_ID
 };
 
 export const mockPscVerificationCreatedResponse = {

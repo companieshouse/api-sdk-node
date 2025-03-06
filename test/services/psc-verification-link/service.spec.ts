@@ -5,7 +5,7 @@ import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
 import { PlannedMaintenance, PscVerification, ValidationStatusResponse } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_VERIFICATION_ID, PSC_VERIFICATION_IND, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors } from "./service.mock";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_NOTIFICATION_ID, PSC_VERIFICATION_IND, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors } from "./service.mock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
@@ -50,7 +50,7 @@ describe("PSC Verification Link", () => {
 
             const response = (await pscService.getPscVerification(
                 TRANSACTION_ID,
-                PSC_VERIFICATION_ID
+                PSC_NOTIFICATION_ID
             )) as Resource<PscVerification>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
@@ -60,7 +60,7 @@ describe("PSC Verification Link", () => {
         it("should return status 401 Unauthorised on unauthorised access", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[401]);
 
-            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
@@ -69,7 +69,7 @@ describe("PSC Verification Link", () => {
         it("should return status 404 Not Found if resource id not found", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[404]);
 
-            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
@@ -112,7 +112,7 @@ describe("PSC Verification Link", () => {
 
             const response = (await pscService.getValidationStatus(
                 TRANSACTION_ID,
-                PSC_VERIFICATION_ID
+                PSC_NOTIFICATION_ID
             )) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
@@ -126,7 +126,7 @@ describe("PSC Verification Link", () => {
 
             const response = (await pscService.getValidationStatus(
                 TRANSACTION_ID,
-                PSC_VERIFICATION_ID
+                PSC_NOTIFICATION_ID
             )) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
@@ -138,7 +138,7 @@ describe("PSC Verification Link", () => {
         it("should return status 401 Unauthorised on unauthorised access", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[401]);
 
-            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
@@ -147,7 +147,7 @@ describe("PSC Verification Link", () => {
         it("should return status 404 Not Found if resource is not found", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[404]);
 
-            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
@@ -156,7 +156,7 @@ describe("PSC Verification Link", () => {
         it("should return status 500 Internal Server Error if a server error occurs", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
 
-            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
@@ -187,7 +187,7 @@ describe("PSC Verification Link", () => {
         it("should return status 500 Internal Server Error if a server error occurs", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
 
-            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_VERIFICATION_ID) as ApiErrorResponse;
+            const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);

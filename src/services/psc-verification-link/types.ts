@@ -139,7 +139,7 @@ export interface PscVerificationResource {
 
 export interface PscVerificationDataResource {
     company_number?: string,
-    psc_appointment_id?: string,
+    psc_notification_id?: string,
     verification_details?: VerificationDetailsResource
 }
 
@@ -151,7 +151,7 @@ export interface PscVerification {
 }
 export interface PscVerificationData {
     companyNumber?: string,
-    pscAppointmentId?: string,
+    pscNotificationId?: string,
     verificationDetails?: VerificationDetails
 }
 
