@@ -20,7 +20,6 @@ export interface LimitedPartnership {
 
 export interface GeneralPartner {
     data?: {
-        country?: string,
         date_effective_from?: string,
         date_of_birth?: string,
         etag?: string,
@@ -28,12 +27,14 @@ export interface GeneralPartner {
         former_names?: string,
         governing_law?: string,
         kind?: string,
+        legal_entity_name?: string,
         legal_entity_register_name?: string,
         legal_entity_registration_location?: string,
         legal_form?: string,
         nationality1?: string,
         nationality2?: string,
         not_disqualified_statement_checked?: boolean,
+        legal_personality_statement_checked?: boolean,
         principal_office_address?: Address,
         registered_company_number?: string,
         resignation_date?: string,

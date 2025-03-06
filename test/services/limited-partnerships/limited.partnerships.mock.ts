@@ -46,7 +46,6 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
 
 export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
     data: {
-        country: "England",
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
         etag: "",
@@ -54,12 +53,14 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         former_names: "Mary",
         governing_law: "British Government",
         kind: "",
-        legal_entity_register_name: "Entity Name",
-        legal_entity_registration_location: "UK",
-        legal_form: "",
+        legal_entity_name: "My company ltd",
+        legal_entity_register_name: "UK Register",
+        legal_entity_registration_location: "England",
+        legal_form: "abc",
         nationality1: "English",
         nationality2: "French",
         not_disqualified_statement_checked: true,
+        legal_personality_statement_checked: true,
         principal_office_address: {
             premises: "22",
             address_line_1: "Some Street",

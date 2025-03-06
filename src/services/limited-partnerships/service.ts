@@ -64,7 +64,7 @@ export default class LimitedPartnershipsService {
         transactionId: string,
         filingResourceId: string,
         includeSubResources?: boolean): Promise<Resource<LimitedPartnershipIncorporation> | ApiErrorResponse> {
-        const subResourcesQuery :string = (includeSubResources ? ("?include_sub_resources=" + includeSubResources) : "");
+        const subResourcesQuery: string = (includeSubResources ? ("?include_sub_resources=" + includeSubResources) : "");
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership/${filingResourceId}${subResourcesQuery}`;
 
         const response: HttpResponse = await this.client.httpGet(URL);
