@@ -5,7 +5,7 @@ import { NameMismatchReasonEnum, PlannedMaintenance, PscVerification, PscVerific
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
 export const COMPANY_NUMBER = "12345678";
-export const PSC_VERIFICATION_ID = "662a0de6a2c6f9aead0f32ab"
+export const PSC_NOTIFICATION_ID = "662a0de6a2c6f9aead0f32ab"
 export const TRANSACTION_ID = "12345";
 export const FILING_ID = "00112233";
 export const FIRST_DATE = new Date("2024-03-13T10:08:42Z");
@@ -19,7 +19,7 @@ export const PSC_VERIFICATION_CREATED: PscVerificationData = {
 
 export const PSC_VERIFICATION_IND: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
-    pscAppointmentId: PSC_VERIFICATION_ID,
+    pscNotificationId: PSC_NOTIFICATION_ID,
     verificationDetails: {
         nameMismatchReason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
         verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
@@ -55,7 +55,7 @@ export const mockPscVerificationCreatedResource: PscVerificationResource = {
 };
 
 const PSC_VERIFICATION_INDV_PATCH: PscVerificationDataResource = {
-    psc_appointment_id: PSC_VERIFICATION_ID
+    psc_notification_id: PSC_NOTIFICATION_ID
 };
 
 export const mockPscVerificationPatchedResource: PscVerificationResource = {
@@ -79,7 +79,7 @@ export const mockPscVerificationPatchIndResource: PscVerificationResource = {
 };
 
 const PSC_VERIFICATION_INDV_PATCH_CAMEL: PscVerificationData = {
-    pscAppointmentId: PSC_VERIFICATION_ID
+    pscNotificationId: PSC_NOTIFICATION_ID
 };
 
 export const mockPscVerificationPatchInd: PscVerification = {
@@ -100,7 +100,7 @@ export const mockPscVerificationCreatedResponse = {
 
 const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER,
-    psc_appointment_id: PSC_VERIFICATION_ID,
+    psc_notification_id: PSC_NOTIFICATION_ID,
     verification_details: {
         name_mismatch_reason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
         verification_statements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
@@ -109,7 +109,7 @@ const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
 
 export const PSC_VERIFICATION_IND_CAMEL: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
-    pscAppointmentId: PSC_VERIFICATION_ID,
+    pscNotificationId: PSC_NOTIFICATION_ID,
     verificationDetails: {
         nameMismatchReason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
         verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
