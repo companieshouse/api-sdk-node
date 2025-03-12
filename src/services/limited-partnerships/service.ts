@@ -19,7 +19,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -33,7 +33,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -46,7 +46,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -62,7 +62,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -80,7 +80,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -97,7 +97,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 
@@ -110,7 +110,7 @@ export default class LimitedPartnershipsService {
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body },
+            resource: { ...response.body }
         };
     }
 }
