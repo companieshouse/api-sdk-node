@@ -261,7 +261,8 @@ describe("LimitedPartnershipsService", () => {
                     mockValues.requestClient
                 );
                 const response = (await service.postLimitedPartnershipIncorporation(
-                    mockValues.TRANSACTION_ID
+                    mockValues.TRANSACTION_ID,
+                    mockValues.INCORPORATION_OBJECT_MOCK
                 )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
@@ -285,7 +286,8 @@ describe("LimitedPartnershipsService", () => {
                     mockValues.requestClient
                 );
                 const response = (await service.postLimitedPartnershipIncorporation(
-                    mockValues.TRANSACTION_ID
+                    mockValues.TRANSACTION_ID,
+                    mockValues.INCORPORATION_OBJECT_MOCK
                 )) as Resource<any>;
 
                 expect(mockRequest).to.have.been.calledOnce;
@@ -308,7 +310,8 @@ describe("LimitedPartnershipsService", () => {
                     mockValues.requestClient
                 );
                 const response = (await service.postLimitedPartnershipIncorporation(
-                    mockValues.TRANSACTION_ID
+                    mockValues.TRANSACTION_ID,
+                    mockValues.INCORPORATION_OBJECT_MOCK
                 )) as Resource<any>;
 
                 expect(mockRequest).to.have.been.calledOnce;

@@ -3,6 +3,16 @@
  */
 
 /**
+ * The data model used by the web and API for an Incorporation journey.
+ * It could be a registration or a transition, determined by the 'kind'.
+ */
+export interface Incorporation {
+  data?: {
+      kind: IncorporationKind;
+  };
+}
+
+/**
  * The data model used by the web and API for a Limited Partnership.
  */
 export interface LimitedPartnership {
@@ -50,6 +60,11 @@ export interface GeneralPartner {
  */
 export interface LimitedPartnershipResourceCreated {
     id: string;
+}
+
+export enum IncorporationKind {
+  REGISTRATION = "limited-partnership-registration",
+  TRANSITION = "limited-partnership-transition"
 }
 
 export enum NameEndingType {

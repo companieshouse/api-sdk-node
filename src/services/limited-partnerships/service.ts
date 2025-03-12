@@ -1,5 +1,6 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import {
+    Incorporation,
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
@@ -55,10 +56,11 @@ export default class LimitedPartnershipsService {
      */
 
     public async postLimitedPartnershipIncorporation (
-        transactionId: string
+        transactionId: string,
+        body: Incorporation
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
-        const response: HttpResponse = await this.client.httpPost(URL);
+        const response: HttpResponse = await this.client.httpPost(URL, body);
 
         return {
             httpStatusCode: response.status,
