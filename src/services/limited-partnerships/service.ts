@@ -71,8 +71,11 @@ export default class LimitedPartnershipsService {
     public async getLimitedPartnershipIncorporation (
         transactionId: string,
         filingResourceId: string,
-        includeSubResources?: boolean): Promise<Resource<LimitedPartnershipIncorporation> | ApiErrorResponse> {
-        const subResourcesQuery: string = (includeSubResources ? ("?include_sub_resources=" + includeSubResources) : "");
+        includeSubResources?: boolean
+    ): Promise<Resource<LimitedPartnershipIncorporation> | ApiErrorResponse> {
+        const subResourcesQuery: string = includeSubResources
+            ? "?include_sub_resources=" + includeSubResources
+            : "";
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership/${filingResourceId}${subResourcesQuery}`;
 
         const response: HttpResponse = await this.client.httpGet(URL);
@@ -89,9 +92,23 @@ export default class LimitedPartnershipsService {
 
     public async postGeneralPartner (
         transactionId: string,
-        body: GeneralPartner): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
+        body: GeneralPartner
+    ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/general-partner`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getGeneralPartner (
+        transactionId: string,
+        generalPartnerId: string
+    ): Promise<Resource<GeneralPartner> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
             httpStatusCode: response.status,
