@@ -103,9 +103,9 @@ export default class LimitedPartnershipsService {
 
     public async getGeneralPartner (
         transactionId: string,
-        submissionId: string
+        generalPartnerId: string
     ): Promise<Resource<GeneralPartner> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${submissionId}`;
+        const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
