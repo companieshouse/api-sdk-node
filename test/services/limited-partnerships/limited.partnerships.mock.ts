@@ -1,5 +1,7 @@
 import { RequestClient } from "../../../src";
 import {
+    Incorporation,
+    IncorporationKind,
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
@@ -93,6 +95,15 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         }
     }
 }
+
+// This structure is used when POSTing Incorporation data
+export const INCORPORATION_OBJECT_MOCK: Incorporation = {
+  data: {
+    kind: IncorporationKind.REGISTRATION
+  }
+};
+
+// These structures represent responses from GETing Incorporation data: 
 
 export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK: LimitedPartnershipIncorporation = {
     etag: "",
