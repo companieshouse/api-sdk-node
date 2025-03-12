@@ -1,10 +1,10 @@
 import { HttpResponse, IHttpClient } from "../../http";
-import { 
-  Incorporation,
-  LimitedPartnership,
-  LimitedPartnershipResourceCreated,
-  LimitedPartnershipIncorporation,
-  GeneralPartner
+import {
+    Incorporation,
+    LimitedPartnership,
+    LimitedPartnershipResourceCreated,
+    LimitedPartnershipIncorporation,
+    GeneralPartner
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 

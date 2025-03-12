@@ -4,7 +4,7 @@
 
 /**
  * The data model used by the web and API for an Incorporation journey.
- * It could be a registration or a transition, determined by the 'kind'. 
+ * It could be a registration or a transition, determined by the 'kind'.
  */
 export interface Incorporation {
   data?: {
