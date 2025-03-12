@@ -501,78 +501,77 @@ describe("LimitedPartnershipsService", () => {
         })
     });
 
-        describe("getGeneralPartner", () => {
-            it("should return a status 200 and the generalPartner object", async () => {
-                const mockRequest = sinon
-                    .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetGeneralPartnerResponse[200]);
+    describe("getGeneralPartner", () => {
+        it("should return a status 200 and the generalPartner object", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetGeneralPartnerResponse[200]);
 
-                const service = new LimitedPartnershipsService(
-                    mockValues.requestClient
-                );
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
 
-                const response = await service.getGeneralPartner(
-                    mockValues.TRANSACTION_ID,
-                    mockValues.SUBMISSION_ID
-                ) as Resource<GeneralPartner>;
+            const response = await service.getGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                mockValues.SUBMISSION_ID
+            ) as Resource<GeneralPartner>;
 
-                expect(mockRequest).to.have.been.calledOnce;
-                expect(
-                    mockRequest.calledWith(
-                       "/transactions/12345/limited-partnership/general-partner/09876"
-                    )
-                ).to.be.true;
-                expect(response.httpStatusCode).to.equal(200);
-                expect(response?.resource).to.eql(mockValues.GENERAL_PARTNER_OBJECT_MOCK);
-            });
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/09876"
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(200);
+            expect(response?.resource).to.eql(mockValues.GENERAL_PARTNER_OBJECT_MOCK);
+        });
 
-            it("should return error 401 (Unauthorised)", async () => {
-                const mockRequest = sinon
-                    .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetGeneralPartnerResponse[401]);
+        it("should return error 401 (Unauthorised)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetGeneralPartnerResponse[401]);
 
-                const service = new LimitedPartnershipsService(
-                    mockValues.requestClient
-                );
-                const response = (await service.getGeneralPartner(
-                    mockValues.TRANSACTION_ID,
-                    mockValues.SUBMISSION_ID
-                )) as Resource<any>;
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.getGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                mockValues.SUBMISSION_ID
+            )) as Resource<any>;
 
-                expect(mockRequest).to.have.been.calledOnce;
-                expect(
-                    mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/general-partner/09876"
-                    )
-                ).to.be.true;
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/09876"
+                )
+            ).to.be.true;
 
-                expect(response.httpStatusCode).to.equal(401);
-                expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
-            });
+            expect(response.httpStatusCode).to.equal(401);
+            expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+        });
 
-            it("should return error 404 (Not Found)", async () => {
-                const mockRequest = sinon
-                    .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetGeneralPartnerResponse[404]);
+        it("should return error 404 (Not Found)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetGeneralPartnerResponse[404]);
 
-                const service = new LimitedPartnershipsService(
-                    mockValues.requestClient
-                );
-                const response = (await service.getGeneralPartner(
-                    mockValues.TRANSACTION_ID,
-                    "wrong-id"
-                )) as Resource<any>;
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.getGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                "wrong-id"
+            )) as Resource<any>;
 
-                expect(mockRequest).to.have.been.calledOnce;
-                expect(
-                    mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/general-partner/wrong-id"
-                    )
-                ).to.be.true;
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/wrong-id"
+                )
+            ).to.be.true;
 
-                expect(response.httpStatusCode).to.equal(404);
-                expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
-            });
-        })
-
+            expect(response.httpStatusCode).to.equal(404);
+            expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
+        });
+    })
 });

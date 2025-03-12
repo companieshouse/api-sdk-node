@@ -3,14 +3,14 @@ import {
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
-    GeneralPartner,
+    GeneralPartner
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
 export default class LimitedPartnershipsService {
-    constructor(private readonly client: IHttpClient) {}
+    constructor (private readonly client: IHttpClient) {}
 
-    public async postLimitedPartnership(
+    public async postLimitedPartnership (
         transactionId: string,
         body: LimitedPartnership
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
@@ -23,7 +23,7 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async patchLimitedPartnership(
+    public async patchLimitedPartnership (
         transactionId: string,
         submissionId: string,
         body: LimitedPartnership["data"]
@@ -37,7 +37,7 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async getLimitedPartnership(
+    public async getLimitedPartnership (
         transactionId: string,
         submissionId: string
     ): Promise<Resource<LimitedPartnership> | ApiErrorResponse> {
@@ -54,7 +54,7 @@ export default class LimitedPartnershipsService {
      * Calls to incorporation endpoints
      */
 
-    public async postLimitedPartnershipIncorporation(
+    public async postLimitedPartnershipIncorporation (
         transactionId: string
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
@@ -66,7 +66,7 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async getLimitedPartnershipIncorporation(
+    public async getLimitedPartnershipIncorporation (
         transactionId: string,
         filingResourceId: string,
         includeSubResources?: boolean
@@ -88,7 +88,7 @@ export default class LimitedPartnershipsService {
      * Calls to general partner endpoints
      */
 
-    public async postGeneralPartner(
+    public async postGeneralPartner (
         transactionId: string,
         body: GeneralPartner
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
@@ -101,7 +101,7 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async getGeneralPartner(
+    public async getGeneralPartner (
         transactionId: string,
         submissionId: string
     ): Promise<Resource<GeneralPartner> | ApiErrorResponse> {
