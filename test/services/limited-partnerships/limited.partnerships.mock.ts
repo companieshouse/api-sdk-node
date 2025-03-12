@@ -156,3 +156,9 @@ export const mockPostGeneralPartnerResponse = {
     400: { status: 400, body: { error: BAD_REQUEST } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
+
+export const mockGetGeneralPartnerResponse = {
+    200: { status: 200, body: GENERAL_PARTNER_OBJECT_MOCK },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
