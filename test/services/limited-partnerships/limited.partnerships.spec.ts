@@ -577,4 +577,54 @@ describe("LimitedPartnershipsService", () => {
             expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
         });
     })
+
+    describe("patchGeneralPartner", () => {
+        it("should return 200 patchGeneralPartner method", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpPatch")
+                .resolves(mockValues.mockPatchGeneralPartnerResponse[200]);
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.patchGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                mockValues.GENERAL_PARTNER_ID,
+                mockValues.GENERAL_PARTNER_OBJECT_MOCK.data
+            )) as Resource<void>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/00112233",
+                    mockValues.GENERAL_PARTNER_OBJECT_MOCK.data
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(200);
+        });
+
+        it("should return error 400 (Bad Request)", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpPatch")
+                .resolves(mockValues.mockPatchGeneralPartnerResponse[400]);
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.patchGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                mockValues.GENERAL_PARTNER_ID,
+                {}
+            )) as Resource<LimitedPartnershipResourceCreated>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/00112233",
+                    {}
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(400);
+        });
+    })
 });
