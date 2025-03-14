@@ -115,4 +115,18 @@ export default class LimitedPartnershipsService {
             resource: { ...response.body }
         };
     }
+
+    public async patchGeneralPartner (
+        transactionId: string,
+        generalPartnerId: string,
+        body: GeneralPartner["data"]
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+        const response: HttpResponse = await this.client.httpPatch(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
 }

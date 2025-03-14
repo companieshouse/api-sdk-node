@@ -122,6 +122,7 @@ export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPart
 
 export const TRANSACTION_ID = "12345";
 export const SUBMISSION_ID = "09876";
+export const GENERAL_PARTNER_ID = "00112233";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const FILE_RESOURCE_ID = "a1b2c3";
 export const UNAUTHORISED = "Unauthorised";
@@ -171,5 +172,11 @@ export const mockPostGeneralPartnerResponse = {
 export const mockGetGeneralPartnerResponse = {
     200: { status: 200, body: GENERAL_PARTNER_OBJECT_MOCK },
     404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockPatchGeneralPartnerResponse = {
+    200: { status: 200 },
+    400: { status: 400, body: { error: BAD_REQUEST } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
