@@ -207,3 +207,22 @@ export interface ValidationStatusResponseResource {
     errors: ValidationStatusErrorResource[];
     is_valid?: boolean;
 }
+
+export enum PscVerificationStatus {
+    UNVERIFIED = "UNVERIFIED",
+    VERIFIED = "VERIFIED",
+    PENDING = "PENDING"
+}
+
+export interface PscVerificationState {
+    verificationStatus: string,
+    verificationStartDate?: Date,
+    verificationStatementDueDate?: Date
+
+}
+
+export interface PscVerificationStateResource {
+    verification_status: string,
+    verification_start_date?: Date,
+    verification_statement_due_date?: Date
+}
