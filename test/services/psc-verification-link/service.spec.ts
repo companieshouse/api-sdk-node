@@ -5,7 +5,7 @@ import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
 import { PlannedMaintenance, PscVerification, PscVerificationState, ValidationStatusResponse } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_NOTIFICATION_ID, PSC_VERIFICATION_IND, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors, mockPscVerificationStateResource, mockPscVerificationStateResponse } from "./service.mock";
+import { COMPANY_NUMBER, FILING_ID, PSC_VERIFICATION_CREATED, PSC_NOTIFICATION_ID, PSC_VERIFICATION_IND, TRANSACTION_ID, mockPlannedMaintenanceResource, mockPlannedMaintenanceResponse, mockGetValidationStatusResponseErrors, mockGetValidationStatusResponse, mockPscVerificationCreated, mockPscVerificationCreatedResponse, mockPscVerificationInd, mockPscVerificationIndResponse, mockPscVerificationPatchInd, mockPscVerificationPatchIndResponse, requestClient, mockValidationStatusResponseValid, mockValidationStatusResponseErrors, mockPscVerificationStateResource, mockPscVerificationStateResponse, mockPscVerificationState } from "./service.mock";
 
 describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
@@ -203,7 +203,7 @@ describe("PSC Verification Link", () => {
             )) as Resource<PscVerificationState>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource).to.eql(mockPscVerificationStateResource);
+            expect(response.resource).to.eql(mockPscVerificationState);
         });
 
         it("should return status 400 Bad Request when the resource ID is null in the request", async () => {
