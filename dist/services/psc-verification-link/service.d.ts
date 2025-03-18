@@ -1,4 +1,4 @@
-import { PlannedMaintenance, PscVerification, PscVerificationData, PscVerificationState } from "./types";
+import { PlannedMaintenance, PscVerification, PscVerificationData } from "./types";
 import { IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 /**
@@ -14,6 +14,5 @@ export default class PscVerificationService {
     patchPscVerification(transactionId: string, filingId: string, pscVerificationPatch: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse>;
     getValidationStatus(transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse>;
     checkPlannedMaintenance(): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse>;
-    getPscVerificationState(pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse>;
     private populateFrontEndResource;
 }

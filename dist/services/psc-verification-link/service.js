@@ -93,25 +93,6 @@ class PscVerificationService {
             };
         });
     }
-    getPscVerificationState(pscNotificationId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const verificationStatusUri = `/corporate-body-appointments/persons-of-significant-control/verification-state/${pscNotificationId}`;
-            const response = yield this.client.httpPost(verificationStatusUri);
-            if (response.error) {
-                return {
-                    httpStatusCode: response.status,
-                    errors: [response.error]
-                };
-            }
-            const frontEndResource = {
-                httpStatusCode: response.status,
-                resource: response.body
-            };
-            const body = response.body;
-            frontEndResource.resource = mapping_1.default.camelCaseKeys(body);
-            return frontEndResource;
-        });
-    }
     populateFrontEndResource(response) {
         const frontEndResource = {
             httpStatusCode: response.status,

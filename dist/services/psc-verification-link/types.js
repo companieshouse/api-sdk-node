@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.VerificationStatusEnum = exports.VerificationStatementEnum = exports.NameMismatchReasonEnum = void 0;
+exports.VerificationStatementEnum = exports.NameMismatchReasonEnum = void 0;
 ;
 ;
 ;
@@ -26,10 +26,4 @@ var VerificationStatementEnum;
 (function (VerificationStatementEnum) {
     VerificationStatementEnum["INDIVIDUAL_VERIFIED"] = "INDIVIDUAL_VERIFIED";
 })(VerificationStatementEnum = exports.VerificationStatementEnum || (exports.VerificationStatementEnum = {}));
-var VerificationStatusEnum;
-(function (VerificationStatusEnum) {
-    VerificationStatusEnum["UNVERIFIED"] = "UNVERIFIED";
-    VerificationStatusEnum["VERIFIED"] = "VERIFIED";
-    VerificationStatusEnum["PENDING"] = "PENDING";
-})(VerificationStatusEnum = exports.VerificationStatusEnum || (exports.VerificationStatusEnum = {}));
 //# sourceMappingURL=types.js.map

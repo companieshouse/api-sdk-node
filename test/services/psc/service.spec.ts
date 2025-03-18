@@ -3,9 +3,9 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscService from "../../../src/services/psc/service";
-import { PersonWithSignificantControl } from "../../../src/services/psc/types";
+import { PersonWithSignificantControl, PscVerificationState } from "../../../src/services/psc/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, PSC_NOTIFICATION_ID, PSC_INDIVIDUAL, mockIndividualResponse, requestClient } from "./service.mock";
+import { COMPANY_NUMBER, PSC_NOTIFICATION_ID, PSC_INDIVIDUAL, mockIndividualResponse, requestClient, mockPscVerificationStateResponse, mockPscVerificationState } from "./service.mock";
 import Mapping from "../../../src/mapping/mapping";
 
 describe("PSC details", () => {
@@ -38,6 +38,55 @@ describe("PSC details", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
+    });
+
+    describe("getPscVerificationState as POST endpoint", () => {
+        it("should return status 200 OK and Verification State resource", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[200]);
+
+            const response = (await pscService.getPscVerificationState(
+                PSC_NOTIFICATION_ID
+            )) as Resource<PscVerificationState>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockPscVerificationState);
+        });
+
+        it("should return status 400 Bad Request when the resource ID is null in the request", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[400]);
+
+            const response = (await pscService.getPscVerificationState(
+                    null as unknown as string
+
+            )) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.BAD_REQUEST);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.BAD_REQUEST);
+        });
+
+        it("should return status 404 Not Found when the resource is not found", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[404]);
+
+            const response = (await pscService.getPscVerificationState(
+                PSC_NOTIFICATION_ID
+
+            )) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[500]);
+
+            const response = (await pscService.getPscVerificationState(
+                PSC_NOTIFICATION_ID
+
+            )) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
     });
 });

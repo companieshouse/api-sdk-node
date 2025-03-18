@@ -1,4 +1,4 @@
-import { PlannedMaintenance, PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource, PscVerificationState, PscVerificationStateResource } from "./types"
+import { PlannedMaintenance, PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource } from "./types"
 
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
@@ -89,28 +89,6 @@ export default class PscVerificationService {
             httpStatusCode: response.status,
             resource: response.body as PlannedMaintenance
         };
-    }
-
-    public async getPscVerificationState (pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse> {
-        const verificationStatusUri = `/corporate-body-appointments/persons-of-significant-control/verification-state/${pscNotificationId}`;
-        const response = await this.client.httpPost(verificationStatusUri);
-
-        if (response.error) {
-            return {
-                httpStatusCode: response.status,
-                errors: [response.error]
-            }
-        }
-
-        const frontEndResource: Resource<PscVerificationState> = {
-            httpStatusCode: response.status,
-            resource: response.body as PscVerificationState
-        };
-
-        const body = response.body as PscVerificationStateResource;
-        frontEndResource.resource = Mapping.camelCaseKeys<PscVerificationState>(body);
-
-        return frontEndResource;
     }
 
     private populateFrontEndResource (response: HttpResponse): Resource<PscVerification> {

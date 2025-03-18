@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
 import { DateOfBirthResource, PscVerificationDataResource, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
-import { PersonWithSignificantControlResource } from "../../../src/services/psc/types";
+import { PersonWithSignificantControlResource, PscVerificationState, PscVerificationStateResource, VerificationStatusEnum } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -81,4 +81,28 @@ export const mockIndividualResponse = {
     200: { status: StatusCodes.OK, body: PSC_INDIVIDUAL },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+};
+
+// Verification status
+const VERIFICATION_START_DATE = new Date("2024-04-13");
+const VERIFICATION_DUE_DATE = new Date("2024-04-27");
+const VERIFICATION_STATUS = VerificationStatusEnum.UNVERIFIED;
+
+export const mockPscVerificationState: PscVerificationState = {
+    verificationStatus: VERIFICATION_STATUS,
+    verificationStartDate: VERIFICATION_START_DATE,
+    verificationStatementDueDate: VERIFICATION_DUE_DATE
+}
+
+export const mockPscVerificationStateResource: PscVerificationStateResource = {
+    verification_status: VERIFICATION_STATUS,
+    verification_start_date: VERIFICATION_START_DATE,
+    verification_statement_due_date: VERIFICATION_DUE_DATE
+}
+
+export const mockPscVerificationStateResponse = {
+    200: { status: StatusCodes.OK, body: mockPscVerificationStateResource },
+    400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
+    500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
 };
