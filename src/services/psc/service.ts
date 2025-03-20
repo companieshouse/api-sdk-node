@@ -1,7 +1,7 @@
-import { IHttpClient } from "../../http";
+import { HttpResponse, IHttpClient } from "../../http";
 import Mapping from "../../mapping/mapping";
 import Resource, { ApiErrorResponse } from "../resource";
-import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscVerificationState as PscWithVerificationState, PscVerificationStateResource } from "./types";
+import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscWithVerificationState, PscWithVerificationStateResource } from "./types";
 
 /**
  * https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/persons-with-significant-control/get-individual
@@ -36,8 +36,8 @@ export default class PscService {
     }
 
     public async getPscWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse> {
-        const verificationStatusUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
-        const response = await this.client.httpPost(verificationStatusUri);
+        const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
+        const response = await this.client.httpPost(resourceUri);
 
         if (response.error) {
             return {
@@ -47,11 +47,10 @@ export default class PscService {
         }
 
         const frontEndResource: Resource<PscWithVerificationState> = {
-            httpStatusCode: response.status,
-            resource: response.body as PscWithVerificationState
+            httpStatusCode: response.status
         };
 
-        const body = response.body as PscVerificationStateResource;
+        const body = response.body as PscWithVerificationStateResource;
         frontEndResource.resource = Mapping.camelCaseKeys<PscWithVerificationState>(body);
 
         return frontEndResource;

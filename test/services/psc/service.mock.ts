@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
 import { DateOfBirthResource, PscVerificationDataResource, PscVerificationResource } from "../../../src/services/psc-verification-link/types";
-import { PersonWithSignificantControlResource, PscVerificationState, PscVerificationStateResource, VerificationStatusEnum } from "../../../src/services/psc/types";
+import { PersonWithSignificantControlResource, PscVerificationState, PscVerificationStateResource, PscWithVerificationState, PscWithVerificationStateResource, VerificationStatusEnum } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 
@@ -23,11 +23,18 @@ export const NAME_ELEMENTS = {
     middlename: "Middlename",
     surname: "Surname"
 };
-export const ADDRESS = {
+
+export const ADDRESS_RESOURCE = {
     postal_code: "CF14 3UZ",
     locality: "Cardiff",
     region: "South Glamorgan",
     address_line_1: "Crown Way"
+};
+export const ADDRESS = {
+    postalCode: "CF14 3UZ",
+    locality: "Cardiff",
+    region: "South Glamorgan",
+    addressLine1: "Crown Way"
 };
 export const COUNTRY_OF_RESIDENCE = "Wales";
 
@@ -47,7 +54,7 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControlResource = {
     name: NAME,
     name_elements: NAME_ELEMENTS,
     nationality: NATIONALITY,
-    address: ADDRESS,
+    address: ADDRESS_RESOURCE,
     country_of_residence: COUNTRY_OF_RESIDENCE,
     links: {
         self: SELF_LINK
@@ -88,21 +95,53 @@ const VERIFICATION_START_DATE = new Date("2024-04-13");
 const VERIFICATION_DUE_DATE = new Date("2024-04-27");
 const VERIFICATION_STATUS = VerificationStatusEnum.UNVERIFIED;
 
-export const mockPscVerificationState: PscVerificationState = {
+export const VERIFICATION_STATE: PscVerificationState = {
     verificationStatus: VERIFICATION_STATUS,
     verificationStartDate: VERIFICATION_START_DATE,
     verificationStatementDueDate: VERIFICATION_DUE_DATE
 }
 
-export const mockPscVerificationStateResource: PscVerificationStateResource = {
+export const VERIFICATION_STATE_RESOURCE: PscVerificationStateResource = {
     verification_status: VERIFICATION_STATUS,
     verification_start_date: VERIFICATION_START_DATE,
     verification_statement_due_date: VERIFICATION_DUE_DATE
 }
 
+const PSC_WITH_VERIFICATION_STATE_RESOURCE: PscWithVerificationStateResource = {
+    country_of_residence: COUNTRY_OF_RESIDENCE,
+    date_of_birth: PSC_INDIVIDUAL_DOB,
+    name: NAME,
+    name_elements: NAME_ELEMENTS,
+    links: {
+        self: SELF_LINK
+    },
+    nationality: NATIONALITY,
+    address: ADDRESS_RESOURCE,
+    natures_of_control: [],
+    etag: "",
+    notified_on: "",
+    verification_state: VERIFICATION_STATE_RESOURCE
+}
+
 export const mockPscVerificationStateResponse = {
-    200: { status: StatusCodes.OK, body: mockPscVerificationStateResource },
+    200: { status: StatusCodes.OK, body: PSC_WITH_VERIFICATION_STATE_RESOURCE },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
     500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
 };
+
+export const PSC_WITH_VERIFICATION_STATE: PscWithVerificationState = {
+    countryOfResidence: COUNTRY_OF_RESIDENCE,
+    dateOfBirth: PSC_INDIVIDUAL_DOB,
+    name: NAME,
+    nameElements: NAME_ELEMENTS,
+    links: {
+        self: SELF_LINK
+    },
+    nationality: NATIONALITY,
+    address: ADDRESS,
+    naturesOfControl: [],
+    etag: "",
+    notifiedOn: "",
+    verificationState: VERIFICATION_STATE
+}

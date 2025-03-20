@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
-import { PersonWithSignificantControl, PscVerificationState as PscWithVerificationState } from "./types";
+import { PersonWithSignificantControl, PscWithVerificationState } from "./types";
 /**
  * https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/persons-with-significant-control/get-individual
  */

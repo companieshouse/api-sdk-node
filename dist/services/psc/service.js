@@ -45,8 +45,8 @@ class PscService {
     }
     getPscWithVerificationState(companyNumber, pscNotificationId) {
         return __awaiter(this, void 0, void 0, function* () {
-            const verificationStatusUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
-            const response = yield this.client.httpPost(verificationStatusUri);
+            const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
+            const response = yield this.client.httpPost(resourceUri);
             if (response.error) {
                 return {
                     httpStatusCode: response.status,
@@ -54,8 +54,7 @@ class PscService {
                 };
             }
             const frontEndResource = {
-                httpStatusCode: response.status,
-                resource: response.body
+                httpStatusCode: response.status
             };
             const body = response.body;
             frontEndResource.resource = mapping_1.default.camelCaseKeys(body);
