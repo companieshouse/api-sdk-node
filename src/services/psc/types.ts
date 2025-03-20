@@ -163,18 +163,18 @@ export interface PscWithVerificationStateResource {
 
 export interface PscWithVerificationState {
   kind?: string,
-  country_of_residence: string,
-  date_of_birth: DateOfBirthResource,
+  countryOfResidence: string,
+  dateOfBirth: DateOfBirthResource,
   name: string,
-  name_elements: NameElementsResource,
+  nameElements: NameElementsResource,
   links: ItemLinksResource,
   nationality: string,
   address: AddressResource,
-  natures_of_control: string[],
-  ceased_on?: string,
+  naturesOfControl: string[],
+  ceasedOn?: string,
   etag: string,
-  notified_on: string,
-  is_sanctioned?: boolean,
+  notifiedOn: string,
+  isSanctioned?: boolean,
   identification?: IdentificationResource
-  verification_state: PscVerificationStateResource;
+  verificationState: PscVerificationStateResource;
 }

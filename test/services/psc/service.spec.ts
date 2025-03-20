@@ -3,7 +3,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscService from "../../../src/services/psc/service";
-import { PersonWithSignificantControl, PscVerificationState } from "../../../src/services/psc/types";
+import { PersonWithSignificantControl, PscWithVerificationState } from "../../../src/services/psc/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { COMPANY_NUMBER, PSC_NOTIFICATION_ID, PSC_INDIVIDUAL, mockIndividualResponse, requestClient, mockPscVerificationStateResponse, mockPscVerificationState } from "./service.mock";
 import Mapping from "../../../src/mapping/mapping";
@@ -47,7 +47,7 @@ describe("PSC details", () => {
 
             const response = (await pscService.getPscWithVerificationState(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
-            )) as Resource<PscVerificationState>;
+            )) as Resource<PscWithVerificationState>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource).to.eql(mockPscVerificationState);
