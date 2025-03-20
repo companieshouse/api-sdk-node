@@ -46,7 +46,7 @@ describe("PSC details", () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[200]);
 
             const response = (await pscService.getPscVerificationState(
-                PSC_NOTIFICATION_ID
+                COMPANY_NUMBER, PSC_NOTIFICATION_ID
             )) as Resource<PscVerificationState>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
@@ -57,7 +57,7 @@ describe("PSC details", () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[400]);
 
             const response = (await pscService.getPscVerificationState(
-                    null as unknown as string
+                    null as unknown as string, null as unknown as string
 
             )) as ApiErrorResponse;
 
@@ -69,7 +69,7 @@ describe("PSC details", () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[404]);
 
             const response = (await pscService.getPscVerificationState(
-                PSC_NOTIFICATION_ID
+                COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
 
@@ -81,7 +81,7 @@ describe("PSC details", () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[500]);
 
             const response = (await pscService.getPscVerificationState(
-                PSC_NOTIFICATION_ID
+                COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
 

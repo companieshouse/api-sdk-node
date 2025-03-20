@@ -35,8 +35,8 @@ export default class PscService {
         return resource;
     }
 
-    public async getPscVerificationState (pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse> {
-        const verificationStatusUri = `/corporate-body-appointments/persons-of-significant-control/verification-state/${pscNotificationId}`;
+    public async getPscVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse> {
+        const verificationStatusUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
         const response = await this.client.httpPost(verificationStatusUri);
 
         if (response.error) {

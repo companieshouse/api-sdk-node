@@ -14,5 +14,5 @@ export default class PscService {
    * @param notificationId the PSC Notification Id to retrieve
    */
     getPscIndividual(companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse>;
-    getPscVerificationState(pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse>;
+    getPscVerificationState(companyNumber: string, pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse>;
 }
