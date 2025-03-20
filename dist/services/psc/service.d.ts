@@ -1,6 +1,6 @@
 import { IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
-import { PersonWithSignificantControl, PscVerificationState } from "./types";
+import { PersonWithSignificantControl, PscVerificationState as PscWithVerificationState } from "./types";
 /**
  * https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/persons-with-significant-control/get-individual
  */
@@ -14,5 +14,5 @@ export default class PscService {
    * @param notificationId the PSC Notification Id to retrieve
    */
     getPscIndividual(companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse>;
-    getPscVerificationState(companyNumber: string, pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse>;
+    getPscWithVerificationState(companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse>;
 }

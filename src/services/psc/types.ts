@@ -142,3 +142,39 @@ export interface PscVerificationStateResource {
     verification_start_date?: Date;
     verification_statement_due_date?: Date;
 }
+
+export interface PscWithVerificationStateResource {
+  kind?: string,
+  country_of_residence: string,
+  date_of_birth: DateOfBirthResource,
+  name: string,
+  name_elements: NameElementsResource,
+  links: ItemLinksResource,
+  nationality: string,
+  address: AddressResource,
+  natures_of_control: string[],
+  ceased_on?: string,
+  etag: string,
+  notified_on: string,
+  is_sanctioned?: boolean,
+  identification?: IdentificationResource
+  verification_state: PscVerificationStateResource;
+}
+
+export interface PscWithVerificationState {
+  kind?: string,
+  country_of_residence: string,
+  date_of_birth: DateOfBirthResource,
+  name: string,
+  name_elements: NameElementsResource,
+  links: ItemLinksResource,
+  nationality: string,
+  address: AddressResource,
+  natures_of_control: string[],
+  ceased_on?: string,
+  etag: string,
+  notified_on: string,
+  is_sanctioned?: boolean,
+  identification?: IdentificationResource
+  verification_state: PscVerificationStateResource;
+}

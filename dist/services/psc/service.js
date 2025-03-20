@@ -43,7 +43,7 @@ class PscService {
             return resource;
         });
     }
-    getPscVerificationState(companyNumber, pscNotificationId) {
+    getPscWithVerificationState(companyNumber, pscNotificationId) {
         return __awaiter(this, void 0, void 0, function* () {
             const verificationStatusUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
             const response = yield this.client.httpPost(verificationStatusUri);

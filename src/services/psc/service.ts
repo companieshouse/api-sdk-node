@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../http";
 import Mapping from "../../mapping/mapping";
 import Resource, { ApiErrorResponse } from "../resource";
-import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscVerificationState, PscVerificationStateResource } from "./types";
+import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscVerificationState as PscWithVerificationState, PscVerificationStateResource } from "./types";
 
 /**
  * https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/persons-with-significant-control/get-individual
@@ -35,7 +35,7 @@ export default class PscService {
         return resource;
     }
 
-    public async getPscVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscVerificationState> | ApiErrorResponse> {
+    public async getPscWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse> {
         const verificationStatusUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
         const response = await this.client.httpPost(verificationStatusUri);
 
@@ -46,13 +46,13 @@ export default class PscService {
             }
         }
 
-        const frontEndResource: Resource<PscVerificationState> = {
+        const frontEndResource: Resource<PscWithVerificationState> = {
             httpStatusCode: response.status,
-            resource: response.body as PscVerificationState
+            resource: response.body as PscWithVerificationState
         };
 
         const body = response.body as PscVerificationStateResource;
-        frontEndResource.resource = Mapping.camelCaseKeys<PscVerificationState>(body);
+        frontEndResource.resource = Mapping.camelCaseKeys<PscWithVerificationState>(body);
 
         return frontEndResource;
     }
