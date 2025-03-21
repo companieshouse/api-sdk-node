@@ -14,5 +14,11 @@ export default class PscService {
    * @param notificationId the PSC Notification Id to retrieve
    */
     getPscIndividual(companyNumber: string, notificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse>;
-    getPscWithVerificationState(companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse>;
+    /**
+   * Get the PSC details for an individual person with their verification state.
+   *
+   * @param companyNumber the company number to look up
+   * @param notificationId the PSC Notification Id to retrieve
+   */
+    getPscIndividualWithVerificationState(companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse>;
 }

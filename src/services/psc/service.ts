@@ -35,7 +35,13 @@ export default class PscService {
         return resource;
     }
 
-    public async getPscWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse> {
+    /**
+   * Get the PSC details for an individual person with their verification state.
+   *
+   * @param companyNumber the company number to look up
+   * @param notificationId the PSC Notification Id to retrieve
+   */
+    public async getPscIndividualWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse> {
         const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
         const response = await this.client.httpPost(resourceUri);
 

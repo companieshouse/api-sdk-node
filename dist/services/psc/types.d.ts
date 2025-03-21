@@ -21,6 +21,7 @@ export interface AddressResource {
     address_line_1: string;
     address_line_2?: string;
     careOf?: string;
+    country?: string;
     locality: string;
     poBox?: string;
     postal_code?: string;
@@ -75,6 +76,7 @@ export interface Address {
     addressLine1: string;
     addressLine2?: string;
     careOf?: string;
+    country?: string;
     locality: string;
     poBox?: string;
     postalCode?: string;
@@ -114,6 +116,9 @@ export declare enum VerificationStatusEnum {
     VERIFIED = "VERIFIED",
     PENDING = "PENDING"
 }
+export declare enum KindEnum {
+    INDIVIDUAL_PERSON_WITH_SIGNIFICANT_CONTROL = "individual-person-with-significant-control"
+}
 export interface PscVerificationState {
     verificationStatus: VerificationStatusEnum;
     verificationStartDate?: Date;
@@ -125,7 +130,7 @@ export interface PscVerificationStateResource {
     verification_statement_due_date?: Date;
 }
 export interface PscWithVerificationStateResource {
-    kind?: string;
+    kind?: KindEnum;
     country_of_residence: string;
     date_of_birth: DateOfBirthResource;
     name: string;
@@ -138,11 +143,10 @@ export interface PscWithVerificationStateResource {
     etag: string;
     notified_on: string;
     is_sanctioned?: boolean;
-    identification?: IdentificationResource;
     verification_state: PscVerificationStateResource;
 }
 export interface PscWithVerificationState {
-    kind?: string;
+    kind?: KindEnum;
     countryOfResidence: string;
     dateOfBirth: DateOfBirth;
     name: string;
@@ -155,6 +159,5 @@ export interface PscWithVerificationState {
     etag: string;
     notifiedOn: string;
     isSanctioned?: boolean;
-    identification?: Identification;
     verificationState: PscVerificationState;
 }

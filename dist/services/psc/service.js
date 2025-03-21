@@ -43,7 +43,13 @@ class PscService {
             return resource;
         });
     }
-    getPscWithVerificationState(companyNumber, pscNotificationId) {
+    /**
+   * Get the PSC details for an individual person with their verification state.
+   *
+   * @param companyNumber the company number to look up
+   * @param notificationId the PSC Notification Id to retrieve
+   */
+    getPscIndividualWithVerificationState(companyNumber, pscNotificationId) {
         return __awaiter(this, void 0, void 0, function* () {
             const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
             const response = yield this.client.httpPost(resourceUri);

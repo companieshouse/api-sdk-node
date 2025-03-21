@@ -41,11 +41,11 @@ describe("PSC details", () => {
         });
     });
 
-    describe("getPscVerificationState as POST endpoint", () => {
+    describe("getPscIndividualWithVerificationState as POST endpoint", () => {
         it("should return status 200 OK and Verification State resource", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[200]);
 
-            const response = (await pscService.getPscWithVerificationState(
+            const response = (await pscService.getPscIndividualWithVerificationState(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
             )) as Resource<PscWithVerificationState>;
 
@@ -56,7 +56,7 @@ describe("PSC details", () => {
         it("should return status 400 Bad Request when the resource ID is null in the request", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[400]);
 
-            const response = (await pscService.getPscWithVerificationState(
+            const response = (await pscService.getPscIndividualWithVerificationState(
                     null as unknown as string, null as unknown as string
 
             )) as ApiErrorResponse;
@@ -68,7 +68,7 @@ describe("PSC details", () => {
         it("should return status 404 Not Found when the resource is not found", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[404]);
 
-            const response = (await pscService.getPscWithVerificationState(
+            const response = (await pscService.getPscIndividualWithVerificationState(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
@@ -80,7 +80,7 @@ describe("PSC details", () => {
         it("should return status 500 Internal Server Error if a server error occurs", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationStateResponse[500]);
 
-            const response = (await pscService.getPscWithVerificationState(
+            const response = (await pscService.getPscIndividualWithVerificationState(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
