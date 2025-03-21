@@ -52,19 +52,13 @@ export default class PscService {
             }
         }
 
-        // const frontEndResource: Resource<PscIndWithVerificationState> = {
-        //     httpStatusCode: response.status
-        // };
-
-        // const body = response.body as PscIndWithVerificationStateResource;
-        // frontEndResource.resource = Mapping.camelCaseKeys<PscIndWithVerificationState>(body);
-
-        // return frontEndResource;
-
-        const resource: Resource<PscIndWithVerificationState> = {
+        const frontEndResource: Resource<PscIndWithVerificationState> = {
             httpStatusCode: response.status
         };
 
-        return resource;
+        const body = response.body as PscIndWithVerificationStateResource;
+        frontEndResource.resource = Mapping.camelCaseKeys<PscIndWithVerificationState>(body);
+
+        return frontEndResource;
     }
 }

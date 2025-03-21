@@ -59,16 +59,12 @@ class PscService {
                     errors: [response.error]
                 };
             }
-            // const frontEndResource: Resource<PscIndWithVerificationState> = {
-            //     httpStatusCode: response.status
-            // };
-            // const body = response.body as PscIndWithVerificationStateResource;
-            // frontEndResource.resource = Mapping.camelCaseKeys<PscIndWithVerificationState>(body);
-            // return frontEndResource;
-            const resource = {
+            const frontEndResource = {
                 httpStatusCode: response.status
             };
-            return resource;
+            const body = response.body;
+            frontEndResource.resource = mapping_1.default.camelCaseKeys(body);
+            return frontEndResource;
         });
     }
 }

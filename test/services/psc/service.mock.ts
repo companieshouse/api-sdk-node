@@ -123,22 +123,6 @@ const PSC_WITH_VERIFICATION_STATE_RESOURCE: PscIndWithVerificationStateResource 
     verification_state: VERIFICATION_STATE_RESOURCE
 }
 
-export const PSC_WITH_VERIFICATION_STATE_MOCK: PscIndWithVerificationState = {
-    countryOfResidence: COUNTRY_OF_RESIDENCE,
-    dateOfBirth: PSC_INDIVIDUAL_DOB,
-    name: NAME,
-    nameElements: NAME_ELEMENTS,
-    links: {
-        self: SELF_LINK
-    },
-    nationality: NATIONALITY,
-    address: ADDRESS,
-    naturesOfControl: [],
-    etag: "",
-    notifiedOn: "",
-    verificationState: VERIFICATION_STATE
-}
-
 export const PSC_WITH_VERIFICATION_STATE: PscIndWithVerificationState = {
     countryOfResidence: COUNTRY_OF_RESIDENCE,
     dateOfBirth: PSC_INDIVIDUAL_DOB,
@@ -156,8 +140,7 @@ export const PSC_WITH_VERIFICATION_STATE: PscIndWithVerificationState = {
 }
 
 export const mockPscVerificationStateResponse = {
-    // 200: { status: StatusCodes.OK, body: PSC_WITH_VERIFICATION_STATE_RESOURCE },
-    200: { status: StatusCodes.OK, body: PSC_WITH_VERIFICATION_STATE_MOCK },
+    200: { status: StatusCodes.OK, body: PSC_WITH_VERIFICATION_STATE_RESOURCE },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
     500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }

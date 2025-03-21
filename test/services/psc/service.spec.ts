@@ -50,7 +50,7 @@ describe("PSC details", () => {
             )) as Resource<PscIndWithVerificationState>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            // expect(response.resource).to.eql(PSC_WITH_VERIFICATION_STATE);
+            expect(response.resource).to.eql(PSC_WITH_VERIFICATION_STATE);
         });
 
         it("should return status 400 Bad Request when the resource ID is null in the request", async () => {
