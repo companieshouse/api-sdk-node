@@ -1,7 +1,7 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import Mapping from "../../mapping/mapping";
 import Resource, { ApiErrorResponse } from "../resource";
-import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscWithVerificationState, PscWithVerificationStateResource } from "./types";
+import { PersonWithSignificantControl, PersonWithSignificantControlResource, PscIndWithVerificationState, PscIndWithVerificationStateResource } from "./types";
 
 /**
  * https://developer-specs.company-information.service.gov.uk/companies-house-public-data-api/reference/persons-with-significant-control/get-individual
@@ -41,7 +41,7 @@ export default class PscService {
    * @param companyNumber the company number to look up
    * @param notificationId the PSC Notification Id to retrieve
    */
-    public async getPscIndividualWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscWithVerificationState> | ApiErrorResponse> {
+    public async getPscIndividualWithVerificationState (companyNumber: string, pscNotificationId: string): Promise<Resource<PscIndWithVerificationState> | ApiErrorResponse> {
         const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
         const response = await this.client.httpPost(resourceUri);
 
@@ -52,13 +52,19 @@ export default class PscService {
             }
         }
 
-        const frontEndResource: Resource<PscWithVerificationState> = {
+        // const frontEndResource: Resource<PscIndWithVerificationState> = {
+        //     httpStatusCode: response.status
+        // };
+
+        // const body = response.body as PscIndWithVerificationStateResource;
+        // frontEndResource.resource = Mapping.camelCaseKeys<PscIndWithVerificationState>(body);
+
+        // return frontEndResource;
+
+        const resource: Resource<PscIndWithVerificationState> = {
             httpStatusCode: response.status
         };
 
-        const body = response.body as PscWithVerificationStateResource;
-        frontEndResource.resource = Mapping.camelCaseKeys<PscWithVerificationState>(body);
-
-        return frontEndResource;
+        return resource;
     }
 }

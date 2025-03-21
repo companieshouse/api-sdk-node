@@ -149,7 +149,7 @@ export interface PscVerificationStateResource {
     verification_statement_due_date?: Date;
 }
 
-export interface PscWithVerificationStateResource {
+export interface PscIndWithVerificationStateResource {
   kind?: KindEnum,
   country_of_residence: string,
   date_of_birth: DateOfBirthResource,
@@ -163,11 +163,10 @@ export interface PscWithVerificationStateResource {
   etag: string,
   notified_on: string,
   is_sanctioned?: boolean,
-  // identification?: IdentificationResource
   verification_state: PscVerificationStateResource;
 }
 
-export interface PscWithVerificationState {
+export interface PscIndWithVerificationState {
   kind?: KindEnum,
   countryOfResidence: string,
   dateOfBirth: DateOfBirth,
@@ -181,6 +180,5 @@ export interface PscWithVerificationState {
   etag: string,
   notifiedOn: string,
   isSanctioned?: boolean,
-  // identification?: Identification,
   verificationState: PscVerificationState;
 }
