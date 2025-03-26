@@ -23,6 +23,7 @@ export interface AddressResource {
   address_line_1: string;
   address_line_2?: string;
   careOf?: string;
+  country?: string;
   locality: string;
   poBox?: string;
   postal_code?: string;
@@ -84,6 +85,7 @@ export interface Address {
   addressLine1: string;
   addressLine2?: string;
   careOf?: string;
+  country?: string;
   locality: string;
   poBox?: string;
   postalCode?: string;
@@ -123,3 +125,58 @@ export interface ItemLinks {
   self: string,
   statement?: string;
 };
+
+export enum VerificationStatusEnum {
+  UNVERIFIED = "UNVERIFIED",
+  VERIFIED = "VERIFIED",
+  PENDING = "PENDING"
+}
+
+export enum KindEnum {
+INDIVIDUAL_PERSON_WITH_SIGNIFICANT_CONTROL = "individual-person-with-significant-control"
+}
+
+export interface VerificationState {
+  verificationStatus?: VerificationStatusEnum;
+  verificationStartDate?: Date;
+  verificationStatementDueDate?: Date;
+
+}
+
+export interface VerificationStateResource {
+  verification_status?: VerificationStatusEnum;
+  verification_start_date?: Date;
+  verification_statement_due_date?: Date;
+}
+
+export interface PscIndWithVerificationStateResource {
+address: AddressResource,
+ceased_on?: Date,
+country_of_residence: string,
+date_of_birth: DateOfBirthResource,
+etag: string,
+kind?: KindEnum,
+links: ItemLinksResource,
+name: string,
+name_elements: NameElementsResource,
+nationality: string,
+natures_of_control: string[],
+notified_on: Date,
+verification_state: VerificationStateResource;
+}
+
+export interface PscIndWithVerificationState {
+address: Address,
+ceasedOn?: Date,
+countryOfResidence: string,
+dateOfBirth: DateOfBirth,
+etag: string,
+kind?: KindEnum,
+links: ItemLinks,
+name: string,
+nameElements: NameElements,
+nationality: string,
+naturesOfControl: string[],
+notifiedOn: Date,
+verificationState: VerificationState;
+}
