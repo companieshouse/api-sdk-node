@@ -1,5 +1,5 @@
 /**
- * PersonWithSignificantControlResource is what is returned from the api.
+ * PersonWithSignificantControlResource is what is returned from the PSC data API, and will apply to individual PSC types only.
  */
 export interface PersonWithSignificantControlResource {
     address: AddressResource;
@@ -14,8 +14,8 @@ export interface PersonWithSignificantControlResource {
     natures_of_control: string[];
     notified_on: string;
     is_sanctioned?: boolean;
-    kind?: string;
-    identification?: IdentificationResource;
+    kind?: KindEnum;
+    verification_state?: VerificationStateResource;
 }
 export interface AddressResource {
     address_line_1: string;
@@ -40,14 +40,6 @@ export interface NameElementsResource {
     middle_name?: string;
     surname: string;
 }
-export interface IdentificationResource {
-    identification_type?: string;
-    legal_authority?: string;
-    legal_form?: string;
-    place_registered?: string;
-    registration_number?: string;
-    country_registered?: string;
-}
 export interface ResultsLinksResource {
     self: string;
     persons_with_significant_control_statements_list?: string;
@@ -55,6 +47,19 @@ export interface ResultsLinksResource {
 export interface ItemLinksResource {
     self: string;
     statement?: string;
+}
+export interface VerificationStateResource {
+    verification_status?: VerificationStatusEnum;
+    verification_start_date?: Date;
+    verification_statement_due_date?: Date;
+}
+export declare enum VerificationStatusEnum {
+    UNVERIFIED = "UNVERIFIED",
+    VERIFIED = "VERIFIED",
+    PENDING = "PENDING"
+}
+export declare enum KindEnum {
+    INDIVIDUAL_PERSON_WITH_SIGNIFICANT_CONTROL = "individual-person-with-significant-control"
 }
 export interface PersonWithSignificantControl {
     address: any;
@@ -69,8 +74,8 @@ export interface PersonWithSignificantControl {
     naturesOfControl: string[];
     notifiedOn: string;
     isSanctioned?: boolean;
-    kind?: string;
-    identification?: Identification;
+    kind?: KindEnum;
+    verificationState?: VerificationState;
 }
 export interface Address {
     addressLine1: string;
@@ -95,14 +100,6 @@ export interface NameElements {
     middleName?: string;
     surname: string;
 }
-export interface Identification {
-    identificationType?: string;
-    legalAuthority?: string;
-    legalForm?: string;
-    placeRegistered?: string;
-    registrationNumber?: string;
-    countryRegistered?: string;
-}
 export interface ResultsLinks {
     self: string;
     personsWithSignificantControlStatementsList?: string;
@@ -111,51 +108,8 @@ export interface ItemLinks {
     self: string;
     statement?: string;
 }
-export declare enum VerificationStatusEnum {
-    UNVERIFIED = "UNVERIFIED",
-    VERIFIED = "VERIFIED",
-    PENDING = "PENDING"
-}
-export declare enum KindEnum {
-    INDIVIDUAL_PERSON_WITH_SIGNIFICANT_CONTROL = "individual-person-with-significant-control"
-}
 export interface VerificationState {
     verificationStatus?: VerificationStatusEnum;
     verificationStartDate?: Date;
     verificationStatementDueDate?: Date;
-}
-export interface VerificationStateResource {
-    verification_status?: VerificationStatusEnum;
-    verification_start_date?: Date;
-    verification_statement_due_date?: Date;
-}
-export interface PscIndWithVerificationStateResource {
-    address: AddressResource;
-    ceased_on?: Date;
-    country_of_residence: string;
-    date_of_birth: DateOfBirthResource;
-    etag: string;
-    kind?: KindEnum;
-    links: ItemLinksResource;
-    name: string;
-    name_elements: NameElementsResource;
-    nationality: string;
-    natures_of_control: string[];
-    notified_on: Date;
-    verification_state: VerificationStateResource;
-}
-export interface PscIndWithVerificationState {
-    address: Address;
-    ceasedOn?: Date;
-    countryOfResidence: string;
-    dateOfBirth: DateOfBirth;
-    etag: string;
-    kind?: KindEnum;
-    links: ItemLinks;
-    name: string;
-    nameElements: NameElements;
-    nationality: string;
-    naturesOfControl: string[];
-    notifiedOn: Date;
-    verificationState: VerificationState;
 }

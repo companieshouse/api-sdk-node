@@ -21,35 +21,12 @@ class PscService {
         this.client = client;
     }
     /**
-   * Get the PSC details for an individual person.
+   * Get the PSC individual details including their optional verification state.
    *
-   * @param companyNumber the company number to look up
-   * @param notificationId the PSC Notification Id to retrieve
+   * @param companyNumber the Company Number to look up
+   * @param pscNotificationId the PSC Notification ID to retrieve
    */
-    getPscIndividual(companyNumber, notificationId) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const response = yield this.client.httpGet(`/company/${companyNumber}/persons-with-significant-control/individual/${notificationId}`);
-            const resource = {
-                httpStatusCode: response.status
-            };
-            if (response.error) {
-                return {
-                    httpStatusCode: response.status,
-                    errors: [response.error]
-                };
-            }
-            const body = response.body;
-            resource.resource = mapping_1.default.camelCaseKeys(body);
-            return resource;
-        });
-    }
-    /**
-   * Get the PSC individual details with their verification state.
-   *
-   * @param companyNumber the company number to look up
-   * @param notificationId the PSC Notification Id to retrieve
-   */
-    getPscIndWithVerificationState(companyNumber, pscNotificationId) {
+    getPscIndividual(companyNumber, pscNotificationId) {
         return __awaiter(this, void 0, void 0, function* () {
             const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
             const response = yield this.client.httpGet(resourceUri);

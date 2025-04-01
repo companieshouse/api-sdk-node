@@ -3,9 +3,9 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { describe } from "mocha";
 import * as sinon from "sinon";
 import PscService from "../../../src/services/psc/service";
-import { PersonWithSignificantControl, PscIndWithVerificationState } from "../../../src/services/psc/types";
+import { PersonWithSignificantControl } from "../../../src/services/psc/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
-import { COMPANY_NUMBER, PSC_NOTIFICATION_ID, PSC_INDIVIDUAL, mockIndividualResponse, requestClient, mockPscVerificationStateResponse, PSC_WITH_VERIFICATION_STATE } from "./service.mock";
+import { COMPANY_NUMBER, PSC_NOTIFICATION_ID, mockIndividualResponse, requestClient, PSC_INDIVIDUAL } from "./service.mock";
 import Mapping from "../../../src/mapping/mapping";
 
 describe("PSC details", () => {
@@ -22,7 +22,7 @@ describe("PSC details", () => {
             expect(response.resource).to.eql(Mapping.camelCaseKeys(PSC_INDIVIDUAL));
         });
 
-        it("should return status 401 Unauthorised on unauthorised access", async () => {
+        it("should return status 401 Unauthorised when access is unauthorised", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[401]);
 
             const response = await pscService.getPscIndividual(COMPANY_NUMBER, PSC_NOTIFICATION_ID) as ApiErrorResponse;
@@ -31,32 +31,10 @@ describe("PSC details", () => {
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
         });
 
-        it("should return status 404 Not Found if resource id not found", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[404]);
-
-            const response = await pscService.getPscIndividual(COMPANY_NUMBER, PSC_NOTIFICATION_ID) as ApiErrorResponse;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
-            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
-        });
-    });
-
-    describe("getPscIndividualWithVerificationState endpoint", () => {
-        it("should return status 200 OK and Verification State resource", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationStateResponse[200]);
-
-            const response = (await pscService.getPscIndWithVerificationState(
-                COMPANY_NUMBER, PSC_NOTIFICATION_ID
-            )) as Resource<PscIndWithVerificationState>;
-
-            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource).to.eql(PSC_WITH_VERIFICATION_STATE);
-        });
-
         it("should return status 400 Bad Request when the resource ID is null in the request", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationStateResponse[400]);
+            sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[400]);
 
-            const response = (await pscService.getPscIndWithVerificationState(
+            const response = (await pscService.getPscIndividual(
                     null as unknown as string, null as unknown as string
 
             )) as ApiErrorResponse;
@@ -65,10 +43,10 @@ describe("PSC details", () => {
             expect(response.errors?.[0]).to.equal(ReasonPhrases.BAD_REQUEST);
         });
 
-        it("should return status 404 Not Found when the resource is not found", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationStateResponse[404]);
+        it("should return status 404 Not Found when the resource ID is not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[404]);
 
-            const response = (await pscService.getPscIndWithVerificationState(
+            const response = (await pscService.getPscIndividual(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
@@ -78,9 +56,9 @@ describe("PSC details", () => {
         });
 
         it("should return status 500 Internal Server Error if a server error occurs", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationStateResponse[500]);
+            sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[500]);
 
-            const response = (await pscService.getPscIndWithVerificationState(
+            const response = (await pscService.getPscIndividual(
                 COMPANY_NUMBER, PSC_NOTIFICATION_ID
 
             )) as ApiErrorResponse;
