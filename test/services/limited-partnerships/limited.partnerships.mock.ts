@@ -43,7 +43,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
             postal_code: "SC13 1WE"
         },
         term: Term.BY_AGREEMENT,
-        sic_codes: ["1234", "5678"]
+        sic_codes: ["12345", "56789"]
     }
 };
 
