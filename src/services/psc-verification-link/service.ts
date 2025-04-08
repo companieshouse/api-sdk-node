@@ -20,7 +20,7 @@ export default class PscVerificationService {
         if (response.error) {
             return {
                 httpStatusCode: response.status,
-                errors: [response.error]
+                errors: [Mapping.camelCaseKeys(response.error)]
             }
         }
 
@@ -34,7 +34,7 @@ export default class PscVerificationService {
         if (response.error) {
             return {
                 httpStatusCode: response.status,
-                errors: [response.error]
+                errors: [Mapping.camelCaseKeys(response.error)]
             }
         }
 
@@ -50,7 +50,7 @@ export default class PscVerificationService {
         if (response.error) {
             return {
                 httpStatusCode: response.status,
-                errors: [response.error]
+                errors: [Mapping.camelCaseKeys(response.error)]
             }
         }
 
@@ -62,7 +62,7 @@ export default class PscVerificationService {
         const response = await this.client.httpGet(resourceUri);
 
         if (response.status >= 400) {
-            return { httpStatusCode: response.status, errors: [response.error] };
+            return { httpStatusCode: response.status, errors: [Mapping.camelCaseKeys(response.error)] };
         }
 
         const resource: Resource<ValidationStatusResponse> = { httpStatusCode: response.status };
@@ -81,7 +81,7 @@ export default class PscVerificationService {
         if (response.error) {
             return {
                 httpStatusCode: response.status,
-                errors: [response.error]
+                errors: [Mapping.camelCaseKeys(response.error)]
             }
         }
 
