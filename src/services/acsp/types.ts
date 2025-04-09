@@ -22,6 +22,7 @@ export interface Company {
 export interface AmlSupervisoryBody {
     amlSupervisoryBody? : string;
     membershipId? : string;
+    dateOfChange? : Date;
 }
 
 export interface ApplicantDetails {
