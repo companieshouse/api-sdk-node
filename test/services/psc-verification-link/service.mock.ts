@@ -95,7 +95,8 @@ export const mockPscVerificationPatchInd: PscVerification = {
 export const mockPscVerificationCreatedResponse = {
     201: { status: StatusCodes.CREATED, body: mockPscVerificationCreatedResource },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
-    401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED }
+    401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
+    500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
 };
 
 const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
@@ -180,14 +181,16 @@ const mockValidationStatusResponseErrorsResource: ValidationStatusResponseResour
 export const mockPscVerificationIndResponse = {
     200: { status: StatusCodes.OK, body: mockPscVerificationIndResource },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
-    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
+    500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
 };
 
 export const mockPscVerificationPatchIndResponse = {
     200: { status: StatusCodes.OK, body: mockPscVerificationPatchIndResource },
     400: { status: StatusCodes.BAD_REQUEST, error: ReasonPhrases.BAD_REQUEST },
     401: { status: StatusCodes.UNAUTHORIZED, error: ReasonPhrases.UNAUTHORIZED },
-    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND }
+    404: { status: StatusCodes.NOT_FOUND, error: ReasonPhrases.NOT_FOUND },
+    500: { status: StatusCodes.INTERNAL_SERVER_ERROR, error: ReasonPhrases.INTERNAL_SERVER_ERROR }
 };
 
 export const mockPlannedMaintenanceResponse = {

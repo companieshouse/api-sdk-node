@@ -42,6 +42,15 @@ describe("PSC Verification Link", () => {
             expect(data.httpStatusCode).to.equal(StatusCodes.BAD_REQUEST);
             expect(data.errors?.[0]).to.equal(ReasonPhrases.BAD_REQUEST);
         });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[500]);
+
+            const data = await pscService.postPscVerification(TRANSACTION_ID, { companyNumber: COMPANY_NUMBER }) as ApiErrorResponse;
+
+            expect(data.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(data.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
     });
 
     describe("GET endpoint", () => {
@@ -74,6 +83,15 @@ describe("PSC Verification Link", () => {
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
         });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[500]);
+
+            const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
     });
 
     describe("PATCH endpoint", () => {
@@ -103,6 +121,19 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
+        });
+
+        it("should return a status 500 Internal Server Error when a server error occurs", async () => {
+            sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[500]);
+
+            const response = await pscService.patchPscVerification(
+                TRANSACTION_ID,
+                FILING_ID,
+                PSC_VERIFICATION_IND
+            ) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
     });
 
