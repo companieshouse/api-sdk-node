@@ -1,0 +1,161 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.mockGetValidationStatusResponse = exports.mockGetDirectorAndTerminationDate = exports.mockGetCurrentOrFutureDissolvedReturnsFalse = exports.mockGetCurrentOrFutureDissolved = exports.mockGetListActiveDirectorsDetails = exports.mockPostOfficerFiling = exports.mockPatchOfficerFiling = exports.mockGetOfficerFiling = exports.mockValidationStatusResponse = exports.mockValidationStatusError = exports.mockDirectorAndTerminationDate = exports.mockListActiveDirectorDetails = exports.mockActiveDirectorDetails = exports.mockOfficerFiling = exports.mockLinks = exports.mockIdentification = exports.mockDateOfBirth = exports.mockAddress2 = exports.mockAddress1 = exports.requestClient = void 0;
+const src_1 = require("../../../src");
+exports.requestClient = new src_1.RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "TOKEN_NOT_USED" });
+exports.mockAddress1 = {
+    address_line_1: "123 Street",
+    address_line_2: "Some area",
+    country: "United Kingdom",
+    locality: "Wales",
+    po_box: "123",
+    postal_code: "SW1",
+    premises: "some premises",
+    region: "South"
+};
+exports.mockAddress2 = {
+    address_line_1: "10 This road",
+    address_line_2: "This",
+    country: "Thisland",
+    locality: "Thistown",
+    po_box: "1",
+    postal_code: "TH1 1AB",
+    premises: "10",
+    region: "Thisshire"
+};
+exports.mockDateOfBirth = {
+    month: "1",
+    year: "1998"
+};
+exports.mockIdentification = {
+    identification_type: "some identification type",
+    legal_authority: "some legal auth",
+    legal_form: "some legal form",
+    place_registered: "some place",
+    registration_number: "some reg"
+};
+exports.mockLinks = {
+    self: "company/00006400/appointments/987",
+    officer: {
+        appointments: "officers/456/appointments"
+    }
+};
+exports.mockOfficerFiling = {
+    reference_appointment_id: "app1",
+    reference_etag: "968ada7234bb1eb65778ca4c83a4a42d36669a17",
+    resigned_on: "2009-08-29"
+};
+exports.mockActiveDirectorDetails = {
+    name: "Doe, James John",
+    occupation: "singer",
+    nationality: "British",
+    date_of_birth: exports.mockDateOfBirth,
+    appointed_on: "1 January 2009",
+    links: exports.mockLinks,
+    country_of_residence: "Country",
+    address: exports.mockAddress1,
+    officer_role: "SECRETARY",
+    identification: exports.mockIdentification
+};
+exports.mockListActiveDirectorDetails = [
+    {
+        name: "Doe, James John",
+        occupation: "singer",
+        nationality: "British",
+        date_of_birth: exports.mockDateOfBirth,
+        appointed_on: "1 January 2009",
+        links: exports.mockLinks,
+        country_of_residence: "Country",
+        address: exports.mockAddress1,
+        officer_role: "SECRETARY",
+        identification: exports.mockIdentification
+    },
+    {
+        name: "JONES, Tim Bill",
+        occupation: "singer",
+        nationality: "British",
+        date_of_birth: exports.mockDateOfBirth,
+        appointed_on: "1 January 2009",
+        links: exports.mockLinks,
+        country_of_residence: "Country",
+        address: exports.mockAddress1,
+        officer_role: "SECRETARY",
+        identification: exports.mockIdentification
+    }
+];
+exports.mockDirectorAndTerminationDate = {
+    name: "Doe, James John",
+    occupation: "singer",
+    nationality: "British",
+    date_of_birth: exports.mockDateOfBirth,
+    appointed_on: "1 January 2009",
+    links: exports.mockLinks,
+    country_of_residence: "Country",
+    address: exports.mockAddress1,
+    officer_role: "SECRETARY",
+    identification: exports.mockIdentification,
+    resigned_on: "1 January 2009"
+};
+exports.mockValidationStatusError = {
+    error: "European public limited liability company (SE) not permitted",
+    location: "$./transactions/185318-541416-850071/officers/646f2b75f8b00c631d83feb2/validation_status",
+    type: "ch:validation",
+    location_type: "json-path"
+};
+exports.mockValidationStatusResponse = {
+    errors: [exports.mockValidationStatusError],
+    is_valid: false
+};
+exports.mockGetOfficerFiling = {
+    200: { status: 200, body: exports.mockOfficerFiling },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockPatchOfficerFiling = {
+    200: {
+        status: 200,
+        body: {
+            id: "123",
+            data: {
+                description: "Appoint a new Director"
+            }
+        }
+    },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockPostOfficerFiling = {
+    200: {
+        status: 200,
+        body: {
+            id: "567",
+            data: {
+                description: "Update a Director"
+            }
+        }
+    },
+    404: { status: 404, error: "Officer filing not found" },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockGetListActiveDirectorsDetails = {
+    200: { status: 200, body: exports.mockListActiveDirectorDetails },
+    404: { status: 404, error: "No active directors details were found" },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockGetCurrentOrFutureDissolved = {
+    200: { status: 200, body: true },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockGetCurrentOrFutureDissolvedReturnsFalse = {
+    200: { status: 200, body: false }
+};
+exports.mockGetDirectorAndTerminationDate = {
+    200: { status: 200, body: exports.mockDirectorAndTerminationDate },
+    500: { status: 500, error: "Internal server error" }
+};
+exports.mockGetValidationStatusResponse = {
+    200: { status: 200, body: exports.mockValidationStatusResponse },
+    404: { status: 404, error: "Not Found" },
+    500: { status: 500, error: "Internal server error" }
+};
+//# sourceMappingURL=officer.filing.mock.js.map
