@@ -118,13 +118,13 @@ export default class LimitedPartnershipsService {
 
     public async getGeneralPartners (
         transactionId: string
-    ): Promise<Resource<GeneralPartner> | ApiErrorResponse> {
+    ): Promise<Resource<GeneralPartner[]> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/general-partners`;
         const response: HttpResponse = await this.client.httpGet(URL, { transactionId });
 
         return {
             httpStatusCode: response.status,
-            resource: { ...response.body }
+            resource: response.body
         };
     }
 

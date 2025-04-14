@@ -176,6 +176,12 @@ export const mockGetGeneralPartnerResponse = {
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
+export const mockGetGeneralPartnersResponse = {
+    200: { status: 200, body: [GENERAL_PARTNER_OBJECT_MOCK] },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
 export const mockPatchGeneralPartnerResponse = {
     200: { status: 200 },
     400: { status: 400, body: { error: BAD_REQUEST } },
