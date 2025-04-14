@@ -11,32 +11,15 @@ const expect = chai.expect;
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-psc", () => {
+    let mockRequest: sinon.SinonStub;
+    let companyPsc: CompanyPscService;
+    let mockResponseBody: CompanyPersonsWithSignificantControlResource;
+
     beforeEach(() => {
         sinon.reset();
         sinon.restore();
-    });
 
-    afterEach(done => {
-        sinon.reset();
-        sinon.restore();
-        done();
-    });
-
-    it("returns an error response on failure", async () => {
-        const mockGetResponse = {
-            status: 401,
-            error: "An error occurred"
-        };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const companyPsc : CompanyPscService = new CompanyPscService(requestClient);
-        const data = await companyPsc.getCompanyPsc("NUMBER-NOT-IMPORTANT");
-
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
-    });
-
-    it("maps the company field data items correctly", async () => {
-        const mockResponseBody : CompanyPersonsWithSignificantControlResource = ({
+        mockResponseBody = {
             active_count: "1",
             ceased_count: "0",
             items_per_page: "1",
@@ -85,15 +68,35 @@ describe("company-psc", () => {
                     ceased_on: "2023-2-1"
                 }
             ]
-        });
+        };
 
         const mockGetResponse = {
             status: 200,
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const companyPsc : CompanyPscService = new CompanyPscService(requestClient);
+        mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        companyPsc = new CompanyPscService(requestClient);
+    });
+
+    afterEach(() => {
+        sinon.restore();
+    });
+
+    it("returns an error response on failure", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+        mockRequest.resolves(mockGetResponse);
+
+        const data = await companyPsc.getCompanyPsc("NUMBER-NOT-IMPORTANT");
+
+        expect(data.httpStatusCode).to.equal(401);
+        expect(data.resource).to.be.undefined;
+    });
+
+    it("maps the company field data items correctly", async () => {
         const data = await companyPsc.getCompanyPsc("123");
 
         expect(data.httpStatusCode).to.equal(200);
@@ -119,7 +122,6 @@ describe("company-psc", () => {
         expect(data.resource?.items[0].address.locality).to.equal(mockResponseBody.items[0].address.locality);
         expect(data.resource?.items[0].address.postalCode).to.equal(mockResponseBody.items[0].address.postal_code);
         expect(data.resource?.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
-        expect(data.resource?.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
 
         expect(data.resource?.items[0].dateOfBirth.month).to.equal(mockResponseBody.items[0].date_of_birth.month);
         expect(data.resource?.items[0].dateOfBirth.year).to.equal(mockResponseBody.items[0].date_of_birth.year);
@@ -127,12 +129,32 @@ describe("company-psc", () => {
         expect(data.resource?.items[0].identification?.legalAuthority).to.equal(mockResponseBody.items[0].identification?.legal_authority);
         expect(data.resource?.items[0].identification?.legalForm).to.equal(mockResponseBody.items[0].identification?.legal_form);
         expect(data.resource?.items[0].identification?.placeRegistered).to.equal(mockResponseBody.items[0].identification?.place_registered);
-        expect(data.resource?.items[0].identification?.registrationNumber).to.equal(mockResponseBody.items[0].identification?.registration_number)
+        expect(data.resource?.items[0].identification?.registrationNumber).to.equal(mockResponseBody.items[0].identification?.registration_number);
 
         expect(data.resource?.items[0].nameElements.title).to.equal(mockResponseBody.items[0].name_elements.title);
         expect(data.resource?.items[0].nameElements.forename).to.equal(mockResponseBody.items[0].name_elements.forename);
         expect(data.resource?.items[0].nameElements.otherForenames).to.equal(mockResponseBody.items[0].name_elements.other_forenames);
         expect(data.resource?.items[0].nameElements.middleName).to.equal(mockResponseBody.items[0].name_elements.middle_name);
         expect(data.resource?.items[0].nameElements.surname).to.equal(mockResponseBody.items[0].name_elements.surname);
+    });
+
+    it("uses default values for startIndex and itemsPerPage when not provided", async () => {
+        await companyPsc.getCompanyPsc("123");
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=25")).to.be.true;
+    });
+
+    it("uses provided startIndex and itemsPerPage values", async () => {
+        await companyPsc.getCompanyPsc("123", 10, 20);
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=20")).to.be.true;
+    });
+
+    it("uses default startIndex when not provided and itemsPerPage is provided", async () => {
+        await companyPsc.getCompanyPsc("123", undefined, 10);
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=10")).to.be.true;
+    });
+
+    it("uses default itemsPerPage when not provided and startIndex is provided", async () => {
+        await companyPsc.getCompanyPsc("123", 10);
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=25")).to.be.true;
     });
 });
