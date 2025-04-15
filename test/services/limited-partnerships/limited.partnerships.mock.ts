@@ -48,6 +48,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
 };
 
 export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
+    id: "123456",
     data: {
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
@@ -95,7 +96,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
             postal_code: "SC15 1N2"
         }
     }
-}
+};
 
 // This structure is used when POSTing Incorporation data
 export const INCORPORATION_OBJECT_MOCK: Incorporation = {
@@ -106,20 +107,22 @@ export const INCORPORATION_OBJECT_MOCK: Incorporation = {
 
 // These structures represent responses from GETing Incorporation data:
 
-export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK: LimitedPartnershipIncorporation = {
-    etag: "",
-    kind: ""
-};
+export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK: LimitedPartnershipIncorporation =
+    {
+        etag: "",
+        kind: ""
+    };
 
-export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPartnershipIncorporation = {
-    etag: "",
-    kind: "",
-    sub_resources: {
-        general_partners: [],
-        limited_partners: [],
-        partnership: LIMITED_PARTNERSHIP_OBJECT_MOCK
-    }
-};
+export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPartnershipIncorporation =
+    {
+        etag: "",
+        kind: "",
+        sub_resources: {
+            general_partners: [],
+            limited_partners: [],
+            partnership: LIMITED_PARTNERSHIP_OBJECT_MOCK
+        }
+    };
 
 export const TRANSACTION_ID = "12345";
 export const SUBMISSION_ID = "09876";
@@ -161,8 +164,11 @@ export const mockGetLimitedPartnershipIncorporationResponse = {
 };
 
 export const mockGetLimitedPartnershipIncorporationResponseWithSub = {
-    200: { status: 200, body: LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB }
-}
+    200: {
+        status: 200,
+        body: LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB
+    }
+};
 
 export const mockPostGeneralPartnerResponse = {
     201: { status: 201, body: mockLimitedPartnershipCreatedResource },
