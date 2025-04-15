@@ -578,6 +578,31 @@ describe("LimitedPartnershipsService", () => {
         });
     })
 
+    describe("getGeneralPartners", () => {
+        it("should return a status 200 and the generalPartner object", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpGet")
+                .resolves(mockValues.mockGetGeneralPartnersResponse[200]);
+
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+
+            const response = await service.getGeneralPartners(
+                mockValues.TRANSACTION_ID
+            ) as Resource<GeneralPartner>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partners"
+                )
+            ).to.be.true;
+            expect(response.httpStatusCode).to.equal(200);
+            expect(response?.resource).to.eql([mockValues.GENERAL_PARTNER_OBJECT_MOCK]);
+        });
+    })
+
     describe("patchGeneralPartner", () => {
         it("should return 200 patchGeneralPartner method", async () => {
             const mockRequest = sinon

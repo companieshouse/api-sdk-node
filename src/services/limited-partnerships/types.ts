@@ -30,6 +30,7 @@ export interface LimitedPartnership {
 }
 
 export interface GeneralPartner {
+    id?: string;
     data?: {
         date_effective_from?: string;
         date_of_birth?: string;
