@@ -141,4 +141,17 @@ export default class LimitedPartnershipsService {
             resource: { ...response.body }
         };
     }
+
+    public async deleteGeneralPartner (
+        transactionId: string,
+        generalPartnerId: string
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+        const response: HttpResponse = await this.client.httpDelete(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
 }
