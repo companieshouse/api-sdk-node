@@ -679,6 +679,57 @@ describe("LimitedPartnershipsService", () => {
     })
 
     describe("LimitedPartner", () => {
+        describe("postLimitedPartner", () => {
+            it("should return object Id for postLimitedPartner method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPost")
+                    .resolves(mockValues.mockPostLimitedPartnerResponse[201]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.postLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.LIMITED_PARTNER_OBJECT_MOCK
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner",
+                        mockValues.LIMITED_PARTNER_OBJECT_MOCK
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(201);
+                expect(response.resource?.id).to.equal(
+                    mockValues.mockLimitedPartnershipCreatedResource.id
+                );
+            });
+
+            it("should return error 400 (Bad Request)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPost")
+                    .resolves(mockValues.mockPostLimitedPartnerResponse[400]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.postLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    {}
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner",
+                        {}
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(400);
+            });
+        });
+
         describe("getLimitedPartner", () => {
             it("should return a status 200 and the limitedPartner object", async () => {
                 const mockRequest = sinon
