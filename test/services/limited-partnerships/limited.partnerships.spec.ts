@@ -614,7 +614,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.patchGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.PARTNER_ID,
+                mockValues.GENERAL_PARTNER_ID,
                 mockValues.GENERAL_PARTNER_OBJECT_MOCK.data
             )) as Resource<void>;
 
@@ -638,7 +638,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.patchGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.PARTNER_ID,
+                mockValues.GENERAL_PARTNER_ID,
                 {}
             )) as Resource<LimitedPartnershipResourceCreated>;
 
@@ -664,7 +664,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.deleteGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.PARTNER_ID
+                mockValues.GENERAL_PARTNER_ID
             )) as Resource<void>;
 
             expect(mockRequest).to.have.been.calledOnce;
@@ -692,7 +692,7 @@ describe("LimitedPartnershipsService", () => {
                 const response = await service.getLimitedPartner(
                     mockValues.TRANSACTION_ID,
                     mockValues.SUBMISSION_ID
-                ) as Resource<GeneralPartner>;
+                ) as Resource<LimitedPartner>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
@@ -788,14 +788,14 @@ describe("LimitedPartnershipsService", () => {
                 );
                 const response = (await service.patchLimitedPartner(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PARTNER_ID,
+                    mockValues.LIMITED_PARTNER_ID,
                     mockValues.LIMITED_PARTNER_OBJECT_MOCK.data
                 )) as Resource<void>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/limited-partner/00112233",
+                        "/transactions/12345/limited-partnership/limited-partner/11223344",
                         mockValues.LIMITED_PARTNER_OBJECT_MOCK.data
                     )
                 ).to.be.true;
@@ -812,14 +812,14 @@ describe("LimitedPartnershipsService", () => {
                 );
                 const response = (await service.patchLimitedPartner(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PARTNER_ID,
+                    mockValues.LIMITED_PARTNER_ID,
                     {}
                 )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/limited-partner/00112233",
+                        "/transactions/12345/limited-partnership/limited-partner/11223344",
                         {}
                     )
                 ).to.be.true;
@@ -838,13 +838,13 @@ describe("LimitedPartnershipsService", () => {
                 );
                 const response = (await service.deleteLimitedPartner(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PARTNER_ID
+                    mockValues.LIMITED_PARTNER_ID
                 )) as Resource<void>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/limited-partner/00112233"
+                        "/transactions/12345/limited-partnership/limited-partner/11223344"
                     )
                 ).to.be.true;
 

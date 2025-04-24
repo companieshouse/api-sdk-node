@@ -170,7 +170,8 @@ export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPart
 
 export const TRANSACTION_ID = "12345";
 export const SUBMISSION_ID = "09876";
-export const PARTNER_ID = "00112233";
+export const GENERAL_PARTNER_ID = "00112233";
+export const LIMITED_PARTNER_ID = "11223344";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const FILE_RESOURCE_ID = "a1b2c3";
 export const UNAUTHORISED = "Unauthorised";
