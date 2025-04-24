@@ -193,3 +193,9 @@ export const mockPatchGeneralPartnerResponse = {
     400: { status: 400, body: { error: BAD_REQUEST } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
+
+export const mockDeleteGeneralPartnerResponse = {
+    204: { status: 204 },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};

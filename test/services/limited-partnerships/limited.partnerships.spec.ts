@@ -652,4 +652,28 @@ describe("LimitedPartnershipsService", () => {
             expect(response.httpStatusCode).to.equal(400);
         });
     })
+
+    describe("deleteGeneralPartner", () => {
+        it("should return 204 patchGeneralPartner method", async () => {
+            const mockRequest = sinon
+                .stub(mockValues.requestClient, "httpDelete")
+                .resolves(mockValues.mockDeleteGeneralPartnerResponse[204]);
+            const service = new LimitedPartnershipsService(
+                mockValues.requestClient
+            );
+            const response = (await service.deleteGeneralPartner(
+                mockValues.TRANSACTION_ID,
+                mockValues.GENERAL_PARTNER_ID
+            )) as Resource<void>;
+
+            expect(mockRequest).to.have.been.calledOnce;
+            expect(
+                mockRequest.calledWith(
+                    "/transactions/12345/limited-partnership/general-partner/00112233"
+                )
+            ).to.be.true;
+
+            expect(response.httpStatusCode).to.equal(204);
+        });
+    })
 });
