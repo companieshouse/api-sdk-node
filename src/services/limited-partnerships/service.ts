@@ -190,7 +190,7 @@ export default class LimitedPartnershipsService {
         transactionId: string
     ): Promise<Resource<LimitedPartner[]> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/limited-partners`;
-        const response: HttpResponse = await this.client.httpGet(URL, { transactionId });
+        const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
             httpStatusCode: response.status,
