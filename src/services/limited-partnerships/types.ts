@@ -28,31 +28,42 @@ export interface LimitedPartnership {
         sic_codes?: string[];
     };
 }
+type Partner = {
+    date_effective_from?: string;
+    date_of_birth?: string;
+    etag?: string;
+    forename?: string;
+    former_names?: string;
+    governing_law?: string;
+    kind?: string;
+    legal_entity_name?: string;
+    legal_entity_register_name?: string;
+    legal_entity_registration_location?: string;
+    legal_form?: string;
+    nationality1?: string;
+    nationality2?: string;
+    principal_office_address?: Address;
+    registered_company_number?: string;
+    resignation_date?: string;
+    surname?: string;
+    usual_residential_address?: Address;
+}
+
+export interface LimitedPartner {
+    id?: string;
+    data?: Partner & {
+        contribution_currency_type?: string,
+        contribution_currency_value?: string,
+        contribution_non_monetary_value?: string
+    };
+}
 
 export interface GeneralPartner {
     id?: string;
-    data?: {
-        date_effective_from?: string;
-        date_of_birth?: string;
-        etag?: string;
-        forename?: string;
-        former_names?: string;
-        governing_law?: string;
-        kind?: string;
-        legal_entity_name?: string;
-        legal_entity_register_name?: string;
-        legal_entity_registration_location?: string;
-        legal_form?: string;
-        nationality1?: string;
-        nationality2?: string;
+    data?: Partner & {
         not_disqualified_statement_checked?: boolean;
         legal_personality_statement_checked?: boolean;
-        principal_office_address?: Address;
-        registered_company_number?: string;
-        resignation_date?: string;
         service_address?: Address;
-        surname?: string;
-        usual_residential_address?: Address;
     };
 }
 

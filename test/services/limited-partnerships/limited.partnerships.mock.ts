@@ -9,7 +9,8 @@ import {
     PartnershipType,
     Jurisdiction,
     Term,
-    GeneralPartner
+    GeneralPartner,
+    LimitedPartner
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -98,6 +99,49 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
     }
 };
 
+export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
+    id: "123456",
+    data: {
+        contribution_currency_type: "GBP",
+        contribution_currency_value: "1000",
+        contribution_non_monetary_value: "car",
+        date_effective_from: "2005-02-04",
+        date_of_birth: "2000-05-01",
+        etag: "",
+        forename: "John",
+        former_names: "Mary",
+        governing_law: "British Government",
+        kind: "",
+        legal_entity_name: "My company ltd",
+        legal_entity_register_name: "UK Register",
+        legal_entity_registration_location: "England",
+        legal_form: "abc",
+        nationality1: "English",
+        nationality2: "French",
+        principal_office_address: {
+            premises: "22",
+            address_line_1: "Some Street",
+            address_line_2: "Some Line 2",
+            locality: "Some Locality",
+            region: "Some Region",
+            country: "Some Country",
+            postal_code: "SC12 1WE"
+        },
+        registered_company_number: "223456",
+        resignation_date: "",
+        surname: "Doe",
+        usual_residential_address: {
+            premises: "25",
+            address_line_1: "That Street",
+            address_line_2: "That Line 2",
+            locality: "That Locality",
+            region: "That Region",
+            country: "That Country",
+            postal_code: "SC15 1N2"
+        }
+    }
+};
+
 // This structure is used when POSTing Incorporation data
 export const INCORPORATION_OBJECT_MOCK: Incorporation = {
     data: {
@@ -126,7 +170,7 @@ export const LIMITED_PARTNERSHIP_INCORPORATION_OBJECT_MOCK_WITH_SUB: LimitedPart
 
 export const TRANSACTION_ID = "12345";
 export const SUBMISSION_ID = "09876";
-export const GENERAL_PARTNER_ID = "00112233";
+export const PARTNER_ID = "00112233";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const FILE_RESOURCE_ID = "a1b2c3";
 export const UNAUTHORISED = "Unauthorised";
@@ -195,6 +239,36 @@ export const mockPatchGeneralPartnerResponse = {
 };
 
 export const mockDeleteGeneralPartnerResponse = {
+    204: { status: 204 },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockPostLimitedPartnerResponse = {
+    201: { status: 201, body: mockLimitedPartnershipCreatedResource },
+    400: { status: 400, body: { error: BAD_REQUEST } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockGetLimitedPartnerResponse = {
+    200: { status: 200, body: LIMITED_PARTNER_OBJECT_MOCK },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockGetLimitedPartnersResponse = {
+    200: { status: 200, body: [LIMITED_PARTNER_OBJECT_MOCK] },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockPatchLimitedPartnerResponse = {
+    200: { status: 200 },
+    400: { status: 400, body: { error: BAD_REQUEST } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockDeleteLimitedPartnerResponse = {
     204: { status: 204 },
     404: { status: 404, body: { error: NOT_FOUND } },
     401: { status: 401, body: { error: UNAUTHORISED } }

@@ -9,7 +9,8 @@ import {
     LimitedPartnershipsService,
     LimitedPartnershipIncorporation,
     NameEndingType,
-    GeneralPartner
+    GeneralPartner,
+    LimitedPartner
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -613,7 +614,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.patchGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.GENERAL_PARTNER_ID,
+                mockValues.PARTNER_ID,
                 mockValues.GENERAL_PARTNER_OBJECT_MOCK.data
             )) as Resource<void>;
 
@@ -637,7 +638,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.patchGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.GENERAL_PARTNER_ID,
+                mockValues.PARTNER_ID,
                 {}
             )) as Resource<LimitedPartnershipResourceCreated>;
 
@@ -663,7 +664,7 @@ describe("LimitedPartnershipsService", () => {
             );
             const response = (await service.deleteGeneralPartner(
                 mockValues.TRANSACTION_ID,
-                mockValues.GENERAL_PARTNER_ID
+                mockValues.PARTNER_ID
             )) as Resource<void>;
 
             expect(mockRequest).to.have.been.calledOnce;
@@ -676,4 +677,179 @@ describe("LimitedPartnershipsService", () => {
             expect(response.httpStatusCode).to.equal(204);
         });
     })
+
+    describe("LimitedPartner", () => {
+        describe("getLimitedPartner", () => {
+            it("should return a status 200 and the limitedPartner object", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetLimitedPartnerResponse[200]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+
+                const response = await service.getLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.SUBMISSION_ID
+                ) as Resource<GeneralPartner>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/09876"
+                    )
+                ).to.be.true;
+                expect(response.httpStatusCode).to.equal(200);
+                expect(response?.resource).to.eql(mockValues.LIMITED_PARTNER_OBJECT_MOCK);
+            });
+
+            it("should return error 401 (Unauthorised)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetLimitedPartnerResponse[401]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.SUBMISSION_ID
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/09876"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(401);
+                expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+            });
+
+            it("should return error 404 (Not Found)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetLimitedPartnerResponse[404]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    "wrong-id"
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/wrong-id"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(404);
+                expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
+            });
+        })
+
+        describe("getLimitedPartners", () => {
+            it("should return a status 200 and the limitedPartner object", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetLimitedPartnersResponse[200]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+
+                const response = await service.getLimitedPartners(
+                    mockValues.TRANSACTION_ID
+                ) as Resource<LimitedPartner>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partners"
+                    )
+                ).to.be.true;
+                expect(response.httpStatusCode).to.equal(200);
+                expect(response?.resource).to.eql([mockValues.LIMITED_PARTNER_OBJECT_MOCK]);
+            });
+        })
+
+        describe("patchLimitedPartner", () => {
+            it("should return 200 patchLimitedPartner method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPatch")
+                    .resolves(mockValues.mockPatchLimitedPartnerResponse[200]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.patchLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PARTNER_ID,
+                    mockValues.LIMITED_PARTNER_OBJECT_MOCK.data
+                )) as Resource<void>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/00112233",
+                        mockValues.LIMITED_PARTNER_OBJECT_MOCK.data
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(200);
+            });
+
+            it("should return error 400 (Bad Request)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPatch")
+                    .resolves(mockValues.mockPatchLimitedPartnerResponse[400]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.patchLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PARTNER_ID,
+                    {}
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/00112233",
+                        {}
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(400);
+            });
+        })
+
+        describe("deleteLimitedPartner", () => {
+            it("should return 204 patchLimitedPartner method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpDelete")
+                    .resolves(mockValues.mockDeleteLimitedPartnerResponse[204]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.deleteLimitedPartner(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PARTNER_ID
+                )) as Resource<void>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/limited-partner/00112233"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(204);
+            });
+        })
+    });
 });

@@ -4,7 +4,8 @@ import {
     LimitedPartnership,
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
-    GeneralPartner
+    GeneralPartner,
+    LimitedPartner
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
@@ -147,6 +148,75 @@ export default class LimitedPartnershipsService {
         generalPartnerId: string
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+        const response: HttpResponse = await this.client.httpDelete(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    /*
+    * Calls to limited partner endpoints
+    */
+
+    public async postLimitedPartner (
+        transactionId: string,
+        body: LimitedPartner
+    ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/limited-partner`;
+        const response: HttpResponse = await this.client.httpPost(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getLimitedPartner (
+        transactionId: string,
+        limitedPartnerId: string
+    ): Promise<Resource<LimitedPartner> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getLimitedPartners (
+        transactionId: string
+    ): Promise<Resource<LimitedPartner[]> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/limited-partners`;
+        const response: HttpResponse = await this.client.httpGet(URL, { transactionId });
+
+        return {
+            httpStatusCode: response.status,
+            resource: response.body
+        };
+    }
+
+    public async patchLimitedPartner (
+        transactionId: string,
+        limitedPartnerId: string,
+        body: LimitedPartner["data"]
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
+        const response: HttpResponse = await this.client.httpPatch(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async deleteLimitedPartner (
+        transactionId: string,
+        limitedPartnerId: string
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
         const response: HttpResponse = await this.client.httpDelete(URL);
 
         return {
