@@ -97,9 +97,9 @@ export enum PartnershipType {
 }
 
 export enum Jurisdiction {
-    ENGLAND_AND_WALES = "England and Wales",
-    NORTHERN_IRELAND = "Northern Ireland",
-    SCOTLAND = "Scotland",
+    ENGLAND_AND_WALES = "england-wales",
+    NORTHERN_IRELAND = "northern-ireland",
+    SCOTLAND = "scotland",
 }
 
 export interface LimitedPartnershipIncorporation {
