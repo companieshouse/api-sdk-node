@@ -151,4 +151,5 @@ export interface CompanyProfile {
   foreignCompanyDetails?: ForeignCompanyDetails;
   isOnRegisterInCountryFormedIn?: boolean;
   links: Links;
+  hasAnsweredRelevantPeriodQuestion: boolean;
 }
