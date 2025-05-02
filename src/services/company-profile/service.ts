@@ -77,7 +77,6 @@ export default class CompanyProfileService {
             type: body.type,
             hasCharges: body.has_charges,
             hasInsolvencyHistory: body.has_insolvency_history,
-            hasAnsweredRelevantPeriodQuestion: body.has_answered_relevant_period_question,
             registeredOfficeAddress: {
                 addressLineOne: roa?.address_line_1,
                 addressLineTwo: roa?.address_line_2,
