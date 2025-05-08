@@ -47,6 +47,7 @@ type Partner = {
     resignation_date?: string;
     surname?: string;
     usual_residential_address?: Address;
+    legal_personality_statement_checked?: boolean;
 }
 
 export interface LimitedPartner {
@@ -62,7 +63,6 @@ export interface GeneralPartner {
     id?: string;
     data?: Partner & {
         not_disqualified_statement_checked?: boolean;
-        legal_personality_statement_checked?: boolean;
         service_address?: Address;
     };
 }
