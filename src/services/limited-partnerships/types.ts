@@ -47,12 +47,12 @@ type Partner = {
     resignation_date?: string;
     surname?: string;
     usual_residential_address?: Address;
+    legal_personality_statement_checked?: boolean;
 }
 
 export interface LimitedPartner {
     id?: string;
     data?: Partner & {
-        legal_personality_statement_checked?: boolean;
         contribution_currency_type?: string,
         contribution_currency_value?: string,
         contribution_non_monetary_value?: string
@@ -63,7 +63,6 @@ export interface GeneralPartner {
     id?: string;
     data?: Partner & {
         not_disqualified_statement_checked?: boolean;
-        legal_personality_statement_checked?: boolean;
         service_address?: Address;
     };
 }
