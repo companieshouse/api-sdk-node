@@ -52,6 +52,7 @@ type Partner = {
 export interface LimitedPartner {
     id?: string;
     data?: Partner & {
+        legal_personality_statement_checked?: boolean;
         contribution_currency_type?: string,
         contribution_currency_value?: string,
         contribution_non_monetary_value?: string
