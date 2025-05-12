@@ -116,6 +116,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
         legal_entity_register_name: "UK Register",
         legal_entity_registration_location: "England",
         legal_form: "abc",
+        legal_personality_statement_checked: true,
         nationality1: "English",
         nationality2: "French",
         principal_office_address: {
