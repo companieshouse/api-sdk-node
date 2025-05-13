@@ -444,7 +444,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal("0");
         expect(data.is_secure_register).to.deep.equal("0");
-         expect(data.has_answered_relevant_period_question).to.deep.equal(true);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(true);
         expect(data.who_is_registering).to.deep.equal("someone_else");
     });
 
