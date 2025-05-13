@@ -53,7 +53,7 @@ export const mapOverseasEntity = (body: OverseasEntity): OverseasEntityResource 
         is_remove: (body.is_remove) ? body.is_remove : null,
         has_sold_land: mapHasSoldLand(body.has_sold_land),
         is_secure_register: mapIsSecureRegister(body.is_secure_register),
-        has_answered_relevant_period_question: (body.has_answered_relevant_period_question) ? body.has_answered_relevant_period_question : null
+        has_answered_relevant_period_question: (body.has_answered_relevant_period_question) ? body.has_answered_relevant_period_question : null,
         who_is_registering: body.who_is_registering,
         payment: body.payment ? body.payment : null
     };
