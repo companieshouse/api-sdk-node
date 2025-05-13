@@ -227,6 +227,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: "0",
             is_secure_register: "0",
+            has_answered_relevant_period_question: true,
             who_is_registering: "agent",
             payment: mockValues.PAYMENT_OBJECT_MOCK
         });
@@ -249,6 +250,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal(false);
         expect(data.is_secure_register).to.deep.equal(false);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(true);
         expect(data.who_is_registering).to.deep.equal(ENTITY_WHO_IS_REGISTERING.AGENT);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
         expect(data.payment).to.deep.equal(mockValues.PAYMENT_OBJECT_MOCK);
@@ -274,6 +276,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: "1",
             is_secure_register: "1",
+            has_answered_relevant_period_question: true,
             who_is_registering: "someone_else"
         });
 
@@ -295,6 +298,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal(true);
         expect(data.is_secure_register).to.deep.equal(true);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(true);
         expect(data.who_is_registering).to.deep.equal(ENTITY_WHO_IS_REGISTERING.SOMEONE_ELSE);
         expect(data.remove).to.deep.equal(mockValues.OVERSEAS_ENTITY_RESOURCE_OBJECT_MOCK.remove);
     });
@@ -319,6 +323,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -340,6 +345,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(null);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -365,6 +371,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: true,
             is_secure_register: true,
+            has_answered_relevant_period_question: true,
             who_is_registering: ENTITY_WHO_IS_REGISTERING.AGENT,
             payment: OE_RESOURCE.payment
         });
@@ -388,6 +395,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal("1");
         expect(data.is_secure_register).to.deep.equal("1");
+        expect(data.has_answered_relevant_period_question).to.deep.equal(true);
         expect(data.who_is_registering).to.deep.equal("agent");
         expect(data.payment).to.deep.equal(mockValues.PAYMENT_OBJECT_MOCK);
     });
@@ -413,6 +421,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: true,
             has_sold_land: false,
             is_secure_register: false,
+            has_answered_relevant_period_question: true,
             who_is_registering: ENTITY_WHO_IS_REGISTERING.SOMEONE_ELSE
         });
 
@@ -435,6 +444,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(true);
         expect(data.has_sold_land).to.deep.equal("0");
         expect(data.is_secure_register).to.deep.equal("0");
+         expect(data.has_answered_relevant_period_question).to.deep.equal(true);
         expect(data.who_is_registering).to.deep.equal("someone_else");
     });
 
@@ -456,6 +466,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -476,6 +487,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
 
@@ -497,6 +509,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -517,6 +530,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -538,6 +552,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -557,6 +572,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.data.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -580,6 +596,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -601,6 +618,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.data.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -624,6 +642,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -645,6 +664,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -668,6 +688,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });
@@ -697,6 +718,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             update: updateResource,
             remove: undefined,
             is_remove: undefined,
+            has_answered_relevant_period_question: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
             who_is_registering: undefined,
@@ -730,6 +752,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
             is_remove: undefined,
             has_sold_land: undefined,
             is_secure_register: undefined,
+            has_answered_relevant_period_question: undefined,
             who_is_registering: undefined,
             payment: undefined
         });

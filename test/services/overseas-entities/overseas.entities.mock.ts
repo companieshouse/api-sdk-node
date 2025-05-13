@@ -545,6 +545,7 @@ export const OVERSEAS_ENTITY_OBJECT_MOCK: OverseasEntity = {
     is_remove: undefined,
     has_sold_land: undefined,
     is_secure_register: undefined,
+    has_answered_relevant_period_question: undefined;
     who_is_registering: undefined,
     payment: PAYMENT_OBJECT_MOCK
 };
