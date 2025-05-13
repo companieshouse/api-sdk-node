@@ -572,7 +572,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
-        expect(data.has_answered_relevant_period_question).to.data.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
@@ -618,7 +618,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         expect(data.is_remove).to.deep.equal(undefined);
         expect(data.has_sold_land).to.deep.equal(undefined);
         expect(data.is_secure_register).to.deep.equal(undefined);
-        expect(data.has_answered_relevant_period_question).to.data.equal(undefined);
+        expect(data.has_answered_relevant_period_question).to.deep.equal(undefined);
         expect(data.who_is_registering).to.deep.equal(undefined);
         expect(data.payment).to.deep.equal(null);
     });
