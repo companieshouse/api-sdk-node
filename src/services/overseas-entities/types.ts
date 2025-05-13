@@ -22,6 +22,7 @@ export interface OverseasEntity {
     is_remove?: boolean;
     has_sold_land?: string;
     is_secure_register?: string;
+    has_answered_relevant_period_question?: boolean;
     who_is_registering?: string;
     payment?: CreatePaymentRequest;
 }
@@ -45,6 +46,7 @@ export interface OverseasEntityResource {
     is_remove?: boolean;
     has_sold_land?: boolean;
     is_secure_register?: boolean;
+    has_answered_relevant_period_question?: boolean;
     who_is_registering?: string;
     payment?: CreatePaymentRequest;
 }
@@ -85,7 +87,6 @@ export interface Entity {
     public_register_name?: string
     registration_number?: string
     is_on_register_in_country_formed_in?: yesNoResponse
-    has_answered_relevant_period_question?: boolean;
 }
 
 export interface DueDiligence {
