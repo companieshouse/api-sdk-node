@@ -74,8 +74,8 @@ describe("order a certified copy GET", () => {
         const certifiedCopy: CertifiedCopiesService = new CertifiedCopiesService(requestClient);
         const data = await certifiedCopy.getCertifiedCopy("CERT-COPY-ID-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("maps the certified copy field data items correctly", async () => {
@@ -88,41 +88,41 @@ describe("order a certified copy GET", () => {
         const certifiedCopy: CertifiedCopiesService = new CertifiedCopiesService(requestClient);
         const data = await certifiedCopy.getCertifiedCopy("CERT-COPY-ID-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
-        expect(data.resource.description).to.equal(mockResponseBody.description);
-        expect(data.resource.descriptionIdentifier).to.equal(mockResponseBody.description_identifier);
-        expect(data.resource.descriptionValues).to.deep.equal(mockResponseBody.description_values);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.links).to.deep.equal(mockResponseBody.links);
-        expect(data.resource.id).to.equal(mockResponseBody.id);
-        expect(data.resource.itemCosts).to.deep.equal([{
+        expect(data.httpStatusCode).toBe(200);
+        expect(data.resource.companyNumber).toBe(mockResponseBody.company_number);
+        expect(data.resource.companyName).toBe(mockResponseBody.company_name);
+        expect(data.resource.customerReference).toBe(mockResponseBody.customer_reference);
+        expect(data.resource.description).toBe(mockResponseBody.description);
+        expect(data.resource.descriptionIdentifier).toBe(mockResponseBody.description_identifier);
+        expect(data.resource.descriptionValues).toEqual(mockResponseBody.description_values);
+        expect(data.resource.etag).toBe(mockResponseBody.etag);
+        expect(data.resource.links).toEqual(mockResponseBody.links);
+        expect(data.resource.id).toBe(mockResponseBody.id);
+        expect(data.resource.itemCosts).toEqual([{
             calculatedCost: "calculated cost",
             discountApplied: "discount applied",
             itemCost: "item cost",
             productType: "product type"
         }] as ItemCosts[]);
-        expect(data.resource.itemOptions.collectionLocation).to.equal(mockResponseBody.item_options.collection_location);
-        expect(data.resource.itemOptions.contactNumber).to.equal(mockResponseBody.item_options.contact_number);
-        expect(data.resource.itemOptions.deliveryMethod).to.equal(mockResponseBody.item_options.delivery_method);
-        expect(data.resource.itemOptions.deliveryTimescale).to.equal(mockResponseBody.item_options.delivery_timescale);
-        expect(data.resource.itemOptions.forename).to.equal(mockResponseBody.item_options.forename);
-        expect(data.resource.itemOptions.surname).to.equal(mockResponseBody.item_options.surname);
-        expect(data.resource.kind).to.equal(mockResponseBody.kind);
-        expect(data.resource.postageCost).to.equal(mockResponseBody.postage_cost);
-        expect(data.resource.postalDelivery).to.equal(mockResponseBody.postal_delivery);
-        expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
-        expect(data.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
+        expect(data.resource.itemOptions.collectionLocation).toBe(mockResponseBody.item_options.collection_location);
+        expect(data.resource.itemOptions.contactNumber).toBe(mockResponseBody.item_options.contact_number);
+        expect(data.resource.itemOptions.deliveryMethod).toBe(mockResponseBody.item_options.delivery_method);
+        expect(data.resource.itemOptions.deliveryTimescale).toBe(mockResponseBody.item_options.delivery_timescale);
+        expect(data.resource.itemOptions.forename).toBe(mockResponseBody.item_options.forename);
+        expect(data.resource.itemOptions.surname).toBe(mockResponseBody.item_options.surname);
+        expect(data.resource.kind).toBe(mockResponseBody.kind);
+        expect(data.resource.postageCost).toBe(mockResponseBody.postage_cost);
+        expect(data.resource.postalDelivery).toBe(mockResponseBody.postal_delivery);
+        expect(data.resource.quantity).toBe(mockResponseBody.quantity);
+        expect(data.resource.totalItemCost).toBe(mockResponseBody.total_item_cost);
 
         const filingHistoryDocument = data.resource.itemOptions.filingHistoryDocuments[0];
         const filingHistoryDocumentResource = mockResponseBody.item_options.filing_history_documents[0];
-        expect(filingHistoryDocument.filingHistoryDate).to.equal(filingHistoryDocumentResource.filing_history_date);
-        expect(filingHistoryDocument.filingHistoryDescription).to.equal(filingHistoryDocumentResource.filing_history_description);
-        expect(filingHistoryDocument.filingHistoryId).to.equal(filingHistoryDocumentResource.filing_history_id);
-        expect(filingHistoryDocument.filingHistoryType).to.equal(filingHistoryDocumentResource.filing_history_type);
-        expect(filingHistoryDocument.filingHistoryDescriptionValues).to.deep.equal(filingHistoryDocumentResource.filing_history_description_values);
-        expect(filingHistoryDocument.filingHistoryCost).to.equal(filingHistoryDocumentResource.filing_history_cost);
+        expect(filingHistoryDocument.filingHistoryDate).toBe(filingHistoryDocumentResource.filing_history_date);
+        expect(filingHistoryDocument.filingHistoryDescription).toBe(filingHistoryDocumentResource.filing_history_description);
+        expect(filingHistoryDocument.filingHistoryId).toBe(filingHistoryDocumentResource.filing_history_id);
+        expect(filingHistoryDocument.filingHistoryType).toBe(filingHistoryDocumentResource.filing_history_type);
+        expect(filingHistoryDocument.filingHistoryDescriptionValues).toEqual(filingHistoryDocumentResource.filing_history_description_values);
+        expect(filingHistoryDocument.filingHistoryCost).toBe(filingHistoryDocumentResource.filing_history_cost);
     });
 });

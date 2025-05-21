@@ -32,8 +32,8 @@ describe("company-filing-history", () => {
         const companyFilingService : CompanyFilingHistoryService = new CompanyFilingHistoryService(requestClient);
         const data = await companyFilingService.getCompanyFilingHistory("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("maps the company filing history data items correctly", async () => {
@@ -63,19 +63,19 @@ describe("company-filing-history", () => {
         const companyFilingHistoryService : CompanyFilingHistoryService = new CompanyFilingHistoryService(requestClient);
         const data = await companyFilingHistoryService.getCompanyFilingHistory("123");
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
 
-        expect(data.resource?.etag).to.equal(mockResponseBody.etag)
-        expect(data.resource?.filingHistoryStatus).to.equal(mockResponseBody.filing_history_status)
-        expect(data.resource?.itemsPerPage).to.equal(mockResponseBody.items_per_page)
-        expect(data.resource?.kind).to.equal(mockResponseBody.kind)
-        expect(data.resource?.startIndex).to.equal(mockResponseBody.start_index)
-        expect(data.resource?.totalCount).to.equal(mockResponseBody.total_count)
+        expect(data.resource?.etag).toBe(mockResponseBody.etag)
+        expect(data.resource?.filingHistoryStatus).toBe(mockResponseBody.filing_history_status)
+        expect(data.resource?.itemsPerPage).toBe(mockResponseBody.items_per_page)
+        expect(data.resource?.kind).toBe(mockResponseBody.kind)
+        expect(data.resource?.startIndex).toBe(mockResponseBody.start_index)
+        expect(data.resource?.totalCount).toBe(mockResponseBody.total_count)
 
-        expect(data.resource?.items[0].category).to.equal(mockFilingHistoryItem.category);
-        expect(data.resource?.items[0].date).to.equal(mockFilingHistoryItem.date);
-        expect(data.resource?.items[0].description).to.equal(mockFilingHistoryItem.description);
-        expect(data.resource?.items[0].transactionId).to.equal(mockFilingHistoryItem.transaction_id);
-        expect(data.resource?.items[0].type).to.equal(mockFilingHistoryItem.type);
+        expect(data.resource?.items[0].category).toBe(mockFilingHistoryItem.category);
+        expect(data.resource?.items[0].date).toBe(mockFilingHistoryItem.date);
+        expect(data.resource?.items[0].description).toBe(mockFilingHistoryItem.description);
+        expect(data.resource?.items[0].transactionId).toBe(mockFilingHistoryItem.transaction_id);
+        expect(data.resource?.items[0].type).toBe(mockFilingHistoryItem.type);
     });
 });

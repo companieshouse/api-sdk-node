@@ -41,8 +41,8 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.postItemToBasket(itemUriRequestStub);
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.resource).to.be.undefined;
+            expect(data.httpStatusCode).toBe(401);
+            expect(data.resource).toBeUndefined();
         });
 
         it("maps add item to basket correctly", async () => {
@@ -55,20 +55,20 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.postItemToBasket(itemUriRequestStub);
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.companyName).to.equal(itemResourceStub.company_name);
-            expect(data.resource.companyNumber).to.equal(itemResourceStub.company_number);
-            expect(data.resource.customerReference).to.equal(itemResourceStub.customer_reference);
-            expect(data.resource.description).to.equal(itemResourceStub.description);
-            expect(data.resource.descriptionIdentifier).to.equal(itemResourceStub.description_identifier);
-            expect(data.resource.descriptionValues).to.deep.equal(itemResourceStub.description_values);
-            expect(data.resource.etag).to.equal(itemResourceStub.etag);
-            expect(data.resource.id).to.equal(itemResourceStub.id);
-            expect(data.resource.itemCosts[0].calculatedCost).to.equal(itemResourceStub.item_costs[0].calculated_cost);
-            expect(data.resource.itemCosts[0].discountApplied).to.equal(itemResourceStub.item_costs[0].discount_applied);
-            expect(data.resource.itemCosts[0].itemCost).to.equal(itemResourceStub.item_costs[0].item_cost);
-            expect(data.resource.itemCosts[0].productType).to.equal(itemResourceStub.item_costs[0].product_type);
-            expect(data.resource.itemOptions).to.deep.equal({
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.companyName).toBe(itemResourceStub.company_name);
+            expect(data.resource.companyNumber).toBe(itemResourceStub.company_number);
+            expect(data.resource.customerReference).toBe(itemResourceStub.customer_reference);
+            expect(data.resource.description).toBe(itemResourceStub.description);
+            expect(data.resource.descriptionIdentifier).toBe(itemResourceStub.description_identifier);
+            expect(data.resource.descriptionValues).toEqual(itemResourceStub.description_values);
+            expect(data.resource.etag).toBe(itemResourceStub.etag);
+            expect(data.resource.id).toBe(itemResourceStub.id);
+            expect(data.resource.itemCosts[0].calculatedCost).toBe(itemResourceStub.item_costs[0].calculated_cost);
+            expect(data.resource.itemCosts[0].discountApplied).toBe(itemResourceStub.item_costs[0].discount_applied);
+            expect(data.resource.itemCosts[0].itemCost).toBe(itemResourceStub.item_costs[0].item_cost);
+            expect(data.resource.itemCosts[0].productType).toBe(itemResourceStub.item_costs[0].product_type);
+            expect(data.resource.itemOptions).toEqual({
                 filingHistoryDate: "filing history date",
                 filingHistoryDescription: "filing history description",
                 filingHistoryDescriptionValues: {
@@ -81,13 +81,13 @@ describe("basket", () => {
                 filingHistoryCategory: "filing history category",
                 filingHistoryCost: "filing history cost"
             } as MissingImageDeliveryItemOptions);
-            expect(data.resource.itemUri).to.equal(itemResourceStub.item_uri);
-            expect(data.resource.kind).to.equal(itemResourceStub.kind);
-            expect(data.resource.links.self).to.equal(itemResourceStub.links.self);
-            expect(data.resource.postageCost).to.equal(itemResourceStub.postage_cost);
-            expect(data.resource.postalDelivery).to.equal(itemResourceStub.postal_delivery);
-            expect(data.resource.quantity).to.equal(itemResourceStub.quantity);
-            expect(data.resource.totalItemCost).to.equal(itemResourceStub.total_item_cost);
+            expect(data.resource.itemUri).toBe(itemResourceStub.item_uri);
+            expect(data.resource.kind).toBe(itemResourceStub.kind);
+            expect(data.resource.links.self).toBe(itemResourceStub.links.self);
+            expect(data.resource.postageCost).toBe(itemResourceStub.postage_cost);
+            expect(data.resource.postalDelivery).toBe(itemResourceStub.postal_delivery);
+            expect(data.resource.quantity).toBe(itemResourceStub.quantity);
+            expect(data.resource.totalItemCost).toBe(itemResourceStub.total_item_cost);
         });
     });
 
@@ -102,8 +102,8 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.appendItemToBasket(itemUriRequestStub);
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.resource).to.be.undefined;
+            expect(data.httpStatusCode).toBe(401);
+            expect(data.resource).toBeUndefined();
         });
 
         it("appends item to basket correctly", async () => {
@@ -116,20 +116,20 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.appendItemToBasket(itemUriRequestStub);
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.companyName).to.equal(itemResourceStub.company_name);
-            expect(data.resource.companyNumber).to.equal(itemResourceStub.company_number);
-            expect(data.resource.customerReference).to.equal(itemResourceStub.customer_reference);
-            expect(data.resource.description).to.equal(itemResourceStub.description);
-            expect(data.resource.descriptionIdentifier).to.equal(itemResourceStub.description_identifier);
-            expect(data.resource.descriptionValues).to.deep.equal(itemResourceStub.description_values);
-            expect(data.resource.etag).to.equal(itemResourceStub.etag);
-            expect(data.resource.id).to.equal(itemResourceStub.id);
-            expect(data.resource.itemCosts[0].calculatedCost).to.equal(itemResourceStub.item_costs[0].calculated_cost);
-            expect(data.resource.itemCosts[0].discountApplied).to.equal(itemResourceStub.item_costs[0].discount_applied);
-            expect(data.resource.itemCosts[0].itemCost).to.equal(itemResourceStub.item_costs[0].item_cost);
-            expect(data.resource.itemCosts[0].productType).to.equal(itemResourceStub.item_costs[0].product_type);
-            expect(data.resource.itemOptions).to.deep.equal({
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.companyName).toBe(itemResourceStub.company_name);
+            expect(data.resource.companyNumber).toBe(itemResourceStub.company_number);
+            expect(data.resource.customerReference).toBe(itemResourceStub.customer_reference);
+            expect(data.resource.description).toBe(itemResourceStub.description);
+            expect(data.resource.descriptionIdentifier).toBe(itemResourceStub.description_identifier);
+            expect(data.resource.descriptionValues).toEqual(itemResourceStub.description_values);
+            expect(data.resource.etag).toBe(itemResourceStub.etag);
+            expect(data.resource.id).toBe(itemResourceStub.id);
+            expect(data.resource.itemCosts[0].calculatedCost).toBe(itemResourceStub.item_costs[0].calculated_cost);
+            expect(data.resource.itemCosts[0].discountApplied).toBe(itemResourceStub.item_costs[0].discount_applied);
+            expect(data.resource.itemCosts[0].itemCost).toBe(itemResourceStub.item_costs[0].item_cost);
+            expect(data.resource.itemCosts[0].productType).toBe(itemResourceStub.item_costs[0].product_type);
+            expect(data.resource.itemOptions).toEqual({
                 filingHistoryDate: "filing history date",
                 filingHistoryDescription: "filing history description",
                 filingHistoryDescriptionValues: {
@@ -142,13 +142,13 @@ describe("basket", () => {
                 filingHistoryCategory: "filing history category",
                 filingHistoryCost: "filing history cost"
             } as MissingImageDeliveryItemOptions);
-            expect(data.resource.itemUri).to.equal(itemResourceStub.item_uri);
-            expect(data.resource.kind).to.equal(itemResourceStub.kind);
-            expect(data.resource.links.self).to.equal(itemResourceStub.links.self);
-            expect(data.resource.postageCost).to.equal(itemResourceStub.postage_cost);
-            expect(data.resource.postalDelivery).to.equal(itemResourceStub.postal_delivery);
-            expect(data.resource.quantity).to.equal(itemResourceStub.quantity);
-            expect(data.resource.totalItemCost).to.equal(itemResourceStub.total_item_cost);
+            expect(data.resource.itemUri).toBe(itemResourceStub.item_uri);
+            expect(data.resource.kind).toBe(itemResourceStub.kind);
+            expect(data.resource.links.self).toBe(itemResourceStub.links.self);
+            expect(data.resource.postageCost).toBe(itemResourceStub.postage_cost);
+            expect(data.resource.postalDelivery).toBe(itemResourceStub.postal_delivery);
+            expect(data.resource.quantity).toBe(itemResourceStub.quantity);
+            expect(data.resource.totalItemCost).toBe(itemResourceStub.total_item_cost);
         });
     })
 
@@ -164,8 +164,8 @@ describe("basket", () => {
             const response = await basket.checkoutBasket();
             const data = response.value as ApiErrorResponse;
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.errors).to.equal("An error occurred");
+            expect(data.httpStatusCode).toBe(401);
+            expect(data.errors).toBe("An error occurred");
         });
 
         it("maps add item to basket correctly", async () => {
@@ -213,30 +213,30 @@ describe("basket", () => {
             const result = await basket.checkoutBasket() as ApiResult<ApiResponse<Checkout>>;
             const data = result.value as ApiResponse<Checkout>;
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.headers["X-Payment-Required"]).to.equal("http://link-to-payment");
-            expect(data.resource.checkedOutBy.email).to.equal(mockResponseBody.checked_out_by.email);
-            expect(data.resource.checkedOutBy.id).to.equal(mockResponseBody.checked_out_by.id);
-            expect(data.resource.deliveryDetails.addressLine1).to.equal(mockResponseBody.delivery_details.address_line_1);
-            expect(data.resource.deliveryDetails.addressLine2).to.equal(mockResponseBody.delivery_details.address_line_2);
-            expect(data.resource.deliveryDetails.companyName).to.equal(mockResponseBody.delivery_details.company_name);
-            expect(data.resource.deliveryDetails.country).to.equal(mockResponseBody.delivery_details.country);
-            expect(data.resource.deliveryDetails.forename).to.equal(mockResponseBody.delivery_details.forename);
-            expect(data.resource.deliveryDetails.locality).to.equal(mockResponseBody.delivery_details.locality);
-            expect(data.resource.deliveryDetails.poBox).to.equal(mockResponseBody.delivery_details.po_box);
-            expect(data.resource.deliveryDetails.postalCode).to.equal(mockResponseBody.delivery_details.postal_code);
-            expect(data.resource.deliveryDetails.region).to.equal(mockResponseBody.delivery_details.region);
-            expect(data.resource.deliveryDetails.surname).to.equal(mockResponseBody.delivery_details.surname);
-            expect(data.resource.etag).to.equal(mockResponseBody.etag);
-            expect(data.resource.items).to.deep.equal(mockResponseBody.items);
-            expect(data.resource.kind).to.equal(mockResponseBody.kind);
-            expect(data.resource.links.payment).to.equal(mockResponseBody.links.payment);
-            expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
-            expect(data.resource.paidAt).to.equal(mockResponseBody.paid_at);
-            expect(data.resource.paymentReference).to.equal(mockResponseBody.payment_reference);
-            expect(data.resource.reference).to.equal(mockResponseBody.reference);
-            expect(data.resource.status).to.equal(mockResponseBody.status);
-            expect(data.resource.totalOrderCost).to.equal(mockResponseBody.total_order_cost);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.headers["X-Payment-Required"]).toBe("http://link-to-payment");
+            expect(data.resource.checkedOutBy.email).toBe(mockResponseBody.checked_out_by.email);
+            expect(data.resource.checkedOutBy.id).toBe(mockResponseBody.checked_out_by.id);
+            expect(data.resource.deliveryDetails.addressLine1).toBe(mockResponseBody.delivery_details.address_line_1);
+            expect(data.resource.deliveryDetails.addressLine2).toBe(mockResponseBody.delivery_details.address_line_2);
+            expect(data.resource.deliveryDetails.companyName).toBe(mockResponseBody.delivery_details.company_name);
+            expect(data.resource.deliveryDetails.country).toBe(mockResponseBody.delivery_details.country);
+            expect(data.resource.deliveryDetails.forename).toBe(mockResponseBody.delivery_details.forename);
+            expect(data.resource.deliveryDetails.locality).toBe(mockResponseBody.delivery_details.locality);
+            expect(data.resource.deliveryDetails.poBox).toBe(mockResponseBody.delivery_details.po_box);
+            expect(data.resource.deliveryDetails.postalCode).toBe(mockResponseBody.delivery_details.postal_code);
+            expect(data.resource.deliveryDetails.region).toBe(mockResponseBody.delivery_details.region);
+            expect(data.resource.deliveryDetails.surname).toBe(mockResponseBody.delivery_details.surname);
+            expect(data.resource.etag).toBe(mockResponseBody.etag);
+            expect(data.resource.items).toEqual(mockResponseBody.items);
+            expect(data.resource.kind).toBe(mockResponseBody.kind);
+            expect(data.resource.links.payment).toBe(mockResponseBody.links.payment);
+            expect(data.resource.links.self).toBe(mockResponseBody.links.self);
+            expect(data.resource.paidAt).toBe(mockResponseBody.paid_at);
+            expect(data.resource.paymentReference).toBe(mockResponseBody.payment_reference);
+            expect(data.resource.reference).toBe(mockResponseBody.reference);
+            expect(data.resource.status).toBe(mockResponseBody.status);
+            expect(data.resource.totalOrderCost).toBe(mockResponseBody.total_order_cost);
         });
     });
 
@@ -251,8 +251,8 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasket();
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.resource).to.be.undefined;
+            expect(data.httpStatusCode).toBe(401);
+            expect(data.resource).toBeUndefined();
         });
 
         it("maps the basket data correctly", async () => {
@@ -337,32 +337,32 @@ describe("basket", () => {
             const resourceItem = data.resource.items[0];
             const mockResourceItem = mockResponseBody.items[0];
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.enrolled).to.be.true;
-            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
-            expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
-            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
-            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
-            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
-            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
-            expect(resourceDeliveryDetails.poBox).to.equal(mockDeliveryDetails.po_box);
-            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
-            expect(resourceDeliveryDetails.region).to.equal(mockDeliveryDetails.region);
-            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.enrolled).toBe(true);
+            expect(resourceDeliveryDetails.addressLine1).toBe(mockDeliveryDetails.address_line_1);
+            expect(resourceDeliveryDetails.addressLine2).toBe(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).toBe(mockDeliveryDetails.company_name);
+            expect(resourceDeliveryDetails.country).toBe(mockDeliveryDetails.country);
+            expect(resourceDeliveryDetails.forename).toBe(mockDeliveryDetails.forename);
+            expect(resourceDeliveryDetails.locality).toBe(mockDeliveryDetails.locality);
+            expect(resourceDeliveryDetails.poBox).toBe(mockDeliveryDetails.po_box);
+            expect(resourceDeliveryDetails.postalCode).toBe(mockDeliveryDetails.postal_code);
+            expect(resourceDeliveryDetails.region).toBe(mockDeliveryDetails.region);
+            expect(resourceDeliveryDetails.surname).toBe(mockDeliveryDetails.surname);
 
-            expect(resourceItem.companyName).to.equal(mockResourceItem.company_name);
-            expect(resourceItem.companyNumber).to.equal(mockResourceItem.company_number);
-            expect(resourceItem.customerReference).to.equal(mockResourceItem.customer_reference);
-            expect(resourceItem.description).to.equal(mockResourceItem.description);
-            expect(resourceItem.descriptionIdentifier).to.equal(mockResourceItem.description_identifier);
-            expect(resourceItem.descriptionValues).to.deep.equal(mockResourceItem.description_values);
-            expect(resourceItem.etag).to.equal(mockResourceItem.etag);
-            expect(resourceItem.id).to.equal(mockResourceItem.id);
-            expect(resourceItem.itemCosts[0].calculatedCost).to.equal(mockResourceItem.item_costs[0].calculated_cost);
-            expect(resourceItem.itemCosts[0].discountApplied).to.equal(mockResourceItem.item_costs[0].discount_applied);
-            expect(resourceItem.itemCosts[0].itemCost).to.equal(mockResourceItem.item_costs[0].item_cost);
-            expect(resourceItem.itemCosts[0].productType).to.equal(mockResourceItem.item_costs[0].product_type);
-            expect(resourceItem.itemOptions).to.deep.equal({
+            expect(resourceItem.companyName).toBe(mockResourceItem.company_name);
+            expect(resourceItem.companyNumber).toBe(mockResourceItem.company_number);
+            expect(resourceItem.customerReference).toBe(mockResourceItem.customer_reference);
+            expect(resourceItem.description).toBe(mockResourceItem.description);
+            expect(resourceItem.descriptionIdentifier).toBe(mockResourceItem.description_identifier);
+            expect(resourceItem.descriptionValues).toEqual(mockResourceItem.description_values);
+            expect(resourceItem.etag).toBe(mockResourceItem.etag);
+            expect(resourceItem.id).toBe(mockResourceItem.id);
+            expect(resourceItem.itemCosts[0].calculatedCost).toBe(mockResourceItem.item_costs[0].calculated_cost);
+            expect(resourceItem.itemCosts[0].discountApplied).toBe(mockResourceItem.item_costs[0].discount_applied);
+            expect(resourceItem.itemCosts[0].itemCost).toBe(mockResourceItem.item_costs[0].item_cost);
+            expect(resourceItem.itemCosts[0].productType).toBe(mockResourceItem.item_costs[0].product_type);
+            expect(resourceItem.itemOptions).toEqual({
                 collectionLocation: "collection location",
                 contactNumber: "contact number",
                 deliveryMethod: "delivery method",
@@ -381,13 +381,13 @@ describe("basket", () => {
                 forename: "forename",
                 surname: "surname"
             } as CertifiedCopyItemOptions);
-            expect(resourceItem.itemUri).to.equal(mockResourceItem.item_uri);
-            expect(resourceItem.kind).to.equal(mockResourceItem.kind);
-            expect(resourceItem.links.self).to.equal(mockResourceItem.links.self);
-            expect(resourceItem.postageCost).to.equal(mockResourceItem.postage_cost);
-            expect(resourceItem.postalDelivery).to.equal(mockResourceItem.postal_delivery);
-            expect(resourceItem.quantity).to.equal(mockResourceItem.quantity);
-            expect(resourceItem.totalItemCost).to.equal(mockResourceItem.total_item_cost);
+            expect(resourceItem.itemUri).toBe(mockResourceItem.item_uri);
+            expect(resourceItem.kind).toBe(mockResourceItem.kind);
+            expect(resourceItem.links.self).toBe(mockResourceItem.links.self);
+            expect(resourceItem.postageCost).toBe(mockResourceItem.postage_cost);
+            expect(resourceItem.postalDelivery).toBe(mockResourceItem.postal_delivery);
+            expect(resourceItem.quantity).toBe(mockResourceItem.quantity);
+            expect(resourceItem.totalItemCost).toBe(mockResourceItem.total_item_cost);
         });
 
         it("maps the basket data correctly with missing fields", async () => {
@@ -418,18 +418,18 @@ describe("basket", () => {
             const resourceDeliveryDetails = data.resource.deliveryDetails;
             const mockDeliveryDetails = mockResponseBodyMissingFields.delivery_details;
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.enrolled).to.be.false;
-            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
-            expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
-            expect(resourceDeliveryDetails?.companyName).to.be.undefined;
-            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
-            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
-            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
-            expect(resourceDeliveryDetails?.poBox).to.be.undefined;
-            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
-            expect(resourceDeliveryDetails?.region).to.be.undefined;
-            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.enrolled).toBe(false);
+            expect(resourceDeliveryDetails.addressLine1).toBe(mockDeliveryDetails.address_line_1);
+            expect(resourceDeliveryDetails?.addressLine2).toBeUndefined();
+            expect(resourceDeliveryDetails?.companyName).toBeUndefined();
+            expect(resourceDeliveryDetails.country).toBe(mockDeliveryDetails.country);
+            expect(resourceDeliveryDetails.forename).toBe(mockDeliveryDetails.forename);
+            expect(resourceDeliveryDetails.locality).toBe(mockDeliveryDetails.locality);
+            expect(resourceDeliveryDetails?.poBox).toBeUndefined();
+            expect(resourceDeliveryDetails.postalCode).toBe(mockDeliveryDetails.postal_code);
+            expect(resourceDeliveryDetails?.region).toBeUndefined();
+            expect(resourceDeliveryDetails.surname).toBe(mockDeliveryDetails.surname);
         });
     });
 
@@ -522,8 +522,8 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.patchBasket(mockRequestBody);
 
-            expect(data.httpStatusCode).to.equal(401);
-            expect(data.resource).to.be.undefined;
+            expect(data.httpStatusCode).toBe(401);
+            expect(data.resource).toBeUndefined();
         });
 
         it("maps basket delivery details correctly when PATCH", async () => {
@@ -540,65 +540,68 @@ describe("basket", () => {
             const resourceItem = data.resource.items[0];
             const mockResourceItem = mockResponseBody.items[0];
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.enrolled).to.be.true;
-            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
-            expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
-            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
-            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
-            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
-            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
-            expect(resourceDeliveryDetails.poBox).to.equal(mockDeliveryDetails.po_box);
-            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
-            expect(resourceDeliveryDetails.region).to.equal(mockDeliveryDetails.region);
-            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
-            expect(resourceItem.companyName).to.equal(mockResourceItem.company_name);
-            expect(resourceItem.companyNumber).to.equal(mockResourceItem.company_number);
-            expect(resourceItem.customerReference).to.equal(mockResourceItem.customer_reference);
-            expect(resourceItem.description).to.equal(mockResourceItem.description);
-            expect(resourceItem.descriptionIdentifier).to.equal(mockResourceItem.description_identifier);
-            expect(resourceItem.descriptionValues).to.deep.equal(mockResourceItem.description_values);
-            expect(resourceItem.etag).to.equal(mockResourceItem.etag);
-            expect(resourceItem.id).to.equal(mockResourceItem.id);
-            expect(resourceItem.itemCosts[0].calculatedCost).to.equal(mockResourceItem.item_costs[0].calculated_cost);
-            expect(resourceItem.itemCosts[0].discountApplied).to.equal(mockResourceItem.item_costs[0].discount_applied);
-            expect(resourceItem.itemCosts[0].itemCost).to.equal(mockResourceItem.item_costs[0].item_cost);
-            expect(resourceItem.itemCosts[0].productType).to.equal(mockResourceItem.item_costs[0].product_type);
-            expect(resourceItem.itemOptions).to.deep.equal(mockResourceItem.item_options);
-            expect(resourceItem.itemUri).to.equal(mockResourceItem.item_uri);
-            expect(resourceItem.kind).to.equal(mockResourceItem.kind);
-            expect(resourceItem.links.self).to.equal(mockResourceItem.links.self);
-            expect(resourceItem.postageCost).to.equal(mockResourceItem.postage_cost);
-            expect(resourceItem.postalDelivery).to.equal(mockResourceItem.postal_delivery);
-            expect(resourceItem.quantity).to.equal(mockResourceItem.quantity);
-            expect(resourceItem.totalItemCost).to.equal(mockResourceItem.total_item_cost);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.enrolled).toBe(true);
+            expect(resourceDeliveryDetails.addressLine1).toBe(mockDeliveryDetails.address_line_1);
+            expect(resourceDeliveryDetails.addressLine2).toBe(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).toBe(mockDeliveryDetails.company_name);
+            expect(resourceDeliveryDetails.country).toBe(mockDeliveryDetails.country);
+            expect(resourceDeliveryDetails.forename).toBe(mockDeliveryDetails.forename);
+            expect(resourceDeliveryDetails.locality).toBe(mockDeliveryDetails.locality);
+            expect(resourceDeliveryDetails.poBox).toBe(mockDeliveryDetails.po_box);
+            expect(resourceDeliveryDetails.postalCode).toBe(mockDeliveryDetails.postal_code);
+            expect(resourceDeliveryDetails.region).toBe(mockDeliveryDetails.region);
+            expect(resourceDeliveryDetails.surname).toBe(mockDeliveryDetails.surname);
+            expect(resourceItem.companyName).toBe(mockResourceItem.company_name);
+            expect(resourceItem.companyNumber).toBe(mockResourceItem.company_number);
+            expect(resourceItem.customerReference).toBe(mockResourceItem.customer_reference);
+            expect(resourceItem.description).toBe(mockResourceItem.description);
+            expect(resourceItem.descriptionIdentifier).toBe(mockResourceItem.description_identifier);
+            expect(resourceItem.descriptionValues).toEqual(mockResourceItem.description_values);
+            expect(resourceItem.etag).toBe(mockResourceItem.etag);
+            expect(resourceItem.id).toBe(mockResourceItem.id);
+            expect(resourceItem.itemCosts[0].calculatedCost).toBe(mockResourceItem.item_costs[0].calculated_cost);
+            expect(resourceItem.itemCosts[0].discountApplied).toBe(mockResourceItem.item_costs[0].discount_applied);
+            expect(resourceItem.itemCosts[0].itemCost).toBe(mockResourceItem.item_costs[0].item_cost);
+            expect(resourceItem.itemCosts[0].productType).toBe(mockResourceItem.item_costs[0].product_type);
+            expect(resourceItem.itemOptions).toEqual(mockResourceItem.item_options);
+            expect(resourceItem.itemUri).toBe(mockResourceItem.item_uri);
+            expect(resourceItem.kind).toBe(mockResourceItem.kind);
+            expect(resourceItem.links.self).toBe(mockResourceItem.links.self);
+            expect(resourceItem.postageCost).toBe(mockResourceItem.postage_cost);
+            expect(resourceItem.postalDelivery).toBe(mockResourceItem.postal_delivery);
+            expect(resourceItem.quantity).toBe(mockResourceItem.quantity);
+            expect(resourceItem.totalItemCost).toBe(mockResourceItem.total_item_cost);
         });
 
-        it("maps basket delivery details with missing fields correctly when PATCH", async () => {
-            const mockPatchRequest = {
-                status: 200,
-                body: mockResponseBodyMissingFields
-            };
+        it(
+            "maps basket delivery details with missing fields correctly when PATCH",
+            async () => {
+                const mockPatchRequest = {
+                    status: 200,
+                    body: mockResponseBodyMissingFields
+                };
 
-            const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
-            const basket: BasketService = new BasketService(requestClient);
-            const data = await basket.patchBasket(mockRequestBody);
-            const resourceDeliveryDetails = data.resource.deliveryDetails;
-            const mockDeliveryDetails = mockResponseBodyMissingFields.delivery_details;
+                const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+                const basket: BasketService = new BasketService(requestClient);
+                const data = await basket.patchBasket(mockRequestBody);
+                const resourceDeliveryDetails = data.resource.deliveryDetails;
+                const mockDeliveryDetails = mockResponseBodyMissingFields.delivery_details;
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.enrolled).to.be.true;
-            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
-            expect(resourceDeliveryDetails?.addressLine2).to.be.undefined;
-            expect(resourceDeliveryDetails?.companyName).to.be.undefined;
-            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
-            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
-            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
-            expect(resourceDeliveryDetails?.poBox).to.be.undefined;
-            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
-            expect(resourceDeliveryDetails?.region).to.be.undefined;
-            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
-        });
+                expect(data.httpStatusCode).toBe(200);
+                expect(data.resource.enrolled).toBe(true);
+                expect(resourceDeliveryDetails.addressLine1).toBe(mockDeliveryDetails.address_line_1);
+                expect(resourceDeliveryDetails?.addressLine2).toBeUndefined();
+                expect(resourceDeliveryDetails?.companyName).toBeUndefined();
+                expect(resourceDeliveryDetails.country).toBe(mockDeliveryDetails.country);
+                expect(resourceDeliveryDetails.forename).toBe(mockDeliveryDetails.forename);
+                expect(resourceDeliveryDetails.locality).toBe(mockDeliveryDetails.locality);
+                expect(resourceDeliveryDetails?.poBox).toBeUndefined();
+                expect(resourceDeliveryDetails.postalCode).toBe(mockDeliveryDetails.postal_code);
+                expect(resourceDeliveryDetails?.region).toBeUndefined();
+                expect(resourceDeliveryDetails.surname).toBe(mockDeliveryDetails.surname);
+            }
+        );
     });
 
     describe("PUT remove item uri", () => {
@@ -615,7 +618,7 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.removeBasketItem(mockPutRequest);
 
-            expect(data.httpStatusCode).to.equal(200);
+            expect(data.httpStatusCode).toBe(200);
         });
     });
 
@@ -629,7 +632,7 @@ describe("basket", () => {
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasketLinks();
 
-            expect(data.httpStatusCode).to.equal(401);
+            expect(data.httpStatusCode).toBe(401);
         });
 
         it("maps the basket data correctly", async () => {
@@ -668,19 +671,19 @@ describe("basket", () => {
             const resourceDeliveryDetails = data.resource.data.deliveryDetails;
             const mockDeliveryDetails = mockResponseBody.data.delivery_details;
 
-            expect(data.httpStatusCode).to.equal(200);
-            expect(data.resource.data.enrolled).to.be.true;
-            expect(resourceDeliveryDetails.addressLine1).to.equal(mockDeliveryDetails.address_line_1);
-            expect(resourceDeliveryDetails.addressLine2).to.equal(mockDeliveryDetails.address_line_2);
-            expect(resourceDeliveryDetails.companyName).to.equal(mockDeliveryDetails.company_name);
-            expect(resourceDeliveryDetails.country).to.equal(mockDeliveryDetails.country);
-            expect(resourceDeliveryDetails.forename).to.equal(mockDeliveryDetails.forename);
-            expect(resourceDeliveryDetails.locality).to.equal(mockDeliveryDetails.locality);
-            expect(resourceDeliveryDetails.poBox).to.equal(mockDeliveryDetails.po_box);
-            expect(resourceDeliveryDetails.postalCode).to.equal(mockDeliveryDetails.postal_code);
-            expect(resourceDeliveryDetails.region).to.equal(mockDeliveryDetails.region);
-            expect(resourceDeliveryDetails.surname).to.equal(mockDeliveryDetails.surname);
-            expect(data.resource.data.items[0].itemUri).to.equal(mockResponseBody.data.items[0].item_uri);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.data.enrolled).toBe(true);
+            expect(resourceDeliveryDetails.addressLine1).toBe(mockDeliveryDetails.address_line_1);
+            expect(resourceDeliveryDetails.addressLine2).toBe(mockDeliveryDetails.address_line_2);
+            expect(resourceDeliveryDetails.companyName).toBe(mockDeliveryDetails.company_name);
+            expect(resourceDeliveryDetails.country).toBe(mockDeliveryDetails.country);
+            expect(resourceDeliveryDetails.forename).toBe(mockDeliveryDetails.forename);
+            expect(resourceDeliveryDetails.locality).toBe(mockDeliveryDetails.locality);
+            expect(resourceDeliveryDetails.poBox).toBe(mockDeliveryDetails.po_box);
+            expect(resourceDeliveryDetails.postalCode).toBe(mockDeliveryDetails.postal_code);
+            expect(resourceDeliveryDetails.region).toBe(mockDeliveryDetails.region);
+            expect(resourceDeliveryDetails.surname).toBe(mockDeliveryDetails.surname);
+            expect(data.resource.data.items[0].itemUri).toBe(mockResponseBody.data.items[0].item_uri);
         });
     });
 });

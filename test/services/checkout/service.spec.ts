@@ -316,8 +316,8 @@ describe("checkout", () => {
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Failure<ApiResponse<Checkout>, ApiErrorResponse>;
 
-            expect(result.value.httpStatusCode).to.equal(401);
-            expect(result.value.errors[0].error).to.equal("An error occurred");
+            expect(result.value.httpStatusCode).toBe(401);
+            expect(result.value.errors[0].error).toBe("An error occurred");
         });
 
         it("should map generic fields correctly", async () => {
@@ -331,55 +331,55 @@ describe("checkout", () => {
             const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
             const data = result.value.resource as Checkout;
 
-            expect(result.value.httpStatusCode).to.equal(200);
-            expect(data.paidAt).to.equal(mockCertificateCheckoutResponseBody.paid_at);
-            expect(data.checkedOutBy.id).to.equal(mockCertificateCheckoutResponseBody.checked_out_by.id);
-            expect(data.checkedOutBy.email).to.equal(mockCertificateCheckoutResponseBody.checked_out_by.email);
-            expect(data.links.self).to.equal(mockCertificateCheckoutResponseBody.links.self);
-            expect(data.links.payment).to.equal(mockCertificateCheckoutResponseBody.links.payment);
-            expect(data.paymentReference).to.equal(mockCertificateCheckoutResponseBody.payment_reference);
-            expect(data.status).to.equal(mockCertificateCheckoutResponseBody.status);
-            expect(data.etag).to.equal(mockCertificateCheckoutResponseBody.etag);
+            expect(result.value.httpStatusCode).toBe(200);
+            expect(data.paidAt).toBe(mockCertificateCheckoutResponseBody.paid_at);
+            expect(data.checkedOutBy.id).toBe(mockCertificateCheckoutResponseBody.checked_out_by.id);
+            expect(data.checkedOutBy.email).toBe(mockCertificateCheckoutResponseBody.checked_out_by.email);
+            expect(data.links.self).toBe(mockCertificateCheckoutResponseBody.links.self);
+            expect(data.links.payment).toBe(mockCertificateCheckoutResponseBody.links.payment);
+            expect(data.paymentReference).toBe(mockCertificateCheckoutResponseBody.payment_reference);
+            expect(data.status).toBe(mockCertificateCheckoutResponseBody.status);
+            expect(data.etag).toBe(mockCertificateCheckoutResponseBody.etag);
 
-            expect(data.deliveryDetails.addressLine1).to.equal(mockCertificateCheckoutResponseBody.delivery_details.address_line_1);
-            expect(data.deliveryDetails.addressLine2).to.equal(mockCertificateCheckoutResponseBody.delivery_details.address_line_2);
-            expect(data.deliveryDetails.companyName).to.equal(mockCertificateCheckoutResponseBody.delivery_details.company_name);
-            expect(data.deliveryDetails.country).to.equal(mockCertificateCheckoutResponseBody.delivery_details.country);
-            expect(data.deliveryDetails.forename).to.equal(mockCertificateCheckoutResponseBody.delivery_details.forename);
-            expect(data.deliveryDetails.locality).to.equal(mockCertificateCheckoutResponseBody.delivery_details.locality);
-            expect(data.deliveryDetails.postalCode).to.equal(mockCertificateCheckoutResponseBody.delivery_details.postal_code);
-            expect(data.deliveryDetails.region).to.equal(mockCertificateCheckoutResponseBody.delivery_details.region);
-            expect(data.deliveryDetails.surname).to.equal(mockCertificateCheckoutResponseBody.delivery_details.surname);
-            expect(data.deliveryDetails.poBox).to.equal(mockCertificateCheckoutResponseBody.delivery_details.po_box);
+            expect(data.deliveryDetails.addressLine1).toBe(mockCertificateCheckoutResponseBody.delivery_details.address_line_1);
+            expect(data.deliveryDetails.addressLine2).toBe(mockCertificateCheckoutResponseBody.delivery_details.address_line_2);
+            expect(data.deliveryDetails.companyName).toBe(mockCertificateCheckoutResponseBody.delivery_details.company_name);
+            expect(data.deliveryDetails.country).toBe(mockCertificateCheckoutResponseBody.delivery_details.country);
+            expect(data.deliveryDetails.forename).toBe(mockCertificateCheckoutResponseBody.delivery_details.forename);
+            expect(data.deliveryDetails.locality).toBe(mockCertificateCheckoutResponseBody.delivery_details.locality);
+            expect(data.deliveryDetails.postalCode).toBe(mockCertificateCheckoutResponseBody.delivery_details.postal_code);
+            expect(data.deliveryDetails.region).toBe(mockCertificateCheckoutResponseBody.delivery_details.region);
+            expect(data.deliveryDetails.surname).toBe(mockCertificateCheckoutResponseBody.delivery_details.surname);
+            expect(data.deliveryDetails.poBox).toBe(mockCertificateCheckoutResponseBody.delivery_details.po_box);
             const item = data.items[0];
             const itemResource = mockCertificateCheckoutResponseBody.items[0];
-            expect(item.id).to.equal(itemResource.id);
-            expect(item.companyName).to.equal(itemResource.company_name);
-            expect(item.companyNumber).to.equal(itemResource.company_number);
-            expect(item.description).to.equal(itemResource.description);
-            expect(item.descriptionIdentifier).to.equal(itemResource.description_identifier);
-            expect(item.descriptionValues.certificate).to.equal(itemResource.description_values.certificate);
-            expect(item.descriptionValues.company_number).to.equal(itemResource.description_values.company_number);
+            expect(item.id).toBe(itemResource.id);
+            expect(item.companyName).toBe(itemResource.company_name);
+            expect(item.companyNumber).toBe(itemResource.company_number);
+            expect(item.description).toBe(itemResource.description);
+            expect(item.descriptionIdentifier).toBe(itemResource.description_identifier);
+            expect(item.descriptionValues.certificate).toBe(itemResource.description_values.certificate);
+            expect(item.descriptionValues.company_number).toBe(itemResource.description_values.company_number);
 
-            expect(item.itemCosts[0].discountApplied).to.equal(itemResource.item_costs[0].discount_applied);
-            expect(item.itemCosts[0].itemCost).to.equal(itemResource.item_costs[0].item_cost);
-            expect(item.itemCosts[0].calculatedCost).to.equal(itemResource.item_costs[0].calculated_cost);
-            expect(item.itemCosts[0].productType).to.equal(itemResource.item_costs[0].product_type);
+            expect(item.itemCosts[0].discountApplied).toBe(itemResource.item_costs[0].discount_applied);
+            expect(item.itemCosts[0].itemCost).toBe(itemResource.item_costs[0].item_cost);
+            expect(item.itemCosts[0].calculatedCost).toBe(itemResource.item_costs[0].calculated_cost);
+            expect(item.itemCosts[0].productType).toBe(itemResource.item_costs[0].product_type);
 
-            expect(item.etag).to.equal(itemResource.etag);
-            expect(item.kind).to.equal(itemResource.kind);
-            expect(item.links.self).to.equal(itemResource.links.self);
-            expect(item.postalDelivery).to.equal(itemResource.postal_delivery);
-            expect(item.quantity).to.equal(itemResource.quantity);
-            expect(item.itemUri).to.equal(itemResource.item_uri);
-            expect(item.status).to.equal(itemResource.status);
-            expect(item.postageCost).to.equal(itemResource.postage_cost);
-            expect(item.totalItemCost).to.equal(itemResource.total_item_cost);
-            expect(item.customerReference).to.equal(itemResource.customer_reference);
-            expect(item.satisfiedAt).to.equal(itemResource.satisfied_at);
-            expect(data.kind).to.equal(mockCertificateCheckoutResponseBody.kind);
-            expect(data.totalOrderCost).to.equal(mockCertificateCheckoutResponseBody.total_order_cost);
-            expect(data.reference).to.equal(mockCertificateCheckoutResponseBody.reference);
+            expect(item.etag).toBe(itemResource.etag);
+            expect(item.kind).toBe(itemResource.kind);
+            expect(item.links.self).toBe(itemResource.links.self);
+            expect(item.postalDelivery).toBe(itemResource.postal_delivery);
+            expect(item.quantity).toBe(itemResource.quantity);
+            expect(item.itemUri).toBe(itemResource.item_uri);
+            expect(item.status).toBe(itemResource.status);
+            expect(item.postageCost).toBe(itemResource.postage_cost);
+            expect(item.totalItemCost).toBe(itemResource.total_item_cost);
+            expect(item.customerReference).toBe(itemResource.customer_reference);
+            expect(item.satisfiedAt).toBe(itemResource.satisfied_at);
+            expect(data.kind).toBe(mockCertificateCheckoutResponseBody.kind);
+            expect(data.totalOrderCost).toBe(mockCertificateCheckoutResponseBody.total_order_cost);
+            expect(data.reference).toBe(mockCertificateCheckoutResponseBody.reference);
         });
 
         it("should map certificate item option fields correctly", async () => {
@@ -399,20 +399,24 @@ describe("checkout", () => {
             const itemOptionsResource = itemResource.item_options as CertificateItemOptionsResource;
             const itemOptions = item.itemOptions as CertificateItemOptions;
 
-            expect(result.value.httpStatusCode).to.equal(200);
-            expect(itemOptions.certificateType).to.equal(itemOptionsResource.certificate_type);
-            expect(itemOptions.deliveryMethod).to.equal(itemOptionsResource.delivery_method);
-            expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
-            expect(itemOptions.directorDetails.includeBasicInformation).to.equal(itemOptionsResource.director_details.include_basic_information);
-            expect(itemOptions.forename).to.equal(itemOptionsResource.forename);
-            expect(itemOptions.includeGeneralNatureOfBusinessInformation).to.equal(itemOptionsResource.include_general_nature_of_business_information);
-            expect(itemOptions.includeGoodStandingInformation).to.equal(itemOptionsResource.include_good_standing_information);
-            expect(itemOptions.registeredOfficeAddressDetails).to.deep.equal(itemOptionsResource.registered_office_address_details);
-            expect(itemOptions.secretaryDetails).to.deep.equal(itemOptionsResource.secretary_details);
-            expect(itemOptions.surname).to.equal(itemOptionsResource.surname);
-            expect(itemOptions.designatedMemberDetails).to.deep.equal({ includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
-            expect(itemOptions.memberDetails).to.deep.equal({ includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" })
-            expect(itemOptions.companyStatus).to.equal(itemOptionsResource.company_status);
+            expect(result.value.httpStatusCode).toBe(200);
+            expect(itemOptions.certificateType).toBe(itemOptionsResource.certificate_type);
+            expect(itemOptions.deliveryMethod).toBe(itemOptionsResource.delivery_method);
+            expect(itemOptions.deliveryTimescale).toBe(itemOptionsResource.delivery_timescale);
+            expect(itemOptions.directorDetails.includeBasicInformation).toBe(itemOptionsResource.director_details.include_basic_information);
+            expect(itemOptions.forename).toBe(itemOptionsResource.forename);
+            expect(itemOptions.includeGeneralNatureOfBusinessInformation).toBe(itemOptionsResource.include_general_nature_of_business_information);
+            expect(itemOptions.includeGoodStandingInformation).toBe(itemOptionsResource.include_good_standing_information);
+            expect(itemOptions.registeredOfficeAddressDetails).toEqual(itemOptionsResource.registered_office_address_details);
+            expect(itemOptions.secretaryDetails).toEqual(itemOptionsResource.secretary_details);
+            expect(itemOptions.surname).toBe(itemOptionsResource.surname);
+            expect(itemOptions.designatedMemberDetails).toEqual(
+                { includeAddress: true, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" }
+            )
+            expect(itemOptions.memberDetails).toEqual(
+                { includeAddress: false, includeAppointmentDate: false, includeBasicInformation: true, includeCountryOfResidence: false, includeDobType: "partial" }
+            )
+            expect(itemOptions.companyStatus).toBe(itemOptionsResource.company_status);
         });
 
         it("should map certified copy item option fields correctly", async () => {
@@ -431,41 +435,48 @@ describe("checkout", () => {
             const itemOptionsResource = itemResource.item_options as CertifiedCopyItemOptionsResource;
             const itemOptions = item.itemOptions as CertifiedCopyItemOptions
 
-            expect(response.value.httpStatusCode).to.equal(200);
-            expect(itemOptions.deliveryMethod).to.equal(itemOptionsResource.delivery_method);
-            expect(itemOptions.deliveryTimescale).to.equal(itemOptionsResource.delivery_timescale);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescription).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDate).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_date);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryId).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_id);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryType).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_type);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.change_date).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.change_date);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.officer_name).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_description_values.officer_name);
-            expect(itemOptions.filingHistoryDocuments[0].filingHistoryCost).to.equal(itemOptionsResource.filing_history_documents[0].filing_history_cost);
+            expect(response.value.httpStatusCode).toBe(200);
+            expect(itemOptions.deliveryMethod).toBe(itemOptionsResource.delivery_method);
+            expect(itemOptions.deliveryTimescale).toBe(itemOptionsResource.delivery_timescale);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescription).toBe(itemOptionsResource.filing_history_documents[0].filing_history_description);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDate).toBe(itemOptionsResource.filing_history_documents[0].filing_history_date);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryId).toBe(itemOptionsResource.filing_history_documents[0].filing_history_id);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryType).toBe(itemOptionsResource.filing_history_documents[0].filing_history_type);
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.change_date).toBe(
+                itemOptionsResource.filing_history_documents[0].filing_history_description_values.change_date
+            );
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryDescriptionValues.officer_name).toBe(
+                itemOptionsResource.filing_history_documents[0].filing_history_description_values.officer_name
+            );
+            expect(itemOptions.filingHistoryDocuments[0].filingHistoryCost).toBe(itemOptionsResource.filing_history_documents[0].filing_history_cost);
         });
 
-        it("should map missing image delivery item option fields correctly", async () => {
-            const mockGetResponse = {
-                status: 200,
-                body: mockMissingImageDeliveryCheckoutResponseBody
-            };
+        it(
+            "should map missing image delivery item option fields correctly",
+            async () => {
+                const mockGetResponse = {
+                    status: 200,
+                    body: mockMissingImageDeliveryCheckoutResponseBody
+                };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-            const checkout: CheckoutService = new CheckoutService(requestClient);
-            const result = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
-            const data = result.value.resource as Checkout;
+                sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+                const checkout: CheckoutService = new CheckoutService(requestClient);
+                const result = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
+                const data = result.value.resource as Checkout;
 
-            const item = data.items[0];
-            const itemResource = mockMissingImageDeliveryCheckoutResponseBody.items[0];
+                const item = data.items[0];
+                const itemResource = mockMissingImageDeliveryCheckoutResponseBody.items[0];
 
-            const itemOptionsResource = itemResource.item_options as MissingImageDeliveryItemOptionsResource;
-            const itemOptions = item.itemOptions as MissingImageDeliveryItemOptions;
+                const itemOptionsResource = itemResource.item_options as MissingImageDeliveryItemOptionsResource;
+                const itemOptions = item.itemOptions as MissingImageDeliveryItemOptions;
 
-            expect(result.value.httpStatusCode).to.equal(200);
-            expect(itemOptions.filingHistoryDate).to.equal(itemOptionsResource.filing_history_date);
-            expect(itemOptions.filingHistoryDescription).to.equal(itemOptionsResource.filing_history_description);
-            expect(itemOptions.filingHistoryDescriptionValues.officer_name).to.equal(itemOptionsResource.filing_history_description_values.officer_name);
-            expect(itemOptions.filingHistoryId).to.equal(itemOptionsResource.filing_history_id);
-            expect(itemOptions.filingHistoryType).to.equal(itemOptionsResource.filing_history_type);
-        });
+                expect(result.value.httpStatusCode).toBe(200);
+                expect(itemOptions.filingHistoryDate).toBe(itemOptionsResource.filing_history_date);
+                expect(itemOptions.filingHistoryDescription).toBe(itemOptionsResource.filing_history_description);
+                expect(itemOptions.filingHistoryDescriptionValues.officer_name).toBe(itemOptionsResource.filing_history_description_values.officer_name);
+                expect(itemOptions.filingHistoryId).toBe(itemOptionsResource.filing_history_id);
+                expect(itemOptions.filingHistoryType).toBe(itemOptionsResource.filing_history_type);
+            }
+        );
     });
 });

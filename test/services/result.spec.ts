@@ -15,9 +15,9 @@ describe("Result", () => {
       it("should create a success value", () => {
           const successValue = success("Hello");
 
-          expect(successValue.isSuccess()).to.equal(true);
-          expect(successValue.isFailure()).to.equal(false);
-          expect(successValue).to.be.an.instanceof(Success);
+          expect(successValue.isSuccess()).toBe(true);
+          expect(successValue.isFailure()).toBe(false);
+          expect(successValue).toBeInstanceOf(Success);
       });
 
       it("Can read the value after narrowing", () => {
@@ -28,7 +28,7 @@ describe("Result", () => {
           // line TypeScript will not allow accessing val.value.name
           if (val.isFailure()) return;
 
-          expect(val.value.name).to.equal("The Company");
+          expect(val.value.name).toBe("The Company");
       });
   });
 
@@ -36,9 +36,9 @@ describe("Result", () => {
       it("should create a success value", () => {
           const successValue = failure("Hello");
 
-          expect(successValue.isSuccess()).to.equal(false);
-          expect(successValue.isFailure()).to.equal(true);
-          expect(successValue).to.be.an.instanceof(Failure);
+          expect(successValue.isSuccess()).toBe(false);
+          expect(successValue.isFailure()).toBe(true);
+          expect(successValue).toBeInstanceOf(Failure);
       });
 
       it("Can read the value after narrowing", () => {
@@ -49,7 +49,7 @@ describe("Result", () => {
           // line TypeScript will not allow accessing val.value.error
           if (val.isSuccess()) return;
 
-          expect(val.value.error).to.equal("There was an error");
+          expect(val.value.error).toBe("There was an error");
       });
   });
 });

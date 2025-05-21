@@ -31,8 +31,8 @@ describe("lfp", () => {
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined()
     });
 
     it("maps the penalty data correctly if there are no penalties", async () => {
@@ -53,12 +53,12 @@ describe("lfp", () => {
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index);
-        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
-        expect(data.resource.items.length).to.eql(0);
+        expect(data.httpStatusCode).toBe(200);
+        expect(data.resource.etag).toBe(mockResponseBody.etag);
+        expect(data.resource.itemsPerPage).toBe(mockResponseBody.items_per_page);
+        expect(data.resource.startIndex).toBe(mockResponseBody.start_index);
+        expect(data.resource.totalResults).toBe(mockResponseBody.total_results);
+        expect(data.resource.items.length).toEqual(0);
     });
 
     it("maps the penalty data items correctly", async () => {
@@ -91,71 +91,74 @@ describe("lfp", () => {
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index);
-        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
-        expect(data.resource.items.length).to.eql(1);
-        expect(data.resource.items[0].id).to.equal(mockResponseBody.items[0].id);
-        expect(data.resource.items[0].etag).to.equal(mockResponseBody.items[0].etag);
-        expect(data.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(data.resource.items[0].isPaid).to.equal(mockResponseBody.items[0].is_paid);
-        expect(data.resource.items[0].isDCA).to.equal(mockResponseBody.items[0].is_dca);
-        expect(data.resource.items[0].dueDate).to.equal(mockResponseBody.items[0].due_date);
-        expect(data.resource.items[0].madeUpDate).to.equal(mockResponseBody.items[0].made_up_date);
-        expect(data.resource.items[0].transactionDate).to.equal(mockResponseBody.items[0].transaction_date);
-        expect(data.resource.items[0].originalAmount).to.equal(mockResponseBody.items[0].original_amount);
-        expect(data.resource.items[0].outstandingAmount).to.equal(mockResponseBody.items[0].outstanding);
-        expect(data.resource.items[0].type).to.equal(mockResponseBody.items[0].type);
+        expect(data.httpStatusCode).toBe(200);
+        expect(data.resource.etag).toBe(mockResponseBody.etag);
+        expect(data.resource.itemsPerPage).toBe(mockResponseBody.items_per_page);
+        expect(data.resource.startIndex).toBe(mockResponseBody.start_index);
+        expect(data.resource.totalResults).toBe(mockResponseBody.total_results);
+        expect(data.resource.items.length).toEqual(1);
+        expect(data.resource.items[0].id).toBe(mockResponseBody.items[0].id);
+        expect(data.resource.items[0].etag).toBe(mockResponseBody.items[0].etag);
+        expect(data.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+        expect(data.resource.items[0].isPaid).toBe(mockResponseBody.items[0].is_paid);
+        expect(data.resource.items[0].isDCA).toBe(mockResponseBody.items[0].is_dca);
+        expect(data.resource.items[0].dueDate).toBe(mockResponseBody.items[0].due_date);
+        expect(data.resource.items[0].madeUpDate).toBe(mockResponseBody.items[0].made_up_date);
+        expect(data.resource.items[0].transactionDate).toBe(mockResponseBody.items[0].transaction_date);
+        expect(data.resource.items[0].originalAmount).toBe(mockResponseBody.items[0].original_amount);
+        expect(data.resource.items[0].outstandingAmount).toBe(mockResponseBody.items[0].outstanding);
+        expect(data.resource.items[0].type).toBe(mockResponseBody.items[0].type);
     });
 
-    it("maps the penalty data items correctly when fields are missing", async () => {
-        const mockResponseBody = ({
-            etag: "string",
-            items_per_page: 0,
-            start_index: undefined,
-            total_results: 2,
-            items: [{
-                id: "string",
-                etag: undefined,
-                kind: "string",
-                is_paid: true,
-                is_dca: undefined,
-                due_date: "2019-12-19",
-                made_up_date: "2019-12-19",
-                transaction_date: "2019-12-19",
-                original_amount: undefined,
-                outstanding: undefined,
-                type: "penalty"
-            }]
-        });
+    it(
+        "maps the penalty data items correctly when fields are missing",
+        async () => {
+            const mockResponseBody = ({
+                etag: "string",
+                items_per_page: 0,
+                start_index: undefined,
+                total_results: 2,
+                items: [{
+                    id: "string",
+                    etag: undefined,
+                    kind: "string",
+                    is_paid: true,
+                    is_dca: undefined,
+                    due_date: "2019-12-19",
+                    made_up_date: "2019-12-19",
+                    transaction_date: "2019-12-19",
+                    original_amount: undefined,
+                    outstanding: undefined,
+                    type: "penalty"
+                }]
+            });
 
-        const mockGetResponse = {
-            status: 200,
-            body: mockResponseBody
-        };
+            const mockGetResponse = {
+                status: 200,
+                body: mockResponseBody
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
-        const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
+            const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(data.resource.startIndex).to.be.undefined
-        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
-        expect(data.resource.items.length).to.eql(1);
-        expect(data.resource.items[0].id).to.equal(mockResponseBody.items[0].id);
-        expect(data.resource.items[0].etag).to.be.undefined
-        expect(data.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(data.resource.items[0].isPaid).to.equal(mockResponseBody.items[0].is_paid);
-        expect(data.resource.items[0].isDCA).to.be.undefined
-        expect(data.resource.items[0].dueDate).to.equal(mockResponseBody.items[0].due_date);
-        expect(data.resource.items[0].madeUpDate).to.equal(mockResponseBody.items[0].made_up_date);
-        expect(data.resource.items[0].transactionDate).to.equal(mockResponseBody.items[0].transaction_date);
-        expect(data.resource.items[0].originalAmount).to.be.undefined
-        expect(data.resource.items[0].outstandingAmount).to.be.undefined
-        expect(data.resource.items[0].type).to.equal(mockResponseBody.items[0].type);
-    });
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.etag).toBe(mockResponseBody.etag);
+            expect(data.resource.itemsPerPage).toBe(mockResponseBody.items_per_page);
+            expect(data.resource.startIndex).toBeUndefined()
+            expect(data.resource.totalResults).toBe(mockResponseBody.total_results);
+            expect(data.resource.items.length).toEqual(1);
+            expect(data.resource.items[0].id).toBe(mockResponseBody.items[0].id);
+            expect(data.resource.items[0].etag).toBeUndefined()
+            expect(data.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+            expect(data.resource.items[0].isPaid).toBe(mockResponseBody.items[0].is_paid);
+            expect(data.resource.items[0].isDCA).toBeUndefined()
+            expect(data.resource.items[0].dueDate).toBe(mockResponseBody.items[0].due_date);
+            expect(data.resource.items[0].madeUpDate).toBe(mockResponseBody.items[0].made_up_date);
+            expect(data.resource.items[0].transactionDate).toBe(mockResponseBody.items[0].transaction_date);
+            expect(data.resource.items[0].originalAmount).toBeUndefined()
+            expect(data.resource.items[0].outstandingAmount).toBeUndefined()
+            expect(data.resource.items[0].type).toBe(mockResponseBody.items[0].type);
+        }
+    );
 });

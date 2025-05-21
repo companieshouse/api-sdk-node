@@ -31,8 +31,8 @@ describe("company-officers", () => {
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         const data = await companyOfficers.getCompanyOfficers("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("maps the company field data items correctly", async () => {
@@ -109,78 +109,78 @@ describe("company-officers", () => {
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         const data = await companyOfficers.getCompanyOfficers("123");
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
 
-        expect(data.resource.activeCount).to.equal(mockResponseBody.active_count);
-        expect(data.resource.etag).to.equal(mockResponseBody.etag);
-        expect(data.resource.inactiveCount).to.equal(mockResponseBody.inactive_count);
-        expect(data.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(data.resource.kind).to.equal(mockResponseBody.kind);
-        expect(data.resource.resignedCount).to.equal(mockResponseBody.resigned_count);
-        expect(data.resource.startIndex).to.equal(mockResponseBody.start_index);
-        expect(data.resource.totalResults).to.equal(mockResponseBody.total_results);
+        expect(data.resource.activeCount).toBe(mockResponseBody.active_count);
+        expect(data.resource.etag).toBe(mockResponseBody.etag);
+        expect(data.resource.inactiveCount).toBe(mockResponseBody.inactive_count);
+        expect(data.resource.itemsPerPage).toBe(mockResponseBody.items_per_page);
+        expect(data.resource.kind).toBe(mockResponseBody.kind);
+        expect(data.resource.resignedCount).toBe(mockResponseBody.resigned_count);
+        expect(data.resource.startIndex).toBe(mockResponseBody.start_index);
+        expect(data.resource.totalResults).toBe(mockResponseBody.total_results);
 
-        expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(data.resource.links.self).toBe(mockResponseBody.links.self);
 
-        expect(data.resource.items.length).to.equal(mockResponseBody.items.length);
+        expect(data.resource.items.length).toBe(mockResponseBody.items.length);
 
-        expect(data.resource.items[0].appointedOn).to.equal(mockResponseBody.items[0].appointed_on);
-        expect(data.resource.items[0].countryOfResidence).to.equal(mockResponseBody.items[0].country_of_residence);
-        expect(data.resource.items[0].nationality).to.equal(mockResponseBody.items[0].nationality);
-        expect(data.resource.items[0].occupation).to.equal(mockResponseBody.items[0].occupation);
-        expect(data.resource.items[0].resignedOn).to.equal(mockResponseBody.items[0].resigned_on);
-        expect(data.resource.items[0].name).to.equal(mockResponseBody.items[0].name);
-        expect(data.resource.items[0].officerRole).to.equal(mockResponseBody.items[0].officer_role);
-        expect(data.resource.items[0].responsibilities).to.equal(mockResponseBody.items[0].responsibilities);
+        expect(data.resource.items[0].appointedOn).toBe(mockResponseBody.items[0].appointed_on);
+        expect(data.resource.items[0].countryOfResidence).toBe(mockResponseBody.items[0].country_of_residence);
+        expect(data.resource.items[0].nationality).toBe(mockResponseBody.items[0].nationality);
+        expect(data.resource.items[0].occupation).toBe(mockResponseBody.items[0].occupation);
+        expect(data.resource.items[0].resignedOn).toBe(mockResponseBody.items[0].resigned_on);
+        expect(data.resource.items[0].name).toBe(mockResponseBody.items[0].name);
+        expect(data.resource.items[0].officerRole).toBe(mockResponseBody.items[0].officer_role);
+        expect(data.resource.items[0].responsibilities).toBe(mockResponseBody.items[0].responsibilities);
 
-        expect(data.resource.items[0].address.addressLine1).to.equal(mockResponseBody.items[0].address.address_line_1);
-        expect(data.resource.items[0].address.addressLine2).to.equal(mockResponseBody.items[0].address.address_line_2);
-        expect(data.resource.items[0].address.careOf).to.equal(mockResponseBody.items[0].address.care_of);
-        expect(data.resource.items[0].address.country).to.equal(mockResponseBody.items[0].address.country);
-        expect(data.resource.items[0].address.locality).to.equal(mockResponseBody.items[0].address.locality);
-        expect(data.resource.items[0].address.poBox).to.equal(mockResponseBody.items[0].address.po_box);
-        expect(data.resource.items[0].address.postalCode).to.equal(mockResponseBody.items[0].address.postal_code);
-        expect(data.resource.items[0].address.premises).to.equal(mockResponseBody.items[0].address.premises);
-        expect(data.resource.items[0].address.region).to.equal(mockResponseBody.items[0].address.region);
+        expect(data.resource.items[0].address.addressLine1).toBe(mockResponseBody.items[0].address.address_line_1);
+        expect(data.resource.items[0].address.addressLine2).toBe(mockResponseBody.items[0].address.address_line_2);
+        expect(data.resource.items[0].address.careOf).toBe(mockResponseBody.items[0].address.care_of);
+        expect(data.resource.items[0].address.country).toBe(mockResponseBody.items[0].address.country);
+        expect(data.resource.items[0].address.locality).toBe(mockResponseBody.items[0].address.locality);
+        expect(data.resource.items[0].address.poBox).toBe(mockResponseBody.items[0].address.po_box);
+        expect(data.resource.items[0].address.postalCode).toBe(mockResponseBody.items[0].address.postal_code);
+        expect(data.resource.items[0].address.premises).toBe(mockResponseBody.items[0].address.premises);
+        expect(data.resource.items[0].address.region).toBe(mockResponseBody.items[0].address.region);
 
-        expect(data.resource.items[0].dateOfBirth.day).to.equal(mockResponseBody.items[0].date_of_birth.day);
-        expect(data.resource.items[0].dateOfBirth.month).to.equal(mockResponseBody.items[0].date_of_birth.month);
-        expect(data.resource.items[0].dateOfBirth.year).to.equal(mockResponseBody.items[0].date_of_birth.year);
+        expect(data.resource.items[0].dateOfBirth.day).toBe(mockResponseBody.items[0].date_of_birth.day);
+        expect(data.resource.items[0].dateOfBirth.month).toBe(mockResponseBody.items[0].date_of_birth.month);
+        expect(data.resource.items[0].dateOfBirth.year).toBe(mockResponseBody.items[0].date_of_birth.year);
 
-        expect(data.resource.items[0].formerNames.length).to.equal(mockResponseBody.items[0].former_names.length);
-        expect(data.resource.items[0].formerNames[0].forenames).to.equal(mockResponseBody.items[0].former_names[0].forenames);
-        expect(data.resource.items[0].formerNames[0].surname).to.equal(mockResponseBody.items[0].former_names[0].surname);
+        expect(data.resource.items[0].formerNames.length).toBe(mockResponseBody.items[0].former_names.length);
+        expect(data.resource.items[0].formerNames[0].forenames).toBe(mockResponseBody.items[0].former_names[0].forenames);
+        expect(data.resource.items[0].formerNames[0].surname).toBe(mockResponseBody.items[0].former_names[0].surname);
 
-        expect(data.resource.items[0].identification.identificationType).to.equal(mockResponseBody.items[0].identification.identification_type);
-        expect(data.resource.items[0].identification.legalAuthority).to.equal(mockResponseBody.items[0].identification.legal_authority);
-        expect(data.resource.items[0].identification.legalForm).to.equal(mockResponseBody.items[0].identification.legal_form);
-        expect(data.resource.items[0].identification.placeRegistered).to.equal(mockResponseBody.items[0].identification.place_registered);
-        expect(data.resource.items[0].identification.registrationNumber).to.equal(mockResponseBody.items[0].identification.registration_number);
+        expect(data.resource.items[0].identification.identificationType).toBe(mockResponseBody.items[0].identification.identification_type);
+        expect(data.resource.items[0].identification.legalAuthority).toBe(mockResponseBody.items[0].identification.legal_authority);
+        expect(data.resource.items[0].identification.legalForm).toBe(mockResponseBody.items[0].identification.legal_form);
+        expect(data.resource.items[0].identification.placeRegistered).toBe(mockResponseBody.items[0].identification.place_registered);
+        expect(data.resource.items[0].identification.registrationNumber).toBe(mockResponseBody.items[0].identification.registration_number);
 
-        expect(data.resource.items[0].contactDetails.contactName).to.equal(mockResponseBody.items[0].contact_details.contact_name);
+        expect(data.resource.items[0].contactDetails.contactName).toBe(mockResponseBody.items[0].contact_details.contact_name);
 
-        expect(data.resource.items[0].links.officer.appointments).to.equal(mockResponseBody.items[0].links.officer.appointments);
-        expect(data.resource.items[0].links.self).to.equal(mockResponseBody.items[0].links.self);
+        expect(data.resource.items[0].links.officer.appointments).toBe(mockResponseBody.items[0].links.officer.appointments);
+        expect(data.resource.items[0].links.self).toBe(mockResponseBody.items[0].links.self);
     });
 
     it("should pass url with default parameters when undefined", async () => {
         const spy = sinon.spy(requestClient, "httpGet");
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123");
-        expect(spy.calledWith("/company/123/officers?page_size=35&page_index=0&register_view=false")).to.equal(true);
+        expect(spy.calledWith("/company/123/officers?page_size=35&page_index=0&register_view=false")).toBe(true);
     });
 
     it("should pass url with specified parameters", async () => {
         const spy = sinon.spy(requestClient, "httpGet");
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123", 10, 2, true);
-        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true")).to.equal(true);
+        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true")).toBe(true);
     });
 
     it("should pass url with orderBy parameter", async () => {
         const spy = sinon.spy(requestClient, "httpGet");
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123", 10, 2, true, "resigned_on");
-        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on")).to.equal(true);
+        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on")).toBe(true);
     });
 });

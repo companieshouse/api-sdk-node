@@ -66,7 +66,7 @@ describe("payment service", () => {
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.createPayment(mockRequestBody);
             const data = response.value as ApiResponse<Payment>;
-            expect(data.httpStatusCode).to.equal(401);
+            expect(data.httpStatusCode).toBe(401);
         });
 
         it("maps the payment fields", async () => {
@@ -81,25 +81,25 @@ describe("payment service", () => {
 
             const data = response.value as ApiResponse<Payment>;
             const payment = data.resource;
-            expect(payment.amount).to.equal(mockResponseBody.amount);
-            expect(payment.availablePaymentMethods[0]).to.equal(mockResponseBody.available_payment_methods[0]);
-            expect(payment.availablePaymentMethods[1]).to.equal(mockResponseBody.available_payment_methods[1]);
-            expect(payment.companyNumber).to.equal(mockResponseBody.company_number);
-            expect(payment.completedAt).to.equal(mockResponseBody.completed_at);
-            expect(payment.createdAt).to.equal(mockResponseBody.created_at);
-            expect(payment.createdBy.email).to.equal(mockResponseBody.created_by.email);
-            expect(payment.createdBy.forename).to.equal(mockResponseBody.created_by.forename);
-            expect(payment.createdBy.id).to.equal(mockResponseBody.created_by.id);
-            expect(payment.createdBy.surname).to.equal(mockResponseBody.created_by.surname);
-            expect(payment.description).to.equal(mockResponseBody.description);
-            expect(payment.etag).to.equal(mockResponseBody.etag);
-            expect(payment.kind).to.equal(mockResponseBody.kind);
-            expect(payment.links.journey).to.equal(mockResponseBody.links.journey);
-            expect(payment.links.resource).to.equal(mockResponseBody.links.resource);
-            expect(payment.links.self).to.equal(mockResponseBody.links.self);
-            expect(payment.paymentMethod).to.equal(mockResponseBody.payment_method);
-            expect(payment.reference).to.equal(mockResponseBody.reference);
-            expect(payment.status).to.equal(mockResponseBody.status);
+            expect(payment.amount).toBe(mockResponseBody.amount);
+            expect(payment.availablePaymentMethods[0]).toBe(mockResponseBody.available_payment_methods[0]);
+            expect(payment.availablePaymentMethods[1]).toBe(mockResponseBody.available_payment_methods[1]);
+            expect(payment.companyNumber).toBe(mockResponseBody.company_number);
+            expect(payment.completedAt).toBe(mockResponseBody.completed_at);
+            expect(payment.createdAt).toBe(mockResponseBody.created_at);
+            expect(payment.createdBy.email).toBe(mockResponseBody.created_by.email);
+            expect(payment.createdBy.forename).toBe(mockResponseBody.created_by.forename);
+            expect(payment.createdBy.id).toBe(mockResponseBody.created_by.id);
+            expect(payment.createdBy.surname).toBe(mockResponseBody.created_by.surname);
+            expect(payment.description).toBe(mockResponseBody.description);
+            expect(payment.etag).toBe(mockResponseBody.etag);
+            expect(payment.kind).toBe(mockResponseBody.kind);
+            expect(payment.links.journey).toBe(mockResponseBody.links.journey);
+            expect(payment.links.resource).toBe(mockResponseBody.links.resource);
+            expect(payment.links.self).toBe(mockResponseBody.links.self);
+            expect(payment.paymentMethod).toBe(mockResponseBody.payment_method);
+            expect(payment.reference).toBe(mockResponseBody.reference);
+            expect(payment.status).toBe(mockResponseBody.status);
         });
 
         it("should map the payment request fields", async () => {
@@ -111,10 +111,10 @@ describe("payment service", () => {
             const paymentService: PaymentService = new PaymentService(requestClient);
             await paymentService.createPayment(mockRequestBody);
             const paymentRequest: CreatePaymentRequestResource = mockHttpPost.getCall(0).args[1];
-            expect(paymentRequest.redirect_uri).to.equal(mockRequestBody.redirectUri);
-            expect(paymentRequest.reference).to.equal(mockRequestBody.reference);
-            expect(paymentRequest.resource).to.equal(mockRequestBody.resource);
-            expect(paymentRequest.state).to.equal(mockRequestBody.state);
+            expect(paymentRequest.redirect_uri).toBe(mockRequestBody.redirectUri);
+            expect(paymentRequest.reference).toBe(mockRequestBody.reference);
+            expect(paymentRequest.resource).toBe(mockRequestBody.resource);
+            expect(paymentRequest.state).toBe(mockRequestBody.state);
         });
     });
 
@@ -141,7 +141,7 @@ describe("payment service", () => {
             const response = await paymentService.getPayment("payments/TEST_ID");
             const data = response.value as ApiResponse<Payment>;
 
-            expect(data.resource).to.be.undefined;
+            expect(data.resource).toBeUndefined();
         });
 
         it("maps the payment fields", async () => {
@@ -156,25 +156,25 @@ describe("payment service", () => {
 
             const data = response.value as ApiResponse<Payment>;
             const payment = data.resource;
-            expect(payment.amount).to.equal(mockResponseBody.amount);
-            expect(payment.availablePaymentMethods[0]).to.equal(mockResponseBody.available_payment_methods[0]);
-            expect(payment.availablePaymentMethods[1]).to.equal(mockResponseBody.available_payment_methods[1]);
-            expect(payment.companyNumber).to.equal(mockResponseBody.company_number);
-            expect(payment.completedAt).to.equal(mockResponseBody.completed_at);
-            expect(payment.createdAt).to.equal(mockResponseBody.created_at);
-            expect(payment.createdBy.email).to.equal(mockResponseBody.created_by.email);
-            expect(payment.createdBy.forename).to.equal(mockResponseBody.created_by.forename);
-            expect(payment.createdBy.id).to.equal(mockResponseBody.created_by.id);
-            expect(payment.createdBy.surname).to.equal(mockResponseBody.created_by.surname);
-            expect(payment.description).to.equal(mockResponseBody.description);
-            expect(payment.etag).to.equal(mockResponseBody.etag);
-            expect(payment.kind).to.equal(mockResponseBody.kind);
-            expect(payment.links.journey).to.equal(mockResponseBody.links.journey);
-            expect(payment.links.resource).to.equal(mockResponseBody.links.resource);
-            expect(payment.links.self).to.equal(mockResponseBody.links.self);
-            expect(payment.paymentMethod).to.equal(mockResponseBody.payment_method);
-            expect(payment.reference).to.equal(mockResponseBody.reference);
-            expect(payment.status).to.equal(mockResponseBody.status);
+            expect(payment.amount).toBe(mockResponseBody.amount);
+            expect(payment.availablePaymentMethods[0]).toBe(mockResponseBody.available_payment_methods[0]);
+            expect(payment.availablePaymentMethods[1]).toBe(mockResponseBody.available_payment_methods[1]);
+            expect(payment.companyNumber).toBe(mockResponseBody.company_number);
+            expect(payment.completedAt).toBe(mockResponseBody.completed_at);
+            expect(payment.createdAt).toBe(mockResponseBody.created_at);
+            expect(payment.createdBy.email).toBe(mockResponseBody.created_by.email);
+            expect(payment.createdBy.forename).toBe(mockResponseBody.created_by.forename);
+            expect(payment.createdBy.id).toBe(mockResponseBody.created_by.id);
+            expect(payment.createdBy.surname).toBe(mockResponseBody.created_by.surname);
+            expect(payment.description).toBe(mockResponseBody.description);
+            expect(payment.etag).toBe(mockResponseBody.etag);
+            expect(payment.kind).toBe(mockResponseBody.kind);
+            expect(payment.links.journey).toBe(mockResponseBody.links.journey);
+            expect(payment.links.resource).toBe(mockResponseBody.links.resource);
+            expect(payment.links.self).toBe(mockResponseBody.links.self);
+            expect(payment.paymentMethod).toBe(mockResponseBody.payment_method);
+            expect(payment.reference).toBe(mockResponseBody.reference);
+            expect(payment.status).toBe(mockResponseBody.status);
         });
     });
 });

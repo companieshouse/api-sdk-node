@@ -74,10 +74,10 @@ describe("Get Psc Discrepancy Report", () => {
 
         const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
-        expect(result).to.be.equal(mockResult)
+        expect(result).toBe(mockResult)
 
-        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports/" + REPORT_ID)
-        expect(mockProcess).to.have.been.calledWith(mockGetResponse)
+        expect(mockRequest).toHaveBeenCalledWith("/psc-discrepancy-reports/" + REPORT_ID)
+        expect(mockProcess).toHaveBeenCalledWith(mockGetResponse)
     })
 
     it("returns an error response on failure", async () => {
@@ -91,44 +91,47 @@ describe("Get Psc Discrepancy Report", () => {
 
         const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
-        expect(result.isFailure()).to.be.true;
+        expect(result.isFailure()).toBe(true);
 
         const data = result.value as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
+        expect(data.httpStatusCode).toBe(401);
+        expect(JSON.stringify(data.errors)).toBe(JSON.stringify([genericApiError]));
     });
 
-    it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
-        const mockGetResponse = {
-            status: 200,
-            body: mockResponseBodyCreate
-        };
+    it(
+        "maps the psc discrepancy report field data items correctly when optional fields are missing",
+        async () => {
+            const mockGetResponse = {
+                status: 200,
+                body: mockResponseBodyCreate
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+            const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
-        expect(result.isFailure()).to.be.false;
-        expect(result.isSuccess()).to.be.true;
+            expect(result.isFailure()).toBe(false);
+            expect(result.isSuccess()).toBe(true);
 
-        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
+            const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
-        expect(data.resource.obliged_entity_organisation_name).to.equal(mockResponseBodyCreate.obliged_entity_organisation_name);
-        expect(data.resource.kind).to.equal(mockResponseBodyCreate.kind);
-        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyCreate.material_discrepancies);
-        expect(data.resource.obliged_entity_name).to.equal(mockResponseBodyCreate.obliged_entity_name);
-        expect(data.resource.obliged_entity_contact_name).to.equal(mockResponseBodyCreate.obliged_entity_contact_name);
-        expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyCreate.obliged_entity_email);
-        expect(data.resource.obliged_entity_telephone_number).to.equal(mockResponseBodyCreate.obliged_entity_telephone_number);
-        expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyCreate.obliged_entity_type);
-        expect(data.resource.company_number).to.equal(mockResponseBodyCreate.company_number);
-        expect(data.resource.submission_reference).to.equal(mockResponseBodyCreate.submission_reference);
-        expect(data.resource.status).to.equal(mockResponseBodyCreate.status);
-        expect(data.resource.links.self).to.equal(mockResponseBodyCreate.links.self);
-    });
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.etag).toBe(mockResponseBodyCreate.etag);
+            expect(data.resource.obliged_entity_organisation_name).toBe(mockResponseBodyCreate.obliged_entity_organisation_name);
+            expect(data.resource.kind).toBe(mockResponseBodyCreate.kind);
+            expect(data.resource.material_discrepancies).toBe(mockResponseBodyCreate.material_discrepancies);
+            expect(data.resource.obliged_entity_name).toBe(mockResponseBodyCreate.obliged_entity_name);
+            expect(data.resource.obliged_entity_contact_name).toBe(mockResponseBodyCreate.obliged_entity_contact_name);
+            expect(data.resource.obliged_entity_email).toBe(mockResponseBodyCreate.obliged_entity_email);
+            expect(data.resource.obliged_entity_telephone_number).toBe(mockResponseBodyCreate.obliged_entity_telephone_number);
+            expect(data.resource.obliged_entity_type).toBe(mockResponseBodyCreate.obliged_entity_type);
+            expect(data.resource.company_number).toBe(mockResponseBodyCreate.company_number);
+            expect(data.resource.submission_reference).toBe(mockResponseBodyCreate.submission_reference);
+            expect(data.resource.status).toBe(mockResponseBodyCreate.status);
+            expect(data.resource.links.self).toBe(mockResponseBodyCreate.links.self);
+        }
+    );
 })
 
 describe("Create Psc Discrepancy Report", () => {
@@ -157,10 +160,10 @@ describe("Create Psc Discrepancy Report", () => {
 
         const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
-        expect(result).to.be.equal(mockResult)
+        expect(result).toBe(mockResult)
 
-        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports")
-        expect(mockProcess).to.have.been.calledWith(mockPostResponse)
+        expect(mockRequest).toHaveBeenCalledWith("/psc-discrepancy-reports")
+        expect(mockProcess).toHaveBeenCalledWith(mockPostResponse)
     })
 
     it("returns an error response on failure", async () => {
@@ -173,77 +176,83 @@ describe("Create Psc Discrepancy Report", () => {
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
-        expect(result.isFailure()).to.be.true;
+        expect(result.isFailure()).toBe(true);
 
         const data = result.value as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
+        expect(data.httpStatusCode).toBe(401);
+        expect(JSON.stringify(data.errors)).toBe(JSON.stringify([genericApiError]));
     });
-    it("returns a correctly mapped error response on validation failure", async () => {
-        const validationError = {
-            status: 400,
-            error: {
-                errors: [
-                    {
-                        error: "material_discrepancies contains an invalid subfield",
-                        location: "material_discrepancies",
-                        location_type: "request-body",
-                        type: "ch:validation"
-                    }
-                ]
+    it(
+        "returns a correctly mapped error response on validation failure",
+        async () => {
+            const validationError = {
+                status: 400,
+                error: {
+                    errors: [
+                        {
+                            error: "material_discrepancies contains an invalid subfield",
+                            location: "material_discrepancies",
+                            location_type: "request-body",
+                            type: "ch:validation"
+                        }
+                    ]
+                }
             }
+            const expectedError: ApiError = {
+                error: "material_discrepancies contains an invalid subfield",
+                location: "material_discrepancies",
+                locationType: "request-body",
+                type: "ch:validation"
+            }
+
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
+
+            const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+            const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
+
+            expect(result.isFailure()).toBe(true);
+
+            const data = result.value as ApiErrorResponse;
+
+            expect(data.httpStatusCode).toBe(400);
+            expect(JSON.stringify(data.errors)).toBe(JSON.stringify([expectedError]));
         }
-        const expectedError: ApiError = {
-            error: "material_discrepancies contains an invalid subfield",
-            location: "material_discrepancies",
-            locationType: "request-body",
-            type: "ch:validation"
+    );
+
+    it(
+        "maps the psc discrepancy report field data items correctly when optional fields are missing",
+        async () => {
+            const mockPostResponse = {
+                status: 200,
+                body: mockResponseBodyCreate
+            };
+
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+            const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
+
+            expect(result.isFailure()).toBe(false);
+            expect(result.isSuccess()).toBe(true);
+
+            const data = result.value as ApiResponse<PSCDiscrepancyReport>;
+
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.etag).toBe(mockResponseBodyCreate.etag);
+            expect(data.resource.kind).toBe(mockResponseBodyCreate.kind);
+            expect(data.resource.material_discrepancies).toBe(mockResponseBodyCreate.material_discrepancies);
+            expect(data.resource.status).toBe(mockResponseBodyCreate.status);
+            expect(data.resource.obliged_entity_type).toBe(mockResponseBodyCreate.obliged_entity_type);
+            expect(data.resource.obliged_entity_email).toBe(mockResponseBodyCreate.obliged_entity_email);
+            expect(data.resource.links.self).toBe(mockResponseBodyCreate.links.self);
+            expect(data.resource.obliged_entity_organisation_name).toBeUndefined();
+            expect(data.resource.obliged_entity_name).toBeUndefined();
+            expect(data.resource.obliged_entity_contact_name).toBeUndefined();
+            expect(data.resource.obliged_entity_telephone_number).toBeUndefined();
+            expect(data.resource.company_number).toBeUndefined();
+            expect(data.resource.submission_reference).toBeUndefined();
         }
-
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
-
-        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
-
-        expect(result.isFailure()).to.be.true;
-
-        const data = result.value as ApiErrorResponse;
-
-        expect(data.httpStatusCode).to.equal(400);
-        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([expectedError]));
-    });
-
-    it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
-        const mockPostResponse = {
-            status: 200,
-            body: mockResponseBodyCreate
-        };
-
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
-
-        expect(result.isFailure()).to.be.false;
-        expect(result.isSuccess()).to.be.true;
-
-        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
-
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBodyCreate.etag);
-        expect(data.resource.kind).to.equal(mockResponseBodyCreate.kind);
-        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyCreate.material_discrepancies);
-        expect(data.resource.status).to.equal(mockResponseBodyCreate.status);
-        expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyCreate.obliged_entity_type);
-        expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyCreate.obliged_entity_email);
-        expect(data.resource.links.self).to.equal(mockResponseBodyCreate.links.self);
-        expect(data.resource.obliged_entity_organisation_name).to.be.undefined;
-        expect(data.resource.obliged_entity_name).to.be.undefined;
-        expect(data.resource.obliged_entity_contact_name).to.be.undefined;
-        expect(data.resource.obliged_entity_telephone_number).to.be.undefined;
-        expect(data.resource.company_number).to.be.undefined;
-        expect(data.resource.submission_reference).to.be.undefined;
-    });
+    );
 })
 
 describe("Update Psc Discrepancy Report", () => {
@@ -272,10 +281,10 @@ describe("Update Psc Discrepancy Report", () => {
 
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 
-        expect(result).to.be.equal(mockResult)
+        expect(result).toBe(mockResult)
 
-        expect(mockRequest).to.have.been.calledWith("/psc-discrepancy-reports/" + REPORT_ID, mockResponseBodyComplete)
-        expect(mockProcess).to.have.been.calledWith(mockPutResponse)
+        expect(mockRequest).toHaveBeenCalledWith("/psc-discrepancy-reports/" + REPORT_ID, mockResponseBodyComplete)
+        expect(mockProcess).toHaveBeenCalledWith(mockPutResponse)
     })
 
     it("returns an error response on failure", async () => {
@@ -288,42 +297,45 @@ describe("Update Psc Discrepancy Report", () => {
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 
-        expect(result.isFailure()).to.be.true;
+        expect(result.isFailure()).toBe(true);
 
         const data = result.value as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([genericApiError]));
+        expect(data.httpStatusCode).toBe(401);
+        expect(JSON.stringify(data.errors)).toBe(JSON.stringify([genericApiError]));
     });
 
-    it("maps the psc discrepancy report field data items correctly when optional fields are missing", async () => {
-        const mockPutResponse = {
-            status: 200,
-            body: mockResponseBodyComplete
-        };
+    it(
+        "maps the psc discrepancy report field data items correctly when optional fields are missing",
+        async () => {
+            const mockPutResponse = {
+                status: 200,
+                body: mockResponseBodyComplete
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
-        const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
-        const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
+            const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+            const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
+            const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 
-        expect(result.isFailure()).to.be.false;
-        expect(result.isSuccess()).to.be.true;
+            expect(result.isFailure()).toBe(false);
+            expect(result.isSuccess()).toBe(true);
 
-        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
+            const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.etag).to.equal(mockResponseBodyComplete.etag);
-        expect(data.resource.kind).to.equal(mockResponseBodyComplete.kind);
-        expect(data.resource.material_discrepancies).to.equal(mockResponseBodyComplete.material_discrepancies);
-        expect(data.resource.status).to.equal(mockResponseBodyComplete.status);
-        expect(data.resource.obliged_entity_type).to.equal(mockResponseBodyComplete.obliged_entity_type);
-        expect(data.resource.obliged_entity_email).to.equal(mockResponseBodyComplete.obliged_entity_email);
-        expect(data.resource.links.self).to.equal(mockResponseBodyComplete.links.self);
-        expect(data.resource.obliged_entity_organisation_name).to.equal(mockResponseBodyComplete.obliged_entity_organisation_name);
-        expect(data.resource.obliged_entity_name).to.equal(mockResponseBodyComplete.obliged_entity_name);
-        expect(data.resource.obliged_entity_contact_name).to.equal(mockResponseBodyComplete.obliged_entity_contact_name);
-        expect(data.resource.obliged_entity_telephone_number).to.equal(mockResponseBodyComplete.obliged_entity_telephone_number);
-        expect(data.resource.company_number).to.equal(mockResponseBodyComplete.company_number);
-        expect(data.resource.submission_reference).to.equal(mockResponseBodyComplete.submission_reference);
-    });
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.etag).toBe(mockResponseBodyComplete.etag);
+            expect(data.resource.kind).toBe(mockResponseBodyComplete.kind);
+            expect(data.resource.material_discrepancies).toBe(mockResponseBodyComplete.material_discrepancies);
+            expect(data.resource.status).toBe(mockResponseBodyComplete.status);
+            expect(data.resource.obliged_entity_type).toBe(mockResponseBodyComplete.obliged_entity_type);
+            expect(data.resource.obliged_entity_email).toBe(mockResponseBodyComplete.obliged_entity_email);
+            expect(data.resource.links.self).toBe(mockResponseBodyComplete.links.self);
+            expect(data.resource.obliged_entity_organisation_name).toBe(mockResponseBodyComplete.obliged_entity_organisation_name);
+            expect(data.resource.obliged_entity_name).toBe(mockResponseBodyComplete.obliged_entity_name);
+            expect(data.resource.obliged_entity_contact_name).toBe(mockResponseBodyComplete.obliged_entity_contact_name);
+            expect(data.resource.obliged_entity_telephone_number).toBe(mockResponseBodyComplete.obliged_entity_telephone_number);
+            expect(data.resource.company_number).toBe(mockResponseBodyComplete.company_number);
+            expect(data.resource.submission_reference).toBe(mockResponseBodyComplete.submission_reference);
+        }
+    );
 })

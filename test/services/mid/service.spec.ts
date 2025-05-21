@@ -81,8 +81,8 @@ describe("create a MID POST", () => {
         const mid: MidService = new MidService(requestClient);
         const data = await mid.postMid(mockRequestBody);
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("maps create a mid correctly", async () => {
@@ -95,11 +95,11 @@ describe("create a MID POST", () => {
         const mid: MidService = new MidService(requestClient);
         const data = await mid.postMid(mockRequestBody);
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.customerReference).to.equal(mockResponseBody.customer_reference);
-        expect(data.resource.itemOptions.filingHistoryId).to.equal(mockResponseBody.item_options.filing_history_id)
-        expect(data.resource.quantity).to.equal(mockResponseBody.quantity);
+        expect(data.httpStatusCode).toBe(200);
+        expect(data.resource.companyNumber).toBe(mockResponseBody.company_number);
+        expect(data.resource.customerReference).toBe(mockResponseBody.customer_reference);
+        expect(data.resource.itemOptions.filingHistoryId).toBe(mockResponseBody.item_options.filing_history_id)
+        expect(data.resource.quantity).toBe(mockResponseBody.quantity);
     });
 });
 
@@ -125,31 +125,34 @@ describe("GET missing image delivery", () => {
         const missingImageDelivery: MidService = new MidService(requestClient);
         const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
-    it("maps the missing image delivery field data items correctly", async () => {
-        const mockGetResponse = {
-            status: 200,
-            body: mockResponseBody
-        };
+    it(
+        "maps the missing image delivery field data items correctly",
+        async () => {
+            const mockGetResponse = {
+                status: 200,
+                body: mockResponseBody
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const missingImageDelivery: MidService = new MidService(requestClient);
-        const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const missingImageDelivery: MidService = new MidService(requestClient);
+            const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(data.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(data.resource.totalItemCost).to.equal(mockResponseBody.total_item_cost);
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.companyNumber).toBe(mockResponseBody.company_number);
+            expect(data.resource.companyName).toBe(mockResponseBody.company_name);
+            expect(data.resource.totalItemCost).toBe(mockResponseBody.total_item_cost);
 
-        const itemOptions = data.resource.itemOptions;
-        const itemOptionsResource = mockResponseBody.item_options;
-        expect(itemOptions.filingHistoryDate).to.equal(itemOptionsResource.filing_history_date);
-        expect(itemOptions.filingHistoryDescription).to.equal(itemOptionsResource.filing_history_description);
-        expect(itemOptions.filingHistoryId).to.equal(itemOptionsResource.filing_history_id);
-        expect(itemOptions.filingHistoryType).to.equal(itemOptionsResource.filing_history_type);
-        expect(itemOptions.filingHistoryDescriptionValues).to.deep.equal(itemOptionsResource.filing_history_description_values);
-    });
+            const itemOptions = data.resource.itemOptions;
+            const itemOptionsResource = mockResponseBody.item_options;
+            expect(itemOptions.filingHistoryDate).toBe(itemOptionsResource.filing_history_date);
+            expect(itemOptions.filingHistoryDescription).toBe(itemOptionsResource.filing_history_description);
+            expect(itemOptions.filingHistoryId).toBe(itemOptionsResource.filing_history_id);
+            expect(itemOptions.filingHistoryType).toBe(itemOptionsResource.filing_history_type);
+            expect(itemOptions.filingHistoryDescriptionValues).toEqual(itemOptionsResource.filing_history_description_values);
+        }
+    );
 });

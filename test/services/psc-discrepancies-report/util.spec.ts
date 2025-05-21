@@ -64,60 +64,72 @@ describe("Process Response", () => {
         done();
     });
 
-    it("returns an ApiResponse with correctly mapped fields on success", async () => {
-        const result = utility.processResponse(mockSuccessResponse)
+    it(
+        "returns an ApiResponse with correctly mapped fields on success",
+        async () => {
+            const result = utility.processResponse(mockSuccessResponse)
 
-        expect(result.isFailure()).to.be.false;
-        expect(result.isSuccess()).to.be.true;
+            expect(result.isFailure()).toBe(false);
+            expect(result.isSuccess()).toBe(true);
 
-        const data = result.value as ApiResponse<PSCDiscrepancyReport>;
+            const data = result.value as ApiResponse<PSCDiscrepancyReport>;
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(JSON.stringify(data.headers)).to.be.equal(JSON.stringify(mockSuccessResponse.headers))
-        expect(JSON.stringify(data.resource)).to.be.equal(JSON.stringify(mockSuccessResponse.body));
-    });
-
-    it("returns an ApiErrorResponse with no Errors if only error status code is sent", async () => {
-        const result = utility.processResponse(mockErrorResponseCode)
-
-        expect(result.isFailure()).to.be.false;
-        expect(result.isSuccess()).to.be.true;
-
-        const data = result.value as ApiErrorResponse;
-
-        expect(data.httpStatusCode).to.equal(400);
-        expect(JSON.stringify(data.errors)).to.be.undefined
-    });
-
-    it("returns an ApiErrorResponse with a single ApiError if response body does not match APIError format", async () => {
-        const result = utility.processResponse(mockGenericErrorResponse)
-
-        expect(result.isFailure()).to.be.true;
-        expect(result.isSuccess()).to.be.false;
-
-        const data = result.value as ApiErrorResponse;
-
-        expect(data.httpStatusCode).to.equal(404);
-        expect(data.errors).to.have.lengthOf(1)
-        expect(data.errors[0].error).to.be.equal(mockGenericErrorResponse.error)
-    });
-
-    it("returns an ApiErrorResponse with ApiErrors matching response body if body does match APIError format", async () => {
-        const expectedError: ApiError = {
-            error: "material_discrepancies contains an invalid subfield",
-            location: "material_discrepancies",
-            locationType: "request-body",
-            type: "ch:validation"
+            expect(data.httpStatusCode).toBe(200);
+            expect(JSON.stringify(data.headers)).toBe(JSON.stringify(mockSuccessResponse.headers))
+            expect(JSON.stringify(data.resource)).toBe(JSON.stringify(mockSuccessResponse.body));
         }
+    );
 
-        const result = utility.processResponse(mockApiErrorResponse)
+    it(
+        "returns an ApiErrorResponse with no Errors if only error status code is sent",
+        async () => {
+            const result = utility.processResponse(mockErrorResponseCode)
 
-        expect(result.isFailure()).to.be.true;
-        expect(result.isSuccess()).to.be.false;
+            expect(result.isFailure()).toBe(false);
+            expect(result.isSuccess()).toBe(true);
 
-        const data = result.value as ApiErrorResponse;
+            const data = result.value as ApiErrorResponse;
 
-        expect(data.httpStatusCode).to.equal(400);
-        expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([expectedError]))
-    });
+            expect(data.httpStatusCode).toBe(400);
+            expect(JSON.stringify(data.errors)).toBeUndefined()
+        }
+    );
+
+    it(
+        "returns an ApiErrorResponse with a single ApiError if response body does not match APIError format",
+        async () => {
+            const result = utility.processResponse(mockGenericErrorResponse)
+
+            expect(result.isFailure()).toBe(true);
+            expect(result.isSuccess()).toBe(false);
+
+            const data = result.value as ApiErrorResponse;
+
+            expect(data.httpStatusCode).toBe(404);
+            expect(data.errors).toHaveLength(1)
+            expect(data.errors[0].error).toBe(mockGenericErrorResponse.error)
+        }
+    );
+
+    it(
+        "returns an ApiErrorResponse with ApiErrors matching response body if body does match APIError format",
+        async () => {
+            const expectedError: ApiError = {
+                error: "material_discrepancies contains an invalid subfield",
+                location: "material_discrepancies",
+                locationType: "request-body",
+                type: "ch:validation"
+            }
+
+            const result = utility.processResponse(mockApiErrorResponse)
+
+            expect(result.isFailure()).toBe(true);
+            expect(result.isSuccess()).toBe(false);
+
+            const data = result.value as ApiErrorResponse;
+
+            expect(data.httpStatusCode).toBe(400);
+            expect(JSON.stringify(data.errors)).toBe(JSON.stringify([expectedError]))
+        }
+    );
 })

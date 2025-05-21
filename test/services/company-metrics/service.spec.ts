@@ -29,8 +29,8 @@ describe("company-metrics", () => {
         const companyMetricsService : CompanyMetricsService = new CompanyMetricsService(requestClient);
         const data = await companyMetricsService.getCompanyMetrics("NUMBER-NOT-IMPORTANT");
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("maps the company metrics data items correctly", async () => {
@@ -62,19 +62,19 @@ describe("company-metrics", () => {
         const companyMetricsService : CompanyMetricsService = new CompanyMetricsService(requestClient);
         const data = await companyMetricsService.getCompanyMetrics("123");
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
 
-        expect(data.resource?.etag).to.equal(mockResponseBody.etag)
+        expect(data.resource?.etag).toBe(mockResponseBody.etag)
 
-        expect(data.resource?.counts.appointments.activeCount).to.equal(mockResponseBody.counts.appointments.activeCount)
-        expect(data.resource?.counts.appointments.activeDirectorsCount).to.equal(mockResponseBody.counts.appointments.activeDirectorsCount)
-        expect(data.resource?.counts.appointments.activeLlpMembersCount).to.equal(mockResponseBody.counts.appointments.activeLlpMembersCount)
-        expect(data.resource?.counts.appointments.activeSecretariesCount).to.equal(mockResponseBody.counts.appointments.activeSecretariesCount)
-        expect(data.resource?.counts.appointments.resignedCount).to.equal(mockResponseBody.counts.appointments.resignedCount)
-        expect(data.resource?.counts.appointments.totalCount).to.equal(mockResponseBody.counts.appointments.totalCount)
+        expect(data.resource?.counts.appointments.activeCount).toBe(mockResponseBody.counts.appointments.activeCount)
+        expect(data.resource?.counts.appointments.activeDirectorsCount).toBe(mockResponseBody.counts.appointments.activeDirectorsCount)
+        expect(data.resource?.counts.appointments.activeLlpMembersCount).toBe(mockResponseBody.counts.appointments.activeLlpMembersCount)
+        expect(data.resource?.counts.appointments.activeSecretariesCount).toBe(mockResponseBody.counts.appointments.activeSecretariesCount)
+        expect(data.resource?.counts.appointments.resignedCount).toBe(mockResponseBody.counts.appointments.resignedCount)
+        expect(data.resource?.counts.appointments.totalCount).toBe(mockResponseBody.counts.appointments.totalCount)
 
-        expect(data.resource?.mortgage.partSatisfiedCount).to.equal(mockResponseBody.mortgage.partSatisfiedCount)
-        expect(data.resource?.mortgage.satisfiedCount).to.equal(mockResponseBody.mortgage.satisfiedCount)
-        expect(data.resource?.mortgage.totalCount).to.equal(mockResponseBody.mortgage.totalCount)
+        expect(data.resource?.mortgage.partSatisfiedCount).toBe(mockResponseBody.mortgage.partSatisfiedCount)
+        expect(data.resource?.mortgage.satisfiedCount).toBe(mockResponseBody.mortgage.satisfiedCount)
+        expect(data.resource?.mortgage.totalCount).toBe(mockResponseBody.mortgage.totalCount)
     });
 });

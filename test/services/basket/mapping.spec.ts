@@ -1,6 +1,5 @@
 import BasketMapping from "../../../src/services/order/basket/mapping";
 import { BasketPatchRequest } from "../../../src/services/order/basket";
-import { expect } from "chai";
 
 describe("BasketMapping", () => {
     describe("mapBasketRequestToBasketRequestResource", () => {
@@ -25,7 +24,7 @@ describe("BasketMapping", () => {
             const actual = BasketMapping.mapBasketRequestToBasketRequestResource(request);
 
             // then
-            expect(actual).to.deep.equal({
+            expect(actual).toEqual({
                 delivery_details: {
                     address_line_1: "address line 1",
                     address_line_2: "address line 2",

@@ -27,11 +27,11 @@ class TestClient extends AbstractClient {
 describe("abstract-client", () => {
     it("sets the correct authorization header when using api key", () => {
         const client = new TestClient({ baseUrl: "http://api", apiKey: "123" });
-        expect(client.headers.Authorization).to.equal("123");
+        expect(client.headers.Authorization).toBe("123");
     });
 
     it("sends the correct authorization header when using oauth token", () => {
         const client = new TestClient({ baseUrl: "http://api", oauthToken: "123" });
-        expect(client.headers.Authorization).to.equal("Bearer 123");
+        expect(client.headers.Authorization).toBe("Bearer 123");
     });
 });

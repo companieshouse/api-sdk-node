@@ -33,7 +33,7 @@ describe("company-psc-statements", () => {
         const companyPscStatement : CompanyPscStatementsService = new CompanyPscStatementsService(requestClient);
         const data = await companyPscStatement.getCompanyPscStatements("NUMBER-NOT-IMPORTANT", 2, 1);
 
-        expect(data.httpStatusCode).to.equal(401);
+        expect(data.httpStatusCode).toBe(401);
     });
 
     it("maps the psc statement data items correctly", async () => {
@@ -67,24 +67,24 @@ describe("company-psc-statements", () => {
         const companyPscStatementService : CompanyPscStatementsService = new CompanyPscStatementsService(requestClient);
         const data = await companyPscStatementService.getCompanyPscStatements("NUMBER-NOT-IMPORTANT", 2, 1);
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
 
         const castedResponse: Resource<CompanyPersonsWithSignificantControlStatements> = data as Resource<CompanyPersonsWithSignificantControlStatements>
 
-        expect(castedResponse.resource.activeCount).to.equal(mockResponseBody.active_count);
-        expect(castedResponse.resource.ceasedCount).to.equal(mockResponseBody.ceased_count);
-        expect(castedResponse.resource.itemsPerPage).to.equal(mockResponseBody.items_per_page);
-        expect(castedResponse.resource.startIndex).to.equal(mockResponseBody.start_index);
-        expect(castedResponse.resource.totalResults).to.equal(mockResponseBody.total_results);
+        expect(castedResponse.resource.activeCount).toBe(mockResponseBody.active_count);
+        expect(castedResponse.resource.ceasedCount).toBe(mockResponseBody.ceased_count);
+        expect(castedResponse.resource.itemsPerPage).toBe(mockResponseBody.items_per_page);
+        expect(castedResponse.resource.startIndex).toBe(mockResponseBody.start_index);
+        expect(castedResponse.resource.totalResults).toBe(mockResponseBody.total_results);
 
-        expect(castedResponse.resource.links.self).to.equal(mockResponseBody.links.self);
+        expect(castedResponse.resource.links.self).toBe(mockResponseBody.links.self);
 
-        expect(castedResponse.resource.items.length).to.equal(mockResponseBody.items.length);
+        expect(castedResponse.resource.items.length).toBe(mockResponseBody.items.length);
 
-        expect(castedResponse.resource.items[0].ceasedOn).to.equal(mockResponseBody.items[0].ceased_on);
-        expect(castedResponse.resource.items[0].etag).to.equal(mockResponseBody.items[0].etag);
-        expect(castedResponse.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(castedResponse.resource.items[0].notifiedOn).to.equal(mockResponseBody.items[0].notified_on);
-        expect(castedResponse.resource.items[0].statement).to.equal(mockResponseBody.items[0].statement);
+        expect(castedResponse.resource.items[0].ceasedOn).toBe(mockResponseBody.items[0].ceased_on);
+        expect(castedResponse.resource.items[0].etag).toBe(mockResponseBody.items[0].etag);
+        expect(castedResponse.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+        expect(castedResponse.resource.items[0].notifiedOn).toBe(mockResponseBody.items[0].notified_on);
+        expect(castedResponse.resource.items[0].statement).toBe(mockResponseBody.items[0].statement);
     });
 });
