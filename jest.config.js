@@ -17,5 +17,9 @@ module.exports = {
     "ts-jest": {
       diagnostics: false,
     }
-  }
+  },
+  transform: {
+    "^.+\\.ts$": ["ts-jest", { diagnostics: false }]
+  },
+  globalSetup: "./test/setup.ts",
 };
