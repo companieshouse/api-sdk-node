@@ -26,6 +26,7 @@ export interface LimitedPartnership {
         principal_place_of_business_address?: Address;
         term?: Term;
         sic_codes?: string[];
+        lawful_purpose_statement_checked?: boolean;
     };
 }
 type Partner = {
