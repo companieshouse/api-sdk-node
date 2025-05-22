@@ -1,6 +1,4 @@
-import chai from "chai";
 import { AbstractClient, HttpResponse } from "../../src/http";
-const expect = chai.expect;
 
 class TestClient extends AbstractClient {
     public httpPost (url: string, body: any, headers: any): Promise<HttpResponse> {

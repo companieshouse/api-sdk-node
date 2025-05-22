@@ -1,24 +1,22 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
 import CompanyOfficersService from "../../../src/services/company-officers/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { CompanyOfficersResource } from "../../../src/services/company-officers/types";
-const expect = chai.expect;
+
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-officers", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -27,7 +25,7 @@ describe("company-officers", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         const data = await companyOfficers.getCompanyOfficers("NUMBER-NOT-IMPORTANT");
 
@@ -105,7 +103,7 @@ describe("company-officers", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         const data = await companyOfficers.getCompanyOfficers("123");
 
@@ -164,23 +162,25 @@ describe("company-officers", () => {
     });
 
     it("should pass url with default parameters when undefined", async () => {
-        const spy = sinon.spy(requestClient, "httpGet");
+        const spy = jest.spyOn(requestClient, "httpGet").mockClear();
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123");
-        expect(spy.calledWith("/company/123/officers?page_size=35&page_index=0&register_view=false")).toBe(true);
+        expect(spy).toHaveBeenCalledWith("/company/123/officers?page_size=35&page_index=0&register_view=false");
     });
 
     it("should pass url with specified parameters", async () => {
-        const spy = sinon.spy(requestClient, "httpGet");
+        const spy = jest.spyOn(requestClient, "httpGet").mockClear();
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123", 10, 2, true);
-        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true")).toBe(true);
+        expect(spy).toHaveBeenCalledWith("/company/123/officers?page_size=10&page_index=2&register_view=true");
     });
 
     it("should pass url with orderBy parameter", async () => {
-        const spy = sinon.spy(requestClient, "httpGet");
+        const spy = jest.spyOn(requestClient, "httpGet").mockClear();
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123", 10, 2, true, "resigned_on");
-        expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on")).toBe(true);
+        expect(spy).toHaveBeenCalledWith(
+            "/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on"
+        );
     });
 });

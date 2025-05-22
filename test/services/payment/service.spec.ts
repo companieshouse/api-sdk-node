@@ -1,5 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
@@ -7,7 +5,6 @@ import PaymentService from "../../../src/services/payment/service";
 import { CreatePaymentRequest, Payment, PaymentResource, CreatePaymentRequestResource } from "../../../src/services/payment/types";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { ApiResponse } from "../../../src/services/resource";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -46,13 +43,13 @@ const mockRequestBody: CreatePaymentRequest = {
 describe("payment service", () => {
     describe("create payment", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         afterEach(done => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
             done();
         });
 
@@ -62,7 +59,7 @@ describe("payment service", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.createPayment(mockRequestBody);
             const data = response.value as ApiResponse<Payment>;
@@ -75,7 +72,7 @@ describe("payment service", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.createPayment(mockRequestBody);
 
@@ -107,10 +104,10 @@ describe("payment service", () => {
                 status: 200,
                 body: mockResponseBody
             };
-            const mockHttpPost = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockHttpPost = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             await paymentService.createPayment(mockRequestBody);
-            const paymentRequest: CreatePaymentRequestResource = mockHttpPost.getCall(0).args[1];
+            const paymentRequest: CreatePaymentRequestResource = mockHttpPost.mock.calls[0][1];
             expect(paymentRequest.redirect_uri).toBe(mockRequestBody.redirectUri);
             expect(paymentRequest.reference).toBe(mockRequestBody.reference);
             expect(paymentRequest.resource).toBe(mockRequestBody.resource);
@@ -120,13 +117,13 @@ describe("payment service", () => {
 
     describe("get payment", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         afterEach(done => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
             done();
         });
 
@@ -136,7 +133,7 @@ describe("payment service", () => {
                 error: "An error occurred"
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.getPayment("payments/TEST_ID");
             const data = response.value as ApiResponse<Payment>;
@@ -150,7 +147,7 @@ describe("payment service", () => {
                 body: mockResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const paymentService: PaymentService = new PaymentService(requestClient);
             const response = await paymentService.getPayment("payments/TEST_ID");
 

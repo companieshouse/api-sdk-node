@@ -1,6 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { RequestClient } from "../../../src/http";
 import CompanyPscStatementsService from "../../../src/services/company-psc-statements/service";
 import {
@@ -8,19 +5,18 @@ import {
     CompanyPersonsWithSignificantControlStatementsResource
 } from "../../../src/services/company-psc-statements";
 import Resource from "../../../src/services/resource";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-psc-statements", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -29,7 +25,7 @@ describe("company-psc-statements", () => {
             status: 401,
             error: "An error occurred"
         };
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyPscStatement : CompanyPscStatementsService = new CompanyPscStatementsService(requestClient);
         const data = await companyPscStatement.getCompanyPscStatements("NUMBER-NOT-IMPORTANT", 2, 1);
 
@@ -63,7 +59,7 @@ describe("company-psc-statements", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyPscStatementService : CompanyPscStatementsService = new CompanyPscStatementsService(requestClient);
         const data = await companyPscStatementService.getCompanyPscStatements("NUMBER-NOT-IMPORTANT", 2, 1);
 

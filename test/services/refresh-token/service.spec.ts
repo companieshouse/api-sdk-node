@@ -1,22 +1,18 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 import { RequestClient } from "../../../src/http";
 import { RefreshTokenData, RefreshTokenService } from "../../../src/services/refresh-token";
 
-const expect = chai.expect;
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("refresh token", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -25,7 +21,7 @@ describe("refresh token", () => {
             status: 400,
             error: "Invalid parameter"
         };
-        sinon.stub(requestClient, "httpPost").resolves(mockErrorResponseBody);
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockErrorResponseBody);
 
         const refreshToken: RefreshTokenService = new RefreshTokenService(requestClient);
 
@@ -45,7 +41,7 @@ describe("refresh token", () => {
             expires_in: 1
         });
 
-        sinon.stub(requestClient, "httpPost").resolves({
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue({
             status: 200,
             body: mockResponseBody
         });
@@ -70,7 +66,7 @@ describe("refresh token", () => {
                 expires_in: 1
             });
 
-            sinon.stub(requestClient, "httpPost").resolves({
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue({
                 status: 200,
                 body: mockResponseBody
             });

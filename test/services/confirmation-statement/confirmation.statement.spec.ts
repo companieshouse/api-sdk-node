@@ -12,7 +12,6 @@ import {
     NextMadeUpToDate
 } from "../../../src/services/confirmation-statement";
 import * as mockValues from "./confirmation.statement.mock";
-import sinon from "sinon";
 import { mockGetPersonsOfSignificantControl, mockGetShareholder, mockGetRegisterLocations } from "./confirmation.statement.mock";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
@@ -21,19 +20,19 @@ const CONFIRMATION_STATEMENT_ID = "r4nd0m";
 const COMPANY_NUMBER = "11111111";
 
 beforeEach(() => {
-    sinon.reset();
-    sinon.restore();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
 });
 
 afterEach(done => {
-    sinon.reset();
-    sinon.restore();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
     done();
 });
 
 describe("check eligibility GET", () => {
     it("should return company validation object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.getEligibility(COMPANY_NUMBER);
 
@@ -42,7 +41,7 @@ describe("check eligibility GET", () => {
     });
 
     it("should return error 400 company validation error object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[400]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[400]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.getEligibility(COMPANY_NUMBER);
 
@@ -53,7 +52,7 @@ describe("check eligibility GET", () => {
     });
 
     it("should return error 401 - Unauthorised", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[401]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[401]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.getEligibility(COMPANY_NUMBER);
 
@@ -62,7 +61,7 @@ describe("check eligibility GET", () => {
     });
 
     it("should return error 404 - not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[404]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.getEligibility(COMPANY_NUMBER);
 
@@ -71,7 +70,7 @@ describe("check eligibility GET", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.getEligibility(COMPANY_NUMBER);
 
@@ -81,7 +80,7 @@ describe("check eligibility GET", () => {
 
     it("should throw error if no body received from API", async () => {
         const expectedErrorMessage = "No body or error body returned from confirmation-statement/company/11111111/eligibility API call - http status from API = 202";
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockCheckEligibility[202]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockCheckEligibility[202]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         await expect(csService.getEligibility(COMPANY_NUMBER)).to.be.rejectedWith(expectedErrorMessage);
     });
@@ -89,7 +88,7 @@ describe("check eligibility GET", () => {
 
 describe("create confirmation statement POST", () => {
     it("should return creation object", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockCreatePostResponse[201]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockCreatePostResponse[201]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<ConfirmationStatementCreated> =
           await csService.postNewConfirmationStatement(TRANSACTION_ID) as Resource<ConfirmationStatementCreated>;
@@ -100,7 +99,7 @@ describe("create confirmation statement POST", () => {
     });
 
     it("should return error 400 company validation error object", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockCreatePostResponse[400]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockCreatePostResponse[400]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<CompanyValidationResponse> =
           await csService.postNewConfirmationStatement(TRANSACTION_ID) as Resource<CompanyValidationResponse>;
@@ -113,7 +112,7 @@ describe("create confirmation statement POST", () => {
     });
 
     it("should return error 401 - Unauthorised", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockCreatePostResponse[401]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockCreatePostResponse[401]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse =
           await csService.postNewConfirmationStatement(TRANSACTION_ID) as ApiErrorResponse;
@@ -123,7 +122,7 @@ describe("create confirmation statement POST", () => {
     });
 
     it("should return error 404 - not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockCreatePostResponse[404]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockCreatePostResponse[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse =
         await csService.postNewConfirmationStatement(TRANSACTION_ID) as ApiErrorResponse;
@@ -133,7 +132,7 @@ describe("create confirmation statement POST", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockCreatePostResponse[500]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockCreatePostResponse[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse =
         await csService.postNewConfirmationStatement(TRANSACTION_ID) as ApiErrorResponse;
@@ -145,7 +144,7 @@ describe("create confirmation statement POST", () => {
 
 describe("Update confirmation statement POST", () => {
     it("should return update object", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[200]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<ConfirmationStatementSubmission> = await csService.postUpdateConfirmationStatement(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID,
             mockValues.mockConfirmationStatementSubmission) as Resource<ConfirmationStatementSubmission>
@@ -171,7 +170,7 @@ describe("Update confirmation statement POST", () => {
     });
 
     it("should return error 404 - not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[404]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse =
         await csService.postUpdateConfirmationStatement(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID,
@@ -185,7 +184,7 @@ describe("submit confirmation statement POST", () => {
     it(
         "should confirmation submission object for submission post method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[202]);
+            jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[202]);
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data = await csService.postConfirmationStatementSubmission(TRANSACTION_ID);
 
@@ -197,7 +196,7 @@ describe("submit confirmation statement POST", () => {
     );
 
     it("should return error 401 - Unauthorised", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[401]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[401]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.postConfirmationStatementSubmission(TRANSACTION_ID);
 
@@ -206,7 +205,7 @@ describe("submit confirmation statement POST", () => {
     });
 
     it("should return error 404 - not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[404]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.postConfirmationStatementSubmission(TRANSACTION_ID);
 
@@ -215,7 +214,7 @@ describe("submit confirmation statement POST", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSubmitPostResponse[500]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockSubmitPostResponse[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data = await csService.postConfirmationStatementSubmission(TRANSACTION_ID);
 
@@ -226,7 +225,7 @@ describe("submit confirmation statement POST", () => {
 
 describe("statement of capital data GET", () => {
     it("should return statement of capital object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetStatementOfCapital[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetStatementOfCapital[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<StatementOfCapital> = await csService.getStatementOfCapital(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<StatementOfCapital>;
 
@@ -235,7 +234,7 @@ describe("statement of capital data GET", () => {
     });
 
     it("should not return statement of capital object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetStatementOfCapital[404]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetStatementOfCapital[404]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getStatementOfCapital(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
@@ -246,7 +245,7 @@ describe("statement of capital data GET", () => {
 
 describe("Active officer details GET", () => {
     it("should return active officer details object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetActiveOfficerDetails[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<ActiveOfficerDetails> = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveOfficerDetails>;
 
@@ -257,7 +256,7 @@ describe("Active officer details GET", () => {
     it(
         "should return error 404 - No active director details were found",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[404]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetActiveOfficerDetails[404]);
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data: ApiErrorResponse = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
@@ -267,7 +266,7 @@ describe("Active officer details GET", () => {
     );
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetActiveOfficerDetails[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetActiveOfficerDetails[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
@@ -278,7 +277,7 @@ describe("Active officer details GET", () => {
 
 describe("List active officers details GET", () => {
     it("should return active officer details object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveOfficersDetails[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<ActiveOfficerDetails[]> = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ActiveOfficerDetails[]>;
 
@@ -289,7 +288,7 @@ describe("List active officers details GET", () => {
     it(
         "should return error 404 - No active director details were found",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[404]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveOfficersDetails[404]);
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data: ApiErrorResponse = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
@@ -299,7 +298,7 @@ describe("List active officers details GET", () => {
     );
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveOfficersDetails[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveOfficersDetails[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getListActiveOfficerDetails(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID);
 
@@ -310,7 +309,7 @@ describe("List active officers details GET", () => {
 
 describe("persons with significant control GET", () => {
     it("should return a list of persons with significant control", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetPersonsOfSignificantControl[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetPersonsOfSignificantControl[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<PersonOfSignificantControl[]>;
         expect(data.httpStatusCode).toBe(200);
@@ -325,7 +324,7 @@ describe("persons with significant control GET", () => {
     });
 
     it("should not map missing address or names", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockPscNoNameNoAddress });
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 200, body: mockValues.mockPscNoNameNoAddress });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<PersonOfSignificantControl[]> = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<PersonOfSignificantControl[]>;
         expect(data.httpStatusCode).toBe(200);
@@ -336,7 +335,7 @@ describe("persons with significant control GET", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetPersonsOfSignificantControl[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetPersonsOfSignificantControl[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getPersonsOfSignificantControl(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).toBe(500);
@@ -346,7 +345,7 @@ describe("persons with significant control GET", () => {
 
 describe("Shareholder GET", () => {
     it("should return a list of shareholder", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetShareholder[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetShareholder[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<Shareholder[]> = await csService.getShareholders(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<Shareholder[]>;
         expect(data.httpStatusCode).toBe(200);
@@ -356,7 +355,7 @@ describe("Shareholder GET", () => {
     });
 
     it("should return a 500 error - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetShareholder[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetShareholder[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getShareholders(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).toBe(500);
@@ -366,7 +365,7 @@ describe("Shareholder GET", () => {
 
 describe("Register Location GET", () => {
     it("should return a list of registers and their locations", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetRegisterLocations[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRegisterLocations[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<RegisterLocation[]> = await csService.getRegisterLocations(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<RegisterLocation[]>;
         expect(data.httpStatusCode).toBe(200);
@@ -376,7 +375,7 @@ describe("Register Location GET", () => {
     });
 
     it("should return a 500 error - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockGetRegisterLocations[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRegisterLocations[500]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: ApiErrorResponse = await csService.getRegisterLocations(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as ApiErrorResponse;
         expect(data.httpStatusCode).toBe(500);
@@ -386,7 +385,7 @@ describe("Register Location GET", () => {
 
 describe("confirmation statement submission GET", () => {
     it("should return confirmation statement submission object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetConfirmationStatementSubmission[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetConfirmationStatementSubmission[200]);
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const data: Resource<ConfirmationStatementSubmission> =
             await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
@@ -413,7 +412,7 @@ describe("confirmation statement submission GET", () => {
     it(
         "should return confirmation statement submission object with no statement of capital",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockConfirmationStatementSubmissionResourceNoSOC });
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 200, body: mockValues.mockConfirmationStatementSubmissionResourceNoSOC });
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data: Resource<ConfirmationStatementSubmission> =
                 await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
@@ -431,7 +430,7 @@ describe("confirmation statement submission GET", () => {
     it(
         "should return error info when confirmation statement submission not returned",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetConfirmationStatementSubmission[404]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetConfirmationStatementSubmission[404]);
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data: ApiErrorResponse =
                 await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ApiErrorResponse>;
@@ -444,7 +443,7 @@ describe("confirmation statement submission GET", () => {
     it(
         "should return confirmation statement submission object with registered email address",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetConfirmationStatementSubmission[200]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetConfirmationStatementSubmission[200]);
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const data: Resource<ConfirmationStatementSubmission> =
                 await csService.getConfirmationStatementSubmission(TRANSACTION_ID, CONFIRMATION_STATEMENT_ID) as Resource<ConfirmationStatementSubmission>;
@@ -462,7 +461,7 @@ describe("confirmation statement submission GET", () => {
 
 describe("getNextMadeUpToDate tests", () => {
     it("Should not map optional fields when filing is due", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsDue });
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsDue });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
         const nextMadeUpToDate: NextMadeUpToDate = response.resource;
@@ -474,7 +473,7 @@ describe("getNextMadeUpToDate tests", () => {
     });
 
     it("Should map optional fields when filing is not due", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsNotDue });
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 200, body: mockValues.mockNextMadeUpToDateResourceIsNotDue });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
         const nextMadeUpToDate: NextMadeUpToDate = response.resource;
@@ -491,7 +490,7 @@ describe("getNextMadeUpToDate tests", () => {
     it(
         "Should not map optional fields when no cs found in company profile",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 200, body: mockValues.mockNextMadeUpToDateResourceNoCs });
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 200, body: mockValues.mockNextMadeUpToDateResourceNoCs });
             const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
             const response: Resource<NextMadeUpToDate> = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as Resource<NextMadeUpToDate>;
             const nextMadeUpToDate: NextMadeUpToDate = response.resource;
@@ -504,7 +503,7 @@ describe("getNextMadeUpToDate tests", () => {
     );
 
     it("Should return an error when api response status >= 400", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves({ status: 404, error: "Not Found" });
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({ status: 404, error: "Not Found" });
         const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
         const response: ApiErrorResponse = await csService.getNextMadeUpToDate(COMPANY_NUMBER) as ApiErrorResponse;
 

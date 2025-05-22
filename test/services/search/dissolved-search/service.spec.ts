@@ -1,11 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { DissolvedSearchService } from "../../../../src/services/search/dissolved-search";
 import { RequestClient } from "../../../../src/http";
 import { CompaniesResource } from "../../../../src/services/search/dissolved-search/types";
 import Resource from "../../../../src/services/resource";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -83,13 +79,13 @@ const page = 0
 
 describe("create a dissolved search GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -99,7 +95,7 @@ describe("create a dissolved search GET", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex, searchBefore, searchafter, page);
 
@@ -113,7 +109,7 @@ describe("create a dissolved search GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: DissolvedSearchService = new DissolvedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchType, startIndex, searchBefore, searchafter, page);
         const item = data.resource.items[0];

@@ -1,24 +1,20 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
 import { Transaction, TransactionData, TransactionList, TransactionResource } from "../../../src/services/transaction";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("transaction", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -28,7 +24,7 @@ describe("transaction", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.postTransaction({} as Transaction);
 
@@ -63,7 +59,7 @@ describe("transaction", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.postTransaction({} as Transaction);
 
@@ -82,7 +78,7 @@ describe("transaction", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.getTransaction({} as string);
 
@@ -108,7 +104,7 @@ describe("transaction", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.getTransaction({} as string);
 
@@ -129,7 +125,7 @@ describe("transaction", () => {
             status: 202
         };
 
-        sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.putTransaction({ id: "abc" } as Transaction);
 
@@ -144,7 +140,7 @@ describe("transaction", () => {
             error: "Unprocessable Entity"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.putTransaction({ id: "abc" } as Transaction);
 
@@ -172,7 +168,7 @@ describe("transaction", () => {
                 body: transactionList
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const transaction : TransactionService = new TransactionService(requestClient);
             const data = await transaction.getTransactionsForResourceKind({} as string);
             expect(data.httpStatusCode).toBe(200);

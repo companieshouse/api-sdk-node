@@ -1,11 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { AlphabeticalSearchService } from "../../../../src/services/search/alphabetical-search";
 import { RequestClient } from "../../../../src/http";
 import { CompaniesResource } from "../../../../src/services/search/alphabetical-search/types";
 import Resource from "../../../../src/services/resource";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -43,13 +39,13 @@ const size = 20;
 
 describe("create a alphabetical search GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -59,7 +55,7 @@ describe("create a alphabetical search GET", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
 
@@ -73,7 +69,7 @@ describe("create a alphabetical search GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
 
@@ -96,7 +92,7 @@ describe("create a alphabetical search GET", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
             const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
             const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchBefore, null, size);
 
@@ -120,7 +116,7 @@ describe("create a alphabetical search GET", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
             const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
             const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, searchAfter, size);
 

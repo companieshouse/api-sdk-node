@@ -1,25 +1,21 @@
-import chai from "chai";
 import { RequestClient } from "../../../src/http";
-import sinon from "sinon";
 import CompanyFilingHistoryService from "../../../src/services/company-filing-history/service";
 import {
     CompanyFilingHistoryResource,
     FilingHistoryItemResource
 } from "../../../src/services/company-filing-history/types";
 
-const expect = chai.expect;
-
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-filing-history", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -28,7 +24,7 @@ describe("company-filing-history", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyFilingService : CompanyFilingHistoryService = new CompanyFilingHistoryService(requestClient);
         const data = await companyFilingService.getCompanyFilingHistory("NUMBER-NOT-IMPORTANT");
 
@@ -59,7 +55,7 @@ describe("company-filing-history", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyFilingHistoryService : CompanyFilingHistoryService = new CompanyFilingHistoryService(requestClient);
         const data = await companyFilingHistoryService.getCompanyFilingHistory("123");
 

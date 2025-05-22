@@ -1,5 +1,4 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import * as sinon from "sinon";
 import PscVerificationService from "../../../src/services/psc-verification-link/service";
 import { PlannedMaintenance, PscVerification, ValidationStatusResponse } from "../../../src/services/psc-verification-link/types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
@@ -9,12 +8,11 @@ describe("PSC Verification Link", () => {
     const pscService = new PscVerificationService(requestClient);
 
     describe("POST endpoint", () => {
-        afterEach(sinon.restore);
 
         it(
             "should return status 201 Created and filing resource representation on authorised access",
             async () => {
-                sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[201]);
+                jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPscVerificationCreatedResponse[201]);
 
                 const response = (await pscService.postPscVerification(
                     TRANSACTION_ID,
@@ -29,7 +27,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 401 Unauthorised on unauthorised access",
             async () => {
-                sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[401]);
+                jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPscVerificationCreatedResponse[401]);
 
                 const response = await pscService.postPscVerification(TRANSACTION_ID, { companyNumber: COMPANY_NUMBER }) as ApiErrorResponse;
 
@@ -39,7 +37,7 @@ describe("PSC Verification Link", () => {
         );
 
         it("should return status 400 Bad Request for bad data", async () => {
-            sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[400]);
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPscVerificationCreatedResponse[400]);
 
             const data = await pscService.postPscVerification(TRANSACTION_ID, { companyNumber: "" }) as ApiErrorResponse;
 
@@ -50,7 +48,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 500 Internal Server Error if a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[500]);
+                jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPscVerificationCreatedResponse[500]);
 
                 const data = await pscService.postPscVerification(TRANSACTION_ID, { companyNumber: COMPANY_NUMBER }) as ApiErrorResponse;
 
@@ -64,7 +62,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 200 OK and filing resource representation on authorised access",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[200]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPscVerificationIndResponse[200]);
 
                 const response = (await pscService.getPscVerification(
                     TRANSACTION_ID,
@@ -79,7 +77,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 401 Unauthorised on unauthorised access",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[401]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPscVerificationIndResponse[401]);
 
                 const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -91,7 +89,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 404 Not Found if resource id not found",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[404]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPscVerificationIndResponse[404]);
 
                 const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -103,7 +101,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 500 Internal Server Error if a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[500]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPscVerificationIndResponse[500]);
 
                 const response = await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -114,12 +112,11 @@ describe("PSC Verification Link", () => {
     });
 
     describe("PATCH endpoint", () => {
-        afterEach(sinon.restore);
 
         it(
             "should return a status 200 OK and patched PSC individual verification filing",
             async () => {
-                sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[200]);
+                jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPscVerificationPatchIndResponse[200]);
 
                 const response = (await pscService.patchPscVerification(
                     TRANSACTION_ID,
@@ -135,7 +132,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return a status 401 Unauthorised on unauthorised access",
             async () => {
-                sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[401]);
+                jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPscVerificationPatchIndResponse[401]);
 
                 const response = await pscService.patchPscVerification(
                     TRANSACTION_ID,
@@ -151,7 +148,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return a status 500 Internal Server Error when a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[500]);
+                jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPscVerificationPatchIndResponse[500]);
 
                 const response = await pscService.patchPscVerification(
                     TRANSACTION_ID,
@@ -169,7 +166,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 200 OK with no errors when the validation status returns true",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[200]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponse[200]);
 
                 const response = (await pscService.getValidationStatus(
                     TRANSACTION_ID,
@@ -186,7 +183,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 200 OK when the validation status returns false with errors",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponseErrors[200]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponseErrors[200]);
 
                 const response = (await pscService.getValidationStatus(
                     TRANSACTION_ID,
@@ -195,7 +192,7 @@ describe("PSC Verification Link", () => {
 
                 expect(response.httpStatusCode).toBe(StatusCodes.OK);
                 expect(response.resource).toEqual(mockValidationStatusResponseErrors);
-                expect(response.resource?.errors).length.toBeGreaterThan(0);
+                expect(response.resource?.errors.length).toBe(1);
                 expect(response.resource?.isValid).toEqual(false);
             }
         );
@@ -203,7 +200,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 401 Unauthorised on unauthorised access",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[401]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponse[401]);
 
                 const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -215,7 +212,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 404 Not Found if resource is not found",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[404]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponse[404]);
 
                 const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -227,7 +224,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 500 Internal Server Error if a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponse[500]);
 
                 const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -241,7 +238,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 200 OK and Planned Maintenance resource",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[200]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPlannedMaintenanceResponse[200]);
 
                 const response = (await pscService.checkPlannedMaintenance(
                 )) as ApiResponse<PlannedMaintenance>;
@@ -252,7 +249,7 @@ describe("PSC Verification Link", () => {
         );
 
         it("should return status 404 Not Found if resource not found", async () => {
-            sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[404]);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockPlannedMaintenanceResponse[404]);
 
             const response = (await pscService.checkPlannedMaintenance(
             )) as ApiErrorResponse;
@@ -264,7 +261,7 @@ describe("PSC Verification Link", () => {
         it(
             "should return status 500 Internal Server Error if a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[500]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetValidationStatusResponse[500]);
 
                 const response = await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 

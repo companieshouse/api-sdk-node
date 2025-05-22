@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import { RequestClient } from "../../../src";
 import { Success, Failure } from "../../../src/services/result";
 import { Item } from "../../../src/services/order/order";
@@ -14,8 +13,8 @@ const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "
 const sandbox = sinon.createSandbox();
 
 afterEach(() => {
-    sandbox.reset();
-    sandbox.restore();
+    sandbox.mockReset();
+    sandbox.mockRestore();
 })
 
 describe("CheckoutItemService", () => {
@@ -30,9 +29,11 @@ describe("CheckoutItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/checkouts/ORD-123123-123123/items/MID-123123-123123")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/checkouts/ORD-123123-123123/items/MID-123123-123123") {
+                        return serverResponse;
+                    }
+                });
                 const checkoutItemService = new CheckoutItemService(requestClient);
 
                 // when
@@ -111,9 +112,11 @@ describe("CheckoutItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/checkouts/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const checkoutItemService = new CheckoutItemService(requestClient);
 
                 // when
@@ -216,9 +219,11 @@ describe("CheckoutItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/checkouts/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const checkoutItemService = new CheckoutItemService(requestClient);
 
                 // when
@@ -240,9 +245,11 @@ describe("CheckoutItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/checkouts/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const checkoutItemService = new CheckoutItemService(requestClient);
 
                 // when
@@ -264,9 +271,11 @@ describe("CheckoutItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/checkouts/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/checkouts/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const checkoutItemService = new CheckoutItemService(requestClient);
 
                 // when

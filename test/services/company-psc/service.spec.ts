@@ -1,23 +1,20 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
 import CompanyPscService from "../../../src/services/company-psc/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { CompanyPersonsWithSignificantControlResource } from "../../../src/services/company-psc/types";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-psc", () => {
-    let mockRequest: sinon.SinonStub;
+    let mockRequest: jest.Mock;
     let companyPsc: CompanyPscService;
     let mockResponseBody: CompanyPersonsWithSignificantControlResource;
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
 
         mockResponseBody = {
             active_count: "1",
@@ -75,12 +72,12 @@ describe("company-psc", () => {
             body: mockResponseBody
         };
 
-        mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         companyPsc = new CompanyPscService(requestClient);
     });
 
     afterEach(() => {
-        sinon.restore();
+        jest.restoreAllMocks();
     });
 
     it("returns an error response on failure", async () => {
@@ -88,7 +85,7 @@ describe("company-psc", () => {
             status: 401,
             error: "An error occurred"
         };
-        mockRequest.resolves(mockGetResponse);
+        mockRequest.mockResolvedValue(mockGetResponse);
 
         const data = await companyPsc.getCompanyPsc("NUMBER-NOT-IMPORTANT");
 
@@ -142,20 +139,26 @@ describe("company-psc", () => {
         "uses default values for startIndex and itemsPerPage when not provided",
         async () => {
             await companyPsc.getCompanyPsc("123");
-            expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=25")).toBe(true);
+            expect(mockRequest).toHaveBeenCalledWith(
+                "/company/123/persons-with-significant-control?start_index=0&items_per_page=25"
+            );
         }
     );
 
     it("uses provided startIndex and itemsPerPage values", async () => {
         await companyPsc.getCompanyPsc("123", 10, 20);
-        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=20")).toBe(true);
+        expect(mockRequest).toHaveBeenCalledWith(
+            "/company/123/persons-with-significant-control?start_index=10&items_per_page=20"
+        );
     });
 
     it(
         "uses default startIndex when not provided and itemsPerPage is provided",
         async () => {
             await companyPsc.getCompanyPsc("123", undefined, 10);
-            expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=10")).toBe(true);
+            expect(mockRequest).toHaveBeenCalledWith(
+                "/company/123/persons-with-significant-control?start_index=0&items_per_page=10"
+            );
         }
     );
 
@@ -163,7 +166,9 @@ describe("company-psc", () => {
         "uses default itemsPerPage when not provided and startIndex is provided",
         async () => {
             await companyPsc.getCompanyPsc("123", 10);
-            expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=25")).toBe(true);
+            expect(mockRequest).toHaveBeenCalledWith(
+                "/company/123/persons-with-significant-control?start_index=10&items_per_page=25"
+            );
         }
     );
 });

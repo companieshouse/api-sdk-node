@@ -1,12 +1,8 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import PscDiscrepancyReportService from "../../../src/services/psc-discrepancies-report/service";
 import { RequestClient } from "../../../src/http";
 import { PSCDiscrepancyReport } from "../../../src/services/psc-discrepancies-report/types";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
 import { Result, failure } from "../../../src/services/result";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -50,13 +46,13 @@ const MATERIAL_DISCREPANCIES = ["1", "2"];
 
 describe("Get Psc Discrepancy Report", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -65,12 +61,12 @@ describe("Get Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
 
-        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+        const mockProcess = jest.spyOn(pscDiscrepancyReportService.utility, "processResponse").mockClear().mockResolvedValue(mockResult)
 
         const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
@@ -85,7 +81,7 @@ describe("Get Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
 
@@ -107,7 +103,7 @@ describe("Get Psc Discrepancy Report", () => {
                 body: mockResponseBodyCreate
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
             const result = await pscDiscrepancyReportService.getReport(REPORT_ID);
 
@@ -136,13 +132,13 @@ describe("Get Psc Discrepancy Report", () => {
 
 describe("Create Psc Discrepancy Report", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -151,18 +147,18 @@ describe("Create Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
 
-        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+        const mockProcess = jest.spyOn(pscDiscrepancyReportService.utility, "processResponse").mockClear().mockResolvedValue(mockResult)
 
         const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
         expect(result).toBe(mockResult)
 
-        expect(mockRequest).toHaveBeenCalledWith("/psc-discrepancy-reports")
+        expect(mockRequest).toHaveBeenCalledWith("/psc-discrepancy-reports", {"material_discrepancies": ["1", "2"], "status": "INCOMPLETE"})
         expect(mockProcess).toHaveBeenCalledWith(mockPostResponse)
     })
 
@@ -171,7 +167,7 @@ describe("Create Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
@@ -206,7 +202,7 @@ describe("Create Psc Discrepancy Report", () => {
                 type: "ch:validation"
             }
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(validationError);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(validationError);
 
             const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
             const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
@@ -228,7 +224,7 @@ describe("Create Psc Discrepancy Report", () => {
                 body: mockResponseBodyCreate
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
             const result = await pscDiscrepancyReportService.createNewReport(MATERIAL_DISCREPANCIES);
 
@@ -257,13 +253,13 @@ describe("Create Psc Discrepancy Report", () => {
 
 describe("Update Psc Discrepancy Report", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -272,12 +268,12 @@ describe("Update Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
         const mockResult: Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse> = failure(null);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
 
-        const mockProcess = sinon.stub(pscDiscrepancyReportService.utility, "processResponse").resolves(mockResult)
+        const mockProcess = jest.spyOn(pscDiscrepancyReportService.utility, "processResponse").mockClear().mockResolvedValue(mockResult)
 
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 
@@ -292,7 +288,7 @@ describe("Update Psc Discrepancy Report", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
 
         const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
         const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
@@ -313,7 +309,7 @@ describe("Update Psc Discrepancy Report", () => {
                 body: mockResponseBodyComplete
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
             const pscDiscrepancyReportService: PscDiscrepancyReportService = new PscDiscrepancyReportService(requestClient);
             const result = await pscDiscrepancyReportService.updateReport(REPORT_ID, mockResponseBodyComplete);
 

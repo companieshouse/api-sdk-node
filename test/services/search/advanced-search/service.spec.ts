@@ -1,12 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { AdvancedSearchService } from "../../../../src/services/search/advanced-search";
 import { RequestClient } from "../../../../src/http";
 import { CompaniesResource } from "../../../../src/services/search/advanced-search/types";
 import Resource from "../../../../src/services/resource";
-
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -86,13 +81,13 @@ const size = 20;
 
 describe("create an advanced search GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -102,7 +97,7 @@ describe("create an advanced search GET", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
@@ -117,7 +112,7 @@ describe("create an advanced search GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);

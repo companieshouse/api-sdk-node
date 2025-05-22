@@ -1,5 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
 import { RequestClient } from "../../../src/http";
 import { Resource } from "../../../src";
 import RegisteredEmailAddressService from "../../../src/services/registered-email-address/service";
@@ -8,7 +6,6 @@ import {
     RegisteredEmailAddressCreatedResource
 } from "../../../src/services/registered-email-address/types";
 
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -17,14 +14,14 @@ describe("registered-email-address", () => {
     let registeredEmailAddressService: RegisteredEmailAddressService;
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         registeredEmailAddressService = new RegisteredEmailAddressService(requestClient);
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -34,7 +31,7 @@ describe("registered-email-address", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, {} as RegisteredEmailAddress).catch((data) => {
             expect(data.status).toBe(401);
             expect(data.error).toBe("An error occurred");
@@ -74,7 +71,7 @@ describe("registered-email-address", () => {
                 }
             };
 
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
 
             await registeredEmailAddressService.postRegisteredEmailAddress(TRANSACTION_ID, registeredEmailAddress).then((data) => {
                 expect(data.httpStatusCode).toBe(200);

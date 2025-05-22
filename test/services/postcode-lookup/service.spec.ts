@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import { PostcodeLookupService, UKAddress } from "../../../src/services/postcode-lookup";
 import { RequestClient } from "../../../src";
 
@@ -28,7 +27,7 @@ describe("test isValidUKPostcode", () => {
             status: 200,
             body: mockResponseBody
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AA";
         const postcodeValidationUrl = "https://example.com/postcode";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
@@ -41,7 +40,7 @@ describe("test isValidUKPostcode", () => {
             status: 404,
             body: null
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AB";
         const postcodeValidationUrl = "https://example.com/postcode";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
@@ -55,7 +54,7 @@ describe("test getListOfValidPostcodeAddresses", () => {
             status: 200,
             body: mockResponseBody
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AA";
         const postcodeAddressesLookupUrl = "https://example.com/multiple-addresses";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
@@ -73,7 +72,7 @@ describe("test getListOfValidPostcodeAddresses", () => {
             status: 404,
             body: null
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AB";
         const postcodeAddressesLookupUrl = "https://example.com/multiple-addresses";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
@@ -81,6 +80,6 @@ describe("test getListOfValidPostcodeAddresses", () => {
         expect(mockRequest).toHaveBeenCalledTimes(1);
         expect(result.httpStatusCode).toBe(404);
         expect(result.resource).toBeDefined();
-        expect(result.resource).toHaveLength(0)
+        expect(Object.keys(result.resource).length).toBe(0);
     });
 });

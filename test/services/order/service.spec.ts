@@ -1,6 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import OrderService, { OrderErrorResponse } from "../../../src/services/order/order/service";
 import { RequestClient } from "../../../src/http";
 import {
@@ -10,7 +7,6 @@ import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as 
 import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
 import { Failure } from "../../../src/services/result";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -292,13 +288,13 @@ const mockMissingImageDeliveryOrderResponseBody: OrderResource = {
 describe("order", () => {
     describe("get an order", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         afterEach(done => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
             done();
         });
 
@@ -310,11 +306,13 @@ describe("order", () => {
                 }
             };
 
-            sinon.mock(requestClient)
+            jest.mock(requestClient)
                 .expects("httpGet")
-                .once()
-                .withArgs("/orders/ORD-123456-123456")
-                .returns(mockGetResponse);
+                .once().mockImplementation((...args: any[]) => {
+                if (args[0] === "/orders/ORD-123456-123456") {
+                    return mockGetResponse;
+                }
+            });
             const order: OrderService = new OrderService(requestClient);
             const actual = await order.getOrder(CERTIFICATE_ORDER_ID) as Failure<Order, OrderErrorResponse>;
 
@@ -329,7 +327,7 @@ describe("order", () => {
                 body: mockCertificateOrderResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const order: OrderService = new OrderService(requestClient);
             const response = await order.getOrder(CERTIFICATE_ORDER_ID);
             const data = response.value as Order;
@@ -388,7 +386,7 @@ describe("order", () => {
                 body: mockCertificateOrderResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const order: OrderService = new OrderService(requestClient);
             const response = await order.getOrder(CERTIFICATE_ORDER_ID);
             const data = response.value as Order;
@@ -424,7 +422,7 @@ describe("order", () => {
                 body: mockCertifiedCopyOrderResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const order: OrderService = new OrderService(requestClient);
             const response = await order.getOrder(CERTIFIED_COPY_ORDER_ID);
             const data = response.value as Order;
@@ -454,7 +452,7 @@ describe("order", () => {
                     body: mockMissingImageDeliveryOrderResponseBody
                 };
 
-                sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
                 const order: OrderService = new OrderService(requestClient);
                 const response = await order.getOrder(MISSING_IMAGE_DELIVERY_ORDER_ID);
                 const data = response.value as Order;

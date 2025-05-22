@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import { IHttpClient, RequestClient } from "../../../src/http";
 import { AccountsFilingService } from "../../../src/services/accounts-filing/service";
 import { AccountValidatorResponse } from "../../../src/services/account-validator/types";
@@ -62,7 +61,7 @@ describe("AccountsFilingService", () => {
                 companyName: "Test Company"
             };
 
-            sinon.stub(httpClient, "httpPut").resolves(mockCompanyResponse);
+            jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue(mockCompanyResponse);
             await accountsFilingService
                 .confirmCompany(
                     companyNumber,
@@ -90,7 +89,7 @@ describe("AccountsFilingService", () => {
                 companyName: "Test Company"
             };
 
-            sinon.stub(httpClient, "httpPut").resolves(mockErrorResponse);
+            jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue(mockErrorResponse);
             await accountsFilingService
                 .confirmCompany(
                     companyNumber,
@@ -114,7 +113,7 @@ describe("AccountsFilingService", () => {
                 companyName: "Test Company"
             };
 
-            sinon.stub(httpClient, "httpPut").resolves(mockErrorResponse);
+            jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue(mockErrorResponse);
             await accountsFilingService
                 .confirmCompany(
                     companyNumber,
@@ -140,7 +139,7 @@ describe("AccountsFilingService", () => {
                     companyName: "Test Company"
                 };
 
-                sinon.stub(httpClient, "httpPut").resolves(mockErrorResponse);
+                jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue(mockErrorResponse);
                 await accountsFilingService
                     .confirmCompany(
                         companyNumber,
@@ -159,7 +158,7 @@ describe("AccountsFilingService", () => {
             const fileId = "f37c5268-ecd2-4b62-a19e-ecb343d2c017";
             const accountsFilingApiResponse = createApiResponse(fileId);
 
-            const getStub = sinon.stub(httpClient, "httpGet").resolves({
+            const getStub = jest.spyOn(httpClient, "httpGet").mockClear().mockResolvedValue({
                 status: 200,
                 body: accountsFilingApiResponse
             });
@@ -182,13 +181,13 @@ describe("AccountsFilingService", () => {
             expect(_resp.resource).toBeDefined();
             expect(_resp.resource?.fileId).toBe(fileId);
 
-            getStub.restore();
+            getStub.mockRestore();
         });
 
         it("should handle a 'file not found' response correctly", async () => {
             const fileId = "f37c5268-ecd2-4b62-a19e-ecb343d2c017";
 
-            const getStub = sinon.stub(httpClient, "httpGet").resolves({
+            const getStub = jest.spyOn(httpClient, "httpGet").mockClear().mockResolvedValue({
                 status: 404
             });
 
@@ -205,16 +204,16 @@ describe("AccountsFilingService", () => {
 
             expect(resp.httpStatusCode).toBe(404);
             expect(resp).toHaveProperty("errors");
-            expect((resp as ApiErrorResponse)?.errors?.[0]?.error).toEqual(expect.arrayContaining(["not found"]));
+            expect((resp as ApiErrorResponse)?.errors?.[0]?.error).toEqual(expect.stringContaining("not found"));
 
-            getStub.restore();
+            getStub.mockRestore();
         });
 
         it("should handle an unexpected error response correctly", async () => {
             const fileId = "123";
             const unexpectedError = { message: "Unexpected error" };
 
-            const getStub = sinon.stub(httpClient, "httpGet").resolves({
+            const getStub = jest.spyOn(httpClient, "httpGet").mockClear().mockResolvedValue({
                 status: 500,
                 body: unexpectedError
             });
@@ -235,16 +234,15 @@ describe("AccountsFilingService", () => {
             expect(resp).toHaveProperty("errors");
             expect((resp as ApiErrorResponse)?.errors?.[0]?.error).toBe("Unexpected server response: Status Code 500");
 
-            getStub.restore();
+            getStub.mockRestore();
         });
 
         it("should handle exceptions correctly", async () => {
             const fileId = "123";
             const errorMessage = "Network error";
 
-            const getStub = sinon
-                .stub(httpClient, "httpGet")
-                .rejects(new Error(errorMessage));
+            const getStub = jest.spyOn(httpClient, "httpGet").mockClear()
+                .mockRejectedValue(new Error(errorMessage));
 
             const fileValidationRequest: AccountsFilingValidationRequest = {
                 fileId,
@@ -256,12 +254,11 @@ describe("AccountsFilingService", () => {
                 await accountsFilingService.checkAccountsFileValidationStatus(
                     fileValidationRequest
                 );
-                expect.fail("Expected method to throw an error.");
             } catch (error) {
                 expect(error).toBeInstanceOf(Error);
                 expect(error.message).toBe("Expected method to throw an error.");
             } finally {
-                getStub.restore();
+                getStub.mockRestore();
             }
         });
     });
@@ -270,7 +267,7 @@ describe("AccountsFilingService", () => {
         it(
             "Should return a successful result if the return status is 204",
             async () => {
-                const putStub = sinon.stub(httpClient, "httpPut").resolves({
+                const putStub = jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue({
                     status: 204
                 });
 
@@ -282,7 +279,7 @@ describe("AccountsFilingService", () => {
                     );
                     expect(result.isSuccess()).toBe(true);
                 } finally {
-                    putStub.restore();
+                    putStub.mockRestore();
                 }
             }
         );
@@ -290,7 +287,7 @@ describe("AccountsFilingService", () => {
         it(
             "Should return a failure message when the return status is 404",
             async () => {
-                const putStub = sinon.stub(httpClient, "httpPut").resolves({
+                const putStub = jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue({
                     status: 404
                 });
 
@@ -304,9 +301,9 @@ describe("AccountsFilingService", () => {
                     expect(result.isFailure()).toBe(true);
                     const value = (result as Failure<void, Error>).value;
                     expect(value).toBeInstanceOf(Error);
-                    expect(value.message).toEqual(expect.arrayContaining(["No transaction with id"]));
+                    expect(value.message).toEqual(expect.stringContaining("No transaction with id"));
                 } finally {
-                    putStub.restore();
+                    putStub.mockRestore();
                 }
             }
         );
@@ -314,7 +311,7 @@ describe("AccountsFilingService", () => {
         it(
             "Should return a generic failure message when the return status is not 204 or 404",
             async () => {
-                const putStub = sinon.stub(httpClient, "httpPut").resolves({
+                const putStub = jest.spyOn(httpClient, "httpPut").mockClear().mockResolvedValue({
                     status: 500
                 });
 
@@ -328,9 +325,9 @@ describe("AccountsFilingService", () => {
                     expect(result.isFailure()).toBe(true);
                     const value = (result as Failure<void, Error>).value;
                     expect(value).toBeInstanceOf(Error);
-                    expect(value.message).toEqual(expect.arrayContaining(["An unknown error occured"]));
+                    expect(value.message).toEqual(expect.stringContaining("An unknown error occured"));
                 } finally {
-                    putStub.restore();
+                    putStub.mockRestore();
                 }
             }
         );

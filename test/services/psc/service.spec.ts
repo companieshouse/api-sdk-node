@@ -1,5 +1,4 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
-import * as sinon from "sinon";
 import PscService from "../../../src/services/psc/service";
 import { PersonWithSignificantControl } from "../../../src/services/psc/types";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
@@ -13,7 +12,7 @@ describe("PSC details", () => {
         it(
             "should return status 200 OK and PSC resource representation on authorised access",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[200]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockIndividualResponse[200]);
 
                 const response = (await pscService.getPscIndividual(
                     COMPANY_NUMBER, PSC_NOTIFICATION_ID)) as Resource<PersonWithSignificantControl>;
@@ -26,7 +25,7 @@ describe("PSC details", () => {
         it(
             "should return status 401 Unauthorised when access is unauthorised",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[401]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockIndividualResponse[401]);
 
                 const response = await pscService.getPscIndividual(COMPANY_NUMBER, PSC_NOTIFICATION_ID) as ApiErrorResponse;
 
@@ -38,7 +37,7 @@ describe("PSC details", () => {
         it(
             "should return status 400 Bad Request when the resource ID is null in the request",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[400]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockIndividualResponse[400]);
 
                 const response = (await pscService.getPscIndividual(
                         null as unknown as string, null as unknown as string
@@ -53,7 +52,7 @@ describe("PSC details", () => {
         it(
             "should return status 404 Not Found when the resource ID is not found",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[404]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockIndividualResponse[404]);
 
                 const response = (await pscService.getPscIndividual(
                     COMPANY_NUMBER, PSC_NOTIFICATION_ID
@@ -68,7 +67,7 @@ describe("PSC details", () => {
         it(
             "should return status 500 Internal Server Error if a server error occurs",
             async () => {
-                sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[500]);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockIndividualResponse[500]);
 
                 const response = (await pscService.getPscIndividual(
                     COMPANY_NUMBER, PSC_NOTIFICATION_ID

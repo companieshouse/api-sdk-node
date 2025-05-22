@@ -1,10 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
 import CertifiedCopiesService from "../../../src/services/order/certified-copies/service";
 import { RequestClient } from "../../../src/http";
 import { CertifiedCopyItemResource, ItemCosts } from "../../../src/services/order/certified-copies/types"
 
-const expect = chai.expect;
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 const mockResponseBody : CertifiedCopyItemResource = ({
     company_name: "test company",
@@ -54,13 +51,13 @@ const mockResponseBody : CertifiedCopyItemResource = ({
 
 describe("order a certified copy GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -70,7 +67,7 @@ describe("order a certified copy GET", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const certifiedCopy: CertifiedCopiesService = new CertifiedCopiesService(requestClient);
         const data = await certifiedCopy.getCertifiedCopy("CERT-COPY-ID-NOT-IMPORTANT");
 
@@ -84,7 +81,7 @@ describe("order a certified copy GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const certifiedCopy: CertifiedCopiesService = new CertifiedCopiesService(requestClient);
         const data = await certifiedCopy.getCertifiedCopy("CERT-COPY-ID-NOT-IMPORTANT");
 

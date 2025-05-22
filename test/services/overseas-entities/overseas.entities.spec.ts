@@ -1,5 +1,3 @@
-import sinon from "sinon";
-
 import * as mockValues from "./overseas.entities.mock";
 import Mapping from "../../../src/mapping/mapping";
 import { ENTITY_WHO_IS_REGISTERING, PAYMENT_OBJECT_MOCK } from "./overseas.entities.mock";
@@ -32,18 +30,18 @@ import {
 
 describe("OverseasEntityService POST Tests suite", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
     it("should return object Id for postOverseasEntity method", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[201]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockPostOverseasEntityResponse[201]);
         const oeService = new OverseasEntityService(mockValues.requestClient);
         const data = (await oeService.postOverseasEntity(
             mockValues.TRANSACTION_ID,
@@ -57,7 +55,7 @@ describe("OverseasEntityService POST Tests suite", () => {
     it(
         "should return error 401 (Unauthorised) for postOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[401]);
+            jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockPostOverseasEntityResponse[401]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.postOverseasEntity(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
@@ -70,7 +68,7 @@ describe("OverseasEntityService POST Tests suite", () => {
     it(
         "should return error 400 (Bad Request) for postOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOverseasEntityResponse[400]);
+            jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockPostOverseasEntityResponse[400]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.postOverseasEntity(mockValues.TRANSACTION_ID, {}) as ApiErrorResponse;
@@ -83,14 +81,14 @@ describe("OverseasEntityService POST Tests suite", () => {
 
 describe("OverseasEntityService PUT Tests suite", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     it(
         "should return httpStatusCode 200 for putOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutOverseasEntityResponse[200]);
+            jest.spyOn(mockValues.requestClient, "httpPut").mockClear().mockResolvedValue(mockValues.mockPutOverseasEntityResponse[200]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.putOverseasEntity(
@@ -106,7 +104,7 @@ describe("OverseasEntityService PUT Tests suite", () => {
     it(
         "should return error 400 (Bad Request) for putOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpPut").resolves(mockValues.mockPutOverseasEntityResponse[400]);
+            jest.spyOn(mockValues.requestClient, "httpPut").mockClear().mockResolvedValue(mockValues.mockPutOverseasEntityResponse[400]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.putOverseasEntity(
@@ -122,14 +120,14 @@ describe("OverseasEntityService PUT Tests suite", () => {
 
 describe("OverseasEntityService GET Tests suite", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     it(
         "should return httpStatusCode 200 for getOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityResponse[200]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOverseasEntityResponse[200]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getOverseasEntity(
@@ -145,7 +143,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return error 400 (Bad Request) for getOverseasEntity method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityResponse[400]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOverseasEntityResponse[400]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.getOverseasEntity(
@@ -161,7 +159,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return httpStatusCode 200 for getOverseasEntityDetails method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[200]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOverseasEntityExtraDetailsResponse[200]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getOverseasEntityDetails(
@@ -177,7 +175,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return error 400 (Bad Request) for getOverseasEntityDetails method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOverseasEntityExtraDetailsResponse[400]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOverseasEntityExtraDetailsResponse[400]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.getOverseasEntityDetails(
@@ -193,7 +191,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return httpStatusCode 200 for getBeneficialOwners method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[200]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockBeneficialOwnerPrivateDataResponse[200]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getBeneficialOwnersPrivateData(
@@ -208,7 +206,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return httpStatusCode 200 and empty fields if no benficial owners for getBeneficialOwners method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataUndefinedResponse[200]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockBeneficialOwnerPrivateDataUndefinedResponse[200]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = (await oeService.getBeneficialOwnersPrivateData(
@@ -223,7 +221,7 @@ describe("OverseasEntityService GET Tests suite", () => {
     it(
         "should return error 400 (Bad Request) for getBeneficialOwners method",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockBeneficialOwnerPrivateDataResponse[400]);
 
             const oeService = new OverseasEntityService(mockValues.requestClient);
             const data = await oeService.getBeneficialOwnersPrivateData(
@@ -1114,14 +1112,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     describe("OverseasEntityService getManagingOfficersPrivateData Tests suite", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         it(
             "should return httpStatusCode 200 for getManagingOfficersPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.MANAGING_OFFICERS_PRIVATE_DATA_MOCK
                 });
@@ -1140,7 +1138,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return error 400 (Bad Request) for getManagingOfficersPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 400,
                     error: mockValues.BAD_REQUEST
                 });
@@ -1159,14 +1157,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     describe("OverseasEntityService getTrustsPrivateData Tests suite", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         it(
             "should return httpStatusCode 200 for getTrustsPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.PRIVATE_TRUSTS_DATA_RESOURCE_MOCK
                 });
@@ -1185,7 +1183,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return httpStatusCode 200 for getTrustsPrivateData method when trust is not ceased",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.PRIVATE_TRUSTS_NOT_CEASED_DATA_RESOURCE_MOCK
                 });
@@ -1204,7 +1202,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return error 400 (Bad Request) for getTrustsPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 400,
                     error: mockValues.BAD_REQUEST
                 });
@@ -1223,14 +1221,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     describe("OverseasEntityService getTrustLinksPrivateData Tests suite", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         it(
             "should return httpStatusCode 200 for getTrustLinksPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.TRUST_LINKS_RESOURCE_MOCK
                 });
@@ -1249,7 +1247,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return error 400 (Bad Request) for getTrustLinksPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 400,
                     error: mockValues.BAD_REQUEST
                 });
@@ -1268,14 +1266,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     describe("OverseasEntityService getIndividualTrusteesPrivateData Tests suite", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         it(
             "should return httpStatusCode 200 for getIndividualTrusteesPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.INDIVIDUAL_TRUSTEES_DATA_RESOURCE_MOCK
                 });
@@ -1295,7 +1293,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return error 400 (Bad Request) for getIndividualTrusteesPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 400,
                     error: mockValues.BAD_REQUEST
                 });
@@ -1315,14 +1313,14 @@ describe("Mapping OverseasEntity Tests suite", () => {
 
     describe("OverseasEntityService getCorporateTrusteesPrivateData Tests suite", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         it(
             "should return httpStatusCode 200 for getCorporateTrusteesPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 200,
                     body: mockValues.CORPORATE_TRUSTEES_DATA_RESOURCE_MOCK
                 });
@@ -1430,7 +1428,7 @@ describe("Mapping OverseasEntity Tests suite", () => {
         it(
             "should return error 400 (Bad Request) for getCorporateTrusteesPrivateData method",
             async () => {
-                sinon.stub(mockValues.requestClient, "httpGet").resolves({
+                jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue({
                     status: 400,
                     error: mockValues.BAD_REQUEST
                 });

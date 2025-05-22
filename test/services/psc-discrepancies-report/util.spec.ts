@@ -1,6 +1,3 @@
-import chai, { expect } from "chai";
-import sinon from "sinon";
-
 import Util from "../../../src/services/psc-discrepancies-report/util";
 import { HttpResponse } from "../../../src/http/index";
 import { ApiResponse, ApiErrorResponse, ApiError } from "../../../src/services/resource";
@@ -54,13 +51,13 @@ const mockApiErrorResponse: HttpResponse = {
 
 describe("Process Response", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 

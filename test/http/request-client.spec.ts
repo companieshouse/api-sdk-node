@@ -1,22 +1,18 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { RequestClient } from "../../src/http";
 import nock = require("nock");
-const expect = chai.expect;
 
 describe("request-client", () => {
     const baseUrl: string = "http://api";
     const client = new RequestClient({ oauthToken: "123", baseUrl });
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -27,7 +23,7 @@ describe("request-client", () => {
             status: statusCode,
             body
         };
-        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockRejectedValue(rejectedValue).mockReturnValue(rejectedValue);
         const resp = await client.httpGet("/foo");
         expect(mockRequest).toHaveBeenCalledTimes(1);
         expect(resp.body).toEqual(body);
@@ -43,7 +39,7 @@ describe("request-client", () => {
             body: body
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockResolvedValue(resolvedValue);
         const resp = await client.httpGet("/foo");
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -63,7 +59,7 @@ describe("request-client", () => {
             }
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockRejectedValue(rejectedValue).mockReturnValue(rejectedValue);
         const resp = await client.httpPost("/foo", { data: "bar" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -79,7 +75,7 @@ describe("request-client", () => {
             body: body
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockResolvedValue(resolvedValue);
         const resp = await client.httpPost("/foo", { data: "bar" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -99,7 +95,7 @@ describe("request-client", () => {
             }
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockRejectedValue(rejectedValue).mockReturnValue(rejectedValue);
         const resp = await client.httpPatch("/foo", { data: "bar" }, { content: "bob" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -115,7 +111,7 @@ describe("request-client", () => {
             body: body
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockResolvedValue(resolvedValue);
         const resp = await client.httpPatch("/foo", { data: "bar" }, { content: "bob" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -209,7 +205,7 @@ describe("request-client", () => {
             }
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockRejectedValue(rejectedValue).mockReturnValue(rejectedValue);
         const resp = await client.httpPut("/foo", { data: "bar" }, { content: "bob" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -225,7 +221,7 @@ describe("request-client", () => {
             body: body
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockResolvedValue(resolvedValue);
         const resp = await client.httpPut("/foo", { data: "bar" }, { content: "bob" });
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -245,7 +241,7 @@ describe("request-client", () => {
             }
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).rejects(rejectedValue).returns(rejectedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockRejectedValue(rejectedValue).mockReturnValue(rejectedValue);
         const resp = await client.httpDelete("/foo");
 
         expect(mockRequest).toHaveBeenCalledTimes(1);
@@ -259,7 +255,7 @@ describe("request-client", () => {
             status: statusCode
         };
 
-        const mockRequest = sinon.stub(client, "request" as any).resolves(resolvedValue);
+        const mockRequest = jest.spyOn(client, "request" as any).mockClear().mockResolvedValue(resolvedValue);
         const resp = await client.httpPatch("/foo");
 
         expect(mockRequest).toHaveBeenCalledTimes(1);

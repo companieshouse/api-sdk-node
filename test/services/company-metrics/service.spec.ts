@@ -1,22 +1,18 @@
-import chai from "chai";
 import { RequestClient } from "../../../src/http";
-import sinon from "sinon";
 import CompanyMetricsService from "../../../src/services/company-metrics/service";
 import { MetricsApiResource } from "../../../src/services/company-metrics/types";
-
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-metrics", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -25,7 +21,7 @@ describe("company-metrics", () => {
             status: 401,
             error: "An error occurred"
         };
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyMetricsService : CompanyMetricsService = new CompanyMetricsService(requestClient);
         const data = await companyMetricsService.getCompanyMetrics("NUMBER-NOT-IMPORTANT");
 
@@ -58,7 +54,7 @@ describe("company-metrics", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyMetricsService : CompanyMetricsService = new CompanyMetricsService(requestClient);
         const data = await companyMetricsService.getCompanyMetrics("123");
 

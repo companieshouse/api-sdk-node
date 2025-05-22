@@ -1,6 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import CheckoutService from "../../../src/services/order/checkout/service";
 import { RequestClient } from "../../../src/http";
 
@@ -12,7 +9,6 @@ import { Failure, Success } from "../../../src/services/result";
 import { ItemOptions as MissingImageDeliveryItemOptions, ItemOptionsResource as MissingImageDeliveryItemOptionsResource } from "../../../src/services/order/mid/types";
 import { ItemOptions as CertificateItemOptions, ItemOptionsResource as CertificateItemOptionsResource } from "../../../src/services/order/certificates/types";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -296,13 +292,13 @@ const mockMissingImageDeliveryCheckoutResponseBody: CheckoutResource = {
 describe("checkout", () => {
     describe("get a checkout", () => {
         beforeEach(() => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
         });
 
         afterEach(done => {
-            sinon.reset();
-            sinon.restore();
+            jest.resetAllMocks();
+            jest.restoreAllMocks();
             done();
         });
 
@@ -312,7 +308,7 @@ describe("checkout", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Failure<ApiResponse<Checkout>, ApiErrorResponse>;
 
@@ -326,7 +322,7 @@ describe("checkout", () => {
                 body: mockCertificateCheckoutResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
             const data = result.value.resource as Checkout;
@@ -388,7 +384,7 @@ describe("checkout", () => {
                 body: mockCertificateCheckoutResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const result = await checkout.getCheckout(CERTIFICATE_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
             const data = result.value.resource as Checkout;
@@ -425,7 +421,7 @@ describe("checkout", () => {
                 body: mockCertifiedCopyCheckoutResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const checkout: CheckoutService = new CheckoutService(requestClient);
             const response = await checkout.getCheckout(CERTIFIED_COPY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
             const data = response.value.resource as Checkout;
@@ -459,7 +455,7 @@ describe("checkout", () => {
                     body: mockMissingImageDeliveryCheckoutResponseBody
                 };
 
-                sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+                jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
                 const checkout: CheckoutService = new CheckoutService(requestClient);
                 const result = await checkout.getCheckout(MISSING_IMAGE_DELIVERY_CHECKOUT_ID) as Success<ApiResponse<Checkout>, ApiErrorResponse>;
                 const data = result.value.resource as Checkout;

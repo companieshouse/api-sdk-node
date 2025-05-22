@@ -1,12 +1,9 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
 import MidService from "../../../src/services/order/mid/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
 import { MidItemPostRequest, MidItemResource } from "../../../src/services/order/mid/types";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -61,13 +58,13 @@ describe("create a MID POST", () => {
     });
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -77,7 +74,7 @@ describe("create a MID POST", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostRequest);
         const mid: MidService = new MidService(requestClient);
         const data = await mid.postMid(mockRequestBody);
 
@@ -91,7 +88,7 @@ describe("create a MID POST", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostRequest);
         const mid: MidService = new MidService(requestClient);
         const data = await mid.postMid(mockRequestBody);
 
@@ -105,13 +102,13 @@ describe("create a MID POST", () => {
 
 describe("GET missing image delivery", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -121,7 +118,7 @@ describe("GET missing image delivery", () => {
             error: "An error occured"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const missingImageDelivery: MidService = new MidService(requestClient);
         const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
 
@@ -137,7 +134,7 @@ describe("GET missing image delivery", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const missingImageDelivery: MidService = new MidService(requestClient);
             const data = await missingImageDelivery.getMid("MID-ID-NOT-IMPORTANT");
 

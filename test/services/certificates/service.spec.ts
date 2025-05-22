@@ -1,6 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import CertificateService from "../../../src/services/order/certificates/service";
 import { HttpResponse, RequestClient } from "../../../src/http";
 import {
@@ -13,8 +10,6 @@ import {
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
 import nock = require("nock");
-
-const expect = chai.expect;
 
 const requestClient = new RequestClient({
     baseUrl: "URL-NOT-USED",
@@ -171,13 +166,13 @@ const mockResponseBodyMissingFields: CertificateItemResource = ({
 
 describe("order a certificate GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -189,7 +184,7 @@ describe("order a certificate GET", () => {
             }
         };
 
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const certificate: CertificateService = new CertificateService(requestClient);
         const result = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>;
 
@@ -205,7 +200,7 @@ describe("order a certificate GET", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
         const resourceItemOptions = data.value.resource.itemOptions;
@@ -308,7 +303,7 @@ describe("order a certificate GET", () => {
                 body: mockResponseBodyMissingFields
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const certificate: CertificateService = new CertificateService(requestClient);
             const data = await certificate.getCertificate("CERT-ID-NOT-IMPORTANT") as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
             const resourceItemOptions = data.value.resource.itemOptions;
@@ -456,13 +451,13 @@ describe("create a certificate POST", () => {
     });
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -474,7 +469,7 @@ describe("create a certificate POST", () => {
             }
         };
 
-        sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.postCertificate(mockRequestBody) as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>
         const errResponse = data.value
@@ -489,7 +484,7 @@ describe("create a certificate POST", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
         const certificateItem = data.value.resource
@@ -555,7 +550,7 @@ describe("create a certificate POST", () => {
                 body: mockResponseBodyMissingFields
             };
 
-            sinon.stub(requestClient, "httpPost").resolves(mockPostRequest);
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostRequest);
             const certificate: CertificateService = new CertificateService(requestClient);
             const data = await certificate.postCertificate(mockRequestBody) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>
             const certificateItem = data.value.resource
@@ -659,13 +654,13 @@ describe("update a certificate PATCH", () => {
     });
 
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -679,7 +674,7 @@ describe("update a certificate PATCH", () => {
             }
         };
 
-        sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+        jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Failure<ApiResponse<CertificateItem>, ApiErrorResponse>;
 
@@ -695,7 +690,7 @@ describe("update a certificate PATCH", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+        jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
         const certificate: CertificateService = new CertificateService(requestClient);
         const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
         const io = data.value.resource.itemOptions;
@@ -760,7 +755,7 @@ describe("update a certificate PATCH", () => {
                 body: mockResponseBodyMissingFields
             };
 
-            sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+            jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
             const certificate: CertificateService = new CertificateService(requestClient);
             const data = await certificate.patchCertificate(mockRequestBody, certificateId) as Success<ApiResponse<CertificateItem>, ApiErrorResponse>;
             const io = data.value.resource.itemOptions;
@@ -820,13 +815,13 @@ describe("update a certificate PATCH", () => {
 
 describe("Create an initial certificate item", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -834,7 +829,7 @@ describe("Create an initial certificate item", () => {
 
     it("should return error on API failure", async () => {
         // given
-        sinon.stub(requestClient, "httpPost").resolves({
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue({
             status: 401,
             error: {
                 errors: [{
@@ -860,7 +855,7 @@ describe("Create an initial certificate item", () => {
 
     it("should create a certificate item", async () => {
         // given
-        sinon.stub(requestClient, "httpPost").resolves({
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue({
             status: 201,
             body: {
                 id: "CRT-123123-123123",

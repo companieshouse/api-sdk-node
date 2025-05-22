@@ -1,7 +1,4 @@
-import chai from "chai";
-
 import { Result, success, Success, failure, Failure } from "../../src/services/result";
-const expect = chai.expect;
 
 describe("Result", () => {
   interface Company {

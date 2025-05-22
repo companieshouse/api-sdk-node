@@ -1,5 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
@@ -8,19 +6,17 @@ import { RequestClient, HttpResponse } from "../../../src/http";
 import { CompanyProfileResource, CompanyProfile } from "../../../src/services/company-profile/types";
 import { fullCompanyProfileMock, registeredAddressEtcMissingCompanyProfileMock, foreignCompanyDetailsEtcMissingCompanyProfileMock } from "./mocks";
 
-const expect = chai.expect;
-
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("company-profile", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -30,7 +26,7 @@ describe("company-profile", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyProfile : CompanyProfileService = new CompanyProfileService(requestClient);
         const data = await companyProfile.getCompanyProfile("NUMBER-NOT-IMPORTANT");
 
@@ -46,7 +42,7 @@ describe("company-profile", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyProfile : CompanyProfileService = new CompanyProfileService(requestClient);
         const data = await companyProfile.getCompanyProfile("NUMBER-NOT-IMPORTANT");
 
@@ -112,7 +108,7 @@ describe("company-profile", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const companyProfile : CompanyProfileService = new CompanyProfileService(requestClient);
             const data = await companyProfile.getCompanyProfile("NUMBER-NOT-IMPORTANT");
 
@@ -180,7 +176,7 @@ describe("company-profile", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const companyProfile : CompanyProfileService = new CompanyProfileService(requestClient);
             const data = await companyProfile.getCompanyProfile("NUMBER-NOT-IMPORTANT");
 

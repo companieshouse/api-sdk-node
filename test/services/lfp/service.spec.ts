@@ -1,23 +1,20 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
 import LateFilingPenaltyService from "../../../src/services/lfp/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("lfp", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -27,7 +24,7 @@ describe("lfp", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
@@ -49,7 +46,7 @@ describe("lfp", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
@@ -87,7 +84,7 @@ describe("lfp", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
         const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 
@@ -138,7 +135,7 @@ describe("lfp", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const companyProfile : LateFilingPenaltyService = new LateFilingPenaltyService(requestClient);
             const data = await companyProfile.getPenalties("NUMBER-NOT-IMPORTANT");
 

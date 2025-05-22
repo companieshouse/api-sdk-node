@@ -1,10 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
 import chaiAsPromised from "chai-as-promised";
 import chaiHttp from "chai-http";
 
 import Mapping from "../../src/mapping/mapping";
-const expect = chai.expect;
 
 describe("mapping", () => {
     describe("camelCaseKeys", () => {

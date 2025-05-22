@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import { RequestClient } from "../../../src";
 import { CheckoutSearchService, CheckoutSummary, SearchResponse } from "../../../src/services/order/search";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
@@ -28,13 +27,13 @@ const expectedOrderSummary: CheckoutSummary = {
 
 describe("CheckoutSearchService", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -51,7 +50,7 @@ describe("CheckoutSearchService", () => {
             };
             const mock = sinon.mock(requestClient);
             mock.expects("httpGet")
-                .returns(serverResponse)
+                .mockReturnValue(serverResponse)
                 .calledWithExactly("/orders/search?page_size=1000");
             const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 
@@ -86,7 +85,7 @@ describe("CheckoutSearchService", () => {
 
             const mock = sinon.mock(requestClient);
             mock.expects("httpGet")
-                .returns(serverResponse)
+                .mockReturnValue(serverResponse)
                 .calledWithExactly("/orders/search?id=ORD-123123-123123&email=demo@ch.gov.uk&company_number=12345678&page_size=1000");
             const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 
@@ -122,7 +121,7 @@ describe("CheckoutSearchService", () => {
             };
             const mock = sinon.mock(requestClient);
             mock.expects("httpGet")
-                .returns(serverResponse)
+                .mockReturnValue(serverResponse)
                 .calledWithExactly("/orders/search");
             const searchService: CheckoutSearchService = new CheckoutSearchService(requestClient);
 

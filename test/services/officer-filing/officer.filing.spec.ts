@@ -2,7 +2,6 @@ import {
     CompanyOfficer, FilingResponse, OfficerFiling, OfficerFilingService, ValidationStatusResponse
 } from "../../../src/services/officer-filing";
 import * as mockValues from "./officer.filing.mock";
-import sinon from "sinon";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
 
 const TRANSACTION_ID = "12345";
@@ -10,32 +9,32 @@ const SUBMISSION_ID = "645d1188c794645afe15f5cc";
 const COMPANY_NUMBER = "00006400";
 
 beforeEach(() => {
-    sinon.reset();
-    sinon.restore();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
 });
 
 afterEach(done => {
-    sinon.reset();
-    sinon.restore();
+    jest.resetAllMocks();
+    jest.restoreAllMocks();
     done();
 });
 
 describe("List active Directors details GET", () => {
     it("should return active director details object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveDirectorsDetails[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveDirectorsDetails[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<CompanyOfficer[]> = await ofService.getListActiveDirectorDetails(TRANSACTION_ID) as Resource<CompanyOfficer[]>;
 
         expect(data.httpStatusCode).toBe(200);
         expect(data.resource?.[1].dateOfBirth).toEqual(
-            expect.arrayContaining([mockValues.mockActiveDirectorDetails.date_of_birth])
+            mockValues.mockActiveDirectorDetails.date_of_birth
         );
     });
 
     it(
         "should return error 404 - No active director details were found",
         async () => {
-            sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveDirectorsDetails[404]);
+            jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveDirectorsDetails[404]);
             const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
             const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
 
@@ -45,7 +44,7 @@ describe("List active Directors details GET", () => {
     );
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetListActiveDirectorsDetails[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetListActiveDirectorsDetails[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getListActiveDirectorDetails(TRANSACTION_ID);
 
@@ -56,28 +55,20 @@ describe("List active Directors details GET", () => {
 
 describe("List TM01 check your answers details GET", () => {
     it("should return company officer details object", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetDirectorAndTerminationDate[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetDirectorAndTerminationDate[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<CompanyOfficer> = await ofService.getDirectorAndTerminationDate(TRANSACTION_ID, SUBMISSION_ID) as Resource<CompanyOfficer>;
 
         expect(data.httpStatusCode).toBe(200);
-        expect(data.resource?.resignedOn).toEqual(
-            expect.arrayContaining([mockValues.mockDirectorAndTerminationDate.resigned_on])
-        );
-        expect(data.resource?.dateOfBirth).toEqual(
-            expect.arrayContaining([mockValues.mockDirectorAndTerminationDate.date_of_birth])
-        );
-        expect(data.resource?.appointedOn).toEqual(
-            expect.arrayContaining([mockValues.mockDirectorAndTerminationDate.appointed_on])
-        );
-        expect(data.resource?.officerRole).toEqual(
-            expect.arrayContaining([mockValues.mockDirectorAndTerminationDate.officer_role])
-        );
-        expect(data.resource?.name).toEqual(expect.arrayContaining([mockValues.mockDirectorAndTerminationDate.name]));
+        expect(data.resource?.resignedOn).toEqual(mockValues.mockDirectorAndTerminationDate.resigned_on);
+        expect(data.resource?.dateOfBirth).toEqual(mockValues.mockDirectorAndTerminationDate.date_of_birth);
+        expect(data.resource?.appointedOn).toEqual(mockValues.mockDirectorAndTerminationDate.appointed_on);
+        expect(data.resource?.officerRole).toEqual(mockValues.mockDirectorAndTerminationDate.officer_role);
+        expect(data.resource?.name).toEqual(mockValues.mockDirectorAndTerminationDate.name);
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetDirectorAndTerminationDate[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetDirectorAndTerminationDate[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getDirectorAndTerminationDate(TRANSACTION_ID, SUBMISSION_ID);
 
@@ -88,7 +79,7 @@ describe("List TM01 check your answers details GET", () => {
 
 describe("Validation Status Response GET", () => {
     it("should return list of error/s and validation status", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetValidationStatusResponse[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetValidationStatusResponse[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<ValidationStatusResponse> = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID) as Resource<ValidationStatusResponse>;
 
@@ -99,7 +90,7 @@ describe("Validation Status Response GET", () => {
     });
 
     it("should return error 404 - No found", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetValidationStatusResponse[404]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetValidationStatusResponse[404]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID) as Resource<Boolean>;
 
@@ -108,7 +99,7 @@ describe("Validation Status Response GET", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetCurrentOrFutureDissolved[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetCurrentOrFutureDissolved[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getValidationStatus(TRANSACTION_ID, SUBMISSION_ID);
 
@@ -119,7 +110,7 @@ describe("Validation Status Response GET", () => {
 
 describe("Officer Filing GET", () => {
     it("should return an officer filing", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[200]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOfficerFiling[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<OfficerFiling> = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID) as Resource<OfficerFiling>;
 
@@ -130,7 +121,7 @@ describe("Officer Filing GET", () => {
     });
 
     it("should return error 404 - Not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[404]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOfficerFiling[404]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
 
@@ -139,7 +130,7 @@ describe("Officer Filing GET", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpGet").resolves(mockValues.mockGetOfficerFiling[500]);
+        jest.spyOn(mockValues.requestClient, "httpGet").mockClear().mockResolvedValue(mockValues.mockGetOfficerFiling[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.getOfficerFiling(TRANSACTION_ID, SUBMISSION_ID);
 
@@ -150,7 +141,7 @@ describe("Officer Filing GET", () => {
 
 describe("Officer Filing POST", () => {
     it("should return an officer filing", async () => {
-        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockPostOfficerFiling[200]);
+        jest.spyOn(mockValues.requestClient, "httpPost").mockClear().mockResolvedValue(mockValues.mockPostOfficerFiling[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<FilingResponse> = await ofService.postOfficerFiling(TRANSACTION_ID, {}) as Resource<FilingResponse>;
 
@@ -160,7 +151,7 @@ describe("Officer Filing POST", () => {
     });
 
     it("should return error 404 - Not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[404]);
+        jest.spyOn(mockValues.requestClient, "httpPatch").mockClear().mockResolvedValue(mockValues.mockPatchOfficerFiling[404]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
 
@@ -169,7 +160,7 @@ describe("Officer Filing POST", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[500]);
+        jest.spyOn(mockValues.requestClient, "httpPatch").mockClear().mockResolvedValue(mockValues.mockPatchOfficerFiling[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
 
@@ -180,7 +171,7 @@ describe("Officer Filing POST", () => {
 
 describe("Officer Filing PATCH", () => {
     it("should return an officer filing", async () => {
-        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[200]);
+        jest.spyOn(mockValues.requestClient, "httpPatch").mockClear().mockResolvedValue(mockValues.mockPatchOfficerFiling[200]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: Resource<FilingResponse> = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {}) as Resource<FilingResponse>;
 
@@ -190,7 +181,7 @@ describe("Officer Filing PATCH", () => {
     });
 
     it("should return error 404 - Not found", async () => {
-        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[404]);
+        jest.spyOn(mockValues.requestClient, "httpPatch").mockClear().mockResolvedValue(mockValues.mockPatchOfficerFiling[404]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
 
@@ -199,7 +190,7 @@ describe("Officer Filing PATCH", () => {
     });
 
     it("should return error 500 - Internal server error", async () => {
-        sinon.stub(mockValues.requestClient, "httpPatch").resolves(mockValues.mockPatchOfficerFiling[500]);
+        jest.spyOn(mockValues.requestClient, "httpPatch").mockClear().mockResolvedValue(mockValues.mockPatchOfficerFiling[500]);
         const ofService: OfficerFilingService = new OfficerFilingService(mockValues.requestClient);
         const data: ApiErrorResponse = await ofService.patchOfficerFiling(TRANSACTION_ID, SUBMISSION_ID, {});
 

@@ -1,5 +1,3 @@
-import chai from "chai";
-import sinon from "sinon";
 import { itemUriRequestStub, itemResourceStub } from "../../stubs/item.stub";
 
 import BasketService from "../../../src/services/order/basket/service";
@@ -14,19 +12,18 @@ import {
 } from "../../../src/services/order/basket/types";
 import { ItemOptions as MissingImageDeliveryItemOptions } from "../../../src/services/order/mid";
 import { ItemOptions as CertifiedCopyItemOptions, ItemOptionsResource as CertifiedCopyItemOptionsResource } from "../../../src/services/order/certified-copies/types";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("basket", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -37,7 +34,7 @@ describe("basket", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.postItemToBasket(itemUriRequestStub);
 
@@ -51,7 +48,7 @@ describe("basket", () => {
                 body: itemResourceStub
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.postItemToBasket(itemUriRequestStub);
 
@@ -98,7 +95,7 @@ describe("basket", () => {
                 error: "An error occurred"
             };
 
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.appendItemToBasket(itemUriRequestStub);
 
@@ -112,7 +109,7 @@ describe("basket", () => {
                 body: itemResourceStub
             };
 
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.appendItemToBasket(itemUriRequestStub);
 
@@ -159,7 +156,7 @@ describe("basket", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const response = await basket.checkoutBasket();
             const data = response.value as ApiErrorResponse;
@@ -208,7 +205,7 @@ describe("basket", () => {
                 }
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
             const basket: BasketService = new BasketService(requestClient);
             const result = await basket.checkoutBasket() as ApiResult<ApiResponse<Checkout>>;
             const data = result.value as ApiResponse<Checkout>;
@@ -247,7 +244,7 @@ describe("basket", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasket();
 
@@ -329,7 +326,7 @@ describe("basket", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasket();
             const resourceDeliveryDetails = data.resource.deliveryDetails;
@@ -412,7 +409,7 @@ describe("basket", () => {
                 body: mockResponseBodyMissingFields
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasket();
             const resourceDeliveryDetails = data.resource.deliveryDetails;
@@ -518,7 +515,7 @@ describe("basket", () => {
                 error: "An error occurred"
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+            const mockRequest = jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.patchBasket(mockRequestBody);
 
@@ -532,7 +529,7 @@ describe("basket", () => {
                 body: mockResponseBody
             };
 
-            const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+            const mockRequest = jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.patchBasket(mockRequestBody);
             const resourceDeliveryDetails = data.resource.deliveryDetails;
@@ -582,7 +579,7 @@ describe("basket", () => {
                     body: mockResponseBodyMissingFields
                 };
 
-                const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPatchRequest);
+                const mockRequest = jest.spyOn(requestClient, "httpPatch").mockClear().mockResolvedValue(mockPatchRequest);
                 const basket: BasketService = new BasketService(requestClient);
                 const data = await basket.patchBasket(mockRequestBody);
                 const resourceDeliveryDetails = data.resource.deliveryDetails;
@@ -614,7 +611,7 @@ describe("basket", () => {
                 status: 200
             };
 
-            sinon.stub(requestClient, "httpPut").resolves(mockResponse);
+            jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.removeBasketItem(mockPutRequest);
 
@@ -628,7 +625,7 @@ describe("basket", () => {
                 status: 401
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasketLinks();
 
@@ -665,7 +662,7 @@ describe("basket", () => {
                 body: mockResponseBody
             };
 
-            sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+            jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
             const basket: BasketService = new BasketService(requestClient);
             const data = await basket.getBasketLinks();
             const resourceDeliveryDetails = data.resource.data.deliveryDetails;

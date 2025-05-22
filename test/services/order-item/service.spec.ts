@@ -1,4 +1,3 @@
-import sinon from "sinon";
 import { IHttpClient, RequestClient } from "../../../src";
 import OrderItemService, { OrderItemErrorResponse } from "../../../src/services/order/order-item/service";
 import { Success, Failure } from "../../../src/services/result";
@@ -7,11 +6,10 @@ import { ApiErrorResponse } from "../../../src/services/resource";
 import { certifiedCopyItemStub, itemResourceStub } from "../../stubs/item.stub";
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
-const sandbox = sinon.createSandbox();
 
 afterEach(() => {
-    sandbox.reset();
-    sandbox.restore();
+    sandbox.mockReset();
+    sandbox.mockRestore();
 })
 
 describe("OrderItemService", () => {
@@ -26,9 +24,11 @@ describe("OrderItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/orders/ORD-123123-123123/items/MID-123123-123123")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/orders/ORD-123123-123123/items/MID-123123-123123") {
+                        return serverResponse;
+                    }
+                });
                 const orderItemService = new OrderItemService(requestClient);
 
                 // when
@@ -90,9 +90,11 @@ describe("OrderItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/orders/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/orders/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const orderItemService = new OrderItemService(requestClient);
 
                 // when
@@ -166,9 +168,11 @@ describe("OrderItemService", () => {
                 };
                 sandbox.mock(requestClient)
                     .expects("httpGet")
-                    .once()
-                    .withArgs("/orders/ORD-123123-123123/items/CCD-123456-123456")
-                    .returns(serverResponse);
+                    .once().mockImplementation((...args: any[]) => {
+                    if (args[0] === "/orders/ORD-123123-123123/items/CCD-123456-123456") {
+                        return serverResponse;
+                    }
+                });
                 const orderItemService = new OrderItemService(requestClient);
 
                 // when
