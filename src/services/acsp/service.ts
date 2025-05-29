@@ -39,9 +39,6 @@ export default class {
 
         const acspDto = Mapping.snakeCaseKeys(acsp);
 
-        console.log("acsp data ---> ", JSON.stringify(acsp));
-        console.log("acspDto data ---> ", JSON.stringify(acspDto));
-
         const resp = await this.client.httpPost(url, acspDto);
 
         if (resp.status >= 400) {
