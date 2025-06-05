@@ -520,7 +520,7 @@ export const UPDATE_OBJECT_MOCK: Update = {
     change_bo_relevant_period: ChangeBoRelevantPeriodType.YES,
     trustee_involved_relevant_period: TrusteeInvolvedRelevantPeriodType.YES,
     change_beneficiary_relevant_period: ChangeBeneficiaryRelevantPeriodType.NO,
-    required_information: yesNoResponse.Yes
+    required_information: yesNoResponse.No
 }
 
 export const REMOVE_OBJECT_MOCK: Remove = {
