@@ -52,6 +52,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
 export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
     id: "123456",
     data: {
+        completed: true,
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
         etag: "",
@@ -103,6 +104,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
 export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
     id: "123456",
     data: {
+        completed: true,
         contribution_currency_type: "GBP",
         contribution_currency_value: "1000",
         contribution_non_monetary_value: "car",
