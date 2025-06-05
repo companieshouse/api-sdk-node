@@ -506,7 +506,8 @@ const mapUpdate = (update: Update): UpdateResource => {
             owned_land_relevant_period: update.owned_land_relevant_period,
             change_bo_relevant_period: update.change_bo_relevant_period,
             trustee_involved_relevant_period: update.trustee_involved_relevant_period,
-            change_beneficiary_relevant_period: update.change_beneficiary_relevant_period
+            change_beneficiary_relevant_period: update.change_beneficiary_relevant_period,
+            required_information: update.required_information
         };
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
@@ -573,7 +574,8 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             owned_land_relevant_period: updateResource.owned_land_relevant_period,
             change_bo_relevant_period: updateResource.change_bo_relevant_period,
             trustee_involved_relevant_period: updateResource.trustee_involved_relevant_period,
-            change_beneficiary_relevant_period: updateResource.change_beneficiary_relevant_period
+            change_beneficiary_relevant_period: updateResource.change_beneficiary_relevant_period,
+            required_information: updateResource.required_information
         };
         const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
         if (beneficial_owners_individual.length !== 0) {

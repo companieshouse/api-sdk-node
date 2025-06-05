@@ -356,6 +356,7 @@ export interface Update {
     change_bo_relevant_period?: ChangeBoRelevantPeriodType;
     trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
     change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
+    required_information?: yesNoResponse;
 }
 
 export interface Remove {
@@ -383,6 +384,7 @@ export interface UpdateResource {
     change_bo_relevant_period?: ChangeBoRelevantPeriodType;
     trustee_involved_relevant_period?: TrusteeInvolvedRelevantPeriodType;
     change_beneficiary_relevant_period?: ChangeBeneficiaryRelevantPeriodType;
+    required_information?: yesNoResponse;
 }
 
 export interface ManagingOfficerCorporateResource {
