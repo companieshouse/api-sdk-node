@@ -1,7 +1,5 @@
-import sinon from "sinon";
 import { PostcodeLookupService, UKAddress } from "../../../src/services/postcode-lookup";
 import { RequestClient } from "../../../src";
-import { expect } from "chai";
 
 const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "NOT USED" });
 const mockResponseBodyOfUKAddress1: UKAddress = ({
@@ -29,12 +27,12 @@ describe("test isValidUKPostcode", () => {
             status: 200,
             body: mockResponseBody
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AA";
         const postcodeValidationUrl = "https://example.com/postcode";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
         const result = await postcodeLookupService.isValidUKPostcode(postcodeValidationUrl, postcode);
-        expect(result).to.be.equal(true);
+        expect(result).toBe(true);
     });
 
     it("should return false for an invalid postcode", async () => {
@@ -42,12 +40,12 @@ describe("test isValidUKPostcode", () => {
             status: 404,
             body: null
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AB";
         const postcodeValidationUrl = "https://example.com/postcode";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
         const result = await postcodeLookupService.isValidUKPostcode(postcodeValidationUrl, postcode);
-        expect(result).to.be.equal(false);
+        expect(result).toBe(false);
     });
 });
 describe("test getListOfValidPostcodeAddresses", () => {
@@ -56,17 +54,17 @@ describe("test getListOfValidPostcodeAddresses", () => {
             status: 200,
             body: mockResponseBody
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AA";
         const postcodeAddressesLookupUrl = "https://example.com/multiple-addresses";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
         const result = await postcodeLookupService.getListOfValidPostcodeAddresses(postcodeAddressesLookupUrl, postcode);
-        expect(mockRequest).to.have.been.calledOnce;
-        expect(result.httpStatusCode).to.be.equal(200);
-        expect(result.resource).to.not.be.undefined;
-        expect(result.resource?.length).to.be.equal(2);
-        expect(JSON.stringify(result.resource![0])).to.be.equals(JSON.stringify(mockResponseBodyOfUKAddress1));
-        expect(JSON.stringify(result.resource![1])).to.be.equals(JSON.stringify(mockResponseBodyOfUKAddress2));
+        expect(mockRequest).toHaveBeenCalledTimes(1);
+        expect(result.httpStatusCode).toBe(200);
+        expect(result.resource).toBeDefined();
+        expect(result.resource?.length).toBe(2);
+        expect(JSON.stringify(result.resource![0])).toBe(JSON.stringify(mockResponseBodyOfUKAddress1));
+        expect(JSON.stringify(result.resource![1])).toBe(JSON.stringify(mockResponseBodyOfUKAddress2));
     });
 
     it("should return an empty list for an invalid postcode", async () => {
@@ -74,14 +72,14 @@ describe("test getListOfValidPostcodeAddresses", () => {
             status: 404,
             body: null
         }
-        const mockRequest = sinon.stub(requestClient, "httpGet").returns(Promise.resolve(mockGetResponse));
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockReturnValue(Promise.resolve(mockGetResponse));
         const postcode = "SW1A1AB";
         const postcodeAddressesLookupUrl = "https://example.com/multiple-addresses";
         const postcodeLookupService: PostcodeLookupService = new PostcodeLookupService(requestClient);
         const result = await postcodeLookupService.getListOfValidPostcodeAddresses(postcodeAddressesLookupUrl, postcode);
-        expect(mockRequest).to.have.been.calledOnce;
-        expect(result.httpStatusCode).to.be.equal(404);
-        expect(result.resource).to.not.be.undefined;
-        expect(result.resource).to.be.empty
+        expect(mockRequest).toHaveBeenCalledTimes(1);
+        expect(result.httpStatusCode).toBe(404);
+        expect(result.resource).toBeDefined();
+        expect(Object.keys(result.resource).length).toBe(0);
     });
 });

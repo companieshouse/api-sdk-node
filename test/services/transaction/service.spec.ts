@@ -1,24 +1,20 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
 import { Transaction, TransactionData, TransactionList, TransactionResource } from "../../../src/services/transaction";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
 describe("transaction", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -28,13 +24,13 @@ describe("transaction", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.postTransaction({} as Transaction);
 
-        expect(data.httpStatusCode).to.equal(401);
+        expect(data.httpStatusCode).toBe(401);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("An error occurred");
+        expect(castedData.errors[0]).toBe("An error occurred");
     });
 
     it("post maps the company field data items correctly", async () => {
@@ -63,17 +59,17 @@ describe("transaction", () => {
             body: mockResponseBody
         };
 
-        sinon.stub(requestClient, "httpPost").resolves(mockPostResponse);
+        jest.spyOn(requestClient, "httpPost").mockClear().mockResolvedValue(mockPostResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.postTransaction({} as Transaction);
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
         const castedData: Resource<Transaction> = data as Resource<Transaction>;
-        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
-        expect(castedData.resource.description).to.equal(mockResponseBody.description);
+        expect(castedData.resource.companyName).toBe(mockResponseBody.company_name);
+        expect(castedData.resource.companyNumber).toBe(mockResponseBody.company_number);
+        expect(castedData.resource.links.self).toBe(mockResponseBody.links.self);
+        expect(castedData.resource.reference).toBe(mockResponseBody.reference);
+        expect(castedData.resource.description).toBe(mockResponseBody.description);
     });
 
     it("get returns an error response on failure", async () => {
@@ -82,13 +78,13 @@ describe("transaction", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.getTransaction({} as string);
 
-        expect(data.httpStatusCode).to.equal(401);
+        expect(data.httpStatusCode).toBe(401);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("An error occurred");
+        expect(castedData.errors[0]).toBe("An error occurred");
     });
 
     it("get maps the company field data items correctly", async () => {
@@ -108,17 +104,17 @@ describe("transaction", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.getTransaction({} as string);
 
-        expect(data.httpStatusCode).to.equal(200);
+        expect(data.httpStatusCode).toBe(200);
         const castedData: Resource<Transaction> = data as Resource<Transaction>;
-        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
-        expect(castedData.resource.description).to.equal(mockResponseBody.description);
+        expect(castedData.resource.companyName).toBe(mockResponseBody.company_name);
+        expect(castedData.resource.companyNumber).toBe(mockResponseBody.company_number);
+        expect(castedData.resource.links.self).toBe(mockResponseBody.links.self);
+        expect(castedData.resource.reference).toBe(mockResponseBody.reference);
+        expect(castedData.resource.description).toBe(mockResponseBody.description);
     });
 
     it("put returns successful response", async () => {
@@ -129,13 +125,13 @@ describe("transaction", () => {
             status: 202
         };
 
-        sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.putTransaction({ id: "abc" } as Transaction);
 
-        expect(data.httpStatusCode).to.equal(202);
+        expect(data.httpStatusCode).toBe(202);
         const castedData: ApiResponse<Transaction> = data as ApiResponse<Transaction>;
-        expect(castedData.headers["X-Payment-Required"]).to.equal("http://link-to-payment");
+        expect(castedData.headers["X-Payment-Required"]).toBe("http://link-to-payment");
     });
 
     it("put returns an error response on failure", async () => {
@@ -144,38 +140,41 @@ describe("transaction", () => {
             error: "Unprocessable Entity"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpPut").resolves(mockPutResponse);
+        const mockRequest = jest.spyOn(requestClient, "httpPut").mockClear().mockResolvedValue(mockPutResponse);
         const transaction : TransactionService = new TransactionService(requestClient);
         const data = await transaction.putTransaction({ id: "abc" } as Transaction);
 
-        expect(data.httpStatusCode).to.equal(422);
+        expect(data.httpStatusCode).toBe(422);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("Unprocessable Entity");
+        expect(castedData.errors[0]).toBe("Unprocessable Entity");
     });
 
-    it("get transaction list for resource kind returns success response ", async () => {
-        const itemsArray: TransactionData[] = ([
-            {
-                id: "123",
-                status: "closed"
-            }
-        ]);
+    it(
+        "get transaction list for resource kind returns success response ",
+        async () => {
+            const itemsArray: TransactionData[] = ([
+                {
+                    id: "123",
+                    status: "closed"
+                }
+            ]);
 
-        const transactionList: TransactionList = ({
-            items: itemsArray
-        });
+            const transactionList: TransactionList = ({
+                items: itemsArray
+            });
 
-        const mockGetResponse = {
-            status: 200,
-            body: transactionList
-        };
+            const mockGetResponse = {
+                status: 200,
+                body: transactionList
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const transaction : TransactionService = new TransactionService(requestClient);
-        const data = await transaction.getTransactionsForResourceKind({} as string);
-        expect(data.httpStatusCode).to.equal(200);
-        const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
-        expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
-        expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
-    });
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetResponse);
+            const transaction : TransactionService = new TransactionService(requestClient);
+            const data = await transaction.getTransactionsForResourceKind({} as string);
+            expect(data.httpStatusCode).toBe(200);
+            const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
+            expect(castedData.resource?.items[0].id).toBe(transactionList.items[0].id);
+            expect(castedData.resource?.items[0].status).toBe(transactionList.items[0].status);
+        }
+    );
 });

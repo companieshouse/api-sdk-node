@@ -1,11 +1,7 @@
-import chai from "chai";
-import sinon from "sinon";
-
 import { AlphabeticalSearchService } from "../../../../src/services/search/alphabetical-search";
 import { RequestClient } from "../../../../src/http";
 import { CompaniesResource } from "../../../../src/services/search/alphabetical-search/types";
 import Resource from "../../../../src/services/resource";
-const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
 
@@ -43,13 +39,13 @@ const size = 20;
 
 describe("create a alphabetical search GET", () => {
     beforeEach(() => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
     });
 
     afterEach(done => {
-        sinon.reset();
-        sinon.restore();
+        jest.resetAllMocks();
+        jest.restoreAllMocks();
         done();
     });
 
@@ -59,12 +55,12 @@ describe("create a alphabetical search GET", () => {
             error: "An error occurred"
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
 
-        expect(data.httpStatusCode).to.equal(401);
-        expect(data.resource).to.be.undefined;
+        expect(data.httpStatusCode).toBe(401);
+        expect(data.resource).toBeUndefined();
     });
 
     it("returns alphabetical search results correctly", async () => {
@@ -73,60 +69,66 @@ describe("create a alphabetical search GET", () => {
             body: mockResponseBody
         };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
         const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
         const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, null, null);
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.top_hit).to.equal(mockResponseBody.top_hit);
-        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
-        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
-        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
-        expect(data.resource.items[0].company_name).to.equal(mockResponseBody.items[0].company_name);
-        expect(data.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
-        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
+        expect(data.httpStatusCode).toBe(200);
+        expect(data.resource.top_hit).toBe(mockResponseBody.top_hit);
+        expect(data.resource.items[0].company_type).toBe(mockResponseBody.items[0].company_type)
+        expect(data.resource.items[0].company_number).toBe(mockResponseBody.items[0].company_number);
+        expect(data.resource.items[0].company_status).toBe(mockResponseBody.items[0].company_status);
+        expect(data.resource.items[0].company_name).toBe(mockResponseBody.items[0].company_name);
+        expect(data.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+        expect(data.resource.items[0].ordered_alpha_key).toBe(mockResponseBody.items[0].ordered_alpha_key);
+        expect(data.resource.items[0].links).toBe(mockResponseBody.items[0].links);
     });
 
-    it("returns alphabetical search results correctly when searching previous results", async () => {
-        const mockGetRequest = {
-            status: 200,
-            body: mockResponseBody
-        };
+    it(
+        "returns alphabetical search results correctly when searching previous results",
+        async () => {
+            const mockGetRequest = {
+                status: 200,
+                body: mockResponseBody
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
-        const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchBefore, null, size);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
+            const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
+            const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, searchBefore, null, size);
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.top_hit).to.equal(mockResponseBody.top_hit);
-        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
-        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
-        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
-        expect(data.resource.items[0].company_name).to.equal(mockResponseBody.items[0].company_name);
-        expect(data.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
-        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
-    });
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.top_hit).toBe(mockResponseBody.top_hit);
+            expect(data.resource.items[0].company_type).toBe(mockResponseBody.items[0].company_type)
+            expect(data.resource.items[0].company_number).toBe(mockResponseBody.items[0].company_number);
+            expect(data.resource.items[0].company_status).toBe(mockResponseBody.items[0].company_status);
+            expect(data.resource.items[0].company_name).toBe(mockResponseBody.items[0].company_name);
+            expect(data.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+            expect(data.resource.items[0].ordered_alpha_key).toBe(mockResponseBody.items[0].ordered_alpha_key);
+            expect(data.resource.items[0].links).toBe(mockResponseBody.items[0].links);
+        }
+    );
 
-    it("returns alphabetical search results correctly when searching next results", async () => {
-        const mockGetRequest = {
-            status: 200,
-            body: mockResponseBody
-        };
+    it(
+        "returns alphabetical search results correctly when searching next results",
+        async () => {
+            const mockGetRequest = {
+                status: 200,
+                body: mockResponseBody
+            };
 
-        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
-        const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
-        const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, searchAfter, size);
+            const mockRequest = jest.spyOn(requestClient, "httpGet").mockClear().mockResolvedValue(mockGetRequest);
+            const search: AlphabeticalSearchService = new AlphabeticalSearchService(requestClient);
+            const data: Resource<CompaniesResource> = await search.getCompanies(testCompanyName, mockRequestId, null, searchAfter, size);
 
-        expect(data.httpStatusCode).to.equal(200);
-        expect(data.resource.top_hit).to.equal(mockResponseBody.top_hit);
-        expect(data.resource.items[0].company_type).to.equal(mockResponseBody.items[0].company_type)
-        expect(data.resource.items[0].company_number).to.equal(mockResponseBody.items[0].company_number);
-        expect(data.resource.items[0].company_status).to.equal(mockResponseBody.items[0].company_status);
-        expect(data.resource.items[0].company_name).to.equal(mockResponseBody.items[0].company_name);
-        expect(data.resource.items[0].kind).to.equal(mockResponseBody.items[0].kind);
-        expect(data.resource.items[0].ordered_alpha_key).to.equal(mockResponseBody.items[0].ordered_alpha_key);
-        expect(data.resource.items[0].links).to.equal(mockResponseBody.items[0].links);
-    });
+            expect(data.httpStatusCode).toBe(200);
+            expect(data.resource.top_hit).toBe(mockResponseBody.top_hit);
+            expect(data.resource.items[0].company_type).toBe(mockResponseBody.items[0].company_type)
+            expect(data.resource.items[0].company_number).toBe(mockResponseBody.items[0].company_number);
+            expect(data.resource.items[0].company_status).toBe(mockResponseBody.items[0].company_status);
+            expect(data.resource.items[0].company_name).toBe(mockResponseBody.items[0].company_name);
+            expect(data.resource.items[0].kind).toBe(mockResponseBody.items[0].kind);
+            expect(data.resource.items[0].ordered_alpha_key).toBe(mockResponseBody.items[0].ordered_alpha_key);
+            expect(data.resource.items[0].links).toBe(mockResponseBody.items[0].links);
+        }
+    );
 });
