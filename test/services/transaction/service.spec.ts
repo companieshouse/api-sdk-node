@@ -42,7 +42,6 @@ describe("transaction", () => {
             id: "12345678",
             company_name: "HELLO LTD",
             company_number: "88",
-            filing_mode: "default",
             links: {
                 self: "/self"
             },
@@ -73,7 +72,6 @@ describe("transaction", () => {
         const resource = castedData.resource;
         expect(resource?.companyName).to.equal(mockResponseBody.company_name);
         expect(resource?.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(resource?.filingMode).to.equal(mockResponseBody.filing_mode);
         expect(resource?.links?.self).to.equal(mockResponseBody.links?.self);
         expect(resource?.reference).to.equal(mockResponseBody.reference);
         expect(resource?.description).to.equal(mockResponseBody.description);
