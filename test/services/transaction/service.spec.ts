@@ -34,7 +34,7 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(401);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("An error occurred");
+        expect(castedData.errors?.[0]).to.equal("An error occurred");
     });
 
     it("post maps the company field data items correctly", async () => {
@@ -42,6 +42,7 @@ describe("transaction", () => {
             id: "12345678",
             company_name: "HELLO LTD",
             company_number: "88",
+            filing_mode: "default",
             links: {
                 self: "/self"
             },
@@ -69,11 +70,13 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(200);
         const castedData: Resource<Transaction> = data as Resource<Transaction>;
-        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
-        expect(castedData.resource.description).to.equal(mockResponseBody.description);
+        const resource = castedData.resource;
+        expect(resource?.companyName).to.equal(mockResponseBody.company_name);
+        expect(resource?.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(resource?.filingMode).to.equal(mockResponseBody.filing_mode);
+        expect(resource?.links?.self).to.equal(mockResponseBody.links?.self);
+        expect(resource?.reference).to.equal(mockResponseBody.reference);
+        expect(resource?.description).to.equal(mockResponseBody.description);
     });
 
     it("get returns an error response on failure", async () => {
@@ -88,7 +91,7 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(401);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("An error occurred");
+        expect(castedData.errors?.[0]).to.equal("An error occurred");
     });
 
     it("get maps the company field data items correctly", async () => {
@@ -96,6 +99,7 @@ describe("transaction", () => {
             id: "12345678",
             company_name: "HELLO LTD",
             company_number: "88",
+            filing_mode: "default",
             links: {
                 self: "/self"
             },
@@ -114,11 +118,13 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(200);
         const castedData: Resource<Transaction> = data as Resource<Transaction>;
-        expect(castedData.resource.companyName).to.equal(mockResponseBody.company_name);
-        expect(castedData.resource.companyNumber).to.equal(mockResponseBody.company_number);
-        expect(castedData.resource.links.self).to.equal(mockResponseBody.links.self);
-        expect(castedData.resource.reference).to.equal(mockResponseBody.reference);
-        expect(castedData.resource.description).to.equal(mockResponseBody.description);
+        const resource = castedData.resource;
+        expect(resource?.companyName).to.equal(mockResponseBody.company_name);
+        expect(resource?.companyNumber).to.equal(mockResponseBody.company_number);
+        expect(resource?.filingMode).to.equal(mockResponseBody.filing_mode);
+        expect(resource?.links?.self).to.equal(mockResponseBody.links?.self);
+        expect(resource?.reference).to.equal(mockResponseBody.reference);
+        expect(resource?.description).to.equal(mockResponseBody.description);
     });
 
     it("put returns successful response", async () => {
@@ -135,7 +141,7 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(202);
         const castedData: ApiResponse<Transaction> = data as ApiResponse<Transaction>;
-        expect(castedData.headers["X-Payment-Required"]).to.equal("http://link-to-payment");
+        expect(castedData.headers?.["X-Payment-Required"]).to.equal("http://link-to-payment");
     });
 
     it("put returns an error response on failure", async () => {
@@ -150,7 +156,7 @@ describe("transaction", () => {
 
         expect(data.httpStatusCode).to.equal(422);
         const castedData: ApiErrorResponse = data;
-        expect(castedData.errors[0]).to.equal("Unprocessable Entity");
+        expect(castedData.errors?.[0]).to.equal("Unprocessable Entity");
     });
 
     it("get transaction list for resource kind returns success response ", async () => {

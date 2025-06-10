@@ -170,6 +170,7 @@ export default class TransactionService {
             created_by: transaction.createdBy,
             description: transaction.description,
             etag: transaction.etag,
+            filing_mode: transaction.filingMode,
             id: transaction.id,
             kind: transaction.kind,
             links: transaction.links,
