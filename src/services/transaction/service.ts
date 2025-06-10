@@ -78,6 +78,7 @@ export default class TransactionService {
             links: body.links,
             reference: body.reference,
             status: body.status,
+            filingMode: body.filing_mode,
             kind: body.kind,
             companyName: body.company_name,
             companyNumber: body.company_number,
