@@ -162,7 +162,7 @@ describe("transaction", () => {
                     testFiling: {
                         status: "accepted",
                         companyNumber: "AP000042",
-                        type: "accsp"
+                        type: "acsp"
                     } as Filing
                 }
             }
