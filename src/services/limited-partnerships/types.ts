@@ -43,7 +43,6 @@ type Partner = {
     legal_entity_register_name?: string;
     legal_entity_registration_location?: string;
     legal_form?: string;
-    legal_personality_statement_checked?: boolean;
     nationality1?: string;
     nationality2?: string;
     principal_office_address?: Address;
