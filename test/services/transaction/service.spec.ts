@@ -3,7 +3,7 @@ import sinon from "sinon";
 
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
-import { Transaction, TransactionData, TransactionList, TransactionResource } from "../../../src/services/transaction";
+import { Transaction, TransactionData, TransactionList, TransactionResource, Filing } from "../../../src/services/transaction";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
 const expect = chai.expect;
@@ -159,10 +159,12 @@ describe("transaction", () => {
                 id: "123",
                 status: "closed",
                 filings: {
-                    status: "",
-                    companyNumber: "",
-                    type: ""
-                } as any // Cast to 'any' to bypass type error for test mock
+                    "testFiling": {
+                        status: "",
+                        companyNumber: "",
+                        type: ""
+                    } as Filing
+                }
             }
         ]);
 
