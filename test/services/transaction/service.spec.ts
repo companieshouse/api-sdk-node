@@ -160,9 +160,9 @@ describe("transaction", () => {
                 status: "closed",
                 filings: {
                     testFiling: {
-                        status: "",
-                        companyNumber: "",
-                        type: ""
+                        status: "accepted",
+                        companyNumber: "AP000042",
+                        type: "accsp"
                     } as Filing
                 }
             }
@@ -184,5 +184,6 @@ describe("transaction", () => {
         const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
         expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
         expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
+        expect(castedData.resource?.items[0].filings).to.equal(transactionList.items[0].filings);
     });
 });
