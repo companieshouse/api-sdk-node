@@ -159,7 +159,7 @@ describe("transaction", () => {
                 id: "123",
                 status: "closed",
                 filings: {
-                    "testFiling": {
+                    testFiling: {
                         status: "",
                         companyNumber: "",
                         type: ""
