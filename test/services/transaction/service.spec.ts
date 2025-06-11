@@ -3,7 +3,7 @@ import sinon from "sinon";
 
 import TransactionService from "../../../src/services/transaction/service";
 import { RequestClient } from "../../../src/http";
-import { Transaction, TransactionData, TransactionList, TransactionResource } from "../../../src/services/transaction";
+import { Transaction, TransactionData, TransactionList, TransactionResource, Filing } from "../../../src/services/transaction";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Resource } from "../../../src";
 const expect = chai.expect;
@@ -161,7 +161,14 @@ describe("transaction", () => {
         const itemsArray: TransactionData[] = ([
             {
                 id: "123",
-                status: "closed"
+                status: "closed",
+                filings: {
+                    testFiling: {
+                        status: "accepted",
+                        companyNumber: "AP000042",
+                        type: "acsp"
+                    } as Filing
+                }
             }
         ]);
 
@@ -181,5 +188,6 @@ describe("transaction", () => {
         const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
         expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
         expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
+        expect(castedData.resource?.items[0].filings).to.equal(transactionList.items[0].filings);
     });
 });
