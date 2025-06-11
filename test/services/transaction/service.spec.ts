@@ -157,7 +157,12 @@ describe("transaction", () => {
         const itemsArray: TransactionData[] = ([
             {
                 id: "123",
-                status: "closed"
+                status: "closed",
+                filings: {
+                    status: "",
+                    companyNumber: "",
+                    type: ""
+                } as any // Cast to 'any' to bypass type error for test mock
             }
         ]);
 
