@@ -61,7 +61,8 @@ export const fullCompanyProfileMock = {
     is_on_register_in_country_formed_in: "false",
     links: {
         filing_history: "/company/00000000/filing-history"
-    }
+    },
+    subtype: ""
 };
 
 export const registeredAddressEtcMissingCompanyProfileMock = {
