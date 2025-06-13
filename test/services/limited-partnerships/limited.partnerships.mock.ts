@@ -107,7 +107,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
         completed: true,
         contribution_currency_type: "GBP",
         contribution_currency_value: "1000",
-        contribution_non_monetary_value: "car",
+        contribution_sub_types: ["car"],
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
         etag: "",

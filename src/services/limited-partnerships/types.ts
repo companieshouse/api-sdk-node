@@ -58,7 +58,7 @@ export interface LimitedPartner {
     data?: Partner & {
         contribution_currency_type?: string;
         contribution_currency_value?: string;
-        contribution_non_monetary_value?: string;
+        contribution_sub_types?: string[];
     };
 }
 
