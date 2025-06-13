@@ -27,6 +27,7 @@ export interface LimitedPartnership {
         term?: Term;
         sic_codes?: string[];
         lawful_purpose_statement_checked?: boolean;
+        partnership_number?: string;
     };
 }
 
