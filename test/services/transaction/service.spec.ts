@@ -208,5 +208,4 @@ describe("transaction", () => {
         const castedData: ApiErrorResponse = data as ApiErrorResponse;
         expect(castedData.errors[0]).to.equal("Internal Server Error");
     });
-
 });
