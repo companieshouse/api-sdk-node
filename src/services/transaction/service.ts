@@ -199,7 +199,11 @@ export default class TransactionService {
                 id: i.id,
                 updatedAt: i.updated_at,
                 status: i.status,
-                filings: i.filings,
+                filings: {
+                    status: i.filings.status,
+                    companyNumber: i.filings.company_number,
+                    type: i.filings.type
+                },
                 resumeJourneyUri: i.resume_journey_uri
             })) : []
         };
