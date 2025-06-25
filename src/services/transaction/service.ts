@@ -2,6 +2,7 @@ import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource, TransactionList } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import { addRequestIdHeader } from "../../util";
+import Mapping from "../../mapping/mapping";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -194,19 +195,7 @@ export default class TransactionService {
             httpStatusCode: resp.status
         };
 
-        resource.resource = {
-            items: resp.body.items ? resp.body.items.map((i) => ({
-                id: i.id,
-                updatedAt: i.updated_at,
-                status: i.status,
-                filings: {
-                    status: i.filings.status,
-                    companyNumber: i.filings.company_number,
-                    type: i.filings.type
-                },
-                resumeJourneyUri: i.resume_journey_uri
-            })) : []
-        };
+        resource.resource = Mapping.camelCaseKeys<TransactionList>(resp.body);
         return resource;
     }
 }
