@@ -72,5 +72,7 @@ export interface TransactionData {
 }
 
 export interface Filing {
-    status?: String;
+    status?: string;
+    companyNumber?: string;
+    type?: string;
 }
