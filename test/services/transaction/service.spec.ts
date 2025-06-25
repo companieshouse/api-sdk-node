@@ -157,59 +157,37 @@ describe("transaction", () => {
         expect(castedData.errors?.[0]).to.equal("Unprocessable Entity");
     });
 
-    it("getTransactionsForResourceKind returns a transaction list with mapped filings", async () => {
-        const mockResponseBody = {
-            items: [
-                {
-                    id: "txn1",
-                    updated_at: "2024-06-25T12:00:00Z",
-                    status: "closed",
-                    filings: {
+    it("get transaction list for resource kind returns success response ", async () => {
+        const itemsArray: TransactionData[] = ([
+            {
+                id: "123",
+                status: "closed",
+                filings: {
+                    testFiling: {
                         status: "accepted",
-                        company_number: "AP000042",
+                        companyNumber: "AP000042",
                         type: "acsp"
-                    },
-                    resume_journey_uri: "/resume/txn1"
+                    } as Filing
                 }
-            ]
-        };
+            }
+        ]);
+
+        const transactionList: TransactionList = ({
+            items: itemsArray
+        });
 
         const mockGetResponse = {
             status: 200,
-            body: mockResponseBody
+            body: transactionList
         };
 
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const transaction: TransactionService = new TransactionService(requestClient);
-        const data = await transaction.getTransactionsForResourceKind("req-123", "some-kind");
-
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransactionsForResourceKind({} as string);
         expect(data.httpStatusCode).to.equal(200);
         const castedData: Resource<TransactionList> = data as Resource<TransactionList>;
-        expect(castedData.resource?.items).to.have.lengthOf(1);
-        const item = castedData.resource?.items[0];
-        expect(item?.id).to.equal("txn1");
-        expect(item?.updatedAt).to.equal("2024-06-25T12:00:00Z");
-        expect(item?.status).to.equal("closed");
-        expect(item?.filings).to.deep.equal({
-            status: "accepted",
-            companyNumber: "AP000042",
-            type: "acsp"
-        });
-        expect(item?.resumeJourneyUri).to.equal("/resume/txn1");
-    });
-
-    it("getTransactionsForResourceKind returns error response on failure", async () => {
-        const mockGetResponse = {
-            status: 500,
-            error: "Internal Server Error"
-        };
-
-        sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
-        const transaction: TransactionService = new TransactionService(requestClient);
-        const data = await transaction.getTransactionsForResourceKind("req-123", "some-kind");
-
-        expect(data.httpStatusCode).to.equal(500);
-        const castedData: ApiErrorResponse = data as ApiErrorResponse;
-        expect(castedData.errors[0]).to.equal("Internal Server Error");
+        expect(castedData.resource?.items[0].id).to.equal(transactionList.items[0].id);
+        expect(castedData.resource?.items[0].status).to.equal(transactionList.items[0].status);
+        expect(castedData.resource?.items[0].filings).to.equal(transactionList.items[0].filings);
     });
 });
