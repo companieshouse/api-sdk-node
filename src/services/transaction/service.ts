@@ -195,7 +195,15 @@ export default class TransactionService {
             httpStatusCode: resp.status
         };
 
-        resource.resource = Mapping.camelCaseKeys<TransactionList>(resp.body);
+        resource.resource = {
+            items: resp.body.items ? resp.body.items.map((i) => ({
+                id: i.id,
+                updatedAt: i.updated_at,
+                status: i.status,
+                filings: i.filings,
+                resumeJourneyUri: i.resume_journey_uri
+            })) : []
+        };
         return resource;
     }
 }
