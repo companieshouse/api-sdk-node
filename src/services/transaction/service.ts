@@ -201,7 +201,22 @@ export default class TransactionService {
                 id: i.id,
                 updatedAt: i.updated_at,
                 status: i.status,
-                filings: i.filings,
+                filings: i.filings
+                    ? (() => {
+                        const result = {};
+                        for (const key in i.filings) {
+                            if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
+                                const filing = i.filings[key];
+                                result[key] = {
+                                    status: filing.status,
+                                    companyNumber: filing.company_number,
+                                    type: filing.type
+                                };
+                            }
+                        }
+                        return result;
+                    })()
+                    : undefined,
                 resumeJourneyUri: i.resume_journey_uri
             })) : []
         };
