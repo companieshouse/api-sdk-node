@@ -196,12 +196,12 @@ describe("transaction", () => {
         expect(item?.resumeJourneyUri).to.equal("/resume/txn1");
         expect(item?.filings).to.have.property("testFiling");
         expect(item?.filings).to.have.property("anotherFiling");
-        expect(item?.filings["testFiling"]).to.deep.equal({
+        expect(item?.filings.testFiling).to.deep.equal({
             status: "accepted",
             companyNumber: "AP000042",
             type: "acsp"
         });
-        expect(item?.filings["anotherFiling"]).to.deep.equal({
+        expect(item?.filings.anotherFiling).to.deep.equal({
             status: "pending",
             companyNumber: "AP000043",
             type: "bcsp"
@@ -222,5 +222,4 @@ describe("transaction", () => {
         const castedData: ApiErrorResponse = data as ApiErrorResponse;
         expect(castedData.errors[0]).to.equal("Internal Server Error");
     });
-
 });
