@@ -22,10 +22,10 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the created PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData, headers: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
         const pscVerificationResource = Mapping.snakeCaseKeys(pscVerification);
-        const response = await this.client.httpPost(resourceUri, pscVerificationResource);
+        const response = await this.client.httpPost(resourceUri, pscVerificationResource, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);
