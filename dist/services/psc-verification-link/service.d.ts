@@ -1,5 +1,5 @@
 import { PlannedMaintenance, PscVerification, PscVerificationData } from "./types";
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 /**
  * Service class for handling PSC (Person with Significant Control) verification-related operations.

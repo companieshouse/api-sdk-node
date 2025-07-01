@@ -1,6 +1,6 @@
 import { PlannedMaintenance, PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource } from "./types"
 
-import { HttpResponse, IHttpClient } from "../../http";
+import { Headers, HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 import { PersonWithSignificantControlResource } from "../psc/types";
