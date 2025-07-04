@@ -2,6 +2,7 @@ import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource, TransactionList } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import { addRequestIdHeader } from "../../util";
+import Mapping from "../../mapping/mapping";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }
@@ -119,6 +120,7 @@ export default class TransactionService {
             links: body.links,
             reference: body.reference,
             status: body.status,
+            filingMode: body.filing_mode,
             kind: body.kind,
             companyName: body.company_name,
             companyNumber: body.company_number,
@@ -199,7 +201,22 @@ export default class TransactionService {
                 id: i.id,
                 updatedAt: i.updated_at,
                 status: i.status,
-                filings: i.filings,
+                filings: i.filings
+                    ? (() => {
+                        const result = {};
+                        for (const key in i.filings) {
+                            if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
+                                const filing = i.filings[key];
+                                result[key] = {
+                                    status: filing.status,
+                                    companyNumber: filing.company_number,
+                                    type: filing.type
+                                };
+                            }
+                        }
+                        return result;
+                    })()
+                    : undefined,
                 resumeJourneyUri: i.resume_journey_uri
             })) : []
         };

@@ -26,9 +26,13 @@ export interface LimitedPartnership {
         principal_place_of_business_address?: Address;
         term?: Term;
         sic_codes?: string[];
+        lawful_purpose_statement_checked?: boolean;
+        partnership_number?: string;
     };
 }
+
 type Partner = {
+    completed?: boolean;
     date_effective_from?: string;
     date_of_birth?: string;
     etag?: string;
@@ -47,14 +51,14 @@ type Partner = {
     resignation_date?: string;
     surname?: string;
     usual_residential_address?: Address;
-}
+};
 
 export interface LimitedPartner {
     id?: string;
     data?: Partner & {
-        contribution_currency_type?: string,
-        contribution_currency_value?: string,
-        contribution_non_monetary_value?: string
+        contribution_currency_type?: string;
+        contribution_currency_value?: string;
+        contribution_sub_types?: string[];
     };
 }
 
@@ -62,7 +66,6 @@ export interface GeneralPartner {
     id?: string;
     data?: Partner & {
         not_disqualified_statement_checked?: boolean;
-        legal_personality_statement_checked?: boolean;
         service_address?: Address;
     };
 }
@@ -97,9 +100,9 @@ export enum PartnershipType {
 }
 
 export enum Jurisdiction {
-    ENGLAND_AND_WALES = "England and Wales",
-    NORTHERN_IRELAND = "Northern Ireland",
-    SCOTLAND = "Scotland",
+    ENGLAND_AND_WALES = "england-wales",
+    NORTHERN_IRELAND = "northern-ireland",
+    SCOTLAND = "scotland",
 }
 
 export interface LimitedPartnershipIncorporation {

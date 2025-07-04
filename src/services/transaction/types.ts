@@ -7,6 +7,7 @@ export interface TransactionResource {
     links?: {self: string},
     reference: string,
     status?: string,
+    filing_mode?: string,
     kind?: string,
     company_name?: string,
     company_number: string,
@@ -35,6 +36,7 @@ export interface Transaction {
     links?: {self: string},
     reference: string,
     status?: string,
+    filingMode?: string,
     kind?: string,
     companyName?: string,
     companyNumber?: string,
@@ -73,4 +75,6 @@ export interface TransactionData {
 
 export interface Filing {
     status?: string;
+    companyNumber?: string;
+    type?: string;
 }

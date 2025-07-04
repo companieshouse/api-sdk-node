@@ -44,13 +44,16 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
             postal_code: "SC13 1WE"
         },
         term: Term.BY_AGREEMENT,
-        sic_codes: ["12345", "56789"]
+        sic_codes: ["12345", "56789"],
+        lawful_purpose_statement_checked: true,
+        partnership_number: "LP123456"
     }
 };
 
 export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
     id: "123456",
     data: {
+        completed: true,
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
         etag: "",
@@ -65,7 +68,6 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         nationality1: "English",
         nationality2: "French",
         not_disqualified_statement_checked: true,
-        legal_personality_statement_checked: true,
         principal_office_address: {
             premises: "22",
             address_line_1: "Some Street",
@@ -102,9 +104,10 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
 export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
     id: "123456",
     data: {
+        completed: true,
         contribution_currency_type: "GBP",
         contribution_currency_value: "1000",
-        contribution_non_monetary_value: "car",
+        contribution_sub_types: ["car"],
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
         etag: "",

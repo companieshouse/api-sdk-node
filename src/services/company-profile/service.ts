@@ -117,7 +117,8 @@ export default class CompanyProfileService {
             isOnRegisterInCountryFormedIn: isOnRegisterInCountryFormedIn,
             links: {
                 filingHistory: links?.filing_history
-            }
+            },
+            subtype: body?.subtype
         };
 
         return resource;
