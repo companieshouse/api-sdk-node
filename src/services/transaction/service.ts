@@ -205,4 +205,30 @@ export default class TransactionService {
         };
         return resource;
     }
+
+    /**
+     * Delete a sub-resource from a transaction by transactionId and resourceId.
+     *
+     * @param transactionId the transaction ID
+     * @param resourceId the resource ID to remove
+     * @param requestId optional request ID for tracing
+     */
+    public async deleteSubResourceFromTransaction (
+        transactionId: string,
+        resourceId: string
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const url = `/private/transactions/${transactionId}/resources/${resourceId}`;
+        const resp = await this.client.httpDelete(url);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        return {
+            httpStatusCode: resp.status
+        };
+    }
 }
