@@ -59,13 +59,27 @@ export default class AssociationsService {
     }
 
     /**
-     * Initiates an HTTP GET request to retrieve the associations searched based on association status.
-     * @param associationStatus - an association status used to filter associations. This parameter is required. Available values: confirmed, awaiting-approval, removed. Default value: confirmed.
-     * @param pageIndex - a page to be returned. Default value: 0.
-     * @param itemsPerPage - a number of items returned per page. Default value: 15.
-     * @param companyNumber - a filter based on company number.
-     * @returns a promise that resolves to the HTTP response from the server that includes the associations or errors object.
+     * Initiates an HTTP GET request to retrieve the association for a company for the provided user email.
+     * @param companyNumber  - a company number of the company for which the associations should be retrieved.
+     * @param userEmail - an email address of a user to check if associated with the company.
+     * @returns a promise that resolves to the HTTP response from the server that includes the association or errors object.
      */
+    public async getCompanyAssociationByUserEmail (companyNumber: string, userEmail: string): Promise<Resource<Association | Errors>> {
+        const url = `/associations/companies/${companyNumber}`;
+        const body = { user_email: userEmail }
+        const response = await this.client.httpPost(url, body);
+
+        return this.getResource(response) as Resource<Association | Errors>;
+    }
+
+    /**
+         * Initiates an HTTP GET request to retrieve the associations searched based on association status.
+         * @param associationStatus - an association status used to filter associations. This parameter is required. Available values: confirmed, awaiting-approval, removed. Default value: confirmed.
+         * @param pageIndex - a page to be returned. Default value: 0.
+         * @param itemsPerPage - a number of items returned per page. Default value: 15.
+         * @param companyNumber - a filter based on company number.
+         * @returns a promise that resolves to the HTTP response from the server that includes the associations or errors object.
+         */
     public async searchAssociations (
         associationStatus: AssociationStatus[],
         pageIndex?: number,
