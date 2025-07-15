@@ -213,6 +213,96 @@ describe("AssociationsService", () => {
         });
     });
 
+    describe("getCompanyAssociationByUserEmail", () => {
+        let associationsService: AssociationsService;
+
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+            associationsService = new AssociationsService(requestClient);
+        });
+
+        it("should return 200 response with the company association", async () => {
+            sinon.stub(requestClient, "httpPost").resolves({ status: 200, body: mockAssociationResource });
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(200);
+
+                    const castedData: Resource<Association> = data as Resource<Association>;
+                    expect(castedData).to.exist;
+                    const association = castedData.resource as Association;
+                    expect(association).to.exist;
+                    expect(association.etag).to.equal("ABC");
+                    expect(association.id).to.equal("0123456789");
+                    expect(association.userId).to.equal("9876543210");
+                    expect(association.userEmail).to.equal("john.doe@test.com");
+                    expect(association.displayName).to.equal("John Doe");
+                    expect(association.companyNumber).to.equal("AB123456");
+                    expect(association.companyName).to.equal("Company Ltd.");
+                    expect(association.status).to.equal(AssociationStatus.AWAITING_APPROVAL);
+                    expect(association.createdAt).to.equal("2022-03-05T11:41:09.568+00:00 UTC");
+                    expect(association.approvedAt).to.equal("");
+                    expect(association.removedAt).to.equal("");
+                    expect(association.kind).to.equal("association");
+                    expect(association.approvalRoute).to.equal(ApprovalRoute.INVITATION);
+                    expect(association.approvalExpiryAt).to.equal("2022-05-05T11:41:09.568+00:00 UTC");
+                    expect(association.links.self).to.equal("/12345");
+                });
+        });
+
+        it("should return 400 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[400]);
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(400);
+                });
+        });
+
+        it("should return 401 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[401]);
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(401);
+                });
+        });
+
+        it("should return 403 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[403]);
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(403);
+                });
+        });
+
+        it("should return 404 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[404]);
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(404);
+                });
+        });
+
+        it("should return 500 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[500]);
+            const companyNumber = mockAssociationResource.company_number;
+            const userEmail = mockAssociationResource.user_email;
+            await associationsService.getCompanyAssociationByUserEmail(companyNumber, userEmail)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(500);
+                });
+        });
+    });
+
     describe("searchAssociations", () => {
         let associationsService: AssociationsService;
 
