@@ -11,8 +11,7 @@ export interface PersonWithSignificantControlResource {
     natures_of_control: string[],
     notified_on: string,
     is_sanctioned?: boolean,
-    kind?: string,
-    identification?: IdentificationResource
+    kind?: string
 };
 
 export interface PersonWithSignificantControl {
@@ -28,8 +27,7 @@ export interface PersonWithSignificantControl {
     naturesOfControl: string[],
     notifiedOn: string,
     isSanctioned?: boolean,
-    kind?: string,
-    identification?: Identification
+    kind?: string
 };
 
 export interface AddressResource {
@@ -110,24 +108,6 @@ export interface NameElements {
     otherForenames?: string;
     middleName?: string;
     surname: string;
-};
-
-export interface IdentificationResource {
-    identification_type?: string,
-    legal_authority?: string,
-    legal_form?: string,
-    place_registered?: string,
-    registration_number?: string,
-    country_registered?: string
-};
-
-export interface Identification {
-    identificationType?: string,
-    legalAuthority?: string,
-    legalForm?: string,
-    placeRegistered?: string,
-    registrationNumber?: string,
-    countryRegistered?: string
 };
 
 export interface PscVerificationResource {
