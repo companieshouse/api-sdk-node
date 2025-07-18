@@ -121,7 +121,7 @@ describe("AssociationsService", () => {
         it("should return 200 response with company associations when a header parameter provided", async () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetResponse[200]);
             const userEmail = "john.doe@test.com";
-            await associationsService.getCompanyAssociations(companyNumber, undefined, undefined, undefined, userEmail)
+            await associationsService.getCompanyAssociations(companyNumber, undefined, undefined, undefined)
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(200);
 

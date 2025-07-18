@@ -31,23 +31,20 @@ export default class AssociationsService {
      * @param includeRemoved - a flag to get a list of companies where status is "removed". Default value: false.
      * @param pageIndex - a page number to be returned. Default value: 0.
      * @param itemsPerPage - a number of items to be returned per page. Default value: 15.
-     * @param userId - a unique identifier of a user to check if associated with the company.
      * @returns a promise that resolves to the HTTP response from the server that includes the associations or errors object.
      */
     public async getCompanyAssociations (
         companyNumber: string,
         includeRemoved?: boolean,
         pageIndex?: number,
-        itemsPerPage?: number,
-        userId?: string
+        itemsPerPage?: number
     ): Promise<Resource<AssociationList | Errors>> {
         let queryString: string = "";
-        if (includeRemoved || pageIndex || itemsPerPage || userId) {
+        if (includeRemoved || pageIndex || itemsPerPage) {
             const queryParameters: QueryParameters = {
                 include_removed: includeRemoved || undefined,
                 page_index: pageIndex || undefined,
-                items_per_page: itemsPerPage || undefined,
-                user_id: userId || undefined
+                items_per_page: itemsPerPage || undefined
             };
             queryString = this.getQueryString(queryParameters);
         }
