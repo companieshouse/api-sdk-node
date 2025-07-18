@@ -56,6 +56,27 @@ export default class AssociationsService {
     }
 
     /**
+     * Initiates an HTTP GET request to retrieve the association for a company for the provided user email or user id (only one of them can be provided).
+     * @param companyNumber  - a company number of the company for which the associations should be retrieved.
+     * @param userEmail - an email address of a user to check if associated with the company.
+     * @param userId - a unique identifier of a user to check if associated with the company.
+     * @param associationStatus - the status of the association (multiple can be specified for the search). Available values: confirmed, awaiting-approval, removed, migrated, unauthorised. Default value: confirmed.
+     * @returns a promise that resolves to the HTTP response from the server that includes the association or errors object.
+     */
+    public async searchForCompanyAssociation (
+        companyNumber: string,
+        userEmail?: string,
+        userId?: string,
+        associationStatus?: AssociationStatus[]
+    ): Promise<Resource<Association | Errors>> {
+        const url = `/associations/companies/${companyNumber}/search`;
+        const body = { user_email: userEmail }
+        const response = await this.client.httpPost(url, body);
+
+        return this.getResource(response) as Resource<Association | Errors>;
+    }
+
+    /**
          * Initiates an HTTP GET request to retrieve the associations searched based on association status.
          * @param associationStatus - an association status used to filter associations. This parameter is required. Available values: confirmed, awaiting-approval, removed. Default value: confirmed.
          * @param pageIndex - a page to be returned. Default value: 0.
