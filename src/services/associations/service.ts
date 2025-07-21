@@ -75,17 +75,12 @@ export default class AssociationsService {
         userId?: string,
         associationStatus?: AssociationStatus[]
     ): Promise<Resource<Association | Errors>> {
-        const queryParameters: QueryParameters = {};
-        if (associationStatus && associationStatus.length > 0) {
-            queryParameters.status = associationStatus;
-        }
-        const queryString = this.getQueryString(queryParameters);
-
-        const url = `/associations/companies/${companyNumber}/search${queryString}`;
+        const url = `/associations/companies/${companyNumber}/search`;
 
         const body: SearchForCompanyAssociationPostBody = {};
         if (userEmail) body.user_email = userEmail;
         if (userId) body.user_id = userId;
+        if (associationStatus) body.status = associationStatus;
 
         const response = await this.client.httpPost(url, body);
 

@@ -212,4 +212,5 @@ export type AssociationsResponse = AssociationList | Association | NewAssociatio
 export interface SearchForCompanyAssociationPostBody {
     user_email?: string;
     user_id?: string;
+    status?: AssociationStatus[]
 }
