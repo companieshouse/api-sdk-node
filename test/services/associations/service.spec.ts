@@ -256,7 +256,8 @@ describe("AssociationsService", () => {
             sinon.stub(requestClient, "httpPost").resolves({ status: 200, body: mockAssociationResource });
             const companyNumber = mockAssociationResource.company_number;
             const userId = mockAssociationResource.user_id;
-            await associationsService.searchForCompanyAssociation(companyNumber, userId)
+            const associationStatus = [AssociationStatus.UNAUTHORISED]
+            await associationsService.searchForCompanyAssociation(companyNumber, undefined, userId, associationStatus)
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(200);
 
