@@ -32,6 +32,7 @@ const service_19 = __importDefault(require("./services/psc-verification-link/ser
 const accounts_filing_1 = require("./services/accounts-filing");
 const service_20 = __importDefault(require("./services/psc/service"));
 const limited_partnerships_1 = require("./services/limited-partnerships");
+const service_21 = __importDefault(require("./services/associations/service"));
 /**
  * ApiClient is the class that all service objects hang off.
  */
@@ -76,6 +77,7 @@ class ApiClient {
         this.accountsFilingService = new accounts_filing_1.AccountsFilingService(apiClient);
         this.pscService = new service_20.default(apiClient);
         this.limitedPartnershipsService = new limited_partnerships_1.LimitedPartnershipsService(apiClient);
+        this.associationsService = new service_21.default(accountClient);
     }
 }
 exports.default = ApiClient;

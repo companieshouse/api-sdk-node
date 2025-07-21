@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import { CompanyProfile } from "./types";
 import Resource from "../resource";
 /**
@@ -12,5 +12,5 @@ export default class CompanyProfileService {
     *
     * @param number the company number to look up
     */
-    getCompanyProfile(number: string): Promise<Resource<CompanyProfile>>;
+    getCompanyProfile(number: string, headers?: Headers): Promise<Resource<CompanyProfile>>;
 }

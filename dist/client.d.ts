@@ -29,6 +29,7 @@ import PscVerificationService from "./services/psc-verification-link/service";
 import { AccountsFilingService } from "./services/accounts-filing";
 import PscService from "./services/psc/service";
 import { LimitedPartnershipsService } from "./services/limited-partnerships";
+import AssociationsService from "./services/associations/service";
 /**
  * ApiClient is the class that all service objects hang off.
  */
@@ -70,5 +71,6 @@ export default class ApiClient {
     readonly accountsFilingService: AccountsFilingService;
     readonly pscService: PscService;
     readonly limitedPartnershipsService: LimitedPartnershipsService;
+    readonly associationsService: AssociationsService;
     constructor(apiClient: IHttpClient, accountClient: IHttpClient);
 }

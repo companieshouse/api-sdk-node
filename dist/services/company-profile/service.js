@@ -21,9 +21,9 @@ class CompanyProfileService {
     *
     * @param number the company number to look up
     */
-    getCompanyProfile(number) {
+    getCompanyProfile(number, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield this.client.httpGet(`/company/${number}`);
+            const resp = yield this.client.httpGet(`/company/${number}`, headers);
             const resource = {
                 httpStatusCode: resp.status
             };
