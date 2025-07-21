@@ -9,7 +9,8 @@ import {
     InvitationList,
     NewAssociationResponse,
     PreviousStateList,
-    QueryParameters
+    QueryParameters,
+    SearchForCompanyAssociationPostBody
 } from "./types";
 import Mapping from "../../mapping/mapping";
 
@@ -56,12 +57,17 @@ export default class AssociationsService {
     }
 
     /**
-     * Initiates an HTTP GET request to retrieve the association for a company for the provided user email or user id (only one of them can be provided).
-     * @param companyNumber  - a company number of the company for which the associations should be retrieved.
-     * @param userEmail - an email address of a user to check if associated with the company.
-     * @param userId - a unique identifier of a user to check if associated with the company.
-     * @param associationStatus - the status of the association (multiple can be specified for the search). Available values: confirmed, awaiting-approval, removed, migrated, unauthorised. Default value: confirmed.
-     * @returns a promise that resolves to the HTTP response from the server that includes the association or errors object.
+     * Searches for an association between a user and a company using either the user's email or user ID.
+     * Only one of userEmail or userId should be provided.
+     * Optionally filter by association status.
+     *
+     * @param companyNumber - The company number to search associations for.
+     * @param userEmail - The user's email address (optional).
+     * @param userId - The user's unique identifier (optional).
+     * @param associationStatus - Array of association statuses to filter by (optional).
+     *        Available values: confirmed, awaiting-approval, removed, migrated, unauthorised.
+     *        Default: confirmed.
+     * @returns Promise resolving to the association or errors object.
      */
     public async searchForCompanyAssociation (
         companyNumber: string,
@@ -69,8 +75,18 @@ export default class AssociationsService {
         userId?: string,
         associationStatus?: AssociationStatus[]
     ): Promise<Resource<Association | Errors>> {
-        const url = `/associations/companies/${companyNumber}/search`;
-        const body = { user_email: userEmail }
+        const queryParameters: QueryParameters = {};
+        if (associationStatus && associationStatus.length > 0) {
+            queryParameters.status = associationStatus;
+        }
+        const queryString = this.getQueryString(queryParameters);
+
+        const url = `/associations/companies/${companyNumber}/search${queryString}`;
+
+        const body: SearchForCompanyAssociationPostBody = {};
+        if (userEmail) body.user_email = userEmail;
+        if (userId) body.user_id = userId;
+
         const response = await this.client.httpPost(url, body);
 
         return this.getResource(response) as Resource<Association | Errors>;
