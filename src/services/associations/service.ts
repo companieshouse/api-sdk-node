@@ -9,7 +9,8 @@ import {
     InvitationList,
     NewAssociationResponse,
     PreviousStateList,
-    QueryParameters
+    QueryParameters,
+    SearchForCompanyAssociationPostBody
 } from "./types";
 import Mapping from "../../mapping/mapping";
 
@@ -31,23 +32,20 @@ export default class AssociationsService {
      * @param includeRemoved - a flag to get a list of companies where status is "removed". Default value: false.
      * @param pageIndex - a page number to be returned. Default value: 0.
      * @param itemsPerPage - a number of items to be returned per page. Default value: 15.
-     * @param userId - a unique identifier of a user to check if associated with the company.
      * @returns a promise that resolves to the HTTP response from the server that includes the associations or errors object.
      */
     public async getCompanyAssociations (
         companyNumber: string,
         includeRemoved?: boolean,
         pageIndex?: number,
-        itemsPerPage?: number,
-        userId?: string
+        itemsPerPage?: number
     ): Promise<Resource<AssociationList | Errors>> {
         let queryString: string = "";
-        if (includeRemoved || pageIndex || itemsPerPage || userId) {
+        if (includeRemoved || pageIndex || itemsPerPage) {
             const queryParameters: QueryParameters = {
                 include_removed: includeRemoved || undefined,
                 page_index: pageIndex || undefined,
-                items_per_page: itemsPerPage || undefined,
-                user_id: userId || undefined
+                items_per_page: itemsPerPage || undefined
             };
             queryString = this.getQueryString(queryParameters);
         }
@@ -59,14 +57,31 @@ export default class AssociationsService {
     }
 
     /**
-     * Initiates an HTTP GET request to retrieve the association for a company for the provided user email.
-     * @param companyNumber  - a company number of the company for which the associations should be retrieved.
-     * @param userEmail - an email address of a user to check if associated with the company.
-     * @returns a promise that resolves to the HTTP response from the server that includes the association or errors object.
+     * Searches for an association between a user and a company using either the user's email or user ID.
+     * Only one of userEmail or userId should be provided.
+     * Optionally filter by association status.
+     *
+     * @param companyNumber - The company number to search associations for.
+     * @param userEmail - The user's email address (optional).
+     * @param userId - The user's unique identifier (optional).
+     * @param associationStatus - Array of association statuses to filter by (optional).
+     *        Available values: confirmed, awaiting-approval, removed, migrated, unauthorised.
+     *        Default: confirmed.
+     * @returns Promise resolving to the association or errors object.
      */
-    public async getCompanyAssociationByUserEmail (companyNumber: string, userEmail: string): Promise<Resource<Association | Errors>> {
-        const url = `/associations/companies/${companyNumber}`;
-        const body = { user_email: userEmail }
+    public async searchForCompanyAssociation (
+        companyNumber: string,
+        userEmail?: string,
+        userId?: string,
+        associationStatus?: AssociationStatus[]
+    ): Promise<Resource<Association | Errors>> {
+        const url = `/associations/companies/${companyNumber}/search`;
+
+        const body: SearchForCompanyAssociationPostBody = {};
+        if (userEmail) body.user_email = userEmail;
+        if (userId) body.user_id = userId;
+        if (associationStatus) body.status = associationStatus;
+
         const response = await this.client.httpPost(url, body);
 
         return this.getResource(response) as Resource<Association | Errors>;
@@ -101,21 +116,34 @@ export default class AssociationsService {
     }
 
     /**
-     * Creates a new association for a user in session.
-     * @param companyNumber - a company number of the company with which a new association for the user will be created.
-     * @param inviteeEmailAddress - an email address of the user invited to have an association with a company.
-     * @returns a promise that resolves to the HTTP response from the server that includes the new association's link (it contains the association identifier) or errors object.
+     * Creates a new association for a user with provided userId.
+     * @param companyNumber - The company number for the new association.
+     * @param userId - The user's unique identifier.
+     * @returns A promise resolving to the new association's link or errors object.
      */
     public async createAssociation (
         companyNumber: string,
-        inviteeEmailAddress?: string
+        userId: string
     ): Promise<Resource<NewAssociationResponse | Errors>> {
-        const url = inviteeEmailAddress ? "/associations/invitations" : "/associations";
-        const body = inviteeEmailAddress
-            ? { company_number: companyNumber, invitee_email_id: inviteeEmailAddress }
-            : { company_number: companyNumber };
+        const url = "/associations";
+        const body = { company_number: companyNumber, user_id: userId };
         const response = await this.client.httpPost(url, body);
+        return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
+    }
 
+    /**
+     * Invites a user with the provided email address to a company.
+     * @param companyNumber - The company number.
+     * @param inviteeEmailAddress - The email address of the user to invite.
+     * @returns A promise resolving to the new association's link or errors object.
+     */
+    public async inviteUser (
+        companyNumber: string,
+        inviteeEmailAddress: string
+    ): Promise<Resource<NewAssociationResponse | Errors>> {
+        const url = "/associations/invitations";
+        const body = { company_number: companyNumber, invitee_email_id: inviteeEmailAddress };
+        const response = await this.client.httpPost(url, body);
         return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
     }
 

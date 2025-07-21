@@ -208,3 +208,9 @@ export interface NewAssociationResponse {
 }
 
 export type AssociationsResponse = AssociationList | Association | NewAssociationResponse | Errors;
+
+export interface SearchForCompanyAssociationPostBody {
+    user_email?: string;
+    user_id?: string;
+    status?: AssociationStatus[]
+}
