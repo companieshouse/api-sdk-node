@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import {
     CompanyProfile, CompanyProfileResource, RegisteredOfficeAddressResource, AccountsResource,
     NextAccountsResource, ConfirmationStatementResource, LinksResource, ForeignCompanyDetailsResource, ServiceAddressResource
@@ -16,8 +16,8 @@ export default class CompanyProfileService {
     *
     * @param number the company number to look up
     */
-    public async getCompanyProfile (number: string): Promise<Resource<CompanyProfile>> {
-        const resp = await this.client.httpGet(`/company/${number}`);
+    public async getCompanyProfile (number: string, headers?: Headers): Promise<Resource<CompanyProfile>> {
+        const resp = await this.client.httpGet(`/company/${number}`, headers);
 
         const resource: Resource<CompanyProfile> = {
             httpStatusCode: resp.status
