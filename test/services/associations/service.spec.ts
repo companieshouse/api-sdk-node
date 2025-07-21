@@ -432,7 +432,7 @@ describe("AssociationsService", () => {
 
     describe("createAssociation", () => {
         let associationsService: AssociationsService;
-        const inviteeEmailAddress = "adam.smith@test.org";
+        const userId = "1234567890";
 
         beforeEach(() => {
             sinon.reset();
@@ -442,17 +442,7 @@ describe("AssociationsService", () => {
 
         it("should return 201 response if a new association created", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
-            await associationsService.createAssociation(companyNumber).then((data) => {
-                expect(data.httpStatusCode).to.equal(201);
-                const castedData: Resource<NewAssociationResponse> = data as Resource<NewAssociationResponse>;
-                expect(castedData).to.exist;
-                expect(castedData.resource?.associationLink).to.equal("/associations/123456");
-            });
-        });
-
-        it("should return 201 response if a new association created for invited user", async () => {
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
-            await associationsService.createAssociation(companyNumber, inviteeEmailAddress).then((data) => {
+            await associationsService.createAssociation(companyNumber, userId).then((data) => {
                 expect(data.httpStatusCode).to.equal(201);
                 const castedData: Resource<NewAssociationResponse> = data as Resource<NewAssociationResponse>;
                 expect(castedData).to.exist;
@@ -462,10 +452,62 @@ describe("AssociationsService", () => {
 
         it("should return 400 response", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[400]);
-            await associationsService.createAssociation(companyNumber)
+            await associationsService.createAssociation(companyNumber, userId)
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(400);
                 });
+        });
+
+        it("should return 401 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[401]);
+            await associationsService.createAssociation(companyNumber, userId)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(401);
+                });
+        });
+
+        it("should return 401 response for invited user", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[401]);
+            await associationsService.createAssociation(companyNumber, userId).then((data) => {
+                expect(data.httpStatusCode).to.equal(401);
+            });
+        });
+
+        it("should return 403 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[403]);
+            await associationsService.createAssociation(companyNumber, userId)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(403);
+                });
+        });
+
+        it("should return 500 response", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[500]);
+            await associationsService.createAssociation(companyNumber, userId)
+                .then((data) => {
+                    expect(data.httpStatusCode).to.equal(500);
+                });
+        });
+    });
+
+    describe("inviteUser", () => {
+        let associationsService: AssociationsService;
+        const inviteeEmailAddress = "adam.smith@test.org";
+
+        beforeEach(() => {
+            sinon.reset();
+            sinon.restore();
+            associationsService = new AssociationsService(requestClient);
+        });
+
+        it("should return 201 response if a new association created for invited user", async () => {
+            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
+            await associationsService.inviteUser(companyNumber, inviteeEmailAddress).then((data) => {
+                expect(data.httpStatusCode).to.equal(201);
+                const castedData: Resource<NewAssociationResponse> = data as Resource<NewAssociationResponse>;
+                expect(castedData).to.exist;
+                expect(castedData.resource?.associationLink).to.equal("/associations/123456");
+            });
         });
 
         it("should return 400 response for invited user", async () => {
@@ -476,48 +518,24 @@ describe("AssociationsService", () => {
                 });
         });
 
-        it("should return 401 response", async () => {
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[401]);
-            await associationsService.createAssociation(companyNumber)
-                .then((data) => {
-                    expect(data.httpStatusCode).to.equal(401);
-                });
-        });
-
         it("should return 401 response for invited user", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[401]);
-            await associationsService.createAssociation(companyNumber, inviteeEmailAddress).then((data) => {
+            await associationsService.inviteUser(companyNumber, inviteeEmailAddress).then((data) => {
                 expect(data.httpStatusCode).to.equal(401);
             });
         });
 
-        it("should return 403 response", async () => {
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[403]);
-            await associationsService.createAssociation(companyNumber)
-                .then((data) => {
-                    expect(data.httpStatusCode).to.equal(403);
-                });
-        });
-
         it("should return 403 response for invited user", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[403]);
-            await associationsService.createAssociation(companyNumber, inviteeEmailAddress)
+            await associationsService.inviteUser(companyNumber, inviteeEmailAddress)
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(403);
-                });
-        });
-
-        it("should return 500 response", async () => {
-            sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[500]);
-            await associationsService.createAssociation(companyNumber)
-                .then((data) => {
-                    expect(data.httpStatusCode).to.equal(500);
                 });
         });
 
         it("should return 500 response for invited user", async () => {
             sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[500]);
-            await associationsService.createAssociation(companyNumber, inviteeEmailAddress)
+            await associationsService.inviteUser(companyNumber, inviteeEmailAddress)
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(500);
                 });

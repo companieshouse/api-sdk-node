@@ -116,21 +116,34 @@ export default class AssociationsService {
     }
 
     /**
-     * Creates a new association for a user in session.
-     * @param companyNumber - a company number of the company with which a new association for the user will be created.
-     * @param inviteeEmailAddress - an email address of the user invited to have an association with a company.
-     * @returns a promise that resolves to the HTTP response from the server that includes the new association's link (it contains the association identifier) or errors object.
+     * Creates a new association for a user with provided userId.
+     * @param companyNumber - The company number for the new association.
+     * @param userId - The user's unique identifier.
+     * @returns A promise resolving to the new association's link or errors object.
      */
     public async createAssociation (
         companyNumber: string,
-        inviteeEmailAddress?: string
+        userId: string
     ): Promise<Resource<NewAssociationResponse | Errors>> {
-        const url = inviteeEmailAddress ? "/associations/invitations" : "/associations";
-        const body = inviteeEmailAddress
-            ? { company_number: companyNumber, invitee_email_id: inviteeEmailAddress }
-            : { company_number: companyNumber };
+        const url = "/associations";
+        const body = { company_number: companyNumber, user_id: userId };
         const response = await this.client.httpPost(url, body);
+        return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
+    }
 
+    /**
+     * Invites a user with the provided email address to a company.
+     * @param companyNumber - The company number.
+     * @param inviteeEmailAddress - The email address of the user to invite.
+     * @returns A promise resolving to the new association's link or errors object.
+     */
+    public async inviteUser (
+        companyNumber: string,
+        inviteeEmailAddress: string
+    ): Promise<Resource<NewAssociationResponse | Errors>> {
+        const url = "/associations/invitations";
+        const body = { company_number: companyNumber, invitee_email_id: inviteeEmailAddress };
+        const response = await this.client.httpPost(url, body);
         return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
     }
 
