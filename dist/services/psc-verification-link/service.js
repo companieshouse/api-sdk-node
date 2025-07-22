@@ -51,10 +51,10 @@ class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    getPscVerification(transactionId, pscVerificationId) {
+    getPscVerification(transactionId, pscVerificationId, headers) {
         return __awaiter(this, void 0, void 0, function* () {
             const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
-            const response = yield this.client.httpGet(resourceUri);
+            const response = yield this.client.httpGet(resourceUri, headers);
             if (response.error) {
                 return this.handleErrorResponse(response);
             }
@@ -71,9 +71,9 @@ class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the updated PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    patchPscVerification(transactionId, pscVerificationId, pscVerificationPatch) {
+    patchPscVerification(transactionId, pscVerificationId, pscVerificationPatch, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
+            const additionalHeaders = Object.assign(Object.assign({}, headers), { "Content-Type": "application/merge-patch+json" });
             const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
             const pscVerificationPatchResource = mapping_1.default.snakeCaseKeys(pscVerificationPatch);
             const response = yield this.client.httpPatch(resourceUri, pscVerificationPatchResource, additionalHeaders);
@@ -97,10 +97,10 @@ class PscVerificationService {
      * using the `handleErrorResponse` method. Otherwise, the response body is mapped to camelCase keys
      * and returned as part of the resource.
      */
-    getValidationStatus(transactionId, pscVerificationId) {
+    getValidationStatus(transactionId, pscVerificationId, headers) {
         return __awaiter(this, void 0, void 0, function* () {
             const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}/validation_status`;
-            const response = yield this.client.httpGet(resourceUri);
+            const response = yield this.client.httpGet(resourceUri, headers);
             if (response.error) {
                 return this.handleErrorResponse(response);
             }

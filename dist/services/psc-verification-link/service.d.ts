@@ -18,7 +18,7 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the created PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    postPscVerification(transactionId: string, pscVerification: PscVerificationData, headers: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
+    postPscVerification(transactionId: string, pscVerification: PscVerificationData, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
     /**
      * Retrieves a specific PSC verification by its ID for a given transaction.
      *
@@ -28,7 +28,7 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    getPscVerification(transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse>;
+    getPscVerification(transactionId: string, pscVerificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
     /**
      * Updates a PSC verification using a PATCH request for a given transaction and filing ID.
      *
@@ -39,7 +39,7 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the updated PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    patchPscVerification(transactionId: string, pscVerificationId: string, pscVerificationPatch: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse>;
+    patchPscVerification(transactionId: string, pscVerificationId: string, pscVerificationPatch: PscVerificationData, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
     /**
      * Retrieves the validation status of a Person with Significant Control (PSC) verification.
      *
@@ -54,7 +54,7 @@ export default class PscVerificationService {
      * using the `handleErrorResponse` method. Otherwise, the response body is mapped to camelCase keys
      * and returned as part of the resource.
      */
-    getValidationStatus(transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse>;
+    getValidationStatus(transactionId: string, pscVerificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
     /**
      * Checks if there is any planned maintenance for the PSC verification service.
      *
