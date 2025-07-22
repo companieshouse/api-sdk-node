@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
 import { PersonWithSignificantControl } from "./types";
 /**
@@ -13,5 +13,5 @@ export default class PscService {
    * @param companyNumber the Company Number to look up
    * @param pscNotificationId the PSC Notification ID to retrieve
    */
-    getPscIndividual(companyNumber: string, pscNotificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse>;
+    getPscIndividual(companyNumber: string, pscNotificationId: string, headers?: Headers): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse>;
 }

@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import { CompanyPersonsWithSignificantControl } from "./types";
 import Resource from "../resource";
 /**
@@ -12,5 +12,5 @@ export default class CompanyPscService {
    *
    * @param number the company number to look up
    */
-    getCompanyPsc(number: string, startIndex?: number, itemsPerPage?: number): Promise<Resource<CompanyPersonsWithSignificantControl>>;
+    getCompanyPsc(number: string, startIndex?: number, itemsPerPage?: number, headers?: Headers): Promise<Resource<CompanyPersonsWithSignificantControl>>;
 }

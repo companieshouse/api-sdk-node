@@ -26,10 +26,10 @@ class PscService {
    * @param companyNumber the Company Number to look up
    * @param pscNotificationId the PSC Notification ID to retrieve
    */
-    getPscIndividual(companyNumber, pscNotificationId) {
+    getPscIndividual(companyNumber, pscNotificationId, headers) {
         return __awaiter(this, void 0, void 0, function* () {
             const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
-            const response = yield this.client.httpGet(resourceUri);
+            const response = yield this.client.httpGet(resourceUri, headers);
             if (response.error) {
                 return {
                     httpStatusCode: response.status,

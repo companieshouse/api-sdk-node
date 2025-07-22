@@ -25,9 +25,9 @@ class CompanyPscService {
    *
    * @param number the company number to look up
    */
-    getCompanyPsc(number, startIndex = 0, itemsPerPage = 25) {
+    getCompanyPsc(number, startIndex = 0, itemsPerPage = 25, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resp = yield this.client.httpGet(`/company/${number}/persons-with-significant-control?start_index=${startIndex}&items_per_page=${itemsPerPage}`);
+            const resp = yield this.client.httpGet(`/company/${number}/persons-with-significant-control?start_index=${startIndex}&items_per_page=${itemsPerPage}`, headers);
             const resource = {
                 httpStatusCode: resp.status
             };
