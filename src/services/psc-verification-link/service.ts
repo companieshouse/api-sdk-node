@@ -118,9 +118,9 @@ export default class PscVerificationService {
      * - An `ApiResponse<PlannedMaintenance>` object containing maintenance details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async checkPlannedMaintenance (): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
+    public async checkPlannedMaintenance (headers?: Headers): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
         const maintenanceUri = `/persons-with-significant-control-verification/maintenance`;
-        const response = await this.client.httpGet(maintenanceUri);
+        const response = await this.client.httpGet(maintenanceUri, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);
