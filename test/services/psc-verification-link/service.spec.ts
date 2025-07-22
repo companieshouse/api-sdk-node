@@ -51,6 +51,16 @@ describe("PSC Verification Link", () => {
             expect(data.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(data.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPscVerificationCreatedResponse[201]);
+
+            const headers = { "X-Request-Id": "random-uuid" };
+            await pscService.postPscVerification(TRANSACTION_ID, PSC_VERIFICATION_CREATED, headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(headers);
+        });
     });
 
     describe("GET endpoint", () => {
@@ -91,6 +101,16 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[200]);
+
+            const headers = { "X-Request-Id": "random-uuid" };
+            await pscService.getPscVerification(TRANSACTION_ID, PSC_NOTIFICATION_ID, headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
         });
     });
 
@@ -134,6 +154,17 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockPscVerificationPatchIndResponse[200]);
+
+            const testHeaders = { "X-Request-Id": "random-uuid" };
+            const existingHeaders = { "Content-Type": "application/merge-patch+json" }; // These are inserted by patchPscVerification
+            await pscService.patchPscVerification(TRANSACTION_ID, FILING_ID, PSC_VERIFICATION_IND, testHeaders);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal({ ...existingHeaders, ...testHeaders });
         });
     });
 
@@ -192,6 +223,16 @@ describe("PSC Verification Link", () => {
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetValidationStatusResponse[200]);
+
+            const headers = { "X-Request-Id": "random-uuid" };
+            await pscService.getValidationStatus(TRANSACTION_ID, PSC_NOTIFICATION_ID, headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
+        });
     });
 
     describe("checkPlannedMaintenance endpoint", () => {
@@ -222,6 +263,16 @@ describe("PSC Verification Link", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockPlannedMaintenanceResponse[200]);
+
+            const headers = { "X-Request-Id": "random-uuid" };
+            await pscService.checkPlannedMaintenance(headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
         });
     });
 });

@@ -157,4 +157,10 @@ describe("company-psc", () => {
         await companyPsc.getCompanyPsc("123", 10);
         expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=25")).to.be.true;
     });
+
+    it("uses provided headers", async () => {
+        const headers = { "X-Request-Id": "random-uuid" };
+        await companyPsc.getCompanyPsc("123", 10, 20, headers);
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=20", headers)).to.be.true;
+    });
 });
