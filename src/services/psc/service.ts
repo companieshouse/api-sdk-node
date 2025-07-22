@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import Mapping from "../../mapping/mapping";
 import Resource, { ApiErrorResponse } from "../resource";
 import { PersonWithSignificantControl, PersonWithSignificantControlResource } from "./types";
@@ -15,9 +15,9 @@ export default class PscService {
    * @param companyNumber the Company Number to look up
    * @param pscNotificationId the PSC Notification ID to retrieve
    */
-    public async getPscIndividual (companyNumber: string, pscNotificationId: string): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
+    public async getPscIndividual (companyNumber: string, pscNotificationId: string, headers?: Headers): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
         const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
-        const response = await this.client.httpGet(resourceUri);
+        const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
             return {
