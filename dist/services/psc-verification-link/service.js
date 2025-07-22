@@ -117,10 +117,10 @@ class PscVerificationService {
      * - An `ApiResponse<PlannedMaintenance>` object containing maintenance details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    checkPlannedMaintenance() {
+    checkPlannedMaintenance(headers) {
         return __awaiter(this, void 0, void 0, function* () {
             const maintenanceUri = `/persons-with-significant-control-verification/maintenance`;
-            const response = yield this.client.httpGet(maintenanceUri);
+            const response = yield this.client.httpGet(maintenanceUri, headers);
             if (response.error) {
                 return this.handleErrorResponse(response);
             }

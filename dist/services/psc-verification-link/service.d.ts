@@ -62,7 +62,7 @@ export default class PscVerificationService {
      * - An `ApiResponse<PlannedMaintenance>` object containing maintenance details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    checkPlannedMaintenance(): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse>;
+    checkPlannedMaintenance(headers?: Headers): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse>;
     /**
      * Maps the response body to a front-end resource format with camelCase keys.
      *
