@@ -1,4 +1,4 @@
-import { IHttpClient } from "../../http";
+import { Headers, IHttpClient } from "../../http";
 import { CompanyPersonsWithSignificantControlResource, CompanyPersonsWithSignificantControl } from "./types";
 import Resource from "../resource";
 import Mapping from "../../mapping/mapping";
@@ -14,8 +14,8 @@ export default class CompanyPscService {
    *
    * @param number the company number to look up
    */
-    public async getCompanyPsc (number: string, startIndex: number = 0, itemsPerPage: number = 25): Promise<Resource<CompanyPersonsWithSignificantControl>> {
-        const resp = await this.client.httpGet(`/company/${number}/persons-with-significant-control?start_index=${startIndex}&items_per_page=${itemsPerPage}`);
+    public async getCompanyPsc (number: string, startIndex: number = 0, itemsPerPage: number = 25, headers?: Headers): Promise<Resource<CompanyPersonsWithSignificantControl>> {
+        const resp = await this.client.httpGet(`/company/${number}/persons-with-significant-control?start_index=${startIndex}&items_per_page=${itemsPerPage}`, headers);
 
         const resource: Resource<CompanyPersonsWithSignificantControl> = {
             httpStatusCode: resp.status
