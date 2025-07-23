@@ -231,4 +231,21 @@ describe("company-profile", () => {
         expect(resource.links.filingHistory).to.be.undefined;
         expect(resource.hasSuperSecurePscs).to.be.undefined;
     });
+
+    it("uses provided headers", async () => {
+        const mockResponseBody : CompanyProfileResource = fullCompanyProfileMock;
+        const headers = { "X-Request-Id": "random-uuid" };
+
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const companyProfile: CompanyProfileService = new CompanyProfileService(requestClient);
+        await companyProfile.getCompanyProfile("NUMBER-NOT-IMPORTANT", headers);
+
+        expect(mockRequest.calledOnce).to.be.true;
+        expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
+    });
 });

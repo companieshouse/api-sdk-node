@@ -1,6 +1,6 @@
 import { PlannedMaintenance, PscVerification, PscVerificationData, ValidationStatusResponse, ValidationStatusResponseResource } from "./types"
 
-import { HttpResponse, IHttpClient } from "../../http";
+import { Headers, HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import Mapping from "../../mapping/mapping";
 import { PersonWithSignificantControlResource } from "../psc/types";
@@ -22,10 +22,10 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the created PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async postPscVerification (transactionId: string, pscVerification: PscVerificationData, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification`;
         const pscVerificationResource = Mapping.snakeCaseKeys(pscVerification);
-        const response = await this.client.httpPost(resourceUri, pscVerificationResource);
+        const response = await this.client.httpPost(resourceUri, pscVerificationResource, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);
@@ -43,9 +43,9 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async getPscVerification (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async getPscVerification (transactionId: string, pscVerificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
-        const response = await this.client.httpGet(resourceUri);
+        const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);
@@ -64,8 +64,11 @@ export default class PscVerificationService {
      * - A `Resource<PscVerification>` object containing the updated PSC verification details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async patchPscVerification (transactionId: string, pscVerificationId: string, pscVerificationPatch: PscVerificationData): Promise<Resource<PscVerification> | ApiErrorResponse> {
-        const additionalHeaders = { "Content-Type": "application/merge-patch+json" };
+    public async patchPscVerification (transactionId: string, pscVerificationId: string, pscVerificationPatch: PscVerificationData, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
+        const additionalHeaders = {
+            ...headers,
+            "Content-Type": "application/merge-patch+json"
+        };
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}`;
         const pscVerificationPatchResource = Mapping.snakeCaseKeys(pscVerificationPatch);
         const response = await this.client.httpPatch(resourceUri, pscVerificationPatchResource, additionalHeaders);
@@ -91,9 +94,9 @@ export default class PscVerificationService {
      * using the `handleErrorResponse` method. Otherwise, the response body is mapped to camelCase keys
      * and returned as part of the resource.
      */
-    public async getValidationStatus (transactionId: string, pscVerificationId: string): Promise<Resource<PscVerification> | ApiErrorResponse> {
+    public async getValidationStatus (transactionId: string, pscVerificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-verification/${pscVerificationId}/validation_status`;
-        const response = await this.client.httpGet(resourceUri);
+        const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);
@@ -115,9 +118,9 @@ export default class PscVerificationService {
      * - An `ApiResponse<PlannedMaintenance>` object containing maintenance details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async checkPlannedMaintenance (): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
+    public async checkPlannedMaintenance (headers?: Headers): Promise<ApiResponse<PlannedMaintenance> | ApiErrorResponse> {
         const maintenanceUri = `/persons-with-significant-control-verification/maintenance`;
-        const response = await this.client.httpGet(maintenanceUri);
+        const response = await this.client.httpGet(maintenanceUri, headers);
 
         if (response.error) {
             return this.handleErrorResponse(response);

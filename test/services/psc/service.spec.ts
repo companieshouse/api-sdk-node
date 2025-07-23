@@ -66,5 +66,15 @@ describe("PSC details", () => {
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
         });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockIndividualResponse[200]);
+            const headers = { "X-Request-Id": "random-uuid" };
+
+            await pscService.getPscIndividual(COMPANY_NUMBER, PSC_NOTIFICATION_ID, headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
+        });
     });
 });
