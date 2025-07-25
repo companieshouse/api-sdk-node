@@ -11,6 +11,7 @@ export interface TransactionResource {
     kind?: string,
     company_name?: string,
     company_number: string,
+    company_type?: string,
     created_at?: string,
     created_by?: {
         language: string,
@@ -40,6 +41,7 @@ export interface Transaction {
     kind?: string,
     companyName?: string,
     companyNumber?: string,
+    companyType?: string,
     createdAt?: string,
     createdBy?: {
         language: string,
