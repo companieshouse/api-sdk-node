@@ -1,4 +1,4 @@
-import IHttpClient, { Headers, HttpResponse } from "http/http-client";
+import IHttpClient, { HttpResponse } from "../../http/http-client";
 import Resource from "../../services/resource";
 import {
     Association,
