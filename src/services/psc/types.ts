@@ -56,15 +56,10 @@ export interface ItemLinksResource {
 };
 
 export interface VerificationStateResource {
-  verification_status?: VerificationStatusEnum;
-  verification_start_date?: Date;
-  verification_statement_due_date?: Date;
-}
-
-export enum VerificationStatusEnum {
-  UNVERIFIED = "UNVERIFIED",
-  VERIFIED = "VERIFIED",
-  PENDING = "PENDING"
+  appointment_verification_end_on?: Date;
+  appointment_verification_statement_date?: Date;
+  appointment_verification_statement_due_on?: Date;
+  appointment_verification_start_on?: Date;
 }
 
 export enum KindEnum {
@@ -125,8 +120,8 @@ export interface ItemLinks {
 };
 
 export interface VerificationState {
-  verificationStatus?: VerificationStatusEnum;
-  verificationStartDate?: Date;
-  verificationStatementDueDate?: Date;
-
+  appointmentVerificationEndOn?: Date;
+  appointmentVerificationStatementDate?: Date;
+  appointmentVerificationStatementDueOn?: Date;
+  appointmentVerificationStartOn?: Date;
 }
