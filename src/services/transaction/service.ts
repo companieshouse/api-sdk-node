@@ -82,6 +82,7 @@ export default class TransactionService {
             kind: body.kind,
             companyName: body.company_name,
             companyNumber: body.company_number,
+            companyType: body.company_type,
             createdAt: body.created_at,
             createdBy: body.created_by,
             updatedAt: body.updated_at,
@@ -124,6 +125,7 @@ export default class TransactionService {
             kind: body.kind,
             companyName: body.company_name,
             companyNumber: body.company_number,
+            companyType: body.company_type,
             createdAt: body.created_at,
             createdBy: body.created_by,
             updatedAt: body.updated_at,
@@ -166,6 +168,7 @@ export default class TransactionService {
         return {
             company_name: transaction.companyName,
             company_number: transaction.companyNumber,
+            company_type: transaction.companyType,
             created_at: transaction.createdAt,
             created_by: transaction.createdBy,
             description: transaction.description,
