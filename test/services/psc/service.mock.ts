@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
 import { DateOfBirthResource } from "../../../src/services/psc-verification-link/types";
-import { KindEnum, PersonWithSignificantControl, PersonWithSignificantControlResource, VerificationState as IdentityVerificationDetails, VerificationStateResource as IdentityVerificationDetailsResource } from "../../../src/services/psc/types";
+import { KindEnum, PersonWithSignificantControl, PersonWithSignificantControlResource, IdentityVerificationDetails, IdentityVerificationDetailsResource } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 export const COMPANY_NUMBER = "12345678";
@@ -75,7 +75,7 @@ const PSC_INDIVIDUAL_RESOURCE: PersonWithSignificantControlResource = {
     date_of_birth: PSC_INDIVIDUAL_DOB,
     etag: ETAG,
     notified_on: NOTIFICATION_DATE,
-    verification_state: IDENTITY_VERIFICATION_DETAILS_RESOURCE
+    identity_verification_details: IDENTITY_VERIFICATION_DETAILS_RESOURCE
 };
 
 export const PSC_INDIVIDUAL: PersonWithSignificantControl = {
@@ -92,7 +92,7 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControl = {
     dateOfBirth: PSC_INDIVIDUAL_DOB,
     etag: ETAG,
     notifiedOn: NOTIFICATION_DATE,
-    verificationState: IDENTITY_VERIFICATION_DETAILS
+    identityVerificationDetails: IDENTITY_VERIFICATION_DETAILS
 };
 
 export const mockIndividualResponse = {

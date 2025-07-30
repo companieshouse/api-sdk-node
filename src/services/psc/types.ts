@@ -16,7 +16,7 @@ export interface PersonWithSignificantControlResource {
   notified_on: string,
   is_sanctioned?: boolean,
   kind?: KindEnum,
-  verification_state?: VerificationStateResource
+  identity_verification_details?: IdentityVerificationDetailsResource
 };
 
 export interface AddressResource {
@@ -55,7 +55,7 @@ export interface ItemLinksResource {
   statement?: string;
 };
 
-export interface VerificationStateResource {
+export interface IdentityVerificationDetailsResource {
   appointment_verification_end_on?: Date;
   appointment_verification_statement_date?: Date;
   appointment_verification_statement_due_on?: Date;
@@ -80,7 +80,7 @@ export interface PersonWithSignificantControl {
   notifiedOn: string,
   isSanctioned?: boolean,
   kind?: KindEnum,
-  verificationState?: VerificationState
+  identityVerificationDetails?: IdentityVerificationDetails
 };
 
 export interface Address {
@@ -119,7 +119,7 @@ export interface ItemLinks {
   statement?: string;
 };
 
-export interface VerificationState {
+export interface IdentityVerificationDetails {
   appointmentVerificationEndOn?: Date;
   appointmentVerificationStatementDate?: Date;
   appointmentVerificationStatementDueOn?: Date;
