@@ -1,7 +1,7 @@
 import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { RequestClient } from "../../../src";
 import { DateOfBirthResource } from "../../../src/services/psc-verification-link/types";
-import { KindEnum, PersonWithSignificantControl, PersonWithSignificantControlResource, VerificationState, VerificationStateResource, VerificationStatusEnum } from "../../../src/services/psc/types";
+import { KindEnum, PersonWithSignificantControl, PersonWithSignificantControlResource, IdentityVerificationDetails, IdentityVerificationDetailsResource } from "../../../src/services/psc/types";
 
 export const requestClient = new RequestClient({ baseUrl: "URL_NOT_USED", oauthToken: "123" });
 export const COMPANY_NUMBER = "12345678";
@@ -36,20 +36,23 @@ const ADDRESS = {
 
 const COUNTRY_OF_RESIDENCE = "Wales";
 
-const VERIFICATION_START_DATE = new Date("2024-04-13");
-const VERIFICATION_DUE_DATE = new Date("2024-04-27");
-const VERIFICATION_STATUS = VerificationStatusEnum.UNVERIFIED;
+const APPT_VERIFICATION_END_ON = undefined;
+const APPT_VERIFICATION_STATEMENT_DATE = new Date("2024-04-13");
+const APPT_VERIFICATION_STATEMENT_DUE_ON = new Date("2024-04-27");
+const APPT_VERIFICATION_START_ON = undefined;
 
-const VERIFICATION_STATE: VerificationState = {
-    verificationStatus: VERIFICATION_STATUS,
-    verificationStartDate: VERIFICATION_START_DATE,
-    verificationStatementDueDate: VERIFICATION_DUE_DATE
+const IDENTITY_VERIFICATION_DETAILS: IdentityVerificationDetails = {
+    appointmentVerificationEndOn: APPT_VERIFICATION_END_ON,
+    appointmentVerificationStatementDate: APPT_VERIFICATION_STATEMENT_DATE,
+    appointmentVerificationStatementDueOn: APPT_VERIFICATION_STATEMENT_DUE_ON,
+    appointmentVerificationStartOn: APPT_VERIFICATION_START_ON
 }
 
-const VERIFICATION_STATE_RESOURCE: VerificationStateResource = {
-    verification_status: VERIFICATION_STATUS,
-    verification_start_date: VERIFICATION_START_DATE,
-    verification_statement_due_date: VERIFICATION_DUE_DATE
+const IDENTITY_VERIFICATION_DETAILS_RESOURCE: IdentityVerificationDetailsResource = {
+    appointment_verification_end_on: APPT_VERIFICATION_END_ON,
+    appointment_verification_statement_date: APPT_VERIFICATION_STATEMENT_DATE,
+    appointment_verification_statement_due_on: APPT_VERIFICATION_STATEMENT_DUE_ON,
+    appointment_verification_start_on: APPT_VERIFICATION_START_ON
 }
 
 const PSC_INDIVIDUAL_DOB: DateOfBirthResource = {
@@ -72,7 +75,7 @@ const PSC_INDIVIDUAL_RESOURCE: PersonWithSignificantControlResource = {
     date_of_birth: PSC_INDIVIDUAL_DOB,
     etag: ETAG,
     notified_on: NOTIFICATION_DATE,
-    verification_state: VERIFICATION_STATE_RESOURCE
+    identity_verification_details: IDENTITY_VERIFICATION_DETAILS_RESOURCE
 };
 
 export const PSC_INDIVIDUAL: PersonWithSignificantControl = {
@@ -89,7 +92,7 @@ export const PSC_INDIVIDUAL: PersonWithSignificantControl = {
     dateOfBirth: PSC_INDIVIDUAL_DOB,
     etag: ETAG,
     notifiedOn: NOTIFICATION_DATE,
-    verificationState: VERIFICATION_STATE
+    identityVerificationDetails: IDENTITY_VERIFICATION_DETAILS
 };
 
 export const mockIndividualResponse = {

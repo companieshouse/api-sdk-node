@@ -16,7 +16,7 @@ export interface PersonWithSignificantControlResource {
   notified_on: string,
   is_sanctioned?: boolean,
   kind?: KindEnum,
-  verification_state?: VerificationStateResource
+  identity_verification_details?: IdentityVerificationDetailsResource
 };
 
 export interface AddressResource {
@@ -55,16 +55,11 @@ export interface ItemLinksResource {
   statement?: string;
 };
 
-export interface VerificationStateResource {
-  verification_status?: VerificationStatusEnum;
-  verification_start_date?: Date;
-  verification_statement_due_date?: Date;
-}
-
-export enum VerificationStatusEnum {
-  UNVERIFIED = "UNVERIFIED",
-  VERIFIED = "VERIFIED",
-  PENDING = "PENDING"
+export interface IdentityVerificationDetailsResource {
+  appointment_verification_end_on?: Date;
+  appointment_verification_statement_date?: Date;
+  appointment_verification_statement_due_on?: Date;
+  appointment_verification_start_on?: Date;
 }
 
 export enum KindEnum {
@@ -85,7 +80,7 @@ export interface PersonWithSignificantControl {
   notifiedOn: string,
   isSanctioned?: boolean,
   kind?: KindEnum,
-  verificationState?: VerificationState
+  identityVerificationDetails?: IdentityVerificationDetails
 };
 
 export interface Address {
@@ -124,9 +119,9 @@ export interface ItemLinks {
   statement?: string;
 };
 
-export interface VerificationState {
-  verificationStatus?: VerificationStatusEnum;
-  verificationStartDate?: Date;
-  verificationStatementDueDate?: Date;
-
+export interface IdentityVerificationDetails {
+  appointmentVerificationEndOn?: Date;
+  appointmentVerificationStatementDate?: Date;
+  appointmentVerificationStatementDueOn?: Date;
+  appointmentVerificationStartOn?: Date;
 }
