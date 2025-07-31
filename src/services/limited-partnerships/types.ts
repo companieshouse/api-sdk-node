@@ -81,6 +81,14 @@ export interface LimitedPartnershipResourceCreated {
 export enum IncorporationKind {
     REGISTRATION = "limited-partnership-registration",
     TRANSITION = "limited-partnership-transition",
+    POST_TRANSITION = "limited-partnership-post-transition",
+}
+
+export enum PartnerKind {
+    GENERAL_PARTNER_PERSON = "limited-partnership#general-partner-person",
+    GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#general-partner-legal-entity",
+    LIMITED_PARTNER_PERSON = "limited-partnership#limited-partner-person",
+    LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#limited-partner-legal-entity",
 }
 
 export enum NameEndingType {
