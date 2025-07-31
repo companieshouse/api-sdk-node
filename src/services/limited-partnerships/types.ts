@@ -85,10 +85,10 @@ export enum IncorporationKind {
 }
 
 export enum PartnerKind {
-    GENERAL_PARTNER_PERSON = "limited-partnership#general-partner-person",
-    GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#general-partner-legal-entity",
-    LIMITED_PARTNER_PERSON = "limited-partnership#limited-partner-person",
-    LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#limited-partner-legal-entity",
+    ADD_GENERAL_PARTNER_PERSON = "limited-partnership#add-general-partner-person",
+    ADD_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#add-general-partner-legal-entity",
+    ADD_LIMITED_PARTNER_PERSON = "limited-partnership#add-limited-partner-person",
+    ADD_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#add-limited-partner-legal-entity",
 }
 
 export enum NameEndingType {
