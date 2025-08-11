@@ -403,6 +403,7 @@ export interface ManagingOfficerCorporateResource {
 }
 
 export interface ManagingOfficerPrivateDataResource {
+    service_address?: PrivateAddressResource;
     residential_address?: PrivateAddressResource;
     principal_address?: PrivateAddressResource;
     date_of_birth?: string;
@@ -412,6 +413,7 @@ export interface ManagingOfficerPrivateDataResource {
 }
 
 export interface ManagingOfficerPrivateData {
+    serviceAddress?: PrivateAddress;
     residentialAddress?: PrivateAddress;
     principalAddress?: PrivateAddress;
     dateOfBirth?: string;
