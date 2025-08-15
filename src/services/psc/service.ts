@@ -16,7 +16,7 @@ export default class PscService {
    * @param pscNotificationId the PSC Notification ID to retrieve
    */
     public async getPscIndividual (companyNumber: string, pscNotificationId: string, headers?: Headers): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
-        const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/verification-state`;
+        const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/identity-verification-details`;
         const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
