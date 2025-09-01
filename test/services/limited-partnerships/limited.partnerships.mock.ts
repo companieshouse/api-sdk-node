@@ -46,7 +46,8 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
         term: Term.BY_AGREEMENT,
         sic_codes: ["12345", "56789"],
         lawful_purpose_statement_checked: true,
-        partnership_number: "LP123456"
+        partnership_number: "LP123456",
+        date_of_update: "2025-01-01"
     }
 };
 
