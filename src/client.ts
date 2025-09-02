@@ -37,6 +37,7 @@ import { AccountsFilingService } from "./services/accounts-filing";
 import PscService from "./services/psc/service";
 import { LimitedPartnershipsService } from "./services/limited-partnerships"
 import AssociationsService from "./services/associations/service";
+import { CondensedSicCodeService } from "./services/sic-code";
 
 /**
  * ApiClient is the class that all service objects hang off.
@@ -78,6 +79,7 @@ export default class ApiClient {
     public readonly pscService: PscService;
     public readonly limitedPartnershipsService: LimitedPartnershipsService;
     public readonly associationsService: AssociationsService;
+    public readonly sicCodeService: CondensedSicCodeService;
 
     constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
         // services on the api domain using the apiClient
@@ -118,5 +120,6 @@ export default class ApiClient {
         this.pscService = new PscService(apiClient);
         this.limitedPartnershipsService = new LimitedPartnershipsService(apiClient);
         this.associationsService = new AssociationsService(accountClient);
+        this.sicCodeService = new CondensedSicCodeService(apiClient);
     }
 }
