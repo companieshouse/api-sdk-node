@@ -22,7 +22,7 @@ export interface CompanyProfileResource {
   foreign_company_details?: ForeignCompanyDetailsResource;
   is_on_register_in_country_formed_in?: string;
   links: LinksResource;
-  subtype: string;
+  subtype?: string;
 }
 
 export interface ForeignCompanyDetailsResource {
@@ -151,5 +151,5 @@ export interface CompanyProfile {
   foreignCompanyDetails?: ForeignCompanyDetails;
   isOnRegisterInCountryFormedIn?: boolean;
   links: Links;
-  subtype: string;
+  subtype?: string;
 }
