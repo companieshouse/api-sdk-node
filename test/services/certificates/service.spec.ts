@@ -12,7 +12,7 @@ import {
 } from "../../../src/services/order/certificates";
 import { ApiErrorResponse, ApiResponse } from "../../../src/services/resource";
 import { Failure, Success } from "../../../src/services/result";
-import nock = require("nock");
+import nock from "nock";
 
 const expect = chai.expect;
 

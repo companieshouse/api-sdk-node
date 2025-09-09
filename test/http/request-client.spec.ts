@@ -2,7 +2,7 @@ import chai from "chai";
 import sinon from "sinon";
 
 import { RequestClient } from "../../src/http";
-import nock = require("nock");
+import nock from "nock";
 const expect = chai.expect;
 
 describe("request-client", () => {
