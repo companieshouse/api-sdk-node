@@ -4,6 +4,10 @@ This SDK abstract the calls to our public APIs.
 
 Intended for use when making cross-web-service calls, supporting ERIC and the propagation of authentication details through to other services.
 
+## Compatible Node versions
+       
+This package has been upgraded to be compatible with Node v24. Presently, it's backward compatible with v20 and v18 but compatibility is primarily required for v24 as all CH Node services are in the process of being upgraded to v24.
+
 ## Quick start
 
 Use NPM to install the SDK in your project;
