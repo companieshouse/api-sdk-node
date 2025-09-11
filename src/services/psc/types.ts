@@ -120,8 +120,12 @@ export interface ItemLinks {
 };
 
 export interface IdentityVerificationDetails {
+  antiMoneyLaunderingSupervisoryBodies?: string[];
   appointmentVerificationEndOn?: Date;
   appointmentVerificationStatementDate?: Date;
   appointmentVerificationStatementDueOn?: Date;
   appointmentVerificationStartOn?: Date;
+  authorisedCorporateServiceProviderName?: string;
+  identityVerifiedOn?: Date;
+  preferredName?: string;
 }
