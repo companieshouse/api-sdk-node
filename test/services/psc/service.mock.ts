@@ -36,23 +36,35 @@ const ADDRESS = {
 
 const COUNTRY_OF_RESIDENCE = "Wales";
 
+const ANTI_MONEY_LAUNDERING_SUPERVISORY_BODIES = ["Body"];
 const APPT_VERIFICATION_END_ON = undefined;
 const APPT_VERIFICATION_STATEMENT_DATE = new Date("2024-04-13");
 const APPT_VERIFICATION_STATEMENT_DUE_ON = new Date("2024-04-27");
 const APPT_VERIFICATION_START_ON = undefined;
+const AUTHORISED_CORPORATE_SERVICE_PROVIDER_NAME = "Service Provider Ltd.";
+const IDENTITY_VERIFIED_ON = undefined;
+const PREFERRED_NAME = "Preferred Name";
 
 const IDENTITY_VERIFICATION_DETAILS: IdentityVerificationDetails = {
+    antiMoneyLaunderingSupervisoryBodies: ANTI_MONEY_LAUNDERING_SUPERVISORY_BODIES,
     appointmentVerificationEndOn: APPT_VERIFICATION_END_ON,
     appointmentVerificationStatementDate: APPT_VERIFICATION_STATEMENT_DATE,
     appointmentVerificationStatementDueOn: APPT_VERIFICATION_STATEMENT_DUE_ON,
-    appointmentVerificationStartOn: APPT_VERIFICATION_START_ON
+    appointmentVerificationStartOn: APPT_VERIFICATION_START_ON,
+    authorisedCorporateServiceProviderName: AUTHORISED_CORPORATE_SERVICE_PROVIDER_NAME,
+    identityVerifiedOn: IDENTITY_VERIFIED_ON,
+    preferredName: PREFERRED_NAME
 }
 
 const IDENTITY_VERIFICATION_DETAILS_RESOURCE: IdentityVerificationDetailsResource = {
+    anti_money_laundering_supervisory_bodies: ANTI_MONEY_LAUNDERING_SUPERVISORY_BODIES,
     appointment_verification_end_on: APPT_VERIFICATION_END_ON,
     appointment_verification_statement_date: APPT_VERIFICATION_STATEMENT_DATE,
     appointment_verification_statement_due_on: APPT_VERIFICATION_STATEMENT_DUE_ON,
-    appointment_verification_start_on: APPT_VERIFICATION_START_ON
+    appointment_verification_start_on: APPT_VERIFICATION_START_ON,
+    authorised_corporate_service_provider_name: AUTHORISED_CORPORATE_SERVICE_PROVIDER_NAME,
+    identity_verified_on: IDENTITY_VERIFIED_ON,
+    preferred_name: PREFERRED_NAME
 }
 
 const PSC_INDIVIDUAL_DOB: DateOfBirthResource = {

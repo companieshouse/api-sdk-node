@@ -10,13 +10,13 @@ export default class PscService {
     constructor (private readonly client: IHttpClient) { }
 
     /**
-   * Get the PSC individual details including their optional verification state.
+   * Get the PSC individual details including their optional identity verification details.
    *
    * @param companyNumber the Company Number to look up
    * @param pscNotificationId the PSC Notification ID to retrieve
    */
     public async getPscIndividual (companyNumber: string, pscNotificationId: string, headers?: Headers): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
-        const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}/identity-verification-details`;
+        const resourceUri = `/company/${companyNumber}/persons-with-significant-control/individual/${pscNotificationId}`;
         const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
