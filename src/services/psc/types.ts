@@ -56,10 +56,14 @@ export interface ItemLinksResource {
 };
 
 export interface IdentityVerificationDetailsResource {
+  anti_money_laundering_supervisory_bodies?: string[];
   appointment_verification_end_on?: Date;
-  appointment_verification_statement_date?: Date;
-  appointment_verification_statement_due_on?: Date;
+  appointment_verification_statement_date: Date;
+  appointment_verification_statement_due_on: Date;
   appointment_verification_start_on?: Date;
+  authorised_corporate_service_provider_name?: string;
+  identity_verified_on?: Date;
+  preferred_name?: string;
 }
 
 export enum KindEnum {
