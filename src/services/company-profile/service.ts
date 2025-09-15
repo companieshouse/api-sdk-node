@@ -118,7 +118,8 @@ export default class CompanyProfileService {
             links: {
                 filingHistory: links?.filing_history
             },
-            subtype: body?.subtype
+            subtype: body?.subtype,
+            term: body?.term
         };
 
         return resource;
