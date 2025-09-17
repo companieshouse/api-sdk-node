@@ -93,8 +93,7 @@ export enum AssociationStatus {
     CONFIRMED = "confirmed",
     REMOVED = "removed",
     AWAITING_APPROVAL = "awaiting-approval",
-    MIGRATED = "migrated",
-    UNAUTHORISED = "unauthorised"
+    MIGRATED = "migrated"
 }
 
 export enum ApprovalRoute {
