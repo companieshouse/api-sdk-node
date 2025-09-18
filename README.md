@@ -76,7 +76,7 @@ Change the definition of the `prepare` script in the package.json file to match 
 
 (The `husky install` command should only be present if already there in the `prepare` script definition of your project)
 
-Once done it should just be necessary to restart your project's service in Tilt (assumes that your local project is running in 'development mode').
+Once done it should just be necessary to restart your project's service in docker-chs-development (assumes that your local project is running in 'development mode').
 
 Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment. The change should NOT be committed or pushed to the project repository.
 
