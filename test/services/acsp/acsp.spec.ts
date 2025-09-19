@@ -103,13 +103,78 @@ describe("ACSP Verifiy a client send confirmation email", async () => {
     it("should return 200 on successful email send", async () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail);
+        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail, { application_type: "verification" });
         expect(data.status).to.equal(200);
     })
+
     it("should return 500 if email fails", async () => {
         sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[500]);
         const ofService: AcspService = new AcspService(mockValues.requestClient);
-        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail);
+        const data = await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail, { application_type: "verification" });
         expect(data.status).to.equal(500);
     })
-})
+
+    it("should call correct URL with verification query parameter", async () => {
+        const httpPostStub = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+
+        await ofService.sendIdentityVerificationEmail(
+            mockValues.mockClientVerificationEmail,
+            { application_type: "verification" }
+        );
+
+        expect(httpPostStub.calledWith(
+            "/acsp-api/verify-client-identity/send-identity-verification-email?application_type=verification",
+            mockValues.mockClientVerificationEmail
+        )).to.be.true;
+    })
+
+    it("should call URL without query parameter when application_type is not provided", async () => {
+        const httpPostStub = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+
+        await ofService.sendIdentityVerificationEmail(mockValues.mockClientVerificationEmail);
+
+        expect(httpPostStub.calledWith(
+            "/acsp-api/verify-client-identity/send-identity-verification-email",
+            mockValues.mockClientVerificationEmail
+        )).to.be.true;
+    })
+});
+
+describe("ACSP Reverify a client send confirmation email", async () => {
+    it("should return 200 on successful reverification email send", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendIdentityVerificationEmail(
+            mockValues.mockClientVerificationEmail,
+            { application_type: "reverification" }
+        );
+        expect(data.status).to.equal(200);
+    })
+
+    it("should return 500 if reverification email fails", async () => {
+        sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[500]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+        const data = await ofService.sendIdentityVerificationEmail(
+            mockValues.mockClientVerificationEmail,
+            { application_type: "reverification" }
+        );
+        expect(data.status).to.equal(500);
+    })
+
+    it("should call correct URL with reverification query parameter", async () => {
+        const httpPostStub = sinon.stub(mockValues.requestClient, "httpPost").resolves(mockValues.mockSendEmail[200]);
+        const ofService: AcspService = new AcspService(mockValues.requestClient);
+
+        await ofService.sendIdentityVerificationEmail(
+            mockValues.mockClientVerificationEmail,
+            { application_type: "reverification" }
+        );
+
+        expect(httpPostStub.calledWith(
+            "/acsp-api/verify-client-identity/send-identity-verification-email?application_type=reverification",
+            mockValues.mockClientVerificationEmail
+        )).to.be.true;
+    })
+});
