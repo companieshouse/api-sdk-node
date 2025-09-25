@@ -340,23 +340,23 @@ export const mockNextMadeUpToDateResourceNoCs: NextMadeUpToDateResource = {
 };
 
 export const mockSicCodeScenarios = {
-  noSicCodes: {
-    status: 200,
-    body: {
-      sic_code_data: {
-        section_status: SectionStatus.CONFIRMED,
-        sic_code: []
-      }
+    noSicCodes: {
+        status: 200,
+        body: {
+            sic_code_data: {
+                section_status: SectionStatus.CONFIRMED,
+                sic_code: []
+            }
+        }
+    },
+    tooManySicCodes: {
+        status: 422,
+        error: "Too many SIC codes provided"
+    },
+    duplicateSicCodes: {
+        status: 422,
+        error: "Duplicate SIC codes detected"
     }
-  },
-  tooManySicCodes: {
-    status: 422,
-    error: "Too many SIC codes provided"
-  },
-  duplicateSicCodes: {
-    status: 422,
-    error: "Duplicate SIC codes detected"
-  }
 };
 
 export const mockCheckEligibility = {

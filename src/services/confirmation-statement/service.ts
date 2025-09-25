@@ -704,7 +704,7 @@ export default class {
 
     private validateSicCodes (sicCodes: SicCode[]) {
         const hasDuplicateSicCodes = new Set(sicCodes.map(sc => sc.code)).size !== sicCodes.length;
-        
+
         if (sicCodes.length === 0) {
             throw new Error(`At least one SIC code must be associated.`);
         }
