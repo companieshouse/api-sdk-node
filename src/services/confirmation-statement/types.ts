@@ -67,11 +67,11 @@ export interface PersonsOfSignificantControlData extends ConfirmationStatementSu
 }
 
 export interface SicCodeDataResource extends ConfirmationStatementSubmissionSectionResource {
-    sic_code?: SicCodeResource
+    sic_code?: SicCodeResource[]
 }
 
 export interface SicCodeData extends ConfirmationStatementSubmissionSection {
-    sicCode?: SicCode
+    sicCode?: SicCode[]
 }
 
 export interface RegisteredOfficeAddressDataResource extends ConfirmationStatementSubmissionSectionResource {

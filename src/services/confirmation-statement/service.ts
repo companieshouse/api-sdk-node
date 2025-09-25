@@ -105,6 +105,9 @@ export default class {
         const resp: HttpResponse =
             await this.client.httpPost(`${baseUrl}/${confirmationStatementId}`,
                 this.mapToConfirmationStatementSubmissionResource(csSubmission));
+        const sicCodes = csSubmission.data?.sicCodeData.sicCode || [];
+
+        this.validateSicCodes(sicCodes);
 
         const resource: Resource<ConfirmationStatementSubmission> = {
             httpStatusCode: resp.status
@@ -550,14 +553,14 @@ export default class {
     private mapToSicCodeDataResource (sicCode: SicCodeData): SicCodeDataResource {
         return {
             section_status: sicCode.sectionStatus,
-            ...(sicCode.sicCode && { sic_code: this.mapToSicCodeResource(sicCode.sicCode) })
+            ...(sicCode.sicCode && { sic_code: sicCode.sicCode.map(this.mapToSicCodeResource) })
         }
     }
 
     private mapToSicCodeData (sicCodeResource: SicCodeDataResource): SicCodeData {
         return {
             sectionStatus: sicCodeResource.section_status,
-            ...(sicCodeResource.sic_code && { sicCode: this.mapToSicCode(sicCodeResource.sic_code) })
+            ...(sicCodeResource.sic_code && { sicCode: sicCodeResource.sic_code.map(this.mapToSicCode) })
         }
     }
 
@@ -695,5 +698,21 @@ export default class {
 
     private getConfirmationStatementUrl (companyNumber: string) {
         return `/confirmation-statement/company/${companyNumber}`;
+    }
+
+    private validateSicCodes (sicCodes: SicCode[]) {
+        const hasDuplicateSicCodes = new Set(sicCodes.map(sc => sc.code)).size !== sicCodes.length;
+        
+        if (sicCodes.length === 0) {
+            throw new Error(`At least one SIC code must be associated.`);
+        }
+
+        if (sicCodes.length > 4) {
+            throw new Error(`Maximum of 4 SIC codes must be associated.`);
+        }
+
+        if (hasDuplicateSicCodes) {
+            throw new Error(`Can not have duplicate SIC codes.`);
+        }
     }
 }

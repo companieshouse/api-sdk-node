@@ -79,10 +79,10 @@ export const mockConfirmationStatementSubmission: ConfirmationStatementSubmissio
         },
         sicCodeData: {
             sectionStatus: null,
-            sicCode: {
+            sicCode: [{
                 code: "123",
                 description: "TEST SIC CODE DETAILS"
-            }
+            }]
         },
         shareholderData: { sectionStatus: SectionStatus.CONFIRMED },
         tradingStatusData: { tradingStatusAnswer: true }
@@ -285,10 +285,10 @@ export const mockConfirmationStatementSubmissionResource: ConfirmationStatementS
         },
         sic_code_data: {
             section_status: null,
-            sic_code: {
+            sic_code: [{
                 code: "123",
                 description: "TEST SIC CODE DETAILS"
-            }
+            }]
         },
         shareholder_data: { section_status: SectionStatus.CONFIRMED },
         trading_status_data: { trading_status_answer: true },
@@ -337,6 +337,26 @@ export const mockNextMadeUpToDateResourceIsNotDue: NextMadeUpToDateResource = {
 
 export const mockNextMadeUpToDateResourceNoCs: NextMadeUpToDateResource = {
     current_next_made_up_to_date: null
+};
+
+export const mockSicCodeScenarios = {
+  noSicCodes: {
+    status: 200,
+    body: {
+      sic_code_data: {
+        section_status: SectionStatus.CONFIRMED,
+        sic_code: []
+      }
+    }
+  },
+  tooManySicCodes: {
+    status: 422,
+    error: "Too many SIC codes provided"
+  },
+  duplicateSicCodes: {
+    status: 422,
+    error: "Duplicate SIC codes detected"
+  }
 };
 
 export const mockCheckEligibility = {
@@ -388,7 +408,11 @@ export const mockGetPersonsOfSignificantControl = {
 
 export const mockGetConfirmationStatementSubmission = {
     200: { status: 200, body: mockConfirmationStatementSubmissionResource },
-    404: { status: 404, error: "No confirmation statement submission found" }
+    404: { status: 404, error: "No confirmation statement submission found" },
+    422: {
+        tooManySicCodes: mockSicCodeScenarios.tooManySicCodes,
+        duplicateSicCodes: mockSicCodeScenarios.duplicateSicCodes
+    }
 };
 
 export const mockGetShareholder = {
