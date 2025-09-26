@@ -90,13 +90,17 @@ export enum PartnerKind {
     ADD_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#add-general-partner-legal-entity",
     ADD_LIMITED_PARTNER_PERSON = "limited-partnership#add-limited-partner-person",
     ADD_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#add-limited-partner-legal-entity",
+    REMOVE_GENERAL_PARTNER_PERSON = "limited-partnership#remove-general-partner-person",
+    REMOVE_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-general-partner-legal-entity",
+    REMOVE_LIMITED_PARTNER_PERSON = "limited-partnership#remove-limited-partner-person",
+    REMOVE_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-limited-partner-legal-entity",
 }
 
 export enum PartnershipKind {
     UPDATE_PARTNERSHIP_REGISTERED_OFFICE_ADDRESS = "limited-partnership#update-partnership-registered-office-address",
     UPDATE_PARTNERSHIP_NAME = "limited-partnership#update-partnership-name",
     UPDATE_PARTNERSHIP_TERM = "limited-partnership#update-partnership-term",
-    UPDATE_PRINCIPAL_PLACE_OF_BUSINESS_ADDRESS = "limited-partnership#update-principal-place-of-business-address"
+    UPDATE_PRINCIPAL_PLACE_OF_BUSINESS_ADDRESS = "limited-partnership#update-principal-place-of-business-address",
 }
 
 export enum NameEndingType {
