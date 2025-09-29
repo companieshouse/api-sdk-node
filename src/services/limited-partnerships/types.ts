@@ -90,6 +90,10 @@ export enum PartnerKind {
     ADD_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#add-general-partner-legal-entity",
     ADD_LIMITED_PARTNER_PERSON = "limited-partnership#add-limited-partner-person",
     ADD_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#add-limited-partner-legal-entity",
+    REMOVE_GENERAL_PARTNER_PERSON = "limited-partnership#remove-general-partner-person",
+    REMOVE_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-general-partner-legal-entity",
+    REMOVE_LIMITED_PARTNER_PERSON = "limited-partnership#remove-limited-partner-person",
+    REMOVE_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-limited-partner-legal-entity",
 }
 
 export enum PartnershipKind {
