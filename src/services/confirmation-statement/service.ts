@@ -105,7 +105,7 @@ export default class {
         const resp: HttpResponse =
             await this.client.httpPost(`${baseUrl}/${confirmationStatementId}`,
                 this.mapToConfirmationStatementSubmissionResource(csSubmission));
-        const sicCodes = csSubmission.data?.sicCodeData.sicCode || [];
+        const sicCodes = csSubmission.data?.sicCodeData?.sicCode || [];
 
         this.validateSicCodes(sicCodes);
 
