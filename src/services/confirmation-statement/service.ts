@@ -698,5 +698,4 @@ export default class {
     private getConfirmationStatementUrl (companyNumber: string) {
         return `/confirmation-statement/company/${companyNumber}`;
     }
-
 }
