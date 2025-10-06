@@ -105,9 +105,6 @@ export default class {
         const resp: HttpResponse =
             await this.client.httpPost(`${baseUrl}/${confirmationStatementId}`,
                 this.mapToConfirmationStatementSubmissionResource(csSubmission));
-        const sicCodes = csSubmission.data?.sicCodeData?.sicCode || [];
-
-        this.validateSicCodes(sicCodes);
 
         const resource: Resource<ConfirmationStatementSubmission> = {
             httpStatusCode: resp.status
@@ -702,19 +699,4 @@ export default class {
         return `/confirmation-statement/company/${companyNumber}`;
     }
 
-    private validateSicCodes (sicCodes: SicCode[]) {
-        const hasDuplicateSicCodes = new Set(sicCodes.map(sc => sc.code)).size !== sicCodes.length;
-
-        if (sicCodes.length === 0) {
-            throw new Error(`At least one SIC code must be associated.`);
-        }
-
-        if (sicCodes.length > 4) {
-            throw new Error(`Maximum of 4 SIC codes must be associated.`);
-        }
-
-        if (hasDuplicateSicCodes) {
-            throw new Error(`Can not have duplicate SIC codes.`);
-        }
-    }
 }
