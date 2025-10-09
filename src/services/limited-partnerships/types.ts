@@ -33,6 +33,7 @@ export interface LimitedPartnership {
 }
 
 type Partner = {
+    appointment_id?: string;
     completed?: boolean;
     date_effective_from?: string;
     date_of_birth?: string;
@@ -52,6 +53,8 @@ type Partner = {
     resignation_date?: string;
     surname?: string;
     usual_residential_address?: Address;
+    cease_date?: string;
+    remove_confirmation_checked?: boolean;
 };
 
 export interface LimitedPartner {
