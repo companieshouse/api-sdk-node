@@ -185,7 +185,7 @@ describe("company-officers", () => {
     });
 
     it("maps the company field data correctly for specific appointment", async () => {
-        const mockResponseBody : CompanyOfficerResource = ({          
+        const mockResponseBody : CompanyOfficerResource = ({
             appointed_on: (new Date()).toISOString(),
             occupation: "director",
             country_of_residence: "United Kingdom",
@@ -232,7 +232,7 @@ describe("company-officers", () => {
                     appointments: "company/123/appointments/abc"
                 }
             }
-                        
+
         });
 
         const mockGetResponse = {
