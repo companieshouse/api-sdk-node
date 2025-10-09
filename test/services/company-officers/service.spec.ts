@@ -5,7 +5,7 @@ import chaiHttp from "chai-http";
 
 import CompanyOfficersService from "../../../src/services/company-officers/service";
 import { RequestClient, HttpResponse } from "../../../src/http";
-import { CompanyOfficersResource } from "../../../src/services/company-officers/types";
+import { CompanyOfficerResource, CompanyOfficersResource } from "../../../src/services/company-officers/types";
 const expect = chai.expect;
 
 const requestClient = new RequestClient({ baseUrl: "URL-NOT-USED", oauthToken: "TOKEN-NOT-USED" });
@@ -182,5 +182,106 @@ describe("company-officers", () => {
         const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
         await companyOfficers.getCompanyOfficers("123", 10, 2, true, "resigned_on");
         expect(spy.calledWith("/company/123/officers?page_size=10&page_index=2&register_view=true&order_by=resigned_on")).to.equal(true);
+    });
+
+    it("maps the company field data correctly for specific appointment", async () => {
+        const mockResponseBody : CompanyOfficerResource = ({          
+            appointed_on: (new Date()).toISOString(),
+            occupation: "director",
+            country_of_residence: "United Kingdom",
+            nationality: "British",
+            resigned_on: (new Date()).toISOString(),
+            name: "Some Director",
+            officer_role: "director",
+            responsibilities: "Determining the company’s strategic objectives and policies",
+            address: {
+                address_line_1: "123 Street",
+                address_line_2: "Some area",
+                care_of: "Some council",
+                country: "United Kingdom",
+                locality: "Wales",
+                po_box: "123",
+                postal_code: "SW1",
+                premises: "some premises",
+                region: "South"
+            },
+            date_of_birth: {
+                day: "15",
+                month: "4",
+                year: "1996"
+            },
+            former_names: [
+                {
+                    forenames: "Fore",
+                    surname: "Sur"
+                }
+            ],
+            identification: {
+                identification_type: "some identification type",
+                legal_authority: "some legal auth",
+                legal_form: "some legal form",
+                place_registered: "some place",
+                registration_number: "some reg"
+            },
+            contact_details: {
+                contact_name: "Firstname Surname"
+            },
+            links: {
+                self: "appointmentIdabc",
+                officer: {
+                    appointments: "company/123/appointments/abc"
+                }
+            }
+                        
+        });
+
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const companyOfficers : CompanyOfficersService = new CompanyOfficersService(requestClient);
+        const data = await companyOfficers.getCompanyAppointment("123", "abc");
+
+        expect(data.httpStatusCode).to.equal(200);
+
+        expect(data.resource.appointedOn).to.equal(mockResponseBody.appointed_on);
+        expect(data.resource.countryOfResidence).to.equal(mockResponseBody.country_of_residence);
+        expect(data.resource.nationality).to.equal(mockResponseBody.nationality);
+        expect(data.resource.occupation).to.equal(mockResponseBody.occupation);
+        expect(data.resource.resignedOn).to.equal(mockResponseBody.resigned_on);
+        expect(data.resource.name).to.equal(mockResponseBody.name);
+        expect(data.resource.officerRole).to.equal(mockResponseBody.officer_role);
+        expect(data.resource.responsibilities).to.equal(mockResponseBody.responsibilities);
+
+        expect(data.resource.address.addressLine1).to.equal(mockResponseBody.address.address_line_1);
+        expect(data.resource.address.addressLine2).to.equal(mockResponseBody.address.address_line_2);
+        expect(data.resource.address.careOf).to.equal(mockResponseBody.address.care_of);
+        expect(data.resource.address.country).to.equal(mockResponseBody.address.country);
+        expect(data.resource.address.locality).to.equal(mockResponseBody.address.locality);
+        expect(data.resource.address.poBox).to.equal(mockResponseBody.address.po_box);
+        expect(data.resource.address.postalCode).to.equal(mockResponseBody.address.postal_code);
+        expect(data.resource.address.premises).to.equal(mockResponseBody.address.premises);
+        expect(data.resource.address.region).to.equal(mockResponseBody.address.region);
+
+        expect(data.resource.dateOfBirth.day).to.equal(mockResponseBody.date_of_birth.day);
+        expect(data.resource.dateOfBirth.month).to.equal(mockResponseBody.date_of_birth.month);
+        expect(data.resource.dateOfBirth.year).to.equal(mockResponseBody.date_of_birth.year);
+
+        expect(data.resource.formerNames.length).to.equal(mockResponseBody.former_names.length);
+        expect(data.resource.formerNames[0].forenames).to.equal(mockResponseBody.former_names[0].forenames);
+        expect(data.resource.formerNames[0].surname).to.equal(mockResponseBody.former_names[0].surname);
+
+        expect(data.resource.identification.identificationType).to.equal(mockResponseBody.identification.identification_type);
+        expect(data.resource.identification.legalAuthority).to.equal(mockResponseBody.identification.legal_authority);
+        expect(data.resource.identification.legalForm).to.equal(mockResponseBody.identification.legal_form);
+        expect(data.resource.identification.placeRegistered).to.equal(mockResponseBody.identification.place_registered);
+        expect(data.resource.identification.registrationNumber).to.equal(mockResponseBody.identification.registration_number);
+
+        expect(data.resource.contactDetails.contactName).to.equal(mockResponseBody.contact_details.contact_name);
+
+        expect(data.resource.links.officer.appointments).to.equal(mockResponseBody.links.officer.appointments);
+        expect(data.resource.links.self).to.equal(mockResponseBody.links.self);
     });
 });

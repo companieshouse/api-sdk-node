@@ -56,8 +56,8 @@ export default class CompanyOfficersService {
      * @returns the company appointment
      */
     public async getCompanyAppointment (number: string, appointmentId: string): Promise<Resource<CompanyOfficer>> {
-        let url = `/company/${number}/appointments/${appointmentId}`;
-        
+        const url = `/company/${number}/appointments/${appointmentId}`;
+
         const resp = await this.client.httpGet(url);
 
         const resource: Resource<CompanyOfficer> = {
