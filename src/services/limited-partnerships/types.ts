@@ -33,6 +33,7 @@ export interface LimitedPartnership {
 }
 
 type Partner = {
+    appointmentId?: string;
     completed?: boolean;
     date_effective_from?: string;
     date_of_birth?: string;

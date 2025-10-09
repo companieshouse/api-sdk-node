@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { CompanyOfficersResource, CompanyOfficers } from "./types";
+import { CompanyOfficersResource, CompanyOfficers, CompanyOfficer } from "./types";
 import Resource from "../resource";
 import Mapping from "../../mapping/mapping";
 
@@ -45,6 +45,32 @@ export default class CompanyOfficersService {
         const body = resp.body as CompanyOfficersResource;
 
         resource.resource = Mapping.camelCaseKeys<CompanyOfficers>(body);
+
+        return resource;
+    }
+
+    /**
+     * Get a specific company appointment.
+     * @param number the company number to look up
+     * @param appointmentId the appointment ID to look up
+     * @returns the company appointment
+     */
+    public async getCompanyAppointment (number: string, appointmentId: string): Promise<Resource<CompanyOfficer>> {
+        let url = `/company/${number}/appointments/${appointmentId}`;
+        
+        const resp = await this.client.httpGet(url);
+
+        const resource: Resource<CompanyOfficer> = {
+            httpStatusCode: resp.status
+        };
+
+        if (resp.error) {
+            return resource;
+        }
+
+        const body = resp.body as CompanyOfficersResource;
+
+        resource.resource = Mapping.camelCaseKeys<CompanyOfficer>(body);
 
         return resource;
     }
