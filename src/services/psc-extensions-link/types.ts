@@ -110,14 +110,14 @@ export interface NameElements {
     surname: string;
 };
 
-export interface PscVerificationResource {
+export interface PscExtensionResource {
     created_at: Date,
     updated_at: Date,
     links: LinksResource,
-    data: PscExtensionnDataResource;
+    data: PscExtensionDataResource;
 }
 
-export interface PscExtensionnDataResource {
+export interface PscExtensionDataResource {
     company_number?: string,
     psc_notification_id?: string,
     extensionDetails?: ExtensionDetailsResource
@@ -127,9 +127,9 @@ export interface PscExtension {
     createdAt: Date,
     updatedAt: Date,
     links: Links,
-    data: PscExtensionnData;
+    data: PscExtensionData;
 }
-export interface PscExtensionnData {
+export interface PscExtensionData {
     companyNumber?: string,
     pscNotificationId?: string,
     extensionDetails?: ExtensionDetails
@@ -145,4 +145,25 @@ export interface ExtensionDetails {
     extensionReason?: string,
     nameMismatchReason?: string,
     extensionRequestDate?: string
+}
+
+export interface ValidationStatusError {
+    error: string;
+    location: string;
+    type?: string;
+    locationType: string;
+}
+export interface ValidationStatusResponse {
+    errors: ValidationStatusError[];
+    isValid?: boolean;
+}
+export interface ValidationStatusErrorResource {
+    error: string;
+    location: string;
+    location_type: string;
+    type?: string;
+}
+export interface ValidationStatusResponseResource {
+    errors: ValidationStatusErrorResource[];
+    is_valid?: boolean;
 }
