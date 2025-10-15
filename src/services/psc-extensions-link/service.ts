@@ -1,4 +1,4 @@
-import { PscExtension, PscExtensionnData} from "./types"
+import { PscExtension, PscExtensionnData } from "./types"
 
 import { Headers, HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
