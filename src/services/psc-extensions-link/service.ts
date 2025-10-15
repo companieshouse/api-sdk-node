@@ -1,4 +1,4 @@
-import { PscExtension, PscExtensionnData } from "./types"
+import { PscExtension, PscExtensionData } from "./types"
 
 import { Headers, HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -22,7 +22,7 @@ export default class PscExtensionService {
      * - A `Resource<PscExtension>` object containing the created PSC extension details.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async postPscExtension (transactionId: string, pscExtension: PscExtensionnData, headers?: Headers): Promise<Resource<PscExtension> | ApiErrorResponse> {
+    public async postPscExtension (transactionId: string, pscExtension: PscExtensionData, headers?: Headers): Promise<Resource<PscExtension> | ApiErrorResponse> {
         const resourceUri = `/transactions/${transactionId}/persons-with-significant-control-extensions`;
         const pscExtensionResource = Mapping.snakeCaseKeys(pscExtension);
         const response = await this.client.httpPost(resourceUri, pscExtensionResource, headers);
