@@ -136,14 +136,14 @@ export interface PscExtensionData {
 }
 
 export interface ExtensionDetailsResource {
-     extensionReason?: string,
-    nameMismatchReason?: string,
+    extensionReason?: string,
+    extensionStatus?: string,
     extensionRequestDate?: string
 }
 
 export interface ExtensionDetails {
     extensionReason?: string,
-    nameMismatchReason?: string,
+    extensionStatus?: string,
     extensionRequestDate?: string
 }
 
