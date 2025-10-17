@@ -1,4 +1,4 @@
-import { PscExtension, PscExtensionData } from "./types"
+import { PscExtension, PscExtensionData, ValidationStatusResponse } from "./types"
 
 import { Headers, HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
@@ -32,6 +32,58 @@ export default class PscExtensionService {
         }
 
         return this.populateFrontEndResource(response);
+    }
+
+    /**
+     * Retrieves the count of extension requests for a specific PSC notification.
+     *
+     * @param pscNotificationId - The unique identifier of the PSC notification.
+     * @param headers - Optional headers to include in the request.
+     * @returns A promise that resolves to either:
+     * - A `Resource<number>` object containing the extension count (0, 1, or 2).
+     * - An `ApiErrorResponse` object if an error occurs during the request.
+     */
+    public async getPscExtensionCount (pscNotificationId: string, headers?: Headers): Promise<Resource<number> | ApiErrorResponse> {
+        const resourceUri = `/persons-with-significant-control-extensions/${pscNotificationId}/extensionCount`;
+        const response = await this.client.httpGet(resourceUri, headers);
+
+        if (response.error) {
+            return this.handleErrorResponse(response);
+        }
+
+        const frontEndResource: Resource<number> = {
+            httpStatusCode: response.status,
+            resource: response.body as number
+        };
+
+        return frontEndResource;
+    }
+
+    /**
+     * Validates whether a PSC extension request is valid for the given parameters.
+     *
+     * @param transactionId - The unique identifier of the transaction.
+     * @param pscNotificationId - The unique identifier of the PSC notification.
+     * @param companyNumber - The company number.
+     * @param headers - Optional headers to include in the request.
+     * @returns A promise that resolves to either:
+     * - A `Resource<ValidationStatusResponse>` object containing validation results.
+     * - An `ApiErrorResponse` object if an error occurs during the request.
+     */
+    public async getIsPscExtensionValid (transactionId: string, pscNotificationId: string, companyNumber: string, headers?: Headers): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
+        const resourceUri = `/persons-with-significant-control-extensions/${transactionId}/${pscNotificationId}/${companyNumber}/isPscExtensionRequestValid`;
+        const response = await this.client.httpGet(resourceUri, headers);
+
+        if (response.error) {
+            return this.handleErrorResponse(response);
+        }
+
+        const frontEndResource: Resource<ValidationStatusResponse> = {
+            httpStatusCode: response.status,
+            resource: Mapping.camelCaseKeys<ValidationStatusResponse>(response.body)
+        };
+
+        return frontEndResource;
     }
 
     /**
