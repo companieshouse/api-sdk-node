@@ -155,7 +155,7 @@ export interface ValidationStatusError {
 }
 export interface ValidationStatusResponse {
     errors: ValidationStatusError[];
-    isValid?: boolean;
+    valid: boolean;
 }
 export interface ValidationStatusErrorResource {
     error: string;
@@ -165,5 +165,5 @@ export interface ValidationStatusErrorResource {
 }
 export interface ValidationStatusResponseResource {
     errors: ValidationStatusErrorResource[];
-    is_valid?: boolean;
+    valid: boolean;
 }

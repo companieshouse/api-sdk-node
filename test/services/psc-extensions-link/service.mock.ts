@@ -46,17 +46,17 @@ export const PSC_EXTENSION: PscExtension = {
 };
 
 const VALIDATION_STATUS_RESPONSE_RESOURCE = {
-    is_valid: true,
+    valid: true,
     errors: []
 };
 
 export const VALIDATION_STATUS_RESPONSE: ValidationStatusResponse = {
-    isValid: true,
+    valid: true,
     errors: []
 };
 
 const VALIDATION_STATUS_RESPONSE_INVALID_RESOURCE = {
-    is_valid: false,
+    valid: false,
     errors: [
         {
             error: "PSC has exceeded maximum number of extension requests",
@@ -68,7 +68,7 @@ const VALIDATION_STATUS_RESPONSE_INVALID_RESOURCE = {
 };
 
 export const VALIDATION_STATUS_RESPONSE_INVALID: ValidationStatusResponse = {
-    isValid: false,
+    valid: false,
     errors: [
         {
             error: "PSC has exceeded maximum number of extension requests",

@@ -155,7 +155,7 @@ describe("PSC Extensions Service", () => {
                 TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource!.isValid).to.be.true;
+            expect(response.resource!.valid).to.be.true;
             expect(response.resource!.errors).to.be.empty;
         });
 
@@ -166,7 +166,7 @@ describe("PSC Extensions Service", () => {
                 TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
-            expect(response.resource!.isValid).to.be.false;
+            expect(response.resource!.valid).to.be.false;
             expect(response.resource!.errors).to.have.length(1);
             expect(response.resource!.errors[0].error).to.equal("PSC has exceeded maximum number of extension requests");
         });
