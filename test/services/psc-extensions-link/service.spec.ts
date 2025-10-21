@@ -152,7 +152,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[200]);
 
             const response = (await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource!.valid).to.be.true;
@@ -163,7 +163,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidInvalidResponse[200]);
 
             const response = (await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER)) as Resource<ValidationStatusResponse>;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource!.valid).to.be.false;
@@ -175,7 +175,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[400]);
 
             const response = await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.BAD_REQUEST);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.BAD_REQUEST);
@@ -185,7 +185,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[401]);
 
             const response = await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
@@ -195,7 +195,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[404]);
 
             const response = await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
@@ -205,7 +205,7 @@ describe("PSC Extensions Service", () => {
             sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[500]);
 
             const response = await pscExtensionService.getIsPscExtensionValid(
-                TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
+                PSC_NOTIFICATION_ID, COMPANY_NUMBER) as ApiErrorResponse;
 
             expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
             expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
@@ -215,7 +215,7 @@ describe("PSC Extensions Service", () => {
             const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetIsPscExtensionValidResponse[200]);
             const headers = { "X-Request-Id": "random-uuid" };
 
-            await pscExtensionService.getIsPscExtensionValid(TRANSACTION_ID, PSC_NOTIFICATION_ID, COMPANY_NUMBER, headers);
+            await pscExtensionService.getIsPscExtensionValid(PSC_NOTIFICATION_ID, COMPANY_NUMBER, headers);
 
             expect(mockRequest.calledOnce).to.be.true;
             expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);

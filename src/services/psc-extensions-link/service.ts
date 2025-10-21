@@ -62,7 +62,6 @@ export default class PscExtensionService {
     /**
      * Validates whether a PSC extension request is valid for the given parameters.
      *
-     * @param transactionId - The unique identifier of the transaction.
      * @param pscNotificationId - The unique identifier of the PSC notification.
      * @param companyNumber - The company number.
      * @param headers - Optional headers to include in the request.
@@ -70,8 +69,8 @@ export default class PscExtensionService {
      * - A `Resource<ValidationStatusResponse>` object containing validation results.
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
-    public async getIsPscExtensionValid (transactionId: string, pscNotificationId: string, companyNumber: string, headers?: Headers): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
-        const resourceUri = `/persons-with-significant-control-extensions/${transactionId}/${pscNotificationId}/${companyNumber}/isPscExtensionRequestValid`;
+    public async getIsPscExtensionValid (pscNotificationId: string, companyNumber: string, headers?: Headers): Promise<Resource<ValidationStatusResponse> | ApiErrorResponse> {
+        const resourceUri = `/persons-with-significant-control-extensions/${pscNotificationId}/${companyNumber}/isPscExtensionRequestValid`;
         const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
