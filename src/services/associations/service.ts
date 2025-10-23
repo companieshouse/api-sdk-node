@@ -13,6 +13,7 @@ import {
     SearchForCompanyAssociationPostBody
 } from "./types";
 import Mapping from "../../mapping/mapping";
+import { addRequestIdHeader } from "../../util";
 
 /**
  * A service class for managing communications with the associations API.
@@ -38,7 +39,8 @@ export default class AssociationsService {
         companyNumber: string,
         includeRemoved?: boolean,
         pageIndex?: number,
-        itemsPerPage?: number
+        itemsPerPage?: number,
+        requestId?: string
     ): Promise<Resource<AssociationList | Errors>> {
         let queryString: string = "";
         if (includeRemoved || pageIndex || itemsPerPage) {
@@ -51,7 +53,8 @@ export default class AssociationsService {
         }
 
         const url = `/associations/companies/${companyNumber}${queryString}`;
-        const response = await this.client.httpGet(url);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpGet(url, headers);
 
         return this.getResource(response) as Resource<AssociationList | Errors>;
     }
@@ -73,7 +76,8 @@ export default class AssociationsService {
         companyNumber: string,
         userEmail?: string,
         userId?: string,
-        associationStatus?: AssociationStatus[]
+        associationStatus?: AssociationStatus[],
+        requestId?: string
     ): Promise<Resource<Association | Errors>> {
         const url = `/associations/companies/${companyNumber}/search`;
 
@@ -81,8 +85,8 @@ export default class AssociationsService {
         if (userEmail) body.user_email = userEmail;
         if (userId) body.user_id = userId;
         if (associationStatus) body.status = associationStatus;
-
-        const response = await this.client.httpPost(url, body);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpPost(url, body, headers);
 
         return this.getResource(response) as Resource<Association | Errors>;
     }
@@ -99,7 +103,8 @@ export default class AssociationsService {
         associationStatus: AssociationStatus[],
         pageIndex?: number,
         itemsPerPage?: number,
-        companyNumber?: string
+        companyNumber?: string,
+        requestId?: string
     ): Promise<Resource<AssociationList | Errors>> {
         const queryParameters: QueryParameters = {
             page_index: pageIndex || undefined,
@@ -110,7 +115,8 @@ export default class AssociationsService {
         const queryString = this.getQueryString(queryParameters);
 
         const url = `/associations${queryString}`;
-        const response = await this.client.httpGet(url);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpGet(url, headers);
 
         return this.getResource(response) as Resource<AssociationList | Errors>;
     }
@@ -123,11 +129,13 @@ export default class AssociationsService {
      */
     public async createAssociation (
         companyNumber: string,
-        userId: string
+        userId: string,
+        requestId?: string
     ): Promise<Resource<NewAssociationResponse | Errors>> {
         const url = "/associations";
         const body = { company_number: companyNumber, user_id: userId };
-        const response = await this.client.httpPost(url, body);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpPost(url, body, headers);
         return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
     }
 
@@ -139,11 +147,13 @@ export default class AssociationsService {
      */
     public async inviteUser (
         companyNumber: string,
-        inviteeEmailAddress: string
+        inviteeEmailAddress: string,
+        requestId?: string
     ): Promise<Resource<NewAssociationResponse | Errors>> {
         const url = "/associations/invitations";
         const body = { company_number: companyNumber, invitee_email_id: inviteeEmailAddress };
-        const response = await this.client.httpPost(url, body);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpPost(url, body, headers);
         return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
     }
 
@@ -153,11 +163,12 @@ export default class AssociationsService {
      * @returns a promise that resolves to the HTTP response from the server that includes the association data or errors object.
      */
     public async getAssociation (
-        associationId: string
+        associationId: string,
+        requestId?: string
     ): Promise<Resource<Association | Errors>> {
         const url = `/associations/${associationId}`;
-        const response = await this.client.httpGet(url);
-
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpGet(url, headers);
         return this.getResource(response) as Resource<Association | Errors>;
     }
 
@@ -169,12 +180,13 @@ export default class AssociationsService {
      */
     public async updateAssociationStatus (
         associationId: string,
-        status: AssociationStatus
+        status: AssociationStatus,
+        requestId?: string
     ): Promise<Resource<undefined | Errors>> {
         const url = `/associations/${associationId}`;
         const body = { status: status };
-        const response = await this.client.httpPatch(url, body);
-
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpPatch(url, body, headers);
         return this.getResource(response) as Resource<undefined | Errors>;
     }
 
@@ -188,7 +200,8 @@ export default class AssociationsService {
      */
     public async getInvitations (
         pageIndex?: number,
-        itemsPerPage?: number
+        itemsPerPage?: number,
+        requestId?: string
     ): Promise<Resource<InvitationList | Errors>> {
         const queryParameters: QueryParameters = {
             page_index: pageIndex || undefined,
@@ -197,7 +210,9 @@ export default class AssociationsService {
         const queryString = this.getQueryString(queryParameters);
 
         const url = `/associations/invitations${queryString}`;
-        const response = await this.client.httpGet(url);
+        const headers = addRequestIdHeader(requestId);
+
+        const response = await this.client.httpGet(url, headers);
 
         return this.getResource(response) as Resource<InvitationList | Errors>;
     }
@@ -210,15 +225,16 @@ export default class AssociationsService {
      */
     public async postInvitation (
         companyNumber: string,
-        inviteeEmailAddress: string
+        inviteeEmailAddress: string,
+        requestId?: string
     ): Promise<Resource<NewAssociationResponse | Errors>> {
         const body = {
             company_number: companyNumber,
             invitee_email_id: inviteeEmailAddress
         };
         const url = `/associations/invitations`;
-
-        const response = await this.client.httpPost(url, body);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpPost(url, body, headers);
 
         return this.getResource(response) as Resource<NewAssociationResponse | Errors>;
     }
@@ -233,7 +249,8 @@ export default class AssociationsService {
     public async getPreviousStates (
         associationID: string,
         pageIndex?: number,
-        itemsPerPage?: number
+        itemsPerPage?: number,
+        requestId?: string
     ): Promise<Resource<PreviousStateList | Errors>> {
         let queryString: string = "";
         if (pageIndex || itemsPerPage) {
@@ -245,7 +262,8 @@ export default class AssociationsService {
         }
 
         const url = `/associations/${associationID}/previous-states${queryString}`;
-        const response = await this.client.httpGet(url);
+        const headers = addRequestIdHeader(requestId);
+        const response = await this.client.httpGet(url, headers);
 
         return this.getResource(response) as Resource<PreviousStateList | Errors>;
     }
