@@ -211,6 +211,15 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse[200]);
+            await associationsService.getCompanyAssociations(companyNumber, undefined, undefined, undefined, "random-uuid")
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("searchForCompanyAssociation", () => {
@@ -333,6 +342,14 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockGetResponse[200]);
+            await associationsService.searchForCompanyAssociation(companyNumber, undefined, undefined, undefined, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("searchAssociations", () => {
@@ -428,6 +445,16 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse[200])
+            const status = [AssociationStatus.AWAITING_APPROVAL];
+
+            await associationsService.searchAssociations(status, undefined, undefined, undefined, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("createAssociation", () => {
@@ -488,6 +515,15 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
+
+            await associationsService.createAssociation(companyNumber, userId, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("inviteUser", () => {
@@ -539,6 +575,15 @@ describe("AssociationsService", () => {
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
+        });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
+
+            await associationsService.inviteUser(companyNumber, inviteeEmailAddress, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(expectedHeader);
         });
     });
 
@@ -625,6 +670,15 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse[200]);
+
+            await associationsService.getAssociation("", "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("updateAssociationStatus", () => {
@@ -694,6 +748,16 @@ describe("AssociationsService", () => {
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
+        });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpPatch").resolves(mockGetResponse[200]);
+            const status = AssociationStatus.REMOVED;
+
+            await associationsService.updateAssociationStatus("associationId", status, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(expectedHeader);
         });
     });
 
@@ -793,6 +857,15 @@ describe("AssociationsService", () => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
         });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetInvitationsResponse[200]);
+
+            await associationsService.getInvitations(undefined, undefined, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(expectedHeader);
+        });
     });
 
     describe("postInvitation", () => {
@@ -844,6 +917,15 @@ describe("AssociationsService", () => {
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
+        });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpPost").resolves(mockPostResponse[201]);
+
+            await associationsService.postInvitation(companyNumber, inviteeEmailAddress, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[2]).to.deep.equal(expectedHeader);
         });
     });
 
@@ -940,6 +1022,15 @@ describe("AssociationsService", () => {
                 .then((data) => {
                     expect(data.httpStatusCode).to.equal(500);
                 });
+        });
+
+        it("should include the x-request-id header when requestId is provided", async () => {
+            const expectedHeader = { "X-Request-Id": "random-uuid" };
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetInvitationsResponse[200]);
+
+            await associationsService.getPreviousStates("", undefined, undefined, "random-uuid")
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(expectedHeader);
         });
     });
 });
