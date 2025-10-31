@@ -29,6 +29,7 @@ export interface LimitedPartnership {
         lawful_purpose_statement_checked?: boolean;
         partnership_number?: string;
         date_of_update?: string;
+        kind?: string;
     };
 }
 
