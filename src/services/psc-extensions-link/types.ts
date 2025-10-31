@@ -130,6 +130,7 @@ export interface PscExtension {
     data: PscExtensionData;
 }
 export interface PscExtensionData {
+    requesterEmail: string,
     companyNumber?: string,
     pscNotificationId?: string,
     extensionDetails?: ExtensionDetails
