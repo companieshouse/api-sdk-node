@@ -8,6 +8,7 @@ export const PSC_NOTIFICATION_ID = "123456";
 export const COMPANY_NUMBER = "00064000";
 
 const PSC_EXTENSION_DATA: PscExtensionData = {
+    requesterEmail: "example@example.com",
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID,
     extensionDetails: {
