@@ -21,7 +21,7 @@ export const PSC_VERIFICATION_IND: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
+        nameMismatchReason: NameMismatchReasonEnum.LEGALLY_CHANGED,
         verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
@@ -103,7 +103,7 @@ const PSC_VERIFICATION_IND_RESOURCE: PscVerificationDataResource = {
     company_number: COMPANY_NUMBER,
     psc_notification_id: PSC_NOTIFICATION_ID,
     verification_details: {
-        name_mismatch_reason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
+        name_mismatch_reason: NameMismatchReasonEnum.LEGALLY_CHANGED,
         verification_statements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
@@ -112,7 +112,7 @@ export const PSC_VERIFICATION_IND_CAMEL: PscVerificationData = {
     companyNumber: COMPANY_NUMBER,
     pscNotificationId: PSC_NOTIFICATION_ID,
     verificationDetails: {
-        nameMismatchReason: NameMismatchReasonEnum.LEGAL_NAME_CHANGE,
+        nameMismatchReason: NameMismatchReasonEnum.LEGALLY_CHANGED,
         verificationStatements: [VerificationStatementEnum.INDIVIDUAL_VERIFIED]
     }
 };
