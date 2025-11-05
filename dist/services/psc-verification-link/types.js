@@ -18,7 +18,7 @@ var NameMismatchReasonEnum;
     NameMismatchReasonEnum["LEGALLY_CHANGED"] = "LEGALLY_CHANGED";
     NameMismatchReasonEnum["TRANSLATION_OR_DIFF_CONV"] = "TRANSLATION_OR_DIFF_CONV";
     NameMismatchReasonEnum["REGISTER_ERROR"] = "REGISTER_ERROR";
-    NameMismatchReasonEnum["NOT_TO_SAY"] = "NOT_TO_SAY";
+    NameMismatchReasonEnum["NOT_TO_SAY"] = "NOT_SAY";
 })(NameMismatchReasonEnum = exports.NameMismatchReasonEnum || (exports.NameMismatchReasonEnum = {}));
 var VerificationStatementEnum;
 (function (VerificationStatementEnum) {

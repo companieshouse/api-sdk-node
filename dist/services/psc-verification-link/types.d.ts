@@ -139,7 +139,7 @@ export declare enum NameMismatchReasonEnum {
     LEGALLY_CHANGED = "LEGALLY_CHANGED",
     TRANSLATION_OR_DIFF_CONV = "TRANSLATION_OR_DIFF_CONV",
     REGISTER_ERROR = "REGISTER_ERROR",
-    NOT_TO_SAY = "NOT_TO_SAY"
+    NOT_TO_SAY = "NOT_SAY"
 }
 export declare enum VerificationStatementEnum {
     INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED"
