@@ -104,7 +104,8 @@ export enum PartnershipKind {
     UPDATE_PARTNERSHIP_REGISTERED_OFFICE_ADDRESS = "limited-partnership#update-partnership-registered-office-address",
     UPDATE_PARTNERSHIP_NAME = "limited-partnership#update-partnership-name",
     UPDATE_PARTNERSHIP_TERM = "limited-partnership#update-partnership-term",
-    UPDATE_PARTNERSHIP_PRINCIPAL_PLACE_OF_BUSINESS_ADDRESS = "limited-partnership#update-partnership-principal-place-of-business-address"
+    UPDATE_PARTNERSHIP_PRINCIPAL_PLACE_OF_BUSINESS_ADDRESS = "limited-partnership#update-partnership-principal-place-of-business-address",
+    UPDATE_PARTNERSHIP_REDESIGNATE_TO_PFLP = "limited-partnership#update-partnership-redesignate-to-pflp"
 }
 
 export enum NameEndingType {
