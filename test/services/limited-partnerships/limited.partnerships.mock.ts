@@ -44,7 +44,8 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
             postal_code: "SC13 1WE"
         },
         term: Term.BY_AGREEMENT,
-        redesignate_to_pflp: false,
+        redesignate_to_pflp_apply: false,
+        redesignate_to_pflp_confirm: false,
         sic_codes: ["12345", "56789"],
         lawful_purpose_statement_checked: true,
         partnership_number: "LP123456",
