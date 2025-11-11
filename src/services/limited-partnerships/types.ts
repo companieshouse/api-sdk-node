@@ -25,7 +25,8 @@ export interface LimitedPartnership {
         registered_office_address?: Address;
         principal_place_of_business_address?: Address;
         term?: Term;
-        redesignate_to_pflp?: boolean;
+        redesignate_to_pflp_apply?: boolean;
+        redesignate_to_pflp_confirm?: boolean;
         sic_codes?: string[];
         lawful_purpose_statement_checked?: boolean;
         partnership_number?: string;
