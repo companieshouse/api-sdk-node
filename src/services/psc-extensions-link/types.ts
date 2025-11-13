@@ -149,13 +149,11 @@ export interface ExtensionDetails {
 }
 
 export interface ValidationStatusError {
-    error: string;
-    location: string;
-    type?: string;
-    locationType: string;
+    field: string;
+    message: string;
 }
 export interface ValidationStatusResponse {
-    errors: ValidationStatusError[];
+    validationStatusError: ValidationStatusError[];
     valid: boolean;
 }
 export interface ValidationStatusErrorResource {
