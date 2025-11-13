@@ -156,7 +156,7 @@ describe("PSC Extensions Service", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource!.valid).to.be.true;
-            expect(response.resource!.errors).to.be.empty;
+            expect(response.resource!.validationStatusError).to.be.empty;
         });
 
         it("should return status 200 OK and validation response when extension is invalid", async () => {
@@ -167,8 +167,8 @@ describe("PSC Extensions Service", () => {
 
             expect(response.httpStatusCode).to.equal(StatusCodes.OK);
             expect(response.resource!.valid).to.be.false;
-            expect(response.resource!.errors).to.have.length(1);
-            expect(response.resource!.errors[0].error).to.equal("PSC has exceeded maximum number of extension requests");
+            expect(response.resource!.validationStatusError).to.have.length(1);
+            expect(response.resource!.validationStatusError[0].message).to.equal("PSC has exceeded maximum number of extension requests");
         });
 
         it("should return status 400 Bad Request when parameters are invalid", async () => {
