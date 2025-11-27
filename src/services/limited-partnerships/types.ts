@@ -100,6 +100,10 @@ export enum PartnerKind {
     REMOVE_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-general-partner-legal-entity",
     REMOVE_LIMITED_PARTNER_PERSON = "limited-partnership#remove-limited-partner-person",
     REMOVE_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#remove-limited-partner-legal-entity",
+    UPDATE_GENERAL_PARTNER_PERSON = "limited-partnership#update-general-partner-person",
+    UPDATE_GENERAL_PARTNER_LEGAL_ENTITY = "limited-partnership#update-general-partner-legal-entity",
+    UPDATE_LIMITED_PARTNER_PERSON = "limited-partnership#update-limited-partner-person",
+    UPDATE_LIMITED_PARTNER_LEGAL_ENTITY = "limited-partnership#update-limited-partner-legal-entity",
 }
 
 export enum PartnershipKind {
@@ -107,7 +111,7 @@ export enum PartnershipKind {
     UPDATE_PARTNERSHIP_NAME = "limited-partnership#update-partnership-name",
     UPDATE_PARTNERSHIP_TERM = "limited-partnership#update-partnership-term",
     UPDATE_PARTNERSHIP_PRINCIPAL_PLACE_OF_BUSINESS_ADDRESS = "limited-partnership#update-partnership-principal-place-of-business-address",
-    UPDATE_PARTNERSHIP_REDESIGNATE_TO_PFLP = "limited-partnership#update-partnership-redesignate-to-pflp"
+    UPDATE_PARTNERSHIP_REDESIGNATE_TO_PFLP = "limited-partnership#update-partnership-redesignate-to-pflp",
 }
 
 export enum NameEndingType {
