@@ -140,7 +140,7 @@ describe("company-psc", () => {
 
     it("uses default values for startIndex and itemsPerPage when not provided", async () => {
         await companyPsc.getCompanyPsc("123");
-        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=30")).to.be.true;
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=0&items_per_page=25")).to.be.true;
     });
 
     it("uses provided startIndex and itemsPerPage values", async () => {
@@ -155,7 +155,7 @@ describe("company-psc", () => {
 
     it("uses default itemsPerPage when not provided and startIndex is provided", async () => {
         await companyPsc.getCompanyPsc("123", 10);
-        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=30")).to.be.true;
+        expect(mockRequest.calledWith("/company/123/persons-with-significant-control?start_index=10&items_per_page=25")).to.be.true;
     });
 
     it("uses provided headers", async () => {
