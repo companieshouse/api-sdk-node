@@ -58,7 +58,7 @@ type Partner = {
     usual_residential_address?: Address;
     cease_date?: string;
     remove_confirmation_checked?: boolean;
-    is_update_usual_residential_address_required?: boolean;
+    update_usual_residential_address_required?: boolean;
 };
 
 export interface LimitedPartner {
