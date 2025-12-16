@@ -71,6 +71,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         nationality1: "English",
         nationality2: "French",
         not_disqualified_statement_checked: true,
+        update_usual_residential_address_required: false,
         principal_office_address: {
             premises: "22",
             address_line_1: "Some Street",
@@ -124,6 +125,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
         legal_form: "abc",
         nationality1: "English",
         nationality2: "French",
+        update_usual_residential_address_required: false,
         principal_office_address: {
             premises: "22",
             address_line_1: "Some Street",
