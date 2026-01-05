@@ -26,6 +26,9 @@ export default class OverseasEntityService {
 
     public async getOverseasEntity (transactionId: string, overseasEntityId: string, forceFetch: boolean = false): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceFetch ? "?force=true" : "")}`
+        console.log(">>>>>getOverseasEntity-method-log");
+        console.log("transactionId: " + transactionId);
+        console.log("overseasEntityId: " + overseasEntityId);
         const response: HttpResponse = await this.client.httpGet(URL);
 
         if (response.error) {
@@ -45,6 +48,9 @@ export default class OverseasEntityService {
 
     public async getOverseasEntityDetails (transactionId: string, overseasEntityId: string): Promise< Resource<OverseasEntityExtraDetails> | ApiErrorResponse > {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/details`
+        console.log(">>>>>getOverseasEntityDetails-method-log");
+        console.log("transactionId: " + transactionId);
+        console.log("overseasEntityId: " + overseasEntityId);
         const response: HttpResponse = await this.client.httpGet(URL);
 
         if (response.error) {
@@ -67,6 +73,8 @@ export default class OverseasEntityService {
         body: OverseasEntity
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
+        console.log(">>>>>postOverseasEntity-method-log");
+        console.log(body);
         const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
 
         if (response.error) {
@@ -86,6 +94,8 @@ export default class OverseasEntityService {
 
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
+        console.log(">>>>>putOverseasEntity-method-log");
+        console.log(body);
         const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 
         if (resp.error) {
