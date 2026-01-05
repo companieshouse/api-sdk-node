@@ -14,6 +14,8 @@ export default class TransactionService {
    */
     public async postTransaction (transaction: Transaction, requestId?: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         let url = "/transactions"
+        console.log(">>>>>postTransaction-method-log");
+        console.log(transaction);
         if (transaction.id) {
             url += "/" + transaction.id
         }
@@ -52,6 +54,8 @@ export default class TransactionService {
     public async putTransaction (transaction: Transaction, requestId?: string): Promise<ApiResponse<Transaction> | ApiErrorResponse> {
         const url = "/transactions/" + transaction.id
 
+        console.log(">>>>>putTransaction-method-log");
+        console.log(transaction);
         const headers = addRequestIdHeader(requestId);
 
         const transactionResource: TransactionResource = this.mapToResource(transaction);
@@ -97,6 +101,8 @@ export default class TransactionService {
      */
     public async getTransaction (transactionId: string, requestId?: string): Promise<Resource<Transaction>|ApiErrorResponse> {
         const url = "/transactions/" + transactionId
+        console.log(">>>>>getTransaction-method-log");
+        console.log("transcationId: " + transactionId);
         const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpGet(url, headers);
 
@@ -141,6 +147,8 @@ export default class TransactionService {
      */
     public async patchTransaction (transactionId: string, transactionResource: Partial<TransactionResource>, requestId?: string): Promise<Resource<Transaction> | ApiErrorResponse> {
         const url = `/transactions/${transactionId}`;
+        console.log(">>>>>patchTransaction-method-log");
+        console.log("transcationId: " + transactionId);
         const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpPatch(url, transactionResource, headers);
 
