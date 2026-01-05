@@ -59,6 +59,7 @@ type Partner = {
     cease_date?: string;
     remove_confirmation_checked?: boolean;
     update_usual_residential_address_required?: boolean;
+    update_service_address_required?: boolean;
 };
 
 export interface LimitedPartner {
