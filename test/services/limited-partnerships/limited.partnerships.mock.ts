@@ -102,7 +102,8 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
             region: "That Region",
             country: "That Country",
             postal_code: "SC15 1N2"
-        }
+        },
+        date_of_update: "2025-01-01"
     }
 };
 
@@ -148,7 +149,8 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
             region: "That Region",
             country: "That Country",
             postal_code: "SC15 1N2"
-        }
+        },
+        date_of_update: "2025-01-01"
     }
 };
 

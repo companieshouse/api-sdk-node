@@ -60,6 +60,7 @@ type Partner = {
     remove_confirmation_checked?: boolean;
     update_usual_residential_address_required?: boolean;
     update_service_address_required?: boolean;
+    date_of_update?: string;
 };
 
 export interface LimitedPartner {
