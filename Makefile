@@ -55,5 +55,5 @@ sonar:
 
 .PHONY: dependency-check
 dependency-check:
-	npm audit --audit-level=high
+	npm audit
 
