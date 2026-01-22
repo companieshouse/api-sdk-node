@@ -52,3 +52,8 @@ dist: lint test-unit clean package
 sonar:
 	npm run coverage:report
 	npm run analyse-code
+
+.PHONY: dependency-check
+dependency-check:
+	npm audit --audit-level=high
+
