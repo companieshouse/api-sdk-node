@@ -73,9 +73,12 @@ export default class OverseasEntityService {
         body: OverseasEntity
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
-        console.log(">>>>>postOverseasEntity-method-log");
+        console.log(">>>>>postOverseasEntity-body");
         console.log(body);
-        const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
+        const fff = mapOverseasEntity(body);
+        console.log(">>>>>postOverseasEntity-mapped");
+        console.log(fff);
+        const response: HttpResponse = await this.client.httpPost(URL, fff);
 
         if (response.error) {
             return {
@@ -94,9 +97,12 @@ export default class OverseasEntityService {
 
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
-        console.log(">>>>>putOverseasEntity-method-log");
+        console.log(">>>>>putOverseasEntity-body");
         console.log(body);
-        const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
+        const fff = mapOverseasEntity(body);
+        console.log(">>>>>putOverseasEntity-mapped");
+        console.log(fff);
+        const resp = await this.client.httpPut(URL, fff);
 
         if (resp.error) {
             return {
