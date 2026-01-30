@@ -77,7 +77,7 @@ export default class OverseasEntityService {
         console.log(body);
         const fff = mapOverseasEntity(body);
         console.log(">>>>>postOverseasEntity-mapped");
-        console.log(fff);
+        console.log(JSON.stringify(fff, null, 2));
         const response: HttpResponse = await this.client.httpPost(URL, fff);
 
         if (response.error) {
@@ -101,7 +101,7 @@ export default class OverseasEntityService {
         console.log(body);
         const fff = mapOverseasEntity(body);
         console.log(">>>>>putOverseasEntity-mapped");
-        console.log(fff);
+        console.log(JSON.stringify(fff, null, 2));
         const resp = await this.client.httpPut(URL, fff);
 
         if (resp.error) {
