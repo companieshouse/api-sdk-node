@@ -501,13 +501,15 @@ const mapUpdate = (update: Update): UpdateResource => {
             filing_date: convertOptionalDateToIsoDateString(update.filing_date?.day, update.filing_date?.month, update.filing_date?.year),
             bo_mo_data_fetched: update.bo_mo_data_fetched,
             registrable_beneficial_owner: update.registrable_beneficial_owner,
-            no_change: update.no_change,
             trust_data_fetched: update.trust_data_fetched,
             owned_land_relevant_period: update.owned_land_relevant_period,
             change_bo_relevant_period: update.change_bo_relevant_period,
             trustee_involved_relevant_period: update.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: update.change_beneficiary_relevant_period
         };
+        if (typeof update.no_change !== "undefined") {
+            resource.no_change = update.no_change;
+        }
         const beneficial_owners_individual = mapBeneficialOwnersIndividual(update.review_beneficial_owners_individual);
         if (beneficial_owners_individual.length !== 0) {
             resource.review_beneficial_owners_individual = beneficial_owners_individual;
@@ -544,7 +546,6 @@ const mapRemove = (remove: Remove): RemoveResource => {
         const resource: RemoveResource = {
             is_not_proprietor_of_land: (remove.is_not_proprietor_of_land) ? remove.is_not_proprietor_of_land : null
         };
-
         return resource;
     }
     return {};
@@ -555,7 +556,6 @@ const mapRemoveResource = (removeResource: RemoveResource): Remove => {
         const remove: Remove = {
             is_not_proprietor_of_land: removeResource.is_not_proprietor_of_land
         };
-
         return remove;
     }
     return {};
@@ -568,13 +568,15 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
             registrable_beneficial_owner: updateResource.registrable_beneficial_owner,
-            no_change: updateResource.no_change,
             trust_data_fetched: updateResource.trust_data_fetched,
             owned_land_relevant_period: updateResource.owned_land_relevant_period,
             change_bo_relevant_period: updateResource.change_bo_relevant_period,
             trustee_involved_relevant_period: updateResource.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: updateResource.change_beneficiary_relevant_period
         };
+        if (typeof updateResource.no_change !== "undefined") {
+            update.no_change = updateResource.no_change;
+        }
         const beneficial_owners_individual = (updateResource.review_beneficial_owners_individual || []).map(mapBoiResource);
         if (beneficial_owners_individual.length !== 0) {
             update.review_beneficial_owners_individual = beneficial_owners_individual;
