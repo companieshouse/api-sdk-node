@@ -146,6 +146,7 @@ export interface Identification {
   legalForm?: string;
   placeRegistered?: string;
   registrationNumber?: string;
+  registerLocation?: string;
 }
 
 export interface CompanyOfficerLinks {
