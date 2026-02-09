@@ -112,6 +112,7 @@ export interface CompanyOfficer {
   nationality?: string;
   occupation?: string;
   officerRole: string;
+  principalOfficeAddress?: Address;
   contactDetails: ContactDetails;
   responsibilities?: string;
   resignedOn?: string;
