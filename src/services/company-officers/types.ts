@@ -33,6 +33,7 @@ export interface CompanyOfficerResource {
   contact_details?: ContactDetailsResource;
   responsibilities?: string;
   resigned_on?: string;
+  principal_office_address?: AddressResource;
 }
 
 export interface AddressResource {

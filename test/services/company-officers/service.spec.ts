@@ -205,6 +205,17 @@ describe("company-officers", () => {
                 premises: "some premises",
                 region: "South"
             },
+            principal_office_address: {
+                address_line_1: "123 Street",
+                address_line_2: "Some area",
+                care_of: "Some council",
+                country: "United Kingdom",
+                locality: "Wales",
+                po_box: "123",
+                postal_code: "SW1",
+                premises: "some premises",
+                region: "South"
+            },
             date_of_birth: {
                 day: "15",
                 month: "4",
@@ -264,6 +275,16 @@ describe("company-officers", () => {
         expect(data.resource.address.postalCode).to.equal(mockResponseBody.address.postal_code);
         expect(data.resource.address.premises).to.equal(mockResponseBody.address.premises);
         expect(data.resource.address.region).to.equal(mockResponseBody.address.region);
+
+        expect(data.resource.principalOfficeAddress.addressLine1).to.equal(mockResponseBody.principal_office_address.address_line_1);
+        expect(data.resource.principalOfficeAddress.addressLine2).to.equal(mockResponseBody.principal_office_address.address_line_2);
+        expect(data.resource.principalOfficeAddress.careOf).to.equal(mockResponseBody.principal_office_address.care_of);
+        expect(data.resource.principalOfficeAddress.country).to.equal(mockResponseBody.principal_office_address.country);
+        expect(data.resource.principalOfficeAddress.locality).to.equal(mockResponseBody.principal_office_address.locality);
+        expect(data.resource.principalOfficeAddress.poBox).to.equal(mockResponseBody.principal_office_address.po_box);
+        expect(data.resource.principalOfficeAddress.postalCode).to.equal(mockResponseBody.principal_office_address.postal_code);
+        expect(data.resource.principalOfficeAddress.premises).to.equal(mockResponseBody.principal_office_address.premises);
+        expect(data.resource.principalOfficeAddress.region).to.equal(mockResponseBody.principal_office_address.region);
 
         expect(data.resource.dateOfBirth.day).to.equal(mockResponseBody.date_of_birth.day);
         expect(data.resource.dateOfBirth.month).to.equal(mockResponseBody.date_of_birth.month);
