@@ -71,26 +71,26 @@ export default interface IHttpClient {
 }
 
 export abstract class AbstractClient implements IHttpClient {
-  private readonly _headers: any = {};
+    private readonly _headers: any = {};
 
-  /**
+    /**
    * Public getter for the request headers.
    */
-  get headers (): any {
-      const out: any = {};
-      for (const name in this._headers) {
-          if (!out.hasOwnProperty(name)) {
-              out[name] = this._headers[name].join(", ");
-          }
-      }
-      return out;
-  }
+    get headers (): any {
+        const out: any = {};
+        for (const name in this._headers) {
+            if (!out.hasOwnProperty(name)) {
+                out[name] = this._headers[name].join(", ");
+            }
+        }
+        return out;
+    }
 
-  constructor (protected readonly options: HttpClientOptions) {
-      this.init();
-  }
+    constructor (protected readonly options: HttpClientOptions) {
+        this.init();
+    }
 
-  /**
+    /**
    * Set's a http request header. Headers can have multiple values and when sent the resulting
    * header values will be comma separated.
    *
@@ -99,23 +99,23 @@ export abstract class AbstractClient implements IHttpClient {
    * @param name the header name
    * @param value the header value
    */
-  public header (name: string, value: string): void {
-      if (!this._headers.hasOwnProperty(name)) {
-          this._headers[name] = [];
-      }
-      this._headers[name].push(value);
-  }
+    public header (name: string, value: string): void {
+        if (!this._headers.hasOwnProperty(name)) {
+            this._headers[name] = [];
+        }
+        this._headers[name].push(value);
+    }
 
-  /**
+    /**
    * Removes a request header.
    *
    * @param name the header name
    */
-  public removeHeader (name: string): void {
-      if (this._headers.hasOwnProperty(name)) {
-          delete this._headers[name];
-      }
-  }
+    public removeHeader (name: string): void {
+        if (this._headers.hasOwnProperty(name)) {
+            delete this._headers[name];
+        }
+    }
 
   /**
    * Sends a HTTP GET request.
