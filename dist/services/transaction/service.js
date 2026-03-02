@@ -250,6 +250,47 @@ class TransactionService {
             return resource;
         });
     }
+    getTestFunction(requestId, companyNumber) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = `/company/${companyNumber}/transactions`;
+            const headers = util_1.addRequestIdHeader(requestId);
+            const resp = yield this.client.httpGet(url, headers);
+            if (resp.error) {
+                return {
+                    httpStatusCode: resp.status,
+                    errors: [resp.error]
+                };
+            }
+            const resource = {
+                httpStatusCode: resp.status
+            };
+            resource.resource = {
+                items: resp.body.items ? resp.body.items.map((i) => ({
+                    id: i.id,
+                    updatedAt: i.updated_at,
+                    status: i.status,
+                    filings: i.filings
+                        ? (() => {
+                            const result = {};
+                            for (const key in i.filings) {
+                                if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
+                                    const filing = i.filings[key];
+                                    result[key] = {
+                                        status: filing.status,
+                                        companyNumber: filing.company_number,
+                                        type: filing.type
+                                    };
+                                }
+                            }
+                            return result;
+                        })()
+                        : undefined,
+                    resumeJourneyUri: i.resume_journey_uri
+                })) : []
+            };
+            return resource;
+        });
+    }
 }
 exports.default = TransactionService;
 //# sourceMappingURL=service.js.map

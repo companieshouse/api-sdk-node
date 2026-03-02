@@ -35,4 +35,5 @@ export default class TransactionService {
     private mapToResource;
     getTransactionsForResourceKind(requestId?: string, resourceKind?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
     getTransactionsForCompany(requestId?: string, companyNumber?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
+    getTestFunction(requestId?: string, companyNumber?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
 }
