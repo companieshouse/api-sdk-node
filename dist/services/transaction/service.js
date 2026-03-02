@@ -252,7 +252,7 @@ class TransactionService {
     }
     getTestFunction(requestId, companyNumber) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `/company/${companyNumber}/transactions`;
+            const url = `/test/company/${companyNumber}/transactions/test`;
             const headers = util_1.addRequestIdHeader(requestId);
             const resp = yield this.client.httpGet(url, headers);
             if (resp.error) {

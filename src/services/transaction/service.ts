@@ -267,7 +267,7 @@ export default class TransactionService {
     }
 
     public async getTestFunction (requestId?: string, companyNumber?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
-        const url = `/company/${companyNumber}/transactions`;
+        const url = `/test/company/${companyNumber}/transactions/test`;
         const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpGet(url, headers);
 
