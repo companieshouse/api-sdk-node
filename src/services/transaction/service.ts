@@ -224,9 +224,11 @@ export default class TransactionService {
     }
 
     public async getTransactionsForCompany (requestId?: string, companyNumber?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
-        const url = `/company/${companyNumber}/transactionsTest`;
+        const url = `/company/${companyNumber}/transactions`;
         const headers = addRequestIdHeader(requestId);
         const resp = await this.client.httpGet(url, headers);
+
+        console.log(`GET ${url} responded with status ${resp.status}, respose body: ${JSON.stringify(resp.body)}, error: ${JSON.stringify(resp.error)}`);
 
         if (resp.error) {
             return {

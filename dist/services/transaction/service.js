@@ -211,9 +211,10 @@ class TransactionService {
     }
     getTransactionsForCompany(requestId, companyNumber) {
         return __awaiter(this, void 0, void 0, function* () {
-            const url = `/company/${companyNumber}/transactionsTest`;
+            const url = `/company/${companyNumber}/transactions`;
             const headers = util_1.addRequestIdHeader(requestId);
             const resp = yield this.client.httpGet(url, headers);
+            console.log(`GET ${url} responded with status ${resp.status}, respose body: ${JSON.stringify(resp.body)}, error: ${JSON.stringify(resp.error)}`);
             if (resp.error) {
                 return {
                     httpStatusCode: resp.status,
