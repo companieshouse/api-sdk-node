@@ -1,0 +1,180 @@
+"use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+class LimitedPartnershipsService {
+    constructor(client) {
+        this.client = client;
+    }
+    postLimitedPartnership(transactionId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/partnership`;
+            const response = yield this.client.httpPost(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    patchLimitedPartnership(transactionId, submissionId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
+            const response = yield this.client.httpPatch(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getLimitedPartnership(transactionId, submissionId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/partnership/${submissionId}`;
+            const response = yield this.client.httpGet(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    /*
+     * Calls to incorporation endpoints
+     */
+    postLimitedPartnershipIncorporation(transactionId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/incorporation/limited-partnership`;
+            const response = yield this.client.httpPost(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getLimitedPartnershipIncorporation(transactionId, filingResourceId, includeSubResources) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const subResourcesQuery = includeSubResources
+                ? "?include_sub_resources=" + includeSubResources
+                : "";
+            const URL = `/transactions/${transactionId}/incorporation/limited-partnership/${filingResourceId}${subResourcesQuery}`;
+            const response = yield this.client.httpGet(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    /*
+     * Calls to general partner endpoints
+     */
+    postGeneralPartner(transactionId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/general-partner`;
+            const response = yield this.client.httpPost(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getGeneralPartner(transactionId, generalPartnerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+            const response = yield this.client.httpGet(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getGeneralPartners(transactionId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/general-partners`;
+            const response = yield this.client.httpGet(URL, { transactionId });
+            return {
+                httpStatusCode: response.status,
+                resource: response.body
+            };
+        });
+    }
+    patchGeneralPartner(transactionId, generalPartnerId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+            const response = yield this.client.httpPatch(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    deleteGeneralPartner(transactionId, generalPartnerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/general-partner/${generalPartnerId}`;
+            const response = yield this.client.httpDelete(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    /*
+    * Calls to limited partner endpoints
+    */
+    postLimitedPartner(transactionId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/limited-partner`;
+            const response = yield this.client.httpPost(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getLimitedPartner(transactionId, limitedPartnerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
+            const response = yield this.client.httpGet(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    getLimitedPartners(transactionId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/limited-partners`;
+            const response = yield this.client.httpGet(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: response.body
+            };
+        });
+    }
+    patchLimitedPartner(transactionId, limitedPartnerId, body) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
+            const response = yield this.client.httpPatch(URL, body);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+    deleteLimitedPartner(transactionId, limitedPartnerId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
+            const response = yield this.client.httpDelete(URL);
+            return {
+                httpStatusCode: response.status,
+                resource: Object.assign({}, response.body)
+            };
+        });
+    }
+}
+exports.default = LimitedPartnershipsService;
+//# sourceMappingURL=service.js.map
