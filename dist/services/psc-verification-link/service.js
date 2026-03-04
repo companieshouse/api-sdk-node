@@ -61,6 +61,16 @@ class PscVerificationService {
             return this.populateFrontEndResource(response);
         });
     }
+    getPscVerificationByPscId(pscId, headers) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const resourceUri = `/persons-with-significant-control-verification/${pscId}`;
+            const response = yield this.client.httpGet(resourceUri, headers);
+            if (response.error) {
+                return this.handleErrorResponse(response);
+            }
+            return this.populateFrontEndResource(response);
+        });
+    }
     /**
      * Updates a PSC verification using a PATCH request for a given transaction and filing ID.
      *

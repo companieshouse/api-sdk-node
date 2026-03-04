@@ -54,6 +54,17 @@ export default class PscVerificationService {
         return this.populateFrontEndResource(response);
     }
 
+    public async getPscVerificationByPscId (pscId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
+        const resourceUri = `/persons-with-significant-control-verification/${pscId}`;
+        const response = await this.client.httpGet(resourceUri, headers);
+
+        if (response.error) {
+            return this.handleErrorResponse(response);
+        }
+
+        return this.populateFrontEndResource(response);
+    }
+
     /**
      * Updates a PSC verification using a PATCH request for a given transaction and filing ID.
      *
