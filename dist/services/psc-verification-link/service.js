@@ -61,9 +61,9 @@ class PscVerificationService {
             return this.populateFrontEndResource(response);
         });
     }
-    getPscVerificationByPscId(pscId, headers) {
+    getPscVerificationByNotificationId(notificationId, headers) {
         return __awaiter(this, void 0, void 0, function* () {
-            const resourceUri = `/private/persons-with-significant-control-verification/${pscId}`;
+            const resourceUri = `/persons-with-significant-control-verification/${notificationId}`;
             const response = yield this.client.httpGet(resourceUri, headers);
             if (response.error) {
                 return this.handleErrorResponse(response);

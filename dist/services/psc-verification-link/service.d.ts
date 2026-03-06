@@ -29,7 +29,7 @@ export default class PscVerificationService {
      * - An `ApiErrorResponse` object if an error occurs during the request.
      */
     getPscVerification(transactionId: string, pscVerificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
-    getPscVerificationByPscId(pscId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
+    getPscVerificationByNotificationId(notificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse>;
     /**
      * Updates a PSC verification using a PATCH request for a given transaction and filing ID.
      *

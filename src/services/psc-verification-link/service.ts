@@ -54,8 +54,8 @@ export default class PscVerificationService {
         return this.populateFrontEndResource(response);
     }
 
-    public async getPscVerificationByPscId (pscId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
-        const resourceUri = `/private/persons-with-significant-control-verification/${pscId}`;
+    public async getPscVerificationByNotificationId (notificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
+        const resourceUri = `/persons-with-significant-control-verification/${notificationId}`;
         const response = await this.client.httpGet(resourceUri, headers);
 
         if (response.error) {
