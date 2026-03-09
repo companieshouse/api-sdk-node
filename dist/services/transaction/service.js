@@ -127,6 +127,52 @@ class TransactionService {
         });
     }
     /**
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
+    getTransactionData(transactionId, requestId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = "/transactions/" + transactionId;
+            const headers = util_1.addRequestIdHeader(requestId);
+            const resp = yield this.client.httpGet(url, headers);
+            if (resp.error) {
+                return {
+                    httpStatusCode: resp.status,
+                    errors: [resp.error]
+                };
+            }
+            const resource = {
+                httpStatusCode: resp.status
+            };
+            // cast the response body to the expected type
+            const body = resp.body;
+            resource.resource = {
+                id: body.id,
+                updatedAt: body.updatedAt,
+                status: body.status,
+                filings: body.filings
+                    ? (() => {
+                        const result = {};
+                        for (const key in body.filings) {
+                            if (Object.prototype.hasOwnProperty.call(body.filings, key)) {
+                                const filing = body.filings[key];
+                                result[key] = {
+                                    status: filing.status,
+                                    companyNumber: filing.companyNumber,
+                                    type: filing.type
+                                };
+                            }
+                        }
+                        return result;
+                    })()
+                    : undefined,
+                resumeJourneyUri: body.resumeJourneyUri
+            };
+            return resource;
+        });
+    }
+    /**
      * Patch a transaction.
      *
      * @param transactionId the ID of the transaction to update
@@ -215,47 +261,6 @@ class TransactionService {
             const headers = util_1.addRequestIdHeader(requestId);
             const resp = yield this.client.httpGet(url, headers);
             console.log(`GET ${url} responded with status ${resp.status}, respose body: ${JSON.stringify(resp.body)}, error: ${JSON.stringify(resp.error)}`);
-            if (resp.error) {
-                return {
-                    httpStatusCode: resp.status,
-                    errors: [resp.error]
-                };
-            }
-            const resource = {
-                httpStatusCode: resp.status
-            };
-            resource.resource = {
-                items: resp.body.items ? resp.body.items.map((i) => ({
-                    id: i.id,
-                    updatedAt: i.updated_at,
-                    status: i.status,
-                    filings: i.filings
-                        ? (() => {
-                            const result = {};
-                            for (const key in i.filings) {
-                                if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
-                                    const filing = i.filings[key];
-                                    result[key] = {
-                                        status: filing.status,
-                                        companyNumber: filing.company_number,
-                                        type: filing.type
-                                    };
-                                }
-                            }
-                            return result;
-                        })()
-                        : undefined,
-                    resumeJourneyUri: i.resume_journey_uri
-                })) : []
-            };
-            return resource;
-        });
-    }
-    getTestFunction(requestId, companyNumber) {
-        return __awaiter(this, void 0, void 0, function* () {
-            const url = `/test/company/${companyNumber}/transactions/test`;
-            const headers = util_1.addRequestIdHeader(requestId);
-            const resp = yield this.client.httpGet(url, headers);
             if (resp.error) {
                 return {
                     httpStatusCode: resp.status,

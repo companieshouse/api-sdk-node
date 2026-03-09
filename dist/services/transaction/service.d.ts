@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { Transaction, TransactionResource, TransactionList } from "./types";
+import { Transaction, TransactionResource, TransactionList, TransactionData } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 export default class TransactionService {
     private readonly client;
@@ -26,6 +26,12 @@ export default class TransactionService {
      */
     getTransaction(transactionId: string, requestId?: string): Promise<Resource<Transaction> | ApiErrorResponse>;
     /**
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
+    getTransactionData(transactionId: string, requestId?: string): Promise<Resource<TransactionData> | ApiErrorResponse>;
+    /**
      * Patch a transaction.
      *
      * @param transactionId the ID of the transaction to update
@@ -35,5 +41,4 @@ export default class TransactionService {
     private mapToResource;
     getTransactionsForResourceKind(requestId?: string, resourceKind?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
     getTransactionsForCompany(requestId?: string, companyNumber?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
-    getTestFunction(requestId?: string, companyNumber?: string): Promise<Resource<TransactionList> | ApiErrorResponse>;
 }

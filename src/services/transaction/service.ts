@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { Transaction, TransactionResource, TransactionList } from "./types";
+import { Transaction, TransactionResource, TransactionList, TransactionData } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import { addRequestIdHeader } from "../../util";
 import Mapping from "../../mapping/mapping";
@@ -134,6 +134,55 @@ export default class TransactionService {
     }
 
     /**
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
+    public async getTransactionData (transactionId: string, requestId?: string): Promise<Resource<TransactionData>|ApiErrorResponse> {
+        const url = "/transactions/" + transactionId
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpGet(url, headers);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<TransactionData> = {
+            httpStatusCode: resp.status
+        };
+
+        // cast the response body to the expected type
+        const body = resp.body as TransactionData;
+
+        resource.resource = {
+            id: body.id,
+            updatedAt: body.updatedAt,
+            status: body.status,
+            filings: body.filings
+                ? (() => {
+                    const result = {};
+                    for (const key in body.filings) {
+                        if (Object.prototype.hasOwnProperty.call(body.filings, key)) {
+                            const filing = body.filings[key];
+                            result[key] = {
+                                status: filing.status,
+                                companyNumber: filing.companyNumber,
+                                type: filing.type
+                            };
+                        }
+                    }
+                    return result;
+                })()
+                : undefined,
+            resumeJourneyUri: body.resumeJourneyUri
+        };
+        return resource;
+    }
+
+    /**
      * Patch a transaction.
      *
      * @param transactionId the ID of the transaction to update
@@ -229,49 +278,6 @@ export default class TransactionService {
         const resp = await this.client.httpGet(url, headers);
 
         console.log(`GET ${url} responded with status ${resp.status}, respose body: ${JSON.stringify(resp.body)}, error: ${JSON.stringify(resp.error)}`);
-
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
-        }
-
-        const resource: Resource<TransactionList> = {
-            httpStatusCode: resp.status
-        };
-
-        resource.resource = {
-            items: resp.body.items ? resp.body.items.map((i) => ({
-                id: i.id,
-                updatedAt: i.updated_at,
-                status: i.status,
-                filings: i.filings
-                    ? (() => {
-                        const result = {};
-                        for (const key in i.filings) {
-                            if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
-                                const filing = i.filings[key];
-                                result[key] = {
-                                    status: filing.status,
-                                    companyNumber: filing.company_number,
-                                    type: filing.type
-                                };
-                            }
-                        }
-                        return result;
-                    })()
-                    : undefined,
-                resumeJourneyUri: i.resume_journey_uri
-            })) : []
-        };
-        return resource;
-    }
-
-    public async getTestFunction (requestId?: string, companyNumber?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
-        const url = `/test/company/${companyNumber}/transactions/test`;
-        const headers = addRequestIdHeader(requestId);
-        const resp = await this.client.httpGet(url, headers);
 
         if (resp.error) {
             return {
