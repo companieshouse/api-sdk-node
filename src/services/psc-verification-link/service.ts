@@ -54,6 +54,14 @@ export default class PscVerificationService {
         return this.populateFrontEndResource(response);
     }
 
+    /**
+     * Retrieves a specific PSC verification by its notification id for a given transaction.
+     *
+     * @param notificationId - The notification id of the PSC verification.
+     * @returns A promise that resolves to either:
+     * - A `Resource<PscVerification>` object containing the PSC verification details.
+     * - An `ApiErrorResponse` object if an error occurs during the request.
+     */
     public async getPscVerificationByNotificationId (notificationId: string, headers?: Headers): Promise<Resource<PscVerification> | ApiErrorResponse> {
         const resourceUri = `/persons-with-significant-control-verification/${notificationId}`;
         const response = await this.client.httpGet(resourceUri, headers);

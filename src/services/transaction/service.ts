@@ -271,49 +271,4 @@ export default class TransactionService {
         };
         return resource;
     }
-
-    public async getTransactionsForCompany (requestId?: string, companyNumber?: string): Promise<Resource<TransactionList>|ApiErrorResponse> {
-        const url = `/company/${companyNumber}/transactions`;
-        const headers = addRequestIdHeader(requestId);
-        const resp = await this.client.httpGet(url, headers);
-
-        console.log(`GET ${url} responded with status ${resp.status}, respose body: ${JSON.stringify(resp.body)}, error: ${JSON.stringify(resp.error)}`);
-
-        if (resp.error) {
-            return {
-                httpStatusCode: resp.status,
-                errors: [resp.error]
-            };
-        }
-
-        const resource: Resource<TransactionList> = {
-            httpStatusCode: resp.status
-        };
-
-        resource.resource = {
-            items: resp.body.items ? resp.body.items.map((i) => ({
-                id: i.id,
-                updatedAt: i.updated_at,
-                status: i.status,
-                filings: i.filings
-                    ? (() => {
-                        const result = {};
-                        for (const key in i.filings) {
-                            if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
-                                const filing = i.filings[key];
-                                result[key] = {
-                                    status: filing.status,
-                                    companyNumber: filing.company_number,
-                                    type: filing.type
-                                };
-                            }
-                        }
-                        return result;
-                    })()
-                    : undefined,
-                resumeJourneyUri: i.resume_journey_uri
-            })) : []
-        };
-        return resource;
-    }
 }
