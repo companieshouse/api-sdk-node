@@ -85,7 +85,7 @@ export interface Psc {
     data?: {
         kind?: string;
         appointment_id?: string;
-        country: string;
+        country?: string;
         date_effective_from?: string;
         resignation_date?: string;
         natures_of_control?: naturesOfControl[];
