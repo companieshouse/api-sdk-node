@@ -80,6 +80,46 @@ export interface GeneralPartner {
     };
 }
 
+export interface Psc {
+    id?: string;
+    data?: {
+        kind?: string;
+        appointment_id?: string;
+        country?: string;
+        date_effective_from?: string;
+        resignation_date?: string;
+        natures_of_control?: naturesOfControl[];
+        legal_personality_statement_checked?: boolean;
+        service_address?: Address;
+        forename?: string;
+        former_names?: string;
+        surname?: string;
+        date_of_birth?: string;
+        nationality1?: string;
+        nationality2?: string;
+        usual_residential_address?: Address;
+        legal_entity_name?: string;
+        legal_form?: string;
+        governing_law?: string;
+        legal_entity_register_name?: string;
+        legal_entity_registration_location?: string;
+        registered_company_number?: string;
+        principal_office_address?: Address;
+    }
+}
+
+export enum naturesOfControl {
+    INDIVIDUAL = "Nature of control for this individual",
+    INDIVIDUAL_FIRM_CONTROL = "Nature of control by a firm over which this individual has significant control",
+    INDIVIDUAL_TRUST_CONTROL = "Nature of control by a trust over which this individual has significant control",
+    RLE = "Nature of control for this relevant legal entity (RLE)",
+    RLE_FIRM_CONTROL = "Nature of control by a firm over which the RLE has significant control",
+    RLE_TRUST_CONTROL = "Nature of control by a trust over which the RLE has significant control",
+    ORP = "Nature of control for this other registrable person (ORP)",
+    ORP_FIRM_CONTROL = "Nature of control by a firm over which the ORP has significant control",
+    ORP_TRUST_CONTROL = "Nature of control by a trust over which the ORP has significant control",
+}
+
 /**
  * The data structure returned by the API when a new Limited Partnership resource has
  * successfully been created.
