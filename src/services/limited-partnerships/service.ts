@@ -6,7 +6,7 @@ import {
     LimitedPartnershipIncorporation,
     GeneralPartner,
     LimitedPartner,
-    Psc
+    PersonWithSignificantControl
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
@@ -232,7 +232,7 @@ export default class LimitedPartnershipsService {
 
     public async postPsc (
         transactionId: string,
-        body: Psc
+        body: PersonWithSignificantControl
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
@@ -246,7 +246,7 @@ export default class LimitedPartnershipsService {
     public async getPsc (
         transactionId: string,
         pscId: string
-    ): Promise<Resource<Psc> | ApiErrorResponse> {
+    ): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
@@ -259,7 +259,7 @@ export default class LimitedPartnershipsService {
     public async patchPsc (
         transactionId: string,
         pscId: string,
-        body: Psc["data"]
+        body: PersonWithSignificantControl["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);

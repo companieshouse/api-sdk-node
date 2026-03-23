@@ -11,7 +11,7 @@ import {
     NameEndingType,
     GeneralPartner,
     LimitedPartner,
-    Psc
+    PersonWithSignificantControl
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -970,7 +970,7 @@ describe("LimitedPartnershipsService", () => {
                 const response = await service.getPsc(
                     mockValues.TRANSACTION_ID,
                     mockValues.PSC_ID
-                ) as Resource<Psc>;
+                ) as Resource<PersonWithSignificantControl>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(

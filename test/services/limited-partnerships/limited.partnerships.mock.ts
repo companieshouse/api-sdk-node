@@ -11,8 +11,8 @@ import {
     Term,
     GeneralPartner,
     LimitedPartner,
-    Psc,
-    naturesOfControl
+    PersonWithSignificantControl,
+    NaturesOfControl
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -156,7 +156,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
     }
 };
 
-export const PSC_OBJECT_MOCK: Psc = {
+export const PSC_OBJECT_MOCK: PersonWithSignificantControl = {
     id: "123456",
     data: {
         date_effective_from: "2005-02-04",
@@ -173,8 +173,8 @@ export const PSC_OBJECT_MOCK: Psc = {
         nationality1: "English",
         nationality2: "French",
         natures_of_control: [
-            naturesOfControl.INDIVIDUAL,
-            naturesOfControl.INDIVIDUAL_FIRM_CONTROL
+            NaturesOfControl.INDIVIDUAL,
+            NaturesOfControl.INDIVIDUAL_FIRM_CONTROL
         ],
         principal_office_address: {
             premises: "22",
