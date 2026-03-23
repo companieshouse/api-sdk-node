@@ -10,7 +10,8 @@ import {
     LimitedPartnershipIncorporation,
     NameEndingType,
     GeneralPartner,
-    LimitedPartner
+    LimitedPartner,
+    Psc
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
 
@@ -900,6 +901,183 @@ describe("LimitedPartnershipsService", () => {
                 ).to.be.true;
 
                 expect(response.httpStatusCode).to.equal(204);
+            });
+        })
+    });
+
+    describe("Psc", () => {
+        describe("postPsc", () => {
+            it("should return object Id for postPsc method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPost")
+                    .resolves(mockValues.mockPostPscResponse[201]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.postPsc(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PSC_OBJECT_MOCK
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control",
+                        mockValues.PSC_OBJECT_MOCK
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(201);
+                expect(response.resource?.id).to.equal(
+                    mockValues.mockLimitedPartnershipCreatedResource.id
+                );
+            });
+
+            it("should return error 400 (Bad Request)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPost")
+                    .resolves(mockValues.mockPostPscResponse[400]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.postPsc(
+                    mockValues.TRANSACTION_ID,
+                    {}
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control",
+                        {}
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(400);
+            });
+        });
+
+        describe("getPsc", () => {
+            it("should return a status 200 and the psc object", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPscResponse[200]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+
+                const response = await service.getPsc(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PSC_ID
+                ) as Resource<Psc>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455"
+                    )
+                ).to.be.true;
+                expect(response.httpStatusCode).to.equal(200);
+                expect(response?.resource).to.eql(mockValues.PSC_OBJECT_MOCK);
+            });
+
+            it("should return error 401 (Unauthorised)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPscResponse[401]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getPsc(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PSC_ID
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(401);
+                expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+            });
+
+            it("should return error 404 (Not Found)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPscResponse[404]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getPsc(
+                    mockValues.TRANSACTION_ID,
+                    "wrong-id"
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control/wrong-id"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(404);
+                expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
+            });
+        })
+
+        describe("patchPsc", () => {
+            it("should return 200 patchPsc method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPatch")
+                    .resolves(mockValues.mockPatchPscResponse[200]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.patchPsc(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PSC_ID,
+                    mockValues.PSC_OBJECT_MOCK.data
+                )) as Resource<void>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455",
+                        mockValues.PSC_OBJECT_MOCK.data
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(200);
+            });
+
+            it("should return error 400 (Bad Request)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpPatch")
+                    .resolves(mockValues.mockPatchPscResponse[400]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.patchPsc(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PSC_ID,
+                    {}
+                )) as Resource<LimitedPartnershipResourceCreated>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455",
+                        {}
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(400);
             });
         })
     });
