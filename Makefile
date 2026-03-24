@@ -24,7 +24,7 @@ security-check:
 
 .PHONY: test
 test:
-	npm run test
+	npm run coverage:report
 
 .PHONY: test-unit
 test-unit:
@@ -56,4 +56,3 @@ sonar:
 .PHONY: dependency-check
 dependency-check:
 	npm audit
-
