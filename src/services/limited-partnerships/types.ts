@@ -80,7 +80,7 @@ export interface GeneralPartner {
     };
 }
 
-export interface Psc {
+export interface PersonWithSignificantControl {
     id?: string;
     data?: {
         kind?: string;
@@ -88,7 +88,7 @@ export interface Psc {
         country?: string;
         date_effective_from?: string;
         resignation_date?: string;
-        natures_of_control?: naturesOfControl[];
+        natures_of_control?: NaturesOfControl[];
         legal_personality_statement_checked?: boolean;
         service_address?: Address;
         forename?: string;
@@ -108,7 +108,7 @@ export interface Psc {
     }
 }
 
-export enum naturesOfControl {
+export enum NaturesOfControl {
     INDIVIDUAL = "Nature of control for this individual",
     INDIVIDUAL_FIRM_CONTROL = "Nature of control by a firm over which this individual has significant control",
     INDIVIDUAL_TRUST_CONTROL = "Nature of control by a trust over which this individual has significant control",

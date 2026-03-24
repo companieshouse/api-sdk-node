@@ -5,7 +5,8 @@ import {
     LimitedPartnershipResourceCreated,
     LimitedPartnershipIncorporation,
     GeneralPartner,
-    LimitedPartner
+    LimitedPartner,
+    PersonWithSignificantControl
 } from "./types";
 import Resource, { ApiErrorResponse } from "../resource";
 
@@ -218,6 +219,50 @@ export default class LimitedPartnershipsService {
     ): Promise<Resource<void> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/limited-partnership/limited-partner/${limitedPartnerId}`;
         const response: HttpResponse = await this.client.httpDelete(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    /*
+    * Calls to psc endpoints
+    */
+
+    public async postPsc (
+        transactionId: string,
+        body: PersonWithSignificantControl
+    ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control`;
+        const response: HttpResponse = await this.client.httpPost(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async getPsc (
+        transactionId: string,
+        pscId: string
+    ): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async patchPsc (
+        transactionId: string,
+        pscId: string,
+        body: PersonWithSignificantControl["data"]
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
+        const response: HttpResponse = await this.client.httpPatch(URL, body);
 
         return {
             httpStatusCode: response.status,
