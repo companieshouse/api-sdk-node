@@ -29,6 +29,7 @@ export interface LimitedPartnership {
         redesignate_to_pflp_confirm?: boolean;
         sic_codes?: string[];
         lawful_purpose_statement_checked?: boolean;
+        has_person_with_significant_control?: boolean;
         partnership_number?: string;
         date_of_update?: string;
         kind?: string;
@@ -100,8 +101,6 @@ export interface PersonWithSignificantControl {
         date_effective_from?: string;
         resignation_date?: string;
         natures_of_control?: NaturesOfControl[];
-        legal_personality_statement_checked?: boolean;
-        no_individual_or_entity_with_significant_control?: boolean;
         service_address?: Address;
         forename?: string;
         former_names?: string;

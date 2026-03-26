@@ -50,6 +50,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
         redesignate_to_pflp_confirm: false,
         sic_codes: ["12345", "56789"],
         lawful_purpose_statement_checked: true,
+        has_person_with_significant_control: true,
         partnership_number: "LP123456",
         date_of_update: "2025-01-01"
     }
@@ -203,9 +204,7 @@ export const PSC_OBJECT_MOCK: PersonWithSignificantControl = {
             region: "That Region",
             country: "That Country",
             postal_code: "SC15 1N2"
-        },
-        legal_personality_statement_checked: true,
-        no_individual_or_entity_with_significant_control: false
+        }
     }
 };
 
