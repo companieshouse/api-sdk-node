@@ -61,7 +61,6 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         completed: true,
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
-        etag: "",
         forename: "John",
         former_names: "Mary",
         governing_law: "British Government",
@@ -118,7 +117,6 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
         contribution_sub_types: ["car"],
         date_effective_from: "2005-02-04",
         date_of_birth: "2000-05-01",
-        etag: "",
         forename: "John",
         former_names: "Mary",
         governing_law: "British Government",
@@ -206,7 +204,8 @@ export const PSC_OBJECT_MOCK: PersonWithSignificantControl = {
             country: "That Country",
             postal_code: "SC15 1N2"
         },
-        legal_personality_statement_checked: true
+        legal_personality_statement_checked: true,
+        no_individual_or_entity_with_significant_control: false,
     }
 };
 
