@@ -205,7 +205,7 @@ export const PSC_OBJECT_MOCK: PersonWithSignificantControl = {
             postal_code: "SC15 1N2"
         },
         legal_personality_statement_checked: true,
-        no_individual_or_entity_with_significant_control: false,
+        no_individual_or_entity_with_significant_control: false
     }
 };
 
