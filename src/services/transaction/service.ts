@@ -133,6 +133,55 @@ export default class TransactionService {
         return resource;
     }
 
+/**
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
+    public async getTransactionData (transactionId: string, requestId?: string): Promise<Resource<TransactionData>|ApiErrorResponse> {
+        const url = "/transactions/" + transactionId
+        const headers = addRequestIdHeader(requestId);
+        const resp = await this.client.httpGet(url, headers);
+
+        if (resp.error) {
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            };
+        }
+
+        const resource: Resource<TransactionData> = {
+            httpStatusCode: resp.status
+        };
+
+        // cast the response body to the expected type
+        const body = resp.body as TransactionData;
+
+        resource.resource = {
+            id: body.id,
+            updatedAt: body.updatedAt,
+            status: body.status,
+            filings: body.filings
+                ? (() => {
+                    const result = {};
+                    for (const key in body.filings) {
+                        if (Object.prototype.hasOwnProperty.call(body.filings, key)) {
+                            const filing = body.filings[key];
+                            result[key] = {
+                                status: filing.status,
+                                companyNumber: filing.companyNumber,
+                                type: filing.type
+                            };
+                        }
+                    }
+                    return result;
+                })()
+                : undefined,
+            resumeJourneyUri: body.resumeJourneyUri
+        };
+        return resource;
+    }
+
     /**
      * Patch a transaction.
      *

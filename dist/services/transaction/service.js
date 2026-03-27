@@ -127,6 +127,52 @@ class TransactionService {
         });
     }
     /**
+         * Get transaction data.
+         *
+         * @param transactionId the id of the transaction to retrieve
+         */
+    getTransactionData(transactionId, requestId) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const url = "/transactions/" + transactionId;
+            const headers = util_1.addRequestIdHeader(requestId);
+            const resp = yield this.client.httpGet(url, headers);
+            if (resp.error) {
+                return {
+                    httpStatusCode: resp.status,
+                    errors: [resp.error]
+                };
+            }
+            const resource = {
+                httpStatusCode: resp.status
+            };
+            // cast the response body to the expected type
+            const body = resp.body;
+            resource.resource = {
+                id: body.id,
+                updatedAt: body.updatedAt,
+                status: body.status,
+                filings: body.filings
+                    ? (() => {
+                        const result = {};
+                        for (const key in body.filings) {
+                            if (Object.prototype.hasOwnProperty.call(body.filings, key)) {
+                                const filing = body.filings[key];
+                                result[key] = {
+                                    status: filing.status,
+                                    companyNumber: filing.companyNumber,
+                                    type: filing.type
+                                };
+                            }
+                        }
+                        return result;
+                    })()
+                    : undefined,
+                resumeJourneyUri: body.resumeJourneyUri
+            };
+            return resource;
+        });
+    }
+    /**
      * Patch a transaction.
      *
      * @param transactionId the ID of the transaction to update
