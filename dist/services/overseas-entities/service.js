@@ -30,7 +30,7 @@ class OverseasEntityService {
             }
             const resource = {
                 httpStatusCode: response.status,
-                resource: mapping_1.mapOverseasEntityResource(response.body)
+                resource: (0, mapping_1.mapOverseasEntityResource)(response.body)
             };
             return resource;
         });
@@ -47,7 +47,7 @@ class OverseasEntityService {
             }
             const resource = {
                 httpStatusCode: response.status,
-                resource: mapping_1.mapOverseasEntityExtraDetails(response.body)
+                resource: (0, mapping_1.mapOverseasEntityExtraDetails)(response.body)
             };
             return resource;
         });
@@ -55,7 +55,7 @@ class OverseasEntityService {
     postOverseasEntity(transactionId, body) {
         return __awaiter(this, void 0, void 0, function* () {
             const URL = `/transactions/${transactionId}/overseas-entity`;
-            const response = yield this.client.httpPost(URL, mapping_1.mapOverseasEntity(body));
+            const response = yield this.client.httpPost(URL, (0, mapping_1.mapOverseasEntity)(body));
             if (response.error) {
                 return {
                     httpStatusCode: response.status,
@@ -72,7 +72,7 @@ class OverseasEntityService {
     putOverseasEntity(transactionId, overseasEntityId, body, forceUpdate = false) {
         return __awaiter(this, void 0, void 0, function* () {
             const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`;
-            const resp = yield this.client.httpPut(URL, mapping_1.mapOverseasEntity(body));
+            const resp = yield this.client.httpPut(URL, (0, mapping_1.mapOverseasEntity)(body));
             if (resp.error) {
                 return {
                     httpStatusCode: resp.status,

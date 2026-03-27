@@ -3,7 +3,7 @@ import { PSCDiscrepancyReport } from "./types";
 import Util from "./util";
 import { Result } from "../../services/result";
 import { ApiResponse, ApiErrorResponse } from "../../services/resource";
-declare type PromisedReportResult = Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>>;
+type PromisedReportResult = Promise<Result<ApiResponse<PSCDiscrepancyReport>, ApiErrorResponse>>;
 export default class {
     private readonly client;
     utility: Util;

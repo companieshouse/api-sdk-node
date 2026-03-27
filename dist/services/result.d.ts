@@ -1,4 +1,4 @@
-export declare type Result<S, F> = Success<S, F> | Failure<S, F>;
+export type Result<S, F> = Success<S, F> | Failure<S, F>;
 export declare class Failure<S, F> {
     readonly value: F;
     constructor(value: F);

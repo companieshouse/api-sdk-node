@@ -23,14 +23,14 @@ class OrderService {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet("/orders/" + orderId);
             if (resp.error) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: resp.status,
                     error: (_a = resp.error) === null || _a === void 0 ? void 0 : _a.error
                 });
             }
             const body = resp.body;
             const result = mapping_1.default.camelCaseKeys(body, OrderService.EXCLUDED_FIELDS);
-            return result_1.success(result);
+            return (0, result_1.success)(result);
         });
     }
 }

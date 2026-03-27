@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../../http";
 import { Result } from "../../../services/result";
 import { Checkout } from "../checkout";
-export declare type CheckoutItemErrorResponse = {
+export type CheckoutItemErrorResponse = {
     httpStatusCode?: number;
     error?: string;
 };

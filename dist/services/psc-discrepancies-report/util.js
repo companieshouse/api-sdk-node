@@ -13,10 +13,10 @@ class default_1 {
                 httpStatusCode: resp.status,
                 errors: this.buildErrors(resp.error)
             };
-            return result_1.failure(error);
+            return (0, result_1.failure)(error);
         }
         else {
-            return result_1.success({
+            return (0, result_1.success)({
                 httpStatusCode: resp.status,
                 headers: resp.headers,
                 resource: resp.body

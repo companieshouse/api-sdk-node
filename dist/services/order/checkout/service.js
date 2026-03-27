@@ -22,7 +22,7 @@ class CheckoutService {
         return __awaiter(this, void 0, void 0, function* () {
             const serverResponse = yield this.client.httpGet("/checkouts/" + checkoutId);
             if (serverResponse.error) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: serverResponse.status,
                     errors: [{
                             error: serverResponse.error
@@ -30,7 +30,7 @@ class CheckoutService {
                 });
             }
             else {
-                return result_1.success({
+                return (0, result_1.success)({
                     httpStatusCode: serverResponse.status,
                     resource: mapping_1.default.camelCaseKeys(serverResponse.body, CheckoutService.EXCLUDED_FIELDS)
                 });

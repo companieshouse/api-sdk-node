@@ -48,7 +48,7 @@ class AccountsFilingService {
     confirmCompany(companyNumber, transactionId, confirmCompanyRequest, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `/transactions/${transactionId}/accounts-filing/company/${companyNumber}/confirm`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpPut(url, confirmCompanyRequest, headers);
             const resource = {
                 httpStatusCode: resp.status
@@ -153,7 +153,7 @@ class AccountsFilingService {
      *          or the result of the invalidResponseType method in case of an incorrect response type.
      */
     handleOkResponse(response, fileId) {
-        if (types_1.isAccountValidatorResponse(response.body)) {
+        if ((0, types_1.isAccountValidatorResponse)(response.body)) {
             return {
                 httpStatusCode: response.status,
                 resource: response.body
@@ -213,7 +213,7 @@ class AccountsFilingService {
                 packageType: packageType
             };
             const requestBody = mapping_1.default.snakeCaseKeys(packageTypeRequest);
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpPut(url, requestBody, headers);
             // Needed due to javascripts switch block scoping rules
             let errorMessage = "";

@@ -24,7 +24,7 @@ export interface AccountValidatorResponse {
     fileId: string;
     fileName: string;
 }
-declare type RequestStatus = "complete" | "pending" | "error";
-declare type ValidationStatus = "OK" | "FAILED";
+type RequestStatus = "complete" | "pending" | "error";
+type ValidationStatus = "OK" | "FAILED";
 export declare function isAccountValidatorResponse(object: any): object is AccountValidatorResponse;
 export {};

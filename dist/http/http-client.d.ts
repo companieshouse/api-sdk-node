@@ -14,8 +14,8 @@ export interface HttpClientOptions {
  * ErrorLogger is a function that accepts details about the error through
  * its parameters and is responsible for handling the details.
  */
-export declare type ErrorLogger = (message: string, data?: any) => void;
-export declare type RequestMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
+export type ErrorLogger = (message: string, data?: any) => void;
+export type RequestMethod = "GET" | "POST" | "PUT" | "DELETE" | "PATCH";
 export interface Headers {
     [key: string]: any;
 }

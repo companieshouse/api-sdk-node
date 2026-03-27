@@ -17,4 +17,4 @@ export interface ApiError {
     locationType?: string;
     type?: string;
 }
-export declare type ApiResult<T> = Result<T, ApiErrorResponse>;
+export type ApiResult<T> = Result<T, ApiErrorResponse>;

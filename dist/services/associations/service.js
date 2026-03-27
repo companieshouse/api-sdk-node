@@ -45,7 +45,7 @@ class AssociationsService {
                 queryString = this.getQueryString(queryParameters);
             }
             const url = `/associations/companies/${companyNumber}${queryString}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpGet(url, headers);
             return this.getResource(response);
         });
@@ -73,7 +73,7 @@ class AssociationsService {
                 body.user_id = userId;
             if (associationStatus)
                 body.status = associationStatus;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpPost(url, body, headers);
             return this.getResource(response);
         });
@@ -96,7 +96,7 @@ class AssociationsService {
             };
             const queryString = this.getQueryString(queryParameters);
             const url = `/associations${queryString}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpGet(url, headers);
             return this.getResource(response);
         });
@@ -111,7 +111,7 @@ class AssociationsService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/associations";
             const body = { company_number: companyNumber, user_id: userId };
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpPost(url, body, headers);
             return this.getResource(response);
         });
@@ -126,7 +126,7 @@ class AssociationsService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/associations/invitations";
             const body = { company_number: companyNumber, invitee_email_id: inviteeEmailAddress };
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpPost(url, body, headers);
             return this.getResource(response);
         });
@@ -139,7 +139,7 @@ class AssociationsService {
     getAssociation(associationId, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `/associations/${associationId}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpGet(url, headers);
             return this.getResource(response);
         });
@@ -154,7 +154,7 @@ class AssociationsService {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `/associations/${associationId}`;
             const body = { status: status };
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpPatch(url, body, headers);
             return this.getResource(response);
         });
@@ -175,7 +175,7 @@ class AssociationsService {
             };
             const queryString = this.getQueryString(queryParameters);
             const url = `/associations/invitations${queryString}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpGet(url, headers);
             return this.getResource(response);
         });
@@ -193,7 +193,7 @@ class AssociationsService {
                 invitee_email_id: inviteeEmailAddress
             };
             const url = `/associations/invitations`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpPost(url, body, headers);
             return this.getResource(response);
         });
@@ -216,7 +216,7 @@ class AssociationsService {
                 queryString = this.getQueryString(queryParameters);
             }
             const url = `/associations/${associationID}/previous-states${queryString}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const response = yield this.client.httpGet(url, headers);
             return this.getResource(response);
         });

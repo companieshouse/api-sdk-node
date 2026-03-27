@@ -11,11 +11,6 @@ const defaultErrorLogger = (message, data) => {
     console.log(message, data);
 };
 class AbstractClient {
-    constructor(options) {
-        this.options = options;
-        this._headers = {};
-        this.init();
-    }
     /**
    * Public getter for the request headers.
    */
@@ -27,6 +22,11 @@ class AbstractClient {
             }
         }
         return out;
+    }
+    constructor(options) {
+        this.options = options;
+        this._headers = {};
+        this.init();
     }
     /**
    * Set's a http request header. Headers can have multiple values and when sent the resulting

@@ -1,7 +1,7 @@
 import { IHttpClient } from "../../../http";
 import { Order } from "./types";
 import { Result } from "../../../services/result";
-export declare type OrderErrorResponse = {
+export type OrderErrorResponse = {
     httpStatusCode?: number;
     error?: string;
 };

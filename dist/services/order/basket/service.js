@@ -70,14 +70,14 @@ class BasketService {
                 headers: resp.headers
             };
             if (resp.error) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: resp.status,
                     errors: ((_a = resp === null || resp === void 0 ? void 0 : resp.error) === null || _a === void 0 ? void 0 : _a.errors) || resp.error
                 });
             }
             const body = resp.body;
             result.resource = mapping_1.default.camelCaseKeys(body, BasketService.EXCLUDED_FIELDS_FULL_BASKET);
-            return result_1.success(result);
+            return (0, result_1.success)(result);
         });
     }
     getBasketLinks() {

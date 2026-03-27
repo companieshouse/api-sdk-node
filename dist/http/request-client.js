@@ -70,7 +70,7 @@ class RequestClient extends http_client_1.AbstractClient {
                 }
                 // any errors (including status code errors) are thrown as exceptions and
                 // will be caught in the catch block.
-                const resp = yield axios_1.default(options);
+                const resp = yield (0, axios_1.default)(options);
                 return {
                     status: resp.status,
                     body: resp.data,

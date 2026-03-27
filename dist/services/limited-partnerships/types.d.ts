@@ -32,7 +32,7 @@ export interface LimitedPartnership {
         kind?: string;
     };
 }
-declare type Partner = {
+type Partner = {
     appointment_id?: string;
     completed?: boolean;
     date_effective_from?: string;
@@ -173,7 +173,7 @@ export interface LimitedPartnershipIncorporation {
         partnership: LimitedPartnership;
     };
 }
-export declare type Address = {
+export type Address = {
     address_line_1: string;
     address_line_2?: string;
     country: string;

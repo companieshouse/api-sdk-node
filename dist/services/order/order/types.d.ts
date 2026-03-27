@@ -61,7 +61,7 @@ export interface ItemCosts {
     itemCost: string;
     productType: string;
 }
-export declare type ItemOptions = CertificateItemOptions | CertifiedCopyItemOptions | MissingImageDeliveryItemOptions;
+export type ItemOptions = CertificateItemOptions | CertifiedCopyItemOptions | MissingImageDeliveryItemOptions;
 /**
  * OrderResource is what is returned from the api.
  */
@@ -122,4 +122,4 @@ export interface ItemCostsResource {
     item_cost: string;
     product_type: string;
 }
-export declare type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource | MissingImageDeliveryItemOptionsResource;
+export type ItemOptionsResource = CertificateItemOptionsResource | CertifiedCopyItemOptionsResource | MissingImageDeliveryItemOptionsResource;

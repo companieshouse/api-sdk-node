@@ -141,7 +141,7 @@ export interface InvitationList {
         next: string;
     };
 }
-export declare type PreviousStateStatus = "confirmed" | "awaiting-approval" | "removed" | "migrated";
+export type PreviousStateStatus = "confirmed" | "awaiting-approval" | "removed" | "migrated";
 export interface PreviousState {
     status: PreviousStateStatus;
     changedAt: string;
@@ -185,7 +185,7 @@ export interface NewAssociationResponseResource {
 export interface NewAssociationResponse {
     associationLink: string;
 }
-export declare type AssociationsResponse = AssociationList | Association | NewAssociationResponse | Errors;
+export type AssociationsResponse = AssociationList | Association | NewAssociationResponse | Errors;
 export interface SearchForCompanyAssociationPostBody {
     user_email?: string;
     user_id?: string;

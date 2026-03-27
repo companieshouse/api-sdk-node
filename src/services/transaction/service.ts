@@ -2,7 +2,6 @@ import { IHttpClient } from "../../http";
 import { Transaction, TransactionResource, TransactionList, TransactionData } from "./types";
 import Resource, { ApiErrorResponse, ApiResponse } from "../resource";
 import { addRequestIdHeader } from "../../util";
-import Mapping from "../../mapping/mapping";
 
 export default class TransactionService {
     constructor (private readonly client: IHttpClient) { }

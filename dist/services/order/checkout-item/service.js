@@ -23,20 +23,20 @@ class CheckoutItemService {
         return __awaiter(this, void 0, void 0, function* () {
             const resp = yield this.client.httpGet(`/checkouts/${orderId}/items/${itemId}`);
             if (resp.error) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: resp.status,
                     error: (_a = resp.error) === null || _a === void 0 ? void 0 : _a.error
                 });
             }
             const body = resp.body;
             if (!body.items || body.items.length !== 1) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: resp.status,
                     error: "Expected checkout returned by api to have exactly one embedded item."
                 });
             }
             const result = mapping_1.default.camelCaseKeys(body, CheckoutItemService.EXCLUDED_FIELDS);
-            return result_1.success(result);
+            return (0, result_1.success)(result);
         });
     }
 }

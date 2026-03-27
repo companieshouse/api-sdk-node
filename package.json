@@ -19,6 +19,7 @@
         "analyse-code": "sonar-scanner"
     },
     "dependencies": {
+        "@companieshouse/api-sdk-node": "github:companieshouse/api-sdk-node#feature/add-get-verification-by-id-function",
         "axios": "^1.8.2",
         "camelcase-keys": "~6.2.2",
         "http-status-codes": "^2.3.0",

@@ -26,7 +26,7 @@ class TransactionService {
                 url += "/" + transaction.id;
             }
             const transactionResource = this.mapToResource(transaction);
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpPost(url, transactionResource, headers);
             if (resp.error) {
                 return {
@@ -53,7 +53,7 @@ class TransactionService {
     putTransaction(transaction, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/transactions/" + transaction.id;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const transactionResource = this.mapToResource(transaction);
             const resp = yield this.client.httpPut(url, transactionResource, headers);
             if (resp.error) {
@@ -94,7 +94,7 @@ class TransactionService {
     getTransaction(transactionId, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/transactions/" + transactionId;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpGet(url, headers);
             if (resp.error) {
                 return {
@@ -134,7 +134,7 @@ class TransactionService {
     getTransactionData(transactionId, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/transactions/" + transactionId;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpGet(url, headers);
             if (resp.error) {
                 return {
@@ -181,7 +181,7 @@ class TransactionService {
     patchTransaction(transactionId, transactionResource, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = `/transactions/${transactionId}`;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpPatch(url, transactionResource, headers);
             if (resp.error) {
                 return {
@@ -217,7 +217,7 @@ class TransactionService {
     getTransactionsForResourceKind(requestId, resourceKind) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/transactions?resource_kind=" + resourceKind;
-            const headers = util_1.addRequestIdHeader(requestId);
+            const headers = (0, util_1.addRequestIdHeader)(requestId);
             const resp = yield this.client.httpGet(url, headers);
             if (resp.error) {
                 return {

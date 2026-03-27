@@ -28,14 +28,14 @@ class CheckoutSearchService {
                 httpStatusCode: serverResponse.status
             };
             if (serverResponse.error) {
-                return result_1.failure({
+                return (0, result_1.failure)({
                     httpStatusCode: serverResponse.status,
                     errors: serverResponse.error.errors
                 });
             }
             else {
                 response.resource = mapping_1.default.camelCaseKeys(serverResponse.body);
-                return result_1.success(response);
+                return (0, result_1.success)(response);
             }
         });
     }
