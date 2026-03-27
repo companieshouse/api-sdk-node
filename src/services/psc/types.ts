@@ -84,7 +84,8 @@ export interface PersonWithSignificantControl {
   notifiedOn: string,
   isSanctioned?: boolean,
   kind?: KindEnum,
-  identityVerificationDetails?: IdentityVerificationDetails
+  identityVerificationDetails?: IdentityVerificationDetails,
+  isPendingVerification?: boolean
 };
 
 export interface Address {
