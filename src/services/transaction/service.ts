@@ -133,7 +133,7 @@ export default class TransactionService {
         return resource;
     }
 
-/**
+    /**
      * Get transaction data.
      *
      * @param transactionId the id of the transaction to retrieve

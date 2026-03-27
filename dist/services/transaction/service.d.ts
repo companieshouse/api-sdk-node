@@ -26,10 +26,10 @@ export default class TransactionService {
      */
     getTransaction(transactionId: string, requestId?: string): Promise<Resource<Transaction> | ApiErrorResponse>;
     /**
-         * Get transaction data.
-         *
-         * @param transactionId the id of the transaction to retrieve
-         */
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
     getTransactionData(transactionId: string, requestId?: string): Promise<Resource<TransactionData> | ApiErrorResponse>;
     /**
      * Patch a transaction.

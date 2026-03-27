@@ -127,10 +127,10 @@ class TransactionService {
         });
     }
     /**
-         * Get transaction data.
-         *
-         * @param transactionId the id of the transaction to retrieve
-         */
+     * Get transaction data.
+     *
+     * @param transactionId the id of the transaction to retrieve
+     */
     getTransactionData(transactionId, requestId) {
         return __awaiter(this, void 0, void 0, function* () {
             const url = "/transactions/" + transactionId;
