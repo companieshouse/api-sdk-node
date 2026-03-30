@@ -29,18 +29,21 @@ export interface LimitedPartnership {
         redesignate_to_pflp_confirm?: boolean;
         sic_codes?: string[];
         lawful_purpose_statement_checked?: boolean;
+        has_person_with_significant_control?: boolean;
         partnership_number?: string;
         date_of_update?: string;
         kind?: string;
     };
 }
 
+/**
+ * The common data model used by the web and API for a Partner (General Partner or Limited Partner).
+ */
 type Partner = {
     appointment_id?: string;
     completed?: boolean;
     date_effective_from?: string;
     date_of_birth?: string;
-    etag?: string;
     forename?: string;
     former_names?: string;
     governing_law?: string;
@@ -63,6 +66,9 @@ type Partner = {
     date_of_update?: string;
 };
 
+/**
+ * The data model used by the web and API for a Limited Partner.
+ */
 export interface LimitedPartner {
     id?: string;
     data?: Partner & {
@@ -72,6 +78,9 @@ export interface LimitedPartner {
     };
 }
 
+/**
+ * The data model used by the web and API for a General Partner.
+ */
 export interface GeneralPartner {
     id?: string;
     data?: Partner & {
@@ -80,6 +89,9 @@ export interface GeneralPartner {
     };
 }
 
+/**
+ * The data model used by the web and API for a Person with Significant Control (PSC).
+ */
 export interface PersonWithSignificantControl {
     id?: string;
     data?: {
@@ -89,7 +101,6 @@ export interface PersonWithSignificantControl {
         date_effective_from?: string;
         resignation_date?: string;
         natures_of_control?: NaturesOfControl[];
-        legal_personality_statement_checked?: boolean;
         service_address?: Address;
         forename?: string;
         former_names?: string;

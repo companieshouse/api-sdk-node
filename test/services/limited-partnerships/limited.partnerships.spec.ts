@@ -922,7 +922,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control",
+                        "/transactions/12345/limited-partnership/person-with-significant-control",
                         mockValues.PSC_OBJECT_MOCK
                     )
                 ).to.be.true;
@@ -948,7 +948,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control",
+                        "/transactions/12345/limited-partnership/person-with-significant-control",
                         {}
                     )
                 ).to.be.true;
@@ -975,7 +975,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455"
+                        "/transactions/12345/limited-partnership/person-with-significant-control/22334455"
                     )
                 ).to.be.true;
                 expect(response.httpStatusCode).to.equal(200);
@@ -998,7 +998,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455"
+                        "/transactions/12345/limited-partnership/person-with-significant-control/22334455"
                     )
                 ).to.be.true;
 
@@ -1022,7 +1022,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control/wrong-id"
+                        "/transactions/12345/limited-partnership/person-with-significant-control/wrong-id"
                     )
                 ).to.be.true;
 
@@ -1048,7 +1048,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455",
+                        "/transactions/12345/limited-partnership/person-with-significant-control/22334455",
                         mockValues.PSC_OBJECT_MOCK.data
                     )
                 ).to.be.true;
@@ -1072,7 +1072,7 @@ describe("LimitedPartnershipsService", () => {
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
-                        "/transactions/12345/limited-partnership/persons-with-significant-control/22334455",
+                        "/transactions/12345/limited-partnership/person-with-significant-control/22334455",
                         {}
                     )
                 ).to.be.true;

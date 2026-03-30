@@ -234,7 +234,7 @@ export default class LimitedPartnershipsService {
         transactionId: string,
         body: PersonWithSignificantControl
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control`;
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control`;
         const response: HttpResponse = await this.client.httpPost(URL, body);
 
         return {
@@ -247,7 +247,7 @@ export default class LimitedPartnershipsService {
         transactionId: string,
         pscId: string
     ): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${pscId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
@@ -261,7 +261,7 @@ export default class LimitedPartnershipsService {
         pscId: string,
         body: PersonWithSignificantControl["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control/${pscId}`;
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${pscId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
 
         return {
