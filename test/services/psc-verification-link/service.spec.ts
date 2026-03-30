@@ -275,4 +275,56 @@ describe("PSC Verification Link", () => {
             expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
         });
     });
+
+    describe("getPscVerificationByNotificationId endpoint", () => {
+        afterEach(sinon.restore);
+
+        it("should return status 200 OK and PSC verification resource on authorised access", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[200]);
+
+            const response = (await pscService.getPscVerificationByNotificationId(
+                PSC_NOTIFICATION_ID
+            )) as Resource<PscVerification>;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.OK);
+            expect(response.resource).to.eql(mockPscVerificationInd);
+        });
+
+        it("should return status 401 Unauthorised on unauthorised access", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[401]);
+
+            const response = await pscService.getPscVerificationByNotificationId(PSC_NOTIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.UNAUTHORIZED);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.UNAUTHORIZED);
+        });
+
+        it("should return status 404 Not Found if resource id not found", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[404]);
+
+            const response = await pscService.getPscVerificationByNotificationId(PSC_NOTIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.NOT_FOUND);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.NOT_FOUND);
+        });
+
+        it("should return status 500 Internal Server Error if a server error occurs", async () => {
+            sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[500]);
+
+            const response = await pscService.getPscVerificationByNotificationId(PSC_NOTIFICATION_ID) as ApiErrorResponse;
+
+            expect(response.httpStatusCode).to.equal(StatusCodes.INTERNAL_SERVER_ERROR);
+            expect(response.errors?.[0]).to.equal(ReasonPhrases.INTERNAL_SERVER_ERROR);
+        });
+
+        it("uses provided headers", async () => {
+            const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockPscVerificationIndResponse[200]);
+
+            const headers = { "X-Request-Id": "random-uuid" };
+            await pscService.getPscVerificationByNotificationId(PSC_NOTIFICATION_ID, headers);
+
+            expect(mockRequest.calledOnce).to.be.true;
+            expect(mockRequest.firstCall.args[1]).to.deep.equal(headers);
+        });
+    });
 });
