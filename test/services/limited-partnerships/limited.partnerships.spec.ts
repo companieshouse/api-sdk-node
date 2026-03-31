@@ -905,25 +905,25 @@ describe("LimitedPartnershipsService", () => {
         })
     });
 
-    describe("Psc", () => {
-        describe("postPsc", () => {
-            it("should return object Id for postPsc method", async () => {
+    describe("PersonWithSignificantControl", () => {
+        describe("postPersonWithSignificantControl", () => {
+            it("should return object Id for postPersonWithSignificantControl method", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpPost")
-                    .resolves(mockValues.mockPostPscResponse[201]);
+                    .resolves(mockValues.mockPostPersonWithSignificantControlResponse[201]);
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.postPsc(
+                const response = (await service.postPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PSC_OBJECT_MOCK
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK
                 )) as Resource<LimitedPartnershipResourceCreated>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
                         "/transactions/12345/limited-partnership/person-with-significant-control",
-                        mockValues.PSC_OBJECT_MOCK
+                        mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK
                     )
                 ).to.be.true;
 
@@ -936,11 +936,11 @@ describe("LimitedPartnershipsService", () => {
             it("should return error 400 (Bad Request)", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpPost")
-                    .resolves(mockValues.mockPostPscResponse[400]);
+                    .resolves(mockValues.mockPostPersonWithSignificantControlResponse[400]);
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.postPsc(
+                const response = (await service.postPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
                     {}
                 )) as Resource<LimitedPartnershipResourceCreated>;
@@ -957,19 +957,19 @@ describe("LimitedPartnershipsService", () => {
             });
         });
 
-        describe("getPsc", () => {
-            it("should return a status 200 and the psc object", async () => {
+        describe("getPersonWithSignificantControl", () => {
+            it("should return a status 200 and the person with significant control object", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetPscResponse[200]);
+                    .resolves(mockValues.mockGetPersonWithSignificantControlResponse[200]);
 
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
 
-                const response = await service.getPsc(
+                const response = await service.getPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PSC_ID
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_ID
                 ) as Resource<PersonWithSignificantControl>;
 
                 expect(mockRequest).to.have.been.calledOnce;
@@ -979,20 +979,20 @@ describe("LimitedPartnershipsService", () => {
                     )
                 ).to.be.true;
                 expect(response.httpStatusCode).to.equal(200);
-                expect(response?.resource).to.eql(mockValues.PSC_OBJECT_MOCK);
+                expect(response?.resource).to.eql(mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK);
             });
 
             it("should return error 401 (Unauthorised)", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetPscResponse[401]);
+                    .resolves(mockValues.mockGetPersonWithSignificantControlResponse[401]);
 
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.getPsc(
+                const response = (await service.getPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PSC_ID
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_ID
                 )) as Resource<any>;
 
                 expect(mockRequest).to.have.been.calledOnce;
@@ -1009,12 +1009,12 @@ describe("LimitedPartnershipsService", () => {
             it("should return error 404 (Not Found)", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetPscResponse[404]);
+                    .resolves(mockValues.mockGetPersonWithSignificantControlResponse[404]);
 
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.getPsc(
+                const response = (await service.getPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
                     "wrong-id"
                 )) as Resource<any>;
@@ -1031,25 +1031,25 @@ describe("LimitedPartnershipsService", () => {
             });
         })
 
-        describe("patchPsc", () => {
-            it("should return 200 patchPsc method", async () => {
+        describe("patchPersonWithSignificantControl", () => {
+            it("should return 200 patchPersonWithSignificantControl method", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpPatch")
-                    .resolves(mockValues.mockPatchPscResponse[200]);
+                    .resolves(mockValues.mockPatchPersonWithSignificantControlResponse[200]);
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.patchPsc(
+                const response = (await service.patchPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PSC_ID,
-                    mockValues.PSC_OBJECT_MOCK.data
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_ID,
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK.data
                 )) as Resource<void>;
 
                 expect(mockRequest).to.have.been.calledOnce;
                 expect(
                     mockRequest.calledWith(
                         "/transactions/12345/limited-partnership/person-with-significant-control/22334455",
-                        mockValues.PSC_OBJECT_MOCK.data
+                        mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK.data
                     )
                 ).to.be.true;
 
@@ -1059,13 +1059,13 @@ describe("LimitedPartnershipsService", () => {
             it("should return error 400 (Bad Request)", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpPatch")
-                    .resolves(mockValues.mockPatchPscResponse[400]);
+                    .resolves(mockValues.mockPatchPersonWithSignificantControlResponse[400]);
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
                 );
-                const response = (await service.patchPsc(
+                const response = (await service.patchPersonWithSignificantControl(
                     mockValues.TRANSACTION_ID,
-                    mockValues.PSC_ID,
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_ID,
                     {}
                 )) as Resource<LimitedPartnershipResourceCreated>;
 
@@ -1078,6 +1078,30 @@ describe("LimitedPartnershipsService", () => {
                 ).to.be.true;
 
                 expect(response.httpStatusCode).to.equal(400);
+            });
+        })
+
+        describe("deletePersonWithSignificantControl", () => {
+            it("should return 204 deletePersonWithSignificantControl method", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpDelete")
+                    .resolves(mockValues.mockDeletePersonWithSignificantControlResponse[204]);
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.deletePersonWithSignificantControl(
+                    mockValues.TRANSACTION_ID,
+                    mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_ID
+                )) as Resource<void>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/person-with-significant-control/22334455"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(204);
             });
         })
     });

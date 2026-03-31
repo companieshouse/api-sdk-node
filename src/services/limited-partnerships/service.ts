@@ -227,10 +227,10 @@ export default class LimitedPartnershipsService {
     }
 
     /*
-    * Calls to psc endpoints
+    * Calls to person with significant control endpoints
     */
 
-    public async postPsc (
+    public async postPersonWithSignificantControl (
         transactionId: string,
         body: PersonWithSignificantControl
     ): Promise<Resource<LimitedPartnershipResourceCreated> | ApiErrorResponse> {
@@ -243,11 +243,11 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async getPsc (
+    public async getPersonWithSignificantControl (
         transactionId: string,
-        pscId: string
+        personWithSignificantControlId: string
     ): Promise<Resource<PersonWithSignificantControl> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${pscId}`;
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${personWithSignificantControlId}`;
         const response: HttpResponse = await this.client.httpGet(URL);
 
         return {
@@ -256,13 +256,26 @@ export default class LimitedPartnershipsService {
         };
     }
 
-    public async patchPsc (
+    public async patchPersonWithSignificantControl (
         transactionId: string,
-        pscId: string,
+        personWithSignificantControlId: string,
         body: PersonWithSignificantControl["data"]
     ): Promise<Resource<void> | ApiErrorResponse> {
-        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${pscId}`;
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${personWithSignificantControlId}`;
         const response: HttpResponse = await this.client.httpPatch(URL, body);
+
+        return {
+            httpStatusCode: response.status,
+            resource: { ...response.body }
+        };
+    }
+
+    public async deletePersonWithSignificantControl (
+        transactionId: string,
+        personWithSignificantControlId: string
+    ): Promise<Resource<void> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/person-with-significant-control/${personWithSignificantControlId}`;
+        const response: HttpResponse = await this.client.httpDelete(URL);
 
         return {
             httpStatusCode: response.status,
