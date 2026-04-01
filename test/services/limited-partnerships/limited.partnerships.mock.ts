@@ -155,7 +155,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
     }
 };
 
-export const PSC_OBJECT_MOCK: PersonWithSignificantControl = {
+export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantControl = {
     id: "123456",
     data: {
         date_effective_from: "2005-02-04",
@@ -239,7 +239,7 @@ export const SUBMISSION_ID = "09876";
 export const LIMITED_PARTNERSHIP_ID = "00112233";
 export const GENERAL_PARTNER_ID = "00112233";
 export const LIMITED_PARTNER_ID = "11223344";
-export const PSC_ID = "22334455";
+export const PERSON_WITH_SIGNIFICANT_CONTROL_ID = "22334455";
 export const FILE_RESOURCE_ID = "a1b2c3";
 export const UNAUTHORISED = "Unauthorised";
 export const BAD_REQUEST = "Bad Request";
@@ -342,20 +342,26 @@ export const mockDeleteLimitedPartnerResponse = {
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
-export const mockPostPscResponse = {
+export const mockPostPersonWithSignificantControlResponse = {
     201: { status: 201, body: mockLimitedPartnershipCreatedResource },
     400: { status: 400, body: { error: BAD_REQUEST } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
-export const mockGetPscResponse = {
-    200: { status: 200, body: PSC_OBJECT_MOCK },
+export const mockGetPersonWithSignificantControlResponse = {
+    200: { status: 200, body: PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK },
     404: { status: 404, body: { error: NOT_FOUND } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
 
-export const mockPatchPscResponse = {
+export const mockPatchPersonWithSignificantControlResponse = {
     200: { status: 200 },
     400: { status: 400, body: { error: BAD_REQUEST } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockDeletePersonWithSignificantControlResponse = {
+    204: { status: 204 },
+    404: { status: 404, body: { error: NOT_FOUND } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };
