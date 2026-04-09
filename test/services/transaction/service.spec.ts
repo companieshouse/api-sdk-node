@@ -125,6 +125,59 @@ describe("transaction", () => {
         expect(resource?.description).to.equal(mockResponseBody.description);
     });
 
+    it("get data returns an error response on failure", async () => {
+        const mockGetResponse = {
+            status: 401,
+            error: "An error occurred"
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransactionData({} as string);
+
+        expect(data.httpStatusCode).to.equal(401);
+        const castedData: ApiErrorResponse = data;
+        expect(castedData.errors?.[0]).to.equal("An error occurred");
+    });
+
+    it("get data maps the company field data items correctly", async () => {
+        const mockResponseBody : TransactionData = ({
+            id: "12345678",
+            updatedAt: new Date("2024-06-25T12:00:00Z"),
+            status: "closed",
+            filings: {
+                testFiling: {
+                    status: "accepted",
+                    companyNumber: "AP000042",
+                    type: "acsp"
+                }
+            },
+            resumeJourneyUri: "desc"
+        });
+
+        const mockGetResponse = {
+            status: 200,
+            body: mockResponseBody
+        };
+
+        const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetResponse);
+        const transaction : TransactionService = new TransactionService(requestClient);
+        const data = await transaction.getTransactionData({} as string);
+
+        expect(data.httpStatusCode).to.equal(200);
+        const castedData: Resource<TransactionData> = data as Resource<TransactionData>;
+        const resource = castedData.resource;
+        expect(resource?.updatedAt).to.equal(mockResponseBody.updatedAt);
+        expect(resource?.status).to.equal(mockResponseBody.status);
+        expect(resource?.resumeJourneyUri).to.equal(mockResponseBody.resumeJourneyUri);
+        expect(resource?.filings).to.have.property("testFiling");
+        expect(resource?.filings?.testFiling).to.deep.equal({
+            status: "accepted",
+            companyNumber: "AP000042",
+            type: "acsp"
+        });
+    });
+
     it("put returns successful response", async () => {
         const mockPutResponse = {
             headers: {
