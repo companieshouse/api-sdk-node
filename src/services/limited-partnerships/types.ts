@@ -116,6 +116,7 @@ export interface PersonWithSignificantControl {
         legal_entity_registration_location?: string;
         registered_company_number?: string;
         principal_office_address?: Address;
+        type?: PersonWithSignificantControlType;
     }
 }
 
@@ -129,6 +130,12 @@ export enum NaturesOfControl {
     ORP = "Nature of control for this other registrable person (ORP)",
     ORP_FIRM_CONTROL = "Nature of control by a firm over which the ORP has significant control",
     ORP_TRUST_CONTROL = "Nature of control by a trust over which the ORP has significant control",
+}
+
+export enum PersonWithSignificantControlType {
+    INDIVIDUAL_PERSON = "INDIVIDUAL_PERSON",
+    RELEVANT_LEGAL_ENTITY = "RELEVANT_LEGAL_ENTITY",
+    OTHER_REGISTRABLE_PERSON = "OTHER_REGISTRABLE_PERSON"
 }
 
 /**
