@@ -206,7 +206,8 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
             country: "That Country",
             postal_code: "SC15 1N2"
         },
-        type: PersonWithSignificantControlType.INDIVIDUAL_PERSON
+        type: PersonWithSignificantControlType.INDIVIDUAL_PERSON,
+        completed: true
     }
 };
 
@@ -352,6 +353,12 @@ export const mockPostPersonWithSignificantControlResponse = {
 
 export const mockGetPersonWithSignificantControlResponse = {
     200: { status: 200, body: PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK },
+    404: { status: 404, body: { error: NOT_FOUND } },
+    401: { status: 401, body: { error: UNAUTHORISED } }
+};
+
+export const mockGetPersonsWithSignificantControlResponse = {
+    200: { status: 200, body: [PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK] },
     404: { status: 404, body: { error: NOT_FOUND } },
     401: { status: 401, body: { error: UNAUTHORISED } }
 };

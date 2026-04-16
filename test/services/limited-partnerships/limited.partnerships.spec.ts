@@ -1031,6 +1031,77 @@ describe("LimitedPartnershipsService", () => {
             });
         })
 
+        describe("getPersonsWithSignificantControl", () => {
+            it("should return a status 200 and the person with significant control object", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPersonsWithSignificantControlResponse[200]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+
+                const response = await service.getPersonsWithSignificantControl(
+                    mockValues.TRANSACTION_ID
+                ) as Resource<PersonWithSignificantControl[]>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control"
+                    )
+                ).to.be.true;
+                expect(response.httpStatusCode).to.equal(200);
+                expect(response?.resource).to.eql([mockValues.PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK]);
+            });
+
+            it("should return error 401 (Unauthorised)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPersonsWithSignificantControlResponse[401]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getPersonsWithSignificantControl(
+                    mockValues.TRANSACTION_ID
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/12345/limited-partnership/persons-with-significant-control"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(401);
+                expect(response.resource.error).to.equal(mockValues.UNAUTHORISED);
+            });
+
+            it("should return error 404 (Not Found)", async () => {
+                const mockRequest = sinon
+                    .stub(mockValues.requestClient, "httpGet")
+                    .resolves(mockValues.mockGetPersonWithSignificantControlResponse[404]);
+
+                const service = new LimitedPartnershipsService(
+                    mockValues.requestClient
+                );
+                const response = (await service.getPersonsWithSignificantControl(
+                    "wrong-id"
+                )) as Resource<any>;
+
+                expect(mockRequest).to.have.been.calledOnce;
+                expect(
+                    mockRequest.calledWith(
+                        "/transactions/wrong-id/limited-partnership/persons-with-significant-control"
+                    )
+                ).to.be.true;
+
+                expect(response.httpStatusCode).to.equal(404);
+                expect(response.resource.error).to.equal(mockValues.NOT_FOUND);
+            });
+        })
+
         describe("patchPersonWithSignificantControl", () => {
             it("should return 200 patchPersonWithSignificantControl method", async () => {
                 const mockRequest = sinon

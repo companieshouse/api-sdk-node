@@ -256,6 +256,18 @@ export default class LimitedPartnershipsService {
         };
     }
 
+    public async getPersonsWithSignificantControl (
+        transactionId: string
+    ): Promise<Resource<PersonWithSignificantControl[]> | ApiErrorResponse> {
+        const URL = `/transactions/${transactionId}/limited-partnership/persons-with-significant-control`;
+        const response: HttpResponse = await this.client.httpGet(URL);
+
+        return {
+            httpStatusCode: response.status,
+            resource: response.body
+        };
+    }
+
     public async patchPersonWithSignificantControl (
         transactionId: string,
         personWithSignificantControlId: string,

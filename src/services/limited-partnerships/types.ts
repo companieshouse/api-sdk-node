@@ -117,6 +117,7 @@ export interface PersonWithSignificantControl {
         registered_company_number?: string;
         principal_office_address?: Address;
         type?: PersonWithSignificantControlType;
+        completed?: boolean;
     }
 }
 
