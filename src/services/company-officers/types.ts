@@ -33,6 +33,7 @@ export interface CompanyOfficerResource {
   contact_details?: ContactDetailsResource;
   responsibilities?: string;
   resigned_on?: string;
+  principal_office_address?: AddressResource;
 }
 
 export interface AddressResource {
@@ -112,6 +113,7 @@ export interface CompanyOfficer {
   nationality?: string;
   occupation?: string;
   officerRole: string;
+  principalOfficeAddress?: Address;
   contactDetails: ContactDetails;
   responsibilities?: string;
   resignedOn?: string;
@@ -146,6 +148,7 @@ export interface Identification {
   legalForm?: string;
   placeRegistered?: string;
   registrationNumber?: string;
+  registerLocation?: string;
 }
 
 export interface CompanyOfficerLinks {

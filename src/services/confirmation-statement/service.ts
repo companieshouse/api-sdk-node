@@ -306,6 +306,7 @@ export default class {
             ...(dataResource.shareholder_data && { shareholderData: this.mapToShareholderData(dataResource.shareholder_data) }),
             ...(dataResource.register_locations_data && { registerLocationsData: this.mapToRegisterLocationsData(dataResource.register_locations_data) }),
             ...(dataResource.trading_status_data && { tradingStatusData: this.mapToTradingStatusData(dataResource.trading_status_data) }),
+            ...(dataResource.new_confirmation_date && { newConfirmationDate: dataResource.new_confirmation_date }),
             acceptLawfulPurposeStatement: dataResource.accept_lawful_purpose_statement
         }
     }
@@ -322,6 +323,7 @@ export default class {
             ...(data.shareholderData && { shareholder_data: this.mapToShareholderDataResource(data.shareholderData) }),
             ...(data.registerLocationsData && { register_locations_data: this.mapToRegisterLocationsDataResource(data.registerLocationsData) }),
             ...(data.tradingStatusData && { trading_status_data: this.mapToTradingStatusDataResource(data.tradingStatusData) }),
+            ...(data.newConfirmationDate && { new_confirmation_date: data.newConfirmationDate }),
             accept_lawful_purpose_statement: data.acceptLawfulPurposeStatement
         }
     }
@@ -550,14 +552,14 @@ export default class {
     private mapToSicCodeDataResource (sicCode: SicCodeData): SicCodeDataResource {
         return {
             section_status: sicCode.sectionStatus,
-            ...(sicCode.sicCode && { sic_code: this.mapToSicCodeResource(sicCode.sicCode) })
+            ...(sicCode.sicCode && { sic_code: sicCode.sicCode.map(this.mapToSicCodeResource) })
         }
     }
 
     private mapToSicCodeData (sicCodeResource: SicCodeDataResource): SicCodeData {
         return {
             sectionStatus: sicCodeResource.section_status,
-            ...(sicCodeResource.sic_code && { sicCode: this.mapToSicCode(sicCodeResource.sic_code) })
+            ...(sicCodeResource.sic_code && { sicCode: sicCodeResource.sic_code.map(this.mapToSicCode) })
         }
     }
 

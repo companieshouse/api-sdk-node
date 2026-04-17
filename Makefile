@@ -24,11 +24,11 @@ security-check:
 
 .PHONY: test
 test:
-	npm run test
+	npm run coverage:report
 
 .PHONY: test-unit
 test-unit:
-	npm run test
+	npm run coverage:report
 
 .PHONY: package
 package: build
@@ -52,3 +52,7 @@ dist: lint test-unit clean package
 sonar:
 	npm run coverage:report
 	npm run analyse-code
+
+.PHONY: dependency-check
+dependency-check:
+	npm audit

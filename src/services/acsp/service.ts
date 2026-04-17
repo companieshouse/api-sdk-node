@@ -90,8 +90,18 @@ export default class {
         return resp;
     }
 
-    public async sendIdentityVerificationEmail (emailData: ClientVerificationEmail): Promise<HttpResponse> {
-        const url = `/acsp-api/verify-client-identity/send-identity-verification-email`;
+    /**
+     * Send an identity verification email to verify or reverify a client identity web app.
+     * @param emailData the email data containing verification details
+     * @param queryParams optional query parameters
+     * @param queryParams.application_type optional application type to filter the verification or reverification services.
+     * @returns Promise that resolves to the HTTP response from the API
+     */
+    public async sendIdentityVerificationEmail (emailData: ClientVerificationEmail, queryParams?: { application_type?: string }): Promise<HttpResponse> {
+        let url = `/acsp-api/verify-client-identity/send-identity-verification-email`;
+        if (queryParams?.application_type) {
+            url += `?application_type=${queryParams.application_type}`;
+        }
         return this.client.httpPost(url, emailData);
     }
 }

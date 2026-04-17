@@ -110,80 +110,59 @@ export interface NameElements {
     surname: string;
 };
 
-export interface PscVerificationResource {
+export interface PscExtensionResource {
     created_at: Date,
     updated_at: Date,
     links: LinksResource,
-    data: PscVerificationDataResource;
+    data: PscExtensionDataResource;
 }
 
-export interface PscVerificationDataResource {
+export interface PscExtensionDataResource {
     company_number?: string,
     psc_notification_id?: string,
-    verification_details?: VerificationDetailsResource
+    extensionDetails?: ExtensionDetailsResource
 }
 
-export interface PscVerification {
+export interface PscExtension {
     createdAt: Date,
     updatedAt: Date,
     links: Links,
-    data: PscVerificationData;
+    data: PscExtensionData;
 }
-export interface PscVerificationData {
+export interface PscExtensionData {
+    requesterEmail: string,
     companyNumber?: string,
     pscNotificationId?: string,
-    verificationDetails?: VerificationDetails
+    extensionDetails?: ExtensionDetails
 }
 
-export interface VerificationDetailsResource {
-    uvid?: string,
-    name_mismatch_reason?: NameMismatchReasonEnum,
-    verification_statements?: VerificationStatementEnum[]
+export interface ExtensionDetailsResource {
+    extensionReason?: string,
+    extensionStatus?: string,
+    extensionRequestDate?: string
 }
 
-export interface VerificationDetails {
-    uvid?: string,
-    nameMismatchReason?: NameMismatchReasonEnum,
-    verificationStatements?: VerificationStatementEnum[]
+export interface ExtensionDetails {
+    extensionReason?: string,
+    extensionStatus?: string,
+    extensionRequestDate?: string
 }
 
-export interface PlannedMaintenance {
-    status: string,
-    message: string,
-    maintenance_start_time: Date,
-    maintenance_end_time: Date
-}
-
-export enum NameMismatchReasonEnum {
-    PREFERRED_NAME = "PREFERRED_NAME",
-    LEGALLY_CHANGED = "LEGALLY_CHANGED",
-    TRANSLATION_OR_DIFF_CONV = "TRANSLATION_OR_DIFF_CONV",
-    REGISTER_ERROR = "REGISTER_ERROR",
-    NOT_SAY = "NOT_SAY"
-}
-
-export enum VerificationStatementEnum {
-    INDIVIDUAL_VERIFIED = "INDIVIDUAL_VERIFIED",
-}
 export interface ValidationStatusError {
-    error: string;
-    location: string;
-    type?: string;
-    locationType: string;
+    field: string;
+    message: string;
 }
 export interface ValidationStatusResponse {
-    errors: ValidationStatusError[];
-    isValid?: boolean;
+    validationStatusError: ValidationStatusError[];
+    valid: boolean;
 }
-
 export interface ValidationStatusErrorResource {
     error: string;
     location: string;
     location_type: string;
     type?: string;
 }
-
 export interface ValidationStatusResponseResource {
     errors: ValidationStatusErrorResource[];
-    is_valid?: boolean;
+    valid: boolean;
 }

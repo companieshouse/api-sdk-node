@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../http";
-import { CompanyOfficersResource, CompanyOfficers } from "./types";
+import { CompanyOfficersResource, CompanyOfficers, CompanyOfficer } from "./types";
 import Resource from "../resource";
 import Mapping from "../../mapping/mapping";
 
@@ -20,10 +20,10 @@ export default class CompanyOfficersService {
    * Those will also have full date of birth.Defaults to false
    * @param orderBy the field by which to order the result set
    */
-    public async getCompanyOfficers (number: string, pageSize: number = 35, pageIndex: number = 0, registerView: boolean = false, orderBy?: string): Promise<Resource<CompanyOfficers>> {
+    public async getCompanyOfficers (number: string, itemsPerPage: number = 35, pageIndex: number = 0, registerView: boolean = false, orderBy?: string): Promise<Resource<CompanyOfficers>> {
         let url = `/company/${number}/officers`;
         url = url.concat("?",
-            `page_size=${pageSize}`,
+            `items_per_page=${itemsPerPage}`,
             "&",
             `page_index=${pageIndex}`,
             "&",
@@ -45,6 +45,32 @@ export default class CompanyOfficersService {
         const body = resp.body as CompanyOfficersResource;
 
         resource.resource = Mapping.camelCaseKeys<CompanyOfficers>(body);
+
+        return resource;
+    }
+
+    /**
+     * Get a specific company appointment.
+     * @param number the company number to look up
+     * @param appointmentId the appointment ID to look up
+     * @returns the company appointment
+     */
+    public async getCompanyAppointment (number: string, appointmentId: string): Promise<Resource<CompanyOfficer>> {
+        const url = `/company/${number}/appointments/${appointmentId}`;
+
+        const resp = await this.client.httpGet(url);
+
+        const resource: Resource<CompanyOfficer> = {
+            httpStatusCode: resp.status
+        };
+
+        if (resp.error) {
+            return resource;
+        }
+
+        const body = resp.body as CompanyOfficersResource;
+
+        resource.resource = Mapping.camelCaseKeys<CompanyOfficer>(body);
 
         return resource;
     }

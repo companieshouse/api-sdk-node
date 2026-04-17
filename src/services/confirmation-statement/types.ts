@@ -25,7 +25,8 @@ export interface ConfirmationStatementSubmissionDataResource {
     sic_code_data?: SicCodeDataResource,
     statement_of_capital_data?: StatementOfCapitalDataResource,
     trading_status_data?: TradingStatusDataResource,
-    accept_lawful_purpose_statement?: boolean
+    accept_lawful_purpose_statement?: boolean,
+    new_confirmation_date?: string | null
 }
 
 export interface ConfirmationStatementSubmissionData {
@@ -39,7 +40,8 @@ export interface ConfirmationStatementSubmissionData {
     sicCodeData?: SicCodeData,
     statementOfCapitalData?: StatementOfCapitalData,
     tradingStatusData?: TradingStatusData,
-    acceptLawfulPurposeStatement?: boolean
+    acceptLawfulPurposeStatement?: boolean,
+    newConfirmationDate?: string | null
 }
 
 export interface ConfirmationStatementSubmissionSectionResource {
@@ -67,11 +69,11 @@ export interface PersonsOfSignificantControlData extends ConfirmationStatementSu
 }
 
 export interface SicCodeDataResource extends ConfirmationStatementSubmissionSectionResource {
-    sic_code?: SicCodeResource
+    sic_code?: SicCodeResource[]
 }
 
 export interface SicCodeData extends ConfirmationStatementSubmissionSection {
-    sicCode?: SicCode
+    sicCode?: SicCode[]
 }
 
 export interface RegisteredOfficeAddressDataResource extends ConfirmationStatementSubmissionSectionResource {
