@@ -5,7 +5,7 @@ This SDK abstract the calls to our public APIs.
 Intended for use when making cross-web-service calls, supporting ERIC and the propagation of authentication details through to other services.
 
 ## Compatible Node versions
-       
+
 This package has been upgraded to be compatible with Node v24. Presently, it's backward compatible with v20 and v18 but compatibility is primarily required for v24 as all CH Node services are in the process of being upgraded to v24.
 
 ## Quick start
@@ -47,7 +47,7 @@ import {createApiClient} from "@companieshouse/api-sdk-node";
         const order = orderResult.value;
         console.log(order);
     }
-    
+
 })()
 
 ```
@@ -58,7 +58,7 @@ To test the changes made to this sdk inside your project, you can use either `np
 
 #### `npm link`
 
-From within this directory, run the following command to make symbolic links to it within the global node modules directory. 
+From within this directory, run the following command to make symbolic links to it within the global node modules directory.
 
     npm link
 
@@ -89,3 +89,10 @@ Note that the `prepare` script change will need to be reverted, if wishing build
 To tun the tests with coverage, pass the `--coverage` flag on the command line.
 
     npm t -- --coverage
+
+### Dependency Overrides
+
+- **serialize-javascript@7.0.5**
+  - Reason: Required as a transitive dependency by mocha@11.7.2, which depends on vulnerable version 6.0.2.
+  - Ticket/CVE: CVE-2026-34043
+  - Remove after: Upgrading Mocha to the latest patch or minor release after @11.7.2. Ensure proper testing after removal.
