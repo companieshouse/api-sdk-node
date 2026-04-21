@@ -1081,7 +1081,7 @@ describe("LimitedPartnershipsService", () => {
             it("should return error 404 (Not Found)", async () => {
                 const mockRequest = sinon
                     .stub(mockValues.requestClient, "httpGet")
-                    .resolves(mockValues.mockGetPersonWithSignificantControlResponse[404]);
+                    .resolves(mockValues.mockGetPersonsWithSignificantControlResponse[404]);
 
                 const service = new LimitedPartnershipsService(
                     mockValues.requestClient
