@@ -29,18 +29,21 @@ export interface LimitedPartnership {
         redesignate_to_pflp_confirm?: boolean;
         sic_codes?: string[];
         lawful_purpose_statement_checked?: boolean;
+        has_person_with_significant_control?: boolean;
         partnership_number?: string;
         date_of_update?: string;
         kind?: string;
     };
 }
 
+/**
+ * The common data model used by the web and API for a Partner (General Partner or Limited Partner).
+ */
 type Partner = {
     appointment_id?: string;
     completed?: boolean;
     date_effective_from?: string;
     date_of_birth?: string;
-    etag?: string;
     forename?: string;
     former_names?: string;
     governing_law?: string;
@@ -63,6 +66,9 @@ type Partner = {
     date_of_update?: string;
 };
 
+/**
+ * The data model used by the web and API for a Limited Partner.
+ */
 export interface LimitedPartner {
     id?: string;
     data?: Partner & {
@@ -72,6 +78,9 @@ export interface LimitedPartner {
     };
 }
 
+/**
+ * The data model used by the web and API for a General Partner.
+ */
 export interface GeneralPartner {
     id?: string;
     data?: Partner & {
@@ -80,7 +89,10 @@ export interface GeneralPartner {
     };
 }
 
-export interface Psc {
+/**
+ * The data model used by the web and API for a Person with Significant Control (PSC).
+ */
+export interface PersonWithSignificantControl {
     id?: string;
     data?: {
         kind?: string;
@@ -88,8 +100,7 @@ export interface Psc {
         country?: string;
         date_effective_from?: string;
         resignation_date?: string;
-        natures_of_control?: naturesOfControl[];
-        legal_personality_statement_checked?: boolean;
+        natures_of_control?: NaturesOfControl[];
         service_address?: Address;
         forename?: string;
         former_names?: string;
@@ -105,10 +116,12 @@ export interface Psc {
         legal_entity_registration_location?: string;
         registered_company_number?: string;
         principal_office_address?: Address;
+        type?: PersonWithSignificantControlType;
+        completed?: boolean;
     }
 }
 
-export enum naturesOfControl {
+export enum NaturesOfControl {
     INDIVIDUAL = "Nature of control for this individual",
     INDIVIDUAL_FIRM_CONTROL = "Nature of control by a firm over which this individual has significant control",
     INDIVIDUAL_TRUST_CONTROL = "Nature of control by a trust over which this individual has significant control",
@@ -118,6 +131,12 @@ export enum naturesOfControl {
     ORP = "Nature of control for this other registrable person (ORP)",
     ORP_FIRM_CONTROL = "Nature of control by a firm over which the ORP has significant control",
     ORP_TRUST_CONTROL = "Nature of control by a trust over which the ORP has significant control",
+}
+
+export enum PersonWithSignificantControlType {
+    INDIVIDUAL_PERSON = "INDIVIDUAL_PERSON",
+    RELEVANT_LEGAL_ENTITY = "RELEVANT_LEGAL_ENTITY",
+    OTHER_REGISTRABLE_PERSON = "OTHER_REGISTRABLE_PERSON"
 }
 
 /**

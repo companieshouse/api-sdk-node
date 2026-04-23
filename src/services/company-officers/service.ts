@@ -20,10 +20,10 @@ export default class CompanyOfficersService {
    * Those will also have full date of birth.Defaults to false
    * @param orderBy the field by which to order the result set
    */
-    public async getCompanyOfficers (number: string, pageSize: number = 35, pageIndex: number = 0, registerView: boolean = false, orderBy?: string): Promise<Resource<CompanyOfficers>> {
+    public async getCompanyOfficers (number: string, itemsPerPage: number = 35, pageIndex: number = 0, registerView: boolean = false, orderBy?: string): Promise<Resource<CompanyOfficers>> {
         let url = `/company/${number}/officers`;
         url = url.concat("?",
-            `page_size=${pageSize}`,
+            `items_per_page=${itemsPerPage}`,
             "&",
             `page_index=${pageIndex}`,
             "&",
