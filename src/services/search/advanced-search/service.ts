@@ -96,9 +96,10 @@ export default class AdvancedSearchService {
 
         return resource;
     }
+
     public async getCompaniesAsCsv (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
         incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
+        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<string>> {
         const START_INDEX_QUERY = "start_index";
         const COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
         const COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
@@ -175,7 +176,7 @@ export default class AdvancedSearchService {
 
         const resp = await this.client.httpGet(advancedSearchUrl, additionalHeaders);
 
-        const resource: Resource<CompaniesResource> = {
+        const resource: Resource<string> = {
             httpStatusCode: resp.status
         };
 
@@ -183,9 +184,7 @@ export default class AdvancedSearchService {
             return resource;
         }
 
-        resource.resource = resp.body as CompaniesResource;
-
+        resource.resource = resp.body as string;
         return resource;
     }
-
 }
