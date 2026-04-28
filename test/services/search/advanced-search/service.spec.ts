@@ -171,7 +171,7 @@ describe("create an advanced search GET", () => {
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<string> = await search.getCompaniesAsCsv(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
-        let csv: String = data.resource;
+        const csv: String = data.resource;
         const mockItem = mockResponseBody.items[0];
         console.log(csv)
         expect(csv !== undefined).to.equal(true);
