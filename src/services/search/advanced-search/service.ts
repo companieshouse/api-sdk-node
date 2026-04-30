@@ -118,7 +118,7 @@ export default class AdvancedSearchService {
             "Content-Type": "application/json"
         }
 
-        const buildAdvancedSearchURL = new URLSearchParams("/advanced-search/companies/csv?");
+        const buildAdvancedSearchURL = new URLSearchParams("/advanced-search/csv?");
 
         if (startIndex !== null) {
             buildAdvancedSearchURL.append(START_INDEX_QUERY, String(startIndex));
