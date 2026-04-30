@@ -4,7 +4,6 @@ import Resource from "../../resource";
 import "url-search-params-polyfill";
 
 export default class AdvancedSearchService {
-
     START_INDEX_QUERY = "start_index";
     COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
     COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
@@ -21,9 +20,8 @@ export default class AdvancedSearchService {
 
     constructor (private readonly client: IHttpClient) { }
     public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-    dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
-
+        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
@@ -48,9 +46,8 @@ export default class AdvancedSearchService {
     }
 
     public async getCompaniesAsCsv (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-    dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<string>> {
-
+        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<string>> {
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
@@ -74,9 +71,8 @@ export default class AdvancedSearchService {
     }
 
     private buildURL (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-    dissolvedTo: string | null, size: number | null, baseUrl: string): string {
-
+        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+        dissolvedTo: string | null, size: number | null, baseUrl: string): string {    
         const buildAdvancedSearchURL = new URLSearchParams(baseUrl)
         if (startIndex !== null) {
             buildAdvancedSearchURL.append(this.START_INDEX_QUERY, String(startIndex));
