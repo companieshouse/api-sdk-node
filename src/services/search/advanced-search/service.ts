@@ -5,25 +5,25 @@ import "url-search-params-polyfill";
 
 export default class AdvancedSearchService {
 
-START_INDEX_QUERY = "start_index";
-COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
-COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
-LOCATION_QUERY = "location";
-INCORPORATED_FROM_QUERY = "incorporated_from";
-INCORPORATED_TO_QUERY = "incorporated_to";
-SIC_CODES_QUERY = "sic_codes";
-COMPANY_STATUS_QUERY = "company_status";
-COMPANY_TYPE_QUERY = "company_type";
-COMPANY_SUBTYPE_QUERY = "company_subtype";
-DISSOLVED_FROM_QUERY_PARAMETER = "dissolved_from";
-DISSOLVED_TO_QUERY_PARAMETER = "dissolved_to";
-SIZE_QUERY_PARAMETER = "size";
+    START_INDEX_QUERY = "start_index";
+    COMPANY_NAME_INCLUDES_QUERY = "company_name_includes";
+    COMPANY_NAME_EXCLUDES_QUERY = "company_name_excludes"
+    LOCATION_QUERY = "location";
+    INCORPORATED_FROM_QUERY = "incorporated_from";
+    INCORPORATED_TO_QUERY = "incorporated_to";
+    SIC_CODES_QUERY = "sic_codes";
+    COMPANY_STATUS_QUERY = "company_status";
+    COMPANY_TYPE_QUERY = "company_type";
+    COMPANY_SUBTYPE_QUERY = "company_subtype";
+    DISSOLVED_FROM_QUERY_PARAMETER = "dissolved_from";
+    DISSOLVED_TO_QUERY_PARAMETER = "dissolved_to";
+    SIZE_QUERY_PARAMETER = "size";
 
     constructor (private readonly client: IHttpClient) { }
     public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
-        
+    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+    dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
+
         const additionalHeaders = {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
@@ -48,8 +48,8 @@ SIZE_QUERY_PARAMETER = "size";
     }
 
     public async getCompaniesAsCsv (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-        dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<string>> {
+    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+    dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<string>> {
 
         const additionalHeaders = {
             "X-Request-ID": requestId,
@@ -73,9 +73,9 @@ SIZE_QUERY_PARAMETER = "size";
         return resource;
     }
 
-    private buildURL(startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
-        incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
-        dissolvedTo: string | null, size: number | null, baseUrl: string): string {
+    private buildURL (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
+    incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
+    dissolvedTo: string | null, size: number | null, baseUrl: string): string {
 
         const buildAdvancedSearchURL = new URLSearchParams(baseUrl)
         if (startIndex !== null) {
@@ -130,5 +130,5 @@ SIZE_QUERY_PARAMETER = "size";
             buildAdvancedSearchURL.append(this.SIZE_QUERY_PARAMETER, String(size))
         }
         return buildAdvancedSearchURL.toString();
-        }
+    }
 }
