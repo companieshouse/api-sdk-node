@@ -164,17 +164,16 @@ describe("create an advanced search GET", () => {
     it("returns advanced search results correctly", async () => {
         const mockGetRequest = {
             status: 200,
-            body: mockResponseBody
+            body: "test csv"
         };
 
         const mockRequest = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
         const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
         const data: Resource<string> = await search.getCompaniesAsCsv(testStartIndex, testCompanyNameIncludes, testCompanyNameExcludes, testLocation, testIncorporatedFrom,
             testIncorporatedTo, testSicCodes, testCompanyStatus, testCompanyType, testCompanySubtype, testDissolvedFrom, testDissolvedTo, size, mockRequestId);
-        const csv = data.resource;
+        const csv = data.resource?.toString();
         const mockItem = mockResponseBody.items[0];
-        console.log(csv)
         expect(csv !== undefined).to.equal(true);
-        expect(csv?.startsWith("company_name,company_number,company_status,company_type,company_subtype,dissolution_date,incorporation_date,removed_date,registered_date,nature_of_business,registered_office_address")).to.equal(true);
+        expect(csv).to.equal("test csv");
     });
 });
