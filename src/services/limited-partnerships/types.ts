@@ -13,7 +13,7 @@ export interface Incorporation {
 }
 
 /**
- * The data model used by the web and API for a Limited Partnership.
+ * The data model used by the web & API for a Limited Partnership.
  */
 export interface LimitedPartnership {
     data?: {
