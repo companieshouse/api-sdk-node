@@ -35,9 +35,13 @@ export default class OverseasEntityService {
             };
         }
 
+        const mappedObj = mapOverseasEntityResource(response.body)
+        console.log(">>>>GET-SDK");
+        console.log(JSON.stringify(mappedObj, null, 2));
+
         const resource: Resource<OverseasEntity> = {
             httpStatusCode: response.status,
-            resource: mapOverseasEntityResource(response.body)
+            resource: mappedObj
         };
 
         return resource;
@@ -54,9 +58,13 @@ export default class OverseasEntityService {
             };
         }
 
+        const mappedObj = mapOverseasEntityExtraDetails(response.body)
+        console.log(">>>>GET-DETAILS-SDK");
+        console.log(JSON.stringify(mappedObj, null, 2));
+
         const resource: Resource<OverseasEntityExtraDetails> = {
             httpStatusCode: response.status,
-            resource: mapOverseasEntityExtraDetails(response.body)
+            resource: mappedObj
         };
 
         return resource;
@@ -67,7 +75,10 @@ export default class OverseasEntityService {
         body: OverseasEntity
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
-        const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
+        const mappedObj = mapOverseasEntity(body);
+        console.log(">>>>POST-SDK");
+        console.log(JSON.stringify(mappedObj, null, 2));
+        const response: HttpResponse = await this.client.httpPost(URL, mappedObj);
 
         if (response.error) {
             return {
@@ -86,7 +97,10 @@ export default class OverseasEntityService {
 
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
-        const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
+        const mappedObj = mapOverseasEntity(body);
+        console.log(">>>>PUT-SDK");
+        console.log(JSON.stringify(mappedObj, null, 2));
+        const resp = await this.client.httpPut(URL, mappedObj);
 
         if (resp.error) {
             return {
