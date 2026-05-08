@@ -159,11 +159,14 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
 export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantControl = {
     id: "123456",
     data: {
+        consent_checked: true,
         date_effective_from: "2005-02-04",
         appointment_id: "112233",
         date_of_birth: "2000-05-01",
+        title: "Mr",
         forename: "John",
         former_names: "Mary",
+        middle_names: "James",
         governing_law: "British Government",
         kind: "",
         legal_entity_name: "My company ltd",
