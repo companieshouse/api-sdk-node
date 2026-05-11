@@ -102,8 +102,10 @@ export interface PersonWithSignificantControl {
         resignation_date?: string;
         natures_of_control?: NaturesOfControl[];
         service_address?: Address;
+        title?: string;
         forename?: string;
         former_names?: string;
+        middle_names?: string;
         surname?: string;
         date_of_birth?: string;
         nationality1?: string;
@@ -118,6 +120,7 @@ export interface PersonWithSignificantControl {
         principal_office_address?: Address;
         type?: PersonWithSignificantControlType;
         completed?: boolean;
+        consent_checked?: boolean;
     }
 }
 
