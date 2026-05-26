@@ -96,3 +96,6 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
   - Reason: Required as a transitive dependency by mocha@11.7.2, which depends on vulnerable version 6.0.2.
   - Ticket/CVE: CVE-2026-34043
   - Remove after: Remove once Mocha has been upgraded beyond version 11.7.2 (patch or minor release). Ensure proper testing is completed after removal.
+- "uuid": "^11.1.1"
+  - Reason: transitive dependency of istanbul-lib-processinfo / nyc
+  - Ticket: ASM-2299 ( gulnerability GHSA-w5hq-g745-h8pq )
