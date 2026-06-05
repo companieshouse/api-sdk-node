@@ -506,19 +506,9 @@ const mapUpdate = (update: Update): UpdateResource => {
             trustee_involved_relevant_period: update.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: update.change_beneficiary_relevant_period
         };
-
-        console.log(">>>>update.no_change");
-        console.log(update.no_change);
-        console.log(typeof update.no_change);
-
         if (typeof update.no_change !== "undefined") {
             resource.no_change = update.no_change;
         }
-
-        console.log(">>>>update.registrable_beneficial_owner");
-        console.log(update.registrable_beneficial_owner);
-        console.log(typeof update.registrable_beneficial_owner);
-
         if (typeof update.registrable_beneficial_owner !== "undefined") {
             resource.registrable_beneficial_owner = update.registrable_beneficial_owner;
         }
@@ -581,26 +571,15 @@ const mapUpdateResource = (updateResource: UpdateResource): Update => {
             date_of_creation: mapOptionalIsoDate(updateResource.date_of_creation),
             filing_date: mapOptionalIsoDate(updateResource.filing_date),
             bo_mo_data_fetched: updateResource.bo_mo_data_fetched,
-            no_change: updateResource.no_change,
             trust_data_fetched: updateResource.trust_data_fetched,
             owned_land_relevant_period: updateResource.owned_land_relevant_period,
             change_bo_relevant_period: updateResource.change_bo_relevant_period,
             trustee_involved_relevant_period: updateResource.trustee_involved_relevant_period,
             change_beneficiary_relevant_period: updateResource.change_beneficiary_relevant_period
         };
-
-        console.log(">>>>updateResource.no_change");
-        console.log(updateResource.no_change);
-        console.log(typeof updateResource.no_change);
-
         if (typeof updateResource.no_change !== "undefined") {
             update.no_change = updateResource.no_change;
         }
-
-        console.log(">>>>updateResource.registrable_beneficial_owner");
-        console.log(updateResource.registrable_beneficial_owner);
-        console.log(typeof updateResource.registrable_beneficial_owner);
-
         if (typeof updateResource.registrable_beneficial_owner !== "undefined") {
             update.registrable_beneficial_owner = updateResource.registrable_beneficial_owner;
         }

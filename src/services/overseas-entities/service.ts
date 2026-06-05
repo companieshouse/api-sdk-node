@@ -35,13 +35,9 @@ export default class OverseasEntityService {
             };
         }
 
-        const mappedObj = mapOverseasEntityResource(response.body)
-        console.log(">>>>GET-SDK");
-        console.log(JSON.stringify(mappedObj, null, 2));
-
         const resource: Resource<OverseasEntity> = {
             httpStatusCode: response.status,
-            resource: mappedObj
+            resource: mapOverseasEntityResource(response.body)
         };
 
         return resource;
@@ -58,13 +54,9 @@ export default class OverseasEntityService {
             };
         }
 
-        const mappedObj = mapOverseasEntityExtraDetails(response.body)
-        console.log(">>>>GET-DETAILS-SDK");
-        console.log(JSON.stringify(mappedObj, null, 2));
-
         const resource: Resource<OverseasEntityExtraDetails> = {
             httpStatusCode: response.status,
-            resource: mappedObj
+            resource: mapOverseasEntityExtraDetails(response.body)
         };
 
         return resource;
@@ -75,10 +67,7 @@ export default class OverseasEntityService {
         body: OverseasEntity
     ): Promise<Resource<OverseasEntityCreated> | ApiErrorResponse> {
         const URL = `/transactions/${transactionId}/overseas-entity`;
-        const mappedObj = mapOverseasEntity(body);
-        console.log(">>>>POST-SDK");
-        console.log(JSON.stringify(mappedObj, null, 2));
-        const response: HttpResponse = await this.client.httpPost(URL, mappedObj);
+        const response: HttpResponse = await this.client.httpPost(URL, mapOverseasEntity(body));
 
         if (response.error) {
             return {
@@ -97,10 +86,7 @@ export default class OverseasEntityService {
 
     public async putOverseasEntity (transactionId: string, overseasEntityId: string, body: OverseasEntity, forceUpdate: boolean = false): Promise<Resource<HttpStatusCode> | ApiErrorResponse> {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceUpdate ? "?force=true" : "")}`
-        const mappedObj = mapOverseasEntity(body);
-        console.log(">>>>PUT-SDK");
-        console.log(JSON.stringify(mappedObj, null, 2));
-        const resp = await this.client.httpPut(URL, mappedObj);
+        const resp = await this.client.httpPut(URL, mapOverseasEntity(body));
 
         if (resp.error) {
             return {
@@ -216,7 +202,7 @@ export default class OverseasEntityService {
      * @param overseasEntityId of the entity
      * @param trustId of the trust
      * @returns an array of individual trustees for a trust
-    */
+     */
     public async getIndividualTrustees (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<IndividualTrusteeData[]> | ApiErrorResponse> {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/individual-trustees`;
         const response: HttpResponse = await this.client.httpGet(URL);
