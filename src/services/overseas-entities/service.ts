@@ -202,7 +202,7 @@ export default class OverseasEntityService {
      * @param overseasEntityId of the entity
      * @param trustId of the trust
      * @returns an array of individual trustees for a trust
-    */
+     */
     public async getIndividualTrustees (transactionId: string, overseasEntityId: string, trustId: string): Promise<Resource<IndividualTrusteeData[]> | ApiErrorResponse> {
         const URL = `private/transactions/${transactionId}/overseas-entity/${overseasEntityId}/trusts/${trustId}/individual-trustees`;
         const response: HttpResponse = await this.client.httpGet(URL);
