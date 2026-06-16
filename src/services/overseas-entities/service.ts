@@ -27,7 +27,6 @@ export default class OverseasEntityService {
     public async getOverseasEntity (transactionId: string, overseasEntityId: string, forceFetch: boolean = false): Promise< Resource<OverseasEntity> | ApiErrorResponse > {
         const URL = `transactions/${transactionId}/overseas-entity/${overseasEntityId}${(forceFetch ? "?force=true" : "")}`
         const response: HttpResponse = await this.client.httpGet(URL);
-        console.log("In getOverseasEntity response:", response);
 
         if (response.error) {
             return {
