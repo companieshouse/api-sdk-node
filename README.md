@@ -56,20 +56,6 @@ import {createApiClient} from "@companieshouse/api-sdk-node";
 
 Once you have made changes to the library, you must validate against a service in Docker before merging your PR into main. Follow the guidance on the [Validating Library Changes Confluence page](https://companieshouse.atlassian.net/wiki/spaces/DEV/pages/6404931599/Validating+Library+Upgrades+with+Docker+Before+Merging ). Reach out to the Common Components teams if you have any questions.
 
-Alternatively you can modify the `prepare` script definition in your project's `package.json` file.
-
-#### `prepare` script
-
-Change the definition of the `prepare` script in the package.json file to match the following, replacing `YOUR-BRANCH-NAME` with the name of the branch in the api-sdk-node repository that contains your changes:
-
-    "prepare": "husky install && npm install --save https://github.com/companieshouse/api-sdk-node/tarball/YOUR-BRANCH-NAME && cd node_modules/@companieshouse/api-sdk-node && npm run build"
-
-(The `husky install` command should only be present if already there in the `prepare` script definition of your project)
-
-Once done it should just be necessary to restart your project's service in docker-chs-development (assumes that your local project is running in 'development mode').
-
-Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment. The change should NOT be committed or pushed to the project repository.
-
 > ⚠️ **Note (Informational Only)**
 >
 > The following instructions are retained for reference purposes only.
