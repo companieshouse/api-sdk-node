@@ -54,31 +54,24 @@ import {createApiClient} from "@companieshouse/api-sdk-node";
 
 ## Development
 
-To test the changes made to this sdk inside your project, you can use either `npm link` or modify the `prepare` script definition in your project's `package.json` file.
+Once you have made changes to the library, you must validate against a service in Docker before merging your PR into main. Follow the guidance on the [Validating Library Changes Confluence page](https://companieshouse.atlassian.net/wiki/spaces/DEV/pages/6404931599/Validating+Library+Upgrades+with+Docker+Before+Merging ). Reach out to the Common Components teams if you have any questions.
+
+> ⚠️ **Note (Informational Only)**
+>
+> The following instructions are retained for reference purposes only.
+> They relate to testing changes made to this SDK within a local project.
+>
+> They may no longer work as expected and are **not actively maintained or supported**.
 
 #### `npm link`
 
-From within this directory, run the following command to make symbolic links to it within the global node modules directory.
+From within this directory, run the following command to create a symbolic link in the global node modules directory:
 
     npm link
 
 Then from within your local project, simply link it with the following command
 
     npm link api-sdk-node
-
-Note that if your local project is running within a Vagrant Virtual Machine, this command will need to be run on the VM.
-
-#### `prepare` script
-
-Change the definition of the `prepare` script in the package.json file to match the following, replacing `YOUR-BRANCH-NAME` with the name of the branch in the api-sdk-node repository that contains your changes:
-
-    "prepare": "husky install && npm install --save https://github.com/companieshouse/api-sdk-node/tarball/YOUR-BRANCH-NAME && cd node_modules/@companieshouse/api-sdk-node && npm run build"
-
-(The `husky install` command should only be present if already there in the `prepare` script definition of your project)
-
-Once done it should just be necessary to restart your project's service in docker-chs-development (assumes that your local project is running in 'development mode').
-
-Note that the `prepare` script change will need to be reverted, if wishing build and run unit-tests from the command-line, outside of the Docker environment. The change should NOT be committed or pushed to the project repository.
 
 ## Testing
 
@@ -96,3 +89,6 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
   - Reason: Required as a transitive dependency by mocha@11.7.2, which depends on vulnerable version 6.0.2.
   - Ticket/CVE: CVE-2026-34043
   - Remove after: Remove once Mocha has been upgraded beyond version 11.7.2 (patch or minor release). Ensure proper testing is completed after removal.
+- "uuid": "^11.1.1"
+  - Reason: transitive dependency of istanbul-lib-processinfo / nyc
+  - Ticket: ASM-2299 ( gulnerability GHSA-w5hq-g745-h8pq )

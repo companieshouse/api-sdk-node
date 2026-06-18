@@ -3,7 +3,7 @@
  */
 
 /**
- * The data model used by the web and API for an Incorporation journey.
+ * The data model used by the web & API for an Incorporation journey.
  * It could be a registration or a transition, determined by the 'kind'.
  */
 export interface Incorporation {
@@ -13,7 +13,7 @@ export interface Incorporation {
 }
 
 /**
- * The data model used by the web and API for a Limited Partnership.
+ * The data model used by the web & API for a Limited Partnership.
  */
 export interface LimitedPartnership {
     data?: {
@@ -102,8 +102,10 @@ export interface PersonWithSignificantControl {
         resignation_date?: string;
         natures_of_control?: NaturesOfControl[];
         service_address?: Address;
+        title?: string;
         forename?: string;
         former_names?: string;
+        middle_names?: string;
         surname?: string;
         date_of_birth?: string;
         nationality1?: string;
@@ -118,6 +120,7 @@ export interface PersonWithSignificantControl {
         principal_office_address?: Address;
         type?: PersonWithSignificantControlType;
         completed?: boolean;
+        consent_checked?: boolean;
     }
 }
 

@@ -50,7 +50,7 @@
         "eslint-plugin-standard": "5.0.0",
         "mocha": "^11.7.2",
         "nock": "^13.3.2",
-        "nyc": "^15.1.0",
+        "nyc": "^18.0.0",
         "sinon": "^9.2.4",
         "sinon-chai": "~3.5.0",
         "sonarqube-scanner": "^3.5.0",
@@ -60,6 +60,7 @@
     "overrides": {
         "semver": "7.5.2",
         "diff": "^8.0.2",
+        "uuid": "^11.1.1",
         "serialize-javascript": "^7.0.5"
     }
 }
