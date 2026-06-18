@@ -89,6 +89,13 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
   - Reason: Required as a transitive dependency by mocha@11.7.2, which depends on vulnerable version 6.0.2.
   - Ticket/CVE: CVE-2026-34043
   - Remove after: Remove once Mocha has been upgraded beyond version 11.7.2 (patch or minor release). Ensure proper testing is completed after removal.
+
 - "uuid": "^11.1.1"
   - Reason: transitive dependency of istanbul-lib-processinfo / nyc
   - Ticket: ASM-2299 ( gulnerability GHSA-w5hq-g745-h8pq )
+
+- **js-yaml@4.2.0**
+  - Reason: Required as a transitive dependency by @istanbuljs/load-nyc-config@1.1.0, which depends on vulnerable version 3.13.1.
+  - Ticket/CVE: CVE-2026-53550 ( vulnerability GHSA-h67p-54hq-rp68 )
+  - Remove after: Remove once load-nyc-config has been upgraded beyond version 1.1.0 (patch or minor release). Ensure proper testing is completed after removal.
+
