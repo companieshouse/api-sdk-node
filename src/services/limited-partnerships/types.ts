@@ -121,6 +121,7 @@ export interface PersonWithSignificantControl {
         type?: PersonWithSignificantControlType;
         completed?: boolean;
         consent_checked?: boolean;
+        nature_of_control_types?: NatureOfControlType[];
     }
 }
 
@@ -225,4 +226,10 @@ export enum Term {
     BY_AGREEMENT = "BY_AGREEMENT",
     UNTIL_DISSOLUTION = "UNTIL_DISSOLUTION",
     NONE = "NONE",
+}
+
+export enum NatureOfControlType {
+    INDIVIDUAL = "INDIVIDUAL",
+    FIRM = "FIRM",
+    TRUST = "TRUST",
 }

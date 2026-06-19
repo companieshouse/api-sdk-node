@@ -13,7 +13,8 @@ import {
     LimitedPartner,
     PersonWithSignificantControl,
     NaturesOfControl,
-    PersonWithSignificantControlType
+    PersonWithSignificantControlType,
+    NatureOfControlType
 } from "../../../src/services/limited-partnerships";
 
 export const requestClient = new RequestClient({
@@ -210,6 +211,7 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
             postal_code: "SC15 1N2"
         },
         type: PersonWithSignificantControlType.INDIVIDUAL_PERSON,
+        nature_of_control_types: [NatureOfControlType.INDIVIDUAL, NatureOfControlType.FIRM, NatureOfControlType.TRUST],
         completed: true
     }
 };
