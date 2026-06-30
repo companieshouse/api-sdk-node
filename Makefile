@@ -48,11 +48,6 @@ endif
 .PHONY: dist
 dist: lint test-unit clean package
 
-.PHONY: sonar
-sonar:
-	npm run coverage:report
-	npm run analyse-code
-
 .PHONY: dependency-check
 dependency-check:
 	npm audit
