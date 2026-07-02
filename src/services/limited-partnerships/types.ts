@@ -100,7 +100,7 @@ export interface PersonWithSignificantControl {
         country?: string;
         date_effective_from?: string;
         resignation_date?: string;
-        natures_of_control?: NaturesOfControl[];
+        natures_of_control?: NatureOfControl[];
         service_address?: Address;
         title?: string;
         forename?: string;
@@ -122,20 +122,22 @@ export interface PersonWithSignificantControl {
         completed?: boolean;
         consent_checked?: boolean;
         nature_of_control_types?: NatureOfControlType[];
-    }
+    };
 }
 
-export enum NaturesOfControl {
-    INDIVIDUAL = "Nature of control for this individual",
-    INDIVIDUAL_FIRM_CONTROL = "Nature of control by a firm over which this individual has significant control",
-    INDIVIDUAL_TRUST_CONTROL = "Nature of control by a trust over which this individual has significant control",
-    RLE = "Nature of control for this relevant legal entity (RLE)",
-    RLE_FIRM_CONTROL = "Nature of control by a firm over which the RLE has significant control",
-    RLE_TRUST_CONTROL = "Nature of control by a trust over which the RLE has significant control",
-    ORP = "Nature of control for this other registrable person (ORP)",
-    ORP_FIRM_CONTROL = "Nature of control by a firm over which the ORP has significant control",
-    ORP_TRUST_CONTROL = "Nature of control by a trust over which the ORP has significant control",
-}
+export type NatureOfControl = {
+    nature_of_control_type?: NatureOfControlType;
+    part_righttosharesurplusassets_25to50percent?: boolean;
+    part_righttosharesurplusassets_50to75percent?: boolean;
+    part_righttosharesurplusassets_75to100percent?: boolean;
+    part_righttosharesurplusassets_does_not_apply?: boolean;
+    votingrights_25to50percent?: boolean;
+    votingrights_50to75percent?: boolean;
+    votingrights_75to100percent?: boolean;
+    votingrights_does_not_apply?: boolean;
+    righttoappointmentandremovepersons?: boolean;
+    siginfluencecontrol?: boolean;
+};
 
 export enum PersonWithSignificantControlType {
     INDIVIDUAL_PERSON = "INDIVIDUAL_PERSON",

@@ -12,7 +12,6 @@ import {
     GeneralPartner,
     LimitedPartner,
     PersonWithSignificantControl,
-    NaturesOfControl,
     PersonWithSignificantControlType,
     NatureOfControlType
 } from "../../../src/services/limited-partnerships";
@@ -157,64 +156,74 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
     }
 };
 
-export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantControl = {
-    id: "123456",
-    data: {
-        consent_checked: true,
-        date_effective_from: "2005-02-04",
-        appointment_id: "112233",
-        date_of_birth: "2000-05-01",
-        title: "Mr",
-        forename: "John",
-        former_names: "Mary",
-        middle_names: "James",
-        governing_law: "British Government",
-        kind: "",
-        legal_entity_name: "My company ltd",
-        legal_entity_register_name: "UK Register",
-        legal_entity_registration_location: "England",
-        legal_form: "abc",
-        nationality1: "English",
-        nationality2: "French",
-        natures_of_control: [
-            NaturesOfControl.INDIVIDUAL,
-            NaturesOfControl.INDIVIDUAL_FIRM_CONTROL
-        ],
-        principal_office_address: {
-            premises: "22",
-            address_line_1: "Some Street",
-            address_line_2: "Some Line 2",
-            locality: "Some Locality",
-            region: "Some Region",
-            country: "Some Country",
-            postal_code: "SC12 1WE"
-        },
-        registered_company_number: "223456",
-        service_address: {
-            premises: "10",
-            address_line_1: "This Street",
-            address_line_2: "This Line 2",
-            locality: "This Locality",
-            region: "This Region",
-            country: "This Country",
-            postal_code: "SC45 1XF"
-        },
-        resignation_date: "",
-        surname: "Doe",
-        usual_residential_address: {
-            premises: "25",
-            address_line_1: "That Street",
-            address_line_2: "That Line 2",
-            locality: "That Locality",
-            region: "That Region",
-            country: "That Country",
-            postal_code: "SC15 1N2"
-        },
-        type: PersonWithSignificantControlType.INDIVIDUAL_PERSON,
-        nature_of_control_types: [NatureOfControlType.INDIVIDUAL, NatureOfControlType.FIRM, NatureOfControlType.TRUST],
-        completed: true
-    }
-};
+export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantControl =
+    {
+        id: "123456",
+        data: {
+            consent_checked: true,
+            date_effective_from: "2005-02-04",
+            appointment_id: "112233",
+            date_of_birth: "2000-05-01",
+            title: "Mr",
+            forename: "John",
+            former_names: "Mary",
+            middle_names: "James",
+            governing_law: "British Government",
+            kind: "",
+            legal_entity_name: "My company ltd",
+            legal_entity_register_name: "UK Register",
+            legal_entity_registration_location: "England",
+            legal_form: "abc",
+            nationality1: "English",
+            nationality2: "French",
+            natures_of_control: [
+                {
+                    nature_of_control_type: NatureOfControlType.INDIVIDUAL,
+                    part_righttosharesurplusassets_25to50percent: true,
+                    votingrights_25to50percent: true,
+                    righttoappointmentandremovepersons: true,
+                    siginfluencecontrol: false
+                }
+            ],
+            principal_office_address: {
+                premises: "22",
+                address_line_1: "Some Street",
+                address_line_2: "Some Line 2",
+                locality: "Some Locality",
+                region: "Some Region",
+                country: "Some Country",
+                postal_code: "SC12 1WE"
+            },
+            registered_company_number: "223456",
+            service_address: {
+                premises: "10",
+                address_line_1: "This Street",
+                address_line_2: "This Line 2",
+                locality: "This Locality",
+                region: "This Region",
+                country: "This Country",
+                postal_code: "SC45 1XF"
+            },
+            resignation_date: "",
+            surname: "Doe",
+            usual_residential_address: {
+                premises: "25",
+                address_line_1: "That Street",
+                address_line_2: "That Line 2",
+                locality: "That Locality",
+                region: "That Region",
+                country: "That Country",
+                postal_code: "SC15 1N2"
+            },
+            type: PersonWithSignificantControlType.INDIVIDUAL_PERSON,
+            nature_of_control_types: [
+                NatureOfControlType.INDIVIDUAL,
+                NatureOfControlType.FIRM,
+                NatureOfControlType.TRUST
+            ],
+            completed: true
+        }
+    };
 
 // This structure is used when POSTing Incorporation data
 export const INCORPORATION_OBJECT_MOCK: Incorporation = {
