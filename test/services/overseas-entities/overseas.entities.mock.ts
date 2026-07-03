@@ -479,6 +479,7 @@ export const TRUSTS_MOCK: Trust[] = [{
     ceased_date_year: "2021",
     trust_still_involved_in_overseas_entity: "No",
     unable_to_obtain_all_trust_info: "No",
+    relevant_period: false,
     INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
     CORPORATES: TRUST_CORPORATES_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK
@@ -496,6 +497,7 @@ export const REVIEW_TRUSTS_MOCK: TrustToReview[] = [{
     ceased_date_year: "2024",
     trust_still_involved_in_overseas_entity: "No",
     unable_to_obtain_all_trust_info: "No",
+    relevant_period: false,
     INDIVIDUALS: TRUST_INDIVIDUALS_MOCK,
     CORPORATES: TRUST_CORPORATES_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_MOCK,
@@ -652,6 +654,7 @@ export const TRUSTS_RESOURCE_MOCK: TrustResource[] = [{
     ceased_date: "2021-03-30",
     trust_still_involved_in_overseas_entity: false,
     unable_to_obtain_all_trust_info: false,
+    relevant_period: false,
     INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
     CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK
@@ -665,6 +668,7 @@ export const REVIEW_TRUSTS_RESOURCE_MOCK: TrustToReviewResource[] = [{
     ceased_date: "2024-02-02",
     trust_still_involved_in_overseas_entity: false,
     unable_to_obtain_all_trust_info: false,
+    relevant_period: false,
     INDIVIDUAL: TRUST_INDIVIDUALS_RESOURCE_MOCK,
     CORPORATE: TRUST_CORPORATES_RESOURCE_MOCK,
     HISTORICAL_BO: TRUST_HISTORICAL_BOS_RESOURCE_MOCK,

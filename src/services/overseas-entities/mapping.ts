@@ -156,6 +156,7 @@ const mapToTrust = (trust: TrustResource): Trust => {
         ceased_date_year: ceased_date?.year,
         trust_still_involved_in_overseas_entity: stillInvolved,
         unable_to_obtain_all_trust_info: (trust.unable_to_obtain_all_trust_info) ? "Yes" : "No",
+        relevant_period: trust?.relevant_period,
         // Convert the Trust Individuals Resource Data into the format that the WEB expects
         INDIVIDUALS: (trust.INDIVIDUAL || []).map(trustInd => {
             const { date_of_birth, date_became_interested_person, ceased_date: individual_ceased_date, is_individual_still_involved_in_trust, start_date, ...rest } = trustInd;
