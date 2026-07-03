@@ -126,7 +126,7 @@ export interface PersonWithSignificantControl {
 }
 
 export type NatureOfControl = {
-    nature_of_control_type?: NatureOfControlType;
+    type?: NatureOfControlType;
     part_righttosharesurplusassets_25to50percent?: boolean;
     part_righttosharesurplusassets_50to75percent?: boolean;
     part_righttosharesurplusassets_75to100percent?: boolean;

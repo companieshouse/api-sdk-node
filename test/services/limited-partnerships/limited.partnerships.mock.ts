@@ -178,7 +178,7 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
             nationality2: "French",
             natures_of_control: [
                 {
-                    nature_of_control_type: NatureOfControlType.INDIVIDUAL,
+                    type: NatureOfControlType.INDIVIDUAL,
                     part_righttosharesurplusassets_25to50percent: true,
                     votingrights_25to50percent: true,
                     righttoappointmentandremovepersons: true,
