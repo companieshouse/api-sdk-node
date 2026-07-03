@@ -127,16 +127,16 @@ export interface PersonWithSignificantControl {
 
 export type NatureOfControl = {
     type?: NatureOfControlType;
-    part_righttosharesurplusassets_25to50percent?: boolean;
-    part_righttosharesurplusassets_50to75percent?: boolean;
-    part_righttosharesurplusassets_75to100percent?: boolean;
-    part_righttosharesurplusassets_does_not_apply?: boolean;
-    votingrights_25to50percent?: boolean;
-    votingrights_50to75percent?: boolean;
-    votingrights_75to100percent?: boolean;
-    votingrights_does_not_apply?: boolean;
-    righttoappointmentandremovepersons?: boolean;
-    siginfluencecontrol?: boolean;
+    share_of_assets_25_to_50?: boolean;
+    share_of_assets_50_to_75?: boolean;
+    share_of_assets_75_to_100?: boolean;
+    share_of_assets_does_not_apply?: boolean;
+    voting_rights_25_to_50?: boolean;
+    voting_rights_50_to_75?: boolean;
+    voting_rights_75_to_100?: boolean;
+    voting_rights_does_not_apply?: boolean;
+    right_to_appointment_and_remove?: boolean;
+    significant_influence_control?: boolean;
 };
 
 export enum PersonWithSignificantControlType {

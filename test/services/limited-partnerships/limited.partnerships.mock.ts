@@ -179,10 +179,10 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
             natures_of_control: [
                 {
                     type: NatureOfControlType.INDIVIDUAL,
-                    part_righttosharesurplusassets_25to50percent: true,
-                    votingrights_25to50percent: true,
-                    righttoappointmentandremovepersons: true,
-                    siginfluencecontrol: false
+                    share_of_assets_25_to_50: true,
+                    voting_rights_25_to_50: true,
+                    right_to_appointment_and_remove: true,
+                    significant_influence_control: false
                 }
             ],
             principal_office_address: {
