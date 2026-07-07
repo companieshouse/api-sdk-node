@@ -18,7 +18,7 @@
         "postpublish": "rm -rf dist"
     },
     "dependencies": {
-        "axios": "^1.8.2",
+        "axios": "^1.18.1",
         "camelcase-keys": "~6.2.2",
         "http-status-codes": "^2.3.0",
         "snakecase-keys": "~3.2.0",
