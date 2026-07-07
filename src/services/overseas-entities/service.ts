@@ -34,7 +34,7 @@ export default class OverseasEntityService {
                 errors: [response.error]
             };
         }
-
+        console.log("response.body, overseas-entt", response.body);
         const resource: Resource<OverseasEntity> = {
             httpStatusCode: response.status,
             resource: mapOverseasEntityResource(response.body)
