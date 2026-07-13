@@ -16,6 +16,7 @@ import { expect } from "chai";
 import sinon from "sinon";
 import { mockGetPersonsOfSignificantControl, mockGetShareholder, mockGetRegisterLocations } from "./confirmation.statement.mock";
 import Resource, { ApiErrorResponse } from "../../../src/services/resource";
+import { CondensedSicCodeData } from "../../../src/services/sic-code";
 
 const TRANSACTION_ID = "12345";
 const CONFIRMATION_STATEMENT_ID = "r4nd0m";
@@ -480,5 +481,70 @@ describe("getNextMadeUpToDate tests", () => {
 
         expect(response.httpStatusCode).to.equal(404);
         expect(response.errors[0]).to.equal("Not Found");
+    });
+});
+
+describe.only("Get condensed sic code list from confirmation service", () => {
+    it("Should return condensed sic code list", async () => {
+        const mockResponseBody = [
+            { sic_code: "15110", sic_description: "Tanning and dressing of leather; dressing and dyeing of fur" },
+            { sic_code: "16220", sic_description: "Manufacture of assembled parquet floors" },
+            { sic_code: "16100", sic_description: "Sawmilling and planing of wood" }
+        ];
+
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({
+            status: 200,
+            body: mockResponseBody
+        });
+
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+
+        const response = await csService.getCondensedSicCodeList() as Resource<CondensedSicCodeData[]>;
+
+        expect(response.httpStatusCode).to.be.equal(200);
+        expect(response.resource).to.be.equal(mockResponseBody);
+    });
+
+    it("Should return an error when sic code api response status = 400", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({
+            status: 400,
+            error: "Bad Request"
+        });
+
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+
+        const response = await csService.getCondensedSicCodeList() as Resource<CondensedSicCodeData[]>;
+
+        expect(response.httpStatusCode).to.be.equal(400);
+        expect(response.resource).to.be.equal("Bad Request");
+    });
+
+    it("Should return an error when sic code api response status = 500", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({
+            status: 500,
+            error: "Internal Server Error"
+        });
+
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+
+        const response = await csService.getCondensedSicCodeList() as Resource<CondensedSicCodeData[]>;
+
+        expect(response.httpStatusCode).to.be.equal(500);
+        expect(response.resource).to.be.equal("Internal Server Error");
+    });
+
+    it("Should throw an error when response body and error are null", async () => {
+        sinon.stub(mockValues.requestClient, "httpGet").resolves({
+            status: 404,
+            error: undefined
+        });
+
+        const csService: ConfirmationStatementService = new ConfirmationStatementService(mockValues.requestClient);
+
+        try {
+            csService.getCondensedSicCodeList();
+        } catch (error) {
+            expect((error as Error).message).to.equal("No body or error body returned from /confirmation-statement/condensed-sic-codes API call - http status from API = 404");
+        }
     });
 });
