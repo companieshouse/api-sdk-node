@@ -484,7 +484,7 @@ describe("getNextMadeUpToDate tests", () => {
     });
 });
 
-describe.only("Get condensed sic code list from confirmation service", () => {
+describe("Get condensed sic code list from confirmation service", () => {
     it("Should return condensed sic code list", async () => {
         const mockResponseBody = [
             { sic_code: "15110", sic_description: "Tanning and dressing of leather; dressing and dyeing of fur" },
