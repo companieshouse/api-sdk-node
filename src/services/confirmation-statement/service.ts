@@ -46,6 +46,7 @@ import {
 } from "./types";
 import { HttpResponse, IHttpClient } from "../../http";
 import Resource, { ApiErrorResponse } from "../resource";
+import { CondensedSicCodeData } from "../sic-code/types";
 export default class {
     constructor (private readonly client: IHttpClient) { }
 
@@ -270,6 +271,29 @@ export default class {
         resource.resource = this.mapToNextMadeUpToDate(resp.body);
 
         return resource;
+    }
+
+    public async getCondensedSicCodeList (): Promise<Resource<CondensedSicCodeData[]>> {
+        const url: string = "/confirmation-statement/condensed-sic-codes";
+        const response: HttpResponse = await this.client.httpGet(url);
+
+        const condensedSicCodeResource: Resource<CondensedSicCodeData[]> = {
+            httpStatusCode: response.status
+        };
+
+        if (response.error && response.status !== 400) {
+            condensedSicCodeResource.resource = response.error;
+            return condensedSicCodeResource;
+        }
+
+        const subResource: CondensedSicCodeData[] = response.body ? response.body : response.error;
+
+        if (!subResource) {
+            throw new Error(`No body or error body returned from ${url} API call - http status from API = ${response.status}`);
+        }
+        condensedSicCodeResource.resource = subResource;
+
+        return condensedSicCodeResource;
     }
 
     private mapToConfirmationStatementSubmission (apiResource: ConfirmationStatementSubmissionResource): ConfirmationStatementSubmission {
