@@ -25,7 +25,10 @@ export default class RegisteredEmailAddressService {
         const resp = await this.client.httpPost(url, registeredEmailAddressResource);
 
         if (resp.error) {
-            return Promise.reject(resp);
+            return {
+                httpStatusCode: resp.status,
+                errors: [resp.error]
+            } as ApiErrorResponse;
         }
 
         const resource: Resource<RegisteredEmailAddressCreatedResource> = {
