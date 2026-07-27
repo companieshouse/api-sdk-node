@@ -41,5 +41,5 @@ export interface PackageTypeRequest {
 }
 
 export interface ConfirmCompanyRequest {
-    companyName: String;
+    companyName: string;
 }
