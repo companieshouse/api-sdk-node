@@ -222,20 +222,20 @@ export class AccountsFilingService {
         const resp = await this.client.httpPut(url, requestBody, headers);
 
         switch (resp.status) {
-            case 204:
-                return new Success(undefined);
-            case 404:
-                // The api only checks to see if a transaction with the given id exists. No such test is performed for the accountsFilingId.
-                return new Failure(new Error(`No transaction with id [${transactionId}] found`));
-            default: {
-                const errorMessageData = {
-                    httpStatusCode: resp.status,
-                    transactionId,
-                    accountsFilingId,
-                    responseBody: resp.body
-                }
-                return new Failure(new Error(`An unknown error occured when setting accounts filing package type. ${JSON.stringify(errorMessageData, null, 2)}`));
+        case 204:
+            return new Success(undefined);
+        case 404:
+            // The api only checks to see if a transaction with the given id exists. No such test is performed for the accountsFilingId.
+            return new Failure(new Error(`No transaction with id [${transactionId}] found`));
+        default: {
+            const errorMessageData = {
+                httpStatusCode: resp.status,
+                transactionId,
+                accountsFilingId,
+                responseBody: resp.body
             }
+            return new Failure(new Error(`An unknown error occured when setting accounts filing package type. ${JSON.stringify(errorMessageData, null, 2)}`));
+        }
         }
     }
 }
