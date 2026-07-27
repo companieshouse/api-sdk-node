@@ -55,7 +55,7 @@ export default class RequestClient extends AbstractClient {
 
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
-            const resp = await axios(options) as AxiosResponse;
+            const resp = await axios(options);
             return {
                 status: resp.status,
                 body: resp.data,

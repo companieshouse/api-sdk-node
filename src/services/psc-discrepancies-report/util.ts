@@ -30,8 +30,8 @@ export default class {
                 error: errors
             };
             return [ret];
-        } else if ((errors as NestedErrors).errors) {
-            return (errors as NestedErrors).errors.reduce<ApiError[]>((previousValue, currentValue) => {
+        } else if (errors.errors) {
+            return errors.errors.reduce<ApiError[]>((previousValue, currentValue) => {
                 return [...previousValue, Mapping.camelCaseKeys(currentValue)]
             }, []);
         } else {
