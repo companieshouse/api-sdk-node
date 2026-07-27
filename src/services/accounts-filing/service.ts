@@ -231,7 +231,7 @@ export class AccountsFilingService {
             errorMessage = `No transaction with id [${transactionId}] found`;
             return new Failure(new Error(errorMessage));
         default:
-            var errorMessageData = {
+            const errorMessageData = {
                 httpStatusCode: resp.status,
                 transactionId,
                 accountsFilingId,
