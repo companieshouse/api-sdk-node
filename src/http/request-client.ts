@@ -76,7 +76,7 @@ export default class RequestClient extends AbstractClient {
         if (uri.startsWith("http")) {
             return uri;
         }
-        if (uri.length > 0 && uri.charAt(0) !== "/") {
+        if (!uri.startsWith("/")) {
             uri = `/${uri}`;
         }
         if (uri === "/") {
