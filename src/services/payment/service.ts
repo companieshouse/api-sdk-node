@@ -1,6 +1,6 @@
 import { HttpResponse, IHttpClient } from "../../http";
 import { ApiResult, ApiResponse } from "../resource";
-import { CreatePaymentRequest, Payment, CreatePaymentRequestResource, PaymentResource } from "./types";
+import { CreatePaymentRequest, Payment, PaymentResource } from "./types";
 import Mapping from "../../mapping/mapping";
 import { failure, success } from "../../services/result";
 

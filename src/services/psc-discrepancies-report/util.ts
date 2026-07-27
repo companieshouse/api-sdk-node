@@ -1,6 +1,6 @@
 import { HttpResponse } from "../../http";
-import Resource, { ApiErrorResponse, ApiError, ApiResponse } from "../../services/resource";
-import { failure, success, Result, Success, Failure } from "../result";
+import { ApiErrorResponse, ApiError, ApiResponse } from "../../services/resource";
+import { failure, success, Result } from "../result";
 import Mapping from "../../mapping/mapping";
 
 type NestedErrors = { errors: ApiError[] }

@@ -1,9 +1,7 @@
 import { IHttpClient } from "../../http";
-import { CompanyFilingHistory, CompanyFilingHistoryResource, FilingHistoryItemResource } from "./types";
+import { CompanyFilingHistory, CompanyFilingHistoryResource } from "./types";
 import Resource from "../resource";
-import { CompanyProfile, CompanyProfileResource } from "../company-profile";
 import Mapping from "../../mapping/mapping";
-import { CompanyOfficers } from "../company-officers";
 
 /**
  * https://developer.companieshouse.gov.uk/api/docs/company/company_number/filing-history/getFilingHistoryList.html
