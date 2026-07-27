@@ -16,10 +16,10 @@ export default class DissolvedSearchService {
             dissolvedSearchURL += searchAfter !== null ? "&search_after=" + searchAfter : "";
             dissolvedSearchURL += searchBefore !== null ? "&search_before=" + searchBefore : "";
             dissolvedSearchURL += size !== null ? "&size=" + size : "";
-        } else if ( searchType === "previousNameDissolved" ) {
+        } else if (searchType === "previousNameDissolved") {
             dissolvedSearchURL += "&search_type=previous-name-dissolved";
             dissolvedSearchURL += startIndex ? "&start_index=" + startIndex : "";
-        } else if ( searchType === "bestMatch") {
+        } else if (searchType === "bestMatch") {
             dissolvedSearchURL += "&search_type=best-match";
             dissolvedSearchURL += startIndex ? "&start_index=" + startIndex : "";
         }
