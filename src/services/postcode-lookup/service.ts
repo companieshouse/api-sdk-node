@@ -2,7 +2,6 @@ import { HttpResponse, IHttpClient } from "../../http";
 import Resource from "../resource";
 import { UKAddress } from "./types";
 import Mapping from "../../mapping/mapping";
-import Util from "../psc-discrepancies-report/util"
 
 export default class PostcodeLookupService {
     constructor (readonly client: IHttpClient) { }

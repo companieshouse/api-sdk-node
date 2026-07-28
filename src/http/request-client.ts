@@ -55,7 +55,7 @@ export default class RequestClient extends AbstractClient {
 
             // any errors (including status code errors) are thrown as exceptions and
             // will be caught in the catch block.
-            const resp = await axios(options) as AxiosResponse;
+            const resp = await axios(options);
             return {
                 status: resp.status,
                 body: resp.data,
@@ -76,7 +76,7 @@ export default class RequestClient extends AbstractClient {
         if (uri.startsWith("http")) {
             return uri;
         }
-        if (uri.length > 0 && uri.charAt(0) !== "/") {
+        if (!uri.startsWith("/")) {
             uri = `/${uri}`;
         }
         if (uri === "/") {

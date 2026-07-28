@@ -155,3 +155,79 @@ describe("create a dissolved search GET", () => {
         expect(data.resource.hits).to.equal(mockResponseBody.hits);
     });
 });
+
+describe("URL construction", () => {
+    const mockGetRequest = { status: 200, body: mockResponseBody };
+
+    it("builds correct URL for alphabetical search with no optional params", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "alphabetical", null, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=alphabetical`
+        );
+    });
+
+    it("builds correct URL for alphabetical search with searchAfter only", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "alphabetical", null, null, searchafter, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=alphabetical&search_after=${searchafter}`
+        );
+    });
+
+    it("builds correct URL for alphabetical search with searchBefore and size", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "alphabetical", null, searchBefore, null, 20);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=alphabetical&search_before=${searchBefore}&size=20`
+        );
+    });
+
+    it("builds correct URL for previousNameDissolved search without startIndex", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "previousNameDissolved", null, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=previous-name-dissolved`
+        );
+    });
+
+    it("builds correct URL for previousNameDissolved search with startIndex", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "previousNameDissolved", 10, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=previous-name-dissolved&start_index=10`
+        );
+    });
+
+    it("builds correct URL for bestMatch search without startIndex", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "bestMatch", null, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=best-match`
+        );
+    });
+
+    it("builds correct URL for bestMatch search with startIndex", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "bestMatch", 5, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}&search_type=best-match&start_index=5`
+        );
+    });
+
+    it("builds base URL only for an unrecognised searchType", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves(mockGetRequest);
+        const search = new DissolvedSearchService(requestClient);
+        await search.getCompanies(testCompanyName, mockRequestId, "unknown", null, null, null, null);
+        expect(stub.firstCall.args[0]).to.equal(
+            `/dissolved-search/companies?q=${testCompanyName}`
+        );
+    });
+});

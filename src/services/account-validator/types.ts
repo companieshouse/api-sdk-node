@@ -33,6 +33,12 @@ export interface AccountValidatorResponse {
 type RequestStatus = "complete" | "pending" | "error" ;
 type ValidationStatus = "OK" | "FAILED"
 
+function isValidErrorMessage (errorMessage: any): boolean {
+    return typeof errorMessage === "object" &&
+        errorMessage !== null &&
+        typeof errorMessage.errorMessage === "string";
+}
+
 export function isAccountValidatorResponse (object: any): object is AccountValidatorResponse {
     if (typeof object.status !== "string" ||
         typeof object.fileId !== "string" ||
@@ -59,14 +65,5 @@ export function isAccountValidatorResponse (object: any): object is AccountValid
         return false;
     }
 
-    for (const errorMessage of errorMessages ?? []) {
-        if (typeof errorMessage !== "object" || errorMessage === null) {
-            return false;
-        }
-        if (typeof errorMessage.errorMessage !== "string") {
-            return false;
-        }
-    }
-
-    return true;
+    return (errorMessages ?? []).every(isValidErrorMessage);
 }
