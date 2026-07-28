@@ -1,7 +1,6 @@
 import { Headers, IHttpClient } from "../../http";
 import {
-    CompanyProfile, CompanyProfileResource, RegisteredOfficeAddressResource, AccountsResource,
-    NextAccountsResource, ConfirmationStatementResource, LinksResource, ForeignCompanyDetailsResource, ServiceAddressResource
+    CompanyProfile, CompanyProfileResource
 } from "./types";
 import Resource from "../resource";
 

@@ -1,5 +1,5 @@
 import { AbstractClient, HttpResponse, AdditionalOptions, Headers } from "./http-client";
-import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
+import axios, { AxiosRequestConfig } from "axios";
 
 /**
  * RequestClient is an implementation of our http client using the request
