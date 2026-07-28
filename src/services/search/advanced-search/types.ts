@@ -17,7 +17,7 @@ export interface Items {
     date_of_cessation: Date;
     date_of_creation: Date;
     registered_office_address: Address;
-    sic_codes: String[];
+    sic_codes: string[];
 }
 
 export interface Address {
@@ -41,7 +41,7 @@ export interface TopHit {
     date_of_cessation: Date;
     date_of_creation: Date;
     registered_office_address: Address;
-    sic_codes: String[];
+    sic_codes: string[];
 }
 
 export interface Links {
