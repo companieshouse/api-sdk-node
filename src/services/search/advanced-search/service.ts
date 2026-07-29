@@ -19,7 +19,11 @@ export default class AdvancedSearchService {
     SIZE_QUERY_PARAMETER = "size";
 
     constructor (private readonly client: IHttpClient) { }
-    public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
+    // NOSONAR: The 14 parameters here exceed the default limit but cannot be reduced without a
+    // breaking change to the public API. It is called by search.web.ch.gov.uk.
+    // Consider refactoring to reduce the number of parameters for example by replacing them
+    // with an AdvancedSearchParams object.
+    public async getCompanies (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null, // NOSONAR
         incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
         dissolvedTo: string | null, size: number | null, requestId: string): Promise<Resource<CompaniesResource>> {
         const additionalHeaders = {
