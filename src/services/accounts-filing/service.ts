@@ -240,6 +240,26 @@ export class AccountsFilingService {
     }
 }
 
+function isValidErrorProperty (error: any, property: string, expectedType: string): boolean {
+    if (!error.hasOwnProperty(property)) {
+        return true;
+    }
+    // eslint-disable-next-line valid-typeof
+    return typeof error[property] === expectedType;
+}
+
+function isValidError (error: any): boolean {
+    if (typeof error !== "object" || error === null) {
+        return false;
+    }
+
+    return isValidErrorProperty(error, "error", "string") &&
+        isValidErrorProperty(error, "errorValues", "object") &&
+        isValidErrorProperty(error, "location", "string") &&
+        isValidErrorProperty(error, "locationType", "string") &&
+        isValidErrorProperty(error, "type", "string");
+}
+
 /**
  * Type guard function to check if a given object conforms to the ApiErrorResponse interface.
  * This function performs structural validation by checking the existence and types of certain properties
@@ -268,36 +288,7 @@ function isApiErrorResponse (object: any): object is ApiErrorResponse {
             return false;
         }
 
-        for (const error of object.errors) {
-            if (typeof error !== "object" || error === null) {
-                return false;
-            }
-
-            if (error.hasOwnProperty("error") && typeof error.error !== "string") {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("errorValues") &&
-                typeof error.errorValues !== "object"
-            ) {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("location") &&
-                typeof error.location !== "string"
-            ) {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("locationType") &&
-                typeof error.locationType !== "string"
-            ) {
-                return false;
-            }
-            if (error.hasOwnProperty("type") && typeof error.type !== "string") {
-                return false;
-            }
-        }
+        return object.errors.every(isValidError);
     }
 
     return true;

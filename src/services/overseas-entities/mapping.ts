@@ -626,14 +626,14 @@ const mapHasSoldLand = (option: string | undefined): boolean | undefined => {
     return typeof option === "undefined" ? option : (option !== "0");
 }
 const mapHasSoldLandResource = (option: boolean | undefined | null): string | undefined => {
-    return typeof option !== "boolean" ? undefined : (option ? "1" : "0");
+    return typeof option !== "boolean" ? undefined : (option ? "1" : "0"); // NOSONAR - nested ternary is ok
 }
 
 const mapIsSecureRegister = (option: string | undefined): boolean | undefined => {
     return typeof option === "undefined" ? option : (option !== "0");
 }
 const mapIsSecureRegisterResource = (option: boolean | undefined | null): string | undefined => {
-    return typeof option !== "boolean" ? undefined : (option ? "1" : "0");
+    return typeof option !== "boolean" ? undefined : (option ? "1" : "0"); // NOSONAR - nested ternary is ok
 }
 
 const convertOptionalDateToIsoDateString = (day: string = "", month: string = "", year: string = ""): string => {
