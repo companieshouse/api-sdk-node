@@ -253,7 +253,7 @@ export default class TransactionService {
                     ? (() => {
                         const result = {};
                         for (const key in i.filings) {
-                            if (Object.prototype.hasOwnProperty.call(i.filings, key)) {
+                            if (Object.hasOwn(i.filings, key)) {
                                 const filing = i.filings[key];
                                 result[key] = {
                                     status: filing.status,

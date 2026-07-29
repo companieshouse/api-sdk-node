@@ -1,7 +1,6 @@
 import { Headers, IHttpClient } from "../../http";
 import {
-    CompanyProfile, CompanyProfileResource, RegisteredOfficeAddressResource, AccountsResource,
-    NextAccountsResource, ConfirmationStatementResource, LinksResource, ForeignCompanyDetailsResource, ServiceAddressResource
+    CompanyProfile, CompanyProfileResource
 } from "./types";
 import Resource from "../resource";
 
@@ -30,16 +29,16 @@ export default class CompanyProfileService {
         // cast the response body to the expected type
         const body = resp.body as CompanyProfileResource;
 
-        const roa = body.registered_office_address as RegisteredOfficeAddressResource;
-        const serviceAddress = body.service_address as ServiceAddressResource;
+        const roa = body.registered_office_address;
+        const serviceAddress = body.service_address;
 
-        const acc = body.accounts as AccountsResource;
+        const acc = body.accounts;
 
-        const nextAccs = acc?.next_accounts as NextAccountsResource;
+        const nextAccs = acc?.next_accounts;
 
-        const confirmationStatement = body.confirmation_statement as ConfirmationStatementResource;
+        const confirmationStatement = body.confirmation_statement;
 
-        const foreignCompanyDetailsResource = body.foreign_company_details as ForeignCompanyDetailsResource;
+        const foreignCompanyDetailsResource = body.foreign_company_details;
 
         const originatingRegistryResource = foreignCompanyDetailsResource?.originating_registry;
         const originatingRegistry = (Object.keys(originatingRegistryResource || {}).length)
@@ -57,7 +56,7 @@ export default class CompanyProfileService {
             }
             : {};
 
-        const links = body.links as LinksResource;
+        const links = body.links;
 
         const isOnRegisterInCountryFormedIn = (body.is_on_register_in_country_formed_in)
             ? body.is_on_register_in_country_formed_in === "true"

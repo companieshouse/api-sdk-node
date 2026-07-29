@@ -1,13 +1,11 @@
 import { HttpResponse } from "../../http";
-import Resource, { ApiErrorResponse, ApiError, ApiResponse } from "../../services/resource";
-import { failure, success, Result, Success, Failure } from "../result";
+import { ApiErrorResponse, ApiError, ApiResponse } from "../../services/resource";
+import { failure, success, Result } from "../result";
 import Mapping from "../../mapping/mapping";
 
 type NestedErrors = { errors: ApiError[] }
 
 export default class {
-    constructor () { }
-
     processResponse (resp: HttpResponse): Result<ApiResponse<any>, ApiErrorResponse> {
         if (resp.error) {
             const error: ApiErrorResponse = {
@@ -30,8 +28,8 @@ export default class {
                 error: errors
             };
             return [ret];
-        } else if ((errors as NestedErrors).errors) {
-            return (errors as NestedErrors).errors.reduce<ApiError[]>((previousValue, currentValue) => {
+        } else if (errors.errors) {
+            return errors.errors.reduce<ApiError[]>((previousValue, currentValue) => {
                 return [...previousValue, Mapping.camelCaseKeys(currentValue)]
             }, []);
         } else {

@@ -8,43 +8,20 @@ export default class DissolvedSearchService {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
         }
-        const ALPHABETICAL_QUERY = "&search_type=alphabetical";
-        const BEST_MATCH_QUERY = "&search_type=best-match";
-        const PREVIOUS_NAME_QUERY = "&search_type=previous-name-dissolved";
-        const START_INDEX_QUERY = "&start_index=";
-        const SEARCH_BEFORE_QUERY = "&search_before=";
-        const SEARCH_AFTER_QUERY = "&search_after=";
-        const SIZE_QUERY = "&size=";
 
         let dissolvedSearchURL = "/dissolved-search/companies?q=" + companyName;
 
         if (searchType === "alphabetical") {
-            dissolvedSearchURL += ALPHABETICAL_QUERY
-            if (searchAfter !== null) {
-                dissolvedSearchURL += SEARCH_AFTER_QUERY + searchAfter;
-            }
-            if (searchBefore !== null) {
-                dissolvedSearchURL += SEARCH_BEFORE_QUERY + searchBefore;
-            }
-            if (size !== null) {
-                dissolvedSearchURL += SIZE_QUERY + size;
-            }
-        }
-
-        if (!startIndex && searchType === "previousNameDissolved") {
-            dissolvedSearchURL += PREVIOUS_NAME_QUERY;
-        }
-
-        if (startIndex && searchType === "previousNameDissolved") {
-            dissolvedSearchURL += PREVIOUS_NAME_QUERY + START_INDEX_QUERY + startIndex;
-        }
-
-        if (!startIndex && searchType === "bestMatch") {
-            dissolvedSearchURL += BEST_MATCH_QUERY;
-        }
-
-        if (startIndex && searchType === "bestMatch") {
-            dissolvedSearchURL += BEST_MATCH_QUERY + START_INDEX_QUERY + startIndex;
+            dissolvedSearchURL += "&search_type=alphabetical";
+            dissolvedSearchURL += searchAfter !== null ? "&search_after=" + searchAfter : "";
+            dissolvedSearchURL += searchBefore !== null ? "&search_before=" + searchBefore : "";
+            dissolvedSearchURL += size !== null ? "&size=" + size : "";
+        } else if (searchType === "previousNameDissolved") {
+            dissolvedSearchURL += "&search_type=previous-name-dissolved";
+            dissolvedSearchURL += startIndex ? "&start_index=" + startIndex : "";
+        } else if (searchType === "bestMatch") {
+            dissolvedSearchURL += "&search_type=best-match";
+            dissolvedSearchURL += startIndex ? "&start_index=" + startIndex : "";
         }
 
         const resp = await this.client.httpGet(dissolvedSearchURL, additionalHeaders);

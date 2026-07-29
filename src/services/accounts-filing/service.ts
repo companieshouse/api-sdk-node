@@ -221,26 +221,43 @@ export class AccountsFilingService {
         const headers = addRequestIdHeader(requestId)
         const resp = await this.client.httpPut(url, requestBody, headers);
 
-        // Needed due to javascripts switch block scoping rules
-        let errorMessage = "";
         switch (resp.status) {
         case 204:
             return new Success(undefined);
         case 404:
             // The api only checks to see if a transaction with the given id exists. No such test is performed for the accountsFilingId.
-            errorMessage = `No transaction with id [${transactionId}] found`;
-            return new Failure(new Error(errorMessage));
-        default:
-            var errorMessageData = {
+            return new Failure(new Error(`No transaction with id [${transactionId}] found`));
+        default: {
+            const errorMessageData = {
                 httpStatusCode: resp.status,
                 transactionId,
                 accountsFilingId,
                 responseBody: resp.body
             }
-            errorMessage = `An unknown error occured when setting accounts filing package type. ${JSON.stringify(errorMessageData, null, 2)}`;
-            return new Failure(new Error(errorMessage));
+            return new Failure(new Error(`An unknown error occured when setting accounts filing package type. ${JSON.stringify(errorMessageData, null, 2)}`));
+        }
         }
     }
+}
+
+function isValidErrorProperty (error: any, property: string, expectedType: string): boolean {
+    if (!error.hasOwnProperty(property)) {
+        return true;
+    }
+    // eslint-disable-next-line valid-typeof
+    return typeof error[property] === expectedType;
+}
+
+function isValidError (error: any): boolean {
+    if (typeof error !== "object" || error === null) {
+        return false;
+    }
+
+    return isValidErrorProperty(error, "error", "string") &&
+        isValidErrorProperty(error, "errorValues", "object") &&
+        isValidErrorProperty(error, "location", "string") &&
+        isValidErrorProperty(error, "locationType", "string") &&
+        isValidErrorProperty(error, "type", "string");
 }
 
 /**
@@ -271,36 +288,7 @@ function isApiErrorResponse (object: any): object is ApiErrorResponse {
             return false;
         }
 
-        for (const error of object.errors) {
-            if (typeof error !== "object" || error === null) {
-                return false;
-            }
-
-            if (error.hasOwnProperty("error") && typeof error.error !== "string") {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("errorValues") &&
-                typeof error.errorValues !== "object"
-            ) {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("location") &&
-                typeof error.location !== "string"
-            ) {
-                return false;
-            }
-            if (
-                error.hasOwnProperty("locationType") &&
-                typeof error.locationType !== "string"
-            ) {
-                return false;
-            }
-            if (error.hasOwnProperty("type") && typeof error.type !== "string") {
-                return false;
-            }
-        }
+        return object.errors.every(isValidError);
     }
 
     return true;

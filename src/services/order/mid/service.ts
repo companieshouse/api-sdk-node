@@ -1,5 +1,5 @@
 import { IHttpClient } from "../../../http";
-import { MidItem, MidItemResource, MidItemPostRequest, MidItemRequestResource } from "./types";
+import { MidItem, MidItemResource, MidItemPostRequest } from "./types";
 import Resource from "../../resource";
 import Mapping from "../../../mapping/mapping";
 

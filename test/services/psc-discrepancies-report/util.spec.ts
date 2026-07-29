@@ -120,4 +120,11 @@ describe("Process Response", () => {
         expect(data.httpStatusCode).to.equal(400);
         expect(JSON.stringify(data.errors)).to.be.equal(JSON.stringify([expectedError]))
     });
+
+    it("should return empty array for NestedErrors with no errors property", () => {
+        const util = new Util();
+        // Simulate malformed API response - cast to bypass type checking
+        const result = (util as any).buildErrors({ errors: null });
+        expect(result).to.deep.equal([]);
+    });
 })
