@@ -244,6 +244,7 @@ function isValidErrorProperty (error: any, property: string, expectedType: strin
     if (!error.hasOwnProperty(property)) {
         return true;
     }
+    // eslint-disable-next-line valid-typeof
     return typeof error[property] === expectedType;
 }
 
