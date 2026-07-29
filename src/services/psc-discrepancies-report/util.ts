@@ -6,7 +6,6 @@ import Mapping from "../../mapping/mapping";
 type NestedErrors = { errors: ApiError[] }
 
 export default class {
-    constructor () { }
 
     processResponse (resp: HttpResponse): Result<ApiResponse<any>, ApiErrorResponse> {
         if (resp.error) {
