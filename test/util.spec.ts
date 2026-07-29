@@ -3,7 +3,6 @@ import { addRequestIdHeader } from "../src/util";
 import { REQUEST_ID_HEADER } from "../src/config";
 
 describe("addRequestIdHeader", () => {
-
     it("should return undefined when called with no arguments", () => {
         expect(addRequestIdHeader()).to.be.undefined;
     });
@@ -43,5 +42,4 @@ describe("addRequestIdHeader", () => {
         addRequestIdHeader("abc-123", original);
         expect(original).to.deep.equal({ "Content-Type": "application/json" });
     });
-
 });
