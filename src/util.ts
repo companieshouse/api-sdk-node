@@ -18,7 +18,5 @@ export function addRequestIdHeader (requestId?: string, otherHeaders: Headers = 
         return undefined
     }
 
-    otherHeaders = otherHeaders !== undefined ? otherHeaders : {}
-
     return { ...otherHeaders, [REQUEST_ID_HEADER]: requestId };
 }
