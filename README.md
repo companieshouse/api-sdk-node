@@ -86,16 +86,28 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
 ### Dependency Overrides
 
 - **serialize-javascript@7.0.5**
-  - Reason: Required as a transitive dependency by mocha@11.7.2, which depends on vulnerable version 6.0.2.
+  - Reason: Required as a transitive dependency by mocha@11.7.6, which depends on vulnerable version 6.0.2.
   - Ticket/CVE: CVE-2026-34043
-  - Remove after: Remove once Mocha has been upgraded beyond version 11.7.2 (patch or minor release). Ensure proper testing is completed after removal.
+  - Remove after: Remove once Mocha has been upgraded beyond version 11.7.6 (patch or minor release). Ensure proper testing is completed after removal.
 
-- "uuid": "^11.1.1"
-  - Reason: transitive dependency of istanbul-lib-processinfo / nyc
-  - Ticket: ASM-2299 ( gulnerability GHSA-w5hq-g745-h8pq )
+- **brace-expansion@5.0.8**
+  - Reason:
+      - Fixes vulnerable brace-expansion versions (2.0.1, and 1.1.7) that are transitive dependencies of `mocha` and `eslint-plugin-import`.
+      - `mocha` latest depends on `glob@10.4.5 -> minimatch@9.0.5 -> brace-expansion@2.0.1`
+      - `eslint-plugin-import` latest depends on `minimatch@3.1.5 -> brace-expansion@1.1.7`
+      - `Glob` upgraded from 10.4.5 to 12.0.0 under mocha override to fix brace-expansion security vulnerabilities with updated dependencies
+   - Mitigation:
+      - general override is used to force `brace-expansion@5.0.8` for `mocha` and `eslint-plugin-import` dependency paths
+      - Mocha override includes `glob@12.0.0` to pull in secure brace-expansion versions
+      - The application test suite was executed successfully after applying the overrides
+   - Risk:
+      - This override spans multiple major versions (`1.x`/`2.x` -> `5.x`)
+      - Compatibility is not guaranteed by npm and should be revalidated whenever related dependencies are upgraded
+  - Ticket/CVE:
+      - CVE-2026-13149
+      - https://companieshouse.atlassian.net/browse/ASM-2687
+  - Remove after:
+      - Remove once mocha and eslint-plugin-import have been upgraded with versions using secure brace-expansion
+      - Ensure proper testing is completed after removal
 
-- **js-yaml@4.2.0**
-  - Reason: Required as a transitive dependency by @istanbuljs/load-nyc-config@1.1.0, which depends on vulnerable version 3.13.1.
-  - Ticket/CVE: CVE-2026-53550 ( vulnerability GHSA-h67p-54hq-rp68 )
-  - Remove after: Remove once load-nyc-config has been upgraded beyond version 1.1.0 (patch or minor release). Ensure proper testing is completed after removal.
 
