@@ -1,5 +1,5 @@
 import ApiClient from "./client";
-import { API_URL, ACCOUNT_URL } from "./config";
+import { API_URL, ACCOUNT_URL, PAYMENT_URL } from "./config";
 import { RequestClient, HttpClientOptions, IHttpClient } from "./http";
 import Resource from "./services/resource";
 
@@ -13,7 +13,13 @@ import Resource from "./services/resource";
  * @param oauthToken a user's oauth token that can be used for authentication
  * @param baseUrl the api base url
  */
-export const createApiClient = (apiKey?: string, oauthToken?: string, baseUrl: string = API_URL, baseAccountUrl: string = ACCOUNT_URL): ApiClient => {
+export const createApiClient = (
+    apiKey?: string,
+    oauthToken?: string,
+    baseUrl: string = API_URL,
+    baseAccountUrl: string = ACCOUNT_URL,
+    basePaymentUrl: string = PAYMENT_URL
+): ApiClient => {
     if (apiKey && oauthToken) {
         throw new Error("You cannot set both api key and oauth token to create a client. Please use one or the other");
     }
@@ -34,9 +40,17 @@ export const createApiClient = (apiKey?: string, oauthToken?: string, baseUrl: s
     };
     const accountHttpClient = new RequestClient(accountOptions);
 
+    // the http client adapter for the payment domain
+    const paymentOptions: HttpClientOptions = {
+        apiKey: apiKey,
+        baseUrl: basePaymentUrl,
+        oauthToken: oauthToken
+    };
+    const paymentHttpClient = new RequestClient(paymentOptions);
+
     // the api client
-    return new ApiClient(apiHttpClient, accountHttpClient);
+    return new ApiClient(apiHttpClient, accountHttpClient, paymentHttpClient);
 };
 
 // exports used by private sdk to provide private services without the need to duplicate configs or http client logic
-export { IHttpClient, HttpClientOptions, RequestClient, API_URL, ACCOUNT_URL, Resource };
+export { IHttpClient, HttpClientOptions, RequestClient, API_URL, ACCOUNT_URL, PAYMENT_URL, Resource };

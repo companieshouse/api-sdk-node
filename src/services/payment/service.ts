@@ -21,6 +21,9 @@ export default class PaymentService {
    * Begins a new payment session.
    * use this if full url is set as baseUrl (usually retrieved from X-Payment-Required header)
    * @param createPaymentRequest a create payment request
+   * @deprecated Use {@link createPayment} instead. This method was a workaround for the absence of a
+   * dedicated payment HTTP client. Now that `PaymentService` uses its own client with the correct
+   * base URL (`PAYMENTS_API_URL`), callers should use `createPayment` which appends `/payments`.
    */
     public async createPaymentWithFullUrl (createPaymentRequest: CreatePaymentRequest):
     Promise<ApiResult<ApiResponse<Payment>>> {
