@@ -1,6 +1,7 @@
 import { IHttpClient } from "../../../http";
 import { CompaniesResource } from "./types";
 import Resource from "../../resource";
+import { ALPHABETICAL_SEARCH_PATH_URL } from "../../../config";
 
 export default class AlphabeticalSearchService {
     constructor (private readonly client: IHttpClient) { }
@@ -13,7 +14,7 @@ export default class AlphabeticalSearchService {
             "X-Request-ID": requestId,
             "Content-Type": "application/json"
         }
-        let alphabeticalSearchURL = "/alphabetical-search/companies?q=" + companyName;
+        let alphabeticalSearchURL = ALPHABETICAL_SEARCH_PATH_URL + "?q=" + companyName;
 
         if (searchBefore != null) {
             alphabeticalSearchURL += SEARCH_BEFORE_QUERY + searchBefore;

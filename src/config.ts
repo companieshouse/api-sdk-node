@@ -4,3 +4,5 @@ export const ACCOUNT_URL = process.env.ACCOUNT_URL || "https://account.companies
 // Header used to correlate logs between services.
 // This will be used as the context key for logging.
 export const REQUEST_ID_HEADER = "X-Request-Id";
+
+export const ALPHABETICAL_SEARCH_PATH_URL = process.env.ALPHABETICAL_SEARCH_PATH_URL || "/alphabetical-search/companies";
