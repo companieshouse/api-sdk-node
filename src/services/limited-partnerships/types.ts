@@ -33,6 +33,7 @@ export interface LimitedPartnership {
         partnership_number?: string;
         date_of_update?: string;
         kind?: string;
+        registration_date?: string;
     };
 }
 

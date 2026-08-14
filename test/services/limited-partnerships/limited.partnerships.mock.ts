@@ -26,6 +26,7 @@ export const LIMITED_PARTNERSHIP_OBJECT_MOCK: LimitedPartnership = {
         partnership_name: "Legalised Asset Stashing",
         name_ending: NameEndingType.LIMITED_PARTNERSHIP,
         partnership_type: PartnershipType.LP,
+        registration_date: "2023-12-29T11:47:59.193Z",
         email: "test@email.com",
         jurisdiction: Jurisdiction.ENGLAND_AND_WALES,
         registered_office_address: {
