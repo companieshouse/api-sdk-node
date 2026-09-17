@@ -221,7 +221,8 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
                 NatureOfControlType.FIRM,
                 NatureOfControlType.TRUST
             ],
-            completed: true
+            completed: true,
+            entered_on_register: true
         }
     };
 

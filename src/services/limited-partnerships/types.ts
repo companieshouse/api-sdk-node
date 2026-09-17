@@ -122,6 +122,7 @@ export interface PersonWithSignificantControl {
         completed?: boolean;
         consent_checked?: boolean;
         nature_of_control_types?: NatureOfControlType[];
+        entered_on_register?: boolean;
     };
 }
 
