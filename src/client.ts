@@ -83,7 +83,11 @@ export default class ApiClient {
     public readonly associationsService: AssociationsService;
     public readonly sicCodeService: CondensedSicCodeService;
 
-    constructor (readonly apiClient: IHttpClient, readonly accountClient: IHttpClient) {
+    constructor (
+        readonly apiClient: IHttpClient,
+        readonly accountClient: IHttpClient,
+        readonly paymentClient: IHttpClient = apiClient // default to apiClient if not provided
+    ) {
         // services on the api domain using the apiClient
         this.lateFilingPenalties = new LateFilingPenaltyService(apiClient);
         this.companyOfficers = new CompanyOfficersService(apiClient);
@@ -96,7 +100,7 @@ export default class ApiClient {
         this.certificate = new CertificateService(apiClient);
         this.certifiedCopies = new CertifiedCopiesService(apiClient);
         this.basket = new BasketService(apiClient);
-        this.payment = new PaymentService(apiClient); // TODO split payments url/domain into a separate config item and http client
+        this.payment = new PaymentService(paymentClient);
         this.checkout = new CheckoutService(apiClient);
         this.checkoutItem = new CheckoutItemService(apiClient);
         this.order = new OrderService(apiClient);

@@ -52,6 +52,18 @@ import {createApiClient} from "@companieshouse/api-sdk-node";
 
 ```
 
+## Environment Variables
+
+The SDK uses the following environment variables to configure the base URLs for each domain. All have production defaults and are optional.
+
+| Variable | Default | Description |
+|---|---|---|
+| `API_URL` | `https://api.companieshouse.gov.uk` | Base URL for the Companies House API domain |
+| `ACCOUNT_URL` | `https://account.companieshouse.gov.uk` | Base URL for the Companies House account domain |
+| `PAYMENTS_API_URL` | `https://api-payments.company-information.service.gov.uk` | Base URL for the Companies House payments domain |
+
+Consuming services should ensure `PAYMENTS_API_URL` is set appropriately in their environment configuration.
+
 ## Development
 
 Once you have made changes to the library, you must validate against a service in Docker before merging your PR into main. Follow the guidance on the [Validating Library Changes Confluence page](https://companieshouse.atlassian.net/wiki/spaces/DEV/pages/6404931599/Validating+Library+Upgrades+with+Docker+Before+Merging ). Reach out to the Common Components teams if you have any questions.
