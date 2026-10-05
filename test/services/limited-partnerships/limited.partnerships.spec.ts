@@ -1,6 +1,7 @@
 import { describe } from "mocha";
-import { expect } from "chai";
+import chai, { expect } from "chai";
 import sinon from "sinon";
+import sinonChai from "sinon-chai";
 
 import * as mockValues from "./limited.partnerships.mock";
 import {
@@ -14,6 +15,8 @@ import {
     PersonWithSignificantControl
 } from "../../../src/services/limited-partnerships";
 import Resource from "../../../src/services/resource";
+
+chai.use(sinonChai);
 
 describe("LimitedPartnershipsService", () => {
     beforeEach(() => {

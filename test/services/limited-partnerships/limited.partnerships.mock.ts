@@ -68,6 +68,7 @@ export const GENERAL_PARTNER_OBJECT_MOCK: GeneralPartner = {
         governing_law: "British Government",
         kind: "",
         legal_entity_name: "My company ltd",
+        entered_on_register: true,
         legal_entity_register_name: "UK Register",
         legal_entity_registration_location: "England",
         legal_form: "abc",
@@ -124,6 +125,7 @@ export const LIMITED_PARTNER_OBJECT_MOCK: LimitedPartner = {
         governing_law: "British Government",
         kind: "",
         legal_entity_name: "My company ltd",
+        entered_on_register: true,
         legal_entity_register_name: "UK Register",
         legal_entity_registration_location: "England",
         legal_form: "abc",
@@ -221,7 +223,8 @@ export const PERSON_WITH_SIGNIFICANT_CONTROL_OBJECT_MOCK: PersonWithSignificantC
                 NatureOfControlType.FIRM,
                 NatureOfControlType.TRUST
             ],
-            completed: true
+            completed: true,
+            entered_on_register: true
         }
     };
 

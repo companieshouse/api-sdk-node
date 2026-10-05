@@ -49,6 +49,7 @@ type Partner = {
     governing_law?: string;
     kind?: string;
     legal_entity_name?: string;
+    entered_on_register?: boolean;
     legal_entity_register_name?: string;
     legal_entity_registration_location?: string;
     legal_form?: string;
@@ -122,6 +123,7 @@ export interface PersonWithSignificantControl {
         completed?: boolean;
         consent_checked?: boolean;
         nature_of_control_types?: NatureOfControlType[];
+        entered_on_register?: boolean;
     };
 }
 
