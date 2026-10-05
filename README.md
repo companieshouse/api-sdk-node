@@ -85,7 +85,3 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
 
 ### Dependency Overrides
 
-- **serialize-javascript@7.0.5**
-  - Reason: Required as a transitive dependency by mocha@11.7.6, which depends on vulnerable version 6.0.2.
-  - Ticket/CVE: CVE-2026-34043
-  - Remove after: Remove once Mocha has been upgraded beyond version 11.7.6 (patch or minor release). Ensure proper testing is completed after removal.
