@@ -176,4 +176,20 @@ describe("create an advanced search GET", () => {
         expect(csv !== undefined).to.equal(true);
         expect(csv).to.equal("test csv");
     });
+
+    it("builds the companies URL with the path unencoded and only the given query parameters", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves({ status: 200, body: mockResponseBody });
+        const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
+        await search.getCompanies(null, "ltd", null, null, null, null, null, null, null, null, null, null, null, mockRequestId);
+
+        expect(stub.firstCall.args[0]).to.equal("/advanced-search/companies?company_name_includes=ltd");
+    });
+
+    it("builds the CSV URL with the path unencoded and only the given query parameters", async () => {
+        const stub = sinon.stub(requestClient, "httpGet").resolves({ status: 200, body: "test csv" });
+        const search: AdvancedSearchService = new AdvancedSearchService(requestClient);
+        await search.getCompaniesAsCsv(testStartIndex, "ltd", null, null, null, null, null, null, null, null, null, null, size, mockRequestId);
+
+        expect(stub.firstCall.args[0]).to.equal("/advanced-search/csv?start_index=0&company_name_includes=ltd&size=20");
+    });
 });
