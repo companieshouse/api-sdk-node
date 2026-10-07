@@ -77,7 +77,7 @@ export default class AdvancedSearchService {
     private buildURL (startIndex: number | null, companyNameIncludes: string | null, companyNameExcludes: string | null, location: string | null, incorporatedFrom: string | null,
         incorporatedTo: string | null, sicCodes: string | null, companyStatus: string | null, companyType: string | null, companySubtype: string | null, dissolvedFrom: string | null,
         dissolvedTo: string | null, size: number | null, baseUrl: string): string {
-        const buildAdvancedSearchURL = new URLSearchParams(baseUrl)
+        const buildAdvancedSearchURL = new URLSearchParams()
         if (startIndex !== null) {
             buildAdvancedSearchURL.append(this.START_INDEX_QUERY, String(startIndex));
         }
@@ -129,6 +129,6 @@ export default class AdvancedSearchService {
         if (size !== null) {
             buildAdvancedSearchURL.append(this.SIZE_QUERY_PARAMETER, String(size))
         }
-        return buildAdvancedSearchURL.toString();
+        return baseUrl + buildAdvancedSearchURL.toString();
     }
 }
