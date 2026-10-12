@@ -36,8 +36,8 @@
         "@types/request-promise-native": "^1.0.18",
         "@types/sinon": "^9.0.11",
         "@types/sinon-chai": "^3.2.8",
-        "@typescript-eslint/eslint-plugin": "^5.54.1",
-        "@typescript-eslint/parser": "^5.54.1",
+        "@typescript-eslint/eslint-plugin": "^8.71.0",
+        "@typescript-eslint/parser": "^8.71.0",
         "chai": "~4.2.0",
         "chai-as-promised": "~7.1.1",
         "chai-http": "~4.3.0",
@@ -47,7 +47,7 @@
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^6.6.0",
         "eslint-plugin-standard": "5.0.0",
-        "mocha": "^11.7.6",
+        "mocha": "^12.0.3",
         "nock": "^13.3.2",
         "nyc": "^18.0.0",
         "sinon": "^9.2.4",
@@ -56,12 +56,9 @@
         "typescript": "^4.1.6"
     },
     "overrides": {
-        "diff": "^8.0.2",
-        "mocha": {
-            "serialize-javascript": "^7.0.5"
-        }
+
     },
-     "engines": {
+    "engines": {
         "node": ">=24.0.0"
     }
 }
