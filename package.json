@@ -56,7 +56,9 @@
         "typescript": "^4.1.6"
     },
     "overrides": {
-
+        "@istanbuljs/load-nyc-config": {
+            "js-yaml": "^4.1.0"
+        }
     },
     "engines": {
         "node": ">=24.0.0"

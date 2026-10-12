@@ -84,4 +84,7 @@ To tun the tests with coverage, pass the `--coverage` flag on the command line.
     npm t -- --coverage
 
 ### Dependency Overrides
-
+- **js-yaml@4.1.0**
+  - Reason: js-yaml@3.15.2 introduces a transitive dependency on sprintf-js@1.0.3 through argparse@1.0.10. The override to js-yaml@4.1.0 upgrades the dependency chain to use argparse@2.0.1, removing the dependency on the vulnerable version of sprintf-js. The @istanbuljs/load-nyc-config was targetted for the override as this is the only dependency that uses the js-yaml@3.15.2 version.
+  - Ticket/CVE: cve-2026-97058
+  - Remove after: Remove this override once the upstream dependencies have been updated to consume js-yaml >=4.1.0 natively. Ensure proper testing is completed after removal.
