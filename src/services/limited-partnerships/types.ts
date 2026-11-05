@@ -76,6 +76,7 @@ export interface LimitedPartner {
         contribution_currency_type?: string;
         contribution_currency_value?: string;
         contribution_sub_types?: string[];
+        update_capital_contribution_required?: boolean;
     };
 }
 
