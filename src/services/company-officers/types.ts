@@ -102,21 +102,36 @@ export interface CompanyOfficersLinks {
 }
 
 export interface CompanyOfficer {
-  address: Address;
-  appointedOn: string;
-  countryOfResidence?: string;
-  dateOfBirth?: DateOfBirth;
-  formerNames?: FormerName[];
-  identification?: Identification;
-  links: CompanyOfficerLinks;
-  name: string;
-  nationality?: string;
-  occupation?: string;
-  officerRole: string;
-  principalOfficeAddress?: Address;
-  contactDetails: ContactDetails;
-  responsibilities?: string;
-  resignedOn?: string;
+    address: Address;
+    appointedOn: string;
+    countryOfResidence?: string;
+    dateOfBirth?: DateOfBirth;
+    formerNames?: FormerName[];
+    identification?: Identification;
+    links: CompanyOfficerLinks;
+    name: string;
+    nationality?: string;
+    occupation?: string;
+    officerRole: string;
+    principalOfficeAddress?: Address;
+    contactDetails: ContactDetails;
+    responsibilities?: string;
+    resignedOn?: string;
+    contribution_currency_type?: string;
+    contribution_currency_value?: string;
+    contribution_sub_types?: ContributionSubType[];
+}
+
+export enum ContributionSubTypeEnum {
+    money = "money",
+    landOrProperty = "land-or-property",
+    shares = "shares",
+    servicesOrGoods = "services-or-goods",
+    anyOtherAsset = "any-other-asset",
+}
+
+export interface ContributionSubType {
+    sub_type: ContributionSubTypeEnum;
 }
 
 export interface Address {
