@@ -117,9 +117,9 @@ export interface CompanyOfficer {
     contactDetails: ContactDetails;
     responsibilities?: string;
     resignedOn?: string;
-    contribution_currency_type?: string;
-    contribution_currency_value?: string;
-    contribution_sub_types?: ContributionSubType[];
+    contributionCurrencyType?: string;
+    contributionCurrencyValue?: string;
+    contributionSubTypes?: ContributionSubType[];
 }
 
 export enum ContributionSubTypeEnum {
