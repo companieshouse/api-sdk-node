@@ -124,14 +124,14 @@ export interface CompanyOfficer {
 
 export enum ContributionSubTypeEnum {
     money = "money",
-    landOrProperty = "land-or-property",
+    "land-or-property" = "land-or-property",
     shares = "shares",
-    servicesOrGoods = "services-or-goods",
-    anyOtherAsset = "any-other-asset",
+    "services-or-goods" = "services-or-goods",
+    "any-other-asset" = "any-other-asset"
 }
 
 export interface ContributionSubType {
-    sub_type: ContributionSubTypeEnum;
+    subType: ContributionSubTypeEnum;
 }
 
 export interface Address {
